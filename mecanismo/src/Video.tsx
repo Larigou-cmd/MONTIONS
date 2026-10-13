@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Audio, staticFile } from "remotion";
-import { Background, Captions, Grain, Hud } from "./lib";
+import { Background, Grain, Hud } from "./lib";
 import { Part1 } from "./parts/Part1";
 import { Part2 } from "./parts/Part2";
 import { Part3 } from "./parts/Part3";
@@ -16,7 +16,6 @@ export const Video: React.FC = () => (
     <Part4 />
     <Part5 />
     <Hud />
-    <Captions />
     <Grain />
     <Audio src={staticFile("narracao.mp3")} />
   </AbsoluteFill>

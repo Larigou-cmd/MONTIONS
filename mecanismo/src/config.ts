@@ -2,7 +2,7 @@
 // Para trocar de remédio: mude estes dados e gere a narração nova (os tempos em T e CAPTIONS seguem a voz).
 
 export const FPS = 30;
-export const DURATION = 1860; // 62 s (a narração da Juliana tem 57 s; os últimos segundos são a assinatura)
+export const DURATION = 1860; // 62 s (a narração da Juliana tem 57 s; os últimos segundos são a mensagem final)
 
 export const config = {
   medicamento: "Tirzepatida",
@@ -32,11 +32,7 @@ export const config = {
   aviso: ["Conteúdo educativo.", "Use somente com prescrição", "e acompanhamento médico."],
   resumoEfeitos: ["Glicose ↓", "Apetite ↓", "Peso ↓"],
   referencias: "Coskun 2018 · Willard 2020 · Frías 2021 · Jastreboff 2022",
-  perfil: "@ssupernova.studio",
-  palavra: "MECANISMO",
-  conviteAntes: "Comenta",
-  conviteDepois: "que eu te mando o resumo",
-  nomeFinal: "SUPERNOVA STUDIO",
+  mensagemFinal: ["Consulte um", "profissional de saúde", "para orientações."],
 };
 
 export const C = {
@@ -76,8 +72,7 @@ export const T = {
   // parte 5
   adversos: 1559,
   aviso: 1654,
-  convite: 1716,
-  assinatura: 1782,
+  final: 1716,
 };
 
 export const PULSES = [546, 576, 956, 1450, 1530];

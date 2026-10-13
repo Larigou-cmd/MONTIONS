@@ -86,7 +86,7 @@ export const Hud: React.FC = () => {
   PARTS.forEach((p, i) => { if (f >= p.from) idx = i; });
   const p = PARTS[idx];
   const k = it(f, p.from, p.from + 14, 0, 1, OUT);
-  const endFade = 1 - P(f, 1776, 1790);
+  const endFade = 1 - P(f, 1712, 1724);
   return (
     <AbsoluteFill style={{ opacity: endFade }}>
       <div style={{ position: "absolute", left: 70, top: 130, width: W - 140, height: 6, borderRadius: 3, background: "rgba(255,255,255,0.1)" }} />

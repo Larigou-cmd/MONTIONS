@@ -1,14 +1,13 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { C, T, config } from "../config";
-import { DISPLAY, SANS, SERIF } from "../fonts";
+import { SANS, SERIF } from "../fonts";
 import { IN, MED, OUT, Part, Pill, SNAP, W, bornColor, it, rgba } from "../lib";
 
 export const Part5: React.FC = () => {
   const f = useCurrentFrame();
   const s = 1554;
-  const out1 = it(f, T.convite - 8, T.convite + 2, 0, 1, IN);
-  const out2 = it(f, T.assinatura - 8, T.assinatura + 2, 0, 1, IN);
+  const out1 = it(f, T.final - 8, T.final + 2, 0, 1, IN);
   const eq: { t: string; c: string }[] = [];
   config.alvos.forEach((a, i) => { if (i) eq.push({ t: "+", c: C.ink }); eq.push({ t: a.hormonio, c: a.cor }); });
   return (
@@ -49,25 +48,17 @@ export const Part5: React.FC = () => {
           })}
         </AbsoluteFill>
       )}
-      {/* convite para comentar */}
-      {f >= T.convite && out2 < 1 && (
-        <AbsoluteFill style={{ opacity: Math.min(it(f, T.convite, T.convite + 10, 0, 1, OUT), 1 - out2), filter: out2 > 0 ? `blur(${out2 * 14}px)` : undefined, transform: `translateY(${-90 * out2}px)` }}>
-          <div style={{ position: "absolute", top: 640, width: W, textAlign: "center", fontFamily: SERIF, fontSize: 84, color: C.ink }}>{config.conviteAntes}</div>
-          <div style={{ position: "absolute", top: 760, width: W, textAlign: "center", fontFamily: SERIF, fontWeight: 600, fontSize: 132, letterSpacing: 2 }}>
-            {config.palavra.split("").map((ch, i) => {
-              const at = T.convite + 6 + i * 3;
-              return <span key={i} style={{ color: f < at ? "transparent" : bornColor(f, at, MED, "#f5f0ff", 12), textShadow: f < at ? "none" : `0 0 30px ${rgba(MED, 0.6)}` }}>{ch}</span>;
-            })}
-          </div>
-          <div style={{ position: "absolute", top: 940, width: W, textAlign: "center", fontFamily: SANS, fontSize: 40, color: C.dim, opacity: it(f, T.convite + 36, T.convite + 48, 0, 1, OUT) }}>{config.conviteDepois}</div>
-        </AbsoluteFill>
-      )}
-      {/* assinatura */}
-      {f >= T.assinatura - 2 && (
-        <AbsoluteFill style={{ opacity: it(f, T.assinatura - 2, T.assinatura + 8, 0, 1, OUT) }}>
-          <div style={{ position: "absolute", top: 860, width: W, textAlign: "center", fontFamily: DISPLAY, fontWeight: 300, fontSize: 70, letterSpacing: 4, color: C.ink, transform: `translateX(${(1 - it(f, T.assinatura - 2, T.assinatura + 8, 0, 1, OUT)) * 70}px) scale(${0.97 + 0.06 * it(f, T.assinatura, 1860, 0, 1, (x) => x)})`, filter: f < T.assinatura + 8 ? `blur(${(1 - it(f, T.assinatura - 2, T.assinatura + 8, 0, 1, OUT)) * 12}px)` : undefined }}>{config.nomeFinal}</div>
-          <div style={{ position: "absolute", top: 970, width: W, textAlign: "center", fontFamily: SANS, fontSize: 34, color: MED, fontWeight: 600, opacity: it(f, T.assinatura + 10, T.assinatura + 22, 0, 1, OUT) }}>{config.perfil}</div>
-          <div style={{ position: "absolute", top: 1150, width: W, textAlign: "center", fontFamily: SANS, fontSize: 24, color: C.dim, opacity: it(f, T.assinatura + 16, T.assinatura + 28, 0, 1, OUT) * 0.85 }}>{config.aviso[0]} Ref.: {config.referencias}</div>
+      {/* mensagem final */}
+      {f >= T.final && (
+        <AbsoluteFill style={{ opacity: it(f, T.final, T.final + 12, 0, 1, OUT) }}>
+          {config.mensagemFinal.map((l, i) => {
+            const at = T.final + 4 + i * 8;
+            const k = it(f, at, at + 14, 0, 1, OUT);
+            return (
+              <div key={i} style={{ position: "absolute", top: 700 + i * 110, width: W, textAlign: "center", fontFamily: SERIF, fontWeight: i === 1 ? 600 : 400, fontSize: i === 1 ? 92 : 80, color: i === 1 ? bornColor(f, at, MED, "#f5f0ff", 20) : bornColor(f, at), textShadow: i === 1 ? `0 0 30px ${rgba(MED, 0.45)}` : "none", opacity: k, transform: `translateY(${(1 - k) * 40}px) scale(${0.98 + 0.04 * it(f, T.final, 1860, 0, 1, (x) => x)})`, filter: k < 1 ? `blur(${(1 - k) * 10}px)` : undefined }}>{l}</div>
+            );
+          })}
+          <div style={{ position: "absolute", top: 1150, width: W, textAlign: "center", fontFamily: SANS, fontSize: 24, color: C.dim, opacity: it(f, T.final + 30, T.final + 42, 0, 1, OUT) * 0.85 }}>{config.aviso[0]} Ref.: {config.referencias}</div>
         </AbsoluteFill>
       )}
     </Part>

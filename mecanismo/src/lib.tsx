@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, random, useCurrentFrame } from "remotion";
-import { C, CAPTIONS, PARTS, PULSES, DURATION, config } from "./config";
+import { C, CAPTIONS, PARTS, PULSES, config } from "./config";
 import { SANS, SERIF } from "./fonts";
 
 export const W = 1080;
@@ -89,8 +89,6 @@ export const Hud: React.FC = () => {
   const endFade = 1 - P(f, 1712, 1724);
   return (
     <AbsoluteFill style={{ opacity: endFade }}>
-      <div style={{ position: "absolute", left: 70, top: 130, width: W - 140, height: 6, borderRadius: 3, background: "rgba(255,255,255,0.1)" }} />
-      <div style={{ position: "absolute", left: 70, top: 130, width: (W - 140) * Math.min(1, f / DURATION), height: 6, borderRadius: 3, background: MED }} />
       <div style={{ position: "absolute", left: 70, top: 168, display: "flex", gap: 14, alignItems: "baseline", opacity: k, transform: `translateY(${(1 - k) * 12}px)`, fontFamily: SANS }}>
         <span style={{ color: MED, fontWeight: 800, fontSize: 32 }}>{p.n}</span>
         <span style={{ color: C.dim, fontWeight: 700, fontSize: 28, letterSpacing: 2 }}>{p.nome}</span>

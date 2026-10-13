@@ -6,11 +6,14 @@ import path from 'node:path';
 
 const FPS = Number(process.env.FPS || 30);
 const ONLY = process.env.STILLS; // ex.: "5,30,45" gera PNGs de prévia
+const SCENE = process.env.SCENE || 'scene.html';
+const OUT = process.env.OUT || 'tirzepatida_mecanismo.mp4';
+const [VW, VH] = (process.env.SIZE || '1920x1080').split('x').map(Number);
 const dir = path.dirname(new URL(import.meta.url).pathname);
 
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
-await page.goto(pathToFileURL(path.join(dir, 'scene.html')).href);
+const page = await browser.newPage({ viewport: { width: VW, height: VH } });
+await page.goto(pathToFileURL(path.join(dir, SCENE)).href);
 await page.waitForFunction(() => window.ready === true);
 const END = await page.evaluate(() => window.END);
 
@@ -27,7 +30,7 @@ const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-fr
   '-filter_complex', '[1:a]adelay=0|0,apad[a]', '-map', '0:v', '-map', '[a]',
   '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-preset', 'medium', '-crf', '20',
   '-c:a', 'aac', '-b:a', '160k', '-shortest', '-movflags', '+faststart',
-  path.join(dir, 'tirzepatida_mecanismo.mp4')], { stdio: ['pipe', 'inherit', 'inherit'] });
+  path.join(dir, OUT)], { stdio: ['pipe', 'inherit', 'inherit'] });
 
 const total = Math.ceil(END * FPS);
 for (let i = 0; i < total; i++) {

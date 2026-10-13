@@ -1,5 +1,5 @@
 # Tirzepatida — Mecanismo de Ação
-### Roteiro de vídeo motion (1920×1080, PT-BR)
+### Roteiro de vídeo motion (1080×1920, vertical para Reels, PT-BR)
 
 Narração: ElevenLabs (plano gratuito) — modelo `eleven_flash_v2_5` (o mais barato em créditos), 1 geração.
 

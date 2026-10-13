@@ -7,8 +7,8 @@ import path from 'node:path';
 const FPS = Number(process.env.FPS || 30);
 const ONLY = process.env.STILLS; // ex.: "5,30,45" gera PNGs de prévia
 const SCENE = process.env.SCENE || 'scene.html';
-const OUT = process.env.OUT || 'tirzepatida_mecanismo.mp4';
-const [VW, VH] = (process.env.SIZE || '1920x1080').split('x').map(Number);
+const OUT = process.env.OUT || 'tirzepatida_reels.mp4';
+const [VW, VH] = (process.env.SIZE || '1080x1920').split('x').map(Number);
 const dir = path.dirname(new URL(import.meta.url).pathname);
 
 const browser = await chromium.launch();

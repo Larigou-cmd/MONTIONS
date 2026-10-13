@@ -1,0 +1,441 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#070b1a}canvas{display:block}</style>
+</head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+// Motion "Tirzepatida — mecanismo de ação". draw(t) renderiza o quadro no tempo t (s).
+const W = 1920, H = 1080;
+const cv = document.getElementById('c');
+const g = cv.getContext('2d');
+const F = 'Inter, "DejaVu Sans", sans-serif';
+
+const C = {
+  bg0: '#070b1a', bg1: '#101a3a', ink: '#eef2ff', dim: '#94a3c8',
+  gip: '#f5a524', glp: '#2dd4bf', tz: '#a78bfa', ins: '#fde047',
+  red: '#fb7185', blue: '#60a5fa', fat: '#fcd34d', alb: '#7dd3fc'
+};
+
+// Cenas sincronizadas com as pausas da narração (s)
+const SCENES = [
+  { t: 0.0,  title: 'Abertura' },
+  { t: 8.6,  title: 'As incretinas' },
+  { t: 20.6, title: 'A molécula' },
+  { t: 37.3, title: 'Agonista duplo' },
+  { t: 52.3, title: 'Pâncreas' },
+  { t: 60.7, title: 'Estômago e cérebro' },
+  { t: 75.0, title: 'Tecido adiposo' },
+  { t: 82.8, title: 'Resultados clínicos' },
+  { t: 91.0, title: 'Resumo' },
+];
+const END = 104.5;
+
+// Legendas: [início, fim, texto]
+const CAPS = [
+  [0.2, 5.4, 'Tirzepatida. Como uma única molécula consegue controlar a glicose e reduzir o peso?'],
+  [6.2, 8.4, 'Vamos entender o mecanismo de ação.'],
+  [8.6, 16.9, 'Depois de uma refeição, o intestino libera dois hormônios chamados incretinas: o GIP e o GLP-1.'],
+  [17.6, 20.3, 'Eles avisam o corpo que há alimento chegando.'],
+  [20.6, 25.8, 'A tirzepatida é um peptídeo de 39 aminoácidos, inspirado no GIP.'],
+  [26.5, 33.4, 'Uma cadeia de ácido graxo faz com que ela se ligue à albumina, prolongando sua meia-vida para cerca de 5 dias.'],
+  [33.9, 36.3, 'Por isso, basta uma aplicação por semana.'],
+  [37.3, 40.1, 'O grande diferencial: ela é um agonista duplo.'],
+  [40.6, 51.7, 'A mesma molécula ativa o receptor de GIP e o receptor de GLP-1, disparando o sinal de AMP cíclico dentro das células.'],
+  [52.3, 57.4, 'No pâncreas, ela estimula a liberação de insulina apenas quando a glicose está elevada,'],
+  [57.4, 60.0, 'o que reduz o risco de hipoglicemia. Ao mesmo tempo, diminui o excesso de glucagon.'],
+  [60.7, 63.4, 'No estômago, ela retarda o esvaziamento gástrico.'],
+  [63.9, 74.0, 'E no cérebro, atua nos centros do apetite, aumentando a saciedade e reduzindo a ingestão de alimentos.'],
+  [75.0, 82.0, 'Pela via do GIP, ela também melhora o manejo de gordura no tecido adiposo e aumenta a sensibilidade à insulina.'],
+  [82.8, 90.6, 'O resultado nos estudos clínicos: redução importante da hemoglobina glicada e perda de peso que chegou a cerca de 20%.'],
+  [91.0, 93.3, 'Duas incretinas, uma só molécula.'],
+  [93.8, 101.2, 'Os efeitos adversos mais comuns são gastrointestinais, como náuseas. Use somente com orientação médica.'],
+];
+
+// ---------- utilidades ----------
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const P = (t, a, b) => clamp((t - a) / (b - a));
+const eo = k => 1 - Math.pow(1 - k, 3);
+const eio = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+const back = k => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); };
+function rng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
+
+function alpha(a, fn) { g.save(); g.globalAlpha *= clamp(a); fn(); g.restore(); }
+function circle(x, y, r, fill, glow = 0) {
+  g.save(); if (glow) { g.shadowColor = fill; g.shadowBlur = glow; }
+  g.beginPath(); g.arc(x, y, Math.max(0, r), 0, Math.PI * 2); g.fillStyle = fill; g.fill(); g.restore();
+}
+function ring(x, y, r, stroke, w = 3, glow = 0) {
+  g.save(); if (glow) { g.shadowColor = stroke; g.shadowBlur = glow; }
+  g.beginPath(); g.arc(x, y, Math.max(0, r), 0, Math.PI * 2); g.strokeStyle = stroke; g.lineWidth = w; g.stroke(); g.restore();
+}
+function text(s, x, y, size, color = C.ink, weight = 600, align = 'center', base = 'middle') {
+  g.font = `${weight} ${size}px ${F}`; g.fillStyle = color; g.textAlign = align; g.textBaseline = base; g.fillText(s, x, y);
+}
+function rrect(x, y, w, h, r) {
+  g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r);
+  g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath();
+}
+function pill(s, x, y, size, color, k = 1) {
+  g.font = `700 ${size}px ${F}`; const w = g.measureText(s).width + size * 1.4, h = size * 1.9;
+  alpha(eo(k), () => {
+    g.save(); g.translate(x, y); const sc = lerp(.7, 1, back(clamp(k))); g.scale(sc, sc);
+    rrect(-w / 2, -h / 2, w, h, h / 2); g.fillStyle = color + '26'; g.fill(); g.strokeStyle = color; g.lineWidth = 2.5; g.stroke();
+    text(s, 0, 2, size, color, 700); g.restore();
+  });
+}
+function wrap(s, maxW, size, weight = 500) {
+  g.font = `${weight} ${size}px ${F}`; const words = s.split(' '); const lines = []; let cur = '';
+  for (const w of words) { const tst = cur ? cur + ' ' + w : w; if (g.measureText(tst).width > maxW && cur) { lines.push(cur); cur = w; } else cur = tst; }
+  if (cur) lines.push(cur); return lines;
+}
+function arrow(x1, y1, x2, y2, color, w = 5, k = 1) {
+  const x = lerp(x1, x2, k), y = lerp(y1, y2, k); const a = Math.atan2(y2 - y1, x2 - x1);
+  g.save(); g.strokeStyle = color; g.fillStyle = color; g.lineWidth = w; g.lineCap = 'round';
+  g.beginPath(); g.moveTo(x1, y1); g.lineTo(x, y); g.stroke();
+  if (k > .05) { g.beginPath(); g.moveTo(x, y); g.lineTo(x - 20 * Math.cos(a - .45), y - 20 * Math.sin(a - .45));
+    g.lineTo(x - 20 * Math.cos(a + .45), y - 20 * Math.sin(a + .45)); g.closePath(); g.fill(); }
+  g.restore();
+}
+// peptídeo estilizado: contas em onda
+function peptide(cx, cy, n, len, k, t, scale = 1, tail = 0) {
+  const pts = [];
+  for (let i = 0; i < n; i++) {
+    const u = i / (n - 1); const x = cx - len / 2 + u * len;
+    const y = cy + Math.sin(u * Math.PI * 3 + t * 1.6) * 34 * scale;
+    pts.push([x, y]);
+  }
+  const shown = Math.floor(k * n + 1e-6);
+  g.save(); g.strokeStyle = 'rgba(167,139,250,.45)'; g.lineWidth = 4 * scale; g.beginPath();
+  for (let i = 0; i < Math.min(shown, n); i++) { const [x, y] = pts[i]; i ? g.lineTo(x, y) : g.moveTo(x, y); } g.stroke(); g.restore();
+  for (let i = 0; i < Math.min(shown + 1, n); i++) {
+    const local = clamp(k * n - i); if (local <= 0) continue;
+    const [x, y] = pts[i]; const col = i < n * .5 ? mix(C.gip, C.tz, i / (n * .5)) : mix(C.tz, C.glp, (i - n * .5) / (n * .5));
+    circle(x, y, 11 * scale * back(local), col, 14);
+  }
+  if (tail > 0) { // ácido graxo C20 ligado a uma lisina central
+    const [x0, y0] = pts[19]; const segs = 10; g.save(); g.strokeStyle = C.fat; g.lineWidth = 5 * scale; g.lineJoin = 'round';
+    g.shadowColor = C.fat; g.shadowBlur = 12; g.beginPath(); g.moveTo(x0, y0);
+    const m = Math.floor(segs * tail);
+    for (let s = 1; s <= m; s++) g.lineTo(x0 + (s % 2 ? 14 : -14) * scale, y0 + s * 17 * scale);
+    g.stroke(); g.restore();
+    return [x0, y0 + m * 17 * scale];
+  }
+  return pts;
+}
+function mix(a, b, k) {
+  k = clamp(k); const pa = parseInt(a.slice(1), 16), pb = parseInt(b.slice(1), 16);
+  const r = Math.round(lerp(pa >> 16, pb >> 16, k)), gg = Math.round(lerp((pa >> 8) & 255, (pb >> 8) & 255, k)), bl = Math.round(lerp(pa & 255, pb & 255, k));
+  return '#' + ((1 << 24) | (r << 16) | (gg << 8) | bl).toString(16).slice(1);
+}
+
+// ---------- fundo ----------
+const R0 = rng(7); const DUST = Array.from({ length: 90 }, () => [R0() * W, R0() * H, R0() * 2.2 + .6, R0() * .5 + .1, R0() * 6.28]);
+function background(t) {
+  const gr = g.createRadialGradient(W * .5, H * .45, 80, W * .5, H * .5, W * .75);
+  gr.addColorStop(0, C.bg1); gr.addColorStop(1, C.bg0); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  for (const [x, y, r, sp, ph] of DUST) {
+    const yy = (y - t * sp * 18 + H) % H; const xx = x + Math.sin(t * .4 + ph) * 12;
+    circle(xx, yy, r, `rgba(160,180,255,${.12 + .1 * Math.sin(t + ph)})`);
+  }
+}
+
+// ---------- HUD ----------
+function hud(t, si) {
+  const s = SCENES[si]; const lt = t - s.t; const k = eo(P(lt, 0, .6));
+  alpha(k * (si === 0 ? P(t, 4, 5) : 1), () => {
+    text(String(si + 1).padStart(2, '0'), 80, 74, 26, C.tz, 800, 'left');
+    text(s.title.toUpperCase(), 124, 74, 22, C.dim, 700, 'left');
+    g.fillStyle = C.tz; g.fillRect(80, 98, 60 * k, 3);
+  });
+  alpha(.8, () => text('TIRZEPATIDA · MECANISMO DE AÇÃO', W - 80, 74, 20, C.dim, 600, 'right'));
+  g.fillStyle = 'rgba(255,255,255,.08)'; g.fillRect(0, H - 6, W, 6);
+  g.fillStyle = C.tz; g.fillRect(0, H - 6, W * clamp(t / END), 6);
+}
+function captions(t) {
+  const c = CAPS.find(([a, b]) => t >= a && t < b + .35); if (!c) return;
+  const [a, b, s] = c; const k = Math.min(P(t, a, a + .25), 1 - P(t, b, b + .35));
+  const lines = wrap(s, 1400, 34, 500); const lh = 46; const h = lines.length * lh + 28;
+  let mw = 0; g.font = `500 34px ${F}`; for (const l of lines) mw = Math.max(mw, g.measureText(l).width);
+  alpha(k, () => {
+    const y0 = H - 70 - h; rrect(W / 2 - mw / 2 - 30, y0, mw + 60, h, 18); g.fillStyle = 'rgba(5,8,20,.72)'; g.fill();
+    lines.forEach((l, i) => text(l, W / 2, y0 + 14 + lh / 2 + i * lh + 2, 34, C.ink, 500));
+  });
+}
+
+// ---------- cenas ----------
+function s1(lt, t) {
+  // anel orbitando
+  const k = eo(P(lt, 0, 1.5));
+  for (let i = 0; i < 24; i++) {
+    const a = i / 24 * Math.PI * 2 + t * .25; const r = 560 + Math.sin(t * 1.5 + i) * 10;
+    alpha(k * .9, () => circle(W / 2 + Math.cos(a) * r * k, 480 + Math.sin(a) * r * .42 * k, 7, i % 2 ? C.gip : C.glp, 16));
+  }
+  const tk = P(lt, .3, 1.6);
+  alpha(eo(tk), () => {
+    g.save(); g.translate(W / 2, 450); const sc = lerp(1.25, 1, eo(tk)); g.scale(sc, sc);
+    g.shadowColor = C.tz; g.shadowBlur = 40; text('Tirzepatida', 0, 0, 150, C.ink, 800); g.restore();
+  });
+  alpha(eo(P(lt, 1.2, 2.2)), () => text('Mecanismo de ação', W / 2, 560, 46, C.dim, 500));
+  pill('GIP', W / 2 - 110, 660, 30, C.gip, P(lt, 2.2, 3));
+  pill('GLP-1', W / 2 + 110, 660, 30, C.glp, P(lt, 2.6, 3.4));
+  alpha(P(lt, 3.6, 4.4) * (1 - P(lt, 7.6, 8.6)), () => text('agonista duplo dos receptores de incretinas', W / 2, 740, 30, C.tz, 600));
+}
+
+function s2(lt, t) {
+  // intestino estilizado (caminho sinuoso)
+  const path = []; for (let i = 0; i <= 160; i++) { const u = i / 160; path.push([260 + u * 760, 520 + Math.sin(u * Math.PI * 4) * 150]); }
+  const dk = eo(P(lt, 0, 1.6)); const n = Math.floor(path.length * dk);
+  g.save(); g.lineCap = 'round'; g.lineJoin = 'round';
+  g.strokeStyle = '#f472b655'; g.lineWidth = 86; g.beginPath(); path.slice(0, n).forEach(([x, y], i) => i ? g.lineTo(x, y) : g.moveTo(x, y)); g.stroke();
+  g.strokeStyle = '#f472b6'; g.lineWidth = 4; g.stroke(); g.restore();
+  alpha(P(lt, .8, 1.6), () => text('Intestino', 640, 300, 34, '#f9a8d4', 700));
+  // alimento percorrendo
+  for (let i = 0; i < 6; i++) {
+    const u = ((lt - 1.2) * .12 + i * .09); if (u < 0 || u > 1 || lt < 1.2) continue;
+    const [x, y] = path[Math.floor(u * 160)]; circle(x, y, 13, '#fb923c', 10);
+  }
+  alpha(P(lt, 1, 2) * (1 - P(lt, 4, 5)), () => text('🍽  refeição', 220, 420, 30, '#fdba74', 600, 'left'));
+  // hormônios saindo
+  const R = rng(3);
+  for (let i = 0; i < 18; i++) {
+    const st = 3 + i * .28; const k = P(lt, st, st + 3.2); if (k <= 0) continue;
+    const src = path[20 + Math.floor(R() * 120)]; const isG = i % 2 === 0;
+    const tx = isG ? 1400 : 1640, ty = 470 + (R() - .5) * 160;
+    const x = lerp(src[0], tx, eio(k)), y = lerp(src[1], ty, eio(k)) - Math.sin(k * Math.PI) * 120;
+    circle(x, y, 13, isG ? C.gip : C.glp, 18);
+  }
+  pill('GIP', 1400, 330, 40, C.gip, P(lt, 4.5, 5.3));
+  pill('GLP-1', 1640, 330, 40, C.glp, P(lt, 5.5, 6.3));
+  alpha(P(lt, 6.5, 7.3), () => { text('incretinas', 1520, 640, 38, C.ink, 700); });
+  alpha(P(lt, 9, 10), () => text('sinal: "chegou alimento"', 1520, 700, 28, C.dim, 500));
+}
+
+function s3(lt, t) {
+  const mk = P(lt, .2, 4.2); const tail = P(lt, 6, 8);
+  const cx = 860 - eio(P(lt, 6, 8)) * 140, cy = 400;
+  // albumina
+  const ak = eio(P(lt, 7.5, 10));
+  if (ak > 0) {
+    const tipY = cy + 34 * Math.sin(19 / 38 * Math.PI * 3 + t * 1.6) + 170;
+    const ax = lerp(W + 300, cx - 380 + 19 / 38 * 760 + 0, ak), ay = tipY + 150;
+    const gr = g.createRadialGradient(ax - 40, ay - 40, 20, ax, ay, 190); gr.addColorStop(0, '#7dd3fc66'); gr.addColorStop(1, '#7dd3fc11');
+    g.save(); g.beginPath();
+    for (let a = 0; a <= 6.3; a += .1) { const r = 150 + Math.sin(a * 3 + t) * 10 + Math.sin(a * 5 - t * .7) * 6; g.lineTo(ax + Math.cos(a) * r * 1.25, ay + Math.sin(a) * r * .8); }
+    g.closePath(); g.fillStyle = gr; g.fill(); g.strokeStyle = C.alb; g.lineWidth = 3; g.stroke(); g.restore();
+    alpha(P(lt, 9.5, 10.5), () => text('Albumina', ax, ay + 50, 34, C.alb, 700));
+  }
+  peptide(cx, cy, 39, 760, mk, t, 1, tail);
+  alpha(P(lt, 2, 3), () => text('39 aminoácidos', cx, 250, 40, C.ink, 700));
+  alpha(P(lt, 2.8, 3.6), () => text('sequência baseada no GIP nativo', cx, 300, 28, C.dim, 500));
+  alpha(P(lt, 7, 8), () => text('ácido graxo C20', cx - 40, cy + 120, 26, C.fat, 700, 'right'));
+  // meia-vida e semana
+  const hk = P(lt, 10.5, 11.5);
+  alpha(hk, () => {
+    rrect(1350, 230, 440, 150, 24); g.fillStyle = 'rgba(167,139,250,.12)'; g.fill(); g.strokeStyle = C.tz; g.lineWidth = 2; g.stroke();
+    text('meia-vida', 1570, 275, 28, C.dim, 600);
+    text(`≈ ${Math.round(lerp(0, 5, eo(P(lt, 10.5, 12.5))))} dias`, 1570, 330, 52, C.ink, 800);
+  });
+  const wk = P(lt, 13.3, 14.3);
+  alpha(wk, () => {
+    const days = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+    days.forEach((d, i) => {
+      const x = 1355 + i * 62, y = 470; const on = i === 0;
+      rrect(x, y, 52, 70, 12); g.fillStyle = on ? C.tz : 'rgba(255,255,255,.06)'; g.fill();
+      text(d, x + 26, y + 36, 26, on ? '#0b1020' : C.dim, 800);
+    });
+    text('💉 1 aplicação por semana', 1570, 600, 32, C.ink, 700);
+    text('via subcutânea', 1570, 645, 24, C.dim, 500);
+  });
+}
+
+function membrane(y, t) {
+  for (let row = 0; row < 2; row++) for (let x = 0; x <= W; x += 26) {
+    const yy = y + row * 46 + Math.sin(x * .01 + t) * 4;
+    circle(x, yy, 11, row ? '#334a7a' : '#3f5a92');
+    g.strokeStyle = '#2a3d66'; g.lineWidth = 3; g.beginPath(); g.moveTo(x - 3, yy + (row ? -11 : 11)); g.lineTo(x - 3, yy + (row ? -24 : 24)); g.moveTo(x + 3, yy + (row ? -11 : 11)); g.lineTo(x + 3, yy + (row ? -24 : 24)); g.stroke();
+  }
+}
+function receptor(x, y, col, on, t) {
+  g.save(); g.shadowColor = col; g.shadowBlur = 10 + 30 * on;
+  g.fillStyle = mix('#334155', col, .35 + .65 * on);
+  rrect(x - 70, y - 70, 40, 190, 18); g.fill(); rrect(x + 30, y - 70, 40, 190, 18); g.fill(); rrect(x - 70, y + 80, 140, 40, 18); g.fill();
+  g.restore();
+}
+function s4(lt, t) {
+  const my = 560; membrane(my, t * .6);
+  alpha(P(lt, 0, 1), () => { text('Meio extracelular', 80, 200, 26, C.dim, 600, 'left'); text('Interior da célula', 80, 760, 26, C.dim, 600, 'left'); });
+  const xs = [620, 1300], cols = [C.gip, C.glp], names = ['Receptor GIP', 'Receptor GLP-1'];
+  const bindT = [4.2, 5.4];
+  xs.forEach((x, i) => {
+    const on = P(lt, bindT[i] + .6, bindT[i] + 1.4);
+    receptor(x, my - 20, cols[i], on, t);
+    
+    // ligante descendo
+    const dk = eio(P(lt, bindT[i] - 2.2, bindT[i] + .6));
+    if (lt > bindT[i] - 2.2) {
+      g.save(); g.translate(lerp(x + (i ? 160 : -160), x, dk), lerp(200, my - 70, dk)); g.rotate(lerp(.6, 0, dk) * (i ? -1 : 1));
+      peptide(0, 0, 13, 150, 1, t * 2, .55); g.restore();
+    }
+    // AMPc
+    if (on > 0) for (let j = 0; j < 7; j++) {
+      const ph = ((lt - bindT[i] - .8) * .55 + j / 7) % 1; if (lt - bindT[i] - .8 < j / 7 / .55) continue;
+      const r = 40 + ph * 260; alpha((1 - ph) * .9, () => ring(x, my + 130, r, cols[i], 3));
+      circle(x + Math.cos(j * 2.1 + t) * r * .6, my + 160 + ph * 200, 7, cols[i], 12);
+    }
+  });
+  xs.forEach((x, i) => pill(names[i], x + (i ? 300 : -300), my - 120, 28, cols[i], P(lt, 1 + i * .4, 2 + i * .4)));
+  pill('Tirzepatida', W / 2 - 0, 200, 34, C.tz, P(lt, .4, 1.2));
+  alpha(P(lt, 2, 3) * (1 - P(lt, 12, 13)), () => text('uma molécula · dois receptores', W / 2, 270, 30, C.ink, 600));
+  alpha(P(lt, 10, 11), () => { pill('AMPc ↑', W / 2 - 0, 900, 36, C.ins, 1); });
+}
+
+function cellBlob(x, y, r, col, t, label) {
+  g.save(); g.beginPath();
+  for (let a = 0; a <= 6.3; a += .08) { const rr = r + Math.sin(a * 4 + t) * 6 + Math.sin(a * 7 - t) * 3; g.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); }
+  g.closePath(); const gr = g.createRadialGradient(x, y, 10, x, y, r); gr.addColorStop(0, col + '40'); gr.addColorStop(1, col + '10');
+  g.fillStyle = gr; g.fill(); g.strokeStyle = col; g.lineWidth = 3; g.stroke(); g.restore();
+  circle(x, y, r * .25, col + '55'); text(label, x, y + r + 50, 34, col, 700);
+}
+function s5(lt, t) {
+  const bx = 640, ax = 1300, y = 520;
+  alpha(eo(P(lt, 0, 1)), () => cellBlob(bx, y, 180, C.gip, t, 'Célula β'));
+  alpha(eo(P(lt, .3, 1.3)), () => cellBlob(ax, y, 160, C.blue, t, 'Célula α'));
+  // glicose
+  alpha(P(lt, .8, 1.6), () => {
+    rrect(140, 230, 220, 120, 20); g.fillStyle = 'rgba(251,113,133,.12)'; g.fill(); g.strokeStyle = C.red; g.lineWidth = 2; g.stroke();
+    text('glicose', 250, 268, 26, C.dim, 600); text('ALTA ↑', 250, 312, 38, C.red, 800);
+  });
+  // insulina subindo
+  const R = rng(11);
+  for (let i = 0; i < 26; i++) {
+    const st = 1.4 + i * .17; const k = P(lt, st, st + 2.6); if (k <= 0 || k >= 1) continue;
+    const ox = (R() - .5) * 200; circle(bx + ox * (1 - k * .3), y - 40 - k * 330, 10, C.ins, 14);
+  }
+  alpha(P(lt, 2, 2.8), () => text('Insulina ↑', bx, 150, 44, C.ins, 800));
+  alpha(P(lt, 3, 3.8), () => pill('dependente de glicose', bx, 800, 24, C.ins, 1));
+  // glucagon
+  const gk = P(lt, 5.2, 7.5);
+  for (let i = 0; i < 14; i++) {
+    const vis = i < Math.round(lerp(14, 4, gk));
+    if (!vis) continue; const a = i / 14 * 6.28 + t * .4; circle(ax + Math.cos(a) * 95, y + Math.sin(a) * 95, 9, C.blue, 10);
+  }
+  alpha(P(lt, 5.2, 6), () => text('Glucagon ↓', ax, 150, 44, C.blue, 800));
+  alpha(P(lt, 4.6, 5.4), () => text('menor risco de hipoglicemia', 250, 400, 22, C.dim, 600));
+}
+
+function stomachPath() {
+  g.beginPath(); g.moveTo(-40, -250); g.lineTo(-40, -150);
+  g.bezierCurveTo(-40, -90, -200, -110, -220, 20);
+  g.bezierCurveTo(-240, 170, -90, 250, 40, 230);
+  g.bezierCurveTo(150, 215, 210, 150, 230, 100);
+  g.lineTo(290, 120); g.lineTo(300, 70); g.lineTo(240, 50);
+  g.bezierCurveTo(250, -60, 120, -60, 60, -90);
+  g.bezierCurveTo(30, -110, 30, -150, 30, -250); g.closePath();
+}
+function s6(lt, t) {
+  // estômago
+  const sx = 560, sy = 520;
+  alpha(eo(P(lt, 0, 1)), () => {
+    g.save(); g.translate(sx, sy);
+    stomachPath(); 
+    g.save(); g.clip();
+    const lvl = lerp(-70, 150, eio(P(lt, .5, 14))); // esvaziando devagar
+    g.fillStyle = '#fb923c66'; g.beginPath(); g.moveTo(-260, lvl);
+    for (let x = -260; x <= 260; x += 10) g.lineTo(x, lvl + Math.sin(x * .03 + t * 2) * 6);
+    g.lineTo(260, 300); g.lineTo(-260, 300); g.fill(); g.restore();
+    stomachPath(); g.strokeStyle = '#fdba74'; g.lineWidth = 5; g.stroke(); g.restore();
+    text('Estômago', sx, sy + 320, 34, '#fdba74', 700);
+  });
+  alpha(P(lt, 1, 2), () => { pill('esvaziamento mais lento', sx, 200, 26, '#fdba74', 1); });
+  // relógio
+  alpha(P(lt, 1.2, 2), () => { ring(sx + 300, sy - 200, 40, C.dim, 3); const a = t * .5; arrow(sx + 300, sy - 200, sx + 300 + Math.cos(a) * 28, sy - 200 + Math.sin(a) * 28, C.dim, 3, 1); });
+  // cérebro
+  const bx = 1340, by = 470; const bk = P(lt, 3.2, 4.4);
+  alpha(eo(bk), () => {
+    g.save(); g.translate(bx, by); g.scale(lerp(.8, 1, eo(bk)), lerp(.8, 1, eo(bk)));
+    g.strokeStyle = '#c4b5fd'; g.lineWidth = 5; g.beginPath(); g.ellipse(0, 0, 230, 170, 0, 0, 6.29); g.stroke();
+    g.lineWidth = 3; g.strokeStyle = '#c4b5fd88';
+    for (let i = 0; i < 6; i++) { g.beginPath(); const yy = -120 + i * 45; for (let x = -190; x <= 190; x += 10) g.lineTo(x, yy + Math.sin(x * .05 + i) * 12); g.stroke(); }
+    const hk = .5 + .5 * Math.sin(t * 4); circle(0, 90, 30 + 6 * hk * P(lt, 5, 6), C.tz, 40 * P(lt, 5, 6));
+    g.restore();
+    text('Cérebro', bx, by + 230, 34, '#c4b5fd', 700);
+  });
+  alpha(P(lt, 5, 6), () => text('hipotálamo', bx + 250, by + 120, 26, C.tz, 700, 'left'));
+  // medidores
+  const m = (y, label, val, col) => { text(label, 1120, y, 26, C.ink, 700, 'left'); rrect(1330, y - 14, 300, 28, 14); g.fillStyle = 'rgba(255,255,255,.08)'; g.fill(); rrect(1330, y - 14, 300 * val, 28, 14); g.fillStyle = col; g.fill(); };
+  alpha(P(lt, 7, 8), () => m(820, 'Saciedade ↑', lerp(.3, .9, eio(P(lt, 7.5, 10))), C.glp));
+  alpha(P(lt, 9.5, 10.5), () => m(870, 'Ingestão ↓', lerp(.85, .35, eio(P(lt, 10, 13))), C.red));
+}
+
+function s7(lt, t) {
+  const R = rng(5); const shrink = eio(P(lt, 1, 6));
+  for (let i = 0; i < 16; i++) {
+    const x = 380 + (i % 4) * 170 + (Math.floor(i / 4) % 2) * 60 + (R() - .5) * 20, y = 300 + Math.floor(i / 4) * 150;
+    const k = eo(P(lt, i * .05, .8 + i * .05)); const r = 70 * k * lerp(1, .78, shrink);
+    alpha(k, () => { ring(x, y, r, C.fat, 3); circle(x, y, r * .82, C.fat + '55'); circle(x + r * .55, y + r * .35, 8, '#e2e8f0'); });
+  }
+  alpha(P(lt, .5, 1.3), () => text('Adipócitos', 560, 180, 38, C.fat, 700));
+  alpha(P(lt, 1.5, 2.3), () => pill('via GIP', 760, 182, 26, C.gip, 1));
+  // medidor de sensibilidade
+  const cx = 1420, cy = 600, v = lerp(.25, .85, eio(P(lt, 3, 6.5)));
+  alpha(P(lt, 2.5, 3.3), () => {
+    g.lineCap = 'round'; g.lineWidth = 34; g.strokeStyle = 'rgba(255,255,255,.08)'; g.beginPath(); g.arc(cx, cy, 220, Math.PI, 2 * Math.PI); g.stroke();
+    g.strokeStyle = C.glp; g.shadowColor = C.glp; g.shadowBlur = 20; g.beginPath(); g.arc(cx, cy, 220, Math.PI, Math.PI + Math.PI * v); g.stroke(); g.shadowBlur = 0;
+    const a = Math.PI + Math.PI * v; arrow(cx, cy, cx + Math.cos(a) * 170, cy + Math.sin(a) * 170, C.ink, 6, 1); circle(cx, cy, 14, C.ink);
+    text('Sensibilidade à insulina ↑', cx, cy + 90, 34, C.ink, 700);
+    text('melhor manejo de lipídios', cx, cy + 140, 26, C.dim, 500);
+  });
+}
+
+function s8(lt, t) {
+  const bar = (x, label, val, max, unit, col, st, ref, sub) => {
+    const k = eio(P(lt, st, st + 2)); const h = 460 * (val / max) * k; const base = 300;
+    alpha(P(lt, st - .5, st), () => {
+      text(label, x, 230, 36, C.ink, 700); text(sub, x, 272, 22, C.dim, 500);
+      rrect(x - 110, base, 220, 460, 20); g.fillStyle = 'rgba(255,255,255,.05)'; g.fill();
+      g.save(); g.shadowColor = col; g.shadowBlur = 30; rrect(x - 110, base, 220, Math.max(h, 1), 20); g.fillStyle = col; g.fill(); g.restore();
+      text(`−${(val * k).toFixed(1).replace('.', ',')}${unit}`, x, base + h + 50, 54, col, 800);
+      text(ref, x, 860, 22, C.dim, 500);
+    });
+  };
+  bar(700, 'HbA1c', 2.30, 2.6, ' p.p.', C.glp, 2, 'SURPASS-2 · 15 mg · 40 semanas', 'hemoglobina glicada');
+  bar(1220, 'Peso corporal', 20.9, 22, '%', C.gip, 4.2, 'SURMOUNT-1 · 15 mg · 72 semanas', 'redução média');
+}
+
+function s9(lt, t) {
+  pill('GIP', 640, 300, 40, C.gip, P(lt, 0, .8));
+  alpha(P(lt, .4, 1), () => text('+', 780, 302, 60, C.ink, 800));
+  pill('GLP-1', 940, 300, 40, C.glp, P(lt, .5, 1.3));
+  alpha(P(lt, 1, 1.6), () => text('=', 1110, 302, 60, C.ink, 800));
+  pill('Tirzepatida', 1340, 300, 40, C.tz, P(lt, 1.2, 2));
+  const items = [['Glicose', '↓', C.glp], ['Apetite', '↓', C.tz], ['Peso', '↓', C.gip]];
+  items.forEach(([l, s, col], i) => alpha(P(lt, 2 + i * .3, 2.8 + i * .3), () => {
+    const x = 620 + i * 340, y = 500; rrect(x - 140, y - 70, 280, 140, 26); g.fillStyle = col + '1f'; g.fill(); g.strokeStyle = col; g.lineWidth = 2; g.stroke();
+    text(`${l} ${s}`, x, y + 2, 44, col, 800);
+  }));
+  alpha(P(lt, 3.2, 4), () => {
+    text('Efeitos adversos mais comuns: náuseas, diarreia, vômitos', W / 2, 680, 30, C.ink, 600);
+    text('Uso somente com prescrição e acompanhamento médico.', W / 2, 730, 28, C.red, 700);
+  });
+  alpha(P(lt, 10.5, 11.5), () => text('Conteúdo educativo · Ref.: Coskun 2018 · Willard 2020 · Frías 2021 · Jastreboff 2022', W / 2, 820, 20, C.dim, 500));
+}
+
+const FNS = [s1, s2, s3, s4, s5, s6, s7, s8, s9];
+
+function draw(t) {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.shadowBlur = 0;
+  background(t);
+  let si = 0; for (let i = 0; i < SCENES.length; i++) if (t >= SCENES[i].t) si = i;
+  const start = SCENES[si].t, next = si + 1 < SCENES.length ? SCENES[si + 1].t : END + 10;
+  const inK = eo(P(t, start, start + .5)), outK = 1 - P(t, next - .45, next);
+  alpha(Math.min(si === 0 ? 1 : inK, outK) * (1 - P(t, END - 1, END)), () => {
+    g.save(); const z = lerp(1.04, 1, inK); g.translate(W / 2, H / 2); g.scale(z, z); g.translate(-W / 2, -H / 2);
+    FNS[si](t - start, t); g.restore();
+  });
+  hud(t, si);
+  captions(t);
+}
+window.draw = draw; window.END = END;
+document.fonts.load(`800 40px Inter`).then(() => { draw(0); window.ready = true; });
+</script></body></html>

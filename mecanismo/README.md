@@ -14,3 +14,10 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 - Textos e tempos: `src/ibp/config.ts`; cenas em `src/ibp/`
 - Narração: `audio/ibp_narracao.mp3`
 - Renderizar: `npx remotion render IBP out/prazois.mp4 --crf=20`
+
+## Vídeo 3: Como funciona o AAS
+
+- Vídeo final: `out/aas.mp4` (1080×1920, 2 min 40 s, voz Juliana gerada no site da ElevenLabs, com efeitos sonoros)
+- Textos, tempos e efeitos: `src/aas/config.ts`; cenas em `src/aas/`
+- Efeitos sonoros feitos por código: `scripts/sfx.py` → `public/sfx/`
+- Renderizar: `npx remotion render AAS out/aas.mp4 --crf=21`

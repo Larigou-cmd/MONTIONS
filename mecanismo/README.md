@@ -21,3 +21,9 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 - Textos, tempos e efeitos: `src/aas/config.ts`; cenas em `src/aas/`
 - Efeitos sonoros feitos por código: `scripts/sfx.py` → `public/sfx/`
 - Renderizar: `npx remotion render AAS out/aas.mp4 --crf=21`
+
+## Vídeo 4 (protótipo): Por que a dipirona é proibida nos EUA?
+
+- Vídeo: `out/dipirona_prototipo.mp4` (1080×1920, 65 s, sem narração, com efeitos sonoros)
+- Textos e tempos: `src/dipirona/config.ts`; cenas em `src/dipirona/scenes.tsx`
+- Renderizar: `npx remotion render Dipirona out/dipirona_prototipo.mp4 --crf=21`

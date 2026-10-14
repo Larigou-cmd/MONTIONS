@@ -32,12 +32,12 @@ export const rgba = (h: string, a: number) => `rgba(${hexToRgb(h).join(",")},${a
 export const MED = config.corMedicamento;
 
 // ---------- fundo: brilho, poeira e grão ----------
-export const Background: React.FC = () => {
+export const Background: React.FC<{ color?: string; pulses?: number[] }> = ({ color = MED, pulses = PULSES }) => {
   const f = useCurrentFrame();
-  const pulse = PULSES.reduce((s, p) => Math.max(s, tri(f, p, 15)), 0);
+  const pulse = pulses.reduce((s, p) => Math.max(s, tri(f, p, 15)), 0);
   const force = 0.35 + 0.05 * Math.sin((f / 240) * Math.PI * 2) + 0.18 * pulse;
   const rh = 700 + 60 * Math.sin((f / 330) * Math.PI * 2) + 140 * pulse;
-  const [r, g, b] = hexToRgb(MED);
+  const [r, g, b] = hexToRgb(color);
   const stops = Array.from({ length: 11 }, (_, i) => {
     const d = i / 10;
     return `rgba(${r},${g},${b},${(force * Math.pow(1 - d, 1.9)).toFixed(4)}) ${d * 100}%`;

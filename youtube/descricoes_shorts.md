@@ -217,3 +217,32 @@ Farmácia Popular: quais remédios são de graça, o que levar para retirar e qu
 Conteúdo educativo. Confira a lista oficial no site do Ministério da Saúde. Consulte um profissional de saúde para orientações.
 
 #farmaciapopular #sus #farmacia #farmaceutica #saude #remedios #aprendanotiktok
+
+---
+
+## RENAME e REMUME (`rename/rename_reels.mp4`)
+
+### YouTube Shorts
+
+**Título:** RENAME e REMUME: por que o remédio tem no posto de uma cidade e não na outra? #shorts
+
+**Descrição:**
+Você sabe o que é a RENAME? Neste vídeo:
+✅ O que é a Relação Nacional de Medicamentos Essenciais (RENAME 2024)
+✅ Os componentes: básico, estratégico e especializado
+✅ Como a RENAME serve de parâmetro para estados e municípios
+✅ O que é a REMUME e como cada cidade monta a sua
+✅ Por que um remédio tem no posto de uma cidade e não na vizinha
+✅ Onde consultar a REMUME da sua cidade
+
+Conteúdo educativo. Consulte um profissional de saúde para orientações. Narração gerada com voz sintética.
+
+#sus #rename #remume #farmacia #farmaceutica #saudepublica #postodesaude #shorts
+
+### TikTok
+
+**Legenda:**
+Por que o remédio tem no posto de saúde de uma cidade e não tem na outra? 🤔💊 A resposta está na RENAME e na REMUME! 👇
+Conteúdo educativo. Procure a REMUME no site da sua prefeitura. Consulte um profissional de saúde para orientações.
+
+#sus #rename #remume #farmacia #farmaceutica #saudepublica #aprendanotiktok

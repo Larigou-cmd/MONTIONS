@@ -37,3 +37,11 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 - Abertura da boca por quadro: `python3 scripts/boca.py audio/sema_narracao.mp3 src/sema/boca.json`
 - Textos e tempos: `src/sema/config.ts`; cenas em `src/sema/scenes.tsx`
 - Renderizar: `npx remotion render Semaglutida out/semaglutida.mp4 --crf=20`
+
+## Vídeo 6: Semaglutida no estilo "explicadora"
+
+- Vídeo: `out/semaglutida_explicadora.mp4` (1080×1920, 80 s, mesma narração, música e efeitos do vídeo 5)
+- Estilo: fundo claro quadriculado (algumas cenas azuis), título pixel com uma palavra colorida, cartões simples, personagem no canto de baixo trocando de "pose" (vira de lado, pulinho, balão com ícone) e indo para o centro no final
+- Personagem recortada: `public/sema/personagem_recorte.png`; boca e piscadas em `src/sema2/Personagem.tsx`
+- Cenas: `src/sema2/Video.tsx` (tempos de `src/sema/config.ts`)
+- Renderizar: `npx remotion render Semaglutida2 out/semaglutida_explicadora.mp4`

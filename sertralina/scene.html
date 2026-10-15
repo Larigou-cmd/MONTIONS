@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Sertralina</title>
+<style>html,body{margin:0;background:#000}canvas{display:block}</style>
+<script src="words.js"></script>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// Vídeo "SERTRALINA.EXE": tudo é desenhado por draw(t), t em segundos da narração (narracao.mp3).
+// Os tempos abaixo vêm da transcrição palavra a palavra (words.js).
+const W = 1080, H = 1920;
+const NARR = 109.95;            // duração da narração
+window.END = NARR + 2.2;       // segura a tela final um pouco depois da última palavra
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const G = '#39ff6a', A = '#ffc23d', R = '#ff4d6d', CY = '#3de0ff', BG = '#020c06', WH = '#eafff0';
+const SILK = "'Silk'", VT = "'VT'";
+
+// ---------- utilidades ----------
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const k = (t, a, d = 0.35) => cl((t - a) / d);
+const eo = x => 1 - Math.pow(1 - x, 3);
+const back = x => { const c = 1.9; x = cl(x); return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const lerp = (a, b, u) => a + (b - a) * u;
+const rnd = i => { const s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+function rgba(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; }
+
+function text(s, x, y, size, { font = VT, color = WH, align = 'left', alpha = 1, glow = 0, bold = false, base = 'alphabetic' } = {}) {
+  if (alpha <= 0) return;
+  g.save(); g.globalAlpha *= alpha; g.font = `${bold ? 700 : 400} ${size}px ${font}`; g.textAlign = align; g.textBaseline = base;
+  if (glow) { g.shadowColor = color; g.shadowBlur = glow; }
+  g.fillStyle = color; g.fillText(s, x, y); g.restore();
+}
+// texto digitado letra por letra (com cursor enquanto digita)
+function typed(s, t, at, x, y, size, opt = {}) {
+  if (t < at) return;
+  const cps = opt.cps || 22;
+  const n = Math.min(s.length, Math.floor((t - at) * cps) + 1);
+  const shown = s.slice(0, n) + (n < s.length || opt.cursor ? (Math.floor(t * 2.5) % 2 ? '█' : ' ') : '');
+  text(shown, x, y, size, opt);
+}
+function box(x, y, w, h, color, { lit = 0, alpha = 1, fill = 'rgba(2,20,10,0.88)', lw = 4 } = {}) {
+  if (alpha <= 0) return;
+  g.save(); g.globalAlpha *= alpha;
+  g.fillStyle = fill; g.fillRect(x, y, w, h);
+  g.shadowColor = color; g.shadowBlur = 8 + 30 * lit;
+  g.strokeStyle = color; g.lineWidth = lw + 2 * lit; g.strokeRect(x, y, w, h);
+  g.shadowBlur = 0;
+  g.fillStyle = color; [[x, y], [x + w - 12, y], [x, y + h - 12], [x + w - 12, y + h - 12]].forEach(([a, b]) => g.fillRect(a, b, 12, 12));
+  g.restore();
+}
+// carimbo torto que cai com impacto
+function stamp(s, t, at, x, y, color, { rot = -8, size = 64, font = SILK } = {}) {
+  if (t < at) return;
+  const u = cl((t - at) / 0.22);
+  const sc = lerp(2.6, 1, eo(u));
+  const shake = u >= 1 ? Math.max(0, 1 - (t - at - 0.22) / 0.25) * 8 * Math.sin((t - at) * 90) : 0;
+  g.save(); g.translate(x + shake, y); g.rotate(rot * Math.PI / 180); g.scale(sc, sc); g.globalAlpha *= cl(u * 1.6);
+  g.font = `700 ${size}px ${font}`; g.textAlign = 'center'; g.textBaseline = 'middle';
+  const w = g.measureText(s).width + 50, h = size + 34;
+  g.fillStyle = 'rgba(0,0,0,0.6)'; g.fillRect(-w / 2, -h / 2, w, h);
+  g.strokeStyle = color; g.lineWidth = 8; g.shadowColor = color; g.shadowBlur = 24; g.strokeRect(-w / 2, -h / 2, w, h);
+  g.lineWidth = 3; g.strokeRect(-w / 2 + 12, -h / 2 + 12, w - 24, h - 24);
+  g.shadowBlur = 12; g.fillStyle = color; g.fillText(s, 0, 4);
+  g.restore();
+}
+const px = (x, y, w, h, c) => { g.fillStyle = c; g.fillRect(Math.round(x / 6) * 6, Math.round(y / 6) * 6, Math.round(w / 6) * 6, Math.round(h / 6) * 6); };
+
+// ---------- fundo ----------
+function fundo(t) {
+  const rg = g.createRadialGradient(540, 800, 100, 540, 900, 1300);
+  rg.addColorStop(0, '#062a14'); rg.addColorStop(1, BG);
+  g.fillStyle = rg; g.fillRect(0, 0, W, H);
+  // chuva binária suave
+  g.font = `34px ${VT}`; g.textAlign = 'left'; g.textBaseline = 'alphabetic';
+  for (let c = 0; c < 27; c++) {
+    const sp = 40 + rnd(c) * 70, off = rnd(c + 50) * 2400;
+    for (let r = 0; r < 14; r++) {
+      const y = ((t * sp + off + r * 40) % 2400) - 300;
+      const bit = (Math.floor(t * 3 + c * 7 + r * 3) % 3) === 0 ? '1' : '0';
+      g.fillStyle = rgba(G, (0.03 + 0.05 * (r / 14)) * (0.6 + 0.4 * rnd(c + r)));
+      g.fillText(bit, c * 40 + 6, y);
+    }
+  }
+  // grade em perspectiva no chão
+  const hy = 1380, vx = 540;
+  g.save(); g.strokeStyle = rgba(G, 0.22); g.lineWidth = 2;
+  for (let i = -12; i <= 12; i++) { g.beginPath(); g.moveTo(vx + i * 30, hy); g.lineTo(vx + i * 260, H); g.stroke(); }
+  for (let j = 0; j < 14; j++) {
+    const u = ((j + (t * 0.6) % 1) / 14);
+    const y = hy + Math.pow(u, 2.2) * (H - hy);
+    g.globalAlpha = 0.25 + 0.75 * u; g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke();
+  }
+  g.restore();
+  const fade = g.createLinearGradient(0, hy - 40, 0, hy + 200);
+  fade.addColorStop(0, BG); fade.addColorStop(1, 'rgba(2,12,6,0)');
+  g.fillStyle = fade; g.fillRect(0, hy - 40, W, 240);
+}
+function crt() {
+  g.fillStyle = 'rgba(0,0,0,0.18)';
+  for (let y = 0; y < H; y += 4) g.fillRect(0, y, W, 2);
+  const v = g.createRadialGradient(540, 960, 520, 540, 960, 1250);
+  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.78)');
+  g.fillStyle = v; g.fillRect(0, 0, W, H);
+}
+function barra(t) {
+  g.fillStyle = 'rgba(0,10,4,0.92)'; g.fillRect(0, 60, W, 104);
+  g.fillStyle = G; g.fillRect(0, 160, W, 4);
+  text('C:\\> SERTRALINA.EXE', 40, 126, 38, { font: SILK, color: G, glow: 10, bold: true });
+  const rest = Math.max(0, Math.ceil(window.END - t));
+  text(`${String(Math.floor(rest / 60)).padStart(2, '0')}:${String(rest % 60).padStart(2, '0')}`, 1040, 126, 50, { color: A, align: 'right', glow: 8 });
+  g.fillStyle = rgba(G, 0.18); g.fillRect(0, 164, W, 12);
+  g.fillStyle = G; g.fillRect(0, 164, W * cl(t / window.END), 12);
+}
+
+// ---------- legendas palavra por palavra ----------
+const KEYS = ['sertralina', 'zoloft', 'diarreia', 'tontura', 'sonolência', 'toc', 'pânico', 'depressão', 'sangramento', 'aas', 'anticoagulantes', 'repente', 'poucos', 'dia', 'rápido', 'comida', 'noite', 'família', 'fluoxetina', 'prozac', 'serotonina', 'sert', 'trava', 'bomba', 'isrs', 'manhã', 'sono', 'semanas', 'própria', 'náusea', 'cabeça', 'insônia', 'ansiedade', 'libido', 'receita', '344', 'c1', 'controle', 'vias', 'retida', 'trinta', 'sessenta', 'corpo', 'misturada', 'serotoninérgica', 'humor', 'neurônio', 'cérebro', 'antidepressivos', 'funciona', 'neurônios', 'imediato', 'colaterais', 'atenção', 'cuidados', 'jovens', 'profissional'];
+const clean = w => w.toLowerCase().replace(/[.,!?:;]/g, '');
+const GRUPOS = (() => {
+  const out = []; let cur = [];
+  WORDS.forEach((w, i) => {
+    cur.push(w);
+    const end = /[.?!:]$/.test(w.w) || cur.length >= 7 || (/,$/.test(w.w) && cur.length >= 4);
+    if (end || i === WORDS.length - 1) { out.push(cur); cur = []; }
+  });
+  return out.map((ws, i) => {
+    let key = ws.findIndex(w => KEYS.includes(clean(w.w)));
+    if (key < 0) key = ws.reduce((b, w, j) => clean(w.w).length > clean(ws[b].w).length ? j : b, 0);
+    return { ws, key, de: ws[0].s, ate: (out[i + 1] ? out[i + 1][0].s : ws[ws.length - 1].e + 0.5) };
+  });
+})();
+function legenda(t) {
+  if (t >= 107.35) return;
+  const gr = GRUPOS.find(gp => t >= gp.de - 0.05 && t < gp.ate);
+  if (!gr) return;
+  const size = 50; g.font = `700 ${size}px ${SILK}`;
+  const sp = g.measureText(' ').width;
+  const items = gr.ws.map((w, j) => ({ w: w.w.toUpperCase(), s: w.s, key: j === gr.key, wd: g.measureText(w.w.toUpperCase()).width }));
+  const lines = [[]]; let lw = 0;
+  items.forEach(it => { if (lw + it.wd > 960 && lines[lines.length - 1].length) { lines.push([]); lw = 0; } lines[lines.length - 1].push(it); lw += it.wd + sp; });
+  const y0 = 1490 - (lines.length - 1) * 34;
+  lines.forEach((ln, li) => {
+    const total = ln.reduce((s, it) => s + it.wd, 0) + sp * (ln.length - 1);
+    let x = 540 - total / 2;
+    ln.forEach(it => {
+      if (t >= it.s - 0.04) {
+        const u = cl((t - it.s + 0.04) / 0.12);
+        g.save(); g.font = `700 ${size}px ${SILK}`; g.textBaseline = 'middle';
+        g.translate(x + it.wd / 2, y0 + li * 68); g.scale(0.85 + 0.15 * u, 0.85 + 0.15 * u); g.globalAlpha = u;
+        g.textAlign = 'center'; g.lineJoin = 'round'; g.lineWidth = 12; g.strokeStyle = '#000'; g.strokeText(it.w, 0, 0);
+        g.fillStyle = it.key ? A : '#ffffff'; if (it.key) { g.shadowColor = A; g.shadowBlur = 14; }
+        g.fillText(it.w, 0, 0); g.restore();
+      }
+      x += it.wd + sp;
+    });
+  });
+}
+
+// ---------- cenas ----------
+const CENAS = [0, 10.4, 35.1, 45.7, 61.3, 69.3, 89.98, 107.35];
+const vis = (t, a, b, fi = 0.25, fo = 0.25) => Math.min(cl((t - a) / fi), cl((b - t) / fo));
+
+// comprimido de sertralina (oblongo, com sulco)
+function comprimido(x, y, s, rot) {
+  g.save(); g.translate(x, y); g.rotate(rot); g.scale(s, s);
+  g.shadowColor = G; g.shadowBlur = 30;
+  px(-132, -42, 264, 84, '#e9f7ff'); px(-150, -24, 18, 48, '#e9f7ff'); px(132, -24, 18, 48, '#e9f7ff');
+  g.shadowBlur = 0;
+  px(-120, -30, 240, 18, 'rgba(61,224,255,0.45)');
+  px(-3, -42, 6, 84, '#7aa6b8');
+  text('50', -66, 18, 40, { font: SILK, color: '#3a6b80', align: 'center', bold: true });
+  g.restore();
+}
+
+function cena1(t) {
+  const a = vis(t, -1, 10.45);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  const pop = back(k(t, 0.3, 0.5));
+  if (pop > 0) comprimido(540, 470 + Math.sin(t * 2) * 10, pop * 1.3, -0.25 + Math.sin(t) * 0.05);
+  typed('SERTRALINA', t, 1.28, 540, 740, 104, { font: SILK, color: G, glow: 26, bold: true, align: 'center', cps: 16 });
+  typed('> antidepressivo', t, 3.04, 540, 830, 64, { color: A, align: 'center', cps: 26 });
+  typed('um dos mais receitados do Brasil', t, 3.9, 540, 900, 46, { color: WH, align: 'center', cps: 30, alpha: 0.85 });
+  stamp('ZOLOFT®', t, 6.88, 540, 1000, A, { rot: -6, size: 56 });
+  if (t >= 8.0) {
+    const u = eo(k(t, 8.0, 0.3));
+    box(70, 1110, 940, 190, G, { alpha: u, lit: 0.5 + 0.3 * Math.sin(t * 6) });
+    text('C:\\> pergunta.txt', 100, 1160, 34, { color: rgba(G, 0.7), alpha: u });
+    typed('> como ela funciona?', t, 8.1, 100, 1250, 68, { color: G, glow: 10, cps: 15, cursor: true });
+  }
+  g.restore();
+}
+
+// --- mecanismo: sinapse em pixel art ---
+const PUMP = { x: 790, y: 640 };
+const TRAVA = 22.0;
+const N = 130;
+const P = Array.from({ length: N }, (_, i) => ({
+  b: 11.96 + i * 0.11,
+  vx: 300 + rnd(i) * 380, cx: 210 + rnd(i + 9) * 660, cy: 700 + rnd(i + 19) * 150,
+  take: i % 2 === 0, ph: rnd(i + 3) * 6.28,
+}));
+function sinapse(t) {
+  const pre = eo(k(t, 10.5, 0.5)), post = eo(k(t, 10.9, 0.5));
+  g.save(); g.globalAlpha *= pre;
+  g.shadowColor = CY; g.shadowBlur = 18;
+  px(420, 300, 240, 156, rgba(CY, 0.22)); px(150, 450, 780, 170, rgba(CY, 0.22));
+  g.shadowBlur = 0;
+  g.strokeStyle = CY; g.lineWidth = 6;
+  g.beginPath(); g.moveTo(420, 300); g.lineTo(660, 300); g.lineTo(660, 450); g.lineTo(930, 450); g.lineTo(930, 620); g.lineTo(150, 620); g.lineTo(150, 450); g.lineTo(420, 450); g.closePath(); g.stroke();
+  for (let i = 0; i < 6; i++) { const x = 190 + i * 90, y = 500 + (i % 2) * 40; g.strokeStyle = rgba(A, 0.8); g.lineWidth = 4; g.strokeRect(x, y, 54, 42); px(x + 12, y + 12, 12, 12, A); px(x + 30, y + 18, 12, 12, A); }
+  text('NEURÔNIO', 540, 395, 34, { font: SILK, color: CY, bold: true, align: 'center' });
+  g.restore();
+  const glow = cl((t - 23.3) / 1.5);
+  g.save(); g.globalAlpha *= post;
+  px(150, 900, 780, 200, rgba(CY, 0.16));
+  g.strokeStyle = CY; g.lineWidth = 6; g.strokeRect(150, 900, 780, 200);
+  for (let i = 0; i < 7; i++) {
+    const x = 190 + i * 108, lit = glow * (0.6 + 0.4 * Math.sin(t * 8 + i));
+    const c = lit > 0.05 ? G : CY;
+    g.shadowColor = G; g.shadowBlur = 30 * lit;
+    px(x, 864, 12, 36, c); px(x + 48, 864, 12, 36, c); px(x, 888, 60, 12, c);
+  }
+  g.shadowBlur = 0;
+  text('RECEPTORES', 540, 1015, 32, { font: SILK, color: glow > 0.3 ? G : CY, align: 'center', bold: true, glow: 20 * glow });
+  g.restore();
+  if (t >= 15.4) {
+    const u = back(k(t, 15.4, 0.4));
+    const trav = t >= TRAVA;
+    const c = trav ? R : A;
+    g.save(); g.translate(PUMP.x, PUMP.y); g.scale(u, u);
+    g.shadowColor = c; g.shadowBlur = 24;
+    px(-54, -66, 108, 36, c); px(-54, -30, 30, 66, c); px(24, -30, 30, 66, c);
+    g.shadowBlur = 0;
+    if (!trav && t > 17.6) { const s = (t * 3) % 1; px(-12, 30 - s * 70, 24, 24, A); }
+    g.restore();
+    text('SERT', PUMP.x + 80, PUMP.y - 20, 40, { font: SILK, color: c, bold: true, alpha: u, glow: 10 });
+    text('puxa de volta', 1050, PUMP.y + 40, 34, { color: A, alpha: cl((t - 17.6) / 0.3) * (trav ? 0 : 1), align: 'right' });
+  }
+  P.forEach((p, i) => {
+    if (t < p.b) return;
+    const takeAt = p.take ? Math.max(17.68, p.b + 0.7) + (i % 7) * 0.18 : 1e9;
+    const levada = takeAt < TRAVA;
+    let al = 1;
+    const fall = eo(cl((t - p.b) / 0.7));
+    let x = lerp(p.vx, p.cx, fall) + Math.sin(t * 2 + p.ph) * 10 * fall;
+    let y = lerp(620, p.cy, fall) + Math.cos(t * 1.7 + p.ph) * 8 * fall;
+    if (levada && t > takeAt) {
+      const u = eo(cl((t - takeAt) / 0.6));
+      x = lerp(x, PUMP.x, u); y = lerp(y, PUMP.y + 30, u); al = 1 - cl((t - takeAt - 0.5) / 0.15);
+      if (al <= 0) return;
+    }
+    g.save(); g.globalAlpha *= al; g.shadowColor = A; g.shadowBlur = 14;
+    px(x - 9, y - 9, 18, 18, A); g.restore();
+  });
+  text('SEROTONINA', 40, 330, 34, { font: SILK, color: A, bold: true, alpha: cl((t - 12.3) / 0.3), glow: 10 });
+  typed('mensageiro do', t, 13.4, 40, 375, 36, { color: A, cps: 30 });
+  typed('bem-estar', t, 13.85, 40, 412, 36, { color: A, cps: 30 });
+  if (t >= 21.0) {
+    const u = eo(cl((t - 21.0) / 0.9));
+    const x = lerp(180, PUMP.x, u), y = lerp(300, PUMP.y - 10, u);
+    comprimido(x, y, 0.4, lerp(-1.2, 0, u));
+    text('SERTRALINA', x, y - 46, 32, { font: SILK, color: G, bold: true, align: 'center', alpha: 1 - cl((t - 22.2) / 0.3), glow: 10 });
+  }
+  stamp('TRAVADO!', t, TRAVA, 770, 790, R, { rot: -10, size: 54 });
+  if (t >= 23.4) text('+ SEROTONINA NA SINAPSE', 540, 1180, 40, { font: SILK, color: G, bold: true, align: 'center', alpha: cl((t - 23.4) / 0.3) * (1 - cl((t - 26.5) / 0.3)), glow: 16 });
+}
+function cena2(t) {
+  const a = vis(t, 10.4, 35.1);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('COMO FUNCIONA', t, 10.5, 540, 260, 64, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 20 });
+  sinapse(t);
+  if (t >= 26.7) {
+    const u = eo(k(t, 26.7, 0.3));
+    box(70, 1110, 940, 230, G, { alpha: u, lit: 0.6 });
+    if (t < 31.0) {
+      text('FAMÍLIA DOS ISRS:', 100, 1165, 34, { font: SILK, color: rgba(G, 0.8), bold: true, alpha: u });
+      typed('Inibidores Seletivos da', t, 27.0, 100, 1230, 52, { color: WH, cps: 24 });
+      typed('Recaptação de Serotonina', t, 28.0, 100, 1290, 52, { color: WH, cps: 24 });
+      stamp('MESMA FAMÍLIA', t, 28.08, 760, 1150, A, { rot: 7, size: 40 });
+    } else {
+      text('USADA EM:', 100, 1165, 34, { font: SILK, color: rgba(G, 0.8), bold: true });
+      [[31.6, 'DEPRESSÃO'], [32.52, 'ANSIEDADE'], [33.52, 'PÂNICO'], [34.4, 'TOC']].forEach(([at, s], i) => {
+        if (t < at) return;
+        const v = back(k(t, at, 0.3));
+        const x = 100 + (i % 2) * 450, y = 1200 + Math.floor(i / 2) * 70;
+        g.save(); g.translate(x + 200, y + 28); g.scale(v, v);
+        box(-200, -28, 400, 58, A, { lit: 0.5, lw: 3 });
+        text(s, 0, 16, 36, { font: SILK, color: A, bold: true, align: 'center' });
+        g.restore();
+      });
+    }
+  }
+  g.restore();
+}
+
+function sol(x, y, s) {
+  g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = A; g.shadowBlur = 20;
+  px(-30, -30, 60, 60, A); for (let i = 0; i < 8; i++) { const an = i * Math.PI / 4; px(Math.cos(an) * 54 - 6, Math.sin(an) * 54 - 6, 12, 12, A); }
+  g.restore();
+}
+function lua(x, y, s) {
+  g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = CY; g.shadowBlur = 20;
+  px(-36, -36, 60, 72, CY); px(-12, -42, 48, 66, 'rgba(2,20,10,1)');
+  g.restore();
+}
+function cena3(t) {
+  const a = vis(t, 35.1, 45.7);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('NA PRÁTICA', t, 35.2, 540, 270, 72, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 18 });
+  if (t >= 36.1) {
+    const u = eo(k(t, 36.1, 0.35));
+    g.save(); g.translate((1 - u) * -500, 0);
+    box(70, 350, 940, 300, A, { lit: t < 40.8 ? 0.8 : 0.15 });
+    text('1X POR DIA', 110, 440, 56, { font: SILK, color: A, bold: true, glow: 10 });
+    if (t >= 37.9) { sol(150, 530, 0.8 + 0.05 * Math.sin(t * 5)); text('manhã', 210, 545, 44, { color: WH }); }
+    if (t >= 38.6) { lua(450, 530, 0.8); text('ou noite', 500, 545, 44, { color: WH }); }
+    typed('pode ser junto com a comida', t, 39.28, 110, 615, 46, { color: G, cps: 30 });
+    g.restore();
+  }
+  if (t >= 40.8) {
+    const u = eo(k(t, 40.8, 0.35));
+    g.save(); g.translate((1 - u) * -500, 0);
+    box(70, 690, 940, 360, G, { lit: 0.8 });
+    text('EFEITO NÃO É IMEDIATO', 110, 770, 42, { font: SILK, color: G, bold: true, glow: 8 });
+    for (let i = 0; i < 4; i++) {
+      const on = t >= 43.28 + i * 0.3;
+      g.save(); g.shadowColor = G; g.shadowBlur = on ? 18 : 0; px(110 + i * 220, 830, 192, 108, on ? (i >= 1 ? G : rgba(G, 0.55)) : rgba(G, 0.15)); g.restore();
+      text(`SEM ${i + 1}`, 206 + i * 220, 902, 40, { color: on ? BG : rgba(G, 0.5), align: 'center' });
+    }
+    typed('2 a 4 semanas para aparecer', t, 44.2, 110, 1010, 50, { color: A, cps: 30 });
+    g.restore();
+  }
+  g.restore();
+}
+
+// comparação: sertralina x fluoxetina
+function escada(t, at, x, y) {
+  for (let i = 0; i < 5; i++) {
+    const on = t >= at + i * 0.25;
+    if (!on) continue;
+    g.save(); g.shadowColor = G; g.shadowBlur = 14; px(x + i * 110, y + i * 30, 96, 150 - i * 30, rgba(G, 0.85 - i * 0.12)); g.restore();
+  }
+}
+function cena4(t) {
+  const a = vis(t, 45.7, 61.3);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('SERTRALINA', t, 45.92, 290, 270, 50, { font: SILK, color: G, glow: 14, bold: true, align: 'center', cps: 24 });
+  text('X', 540, 272, 50, { font: SILK, color: WH, bold: true, align: 'center', alpha: cl((t - 46.4) / 0.2) });
+  typed('FLUOXETINA', t, 47.12, 790, 270, 50, { font: SILK, color: A, glow: 14, bold: true, align: 'center', cps: 24 });
+  if (t >= 48.3) {
+    const u = eo(k(t, 48.3, 0.3));
+    box(70, 330, 940, 420, CY, { alpha: u, lit: t < 54.8 ? 0.7 : 0.15 });
+    text('QUANTO TEMPO FICA NO CORPO', 540, 395, 36, { font: SILK, color: CY, bold: true, align: 'center', alpha: u });
+    // sertralina: barra curta
+    if (t >= 49.28) {
+      text('SERTRALINA', 110, 480, 36, { font: SILK, color: G, bold: true });
+      const w = 170 * eo(cl((t - 49.28) / 0.8));
+      g.save(); g.shadowColor = G; g.shadowBlur = 16; px(110, 500, w, 48, G); g.restore();
+      typed('~1 dia', t, 51.28, 310, 540, 48, { color: G, cps: 20 });
+    }
+    if (t >= 52.64) {
+      text('FLUOXETINA', 110, 620, 36, { font: SILK, color: A, bold: true });
+      const w = 840 * eo(cl((t - 52.64) / 1.4));
+      g.save(); g.shadowColor = A; g.shadowBlur = 16; px(110, 640, w, 48, A); g.restore();
+      typed('semanas', t, 53.76, 110, 720, 44, { color: A, cps: 20 });
+    }
+  }
+  if (t >= 54.8) {
+    const u = eo(k(t, 54.8, 0.3));
+    g.save(); g.translate((1 - u) * 600, 0);
+    box(70, 790, 940, 470, G, { lit: 0.6 });
+    text('POR ISSO, NA SERTRALINA:', 110, 850, 36, { font: SILK, color: rgba(G, 0.85), bold: true });
+    if (t >= 58.52) {
+      text('RETIRADA AOS POUCOS', 110, 920, 40, { font: SILK, color: G, bold: true, glow: 8 });
+      escada(t, 58.6, 120, 960);
+      typed('com o médico', t, 60.24, 730, 1120, 46, { color: WH, cps: 24 });
+    }
+    g.restore();
+  }
+  stamp('NUNCA PARE DE REPENTE', t, 56.32, 380, 1185, R, { rot: -5, size: 36 });
+  g.restore();
+}
+
+function cena5(t) {
+  const a = vis(t, 61.3, 69.3);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('EFEITOS COLATERAIS', t, 61.4, 540, 270, 58, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 26 });
+  text('OS MAIS COMUNS', 540, 335, 40, { color: A, align: 'center', alpha: cl((t - 62.6) / 0.3) });
+  const itens = [[63.6, 'NÁUSEA'], [64.32, 'DIARREIA'], [65.2, 'INSÔNIA OU SONO'], [66.88, 'TONTURA'], [67.76, 'LIBIDO ↓']];
+  itens.forEach(([at, s], i) => {
+    if (t < at) return;
+    const u = eo(k(t, at, 0.3));
+    const nxt = itens[i + 1] ? itens[i + 1][0] : 69.2;
+    const cor = i === 4 ? A : G;
+    g.save(); g.translate((1 - u) * 600, 0);
+    box(110, 390 + i * 165, 860, 135, cor, { lit: t < nxt ? 1 : 0.15 });
+    px(150, 434 + i * 165, 48, 48, cor);
+    text(s, 240, 478 + i * 165, 50, { font: SILK, color: WH, bold: true });
+    g.restore();
+  });
+  g.restore();
+}
+
+function folha(x, y, rot, rotulo, cor, alpha) {
+  if (alpha <= 0) return;
+  g.save(); g.globalAlpha *= alpha; g.translate(x, y); g.rotate(rot);
+  g.shadowColor = cor; g.shadowBlur = 16;
+  px(-130, -160, 260, 320, '#e9f5ec'); g.shadowBlur = 0;
+  px(-130, -160, 260, 48, cor);
+  text('CONTROLE', 0, -126, 26, { font: SILK, color: BG, align: 'center', bold: true });
+  for (let i = 0; i < 5; i++) px(-100, -80 + i * 40, i === 4 ? 120 : 200, 12, 'rgba(0,40,20,0.35)');
+  text(rotulo, 0, 140, 34, { font: SILK, color: BG, align: 'center', bold: true });
+  g.restore();
+}
+function cena6(t) {
+  const a = vis(t, 69.3, 89.98);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  stamp('ATENÇÃO', t, 69.52, 540, 280, R, { rot: -6, size: 64 });
+  if (t >= 72.8) {
+    const u = eo(k(t, 72.8, 0.3));
+    box(70, 390, 600, 120, A, { alpha: u, lit: t < 76.8 ? 0.8 : 0.15 });
+    typed('PORTARIA', t, 72.88, 100, 470, 44, { font: SILK, color: A, bold: true, cps: 24 });
+    if (t >= 73.28) text('344/98', 420, 474, 74, { color: A, glow: 10, alpha: cl((t - 73.28) / 0.2) });
+  }
+  if (t >= 74.96) {
+    const u = back(k(t, 74.96, 0.35));
+    g.save(); g.translate(850, 450); g.scale(u, u);
+    box(-150, -60, 300, 120, G, { lit: 0.7 });
+    text('LISTA C1', 0, 18, 46, { font: SILK, color: G, bold: true, align: 'center', glow: 12 });
+    g.restore();
+  }
+  if (t >= 76.8) {
+    const ap = eo(k(t, 76.8, 0.4));
+    const sep = eo(k(t, 79.44, 0.5));
+    typed('RECEITA DE CONTROLE ESPECIAL', t, 77.44, 540, 585, 38, { font: SILK, color: G, bold: true, align: 'center', cps: 30, glow: 8 });
+    folha(lerp(540, 300, sep), 810, lerp(0, -0.06, sep), sep > 0.5 ? '1ª VIA' : '', A, ap);
+    folha(lerp(560, 780, sep), 820, lerp(0.04, 0.06, sep), sep > 0.5 ? '2ª VIA' : '', A, ap);
+    if (t >= 80.8) {
+      text('FARMÁCIA', 300, 1030, 36, { font: SILK, color: R, bold: true, align: 'center', alpha: cl((t - 80.8) / 0.3) });
+      text('PACIENTE', 780, 1030, 36, { font: SILK, color: G, bold: true, align: 'center', alpha: cl((t - 81.2) / 0.3) });
+      stamp('RETIDA', t, 81.08, 300, 800, R, { rot: -14, size: 50 });
+    }
+  }
+  if (t >= 82.6) {
+    const u = eo(k(t, 82.6, 0.3));
+    g.save(); g.translate((1 - u) * -500, 0);
+    box(70, 1080, 460, 250, G, { lit: t < 86.7 ? 0.8 : 0.15 });
+    text('VALIDADE', 300, 1140, 36, { font: SILK, color: rgba(G, 0.8), bold: true, align: 'center' });
+    const n = Math.round(30 * eo(cl((t - 83.6) / 0.8)));
+    text(`${n} DIAS`, 300, 1240, 70, { font: SILK, color: G, bold: true, align: 'center', glow: 16 });
+    text('a partir da emissão', 300, 1300, 34, { color: WH, align: 'center', alpha: cl((t - 84.5) / 0.3) });
+    g.restore();
+  }
+  if (t >= 86.7) {
+    const u = eo(k(t, 86.7, 0.3));
+    g.save(); g.translate((1 - u) * 500, 0);
+    box(550, 1080, 460, 250, A, { lit: 0.8 });
+    text('QUANTIDADE', 780, 1140, 36, { font: SILK, color: rgba(A, 0.8), bold: true, align: 'center' });
+    const n = Math.round(60 * eo(cl((t - 87.84) / 0.8)));
+    text(`ATÉ ${n}`, 780, 1240, 66, { font: SILK, color: A, bold: true, align: 'center', glow: 16 });
+    text('dias de tratamento', 780, 1300, 34, { color: WH, align: 'center', alpha: cl((t - 88.5) / 0.3) });
+    g.restore();
+  }
+  g.restore();
+}
+
+function cena7(t) {
+  const a = vis(t, 89.98, 107.35);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('ALERTAS', t, 90.0, 540, 270, 76, { font: SILK, color: R, glow: 20, bold: true, align: 'center', cps: 16 });
+  const cards = [
+    [91.5, 95.5, A, 'NÃO MISTURAR', 'com remédios que aumentam serotonina'],
+    [95.5, 97.5, R, 'RISCO DE SÍNDROME', 'SEROTONINÉRGICA'],
+    [97.5, 102.4, A, 'AAS / ANTICOAGULANTES', 'mais risco de sangramento'],
+    [102.4, 107.35, CY, 'JOVENS: ATENÇÃO', 'acompanhar o humor de perto'],
+  ];
+  cards.forEach(([at, ate, cor, t1, t2], i) => {
+    if (t < at) return;
+    const u = eo(k(t, at, 0.3));
+    g.save(); g.translate((1 - u) * (i % 2 ? 600 : -600), 0);
+    box(70, 330 + i * 245, 940, 215, cor, { lit: t < ate ? 0.9 : 0.15 });
+    text(t1, 110, 405 + i * 245, 44, { font: SILK, color: cor, bold: true, glow: 8 });
+    typed(t2, t, at + 0.25, 110, 478 + i * 245, i === 1 ? 44 : 46, { font: i === 1 ? SILK : VT, bold: i === 1, color: i === 1 ? R : WH, cps: 34 });
+    g.restore();
+  });
+  stamp('PERIGO', t, 96.08, 870, 745, R, { rot: 10, size: 44 });
+  if (t >= 99.12) stamp('SANGRAMENTO', t, 100.9, 800, 990, R, { rot: -8, size: 34 });
+  g.restore();
+}
+
+function cena8(t) {
+  const a = cl((t - 107.35) / 0.3);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  box(70, 560, 940, 560, G, { lit: 0.6 + 0.3 * Math.sin(t * 4) });
+  text('C:\\> encerrar.exe', 110, 630, 36, { color: rgba(G, 0.7) });
+  ['CONSULTE UM', 'PROFISSIONAL', 'DE SAÚDE PARA', 'ORIENTAÇÕES.'].forEach((l, i) =>
+    typed(l, t, 107.4 + i * 0.45, 540, 770 + i * 95, 66, { font: SILK, color: i === 1 ? A : G, bold: true, align: 'center', glow: 16, cps: 30 }));
+  text('Ref.: Portaria SVS/MS 344/1998 · Bula da sertralina (Anvisa) · Stahl, Psicofarmacologia', 540, 1330, 25, { color: rgba(WH, 0.65), align: 'center', alpha: cl((t - 108.8) / 0.4) });
+  g.restore();
+}
+
+// glitch rápido na troca de cena
+function glitch(t) {
+  const c = CENAS.find(s => s > 0 && t >= s && t < s + 0.22);
+  if (c === undefined) return;
+  const u = 1 - (t - c) / 0.22;
+  for (let i = 0; i < 9; i++) {
+    const y = Math.floor(rnd(i + Math.floor(t * 30)) * H), h = 20 + rnd(i + 7) * 90;
+    const dx = (rnd(i + 3 + Math.floor(t * 60)) - 0.5) * 120 * u;
+    g.drawImage(cv, 0, y, W, h, dx, y, W, h);
+  }
+  g.fillStyle = rgba(R, 0.12 * u); g.fillRect(0, 0, W, H);
+  g.fillStyle = rgba(CY, 0.08 * u); g.fillRect(8 * u, 0, W, H);
+}
+
+window.draw = function (t) {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.shadowBlur = 0;
+  fundo(t);
+  cena1(t); cena2(t); cena3(t); cena4(t); cena5(t); cena6(t); cena7(t); cena8(t);
+  legenda(t);
+  barra(t);
+  glitch(t);
+  crt();
+};
+window.render = window.draw;
+
+const faces = [
+  ['Silk', 'fonts/silk400.woff2', '400'], ['Silk', 'fonts/silk400ext.woff2', '400', 'U+0100-024F'],
+  ['Silk', 'fonts/silk700.woff2', '700'], ['Silk', 'fonts/silk700ext.woff2', '700', 'U+0100-024F'],
+  ['VT', 'fonts/vt.woff2', '400'], ['VT', 'fonts/vtext.woff2', '400', 'U+0100-024F'],
+];
+Promise.all(faces.map(([f, u, w, r]) => new FontFace(f, `url(${u})`, r ? { weight: w, unicodeRange: r } : { weight: w }).load().then(ff => document.fonts.add(ff))))
+  .then(() => { draw(0); window.ready = true; });
+</script>
+</body>
+</html>

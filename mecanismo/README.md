@@ -45,3 +45,10 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 - Personagem recortada: `public/sema/personagem_recorte.png`; boca e piscadas em `src/sema2/Personagem.tsx`
 - Cenas: `src/sema2/Video.tsx` (tempos de `src/sema/config.ts`)
 - Renderizar: `npx remotion render Semaglutida2 out/semaglutida_explicadora.mp4`
+
+## Vídeo 7: Semaglutida no modelo do omeprazol (sem personagem)
+
+- Vídeo: `out/semaglutida_modelo_omeprazol.mp4` (1080×1920, 80 s, mesma narração, música e efeitos)
+- Mesmo visual do vídeo dos prazóis: fundo escuro com brilho azul, títulos em serifa, cartões arredondados
+- Cenas: `src/semaIbp/Video.tsx` (tempos de `src/sema/config.ts`)
+- Renderizar: `npx remotion render SemaglutidaIBP out/semaglutida_modelo_omeprazol.mp4 --crf=24`

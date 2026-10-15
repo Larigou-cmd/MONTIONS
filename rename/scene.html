@@ -12,7 +12,7 @@
 // Vídeo "RENAME.EXE": tudo é desenhado por draw(t), t em segundos da narração (narracao.mp3).
 // Os tempos abaixo vêm da transcrição palavra a palavra (words.js).
 const W = 1080, H = 1920;
-const NARR = 75.15;            // duração da narração
+const NARR = 93.94;            // duração da narração
 window.END = NARR + 2.2;       // segura a tela final um pouco depois da última palavra
 const cv = document.getElementById('c'), g = cv.getContext('2d');
 const G = '#39ff6a', A = '#ffc23d', R = '#ff4d6d', CY = '#3de0ff', BG = '#020c06', WH = '#eafff0';
@@ -116,7 +116,7 @@ function barra(t) {
 }
 
 // ---------- legendas palavra por palavra ----------
-const KEYS = ['rename', 'remume', 'sus', 'conitec', 'anos', '2024', 'componentes', 'básico', 'básica', 'estratégico', 'especializado', 'hospitalar', 'parâmetro', 'padronizarem', 'município', 'orçamento', 'posto', 'vizinha', 'padronizado', 'prefeitura', 'farmácia', 'fluoxetina', 'prozac', 'serotonina', 'sert', 'trava', 'bomba', 'isrs', 'manhã', 'sono', 'semanas', 'própria', 'náusea', 'cabeça', 'insônia', 'ansiedade', 'libido', 'receita', '344', 'c1', 'controle', 'vias', 'retida', 'trinta', 'sessenta', 'corpo', 'misturada', 'serotoninérgica', 'humor', 'neurônio', 'cérebro', 'antidepressivos', 'funciona', 'neurônios', 'imediato', 'colaterais', 'atenção', 'cuidados', 'jovens', 'profissional'];
+const KEYS = ['lei', '14654', '2023', 'estoques', 'internet', '15', 'conferir', 'disponível', 'rename', 'remume', 'sus', 'conitec', 'anos', '2024', 'componentes', 'básico', 'básica', 'estratégico', 'especializado', 'hospitalar', 'parâmetro', 'padronizarem', 'município', 'orçamento', 'posto', 'vizinha', 'padronizado', 'prefeitura', 'farmácia', 'fluoxetina', 'prozac', 'serotonina', 'sert', 'trava', 'bomba', 'isrs', 'manhã', 'sono', 'semanas', 'própria', 'náusea', 'cabeça', 'insônia', 'ansiedade', 'libido', 'receita', '344', 'c1', 'controle', 'vias', 'retida', 'trinta', 'sessenta', 'corpo', 'misturada', 'serotoninérgica', 'humor', 'neurônio', 'cérebro', 'antidepressivos', 'funciona', 'neurônios', 'imediato', 'colaterais', 'atenção', 'cuidados', 'jovens', 'profissional'];
 const clean = w => w.toLowerCase().replace(/[.,!?:;]/g, '');
 const GRUPOS = (() => {
   const out = []; let cur = [];
@@ -172,9 +172,10 @@ const S = {
   monta: T('cada', 2) - 0.3, partir: T('rename', 4), basica2: T('básica', 2), doencas: T('doenças', 2), orcamento: T('orçamento'),
   isso: T('isso') - 0.6, posto: T('posto'), vizinha: T('vizinha'), padronizado: T('padronizado'),
   quer: T('quer') - 0.3, site: T('site'), farmacia: T('farmácia'),
+  lei: T('lei') - 1.4, leiNum: T('14654'), estoques: T('estoques'), quinze: T('15'), conferir: T('conferir'),
   consulte: T('consulte'),
 };
-const CENAS = [0, S.comp, S.param, S.monta, S.isso, S.quer, S.consulte - 0.05];
+const CENAS = [0, S.comp, S.param, S.monta, S.isso, S.quer, S.lei, S.consulte - 0.05];
 const vis = (t, a, b, fi = 0.25, fo = 0.25) => Math.min(cl((t - a) / fi), cl((b - t) / fo));
 
 function cruz(x, y, s, c = G) { g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = c; g.shadowBlur = 24; px(-24, -72, 48, 144, c); px(-72, -24, 144, 48, c); g.restore(); }
@@ -337,7 +338,7 @@ function navegador(x, y, w, h, t) {
   for (let i = 0; i < 6; i++) { px(x + 40, y + 90 + i * 45, 30, 24, G); px(x + 90, y + 96 + i * 45, 200 + (i % 3) * 80, 12, rgba(WH, 0.5)); }
 }
 function cena6(t) {
-  const a = vis(t, S.quer, S.consulte - 0.05);
+  const a = vis(t, S.quer, S.lei);
   if (a <= 0) return;
   g.save(); g.globalAlpha = a;
   typed('E NA SUA CIDADE?', t, S.quer + 0.1, 540, 270, 62, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 20 });
@@ -358,6 +359,50 @@ function cena6(t) {
   g.restore();
 }
 
+// ---------- Lei 14.654/2023: estoques do SUS na internet ----------
+function cenaLei(t) {
+  const a = vis(t, S.lei, S.consulte - 0.05);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('E TEM MAIS!', t, S.lei + 0.1, 540, 270, 70, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 18 });
+  if (t >= S.leiNum - 0.3) {
+    const u = back(k(t, S.leiNum - 0.3, 0.4));
+    g.save(); g.translate(540, 400); g.scale(u, u);
+    box(-420, -70, 840, 140, A, { lit: 0.8 });
+    text('LEI Nº', -230, 20, 50, { font: SILK, color: A, bold: true, align: 'center', glow: 12 });
+    text('14.654/2023', 120, 26, 84, { font: VT, color: A, align: 'center', glow: 12 });
+    g.restore();
+  }
+  if (t >= S.estoques - 0.5) {
+    const u = eo(k(t, S.estoques - 0.5, 0.4));
+    g.save(); g.translate(0, (1 - u) * 300); g.globalAlpha *= u;
+    box(70, 510, 940, 420, CY, { lit: 0.6 });
+    px(70, 510, 940, 50, rgba(CY, 0.3));
+    [R, A, G].forEach((c, i) => px(90 + i * 34, 524, 22, 22, c));
+    text('ESTOQUE DE MEDICAMENTOS · FARMÁCIA DO POSTO', 560, 545, 22, { font: SILK, color: WH, bold: true, align: 'center' });
+    const linhas = [['LOSARTANA 50 MG', 'DISPONÍVEL', G], ['METFORMINA 850 MG', 'DISPONÍVEL', G], ['SINVASTATINA 20 MG', 'EM FALTA', R], ['SALBUTAMOL SPRAY', 'DISPONÍVEL', G], ['OMEPRAZOL 20 MG', 'BAIXO', A]];
+    linhas.forEach(([n, st, c], i) => {
+      const at = S.estoques + i * 0.25;
+      if (t < at) return;
+      const y = 610 + i * 62;
+      text(n, 110, y, 30, { font: SILK, color: WH, bold: true, alpha: cl((t - at) / 0.2) });
+      text(st, 970, y, 30, { font: SILK, color: c, bold: true, align: 'right', alpha: cl((t - at) / 0.2), glow: 8 });
+    });
+    text('exemplo ilustrativo', 540, 910, 26, { color: rgba(WH, 0.5), align: 'center' });
+    g.restore();
+  }
+  stamp('ATUALIZA A CADA 15 DIAS', t, S.quinze, 540, 1000, G, { rot: -4, size: 40 });
+  if (t >= S.conferir - 0.2) {
+    const u = eo(k(t, S.conferir - 0.2, 0.35));
+    g.save(); g.translate((1 - u) * 600, 0);
+    box(70, 1090, 940, 150, CY, { lit: 0.8 });
+    text('CONFIRA ANTES DE IR', 540, 1155, 44, { font: SILK, color: CY, bold: true, align: 'center', glow: 10 });
+    text('ao posto de saúde', 540, 1210, 38, { color: WH, align: 'center' });
+    g.restore();
+  }
+  g.restore();
+}
+
 function cena7(t) {
   const a = cl((t - S.consulte + 0.05) / 0.3);
   if (a <= 0) return;
@@ -366,7 +411,7 @@ function cena7(t) {
   text('C:\\> encerrar.exe', 110, 630, 36, { color: rgba(G, 0.7) });
   ['CONSULTE UM', 'PROFISSIONAL', 'DE SAÚDE PARA', 'ORIENTAÇÕES.'].forEach((l, i) =>
     typed(l, t, S.consulte + i * 0.45, 540, 770 + i * 95, 66, { font: SILK, color: i === 1 ? A : G, bold: true, align: 'center', glow: 16, cps: 30 }));
-  text('Ref.: Ministério da Saúde — RENAME 2024 · Decreto 7.508/2011 · Conitec', 540, 1330, 25, { color: rgba(WH, 0.65), align: 'center', alpha: cl((t - S.consulte - 1.4) / 0.4) });
+  text('Ref.: Ministério da Saúde — RENAME 2024 · Decreto 7.508/2011 · Conitec · Lei 14.654/2023', 540, 1330, 25, { color: rgba(WH, 0.65), align: 'center', alpha: cl((t - S.consulte - 1.4) / 0.4) });
   g.restore();
 }
 
@@ -387,7 +432,7 @@ function glitch(t) {
 window.draw = function (t) {
   g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.shadowBlur = 0;
   fundo(t);
-  cena1(t); cena2(t); cena3(t); cena4(t); cena5(t); cena6(t); cena7(t);
+  cena1(t); cena2(t); cena3(t); cena4(t); cena5(t); cena6(t); cenaLei(t); cena7(t);
   legenda(t);
   barra(t);
   glitch(t);

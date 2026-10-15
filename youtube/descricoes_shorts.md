@@ -234,6 +234,7 @@ Você sabe o que é a RENAME? Neste vídeo:
 ✅ O que é a REMUME e como cada cidade monta a sua
 ✅ Por que um remédio tem no posto de uma cidade e não na vizinha
 ✅ Onde consultar a REMUME da sua cidade
+✅ Lei 14.654/2023: estoques das farmácias do SUS na internet, atualizados a cada 15 dias
 
 Conteúdo educativo. Consulte um profissional de saúde para orientações. Narração gerada com voz sintética.
 

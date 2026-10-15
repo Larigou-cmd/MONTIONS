@@ -29,3 +29,11 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 - Música de fundo própria, feita por código: `scripts/musica.py` → `public/musica_dipirona.wav`
 - Textos e tempos: `src/dipirona/config.ts`; cenas em `src/dipirona/scenes.tsx`
 - Renderizar: `npx remotion render Dipirona out/dipirona.mp4 --crf=21`
+
+## Vídeo 5: Semaglutida com a personagem farmacêutica
+
+- Vídeo: `out/semaglutida.mp4` (1080×1920, 80 s, voz Juliana, boca da personagem sincronizada com a voz, música e efeitos)
+- Personagem: `public/sema/personagem.jpg`; boca e piscadas em `src/sema/Character.tsx`
+- Abertura da boca por quadro: `python3 scripts/boca.py audio/sema_narracao.mp3 src/sema/boca.json`
+- Textos e tempos: `src/sema/config.ts`; cenas em `src/sema/scenes.tsx`
+- Renderizar: `npx remotion render Semaglutida out/semaglutida.mp4 --crf=20`

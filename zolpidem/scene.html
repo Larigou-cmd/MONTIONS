@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Zolpidem</title>
+<style>html,body{margin:0;background:#000}canvas{display:block}</style>
+<script src="words.js"></script>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// Vídeo "ZOLPIDEM.EXE": tudo é desenhado por draw(t), t em segundos da narração (narracao.mp3).
+// Os tempos abaixo vêm da transcrição palavra a palavra (words.js).
+const W = 1080, H = 1920;
+const NARR = 116.61;            // duração da narração
+window.END = NARR + 2.2;       // segura a tela final um pouco depois da última palavra
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const G = '#39ff6a', A = '#ffc23d', R = '#ff4d6d', CY = '#3de0ff', BG = '#020c06', WH = '#eafff0';
+const SILK = "'Silk'", VT = "'VT'";
+
+// ---------- utilidades ----------
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const k = (t, a, d = 0.35) => cl((t - a) / d);
+const eo = x => 1 - Math.pow(1 - x, 3);
+const back = x => { const c = 1.9; x = cl(x); return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const lerp = (a, b, u) => a + (b - a) * u;
+const rnd = i => { const s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+function rgba(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; }
+
+function text(s, x, y, size, { font = VT, color = WH, align = 'left', alpha = 1, glow = 0, bold = false, base = 'alphabetic' } = {}) {
+  if (alpha <= 0) return;
+  g.save(); g.globalAlpha *= alpha; g.font = `${bold ? 700 : 400} ${size}px ${font}`; g.textAlign = align; g.textBaseline = base;
+  if (glow) { g.shadowColor = color; g.shadowBlur = glow; }
+  g.fillStyle = color; g.fillText(s, x, y); g.restore();
+}
+// texto digitado letra por letra (com cursor enquanto digita)
+function typed(s, t, at, x, y, size, opt = {}) {
+  if (t < at) return;
+  const cps = opt.cps || 22;
+  const n = Math.min(s.length, Math.floor((t - at) * cps) + 1);
+  const shown = s.slice(0, n) + (n < s.length || opt.cursor ? (Math.floor(t * 2.5) % 2 ? '█' : ' ') : '');
+  text(shown, x, y, size, opt);
+}
+function box(x, y, w, h, color, { lit = 0, alpha = 1, fill = 'rgba(2,20,10,0.88)', lw = 4 } = {}) {
+  if (alpha <= 0) return;
+  g.save(); g.globalAlpha *= alpha;
+  g.fillStyle = fill; g.fillRect(x, y, w, h);
+  g.shadowColor = color; g.shadowBlur = 8 + 30 * lit;
+  g.strokeStyle = color; g.lineWidth = lw + 2 * lit; g.strokeRect(x, y, w, h);
+  g.shadowBlur = 0;
+  g.fillStyle = color; [[x, y], [x + w - 12, y], [x, y + h - 12], [x + w - 12, y + h - 12]].forEach(([a, b]) => g.fillRect(a, b, 12, 12));
+  g.restore();
+}
+// carimbo torto que cai com impacto
+function stamp(s, t, at, x, y, color, { rot = -8, size = 64, font = SILK } = {}) {
+  if (t < at) return;
+  const u = cl((t - at) / 0.22);
+  const sc = lerp(2.6, 1, eo(u));
+  const shake = u >= 1 ? Math.max(0, 1 - (t - at - 0.22) / 0.25) * 8 * Math.sin((t - at) * 90) : 0;
+  g.save(); g.translate(x + shake, y); g.rotate(rot * Math.PI / 180); g.scale(sc, sc); g.globalAlpha *= cl(u * 1.6);
+  g.font = `700 ${size}px ${font}`; g.textAlign = 'center'; g.textBaseline = 'middle';
+  const w = g.measureText(s).width + 50, h = size + 34;
+  g.fillStyle = 'rgba(0,0,0,0.6)'; g.fillRect(-w / 2, -h / 2, w, h);
+  g.strokeStyle = color; g.lineWidth = 8; g.shadowColor = color; g.shadowBlur = 24; g.strokeRect(-w / 2, -h / 2, w, h);
+  g.lineWidth = 3; g.strokeRect(-w / 2 + 12, -h / 2 + 12, w - 24, h - 24);
+  g.shadowBlur = 12; g.fillStyle = color; g.fillText(s, 0, 4);
+  g.restore();
+}
+const px = (x, y, w, h, c) => { g.fillStyle = c; g.fillRect(Math.round(x / 6) * 6, Math.round(y / 6) * 6, Math.round(w / 6) * 6, Math.round(h / 6) * 6); };
+
+// ---------- fundo ----------
+function fundo(t) {
+  const rg = g.createRadialGradient(540, 800, 100, 540, 900, 1300);
+  rg.addColorStop(0, '#062a14'); rg.addColorStop(1, BG);
+  g.fillStyle = rg; g.fillRect(0, 0, W, H);
+  // chuva binária suave
+  g.font = `34px ${VT}`; g.textAlign = 'left'; g.textBaseline = 'alphabetic';
+  for (let c = 0; c < 27; c++) {
+    const sp = 40 + rnd(c) * 70, off = rnd(c + 50) * 2400;
+    for (let r = 0; r < 14; r++) {
+      const y = ((t * sp + off + r * 40) % 2400) - 300;
+      const bit = (Math.floor(t * 3 + c * 7 + r * 3) % 3) === 0 ? '1' : '0';
+      g.fillStyle = rgba(G, (0.03 + 0.05 * (r / 14)) * (0.6 + 0.4 * rnd(c + r)));
+      g.fillText(bit, c * 40 + 6, y);
+    }
+  }
+  // grade em perspectiva no chão
+  const hy = 1380, vx = 540;
+  g.save(); g.strokeStyle = rgba(G, 0.22); g.lineWidth = 2;
+  for (let i = -12; i <= 12; i++) { g.beginPath(); g.moveTo(vx + i * 30, hy); g.lineTo(vx + i * 260, H); g.stroke(); }
+  for (let j = 0; j < 14; j++) {
+    const u = ((j + (t * 0.6) % 1) / 14);
+    const y = hy + Math.pow(u, 2.2) * (H - hy);
+    g.globalAlpha = 0.25 + 0.75 * u; g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke();
+  }
+  g.restore();
+  const fade = g.createLinearGradient(0, hy - 40, 0, hy + 200);
+  fade.addColorStop(0, BG); fade.addColorStop(1, 'rgba(2,12,6,0)');
+  g.fillStyle = fade; g.fillRect(0, hy - 40, W, 240);
+}
+function crt() {
+  g.fillStyle = 'rgba(0,0,0,0.18)';
+  for (let y = 0; y < H; y += 4) g.fillRect(0, y, W, 2);
+  const v = g.createRadialGradient(540, 960, 520, 540, 960, 1250);
+  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.78)');
+  g.fillStyle = v; g.fillRect(0, 0, W, H);
+}
+function barra(t) {
+  g.fillStyle = 'rgba(0,10,4,0.92)'; g.fillRect(0, 60, W, 104);
+  g.fillStyle = G; g.fillRect(0, 160, W, 4);
+  text('C:\\> ZOLPIDEM.EXE', 40, 126, 38, { font: SILK, color: G, glow: 10, bold: true });
+  const rest = Math.max(0, Math.ceil(window.END - t));
+  text(`${String(Math.floor(rest / 60)).padStart(2, '0')}:${String(rest % 60).padStart(2, '0')}`, 1040, 126, 50, { color: A, align: 'right', glow: 8 });
+  g.fillStyle = rgba(G, 0.18); g.fillRect(0, 164, W, 12);
+  g.fillStyle = G; g.fillRect(0, 164, W * cl(t / window.END), 12);
+}
+
+// ---------- legendas palavra por palavra ----------
+const KEYS = ['zolpidem', 'stilnox', 'gaba', 'freio', 'receptor', 'cloreto', 'calmo', 'alfa-1', 'forte', 'sono', 'insônia', 'rápido', 'deitado', 'horas', 'sonolência', 'tontura', 'esquecimento', 'dirigir', 'dependência', 'alcoólica', 'não', 'álcool', 'somam', 'apagões', 'lenta', 'b1', 'preta', '2024', 'azul', 'estado', 'dentista', 'odontológico', 'médico', 'cadastrado', 'fluoxetina', 'prozac', 'serotonina', 'sert', 'trava', 'bomba', 'isrs', 'manhã', 'sono', 'semanas', 'própria', 'náusea', 'cabeça', 'insônia', 'ansiedade', 'libido', 'receita', '344', 'c1', 'controle', 'vias', 'retida', 'trinta', 'sessenta', 'corpo', 'misturada', 'serotoninérgica', 'humor', 'neurônio', 'cérebro', 'antidepressivos', 'funciona', 'neurônios', 'imediato', 'colaterais', 'atenção', 'cuidados', 'jovens', 'profissional'];
+const clean = w => w.toLowerCase().replace(/[.,!?:;]/g, '');
+const GRUPOS = (() => {
+  const out = []; let cur = [];
+  WORDS.forEach((w, i) => {
+    cur.push(w);
+    const end = /[.?!:]$/.test(w.w) || cur.length >= 7 || (/,$/.test(w.w) && cur.length >= 4);
+    if (end || i === WORDS.length - 1) { out.push(cur); cur = []; }
+  });
+  return out.map((ws, i) => {
+    let key = ws.findIndex(w => KEYS.includes(clean(w.w)));
+    if (key < 0) key = ws.reduce((b, w, j) => clean(w.w).length > clean(ws[b].w).length ? j : b, 0);
+    return { ws, key, de: ws[0].s, ate: (out[i + 1] ? out[i + 1][0].s : ws[ws.length - 1].e + 0.5) };
+  });
+})();
+function legenda(t) {
+  if (t >= S.consulte - 0.05) return;
+  const gr = GRUPOS.find(gp => t >= gp.de - 0.05 && t < gp.ate);
+  if (!gr) return;
+  const size = 50; g.font = `700 ${size}px ${SILK}`;
+  const sp = g.measureText(' ').width;
+  const items = gr.ws.map((w, j) => ({ w: w.w.toUpperCase(), s: w.s, key: j === gr.key, wd: g.measureText(w.w.toUpperCase()).width }));
+  const lines = [[]]; let lw = 0;
+  items.forEach(it => { if (lw + it.wd > 960 && lines[lines.length - 1].length) { lines.push([]); lw = 0; } lines[lines.length - 1].push(it); lw += it.wd + sp; });
+  const y0 = 1490 - (lines.length - 1) * 34;
+  lines.forEach((ln, li) => {
+    const total = ln.reduce((s, it) => s + it.wd, 0) + sp * (ln.length - 1);
+    let x = 540 - total / 2;
+    ln.forEach(it => {
+      if (t >= it.s - 0.04) {
+        const u = cl((t - it.s + 0.04) / 0.12);
+        g.save(); g.font = `700 ${size}px ${SILK}`; g.textBaseline = 'middle';
+        g.translate(x + it.wd / 2, y0 + li * 68); g.scale(0.85 + 0.15 * u, 0.85 + 0.15 * u); g.globalAlpha = u;
+        g.textAlign = 'center'; g.lineJoin = 'round'; g.lineWidth = 12; g.strokeStyle = '#000'; g.strokeText(it.w, 0, 0);
+        g.fillStyle = it.key ? A : '#ffffff'; if (it.key) { g.shadowColor = A; g.shadowBlur = 14; }
+        g.fillText(it.w, 0, 0); g.restore();
+      }
+      x += it.wd + sp;
+    });
+  });
+}
+
+// ---------- tempos: procurados na transcrição (palavra, ocorrência) ----------
+const norm = w => w.toLowerCase().replace(/[.,!?:;]/g, '');
+function T(word, n = 1) {
+  let c = 0;
+  for (const w of WORDS) if (norm(w.w) === word && ++c === n) return w.s;
+  console.warn('tempo não achado', word, n); return 1e9;
+}
+const S = {
+  titulo: T('zolpidem'), remedios: T('remédios'), stilnox: T('stilnox'), mas: T('mas'),
+  mec: T('existe') - 0.9, freio: T('freio'), acalma: T('acalma'), encaixa: T('encaixa'), canal: T('canal'), cloreto: T('cloreto'),
+  calmo: T('calmo'), zolp: T('zolpidem', 2), alfa: T('alfa-1'), forte: T('forte'), resultado: T('resultado'), sono: T('sono'),
+  uso: T('insônia') - 0.45, insonia: T('insônia'), pouco: T('pouco'), rapido: T('rápido'), trinta: T('trinta'), deitado: T('deitado'), sete: T('sete'),
+  efeitos: T('efeitos') - 0.3, sonolencia: T('sonolência'), tontura: T('tontura'), dor: T('dor'), esquec: T('esquecimento'),
+  comport: T('comportamentos'), andar: T('andar'), comer: T('comer'), dirigir: T('dirigir'), lembrar: T('lembrar'), dependencia: T('dependência'),
+  alcool: T('alcoólica') - 1.1, nao: T('não'), freia: T('freia'), juntos: T('juntos'), apagoes: T('apagões'), quedas: T('quedas'), sonamb: T('sonambulismo'), respira: T('respiração'),
+  receita: T('agora') - 0.3, portaria: T('portaria'), b1: T('b1'), tarja: T('tarja'), agosto: T('agosto'), qualquer: T('qualquer'), azul: T('azul'),
+  trinta2: T('trinta', 2), estado: T('estado'), retida: T('retida'), cadastrado: T('cadastrado'),
+  dentista: T('dentista') - 0.4, odonto: T('odontológico'), medico: T('médico'), consulte: T('consulte'),
+};
+const CENAS = [0, S.mec, S.uso, S.efeitos, S.alcool, S.receita, S.dentista, S.consulte - 0.05];
+const vis = (t, a, b, fi = 0.25, fo = 0.25) => Math.min(cl((t - a) / fi), cl((b - t) / fo));
+
+function comprimido(x, y, s, rot) {
+  g.save(); g.translate(x, y); g.rotate(rot); g.scale(s, s);
+  g.shadowColor = G; g.shadowBlur = 30;
+  px(-120, -48, 240, 96, '#f2f2ea'); px(-138, -30, 18, 60, '#f2f2ea'); px(120, -30, 18, 60, '#f2f2ea');
+  g.shadowBlur = 0;
+  px(-108, -36, 216, 18, 'rgba(255,255,255,0.7)'); px(-3, -48, 6, 96, '#9aa39a');
+  text('10', -60, 20, 40, { font: SILK, color: '#5d6a5d', align: 'center', bold: true });
+  g.restore();
+}
+function lua(x, y, s, c = A) {
+  g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = c; g.shadowBlur = 24;
+  px(-42, -48, 72, 96, c); px(-12, -54, 60, 84, '#031a0c');
+  g.restore();
+}
+
+function cena1(t) {
+  const a = vis(t, -1, S.mec + 0.05);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  const pop = back(k(t, 0.3, 0.5));
+  if (pop > 0) { comprimido(470, 470 + Math.sin(t * 2) * 10, pop * 1.2, -0.2 + Math.sin(t) * 0.05); lua(760, 420, pop * 1.1); }
+  for (let i = 0; i < 3; i++) text('Z', 840 + i * 50, 340 - i * 50 + Math.sin(t * 3 + i) * 8, 40 + i * 12, { font: SILK, color: CY, bold: true, alpha: pop * (0.5 + 0.5 * Math.sin(t * 2 + i)), glow: 10 });
+  typed('ZOLPIDEM', t, S.titulo, 540, 740, 112, { font: SILK, color: G, glow: 26, bold: true, align: 'center', cps: 16 });
+  typed('> remédio para dormir', t, S.remedios - 0.3, 540, 830, 62, { color: A, align: 'center', cps: 26 });
+  typed('um dos mais usados no Brasil', t, S.remedios + 0.6, 540, 900, 46, { color: WH, align: 'center', cps: 30, alpha: 0.85 });
+  stamp('STILNOX®', t, S.stilnox, 540, 1000, A, { rot: -6, size: 56 });
+  if (t >= S.mas) {
+    const u = eo(k(t, S.mas, 0.3));
+    box(70, 1110, 940, 190, G, { alpha: u, lit: 0.5 + 0.3 * Math.sin(t * 6) });
+    text('C:\\> pergunta.txt', 100, 1160, 34, { color: rgba(G, 0.7), alpha: u });
+    typed('> como ele age no cérebro?', t, S.mas + 0.1, 100, 1250, 62, { color: G, glow: 10, cps: 15, cursor: true });
+  }
+  g.restore();
+}
+
+// --- mecanismo: receptor GABA-A na membrana ---
+function cena2(t) {
+  const a = vis(t, S.mec, S.uso);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('COMO ELE AGE', t, S.mec + 0.1, 540, 260, 66, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 20 });
+  text('FORA DO NEURÔNIO', 60, 340, 28, { font: SILK, color: rgba(CY, 0.7), bold: true, alpha: cl((t - S.mec - 0.3) / 0.3) });
+  // membrana
+  const mem = eo(k(t, S.mec + 0.2, 0.6));
+  const abre = Math.max(0.35 * cl((t - S.canal) / 0.5), cl((t - S.forte) / 0.5));
+  for (let i = 0; i < 26; i++) {
+    const x = 40 + i * 40;
+    if (x > 440 && x < 640) continue;
+    if (i / 26 > mem) continue;
+    g.save(); g.shadowColor = CY; g.shadowBlur = 8;
+    px(x, 600, 30, 30, rgba(CY, 0.8)); px(x, 690, 30, 30, rgba(CY, 0.8));
+    px(x + 12, 630, 6, 60, rgba(CY, 0.4));
+    g.restore();
+  }
+  // receptor (canal)
+  if (mem > 0.3) {
+    const off = 30 * abre;
+    const cor = t >= S.forte ? G : CY;
+    g.save(); g.shadowColor = cor; g.shadowBlur = 20;
+    px(452 - off, 560, 72, 200, rgba(cor, 0.9)); px(556 + off, 560, 72, 200, rgba(cor, 0.9));
+    g.restore();
+    text('RECEPTOR GABA-A', 540, 800, 30, { font: SILK, color: cor, bold: true, align: 'center' });
+    // bolsos de encaixe
+    g.strokeStyle = A; g.lineWidth = 4; g.strokeRect(392 - off, 578, 54, 54);
+    g.strokeStyle = G; g.strokeRect(634 + off, 578, 54, 54);
+    if (t >= S.alfa) text('α1', 661 + off, 560, 34, { font: SILK, color: G, bold: true, align: 'center', glow: 10 });
+  }
+  // moléculas de GABA (âmbar) — uma encaixa
+  for (let i = 0; i < 5; i++) {
+    const x0 = 120 + i * 190, y0 = 420 + (i % 2) * 70;
+    let x = x0 + Math.sin(t * 1.5 + i) * 20, y = y0 + Math.cos(t * 1.2 + i) * 14;
+    if (i === 2) { const u = eo(cl((t - S.encaixa) / 0.6)); x = lerp(x, 419 - 30 * abre, u); y = lerp(y, 605, u); }
+    if (t < S.freio - 0.6) continue;
+    g.save(); g.shadowColor = A; g.shadowBlur = 14; px(x - 15, y - 15, 30, 30, A); g.restore();
+    if (i === 0) text('GABA', x, y - 30, 30, { font: SILK, color: A, bold: true, align: 'center' });
+  }
+  // zolpidem entra no ponto alfa-1
+  if (t >= S.zolp - 0.2) {
+    const u = eo(cl((t - S.zolp + 0.2) / 0.9));
+    const x = lerp(980, 661 + 30 * abre, u), y = lerp(380, 605, u);
+    comprimido(x, y, lerp(0.45, 0.2, u), lerp(1, 0, u));
+    text('ZOLPIDEM', x, y - 40, 30, { font: SILK, color: G, bold: true, align: 'center', alpha: 1 - cl((t - S.alfa - 0.6) / 0.3), glow: 10 });
+  }
+  // íons cloreto passando pelo canal
+  const nIons = Math.round(16 * abre);
+  for (let i = 0; i < nIons; i++) {
+    const ph = (t * (0.5 + 0.7 * abre) + i / 16) % 1;
+    const x = 540 + Math.sin(i * 2.1) * 14 * abre, y = lerp(470, 900, ph);
+    g.save(); g.globalAlpha *= Math.sin(ph * Math.PI); g.shadowColor = CY; g.shadowBlur = 12;
+    px(x - 12, y - 12, 24, 24, CY); g.restore();
+    text('-', x, y + 10, 30, { font: SILK, color: BG, bold: true, align: 'center', alpha: Math.sin(ph * Math.PI) });
+  }
+  if (t >= S.cloreto) text('Cl⁻ entra', 760, 880, 40, { font: VT, color: CY, alpha: cl((t - S.cloreto) / 0.3), glow: 10 });
+  text('DENTRO', 60, 880, 28, { font: SILK, color: rgba(CY, 0.7), bold: true, alpha: mem });
+  // atividade do neurônio
+  if (t >= S.canal - 0.3) {
+    const u = eo(k(t, S.canal - 0.3, 0.3));
+    box(70, 950, 940, 200, CY, { alpha: u, lit: 0.3 });
+    text('ATIVIDADE DO NEURÔNIO', 100, 995, 28, { font: SILK, color: CY, bold: true, alpha: u });
+    const amp = t < S.calmo ? 1 : t < S.forte ? 0.55 : lerp(0.55, 0.12, cl((t - S.forte) / 1.2));
+    g.save(); g.globalAlpha *= u; g.strokeStyle = amp < 0.3 ? G : A; g.lineWidth = 6; g.shadowColor = g.strokeStyle; g.shadowBlur = 12;
+    g.beginPath();
+    for (let x = 100; x <= 980; x += 6) { const y = 1080 + Math.sin(x / 18 + t * 9) * 45 * amp * (0.6 + 0.4 * Math.sin(x / 70)); x === 100 ? g.moveTo(x, y) : g.lineTo(x, y); }
+    g.stroke(); g.restore();
+  }
+  if (t >= S.freio - 0.1 && t < S.zolp) {
+    const u = eo(k(t, S.freio - 0.1, 0.3));
+    box(70, 1180, 940, 110, A, { alpha: u, lit: 0.7 });
+    text('GABA = FREIO DO CÉREBRO', 540, 1253, 42, { font: SILK, color: A, bold: true, align: 'center', alpha: u });
+  }
+  stamp('FREIO NO MÁXIMO!', t, S.forte, 540, 470, G, { rot: -6, size: 46 });
+  if (t >= S.resultado) {
+    stamp('SONO', t, S.sono, 540, 1240, CY, { rot: 5, size: 66 });
+    for (let i = 0; i < 3; i++) text('Z', 760 + i * 60, 1220 - i * 50 + Math.sin(t * 3 + i) * 8, 40 + i * 14, { font: SILK, color: CY, bold: true, alpha: cl((t - S.sono - i * 0.2) / 0.3), glow: 12 });
+  }
+  g.restore();
+}
+
+function relogio(x, y, t) {
+  g.save(); g.translate(x, y); g.shadowColor = A; g.shadowBlur = 16;
+  g.strokeStyle = A; g.lineWidth = 8; g.strokeRect(-50, -50, 100, 100);
+  const an = t * 2;
+  g.beginPath(); g.moveTo(0, 0); g.lineTo(Math.cos(an) * 34, Math.sin(an) * 34); g.stroke();
+  g.restore();
+}
+function cena3(t) {
+  const a = vis(t, S.uso, S.efeitos);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('PARA QUE SERVE', t, S.uso + 0.1, 540, 270, 64, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 20 });
+  if (t >= S.insonia - 0.2) {
+    const u = eo(k(t, S.insonia - 0.2, 0.35));
+    g.save(); g.translate((1 - u) * -500, 0);
+    box(70, 340, 940, 190, G, { lit: t < S.rapido ? 0.8 : 0.15 });
+    lua(170, 435, 0.8, CY);
+    text('INSÔNIA', 270, 430, 60, { font: SILK, color: G, bold: true, glow: 10 });
+    typed('tratamento por pouco tempo', t, S.pouco, 270, 495, 46, { color: A, cps: 30 });
+    g.restore();
+  }
+  if (t >= S.rapido - 0.2) {
+    const u = eo(k(t, S.rapido - 0.2, 0.35));
+    g.save(); g.translate((1 - u) * 500, 0);
+    box(70, 570, 940, 190, A, { lit: t < S.deitado ? 0.8 : 0.15 });
+    relogio(170, 665, t);
+    text('AGE RÁPIDO', 270, 650, 52, { font: SILK, color: A, bold: true, glow: 10 });
+    if (t >= S.trinta) text('~30 MINUTOS', 270, 720, 50, { color: WH, alpha: cl((t - S.trinta) / 0.3) });
+    g.restore();
+  }
+  if (t >= S.deitado - 0.3) {
+    const u = eo(k(t, S.deitado - 0.3, 0.35));
+    g.save(); g.translate((1 - u) * -500, 0);
+    box(70, 800, 940, 190, CY, { lit: t < S.sete ? 0.8 : 0.15 });
+    px(120, 890, 120, 30, CY); px(120, 860, 36, 30, WH); px(108, 860, 12, 72, CY); px(240, 890, 12, 42, CY);
+    text('TOMAR JÁ DEITADO', 280, 880, 46, { font: SILK, color: CY, bold: true, glow: 8 });
+    typed('na hora de dormir', t, S.deitado + 0.4, 280, 945, 46, { color: WH, cps: 30 });
+    g.restore();
+  }
+  if (t >= S.sete - 0.2) {
+    const u = eo(k(t, S.sete - 0.2, 0.35));
+    g.save(); g.translate((1 - u) * 500, 0);
+    box(70, 1030, 940, 230, G, { lit: 0.8 });
+    text('SÓ SE DER PARA DORMIR', 110, 1100, 40, { font: SILK, color: G, bold: true });
+    for (let i = 0; i < 8; i++) { const on = t >= S.sete + 0.1 + i * 0.12; g.save(); g.shadowColor = G; g.shadowBlur = on ? 14 : 0; px(110 + i * 105, 1130, 90, 60, on ? G : rgba(G, 0.15)); g.restore(); }
+    text('7 a 8 horas', 110, 1240, 46, { color: A, alpha: cl((t - S.sete - 0.8) / 0.3) });
+    g.restore();
+  }
+  g.restore();
+}
+
+function cena4(t) {
+  const a = vis(t, S.efeitos, S.alcool);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('EFEITOS COLATERAIS', t, S.efeitos + 0.1, 540, 270, 58, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 26 });
+  const fase2 = t >= S.comport - 0.3;
+  if (!fase2) {
+    const itens = [[S.sonolencia, 'SONO NO DIA SEGUINTE'], [S.tontura, 'TONTURA'], [S.dor, 'DOR DE CABEÇA'], [S.esquec, 'ESQUECIMENTO']];
+    itens.forEach(([at, s], i) => {
+      if (t < at) return;
+      const u = eo(k(t, at, 0.3));
+      const nxt = itens[i + 1] ? itens[i + 1][0] : S.comport;
+      g.save(); g.translate((1 - u) * 600, 0);
+      box(110, 360 + i * 175, 860, 140, G, { lit: t < nxt ? 1 : 0.15 });
+      px(150, 406 + i * 175, 48, 48, G);
+      text(s, 240, 450 + i * 175, 42, { font: SILK, color: WH, bold: true });
+      g.restore();
+    });
+  } else {
+    const u = eo(k(t, S.comport - 0.3, 0.3));
+    box(70, 340, 940, 520, A, { alpha: u, lit: t < S.dependencia ? 0.8 : 0.15 });
+    text('DURANTE O SONO:', 110, 410, 40, { font: SILK, color: A, bold: true, alpha: u });
+    [[S.andar, 'ANDAR'], [S.comer, 'COMER'], [S.dirigir, 'DIRIGIR']].forEach(([at, s], i) => {
+      if (t < at) return;
+      const v = back(k(t, at, 0.3));
+      g.save(); g.translate(250 + i * 290, 540); g.scale(v, v);
+      box(-130, -60, 260, 120, i === 2 ? R : A, { lit: 0.6 });
+      text(s, 0, 18, 42, { font: SILK, color: i === 2 ? R : A, bold: true, align: 'center' });
+      g.restore();
+    });
+    if (t >= S.dirigir) text('...dormindo!', 540, 680, 52, { color: WH, align: 'center', alpha: cl((t - S.dirigir - 0.3) / 0.3) });
+    stamp('SEM LEMBRAR DEPOIS', t, S.lembrar - 0.2, 540, 790, R, { rot: -4, size: 40 });
+    if (t >= S.dependencia - 0.6) {
+      const w = eo(k(t, S.dependencia - 0.6, 0.35));
+      g.save(); g.translate((1 - w) * -600, 0);
+      box(70, 910, 940, 200, R, { lit: 0.9 });
+      text('USO PROLONGADO', 110, 985, 42, { font: SILK, color: R, bold: true });
+      typed('pode causar dependência', t, S.dependencia - 0.3, 110, 1060, 52, { color: WH, cps: 30 });
+      g.restore();
+    }
+  }
+  g.restore();
+}
+
+function garrafa(x, y, s) {
+  g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = A; g.shadowBlur = 20;
+  px(-18, -120, 36, 48, A); px(-48, -72, 96, 168, A); g.shadowBlur = 0; px(-36, -24, 72, 60, '#3b2a00');
+  text('%', 0, 22, 44, { font: SILK, color: A, bold: true, align: 'center' });
+  g.restore();
+}
+function cena5(t) {
+  const a = vis(t, S.alcool, S.receita);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('E COM ÁLCOOL?', t, S.alcool + 0.1, 540, 270, 64, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 20 });
+  const ap = back(k(t, S.alcool + 0.3, 0.5));
+  if (ap > 0) {
+    comprimido(260, 470, 0.8 * ap, 0);
+    text('+', 540, 500, 90, { font: SILK, color: WH, bold: true, align: 'center', alpha: ap });
+    garrafa(800, 480, 1.1 * ap);
+  }
+  stamp('NÃO!', t, S.nao, 540, 470, R, { rot: -10, size: 110 });
+  if (t >= S.freia - 0.3) {
+    const u = eo(k(t, S.freia - 0.3, 0.35));
+    box(70, 650, 940, 250, A, { alpha: u, lit: t < S.apagoes ? 0.8 : 0.15 });
+    text('OS DOIS FREIAM O CÉREBRO', 540, 715, 38, { font: SILK, color: A, bold: true, align: 'center', alpha: u });
+    const z = cl((t - S.freia) / 0.6), al = cl((t - S.juntos) / 0.8);
+    g.save(); g.shadowColor = G; g.shadowBlur = 14; px(110, 760, 400 * z, 60, G); g.restore();
+    g.save(); g.shadowColor = A; g.shadowBlur = 14; px(510, 760, 400 * al, 60, A); g.restore();
+    if (t >= S.juntos) text('SOMAM O EFEITO', 540, 868, 34, { font: SILK, color: R, bold: true, align: 'center', alpha: cl((t - S.juntos - 0.4) / 0.3) });
+  }
+  [[S.apagoes, 'APAGÕES'], [S.quedas, 'QUEDAS'], [S.sonamb, 'SONAMBULISMO'], [S.respira, 'RESPIRAÇÃO LENTA']].forEach(([at, s], i) => {
+    if (t < at) return;
+    const v = back(k(t, at, 0.3));
+    const x = 70 + (i % 2) * 480, y = 940 + Math.floor(i / 2) * 150;
+    g.save(); g.translate(x + 230, y + 60); g.scale(v, v);
+    box(-230, -60, 460, 120, R, { lit: i === 3 ? 1 : 0.5 });
+    text(s, 0, 16, i === 3 ? 34 : 42, { font: SILK, color: i === 3 ? R : WH, bold: true, align: 'center' });
+    g.restore();
+  });
+  g.restore();
+}
+
+function notificacao(x, y, rot, alpha) {
+  if (alpha <= 0) return;
+  const azul = '#4da3ff';
+  g.save(); g.globalAlpha *= alpha; g.translate(x, y); g.rotate(rot);
+  g.shadowColor = azul; g.shadowBlur = 24;
+  px(-170, -190, 340, 380, '#cfe6ff'); g.shadowBlur = 0;
+  px(-170, -190, 340, 66, azul);
+  text('NOTIFICAÇÃO', 0, -160, 26, { font: SILK, color: '#04182e', align: 'center', bold: true });
+  text('DE RECEITA B', 0, -132, 26, { font: SILK, color: '#04182e', align: 'center', bold: true });
+  for (let i = 0; i < 6; i++) px(-140, -90 + i * 42, i === 5 ? 140 : 280, 12, 'rgba(4,24,46,0.35)');
+  text('Nº 000123', 0, 170, 26, { font: SILK, color: '#04182e', align: 'center', bold: true });
+  g.restore();
+}
+function cena6(t) {
+  const a = vis(t, S.receita, S.dentista);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('A RECEITA', t, S.receita + 0.1, 540, 270, 70, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 18 });
+  if (t >= S.portaria - 0.1) {
+    const u = eo(k(t, S.portaria - 0.1, 0.3));
+    box(70, 330, 600, 120, A, { alpha: u, lit: t < S.agosto ? 0.8 : 0.15 });
+    text('PORTARIA', 100, 410, 44, { font: SILK, color: A, bold: true, alpha: u });
+    if (t >= S.portaria + 0.4) text('344/98', 420, 414, 74, { color: A, glow: 10, alpha: cl((t - S.portaria - 0.4) / 0.2) });
+  }
+  if (t >= S.b1) {
+    const u = back(k(t, S.b1, 0.35));
+    g.save(); g.translate(850, 390); g.scale(u, u);
+    box(-150, -60, 300, 120, CY, { lit: 0.7 });
+    text('LISTA B1', 0, 18, 46, { font: SILK, color: CY, bold: true, align: 'center', glow: 12 });
+    g.restore();
+  }
+  if (t >= S.tarja) {
+    const u = eo(k(t, S.tarja, 0.3));
+    g.fillStyle = '#000'; g.fillRect(70, 480, 940 * u, 70); g.strokeStyle = WH; g.lineWidth = 3; g.strokeRect(70, 480, 940 * u, 70);
+    text('TARJA PRETA · VENDA SOB PRESCRIÇÃO', 540, 528, 32, { font: SILK, color: WH, bold: true, align: 'center', alpha: u });
+  }
+  if (t >= S.agosto - 0.2) {
+    const u = eo(k(t, S.agosto - 0.2, 0.3));
+    box(70, 580, 940, 110, G, { alpha: u, lit: t < S.azul ? 0.8 : 0.15 });
+    text('DESDE AGO/2024: QUALQUER DOSE', 540, 652, 38, { font: SILK, color: G, bold: true, align: 'center', alpha: u });
+  }
+  if (t >= S.azul - 0.8) notificacao(300, 930, -0.04, eo(k(t, S.azul - 0.8, 0.4)));
+  stamp('RECEITA AZUL', t, S.azul, 300, 760, '#4da3ff', { rot: -8, size: 34 });
+  const lista = [[S.trinta2, 'VALE 30 DIAS', G], [S.estado, 'SÓ NO ESTADO', A], [S.retida, 'RETIDA NA FARMÁCIA', R], [S.cadastrado, 'PRESCRITOR CADASTRADO NA VISA', CY]];
+  lista.forEach(([at, s, cor], i) => {
+    if (t < at - 0.1) return;
+    const u = eo(k(t, at - 0.1, 0.3));
+    g.save(); g.translate((1 - u) * 500, 0);
+    box(520, 740 + i * 140, 490, 115, cor, { lit: 0.6 });
+    const words = s.split(' ');
+    if (s.length > 18) {
+      const half = Math.ceil(words.length / 2);
+      text(words.slice(0, half).join(' '), 765, 790 + i * 140, 28, { font: SILK, color: cor, bold: true, align: 'center' });
+      text(words.slice(half).join(' '), 765, 828 + i * 140, 28, { font: SILK, color: cor, bold: true, align: 'center' });
+    } else text(s, 765, 810 + i * 140, 34, { font: SILK, color: cor, bold: true, align: 'center' });
+    g.restore();
+  });
+  g.restore();
+}
+
+function cena7(t) {
+  const a = vis(t, S.dentista, S.consulte - 0.05);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('E O DENTISTA?', t, S.dentista + 0.1, 540, 270, 68, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 20 });
+  box(70, 340, 940, 170, G, { lit: 0.5 + 0.3 * Math.sin(t * 6) });
+  text('C:\\> pergunta.txt', 100, 390, 32, { color: rgba(G, 0.7) });
+  typed('> dentista pode prescrever?', t, S.dentista + 0.3, 100, 465, 56, { color: G, glow: 10, cps: 22, cursor: t < S.odonto - 1.5 });
+  if (t >= S.odonto - 2.2) {
+    const u = eo(k(t, S.odonto - 2.2, 0.35));
+    g.save(); g.translate((1 - u) * -600, 0);
+    box(70, 560, 940, 240, A, { lit: t < S.medico - 1.5 ? 0.8 : 0.15 });
+    // dente em pixel
+    g.save(); g.shadowColor = WH; g.shadowBlur = 12; px(110, 610, 108, 84, WH); px(110, 694, 36, 60, WH); px(182, 694, 36, 60, WH); g.restore();
+    text('CONTROLADOS SÓ PARA', 260, 650, 38, { font: SILK, color: A, bold: true });
+    text('USO ODONTOLÓGICO', 260, 715, 50, { font: SILK, color: A, bold: true, glow: 10 });
+    text('Portaria 344, art. 38', 260, 770, 34, { color: WH, alpha: 0.8 });
+    g.restore();
+  }
+  if (t >= S.medico - 1.6) {
+    const u = eo(k(t, S.medico - 1.6, 0.35));
+    g.save(); g.translate((1 - u) * 600, 0);
+    box(70, 840, 940, 220, G, { lit: 0.8 });
+    text('PARA INSÔNIA:', 110, 915, 42, { font: SILK, color: G, bold: true });
+    text('PRESCRIÇÃO MÉDICA', 110, 995, 54, { font: SILK, color: G, bold: true, glow: 12 });
+    g.restore();
+  }
+  stamp('MÉDICO', t, S.medico, 820, 1110, G, { rot: 8, size: 48 });
+  g.restore();
+}
+
+function cena8(t) {
+  const a = cl((t - S.consulte + 0.05) / 0.3);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  box(70, 560, 940, 560, G, { lit: 0.6 + 0.3 * Math.sin(t * 4) });
+  text('C:\\> encerrar.exe', 110, 630, 36, { color: rgba(G, 0.7) });
+  ['CONSULTE UM', 'PROFISSIONAL', 'DE SAÚDE PARA', 'ORIENTAÇÕES.'].forEach((l, i) =>
+    typed(l, t, S.consulte + i * 0.45, 540, 770 + i * 95, 66, { font: SILK, color: i === 1 ? A : G, bold: true, align: 'center', glow: 16, cps: 30 }));
+  text('Ref.: Portaria SVS/MS 344/1998 · Anvisa 2024 (zolpidem: Notificação B) · Bula do zolpidem', 540, 1330, 24, { color: rgba(WH, 0.65), align: 'center', alpha: cl((t - S.consulte - 1.4) / 0.4) });
+  g.restore();
+}
+
+// glitch rápido na troca de cena
+function glitch(t) {
+  const c = CENAS.find(s => s > 0 && t >= s && t < s + 0.22);
+  if (c === undefined) return;
+  const u = 1 - (t - c) / 0.22;
+  for (let i = 0; i < 9; i++) {
+    const y = Math.floor(rnd(i + Math.floor(t * 30)) * H), h = 20 + rnd(i + 7) * 90;
+    const dx = (rnd(i + 3 + Math.floor(t * 60)) - 0.5) * 120 * u;
+    g.drawImage(cv, 0, y, W, h, dx, y, W, h);
+  }
+  g.fillStyle = rgba(R, 0.12 * u); g.fillRect(0, 0, W, H);
+  g.fillStyle = rgba(CY, 0.08 * u); g.fillRect(8 * u, 0, W, H);
+}
+
+window.draw = function (t) {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.shadowBlur = 0;
+  fundo(t);
+  cena1(t); cena2(t); cena3(t); cena4(t); cena5(t); cena6(t); cena7(t); cena8(t);
+  legenda(t);
+  barra(t);
+  glitch(t);
+  crt();
+};
+window.render = window.draw;
+
+const faces = [
+  ['Silk', 'fonts/silk400.woff2', '400'], ['Silk', 'fonts/silk400ext.woff2', '400', 'U+0100-024F'],
+  ['Silk', 'fonts/silk700.woff2', '700'], ['Silk', 'fonts/silk700ext.woff2', '700', 'U+0100-024F'],
+  ['VT', 'fonts/vt.woff2', '400'], ['VT', 'fonts/vtext.woff2', '400', 'U+0100-024F'],
+];
+Promise.all(faces.map(([f, u, w, r]) => new FontFace(f, `url(${u})`, r ? { weight: w, unicodeRange: r } : { weight: w }).load().then(ff => document.fonts.add(ff))))
+  .then(() => { draw(0); window.ready = true; });
+</script>
+</body>
+</html>

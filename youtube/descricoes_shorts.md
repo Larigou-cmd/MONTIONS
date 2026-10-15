@@ -244,7 +244,7 @@ Conteúdo educativo. Consulte um profissional de saúde para orientações. Narr
 ### TikTok
 
 **Legenda:**
-Por que o remédio tem no posto de saúde de uma cidade e não tem na outra? 🤔💊 A resposta está na RENAME e na REMUME! 👇
-Conteúdo educativo. Procure a REMUME no site da sua prefeitura. Consulte um profissional de saúde para orientações.
+Por que o remédio tem no posto de saúde de uma cidade e não tem na outra? 🤔💊 A resposta está na RENAME e na REMUME! E você sabia que a cidade pode padronizar remédio fora da RENAME, mas paga sozinha? E que, pela Lei 14.654/2023, o estoque das farmácias do SUS tem que estar na internet, atualizado a cada 15 dias? 👇
+Conteúdo educativo. Procure a REMUME e o estoque no site da sua prefeitura. Consulte um profissional de saúde para orientações.
 
-#sus #rename #remume #farmacia #farmaceutica #saudepublica #aprendanotiktok
+#sus #rename #remume #farmacia #farmaceutica #saudepublica #postodesaude #aprendanotiktok

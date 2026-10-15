@@ -12,7 +12,7 @@
 // Vídeo "RENAME.EXE": tudo é desenhado por draw(t), t em segundos da narração (narracao.mp3).
 // Os tempos abaixo vêm da transcrição palavra a palavra (words.js).
 const W = 1080, H = 1920;
-const NARR = 93.94;            // duração da narração
+const NARR = 109.87;            // duração da narração
 window.END = NARR + 2.2;       // segura a tela final um pouco depois da última palavra
 const cv = document.getElementById('c'), g = cv.getContext('2d');
 const G = '#39ff6a', A = '#ffc23d', R = '#ff4d6d', CY = '#3de0ff', BG = '#020c06', WH = '#eafff0';
@@ -116,7 +116,7 @@ function barra(t) {
 }
 
 // ---------- legendas palavra por palavra ----------
-const KEYS = ['lei', '14654', '2023', 'estoques', 'internet', '15', 'conferir', 'disponível', 'rename', 'remume', 'sus', 'conitec', 'anos', '2024', 'componentes', 'básico', 'básica', 'estratégico', 'especializado', 'hospitalar', 'parâmetro', 'padronizarem', 'município', 'orçamento', 'posto', 'vizinha', 'padronizado', 'prefeitura', 'farmácia', 'fluoxetina', 'prozac', 'serotonina', 'sert', 'trava', 'bomba', 'isrs', 'manhã', 'sono', 'semanas', 'própria', 'náusea', 'cabeça', 'insônia', 'ansiedade', 'libido', 'receita', '344', 'c1', 'controle', 'vias', 'retida', 'trinta', 'sessenta', 'corpo', 'misturada', 'serotoninérgica', 'humor', 'neurônio', 'cérebro', 'antidepressivos', 'funciona', 'neurônios', 'imediato', 'colaterais', 'atenção', 'cuidados', 'jovens', 'profissional'];
+const KEYS = ['sozinho', 'próprio', 'federal', 'colocar', 'lei', '14654', '2023', 'estoques', 'internet', '15', 'conferir', 'disponível', 'rename', 'remume', 'sus', 'conitec', 'anos', '2024', 'componentes', 'básico', 'básica', 'estratégico', 'especializado', 'hospitalar', 'parâmetro', 'padronizarem', 'município', 'orçamento', 'posto', 'vizinha', 'padronizado', 'prefeitura', 'farmácia', 'fluoxetina', 'prozac', 'serotonina', 'sert', 'trava', 'bomba', 'isrs', 'manhã', 'sono', 'semanas', 'própria', 'náusea', 'cabeça', 'insônia', 'ansiedade', 'libido', 'receita', '344', 'c1', 'controle', 'vias', 'retida', 'trinta', 'sessenta', 'corpo', 'misturada', 'serotoninérgica', 'humor', 'neurônio', 'cérebro', 'antidepressivos', 'funciona', 'neurônios', 'imediato', 'colaterais', 'atenção', 'cuidados', 'jovens', 'profissional'];
 const clean = w => w.toLowerCase().replace(/[.,!?:;]/g, '');
 const GRUPOS = (() => {
   const out = []; let cur = [];
@@ -172,10 +172,11 @@ const S = {
   monta: T('cada', 2) - 0.3, partir: T('rename', 4), basica2: T('básica', 2), doencas: T('doenças', 2), orcamento: T('orçamento'),
   isso: T('isso') - 0.6, posto: T('posto'), vizinha: T('vizinha'), padronizado: T('padronizado'),
   quer: T('quer') - 0.3, site: T('site'), farmacia: T('farmácia'),
+  fora: T('colocar') - 1.5, podeSim: T('sozinho') - 1.9, sozinho: T('sozinho'), proprio: T('próprio'), recurso: T('recurso'), federal: T('federal'), estado: T('estado'), usado: T('usado'),
   lei: T('lei') - 1.4, leiNum: T('14654'), estoques: T('estoques'), quinze: T('15'), conferir: T('conferir'),
   consulte: T('consulte'),
 };
-const CENAS = [0, S.comp, S.param, S.monta, S.isso, S.quer, S.lei, S.consulte - 0.05];
+const CENAS = [0, S.comp, S.param, S.monta, S.isso, S.fora, S.quer, S.lei, S.consulte - 0.05];
 const vis = (t, a, b, fi = 0.25, fo = 0.25) => Math.min(cl((t - a) / fi), cl((b - t) / fo));
 
 function cruz(x, y, s, c = G) { g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = c; g.shadowBlur = 24; px(-24, -72, 48, 144, c); px(-72, -24, 144, 48, c); g.restore(); }
@@ -310,7 +311,7 @@ function posto(x, y, s, cor) {
   g.restore();
 }
 function cena5(t) {
-  const a = vis(t, S.isso, S.quer);
+  const a = vis(t, S.isso, S.fora);
   if (a <= 0) return;
   g.save(); g.globalAlpha = a;
   typed('POR ISSO...', t, S.isso + 0.1, 540, 270, 66, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 18 });
@@ -403,6 +404,46 @@ function cenaLei(t) {
   g.restore();
 }
 
+// ---------- remédio fora da RENAME: o município paga sozinho ----------
+function moedas(x, y, n, cor, t) {
+  for (let i = 0; i < n; i++) { g.save(); g.shadowColor = cor; g.shadowBlur = 10; px(x - 40, y - i * 18, 80, 14, cor); g.restore(); }
+  text('R$', x, y + 50, 30, { font: SILK, color: cor, bold: true, align: 'center' });
+}
+function cenaFora(t) {
+  const a = vis(t, S.fora, S.quer);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('E FORA DA RENAME?', t, S.fora + 0.1, 540, 270, 58, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 22 });
+  box(70, 330, 940, 150, G, { lit: 0.5 + 0.3 * Math.sin(t * 6) });
+  typed('> o município pode padronizar?', t, S.fora + 0.4, 100, 425, 48, { color: G, glow: 10, cps: 26, cursor: t < S.podeSim });
+  stamp('PODE!', t, S.podeSim, 820, 520, G, { rot: 8, size: 56 });
+  if (t >= S.sozinho - 0.4) {
+    const u = eo(k(t, S.sozinho - 0.4, 0.35));
+    g.save(); g.translate((1 - u) * -600, 0);
+    box(70, 600, 940, 200, R, { lit: t < S.recurso ? 0.9 : 0.15 });
+    moedas(170, 690, 4, R, t);
+    text('O MUNICÍPIO PAGA', 280, 680, 46, { font: SILK, color: R, bold: true });
+    text('SOZINHO', 280, 745, 52, { font: SILK, color: R, bold: true, glow: 12 });
+    if (t >= S.proprio - 0.1) text('com dinheiro próprio', 640, 745, 36, { color: WH, alpha: cl((t - S.proprio) / 0.3) });
+    g.restore();
+  }
+  if (t >= S.recurso - 0.3) {
+    const u = eo(k(t, S.recurso - 0.3, 0.35));
+    g.save(); g.translate((1 - u) * 600, 0);
+    box(70, 840, 940, 300, CY, { lit: 0.7 });
+    text('RECURSO DA ATENÇÃO BÁSICA', 540, 900, 34, { font: SILK, color: CY, bold: true, align: 'center' });
+    if (t >= S.federal - 0.1) moedas(200, 1000, 3, G, t), text('FEDERAL', 200, 1100, 28, { font: SILK, color: G, bold: true, align: 'center' });
+    if (t >= S.estado - 0.1) moedas(380, 1000, 3, A, t), text('ESTADO', 380, 1100, 28, { font: SILK, color: A, bold: true, align: 'center' });
+    if (t >= S.usado - 0.2) {
+      const p = eo(cl((t - S.usado + 0.2) / 0.6));
+      g.fillStyle = WH; for (let x = 470; x < 470 + 160 * p; x += 24) g.fillRect(x, 995, 14, 8);
+      if (p > 0.9) { box(660, 950, 300, 100, G, { lit: 0.8 }); text('SÓ RENAME', 810, 1012, 32, { font: SILK, color: G, bold: true, align: 'center', glow: 12 }); }
+    }
+    g.restore();
+  }
+  g.restore();
+}
+
 function cena7(t) {
   const a = cl((t - S.consulte + 0.05) / 0.3);
   if (a <= 0) return;
@@ -432,7 +473,7 @@ function glitch(t) {
 window.draw = function (t) {
   g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.shadowBlur = 0;
   fundo(t);
-  cena1(t); cena2(t); cena3(t); cena4(t); cena5(t); cena6(t); cenaLei(t); cena7(t);
+  cena1(t); cena2(t); cena3(t); cena4(t); cena5(t); cenaFora(t); cena6(t); cenaLei(t); cena7(t);
   legenda(t);
   barra(t);
   glitch(t);

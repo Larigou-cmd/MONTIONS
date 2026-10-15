@@ -48,7 +48,8 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 
 ## Vídeo 7: Semaglutida no modelo do omeprazol (sem personagem)
 
-- Vídeo: `out/semaglutida_modelo_omeprazol.mp4` (1080×1920, 80 s, mesma narração, música e efeitos)
+- Vídeo: `out/semaglutida_modelo_omeprazol.mp4` (1080×1920, 129 s; narração `audio/sema_narracao_mercado.mp3` = narração original + trecho das canetas nacionais `audio/sema_mercado.mp3`)
+- Trecho das canetas nacionais (patente, lista, fabricação, estudo, cuidados): `src/semaIbp/Mercado.tsx`
 - Mesmo visual do vídeo dos prazóis: fundo escuro com brilho azul, títulos em serifa, cartões arredondados
 - Cenas: `src/semaIbp/Video.tsx` (tempos de `src/sema/config.ts`)
 - Renderizar: `npx remotion render SemaglutidaIBP out/semaglutida_modelo_omeprazol.mp4 --crf=24`

@@ -5,14 +5,23 @@ import { SANS, SERIF } from "../fonts";
 import { Background, Grain, IN, OUT, P, Part, Pill, SNAP, W, bornColor, bornGlow, it, rgba } from "../lib";
 import { EMOJI } from "../aas/ui";
 import { SFX, STEP1, T } from "../sema/config";
+import { M, MercadoAtencao, MercadoEstudo, MercadoFabrica, MercadoLista } from "./Mercado";
 
 // Semaglutida no mesmo modelo do vídeo dos prazóis (src/ibp): fundo escuro com brilho na cor
 // do remédio, títulos em serifa, cartões arredondados e nenhuma personagem.
 // Narração, música e tempos são os mesmos do vídeo sema/ (T em sema/config.ts).
-export const DURATION = 2400;
+// a narração ganhou o trecho das canetas nacionais (48,9 s = 1466 quadros) antes da mensagem final
+const EXTRA = 1466;
+export const DURATION = 2400 + EXTRA;
+const CONSULTE = T.consulte + EXTRA;
 const COR = "#38bdf8"; // cor do remédio
 const VERDE = "#4ade80";
-const PULSOS = [T.titulo, T.semanal, T.perda, T.indicacao];
+const PULSOS = [T.titulo, T.semanal, T.perda, T.indicacao, M.ozivy, M.molecula, M.efeitos];
+const SONS: [number, string, number][] = [
+  ...SFX.map(([fr, n, v]) => [fr >= T.consulte ? fr + EXTRA : fr, n, v] as [number, string, number]),
+  [M.novidade, "whoosh", 0.25], [M.patente, "pop", 0.2], [M.ozivy, "pop", 0.2], [M.molecula, "whoosh", 0.25],
+  [M.igual, "whoosh", 0.25], [M.efeitos, "plim", 0.2], [M.atencao, "whoosh", 0.25], [M.receita, "trava", 0.25],
+];
 
 const Titulo: React.FC<{ f: number; at: number; children: React.ReactNode; top?: number; size?: number }> = ({ f, at, children, top = 250, size = 66 }) => (
   <div style={{ position: "absolute", top, width: W, textAlign: "center", fontFamily: SERIF, fontSize: size, color: bornColor(f, at, C.ink, COR), textShadow: bornGlow(f, at, COR), opacity: it(f, at, at + 12, 0, 1, OUT), transform: `translateY(${(1 - it(f, at, at + 14, 0, 1, OUT)) * 30}px)` }}>{children}</div>
@@ -237,12 +246,12 @@ const ParteParar: React.FC = () => {
 // ---------- 8. mensagem final ----------
 const Final: React.FC = () => {
   const f = useCurrentFrame();
-  if (f < T.consulte) return null;
+  if (f < CONSULTE) return null;
   const linhas = ["Consulte um", "profissional de saúde", "para orientações."];
   return (
-    <AbsoluteFill style={{ opacity: it(f, T.consulte, T.consulte + 12, 0, 1, OUT) }}>
+    <AbsoluteFill style={{ opacity: it(f, CONSULTE, CONSULTE + 12, 0, 1, OUT) }}>
       {linhas.map((l, i) => {
-        const at = T.consulte + 4 + i * 8;
+        const at = CONSULTE + 4 + i * 8;
         const k = it(f, at, at + 14, 0, 1, OUT);
         return (
           <div key={i} style={{ position: "absolute", top: 760 + i * 110, width: W, textAlign: "center", fontFamily: SERIF, fontWeight: i === 1 ? 600 : 400, fontSize: i === 1 ? 92 : 80, color: i === 1 ? bornColor(f, at, COR, "#f0f9ff", 20) : bornColor(f, at, C.ink, COR), textShadow: i === 1 ? `0 0 30px ${rgba(COR, 0.45)}` : "none", opacity: k, transform: `translateY(${(1 - k) * 40}px)`, filter: k < 1 ? `blur(${(1 - k) * 10}px)` : undefined }}>{l}</div>
@@ -260,13 +269,14 @@ export const VideoSemaIBP: React.FC = () => {
       {/* desce o conteúdo para ficar no meio da tela */}
       <AbsoluteFill style={{ transform: "translateY(170px)" }}>
         <Abertura /><ParteGLP /><ParteMecanismo /><ParteStep /><ParteEfeitos /><ParteOff /><ParteParar />
+        <MercadoLista /><MercadoFabrica /><MercadoEstudo /><MercadoAtencao />
       </AbsoluteFill>
       <Final />
       <Grain />
       <AbsoluteFill style={{ background: "#000", opacity: it(f, DURATION - 12, DURATION, 0, 1, IN), pointerEvents: "none" }} />
-      <Audio src={staticFile("sema/narracao.mp3")} />
-      <Audio src={staticFile("sema/musica.wav")} volume={0.11} />
-      {SFX.map(([fr, name, vol], i) => (
+      <Audio src={staticFile("sema/narracao_mercado.mp3")} />
+      <Audio src={staticFile("sema/musica_longa.wav")} volume={0.11} />
+      {SONS.map(([fr, name, vol], i) => (
         <Sequence key={i} from={fr} durationInFrames={60}><Audio src={staticFile(`sfx/${name}.wav`)} volume={vol * 0.8} /></Sequence>
       ))}
     </AbsoluteFill>

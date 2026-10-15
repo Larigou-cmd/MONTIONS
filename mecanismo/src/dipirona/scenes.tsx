@@ -75,7 +75,7 @@ export const S1: React.FC = () => {
   const red = Math.floor(f / 8) % 2 === 0;
   const walk = it(f, T.agentes, T.agentes + 45, 0, 1, OUT);
   const q = "Você sabe por que a dipirona é proibida nos EUA?";
-  const n = Math.min(q.length, Math.max(0, Math.floor((f - T.fala) * 0.8)));
+  const n = Math.min(q.length, Math.max(0, Math.floor((f - T.fala) * 0.5)));
   return (
     <Part from={R(0)[0]} to={R(0)[1]}>
       <AbsoluteFill style={{ background: `radial-gradient(ellipse 700px 900px at ${red ? "10%" : "90%"} 45%, ${red ? "rgba(239,68,68,.32)" : "rgba(59,130,246,.34)"}, rgba(0,0,0,0) 70%)` }} />
@@ -123,7 +123,7 @@ export const S3: React.FC = () => {
   return (
     <Part from={R(2)[0]} to={R(2)[1]} inY={100}>
       <Title f={f} at={T.motivo} y={250} size={46} font={SANS} color={C.dim} from={COR}>O motivo:</Title>
-      <Title f={f} at={T.motivo + 8} y={310} size={84} weight={600} color="#fda4af" from={C.alert}>Agranulocitose</Title>
+      <Title f={f} at={T.agranulo} y={310} size={84} weight={600} color="#fda4af" from={C.alert}>Agranulocitose</Title>
       <svg width={W} height={1920} style={{ position: "absolute" }}>
         <rect x={-20} y={520} width={W + 40} height={420} rx={210} fill="rgba(239,68,68,.07)" stroke="#f87171" strokeWidth={5} opacity={P(f, T.neutro - 10, T.neutro)} />
         {Array.from({ length: 10 }, (_, i) => {
@@ -223,7 +223,7 @@ export const S6: React.FC = () => {
       <div style={{ position: "absolute", top: 960, width: W, display: "flex", justifyContent: "center", gap: 22 }}>
         {[["⚡", "Dor ↓"], ["🌡️", "Febre ↓"], ["🌀", "Cólica ↓"]].map(([e, t], i) => (
           <div key={i} style={{ position: "relative", width: 300, height: 130 }}>
-            <Card f={f} at={T.chips + i * 10} x={0} y={0} w={290} h={130} border={rgba(COR, 0.6)} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, fontSize: 40, fontWeight: 700 }}>
+            <Card f={f} at={T.chips + i * 14} x={0} y={0} w={290} h={130} border={rgba(COR, 0.6)} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, fontSize: 40, fontWeight: 700 }}>
               <span style={{ fontFamily: EMOJI, fontSize: 52 }}>{e}</span>{t}
             </Card>
           </div>
@@ -260,7 +260,7 @@ export const S8: React.FC = () => {
       {lines.map((l, i) => {
         const at = T.final + 4 + i * 8;
         const k = it(f, at, at + 14, 0, 1, OUT);
-        return <div key={i} style={{ position: "absolute", top: 700 + i * 110, width: W, textAlign: "center", fontFamily: SERIF, fontWeight: i === 1 ? 600 : 400, fontSize: i === 1 ? 92 : 80, color: i === 1 ? bornColor(f, at, COR, "#fff7e6", 20) : bornColor(f, at, C.ink, COR), textShadow: i === 1 ? `0 0 30px ${rgba(COR, 0.45)}` : "none", opacity: k, transform: `translateY(${(1 - k) * 40}px) scale(${0.98 + 0.04 * it(f, T.final, 1960, 0, 1, LIN)})`, filter: k < 1 ? `blur(${(1 - k) * 10}px)` : undefined }}>{l}</div>;
+        return <div key={i} style={{ position: "absolute", top: 700 + i * 110, width: W, textAlign: "center", fontFamily: SERIF, fontWeight: i === 1 ? 600 : 400, fontSize: i === 1 ? 92 : 80, color: i === 1 ? bornColor(f, at, COR, "#fff7e6", 20) : bornColor(f, at, C.ink, COR), textShadow: i === 1 ? `0 0 30px ${rgba(COR, 0.45)}` : "none", opacity: k, transform: `translateY(${(1 - k) * 40}px) scale(${0.98 + 0.04 * it(f, T.final, 2520, 0, 1, LIN)})`, filter: k < 1 ? `blur(${(1 - k) * 10}px)` : undefined }}>{l}</div>;
       })}
       <div style={{ position: "absolute", top: 1150, width: W, textAlign: "center", fontFamily: SANS, fontSize: 24, color: C.dim, opacity: it(f, T.final + 30, T.final + 42, 0, 1, OUT) * 0.85 }}>Conteúdo educativo. Ref.: {REFERENCIAS}</div>
     </Part>

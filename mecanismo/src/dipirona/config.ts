@@ -1,29 +1,31 @@
 // Protótipo "Por que a dipirona é proibida nos EUA?" — sem narração, só textos na tela e efeitos.
 export const COR = "#f59e0b";
-export const DURATION = 1960; // 65 s
+export const DURATION = 2520; // 84 s
+export const VOZ_INICIO = 105; // a narração começa depois que a caixa é algemada e olha para a câmera
 
+// tempos medidos nas pausas de audio/dipirona_narracao.mp3 (+ 105 quadros de atraso da voz)
 export const T = {
-  agentes: 15, algema: 86, olha: 104, fala: 112,
-  ano: 215, fda: 250,
-  motivo: 425, neutro: 470, some: 540, bacteria: 600,
-  polemica: 725, lado1: 770, lado2: 820, discutido: 880,
-  paises: 965, proibida: 990, liberada: 1050, anvisa: 1140,
-  age: 1235, chips: 1300,
-  alerta: 1505, sinais: [1550, 1585, 1620], pare: 1680,
-  final: 1775,
+  agentes: 15, algema: 86, olha: 100, fala: 105,
+  ano: 224, fda: 270,
+  motivo: 456, agranulo: 560, neutro: 615, some: 660, bacteria: 797,
+  polemica: 918, lado1: 1064, lado2: 1185, discutido: 1268,
+  paises: 1370, proibida: 1450, liberada: 1534, anvisa: 1674,
+  age: 1771, chips: 1890,
+  alerta: 2078, sinais: [2133, 2160, 2193], pare: 2245,
+  final: 2350,
 };
 
-export const PARTES = [[0, 222], [212, 432], [422, 732], [722, 972], [962, 1242], [1232, 1512], [1502, 1782], [1772, 1960]];
+export const PARTES = [[0, 226], [214, 456], [446, 918], [908, 1370], [1360, 1771], [1762, 2078], [2068, 2350], [2340, 2520]];
 
 export const REFERENCIAS = "FDA 1977 · IAAAS, JAMA 1986 · Hedenmalm & Spigset 2002 · Anvisa 2001";
 
 export const SFX: [number, string, number][] = [
-  [15, "whoosh", 0.35], [86, "trava", 0.55], [112, "pop", 0.3],
-  [212, "whoosh", 0.35], [215, "plim", 0.25],
-  [422, "whoosh", 0.35], [540, "pop", 0.25], [600, "pop", 0.25],
-  [722, "whoosh", 0.35], [770, "pop", 0.3], [820, "pop", 0.3],
-  [962, "whoosh", 0.35], [990, "pop", 0.25], [1050, "pop", 0.25], [1140, "plim", 0.25],
-  [1232, "whoosh", 0.35], [1300, "pop", 0.25],
-  [1502, "whoosh", 0.35], [1550, "pop", 0.3], [1585, "pop", 0.3], [1620, "pop", 0.3], [1680, "trava", 0.35],
-  [1772, "whoosh", 0.3], [1775, "plim", 0.3],
+  [15, "whoosh", 0.3], [86, "trava", 0.5], [105, "pop", 0.25],
+  [214, "whoosh", 0.3], [224, "plim", 0.2],
+  [446, "whoosh", 0.3], [560, "pop", 0.22], [660, "pop", 0.2], [797, "pop", 0.2],
+  [908, "whoosh", 0.3], [1064, "pop", 0.25], [1185, "pop", 0.25],
+  [1360, "whoosh", 0.3], [1450, "pop", 0.22], [1534, "pop", 0.22], [1674, "plim", 0.2],
+  [1762, "whoosh", 0.3], [1890, "pop", 0.22],
+  [2068, "whoosh", 0.3], [2133, "pop", 0.25], [2160, "pop", 0.25], [2193, "pop", 0.25], [2245, "trava", 0.3],
+  [2340, "whoosh", 0.25], [2350, "plim", 0.25],
 ];

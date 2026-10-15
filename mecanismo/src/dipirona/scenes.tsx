@@ -4,7 +4,7 @@ import { C } from "../config";
 import { SANS, SERIF } from "../fonts";
 import { EASE, OUT, P, Part, Pill, SNAP, W, bornColor, it, rgba } from "../lib";
 import { Card, EMOJI, Emoji, Title } from "../aas/ui";
-import { COR, PARTES, REFERENCIAS, T } from "./config";
+import { COR, PARTES, T } from "./config";
 
 const R = (i: number) => PARTES[i];
 const LIN = (x: number) => x;
@@ -262,7 +262,6 @@ export const S8: React.FC = () => {
         const k = it(f, at, at + 14, 0, 1, OUT);
         return <div key={i} style={{ position: "absolute", top: 700 + i * 110, width: W, textAlign: "center", fontFamily: SERIF, fontWeight: i === 1 ? 600 : 400, fontSize: i === 1 ? 92 : 80, color: i === 1 ? bornColor(f, at, COR, "#fff7e6", 20) : bornColor(f, at, C.ink, COR), textShadow: i === 1 ? `0 0 30px ${rgba(COR, 0.45)}` : "none", opacity: k, transform: `translateY(${(1 - k) * 40}px) scale(${0.98 + 0.04 * it(f, T.final, 2520, 0, 1, LIN)})`, filter: k < 1 ? `blur(${(1 - k) * 10}px)` : undefined }}>{l}</div>;
       })}
-      <div style={{ position: "absolute", top: 1150, width: W, textAlign: "center", fontFamily: SANS, fontSize: 24, color: C.dim, opacity: it(f, T.final + 30, T.final + 42, 0, 1, OUT) * 0.85 }}>Conteúdo educativo. Ref.: {REFERENCIAS}</div>
     </Part>
   );
 };

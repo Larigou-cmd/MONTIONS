@@ -26,5 +26,6 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 
 - Vídeo: `out/dipirona.mp4` (1080×1920, 84 s, voz Juliana, com efeitos sonoros)
 - Narração: `audio/dipirona_narracao.mp3` (começa no quadro 105)
+- Música de fundo própria, feita por código: `scripts/musica.py` → `public/musica_dipirona.wav`
 - Textos e tempos: `src/dipirona/config.ts`; cenas em `src/dipirona/scenes.tsx`
 - Renderizar: `npx remotion render Dipirona out/dipirona.mp4 --crf=21`

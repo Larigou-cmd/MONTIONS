@@ -9,6 +9,7 @@ export const VideoDipirona: React.FC = () => (
     <Background color={COR} pulses={[T.algema, T.ano, T.some, T.anvisa, T.pare, T.final]} />
     <S1 /><S2 /><S3 /><S4 /><S5 /><S6 /><S7 /><S8 />
     <Grain />
+    <Audio src={staticFile("musica_dipirona.wav")} volume={(f) => (f < VOZ_INICIO ? 0.32 : 0.14)} />
     <Sequence from={VOZ_INICIO}>
       <Audio src={staticFile("dipirona_narracao.mp3")} />
     </Sequence>

@@ -53,3 +53,10 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 - Mesmo visual do vídeo dos prazóis: fundo escuro com brilho azul, títulos em serifa, cartões arredondados
 - Cenas: `src/semaIbp/Video.tsx` (tempos de `src/sema/config.ts`)
 - Renderizar: `npx remotion render SemaglutidaIBP out/semaglutida_modelo_omeprazol.mp4 --crf=24`
+
+## Vídeo 8: Amoxicilina + clavulanato (modelo aula elegante)
+
+- Vídeo: `out/amoxicilina_clavulanato.mp4` (1080×1920, 114 s, voz Juliana, música e efeitos, sem legendas)
+- Narração: `public/amoxi/narracao.mp3`; tempos palavra a palavra: `audio/amoxi_palavras.json`
+- Textos, tempos e efeitos: `src/amoxi/config.ts`; desenhos (molécula, bactéria, PBP, betalactamase, escudo): `src/amoxi/shapes.tsx`; cenas: `src/amoxi/Video.tsx`
+- Renderizar: `npx remotion render Amoxi out/amoxicilina_clavulanato.mp4 --crf=22`

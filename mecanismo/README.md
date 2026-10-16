@@ -74,3 +74,10 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 - Narração: `public/sinva/narracao.mp3`; tempos palavra a palavra: `audio/sinva_palavras.json`
 - Cenas, tempos e efeitos: `src/sinva/Video.tsx`
 - Renderizar: `npx remotion render Sinvastatina out/sinvastatina.mp4 --crf=22`
+
+## Vídeo 11: Por que a sinvastatina é tomada à noite? (parte 2, modelo aula elegante)
+
+- Vídeo: `out/sinvastatina_noite.mp4` (1080×1920, 96 s, voz Juliana, música própria `public/sinvaNoite/musica.wav` e efeitos, sem legendas)
+- Narração: `public/sinvaNoite/narracao.mp3`; tempos palavra a palavra: `audio/sinvaNoite_palavras.json`
+- Cenas, tempos e efeitos: `src/sinvaNoite/Video.tsx` (gráficos de 24 h esquemáticos: produção de colesterol × remédio no sangue)
+- Renderizar: `npx remotion render SinvaNoite out/sinvastatina_noite.mp4 --crf=22`

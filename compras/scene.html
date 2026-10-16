@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Compras de medicamentos</title>
+<style>html,body{margin:0;background:#000}canvas{display:block}</style>
+<script src="words.js"></script>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// Vídeo "COMPRAS.EXE": tudo é desenhado por draw(t), t em segundos da narração (narracao.mp3).
+// Os tempos abaixo vêm da transcrição palavra a palavra (words.js).
+const W = 1080, H = 1920;
+const NARR = 112.2;            // duração da narração
+window.END = NARR + 2.2;       // segura a tela final um pouco depois da última palavra
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const G = '#39ff6a', A = '#ffc23d', R = '#ff4d6d', CY = '#3de0ff', BG = '#020c06', WH = '#eafff0';
+const SILK = "'Silk'", VT = "'VT'";
+
+// ---------- utilidades ----------
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const k = (t, a, d = 0.35) => cl((t - a) / d);
+const eo = x => 1 - Math.pow(1 - x, 3);
+const back = x => { const c = 1.9; x = cl(x); return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const lerp = (a, b, u) => a + (b - a) * u;
+const rnd = i => { const s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+function rgba(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; }
+
+function text(s, x, y, size, { font = VT, color = WH, align = 'left', alpha = 1, glow = 0, bold = false, base = 'alphabetic' } = {}) {
+  if (alpha <= 0) return;
+  g.save(); g.globalAlpha *= alpha; g.font = `${bold ? 700 : 400} ${size}px ${font}`; g.textAlign = align; g.textBaseline = base;
+  if (glow) { g.shadowColor = color; g.shadowBlur = glow; }
+  g.fillStyle = color; g.fillText(s, x, y); g.restore();
+}
+// texto digitado letra por letra (com cursor enquanto digita)
+function typed(s, t, at, x, y, size, opt = {}) {
+  if (t < at) return;
+  const cps = opt.cps || 22;
+  const n = Math.min(s.length, Math.floor((t - at) * cps) + 1);
+  const shown = s.slice(0, n) + (n < s.length || opt.cursor ? (Math.floor(t * 2.5) % 2 ? '█' : ' ') : '');
+  text(shown, x, y, size, opt);
+}
+function box(x, y, w, h, color, { lit = 0, alpha = 1, fill = 'rgba(2,20,10,0.88)', lw = 4 } = {}) {
+  if (alpha <= 0) return;
+  g.save(); g.globalAlpha *= alpha;
+  g.fillStyle = fill; g.fillRect(x, y, w, h);
+  g.shadowColor = color; g.shadowBlur = 8 + 30 * lit;
+  g.strokeStyle = color; g.lineWidth = lw + 2 * lit; g.strokeRect(x, y, w, h);
+  g.shadowBlur = 0;
+  g.fillStyle = color; [[x, y], [x + w - 12, y], [x, y + h - 12], [x + w - 12, y + h - 12]].forEach(([a, b]) => g.fillRect(a, b, 12, 12));
+  g.restore();
+}
+// carimbo torto que cai com impacto
+function stamp(s, t, at, x, y, color, { rot = -8, size = 64, font = SILK } = {}) {
+  if (t < at) return;
+  const u = cl((t - at) / 0.22);
+  const sc = lerp(2.6, 1, eo(u));
+  const shake = u >= 1 ? Math.max(0, 1 - (t - at - 0.22) / 0.25) * 8 * Math.sin((t - at) * 90) : 0;
+  g.save(); g.translate(x + shake, y); g.rotate(rot * Math.PI / 180); g.scale(sc, sc); g.globalAlpha *= cl(u * 1.6);
+  g.font = `700 ${size}px ${font}`; g.textAlign = 'center'; g.textBaseline = 'middle';
+  const w = g.measureText(s).width + 50, h = size + 34;
+  g.fillStyle = 'rgba(0,0,0,0.6)'; g.fillRect(-w / 2, -h / 2, w, h);
+  g.strokeStyle = color; g.lineWidth = 8; g.shadowColor = color; g.shadowBlur = 24; g.strokeRect(-w / 2, -h / 2, w, h);
+  g.lineWidth = 3; g.strokeRect(-w / 2 + 12, -h / 2 + 12, w - 24, h - 24);
+  g.shadowBlur = 12; g.fillStyle = color; g.fillText(s, 0, 4);
+  g.restore();
+}
+const px = (x, y, w, h, c) => { g.fillStyle = c; g.fillRect(Math.round(x / 6) * 6, Math.round(y / 6) * 6, Math.round(w / 6) * 6, Math.round(h / 6) * 6); };
+
+// ---------- fundo ----------
+function fundo(t) {
+  const rg = g.createRadialGradient(540, 800, 100, 540, 900, 1300);
+  rg.addColorStop(0, '#062a14'); rg.addColorStop(1, BG);
+  g.fillStyle = rg; g.fillRect(0, 0, W, H);
+  // chuva binária suave
+  g.font = `34px ${VT}`; g.textAlign = 'left'; g.textBaseline = 'alphabetic';
+  for (let c = 0; c < 27; c++) {
+    const sp = 40 + rnd(c) * 70, off = rnd(c + 50) * 2400;
+    for (let r = 0; r < 14; r++) {
+      const y = ((t * sp + off + r * 40) % 2400) - 300;
+      const bit = (Math.floor(t * 3 + c * 7 + r * 3) % 3) === 0 ? '1' : '0';
+      g.fillStyle = rgba(G, (0.03 + 0.05 * (r / 14)) * (0.6 + 0.4 * rnd(c + r)));
+      g.fillText(bit, c * 40 + 6, y);
+    }
+  }
+  // grade em perspectiva no chão
+  const hy = 1380, vx = 540;
+  g.save(); g.strokeStyle = rgba(G, 0.22); g.lineWidth = 2;
+  for (let i = -12; i <= 12; i++) { g.beginPath(); g.moveTo(vx + i * 30, hy); g.lineTo(vx + i * 260, H); g.stroke(); }
+  for (let j = 0; j < 14; j++) {
+    const u = ((j + (t * 0.6) % 1) / 14);
+    const y = hy + Math.pow(u, 2.2) * (H - hy);
+    g.globalAlpha = 0.25 + 0.75 * u; g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke();
+  }
+  g.restore();
+  const fade = g.createLinearGradient(0, hy - 40, 0, hy + 200);
+  fade.addColorStop(0, BG); fade.addColorStop(1, 'rgba(2,12,6,0)');
+  g.fillStyle = fade; g.fillRect(0, hy - 40, W, 240);
+}
+function crt() {
+  g.fillStyle = 'rgba(0,0,0,0.18)';
+  for (let y = 0; y < H; y += 4) g.fillRect(0, y, W, 2);
+  const v = g.createRadialGradient(540, 960, 520, 540, 960, 1250);
+  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.78)');
+  g.fillStyle = v; g.fillRect(0, 0, W, H);
+}
+function barra(t) {
+  g.fillStyle = 'rgba(0,10,4,0.92)'; g.fillRect(0, 60, W, 104);
+  g.fillStyle = G; g.fillRect(0, 160, W, 4);
+  text('C:\\> COMPRAS.EXE', 40, 126, 38, { font: SILK, color: G, glow: 10, bold: true });
+  const rest = Math.max(0, Math.ceil(window.END - t));
+  text(`${String(Math.floor(rest / 60)).padStart(2, '0')}:${String(rest % 60).padStart(2, '0')}`, 1040, 126, 50, { color: A, align: 'right', glow: 8 });
+  g.fillStyle = rgba(G, 0.18); g.fillRect(0, 164, W, 12);
+  g.fillStyle = G; g.fillRect(0, 164, W * cl(t / window.END), 12);
+}
+
+// ---------- legendas palavra por palavra ----------
+const KEYS = ["dinheiro", "município", "fornecedor", "não", "farmácia", "14133", "2021", "licitações", "planejamento", "programação", "remume", "consumo", "pesquisa", "preços", "saúde", "teto", "cmed", "licitação", "pregão", "eletrônico", "internet", "menor", "registro", "ata", "ano", "prorrogada", "precisa", "barato", "anvisa", "autorização", "públicas", "exceções", "dispensa", "r$ 65 mil", "2026", "emergência", "inexigibilidade", "consórcios", "quantidade", "menos", "entrega", "lote", "validade", "abastecimento", "unidades", "fiscalizado", "interno", "vereadores", "contas", "profissional"];
+const clean = w => w.toLowerCase().replace(/[.,!?:;]/g, '');
+const GRUPOS = (() => {
+  const out = []; let cur = [];
+  WORDS.forEach((w, i) => {
+    cur.push(w);
+    const end = /[.?!:]$/.test(w.w) || cur.length >= 7 || (/,$/.test(w.w) && cur.length >= 4);
+    if (end || i === WORDS.length - 1) { out.push(cur); cur = []; }
+  });
+  return out.map((ws, i) => {
+    let key = ws.findIndex(w => KEYS.includes(clean(w.w)));
+    if (key < 0) key = ws.reduce((b, w, j) => clean(w.w).length > clean(ws[b].w).length ? j : b, 0);
+    return { ws, key, de: ws[0].s, ate: (out[i + 1] ? out[i + 1][0].s : ws[ws.length - 1].e + 0.5) };
+  });
+})();
+function legenda(t) {
+  if (t >= S.consulte - 0.05) return;
+  const gr = GRUPOS.find(gp => t >= gp.de - 0.05 && t < gp.ate);
+  if (!gr) return;
+  const size = 50; g.font = `700 ${size}px ${SILK}`;
+  const sp = g.measureText(' ').width;
+  // números (leis, valores, %) em VT323: no Silkscreen o 4 parece Y e o % parece Z
+  const fonte = w => /\d/.test(w) ? `400 ${size + 18}px ${VT}` : `700 ${size}px ${SILK}`;
+  const items = gr.ws.map((w, j) => { const u = w.w.toUpperCase(); g.font = fonte(u); return { w: u, f: fonte(u), s: w.s, key: j === gr.key, wd: g.measureText(u).width }; });
+  g.font = `700 ${size}px ${SILK}`;
+  const lines = [[]]; let lw = 0;
+  items.forEach(it => { if (lw + it.wd > 960 && lines[lines.length - 1].length) { lines.push([]); lw = 0; } lines[lines.length - 1].push(it); lw += it.wd + sp; });
+  const y0 = 1490 - (lines.length - 1) * 34;
+  lines.forEach((ln, li) => {
+    const total = ln.reduce((s, it) => s + it.wd, 0) + sp * (ln.length - 1);
+    let x = 540 - total / 2;
+    ln.forEach(it => {
+      if (t >= it.s - 0.04) {
+        const u = cl((t - it.s + 0.04) / 0.12);
+        g.save(); g.font = it.f; g.textBaseline = 'middle';
+        g.translate(x + it.wd / 2, y0 + li * 68); g.scale(0.85 + 0.15 * u, 0.85 + 0.15 * u); g.globalAlpha = u;
+        g.textAlign = 'center'; g.lineJoin = 'round'; g.lineWidth = 12; g.strokeStyle = '#000'; g.strokeText(it.w, 0, 0);
+        g.fillStyle = it.key ? A : '#ffffff'; if (it.key) { g.shadowColor = A; g.shadowBlur = 14; }
+        g.fillText(it.w, 0, 0); g.restore();
+      }
+      x += it.wd + sp;
+    });
+  });
+}
+
+// ---------- tempos: procurados na transcrição (palavra, ocorrência) ----------
+const norm = w => w.toLowerCase().replace(/[.,!?:;]/g, '');
+function T(word, n = 1) {
+  let c = 0;
+  for (const w of WORDS) if (norm(w.w) === word && ++c === n) return w.s;
+  console.warn('tempo não achado', word, n); return 1e9;
+}
+const S = {
+  dinheiro: T('dinheiro'), municipio: T('município'), ligar: T('ligar'), nao: T('não'), prefeitura: T('prefeitura'), farmacia: T('farmácia'),
+  quem: T('quem') - 0.1, lei: T('14133'), ano2021: T('2021'), nova: T('nova'),
+  plan: T('primeiro') - 0.15, programacao: T('programação'), remume: T('remume'), consumo: T('consumo'),
+  pesquisa: T('pesquisa'), banco: T('banco'), teto: T('teto'), cmed: T('cmed'),
+  abre: T('aí') - 0.15, pregao: T('pregão'), internet: T('internet'), menor: T('menor'),
+  srp: T('geralmente') - 0.1, registro: T('registro'), ata: T('ata'), ano: T('ano'), prorrogada: T('prorrogada'), pedindo: T('pedindo'),
+  barato: T('mas', 1) - 0.15, anvisa: T('anvisa'), autorizacao: T('autorização'), portal: T('portal'), publicas: T('públicas'),
+  excecoes: T('existem') - 0.1, dispensa: T('dispensa'), r65: T('r$ 65 mil'), emergencia: T('emergência'), umAno: T('ano', 2), inexig: T('inexigibilidade'), unico: T('fornecedor', 2),
+  consorcio: T('muitas') - 0.15, consorcios: T('consórcios'), quantidade: T('quantidade'), menos: T('menos'),
+  log: T('depois', 3) - 0.15, entrega: T('entrega'), lote: T('lote'), validade: T('validade'), central: T('central'), distribui: T('distribui'),
+  fisc: T('tudo', 2) - 0.15, controle: T('controle'), camara: T('câmara'), tribunal: T('tribunal'),
+  consulte: T('consulte'),
+};
+const CENAS = [0, S.quem, S.plan, S.abre, S.srp, S.barato, S.excecoes, S.consorcio, S.log, S.fisc, S.consulte - 0.05];
+const vis = (t, a, b, fi = 0.25, fo = 0.25) => Math.min(cl((t - a) / fi), cl((b - t) / fo));
+
+function moeda(x, y, s, cor) {
+  g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = cor; g.shadowBlur = 16;
+  px(-30, -42, 60, 84, cor); px(-42, -30, 84, 60, cor); g.shadowBlur = 0;
+  text('$', 0, 16, 54, { font: SILK, color: BG, bold: true, align: 'center' });
+  g.restore();
+}
+function predio(x, y, s, cor) {
+  g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = cor; g.shadowBlur = 14;
+  g.beginPath(); g.moveTo(-110, -40); g.lineTo(0, -110); g.lineTo(110, -40); g.closePath(); g.fillStyle = cor; g.fill(); g.shadowBlur = 0;
+  for (let i = 0; i < 4; i++) px(-90 + i * 54, -30, 24, 110, cor);
+  px(-120, 84, 240, 22, cor);
+  g.restore();
+}
+// caixa que entra deslizando de lado (usar dentro de g.save/g.restore)
+function cartao(at, t, x, y, w, h, cor, dir = -1) {
+  if (t < at) return false;
+  const u = eo(k(t, at, 0.3));
+  g.translate((1 - u) * 600 * dir, 0);
+  box(x, y, w, h, cor, { lit: 0.6 });
+  return true;
+}
+// número da etapa num quadradinho
+function etapa(n, x, y, cor) { px(x, y, 72, 72, cor); text(String(n), x + 36, y + 58, 56, { font: SILK, color: BG, bold: true, align: 'center' }); }
+function check(t, at, x, y, s, cor, size = 40) {
+  if (t < at) return;
+  const a = cl((t - at) / 0.25);
+  text('✓', x, y, size + 10, { font: SILK, color: cor, bold: true, glow: 12, alpha: a });
+  text(s, x + 60, y, size, { color: WH, alpha: a });
+}
+
+// 1. gancho: o dinheiro chegou… é só ligar pro fornecedor?
+function cena1(t) {
+  const a = vis(t, -1, S.quem);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('COMO O MUNICÍPIO', t, 0.1, 540, 280, 60, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 20 });
+  typed('COMPRA REMÉDIOS?', t, 0.9, 540, 355, 60, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 20 });
+  if (t >= S.municipio - 0.3) {
+    const u = back(k(t, S.municipio - 0.3, 0.4));
+    g.save(); g.translate(540, 660); g.scale(u, u); predio(0, 0, 1.1, CY); g.restore();
+    text('PREFEITURA', 540, 830, 36, { font: SILK, color: CY, bold: true, align: 'center', alpha: cl(u) });
+  }
+  for (let i = 0; i < 5; i++) {
+    const at = S.dinheiro + i * 0.3; if (t < at || t > S.ligar) continue;
+    const p = ((t - at) * 0.8) % 1;
+    moeda(380 + i * 80, 430 + p * 120, 0.5, A);
+  }
+  g.save(); if (cartao(S.ligar - 0.2, t, 70, 900, 940, 150, G, 1)) {
+    typed('> ligar pro fornecedor?', t, S.ligar, 110, 990, 52, { color: G, glow: 10, cps: 30 });
+  }
+  g.restore();
+  stamp('NÃO!', t, S.nao, 800, 1120, R, { rot: 8, size: 70 });
+  if (t >= S.farmacia - 0.4) text('não é como a gente compra na farmácia', 540, 1260, 40, { color: WH, align: 'center', alpha: cl((t - S.farmacia + 0.4) / 0.3) });
+  g.restore();
+}
+
+// 2. a lei
+function cena2(t) {
+  const a = vis(t, S.quem, S.plan);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('QUEM MANDA É A LEI', t, S.quem + 0.1, 540, 290, 58, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 22 });
+  if (t >= S.lei - 0.3) {
+    const u = back(k(t, S.lei - 0.3, 0.4));
+    g.save(); g.translate(540, 560); g.scale(u, u);
+    box(-440, -150, 880, 300, A, { lit: 0.8 });
+    text('LEI Nº', 0, -60, 56, { font: SILK, color: A, bold: true, align: 'center', glow: 12 });
+    text('14.133', -60, 80, 150, { font: VT, color: A, align: 'center', glow: 16 });
+    if (t >= S.ano2021) text('/2021', 270, 80, 90, { font: VT, color: WH, align: 'center', alpha: cl((t - S.ano2021) / 0.3) });
+    g.restore();
+  }
+  stamp('NOVA LEI DE LICITAÇÕES', t, S.nova, 540, 870, G, { rot: -5, size: 44 });
+  g.restore();
+}
+
+// 3. planejamento e pesquisa de preços (com o teto da CMED)
+function cena3(t) {
+  const a = vis(t, S.plan, S.abre);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  g.save(); if (cartao(S.plan, t, 70, 250, 940, 520, G)) {
+    etapa(1, 100, 272, G);
+    text('PLANEJAMENTO', 200, 330, 50, { font: SILK, color: G, bold: true, glow: 10 });
+    if (t >= S.programacao - 0.2) {
+      [0.5, 0.7, 0.6, 0.8, 0.65, 0.9].forEach((v, i) => {
+        const p = eo(cl((t - S.programacao - i * 0.12) / 0.4));
+        g.save(); g.shadowColor = G; g.shadowBlur = 10; px(130 + i * 90, 690 - 240 * v * p, 54, 240 * v * p, i === 5 ? A : rgba(G, 0.8)); g.restore();
+      });
+      text('consumo mês a mês', 130, 740, 30, { color: rgba(WH, 0.7) });
+    }
+    if (t >= S.remume - 0.1) {
+      const v = back(k(t, S.remume - 0.1, 0.35));
+      g.save(); g.translate(820, 470); g.scale(v, v);
+      box(-140, -60, 280, 120, CY, { lit: 0.8 });
+      text('REMUME', 0, 14, 44, { font: SILK, color: CY, bold: true, align: 'center', glow: 10 });
+      g.restore();
+    }
+    if (t >= S.consumo) text('→ quanto comprar', 680, 640, 34, { color: A, alpha: cl((t - S.consumo) / 0.3) });
+  }
+  g.restore();
+  g.save(); if (cartao(S.pesquisa - 0.2, t, 70, 820, 940, 470, A, 1)) {
+    etapa(2, 100, 842, A);
+    text('PESQUISA DE PREÇOS', 200, 900, 46, { font: SILK, color: A, bold: true, glow: 10 });
+    typed('> Banco de Preços em Saúde', t, S.banco - 0.1, 110, 990, 44, { color: G, glow: 8, cps: 34 });
+    if (t >= S.teto - 0.1) {
+      const u = eo(k(t, S.teto - 0.1, 0.4));
+      g.save(); g.strokeStyle = R; g.lineWidth = 6; g.setLineDash([18, 12]); g.beginPath(); g.moveTo(110, 1080); g.lineTo(110 + 860 * u, 1080); g.stroke(); g.restore();
+      text('TETO', 110, 1065, 34, { font: SILK, color: R, bold: true, alpha: u });
+      [120, 90, 150, 70].forEach((h, i) => px(300 + i * 150, 1250 - h * u, 90, h * u, rgba(A, 0.7)));
+    }
+  }
+  g.restore();
+  stamp('PREÇO MÁXIMO: CMED', t, S.cmed, 640, 1215, R, { rot: -4, size: 38 });
+  g.restore();
+}
+
+// 4. licitação: pregão eletrônico, menor preço
+function cena4(t) {
+  const a = vis(t, S.abre, S.srp);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('3 · LICITAÇÃO', t, S.abre + 0.1, 540, 280, 64, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 20 });
+  g.save(); if (cartao(S.pregao - 0.3, t, 70, 350, 940, 760, CY)) {
+    px(100, 370, 880, 60, rgba(CY, 0.3));
+    [R, A, G].forEach((c, i) => px(120 + i * 34, 388, 22, 22, c));
+    text('PREGÃO ELETRÔNICO', 560, 412, 30, { font: SILK, color: WH, bold: true, align: 'center' });
+    if (t >= S.internet - 0.2) text('pela internet', 540, 500, 42, { color: CY, align: 'center', alpha: cl((t - S.internet + 0.2) / 0.3) });
+    [['EMPRESA A', 0.92], ['EMPRESA B', 0.78], ['EMPRESA C', 0.61]].forEach(([n, v], i) => {
+      const at = S.pregao + 0.6 + i * 0.5;
+      if (t < at) return;
+      const p = eo(cl((t - at) / 0.5));
+      const ven = t >= S.menor && i === 2;
+      const y = 600 + i * 150;
+      text(n, 120, y, 36, { font: SILK, color: ven ? G : WH, bold: true });
+      g.fillStyle = rgba(WH, 0.08); g.fillRect(120, y + 18, 820, 40);
+      g.save(); g.shadowColor = ven ? G : A; g.shadowBlur = 10; g.fillStyle = ven ? G : A; g.fillRect(120, y + 18, 820 * v * p, 40); g.restore();
+      text('R$ ' + (v * 10).toFixed(2).replace('.', ','), 960, y, 44, { font: VT, color: ven ? G : A, align: 'right', glow: 8 });
+    });
+  }
+  g.restore();
+  stamp('MENOR PREÇO VENCE', t, S.menor, 540, 1210, G, { rot: -4, size: 44 });
+  text('valores ilustrativos', 540, 1300, 26, { color: rgba(WH, 0.5), align: 'center', alpha: cl((t - S.pregao - 1) / 0.4) });
+  g.restore();
+}
+
+// 5. sistema de registro de preços: a ata
+function cena5(t) {
+  const a = vis(t, S.srp, S.barato);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('REGISTRO DE PREÇOS', t, S.srp + 0.1, 540, 280, 56, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 22 });
+  text('não compra tudo de uma vez', 540, 350, 40, { color: WH, align: 'center', alpha: cl((t - S.srp - 3.6) / 0.4) });
+  if (t >= S.ata - 0.3) {
+    const u = back(k(t, S.ata - 0.3, 0.4));
+    g.save(); g.translate(300, 680); g.scale(u, u); g.rotate(-0.04);
+    box(-190, -250, 380, 500, WH, { lit: 0.5, fill: 'rgba(240,255,245,0.08)' });
+    text('ATA', 0, -170, 70, { font: SILK, color: WH, bold: true, align: 'center', glow: 10 });
+    for (let i = 0; i < 6; i++) px(-140, -110 + i * 50, 200 + (i % 2) * 60, 14, rgba(WH, 0.45));
+    g.restore();
+  }
+  if (t >= S.ano - 0.1) {
+    const v = back(k(t, S.ano - 0.1, 0.35));
+    g.save(); g.translate(780, 560); g.scale(v, v); box(-200, -70, 400, 140, G, { lit: 0.8 }); text('VALE 1 ANO', 0, 16, 44, { font: SILK, color: G, bold: true, align: 'center', glow: 10 }); g.restore();
+  }
+  if (t >= S.prorrogada - 0.1) {
+    const v = back(k(t, S.prorrogada - 0.1, 0.35));
+    g.save(); g.translate(780, 760); g.scale(v, v); box(-200, -70, 400, 140, A, { lit: 0.8 }); text('+1 ANO', 0, 0, 44, { font: SILK, color: A, bold: true, align: 'center', glow: 10 }); text('prorrogação', 0, 46, 32, { color: WH, align: 'center' }); g.restore();
+  }
+  if (t >= S.pedindo - 0.2) {
+    text('PEDIDOS CONFORME PRECISA', 540, 1010, 36, { font: SILK, color: CY, bold: true, align: 'center', alpha: cl((t - S.pedindo + 0.2) / 0.3) });
+    for (let i = 0; i < 4; i++) {
+      const at = S.pedindo + i * 0.35; if (t < at) continue;
+      const v = back(k(t, at, 0.3));
+      g.save(); g.translate(195 + i * 230, 1120); g.scale(v, v);
+      box(-95, -55, 190, 110, CY, { lit: 0.5 });
+      text('PEDIDO', 0, -6, 26, { font: SILK, color: WH, bold: true, align: 'center' });
+      text(String(i + 1), 0, 42, 46, { font: SILK, color: CY, bold: true, align: 'center' });
+      g.restore();
+    }
+  }
+  g.restore();
+}
+
+// 6. não basta ser barato: registro na Anvisa, empresa autorizada, tudo no PNCP
+function cena6(t) {
+  const a = vis(t, S.barato, S.excecoes);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('NÃO BASTA SER BARATO', t, S.barato + 0.1, 540, 290, 54, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 22 });
+  g.save(); if (cartao(S.anvisa - 0.4, t, 70, 380, 940, 380, G)) {
+    check(t, S.anvisa - 0.4, 120, 470, 'remédio com', G, 40);
+    if (t >= S.anvisa) text('REGISTRO NA ANVISA', 180, 535, 46, { font: SILK, color: G, bold: true, glow: 10 });
+    check(t, S.autorizacao - 0.5, 120, 640, 'empresa com', G, 40);
+    if (t >= S.autorizacao) text('AUTORIZAÇÃO (AFE)', 180, 705, 46, { font: SILK, color: G, bold: true, glow: 10 });
+  }
+  g.restore();
+  g.save(); if (cartao(S.portal - 0.3, t, 70, 830, 940, 300, CY, 1)) {
+    text('PNCP', 110, 945, 90, { font: SILK, color: CY, bold: true, glow: 12 });
+    text('Portal Nacional de', 110, 1020, 40, { color: WH });
+    text('Contratações Públicas', 110, 1075, 40, { color: WH });
+  }
+  g.restore();
+  stamp('TUDO PUBLICADO', t, S.publicas, 760, 960, A, { rot: 6, size: 40 });
+  g.restore();
+}
+
+// 7. exceções: dispensa (valor ou emergência) e inexigibilidade
+function cena7(t) {
+  const a = vis(t, S.excecoes, S.consorcio);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('EXCEÇÕES', t, S.excecoes + 0.1, 540, 280, 70, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 18 });
+  g.save(); if (cartao(S.dispensa - 0.2, t, 70, 350, 940, 520, A)) {
+    text('DISPENSA DE LICITAÇÃO', 110, 420, 46, { font: SILK, color: A, bold: true, glow: 10 });
+    if (t >= S.r65 - 1.5) {
+      text('compras de pequeno valor', 110, 495, 38, { color: WH, alpha: cl((t - S.r65 + 1.5) / 0.3) });
+      text('até ≈', 110, 600, 46, { color: WH, alpha: cl((t - S.r65 + 0.2) / 0.3) });
+      if (t >= S.r65) text('R$ 65 mil', 260, 610, 96, { font: VT, color: A, glow: 14, alpha: cl((t - S.r65) / 0.25) });
+      if (t >= S.r65 + 1.2) text('(2026)', 760, 600, 50, { font: VT, color: rgba(WH, 0.7), alpha: cl((t - S.r65 - 1.2) / 0.3) });
+    }
+    if (t >= S.emergencia - 0.1) {
+      const e = cl((t - S.emergencia + 0.1) / 0.3);
+      text('OU EMERGÊNCIA', 110, 780, 44, { font: SILK, color: R, bold: true, glow: 10, alpha: e });
+      if (t >= S.umAno - 0.3) text('máx. 1 ano', 640, 780, 44, { font: SILK, color: WH, bold: true, alpha: cl((t - S.umAno + 0.3) / 0.3) });
+    }
+  }
+  g.restore();
+  g.save(); if (cartao(S.inexig - 0.1, t, 70, 930, 940, 280, CY, 1)) {
+    text('INEXIGIBILIDADE', 110, 1010, 50, { font: SILK, color: CY, bold: true, glow: 10 });
+    if (t >= S.unico - 1) {
+      predio(190, 1125, 0.45, CY);
+      text('só existe 1 fornecedor', 300, 1140, 44, { color: WH, alpha: cl((t - S.unico + 1) / 0.3) });
+    }
+  }
+  g.restore();
+  g.restore();
+}
+
+// 8. consórcios
+function cena8(t) {
+  const a = vis(t, S.consorcio, S.log);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('CONSÓRCIOS', t, S.consorcio + 0.1, 540, 290, 70, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 18 });
+  const jun = eo(cl((t - S.consorcios + 0.3) / 0.8));
+  [[200, 600], [540, 520], [880, 600]].forEach(([x, y], i) => {
+    const at = S.consorcio + 0.3 + i * 0.25; if (t < at) return;
+    const u = back(k(t, at, 0.35));
+    const xx = lerp(x, 540 + (i - 1) * 230, jun), yy = lerp(y, 630, jun);
+    g.save(); g.translate(xx, yy); g.scale(u * 0.7, u * 0.7); predio(0, 0, 1, [G, CY, A][i]); g.restore();
+  });
+  if (jun > 0) { g.save(); g.strokeStyle = rgba(G, 0.7 * jun); g.lineWidth = 6; g.setLineDash([16, 10]); g.strokeRect(150, 470, 780, 300); g.restore(); }
+  if (t >= S.consorcios) text('cidades pequenas juntas', 540, 840, 42, { color: WH, align: 'center', alpha: cl((t - S.consorcios) / 0.3) });
+  g.save(); if (cartao(S.quantidade - 0.2, t, 70, 920, 940, 260, A, 1)) {
+    text('MAIS QUANTIDADE', 110, 1020, 46, { font: SILK, color: A, bold: true, glow: 10 });
+    if (t >= S.menos - 0.2) text('= MENOR PREÇO', 110, 1120, 56, { font: SILK, color: G, bold: true, glow: 12, alpha: cl((t - S.menos + 0.2) / 0.3) });
+  }
+  g.restore();
+  g.restore();
+}
+
+// 9. logística: entrega, conferência, central de abastecimento, unidades
+function cena9(t) {
+  const a = vis(t, S.log, S.fisc);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('DEPOIS DA COMPRA', t, S.log + 0.1, 540, 280, 58, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 22 });
+  const passos = [
+    [S.entrega - 0.2, 'FORNECEDOR ENTREGA', 'na farmácia central'],
+    [S.lote - 0.3, 'CONFERE', 'lote e validade'],
+    [S.central - 0.3, 'CENTRAL DE ABASTEC.', 'armazena'],
+    [S.distribui - 0.2, 'DISTRIBUI', 'para as unidades de saúde'],
+  ];
+  passos.forEach(([at, l1, l2], i) => {
+    if (t < at) return;
+    const u = eo(k(t, at, 0.3));
+    const y = 360 + i * 230;
+    const ativo = t < (passos[i + 1] ? passos[i + 1][0] : S.fisc);
+    g.save(); g.translate((1 - u) * (i % 2 ? 600 : -600), 0);
+    box(70, y, 940, 180, ativo ? A : G, { lit: ativo ? 0.9 : 0.3 });
+    etapa(i + 1, 100, y + 54, ativo ? A : G);
+    text(l1, 210, y + 80, 44, { font: SILK, color: ativo ? A : G, bold: true, glow: 8 });
+    text(l2, 210, y + 140, 40, { color: WH });
+    g.restore();
+    if (i > 0) { g.fillStyle = rgba(WH, 0.6); for (let yy = y - 46; yy < y - 4; yy += 12) g.fillRect(534, yy, 12, 6); }
+  });
+  g.restore();
+}
+
+// 10. fiscalização
+function cena10(t) {
+  const a = vis(t, S.fisc, S.consulte - 0.05);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('QUEM FISCALIZA?', t, S.fisc + 0.1, 540, 290, 62, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 20 });
+  [[S.controle - 0.2, 'CONTROLE INTERNO', 'da própria prefeitura', G], [S.camara - 0.2, 'CÂMARA DE VEREADORES', 'o Legislativo da cidade', CY], [S.tribunal - 0.2, 'TRIBUNAL DE CONTAS', 'confere as contas', A]].forEach(([at, nome, sub, cor], i) => {
+    g.save(); if (cartao(at, t, 70, 380 + i * 210, 940, 180, cor, i % 2 ? 1 : -1)) {
+      text('✓', 140, 495 + i * 210, 70, { font: SILK, color: cor, bold: true, align: 'center', glow: 12 });
+      text(nome, 220, 460 + i * 210, 42, { font: SILK, color: cor, bold: true, glow: 8 });
+      text(sub, 220, 515 + i * 210, 38, { color: WH });
+    }
+    g.restore();
+  });
+  g.restore();
+}
+
+function cenaFim(t) {
+  const a = cl((t - S.consulte + 0.05) / 0.3);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  box(70, 560, 940, 560, G, { lit: 0.6 + 0.3 * Math.sin(t * 4) });
+  text('C:\\> encerrar.exe', 110, 630, 36, { color: rgba(G, 0.7) });
+  ['CONSULTE UM', 'PROFISSIONAL', 'DE SAÚDE PARA', 'ORIENTAÇÕES.'].forEach((l, i) =>
+    typed(l, t, S.consulte + i * 0.45, 540, 770 + i * 95, 66, { font: SILK, color: i === 1 ? A : G, bold: true, align: 'center', glow: 16, cps: 30 }));
+  const ra = cl((t - S.consulte - 1.4) / 0.4);
+  text('Ref.: Lei 14.133/2021 · Decreto 12.807/2025 (valores de 2026) · CMED/Anvisa', 540, 1300, 24, { color: rgba(WH, 0.65), align: 'center', alpha: ra });
+  text('Lei 11.107/2005 (consórcios públicos) · PNCP', 540, 1336, 24, { color: rgba(WH, 0.65), align: 'center', alpha: ra });
+  g.restore();
+}
+
+// glitch rápido na troca de cena
+function glitch(t) {
+  const c = CENAS.find(s => s > 0 && t >= s && t < s + 0.22);
+  if (c === undefined) return;
+  const u = 1 - (t - c) / 0.22;
+  for (let i = 0; i < 9; i++) {
+    const y = Math.floor(rnd(i + Math.floor(t * 30)) * H), h = 20 + rnd(i + 7) * 90;
+    const dx = (rnd(i + 3 + Math.floor(t * 60)) - 0.5) * 120 * u;
+    g.drawImage(cv, 0, y, W, h, dx, y, W, h);
+  }
+  g.fillStyle = rgba(R, 0.12 * u); g.fillRect(0, 0, W, H);
+  g.fillStyle = rgba(CY, 0.08 * u); g.fillRect(8 * u, 0, W, H);
+}
+
+window.draw = function (t) {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.shadowBlur = 0;
+  fundo(t);
+  cena1(t); cena2(t); cena3(t); cena4(t); cena5(t); cena6(t); cena7(t); cena8(t); cena9(t); cena10(t); cenaFim(t);
+  legenda(t);
+  barra(t);
+  glitch(t);
+  crt();
+};
+window.render = window.draw;
+
+const faces = [
+  ['Silk', 'fonts/silk400.woff2', '400'], ['Silk', 'fonts/silk400ext.woff2', '400', 'U+0100-024F'],
+  ['Silk', 'fonts/silk700.woff2', '700'], ['Silk', 'fonts/silk700ext.woff2', '700', 'U+0100-024F'],
+  ['VT', 'fonts/vt.woff2', '400'], ['VT', 'fonts/vtext.woff2', '400', 'U+0100-024F'],
+];
+Promise.all(faces.map(([f, u, w, r]) => new FontFace(f, `url(${u})`, r ? { weight: w, unicodeRange: r } : { weight: w }).load().then(ff => document.fonts.add(ff))))
+  .then(() => { draw(0); window.ready = true; });
+</script>
+</body>
+</html>

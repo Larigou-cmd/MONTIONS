@@ -67,3 +67,10 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 - Narração: `public/forxiga/narracao.mp3`; tempos palavra a palavra: `audio/forxiga_palavras.json`
 - Textos, tempos e efeitos: `src/forxiga/config.ts`; cenas (rim com SGLT2, Farmácia Popular, CEAF com CIDs, processo): `src/forxiga/Video.tsx`
 - Renderizar: `npx remotion render Forxiga out/forxiga.mp4 --crf=22`
+
+## Vídeo 10: Sinvastatina e dor na perna (modelo aula elegante, roteiro da Larissa)
+
+- Vídeo: `out/sinvastatina.mp4` (1080×1920, 177 s, voz Juliana, música própria `public/sinva/musica.wav` e efeitos, sem legendas)
+- Narração: `public/sinva/narracao.mp3`; tempos palavra a palavra: `audio/sinva_palavras.json`
+- Cenas, tempos e efeitos: `src/sinva/Video.tsx`
+- Renderizar: `npx remotion render Sinvastatina out/sinvastatina.mp4 --crf=22`

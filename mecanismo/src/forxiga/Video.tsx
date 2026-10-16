@@ -233,14 +233,14 @@ const S6: React.FC = () => {
       <Card f={f} at={T.dm2c} x={60} y={610} w={960} h={420} border={rgba(GLI, 0.55)} style={{ padding: "26px 36px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <span style={{ fontFamily: SERIF, fontWeight: 600, fontSize: 50, color: GLI }}>Diabetes tipo 2</span>
-          <Cid t="CID E11" />
+          <Cid t="E11.2 a E11.9" />
         </div>
         {crit.map(([at, t], i) => (
           <div key={i} style={{ marginTop: 18, fontSize: 36, fontWeight: 600, lineHeight: 1.25, opacity: P(f, at, at + 10), transform: `translateX(${(1 - P(f, at, at + 10)) * -30}px)` }}>• {t}</div>
         ))}
       </Card>
       <Card f={f} at={T.icc} x={60} y={1055} w={960} h={170} border={rgba(SANGUE, 0.55)} style={{ padding: "22px 36px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 12 }}>
-        <span style={{ fontFamily: SERIF, fontWeight: 600, fontSize: 42, color: "#fca5a5" }}>Insuficiência cardíaca (FE reduzida)</span>
+        <span style={{ fontFamily: SERIF, fontWeight: 600, fontSize: 42, color: "#fca5a5" }}>Insuficiência cardíaca (FE ≤ 40%)</span>
         <div style={{ display: "flex", gap: 12 }}><Cid t="I50.0" /><Cid t="I50.1" /><Cid t="I50.9" /></div>
       </Card>
       <Card f={f} at={T.drcc} x={60} y={1245} w={960} h={170} border={rgba("#f472b6", 0.55)} style={{ padding: "22px 36px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 12 }}>

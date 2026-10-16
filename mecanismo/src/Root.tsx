@@ -14,6 +14,7 @@ import { DURATION as DURATION_DIP } from "./dipirona/config";
 import { DURATION as DURATION_AAS } from "./aas/config";
 import { VideoAmoxi, DURATION as DURATION_AMOXI } from "./amoxi/Video";
 import { VideoForxiga, DURATION as DURATION_FORXIGA } from "./forxiga/Video";
+import { VideoSinva, DURATION as DURATION_SINVA } from "./sinva/Video";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -25,6 +26,7 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="AAS" component={VideoAAS} durationInFrames={DURATION_AAS} fps={FPS} width={1080} height={1920} />
     <Composition id="Amoxi" component={VideoAmoxi} durationInFrames={DURATION_AMOXI} fps={FPS} width={1080} height={1920} />
     <Composition id="Forxiga" component={VideoForxiga} durationInFrames={DURATION_FORXIGA} fps={FPS} width={1080} height={1920} />
+    <Composition id="Sinvastatina" component={VideoSinva} durationInFrames={DURATION_SINVA} fps={FPS} width={1080} height={1920} />
     <Composition id="IBP" component={VideoIBP} durationInFrames={DURATION_IBP} fps={FPS} width={1080} height={1920} />
   </>
 );

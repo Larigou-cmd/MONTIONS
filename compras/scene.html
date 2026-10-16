@@ -12,7 +12,7 @@
 // Vídeo "COMPRAS.EXE": tudo é desenhado por draw(t), t em segundos da narração (narracao.mp3).
 // Os tempos abaixo vêm da transcrição palavra a palavra (words.js).
 const W = 1080, H = 1920;
-const NARR = 112.2;            // duração da narração
+const NARR = 141.55;            // duração da narração
 window.END = NARR + 2.2;       // segura a tela final um pouco depois da última palavra
 const cv = document.getElementById('c'), g = cv.getContext('2d');
 const G = '#39ff6a', A = '#ffc23d', R = '#ff4d6d', CY = '#3de0ff', BG = '#020c06', WH = '#eafff0';
@@ -116,7 +116,7 @@ function barra(t) {
 }
 
 // ---------- legendas palavra por palavra ----------
-const KEYS = ["dinheiro", "município", "fornecedor", "não", "farmácia", "14133", "2021", "licitações", "planejamento", "programação", "remume", "consumo", "pesquisa", "preços", "saúde", "teto", "cmed", "licitação", "pregão", "eletrônico", "internet", "menor", "registro", "ata", "ano", "prorrogada", "precisa", "barato", "anvisa", "autorização", "públicas", "exceções", "dispensa", "r$ 65 mil", "2026", "emergência", "inexigibilidade", "consórcios", "quantidade", "menos", "entrega", "lote", "validade", "abastecimento", "unidades", "fiscalizado", "interno", "vereadores", "contas", "profissional"];
+const KEYS = ["fracassar", "ninguém", "proposta", "mercado", "demorar", "fracassou", "12 meses", "direto", "edital", "revisar", "novo", "semanas", "dinheiro", "município", "fornecedor", "não", "farmácia", "14133", "2021", "licitações", "planejamento", "programação", "remume", "consumo", "pesquisa", "preços", "saúde", "teto", "cmed", "licitação", "pregão", "eletrônico", "internet", "menor", "registro", "ata", "ano", "prorrogada", "precisa", "barato", "anvisa", "autorização", "públicas", "exceções", "dispensa", "r$ 65 mil", "2026", "emergência", "inexigibilidade", "consórcios", "quantidade", "menos", "entrega", "lote", "validade", "abastecimento", "unidades", "fiscalizado", "interno", "vereadores", "contas", "profissional"];
 const clean = w => w.toLowerCase().replace(/[.,!?:;]/g, '');
 const GRUPOS = (() => {
   const out = []; let cur = [];
@@ -177,12 +177,13 @@ const S = {
   srp: T('geralmente') - 0.1, registro: T('registro'), ata: T('ata'), ano: T('ano'), prorrogada: T('prorrogada'), pedindo: T('pedindo'),
   barato: T('mas', 1) - 0.15, anvisa: T('anvisa'), autorizacao: T('autorização'), portal: T('portal'), publicas: T('públicas'),
   excecoes: T('existem') - 0.1, dispensa: T('dispensa'), r65: T('r$ 65 mil'), emergencia: T('emergência'), umAno: T('ano', 2), inexig: T('inexigibilidade'), unico: T('fornecedor', 2),
+  fracasso: T('fracassar') - 0.6, ninguem: T('ninguém'), proposta: T('proposta'), mercado: T('mercado'), demorar: T('demorar'), fracassou: T('fracassou'), direto: T('direto'), edital: T('edital'), revisar: T('revisar'), novoPregao: T('novo'), semanas: T('semanas'),
   consorcio: T('muitas') - 0.15, consorcios: T('consórcios'), quantidade: T('quantidade'), menos: T('menos'),
   log: T('depois', 3) - 0.15, entrega: T('entrega'), lote: T('lote'), validade: T('validade'), central: T('central'), distribui: T('distribui'),
   fisc: T('tudo', 2) - 0.15, controle: T('controle'), camara: T('câmara'), tribunal: T('tribunal'),
   consulte: T('consulte'),
 };
-const CENAS = [0, S.quem, S.plan, S.abre, S.srp, S.barato, S.excecoes, S.consorcio, S.log, S.fisc, S.consulte - 0.05];
+const CENAS = [0, S.quem, S.plan, S.abre, S.srp, S.barato, S.excecoes, S.fracasso, S.consorcio, S.log, S.fisc, S.consulte - 0.05];
 const vis = (t, a, b, fi = 0.25, fo = 0.25) => Math.min(cl((t - a) / fi), cl((b - t) / fo));
 
 function moeda(x, y, s, cor) {
@@ -393,7 +394,7 @@ function cena6(t) {
 
 // 7. exceções: dispensa (valor ou emergência) e inexigibilidade
 function cena7(t) {
-  const a = vis(t, S.excecoes, S.consorcio);
+  const a = vis(t, S.excecoes, S.fracasso);
   if (a <= 0) return;
   g.save(); g.globalAlpha = a;
   typed('EXCEÇÕES', t, S.excecoes + 0.1, 540, 280, 70, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 18 });
@@ -418,6 +419,35 @@ function cena7(t) {
       predio(190, 1125, 0.45, CY);
       text('só existe 1 fornecedor', 300, 1140, 44, { color: WH, alpha: cl((t - S.unico + 1) / 0.3) });
     }
+  }
+  g.restore();
+  g.restore();
+}
+
+// 7b. e se o pregão fracassar?
+function cenaFracasso(t) {
+  const a = vis(t, S.fracasso, S.consorcio);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('E SE FRACASSAR?', t, S.fracasso + 0.1, 540, 280, 64, { font: SILK, color: R, glow: 18, bold: true, align: 'center', cps: 20 });
+  g.save(); if (cartao(S.ninguem - 0.3, t, 70, 340, 940, 300, R)) {
+    text('PREGÃO FRACASSADO', 110, 410, 46, { font: SILK, color: R, bold: true, glow: 10 });
+    if (t >= S.ninguem) text('✕ ninguém aparece', 110, 485, 40, { color: WH, alpha: cl((t - S.ninguem) / 0.3) });
+    if (t >= S.proposta - 0.2) text('✕ nenhuma proposta válida', 110, 545, 40, { color: WH, alpha: cl((t - S.proposta + 0.2) / 0.3) });
+    if (t >= S.mercado - 0.4) text('ex.: preço acima do mercado', 150, 605, 34, { color: A, alpha: cl((t - S.mercado + 0.4) / 0.3) });
+  }
+  g.restore();
+  stamp('MAIS DEMORA', t, S.demorar, 800, 690, A, { rot: 6, size: 44 });
+  g.save(); if (cartao(S.fracassou - 0.3, t, 70, 770, 940, 250, G)) {
+    text('ATÉ 12 MESES', 110, 840, 44, { font: SILK, color: G, bold: true, glow: 10 });
+    if (t >= S.direto - 0.2) text('→ compra direta por DISPENSA', 110, 910, 42, { color: WH, alpha: cl((t - S.direto + 0.2) / 0.3) });
+    if (t >= S.edital - 0.6) text('mesmas condições do edital', 150, 975, 36, { color: G, alpha: cl((t - S.edital + 0.6) / 0.3) });
+  }
+  g.restore();
+  g.save(); if (cartao(S.revisar - 0.5, t, 70, 1060, 940, 250, CY, 1)) {
+    text('SE NÃO DER', 110, 1130, 44, { font: SILK, color: CY, bold: true, glow: 10 });
+    if (t >= S.revisar) text('revisa o preço → NOVO PREGÃO', 110, 1200, 42, { color: WH, alpha: cl((t - S.revisar) / 0.3) });
+    if (t >= S.semanas - 0.2) text('pode levar semanas ou meses', 150, 1265, 36, { color: A, alpha: cl((t - S.semanas + 0.2) / 0.3) });
   }
   g.restore();
   g.restore();
@@ -501,7 +531,7 @@ function cenaFim(t) {
     typed(l, t, S.consulte + i * 0.45, 540, 770 + i * 95, 66, { font: SILK, color: i === 1 ? A : G, bold: true, align: 'center', glow: 16, cps: 30 }));
   const ra = cl((t - S.consulte - 1.4) / 0.4);
   text('Ref.: Lei 14.133/2021 · Decreto 12.807/2025 (valores de 2026) · CMED/Anvisa', 540, 1300, 24, { color: rgba(WH, 0.65), align: 'center', alpha: ra });
-  text('Lei 11.107/2005 (consórcios públicos) · PNCP', 540, 1336, 24, { color: rgba(WH, 0.65), align: 'center', alpha: ra });
+  text('Lei 14.133, art. 75, III (licitação fracassada) · Lei 11.107/2005 (consórcios) · PNCP', 540, 1336, 24, { color: rgba(WH, 0.65), align: 'center', alpha: ra });
   g.restore();
 }
 
@@ -522,7 +552,7 @@ function glitch(t) {
 window.draw = function (t) {
   g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.shadowBlur = 0;
   fundo(t);
-  cena1(t); cena2(t); cena3(t); cena4(t); cena5(t); cena6(t); cena7(t); cena8(t); cena9(t); cena10(t); cenaFim(t);
+  cena1(t); cena2(t); cena3(t); cena4(t); cena5(t); cena6(t); cena7(t); cenaFracasso(t); cena8(t); cena9(t); cena10(t); cenaFim(t);
   legenda(t);
   barra(t);
   glitch(t);

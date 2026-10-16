@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Repasse de verbas</title>
+<style>html,body{margin:0;background:#000}canvas{display:block}</style>
+<script src="words.js"></script>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// Vídeo "REPASSE.EXE": tudo é desenhado por draw(t), t em segundos da narração (narracao.mp3).
+// Os tempos abaixo vêm da transcrição palavra a palavra (words.js).
+const W = 1080, H = 1920;
+const NARR = 113.11;            // duração da narração
+window.END = NARR + 2.2;       // segura a tela final um pouco depois da última palavra
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const G = '#39ff6a', A = '#ffc23d', R = '#ff4d6d', CY = '#3de0ff', BG = '#020c06', WH = '#eafff0';
+const SILK = "'Silk'", VT = "'VT'";
+
+// ---------- utilidades ----------
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const k = (t, a, d = 0.35) => cl((t - a) / d);
+const eo = x => 1 - Math.pow(1 - x, 3);
+const back = x => { const c = 1.9; x = cl(x); return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const lerp = (a, b, u) => a + (b - a) * u;
+const rnd = i => { const s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+function rgba(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; }
+
+function text(s, x, y, size, { font = VT, color = WH, align = 'left', alpha = 1, glow = 0, bold = false, base = 'alphabetic' } = {}) {
+  if (alpha <= 0) return;
+  g.save(); g.globalAlpha *= alpha; g.font = `${bold ? 700 : 400} ${size}px ${font}`; g.textAlign = align; g.textBaseline = base;
+  if (glow) { g.shadowColor = color; g.shadowBlur = glow; }
+  g.fillStyle = color; g.fillText(s, x, y); g.restore();
+}
+// texto digitado letra por letra (com cursor enquanto digita)
+function typed(s, t, at, x, y, size, opt = {}) {
+  if (t < at) return;
+  const cps = opt.cps || 22;
+  const n = Math.min(s.length, Math.floor((t - at) * cps) + 1);
+  const shown = s.slice(0, n) + (n < s.length || opt.cursor ? (Math.floor(t * 2.5) % 2 ? '█' : ' ') : '');
+  text(shown, x, y, size, opt);
+}
+function box(x, y, w, h, color, { lit = 0, alpha = 1, fill = 'rgba(2,20,10,0.88)', lw = 4 } = {}) {
+  if (alpha <= 0) return;
+  g.save(); g.globalAlpha *= alpha;
+  g.fillStyle = fill; g.fillRect(x, y, w, h);
+  g.shadowColor = color; g.shadowBlur = 8 + 30 * lit;
+  g.strokeStyle = color; g.lineWidth = lw + 2 * lit; g.strokeRect(x, y, w, h);
+  g.shadowBlur = 0;
+  g.fillStyle = color; [[x, y], [x + w - 12, y], [x, y + h - 12], [x + w - 12, y + h - 12]].forEach(([a, b]) => g.fillRect(a, b, 12, 12));
+  g.restore();
+}
+// carimbo torto que cai com impacto
+function stamp(s, t, at, x, y, color, { rot = -8, size = 64, font = SILK } = {}) {
+  if (t < at) return;
+  const u = cl((t - at) / 0.22);
+  const sc = lerp(2.6, 1, eo(u));
+  const shake = u >= 1 ? Math.max(0, 1 - (t - at - 0.22) / 0.25) * 8 * Math.sin((t - at) * 90) : 0;
+  g.save(); g.translate(x + shake, y); g.rotate(rot * Math.PI / 180); g.scale(sc, sc); g.globalAlpha *= cl(u * 1.6);
+  g.font = `700 ${size}px ${font}`; g.textAlign = 'center'; g.textBaseline = 'middle';
+  const w = g.measureText(s).width + 50, h = size + 34;
+  g.fillStyle = 'rgba(0,0,0,0.6)'; g.fillRect(-w / 2, -h / 2, w, h);
+  g.strokeStyle = color; g.lineWidth = 8; g.shadowColor = color; g.shadowBlur = 24; g.strokeRect(-w / 2, -h / 2, w, h);
+  g.lineWidth = 3; g.strokeRect(-w / 2 + 12, -h / 2 + 12, w - 24, h - 24);
+  g.shadowBlur = 12; g.fillStyle = color; g.fillText(s, 0, 4);
+  g.restore();
+}
+const px = (x, y, w, h, c) => { g.fillStyle = c; g.fillRect(Math.round(x / 6) * 6, Math.round(y / 6) * 6, Math.round(w / 6) * 6, Math.round(h / 6) * 6); };
+
+// ---------- fundo ----------
+function fundo(t) {
+  const rg = g.createRadialGradient(540, 800, 100, 540, 900, 1300);
+  rg.addColorStop(0, '#062a14'); rg.addColorStop(1, BG);
+  g.fillStyle = rg; g.fillRect(0, 0, W, H);
+  // chuva binária suave
+  g.font = `34px ${VT}`; g.textAlign = 'left'; g.textBaseline = 'alphabetic';
+  for (let c = 0; c < 27; c++) {
+    const sp = 40 + rnd(c) * 70, off = rnd(c + 50) * 2400;
+    for (let r = 0; r < 14; r++) {
+      const y = ((t * sp + off + r * 40) % 2400) - 300;
+      const bit = (Math.floor(t * 3 + c * 7 + r * 3) % 3) === 0 ? '1' : '0';
+      g.fillStyle = rgba(G, (0.03 + 0.05 * (r / 14)) * (0.6 + 0.4 * rnd(c + r)));
+      g.fillText(bit, c * 40 + 6, y);
+    }
+  }
+  // grade em perspectiva no chão
+  const hy = 1380, vx = 540;
+  g.save(); g.strokeStyle = rgba(G, 0.22); g.lineWidth = 2;
+  for (let i = -12; i <= 12; i++) { g.beginPath(); g.moveTo(vx + i * 30, hy); g.lineTo(vx + i * 260, H); g.stroke(); }
+  for (let j = 0; j < 14; j++) {
+    const u = ((j + (t * 0.6) % 1) / 14);
+    const y = hy + Math.pow(u, 2.2) * (H - hy);
+    g.globalAlpha = 0.25 + 0.75 * u; g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke();
+  }
+  g.restore();
+  const fade = g.createLinearGradient(0, hy - 40, 0, hy + 200);
+  fade.addColorStop(0, BG); fade.addColorStop(1, 'rgba(2,12,6,0)');
+  g.fillStyle = fade; g.fillRect(0, hy - 40, W, 240);
+}
+function crt() {
+  g.fillStyle = 'rgba(0,0,0,0.18)';
+  for (let y = 0; y < H; y += 4) g.fillRect(0, y, W, 2);
+  const v = g.createRadialGradient(540, 960, 520, 540, 960, 1250);
+  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.78)');
+  g.fillStyle = v; g.fillRect(0, 0, W, H);
+}
+function barra(t) {
+  g.fillStyle = 'rgba(0,10,4,0.92)'; g.fillRect(0, 60, W, 104);
+  g.fillStyle = G; g.fillRect(0, 160, W, 4);
+  text('C:\\> REPASSE.EXE', 40, 126, 38, { font: SILK, color: G, glow: 10, bold: true });
+  const rest = Math.max(0, Math.ceil(window.END - t));
+  text(`${String(Math.floor(rest / 60)).padStart(2, '0')}:${String(rest % 60).padStart(2, '0')}`, 1040, 126, 50, { color: A, align: 'right', glow: 8 });
+  g.fillStyle = rgba(G, 0.18); g.fillRect(0, 164, W, 12);
+  g.fillStyle = G; g.fillRect(0, 164, W * cl(t / window.END), 12);
+}
+
+// ---------- legendas palavra por palavra ----------
+const KEYS = ["dinheiro", "tripartite", "união", "estado", "município", "8080", "8142", "1990", "fundo", "nacional", "municipal", "automática", "mês", "convênio", "básico", "2026", "r$ 820", "r$ 905", "idh", "r$ 301", "aumentar", "cib", "rename", "seringas", "tiras", "lancetas", "insulina", "prefeitura", "hiv", "tuberculose", "hanseníase", "estratégico", "especializado", "custo", "141", "15%", "12%", "impostos", "plano", "conselho", "tribunal", "faltou", "transparência", "profissional", "posto", "remédios", "lugares"];
+const clean = w => w.toLowerCase().replace(/[.,!?:;]/g, '');
+const GRUPOS = (() => {
+  const out = []; let cur = [];
+  WORDS.forEach((w, i) => {
+    cur.push(w);
+    const end = /[.?!:]$/.test(w.w) || cur.length >= 7 || (/,$/.test(w.w) && cur.length >= 4);
+    if (end || i === WORDS.length - 1) { out.push(cur); cur = []; }
+  });
+  return out.map((ws, i) => {
+    let key = ws.findIndex(w => KEYS.includes(clean(w.w)));
+    if (key < 0) key = ws.reduce((b, w, j) => clean(w.w).length > clean(ws[b].w).length ? j : b, 0);
+    return { ws, key, de: ws[0].s, ate: (out[i + 1] ? out[i + 1][0].s : ws[ws.length - 1].e + 0.5) };
+  });
+})();
+function legenda(t) {
+  if (t >= S.consulte - 0.05) return;
+  const gr = GRUPOS.find(gp => t >= gp.de - 0.05 && t < gp.ate);
+  if (!gr) return;
+  const size = 50; g.font = `700 ${size}px ${SILK}`;
+  const sp = g.measureText(' ').width;
+  // números (leis, valores, %) em VT323: no Silkscreen o 4 parece Y e o % parece Z
+  const fonte = w => /\d/.test(w) ? `400 ${size + 18}px ${VT}` : `700 ${size}px ${SILK}`;
+  const items = gr.ws.map((w, j) => { const u = w.w.toUpperCase(); g.font = fonte(u); return { w: u, f: fonte(u), s: w.s, key: j === gr.key, wd: g.measureText(u).width }; });
+  g.font = `700 ${size}px ${SILK}`;
+  const lines = [[]]; let lw = 0;
+  items.forEach(it => { if (lw + it.wd > 960 && lines[lines.length - 1].length) { lines.push([]); lw = 0; } lines[lines.length - 1].push(it); lw += it.wd + sp; });
+  const y0 = 1490 - (lines.length - 1) * 34;
+  lines.forEach((ln, li) => {
+    const total = ln.reduce((s, it) => s + it.wd, 0) + sp * (ln.length - 1);
+    let x = 540 - total / 2;
+    ln.forEach(it => {
+      if (t >= it.s - 0.04) {
+        const u = cl((t - it.s + 0.04) / 0.12);
+        g.save(); g.font = it.f; g.textBaseline = 'middle';
+        g.translate(x + it.wd / 2, y0 + li * 68); g.scale(0.85 + 0.15 * u, 0.85 + 0.15 * u); g.globalAlpha = u;
+        g.textAlign = 'center'; g.lineJoin = 'round'; g.lineWidth = 12; g.strokeStyle = '#000'; g.strokeText(it.w, 0, 0);
+        g.fillStyle = it.key ? A : '#ffffff'; if (it.key) { g.shadowColor = A; g.shadowBlur = 14; }
+        g.fillText(it.w, 0, 0); g.restore();
+      }
+      x += it.wd + sp;
+    });
+  });
+}
+
+// ---------- tempos: procurados na transcrição (palavra, ocorrência) ----------
+const norm = w => w.toLowerCase().replace(/[.,!?:;]/g, '');
+function T(word, n = 1) {
+  let c = 0;
+  for (const w of WORDS) if (norm(w.w) === word && ++c === n) return w.s;
+  console.warn('tempo não achado', word, n); return 1e9;
+}
+const S = {
+  dinheiro: T('dinheiro'), remedios: T('remédios'), tres: T('três'), uniao: T('união'), estado: T('estado'), municipio: T('município'), tripartite: T('tripartite'),
+  base: T('base') - 0.15, l8080: T('8080'), l8142: T('8142'), l1990: T('1990'), repasse: T('repasse'), fundoAfundo: T('fundo', 1),
+  funciona: T('funciona') - 0.1, fns: T('nacional') - 0.3, transfere: T('transfere'), fms: T('municipal') - 0.3, automatica: T('automática'), mes: T('mês'), convenio: T('convênio'),
+  basica: T('básica') - 1.2, componente: T('componente'), ano2026: T('2026'), repassa: T('repassa'), v820: T('r$ 820'), v905: T('r$ 905'), idh: T('idh'),
+  contra: T('entram') - 1.4, entram: T('entram'), v301: T('r$ 301'), aumentar: T('aumentar'), cib: T('cib'),
+  compra: T('dinheiro', 3) - 0.5, medicamentos: T('medicamentos'), rename: T('rename'), seringas: T('seringas'), tiras: T('tiras'), lancetas: T('lancetas'), insulina: T('insulina'),
+  nem: T('nem') - 0.35, hiv: T('hiv'), tuberculose: T('tuberculose'), hanseniase: T('hanseníase'), estrategico: T('estratégico'), ministerio: T('ministério', 1),
+  alto: T('alto'), divididos: T('divididos'),
+  mais: T('mais') - 0.3, lc: T('complementar'), p15: T('15%'), p12: T('12%'),
+  todo: T('todo', 2) - 0.1, plano: T('plano'), conselho: T('conselho'), tribunal: T('tribunal'), faltou: T('faltou'), cobrar: T('cobrar'),
+  consulte: T('consulte'),
+};
+const CENAS = [0, S.base, S.funciona, S.basica, S.contra, S.compra, S.nem, S.mais, S.todo, S.consulte - 0.05];
+const vis = (t, a, b, fi = 0.25, fo = 0.25) => Math.min(cl((t - a) / fi), cl((b - t) / fo));
+
+function cruz(x, y, s, c = G) { g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = c; g.shadowBlur = 24; px(-24, -72, 48, 144, c); px(-72, -24, 144, 48, c); g.restore(); }
+function moeda(x, y, s, cor) {
+  g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = cor; g.shadowBlur = 16;
+  px(-30, -42, 60, 84, cor); px(-42, -30, 84, 60, cor); g.shadowBlur = 0;
+  text('$', 0, 16, 54, { font: SILK, color: BG, bold: true, align: 'center' });
+  g.restore();
+}
+function predio(x, y, s, cor) {
+  g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = cor; g.shadowBlur = 14;
+  g.beginPath(); g.moveTo(-110, -40); g.lineTo(0, -110); g.lineTo(110, -40); g.closePath(); g.fillStyle = cor; g.fill(); g.shadowBlur = 0;
+  for (let i = 0; i < 4; i++) px(-90 + i * 54, -30, 24, 110, cor);
+  px(-120, 84, 240, 22, cor);
+  g.restore();
+}
+// caixa que entra deslizando de lado (usar dentro de g.save/g.restore)
+function cartao(at, t, x, y, w, h, cor, dir = -1) {
+  if (t < at) return false;
+  const u = eo(k(t, at, 0.3));
+  g.translate((1 - u) * 600 * dir, 0);
+  box(x, y, w, h, cor, { lit: 0.6 });
+  return true;
+}
+
+// 1. de onde vem o dinheiro? três lugares
+function cena1(t) {
+  const a = vis(t, -1, S.base);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('DE ONDE VEM', t, 0.1, 540, 290, 70, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 20 });
+  typed('O DINHEIRO?', t, 0.7, 540, 370, 70, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 20 });
+  // moedas caindo até o posto de saúde
+  const sai = cl((S.tres - t) / 0.3);
+  if (sai > 0) {
+    g.save(); g.globalAlpha *= sai;
+    const u = back(k(t, S.remedios - 0.6, 0.4));
+    if (u > 0) {
+      g.save(); g.translate(540, 820); g.scale(u, u);
+      box(-220, -120, 440, 260, G, { lit: 0.5 }); cruz(0, -10, 0.7);
+      text('POSTO DE SAÚDE', 0, 180, 34, { font: SILK, color: G, bold: true, align: 'center' });
+      g.restore();
+    }
+    for (let i = 0; i < 5; i++) {
+      const at = S.dinheiro + i * 0.35; if (t < at) continue;
+      const p = ((t - at) * 0.9) % 1;
+      moeda(380 + i * 80, 470 + p * 200, 0.6, A);
+    }
+    g.restore();
+  }
+  const lug = [[S.uniao, 'UNIÃO', 'governo federal', G], [S.estado, 'ESTADO', 'secretaria estadual', A], [S.municipio, 'MUNICÍPIO', 'prefeitura', CY]];
+  lug.forEach(([at, nome, sub, cor], i) => {
+    g.save(); if (cartao(at - 0.15, t, 70, 470 + i * 190, 940, 160, cor, i % 2 ? 1 : -1)) {
+      predio(170, 545 + i * 190, 0.42, cor);
+      text(nome, 290, 545 + i * 190, 58, { font: SILK, color: cor, bold: true, glow: 10 });
+      text(sub, 290, 600 + i * 190, 38, { color: WH });
+    }
+    g.restore();
+  });
+  stamp('TRIPARTITE', t, S.tripartite, 540, 1110, R, { rot: -6, size: 60 });
+  g.restore();
+}
+
+// 2. as leis do repasse fundo a fundo
+function cena2(t) {
+  const a = vis(t, S.base, S.funciona);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('A BASE É A LEI', t, S.base + 0.1, 540, 290, 66, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 20 });
+  [[S.l8080 - 0.2, '8.080', 'Lei Orgânica da Saúde', G], [S.l8142 - 0.2, '8.142', 'repasses e participação social', CY]].forEach(([at, num, sub, cor], i) => {
+    if (t < at) return;
+    const u = back(k(t, at, 0.35));
+    g.save(); g.translate(540, 470 + i * 250); g.scale(u, u);
+    box(-430, -100, 860, 200, cor, { lit: 0.7 });
+    text('LEI Nº', -300, 10, 46, { font: SILK, color: cor, bold: true, align: 'center', glow: 10 });
+    text(num, 20, 22, 120, { font: VT, color: cor, align: 'center', glow: 12 });
+    if (t >= S.l1990) text('/1990', 290, 22, 76, { font: VT, color: WH, align: 'center', alpha: cl((t - S.l1990) / 0.3) });
+    text(sub, 0, 76, 34, { color: WH, align: 'center' });
+    g.restore();
+  });
+  stamp('REPASSE FUNDO A FUNDO', t, S.fundoAfundo - 0.3, 540, 1060, A, { rot: -5, size: 46 });
+  g.restore();
+}
+
+// 3. Fundo Nacional → Fundo Municipal
+function cena3(t) {
+  const a = vis(t, S.funciona, S.basica);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('FUNCIONA ASSIM:', t, S.funciona + 0.1, 540, 280, 62, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 22 });
+  const fundo1 = (at, y, l1, l2, cor) => {
+    if (t < at) return;
+    const u = back(k(t, at, 0.35));
+    g.save(); g.translate(540, y); g.scale(u, u);
+    box(-430, -85, 860, 170, cor, { lit: 0.7 });
+    text(l1, 0, -10, 50, { font: SILK, color: cor, bold: true, align: 'center', glow: 10 });
+    text(l2, 0, 50, 38, { color: WH, align: 'center' });
+    g.restore();
+  };
+  fundo1(S.fns, 420, 'FUNDO NACIONAL', 'de Saúde · Ministério', G);
+  fundo1(S.fms, 880, 'FUNDO MUNICIPAL', 'de Saúde · sua cidade', CY);
+  // moedas descendo pelo cano
+  if (t >= S.transfere) {
+    g.fillStyle = rgba(WH, 0.35); for (let y = 515; y < 790; y += 14) g.fillRect(534, y, 12, 7);
+    for (let i = 0; i < 4; i++) { const p = ((t - S.transfere) * 0.8 + i / 4) % 1; moeda(540, 530 + p * 240, 0.5, A); }
+  }
+  [[S.automatica, 'AUTOMÁTICO', 270, G], [S.mes, 'TODO MÊS', 810, A]].forEach(([at, s, x, c]) => {
+    if (t < at - 0.1) return;
+    const v = back(k(t, at - 0.1, 0.35));
+    g.save(); g.translate(x, 655); g.scale(v, v);
+    box(-190, -45, 380, 90, c, { lit: 0.7 });
+    text(s, 0, 11, 32, { font: SILK, color: c, bold: true, align: 'center' });
+    g.restore();
+  });
+  stamp('SEM CONVÊNIO', t, S.convenio, 540, 1110, R, { rot: 6, size: 58 });
+  g.restore();
+}
+
+// 4. Componente Básico: quanto a União repassa
+function cena4(t) {
+  const a = vis(t, S.basica, S.contra);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('COMPONENTE BÁSICO', t, S.componente - 0.3, 540, 280, 58, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 24 });
+  typed('da Assistência Farmacêutica', t, S.componente + 0.5, 540, 340, 42, { color: WH, align: 'center', cps: 30 });
+  stamp('ANO 2026', t, S.ano2026, 540, 450, A, { rot: -4, size: 46 });
+  g.save(); if (cartao(S.repassa - 0.2, t, 70, 540, 940, 400, G)) {
+    predio(190, 650, 0.5, G);
+    text('UNIÃO REPASSA', 320, 650, 46, { font: SILK, color: G, bold: true, glow: 10 });
+    text('por habitante, por ano', 320, 705, 36, { color: WH });
+    if (t >= S.v820 - 0.1) text('R$ 8,20', 290, 850, 110, { font: VT, color: A, align: 'center', glow: 14, alpha: cl((t - S.v820 + 0.1) / 0.2) });
+    if (t >= S.v905 - 0.3) text('a', 540, 840, 56, { font: VT, color: WH, align: 'center' });
+    if (t >= S.v905 - 0.1) text('R$ 9,05', 790, 850, 110, { font: VT, color: A, align: 'center', glow: 14, alpha: cl((t - S.v905 + 0.1) / 0.2) });
+  }
+  g.restore();
+  if (t >= S.idh - 0.1) {
+    const v = back(k(t, S.idh - 0.1, 0.35));
+    g.save(); g.translate(540, 1050); g.scale(v, v);
+    box(-420, -65, 840, 130, CY, { lit: 0.7 });
+    text('VARIA CONFORME O IDH', 0, -4, 38, { font: SILK, color: CY, bold: true, align: 'center' });
+    text('do município', 0, 42, 34, { color: WH, align: 'center' });
+    g.restore();
+  }
+  g.restore();
+}
+
+// 5. contrapartida de estado e município + CIB
+function barraValor(t, at, y, nome, valor, frac, cor) {
+  if (t < at) return;
+  const u = eo(k(t, at, 0.7));
+  text(nome, 110, y, 44, { font: SILK, color: cor, bold: true, alpha: cl(u * 2) });
+  text(valor, 970, y, 66, { font: VT, color: cor, align: 'right', glow: 10, alpha: cl(u * 2) });
+  g.fillStyle = rgba(WH, 0.08); g.fillRect(110, y + 26, 860, 34);
+  g.save(); g.shadowColor = cor; g.shadowBlur = 16; g.fillStyle = cor; g.fillRect(110, y + 26, 860 * frac * u, 34); g.restore();
+}
+function cena5(t) {
+  const a = vis(t, S.contra, S.compra);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('E A CONTRAPARTIDA?', t, S.contra + 0.1, 540, 280, 56, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 22 });
+  box(70, 340, 940, 620, G, { lit: 0.35 });
+  text('POR HABITANTE / ANO', 540, 410, 34, { font: SILK, color: rgba(WH, 0.85), bold: true, align: 'center' });
+  barraValor(t, S.contra + 0.3, 520, 'UNIÃO', 'R$ 8,20+', 1, G);
+  barraValor(t, S.entram - 0.4, 680, 'ESTADO', 'mín. R$ 3,01', 3.01 / 9.05, A);
+  barraValor(t, S.entram, 840, 'MUNICÍPIO', 'mín. R$ 3,01', 3.01 / 9.05, CY);
+  stamp('CADA UM', t, S.v301 + 0.6, 820, 960, R, { rot: 7, size: 40 });
+  g.save(); if (cartao(S.aumentar - 0.1, t, 70, 1050, 940, 170, CY, 1)) {
+    text('▲ PODE AUMENTAR', 540, 1115, 46, { font: SILK, color: CY, bold: true, align: 'center', glow: 10 });
+    typed('se for combinado na CIB', t, S.cib - 0.4, 540, 1180, 38, { color: WH, align: 'center', cps: 30 });
+  }
+  g.restore();
+  g.restore();
+}
+
+// 6. o que o município compra
+function item(t, at, x, y, nome, cor, desenho) {
+  if (t < at) return;
+  const u = back(k(t, at, 0.35));
+  g.save(); g.translate(x, y); g.scale(u, u);
+  box(-210, -150, 420, 300, cor, { lit: 0.6 });
+  g.save(); g.shadowColor = cor; g.shadowBlur = 14; desenho(cor); g.restore();
+  text(nome, 0, 115, 36, { font: SILK, color: cor, bold: true, align: 'center' });
+  g.restore();
+}
+function cena6(t) {
+  const a = vis(t, S.compra, S.nem);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('O MUNICÍPIO COMPRA', t, S.compra + 0.1, 540, 280, 56, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 22 });
+  item(t, S.medicamentos - 0.1, 300, 500, 'REMÉDIOS', G, c => { px(-80, -100, 80, 56, c); px(0, -100, 80, 56, rgba(WH, 0.9)); px(-90, -20, 180, 50, rgba(c, 0.5)); });
+  item(t, S.seringas - 0.1, 780, 500, 'SERINGAS', CY, c => { px(-110, -70, 160, 40, rgba(WH, 0.85)); px(50, -82, 18, 64, c); px(68, -60, 50, 20, c); px(-150, -58, 40, 16, c); });
+  item(t, S.tiras - 0.1, 300, 850, 'TIRAS', A, c => { for (let i = 0; i < 3; i++) px(-90 + i * 66, -110, 40, 130, i === 1 ? c : rgba(WH, 0.8)); });
+  item(t, S.lancetas - 0.1, 780, 850, 'LANCETAS', R, c => { px(-30, -110, 60, 100, c); px(-8, -10, 16, 50, rgba(WH, 0.9)); });
+  stamp('DA RENAME', t, S.rename, 540, 675, A, { rot: -6, size: 46 });
+  if (t >= S.insulina - 0.1) {
+    const v = eo(k(t, S.insulina - 0.1, 0.35));
+    g.save(); g.translate(0, (1 - v) * 200); g.globalAlpha *= v;
+    box(70, 1060, 940, 110, CY, { lit: 0.7 });
+    text('insumos para quem usa insulina', 540, 1128, 44, { color: WH, align: 'center' });
+    g.restore();
+  }
+  g.restore();
+}
+
+// 7. nem tudo passa pela prefeitura: componentes Estratégico e Especializado
+function cena7(t) {
+  const a = vis(t, S.nem, S.mais);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('NEM TUDO PASSA', t, S.nem + 0.1, 540, 270, 60, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 22 });
+  typed('PELA PREFEITURA', t, S.nem + 0.8, 540, 340, 60, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 22 });
+  const linha = (at, y, nome, cor, dir, ex, quem, quemAt) => {
+    g.save(); if (cartao(at, t, 70, y, 940, 240, cor, dir)) {
+      text(nome, 110, y + 70, 52, { font: SILK, color: cor, bold: true, glow: 10 });
+      ex.forEach(([eat, s, x]) => { if (t >= eat - 0.1) text(s, x, y + 132, 40, { color: WH, alpha: cl((t - eat + 0.1) / 0.2) }); });
+      if (t >= quemAt) {
+        const v = eo(k(t, quemAt, 0.4));
+        g.fillStyle = rgba(cor, 0.18); g.fillRect(90, y + 162, 900 * v, 58);
+        text('▶ ' + quem, 110, y + 204, 34, { font: SILK, color: cor, bold: true, alpha: v });
+      }
+    }
+    g.restore();
+  };
+  linha(S.hiv - 0.6, 410, 'ESTRATÉGICO', A, 1, [[S.hiv, 'HIV ·', 110], [S.tuberculose, 'TUBERCULOSE ·', 210], [S.hanseniase, 'HANSENÍASE', 470]], 'MINISTÉRIO COMPRA → ESTADOS', S.ministerio);
+  linha(S.alto - 0.3, 690, 'ESPECIALIZADO', CY, -1, [[S.alto, 'alto custo', 110]], 'MINISTÉRIO + ESTADOS', S.divididos);
+  g.restore();
+}
+
+// 8. LC 141/2012: pisos de aplicação em saúde
+function cena8(t) {
+  const a = vis(t, S.mais, S.todo);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('E TEM MAIS!', t, S.mais + 0.1, 540, 280, 70, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 18 });
+  if (t >= S.lc - 0.4) {
+    const u = back(k(t, S.lc - 0.4, 0.4));
+    g.save(); g.translate(540, 440); g.scale(u, u);
+    box(-430, -85, 860, 170, A, { lit: 0.8 });
+    text('LEI COMPLEMENTAR', 0, -16, 44, { font: SILK, color: A, bold: true, align: 'center', glow: 10 });
+    text('141/2012', 0, 58, 80, { font: VT, color: A, align: 'center', glow: 12 });
+    g.restore();
+  }
+  if (t >= S.p15 - 0.8) {
+    box(70, 580, 940, 500, G, { lit: 0.35, alpha: cl((t - S.p15 + 0.8) / 0.3) });
+    text('MÍNIMO DOS IMPOSTOS EM SAÚDE', 540, 640, 30, { font: SILK, color: rgba(WH, 0.85), bold: true, align: 'center' });
+  }
+  // barras verticais: 15% e 12%
+  const col = (at, x, pct, nome, cor) => {
+    if (t < at) return;
+    const u = eo(k(t, at, 0.7)), h = pct * 16 * u;
+    g.save(); g.shadowColor = cor; g.shadowBlur = 18; g.fillStyle = cor; g.fillRect(x - 90, 980 - h, 180, h); g.restore();
+    text(Math.round(pct * u) + '%', x, 960 - h, 84, { font: VT, color: cor, align: 'center', glow: 12 });
+    text(nome, x, 1040, 38, { font: SILK, color: cor, bold: true, align: 'center' });
+  };
+  col(S.p15 - 0.2, 330, 15, 'MUNICÍPIO', CY);
+  col(S.p12 - 0.2, 750, 12, 'ESTADO', A);
+  g.restore();
+}
+
+// 9. fiscalização e transparência
+function cena9(t) {
+  const a = vis(t, S.todo, S.consulte - 0.05);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('QUEM FISCALIZA?', t, S.todo + 0.1, 540, 280, 62, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 20 });
+  [[S.plano - 0.2, 'PLANO DE SAÚDE', 'o gasto precisa estar previsto', G], [S.conselho - 0.2, 'CONSELHO MUNICIPAL', 'de Saúde · com a população', CY], [S.tribunal - 0.2, 'TRIBUNAL DE CONTAS', 'confere as contas', A]].forEach(([at, nome, sub, cor], i) => {
+    g.save(); if (cartao(at, t, 70, 350 + i * 190, 940, 160, cor, i % 2 ? 1 : -1)) {
+      text('✓', 140, 455 + i * 190, 70, { font: SILK, color: cor, bold: true, align: 'center', glow: 12 });
+      text(nome, 220, 425 + i * 190, 46, { font: SILK, color: cor, bold: true, glow: 8 });
+      text(sub, 220, 478 + i * 190, 36, { color: WH });
+    }
+    g.restore();
+  });
+  stamp('FALTOU REMÉDIO?', t, S.faltou - 0.2, 540, 1000, R, { rot: -5, size: 50 });
+  stamp('COBRE TRANSPARÊNCIA', t, S.cobrar, 540, 1170, G, { rot: 4, size: 46 });
+  g.restore();
+}
+
+function cenaFim(t) {
+  const a = cl((t - S.consulte + 0.05) / 0.3);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  box(70, 560, 940, 560, G, { lit: 0.6 + 0.3 * Math.sin(t * 4) });
+  text('C:\\> encerrar.exe', 110, 630, 36, { color: rgba(G, 0.7) });
+  ['CONSULTE UM', 'PROFISSIONAL', 'DE SAÚDE PARA', 'ORIENTAÇÕES.'].forEach((l, i) =>
+    typed(l, t, S.consulte + i * 0.45, 540, 770 + i * 95, 66, { font: SILK, color: i === 1 ? A : G, bold: true, align: 'center', glow: 16, cps: 30 }));
+  const ra = cl((t - S.consulte - 1.4) / 0.4);
+  text('Ref.: Leis 8.080 e 8.142/1990 · LC 141/2012 · Portaria de Consolidação GM/MS 6/2017', 540, 1300, 24, { color: rgba(WH, 0.65), align: 'center', alpha: ra });
+  text('Portarias GM/MS 6.942/2025 e 9.887/2025 · Ministério da Saúde', 540, 1336, 24, { color: rgba(WH, 0.65), align: 'center', alpha: ra });
+  g.restore();
+}
+
+// glitch rápido na troca de cena
+function glitch(t) {
+  const c = CENAS.find(s => s > 0 && t >= s && t < s + 0.22);
+  if (c === undefined) return;
+  const u = 1 - (t - c) / 0.22;
+  for (let i = 0; i < 9; i++) {
+    const y = Math.floor(rnd(i + Math.floor(t * 30)) * H), h = 20 + rnd(i + 7) * 90;
+    const dx = (rnd(i + 3 + Math.floor(t * 60)) - 0.5) * 120 * u;
+    g.drawImage(cv, 0, y, W, h, dx, y, W, h);
+  }
+  g.fillStyle = rgba(R, 0.12 * u); g.fillRect(0, 0, W, H);
+  g.fillStyle = rgba(CY, 0.08 * u); g.fillRect(8 * u, 0, W, H);
+}
+
+window.draw = function (t) {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.shadowBlur = 0;
+  fundo(t);
+  cena1(t); cena2(t); cena3(t); cena4(t); cena5(t); cena6(t); cena7(t); cena8(t); cena9(t); cenaFim(t);
+  legenda(t);
+  barra(t);
+  glitch(t);
+  crt();
+};
+window.render = window.draw;
+
+const faces = [
+  ['Silk', 'fonts/silk400.woff2', '400'], ['Silk', 'fonts/silk400ext.woff2', '400', 'U+0100-024F'],
+  ['Silk', 'fonts/silk700.woff2', '700'], ['Silk', 'fonts/silk700ext.woff2', '700', 'U+0100-024F'],
+  ['VT', 'fonts/vt.woff2', '400'], ['VT', 'fonts/vtext.woff2', '400', 'U+0100-024F'],
+];
+Promise.all(faces.map(([f, u, w, r]) => new FontFace(f, `url(${u})`, r ? { weight: w, unicodeRange: r } : { weight: w }).load().then(ff => document.fonts.add(ff))))
+  .then(() => { draw(0); window.ready = true; });
+</script>
+</body>
+</html>

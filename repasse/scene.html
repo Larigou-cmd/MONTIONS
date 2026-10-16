@@ -12,7 +12,7 @@
 // Vídeo "REPASSE.EXE": tudo é desenhado por draw(t), t em segundos da narração (narracao.mp3).
 // Os tempos abaixo vêm da transcrição palavra a palavra (words.js).
 const W = 1080, H = 1920;
-const NARR = 113.11;            // duração da narração
+const NARR = 143.02;            // duração da narração
 window.END = NARR + 2.2;       // segura a tela final um pouco depois da última palavra
 const cv = document.getElementById('c'), g = cv.getContext('2d');
 const G = '#39ff6a', A = '#ffc23d', R = '#ff4d6d', CY = '#3de0ff', BG = '#020c06', WH = '#eafff0';
@@ -116,7 +116,7 @@ function barra(t) {
 }
 
 // ---------- legendas palavra por palavra ----------
-const KEYS = ["dinheiro", "tripartite", "união", "estado", "município", "8080", "8142", "1990", "fundo", "nacional", "municipal", "automática", "mês", "convênio", "básico", "2026", "r$ 820", "r$ 905", "idh", "r$ 301", "aumentar", "cib", "rename", "seringas", "tiras", "lancetas", "insulina", "prefeitura", "hiv", "tuberculose", "hanseníase", "estratégico", "especializado", "custo", "141", "15%", "12%", "impostos", "plano", "conselho", "tribunal", "faltou", "transparência", "profissional", "posto", "remédios", "lugares"];
+const KEYS = ["conta", "fictícia", "50 mil", "r$ 410 mil", "r$ 150500", "r$ 711 mil", "r$ 59 mil", "dinheiro", "tripartite", "união", "estado", "município", "8080", "8142", "1990", "fundo", "nacional", "municipal", "automática", "mês", "convênio", "básico", "2026", "r$ 820", "r$ 905", "idh", "r$ 301", "aumentar", "cib", "rename", "seringas", "tiras", "lancetas", "insulina", "prefeitura", "hiv", "tuberculose", "hanseníase", "estratégico", "especializado", "custo", "141", "15%", "12%", "impostos", "plano", "conselho", "tribunal", "faltou", "transparência", "profissional", "posto", "remédios", "lugares"];
 const clean = w => w.toLowerCase().replace(/[.,!?:;]/g, '');
 const GRUPOS = (() => {
   const out = []; let cur = [];
@@ -174,6 +174,7 @@ const S = {
   funciona: T('funciona') - 0.1, fns: T('nacional') - 0.3, transfere: T('transfere'), fms: T('municipal') - 0.3, automatica: T('automática'), mes: T('mês'), convenio: T('convênio'),
   basica: T('básica') - 1.2, componente: T('componente'), ano2026: T('2026'), repassa: T('repassa'), v820: T('r$ 820'), v905: T('r$ 905'), idh: T('idh'),
   contra: T('entram') - 1.4, entram: T('entram'), v301: T('r$ 301'), aumentar: T('aumentar'), cib: T('cib'),
+  conta: T('vamos') - 0.15, uniao2: T('união', 3), ficticia: T('fictícia'), hab: T('50 mil'), r410: T('r$ 410 mil'), entra: T('entra'), r150a: T('r$ 150500'), r150b: T('r$ 150500', 2), total: T('total'), r711: T('r$ 711 mil'), r59: T('r$ 59 mil'),
   compra: T('dinheiro', 3) - 0.5, medicamentos: T('medicamentos'), rename: T('rename'), seringas: T('seringas'), tiras: T('tiras'), lancetas: T('lancetas'), insulina: T('insulina'),
   nem: T('nem') - 0.35, hiv: T('hiv'), tuberculose: T('tuberculose'), hanseniase: T('hanseníase'), estrategico: T('estratégico'), ministerio: T('ministério', 1),
   alto: T('alto'), divididos: T('divididos'),
@@ -181,7 +182,7 @@ const S = {
   todo: T('todo', 2) - 0.1, plano: T('plano'), conselho: T('conselho'), tribunal: T('tribunal'), faltou: T('faltou'), cobrar: T('cobrar'),
   consulte: T('consulte'),
 };
-const CENAS = [0, S.base, S.funciona, S.basica, S.contra, S.compra, S.nem, S.mais, S.todo, S.consulte - 0.05];
+const CENAS = [0, S.base, S.funciona, S.basica, S.contra, S.conta, S.compra, S.nem, S.mais, S.todo, S.consulte - 0.05];
 const vis = (t, a, b, fi = 0.25, fo = 0.25) => Math.min(cl((t - a) / fi), cl((b - t) / fo));
 
 function cruz(x, y, s, c = G) { g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = c; g.shadowBlur = 24; px(-24, -72, 48, 144, c); px(-72, -24, 144, 48, c); g.restore(); }
@@ -338,7 +339,7 @@ function barraValor(t, at, y, nome, valor, frac, cor) {
   g.save(); g.shadowColor = cor; g.shadowBlur = 16; g.fillStyle = cor; g.fillRect(110, y + 26, 860 * frac * u, 34); g.restore();
 }
 function cena5(t) {
-  const a = vis(t, S.contra, S.compra);
+  const a = vis(t, S.contra, S.conta);
   if (a <= 0) return;
   g.save(); g.globalAlpha = a;
   typed('E A CONTRAPARTIDA?', t, S.contra + 0.1, 540, 280, 56, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 22 });
@@ -353,6 +354,60 @@ function cena5(t) {
     typed('se for combinado na CIB', t, S.cib - 0.4, 540, 1180, 38, { color: WH, align: 'center', cps: 30 });
   }
   g.restore();
+  g.restore();
+}
+
+// 5b. exemplo: cidade fictícia de 50 mil habitantes
+function cidade(x, y, cor) {
+  const pr = [[0, 90], [70, 150], [150, 110], [230, 190], [320, 120], [400, 160], [480, 80]];
+  g.save(); g.shadowColor = cor; g.shadowBlur = 12;
+  pr.forEach(([dx, h], i) => {
+    px(x + dx, y - h, 66, h, rgba(cor, 0.55));
+    for (let j = 0; j < Math.floor(h / 36); j++) px(x + dx + 12, y - h + 14 + j * 36, 12, 12, (i + j) % 3 ? WH : A), px(x + dx + 40, y - h + 14 + j * 36, 12, 12, (i + j) % 2 ? WH : rgba(WH, 0.3));
+  });
+  g.restore();
+}
+function cenaConta(t) {
+  const a = vis(t, S.conta, S.compra);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('VAMOS FAZER A CONTA?', t, S.conta + 0.1, 540, 270, 52, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 24 });
+  g.save(); if (cartao(S.ficticia - 0.5, t, 70, 320, 940, 230, CY)) {
+    cidade(100, 530, CY);
+    text('CIDADE FICTÍCIA', 800, 400, 32, { font: SILK, color: CY, bold: true, glow: 10, align: 'center' });
+    if (t >= S.hab - 0.1) text('50.000', 800, 490, 96, { font: VT, color: WH, align: 'center', glow: 12, alpha: cl((t - S.hab + 0.1) / 0.2) });
+    if (t >= S.hab + 0.4) text('habitantes', 800, 530, 34, { color: WH, align: 'center' });
+  }
+  g.restore();
+  if (t >= S.uniao2 - 0.3) {
+    const u = eo(k(t, S.uniao2 - 0.3, 0.35));
+    g.save(); g.translate(0, (1 - u) * 300); g.globalAlpha *= u;
+    box(70, 590, 940, 600, G, { lit: 0.35, fill: 'rgba(2,20,10,0.94)' });
+    text('C:\\> calcular.exe', 110, 640, 32, { color: rgba(G, 0.7) });
+    g.restore();
+  }
+  const linha = (at, atR, y, nome, conta, res, cor) => {
+    if (t < at) return;
+    const v = cl((t - at) / 0.25);
+    text(nome, 110, y, 40, { font: SILK, color: cor, bold: true, alpha: v });
+    typed(conta, t, at + 0.15, 110, y + 52, 44, { font: VT, color: WH, cps: 30 });
+    if (t >= atR) text(res, 970, y + 52, 64, { font: VT, color: cor, align: 'right', glow: 12, alpha: cl((t - atR) / 0.2) });
+  };
+  linha(S.uniao2 - 0.1, S.r410 - 0.1, 710, 'UNIÃO', '50.000 × R$ 8,20 =', 'R$ 410.000', G);
+  linha(S.entra - 0.6, S.r150a - 0.1, 840, 'ESTADO', '50.000 × R$ 3,01 =', 'R$ 150.500', A);
+  linha(S.r150b - 1.4, S.r150b - 0.1, 970, 'MUNICÍPIO', '50.000 × R$ 3,01 =', 'R$ 150.500', CY);
+  if (t >= S.total - 0.1) {
+    const v = eo(k(t, S.total - 0.1, 0.3));
+    g.fillStyle = WH; g.fillRect(110, 1060, 860 * v, 6);
+    text('TOTAL / ANO', 110, 1140, 44, { font: SILK, color: WH, bold: true, alpha: v });
+    if (t >= S.r711 - 0.1) {
+      const b = back(k(t, S.r711 - 0.1, 0.35));
+      g.save(); g.translate(800, 1124); g.scale(b, b);
+      text('R$ 711.000', 0, 16, 84, { font: VT, color: A, align: 'center', glow: 18 });
+      g.restore();
+    }
+  }
+  stamp('≈ R$ 59 MIL POR MÊS', t, S.r59, 540, 1270, R, { rot: -4, size: 76, font: VT });
   g.restore();
 }
 
@@ -491,7 +546,7 @@ function glitch(t) {
 window.draw = function (t) {
   g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.shadowBlur = 0;
   fundo(t);
-  cena1(t); cena2(t); cena3(t); cena4(t); cena5(t); cena6(t); cena7(t); cena8(t); cena9(t); cenaFim(t);
+  cena1(t); cena2(t); cena3(t); cena4(t); cena5(t); cenaConta(t); cena6(t); cena7(t); cena8(t); cena9(t); cenaFim(t);
   legenda(t);
   barra(t);
   glitch(t);

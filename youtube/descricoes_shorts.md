@@ -424,7 +424,9 @@ Na parte 1 eu prometi, e aqui está: por que a sinvastatina é tomada à noite?
 ✅ Atorvastatina e rosuvastatina têm meia-vida longa: qualquer horário, sempre o mesmo
 ✅ Esqueceu uma dose? Nunca tome duas juntas
 
-Referências: Whalen K. et al. Farmacologia Ilustrada (Artmed), capítulo de fármacos para dislipidemias (mecanismo das estatinas); bula da sinvastatina (dose única à noite); GPnotebook – horário das estatinas.
+👩‍⚕️ Me siga para mais dicas de farmacologia e curiosidades sobre a área!
+
+Referências: Whalen K. et al. Farmacologia Ilustrada (Artmed); bula da sinvastatina (dose única à noite); GPnotebook – horário das estatinas.
 Conteúdo educativo. Os gráficos são ilustrativos. Não mude horário nem dose por conta própria. Consulte um profissional de saúde para orientações. Narração gerada com voz sintética.
 
 #sinvastatina #colesterol #estatina #farmacologia #farmaceutica #saude #shorts
@@ -432,7 +434,7 @@ Conteúdo educativo. Os gráficos são ilustrativos. Não mude horário nem dose
 ### TikTok
 
 **Legenda:**
-Por que a sinvastatina é tomada à noite? 🌙💊 Tem a ver com o relógio do seu fígado e com a meia-vida do remédio ⏰ E a atorvastatina e a rosuvastatina? Te conto no vídeo 👇 (Parte 2)
+Por que a sinvastatina é tomada à noite? 🌙💊 Tem a ver com o relógio do seu fígado e com a meia-vida do remédio ⏰ E a atorvastatina e a rosuvastatina? Te conto no vídeo 👇 (Parte 2) Me siga para mais dicas de farmacologia 💊
 Conteúdo educativo. Não mude horário nem dose por conta própria. Consulte um profissional de saúde para orientações.
 
 #sinvastatina #colesterol #estatina #farmaceutica #farmacologia #aprendanotiktok

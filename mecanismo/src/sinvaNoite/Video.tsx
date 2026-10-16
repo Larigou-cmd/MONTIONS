@@ -13,32 +13,34 @@ const NOITE = "#818cf8";
 const GORD = "#fbbf24"; // colesterol
 const FIG = "#c2410c"; // fígado
 const VERDE = "#4ade80", VERM = "#ef4444", LONGA = "#c084fc";
-export const DURATION = 2890; // 96,3 s (narração de 92 s + mensagem final)
+export const DURATION = 2930; // 97,7 s (narração de 93,9 s + mensagem final)
 
 const T = {
   parte: 7, sinva: 77, noite: 118,
   figado: 182, dia: 233, fabrica: 276, ritmo: 340, relogio: 380, pico: 439, noite2: 499, dorme: 538, jejum: 566,
-  peca: 596, enzima: 661, hmg: 689, controla: 782, lenta: 822, velocidade: 862, livro: 968, exatamente: 1037, bloqueiam: 1111,
-  detalhe: 1163, meiaVida: 1234, sinva2: 1274, curta: 1325, entra: 1390, age: 1409, saindo: 1447,
-  manha: 1510, madrugada: 1544, sobrou: 1631, sangue: 1668, tomandoNoite: 1692, auge: 1745, produzindo: 1810, sincronizar: 1856,
-  outras: 1942, ator: 2002, rosu: 2035, longa: 2090, diaInteiro: 2158, qualquer: 2248, mesmo: 2322,
-  resumindo: 2344, sinva3: 2370, dura: 2430, madrugada3: 2515,
-  esquecer: 2550, nunca: 2590, mude: 2681,
-  final: 2790,
+  peca: 596, enzima: 661, hmg: 689, controla: 782, lenta: 822, velocidade: 862, exatamente: 945, bloqueiam: 1019,
+  detalhe: 1071, meiaVida: 1142, sinva2: 1182, curta: 1233, entra: 1298, age: 1317, saindo: 1355,
+  manha: 1418, madrugada: 1452, sobrou: 1539, sangue: 1576, tomandoNoite: 1600, auge: 1653, produzindo: 1718, sincronizar: 1764,
+  outras: 1850, ator: 1910, rosu: 1943, longa: 1998, diaInteiro: 2066, qualquer: 2156, mesmo: 2230,
+  resumindo: 2252, sinva3: 2278, dura: 2338, madrugada3: 2423,
+  esquecer: 2458, nunca: 2498, mude: 2589,
+  siga: 2684,
+  final: 2830,
 };
 const PARTES: [number, number][] = [
-  [0, 176], [170, 590], [584, 1157], [1151, 1503], [1497, 1936], [1930, 2338], [2332, 2546], [2540, 2786], [2780, DURATION],
+  [0, 176], [170, 590], [584, 1065], [1059, 1411], [1405, 1844], [1838, 2246], [2240, 2454], [2448, 2680], [2674, 2832], [2826, DURATION],
 ];
 const SFX: [number, string, number][] = [
   [7, "pop", 0.25], [118, "plim", 0.25],
   [170, "whoosh", 0.3], [233, "pop", 0.2], [340, "pop", 0.22], [439, "pop", 0.25], [499, "plim", 0.22], [566, "pop", 0.2],
-  [584, "whoosh", 0.3], [689, "pop", 0.25], [822, "pop", 0.22], [968, "plim", 0.22], [1111, "trava", 0.42],
-  [1151, "whoosh", 0.3], [1325, "pop", 0.25], [1390, "pop", 0.2], [1409, "pop", 0.2], [1447, "pop", 0.2],
-  [1497, "whoosh", 0.3], [1631, "trava", 0.38], [1745, "plim", 0.28], [1856, "pop", 0.22],
-  [1930, "whoosh", 0.3], [2002, "pop", 0.22], [2035, "pop", 0.22], [2090, "pop", 0.22], [2248, "plim", 0.22], [2322, "pop", 0.2],
-  [2332, "whoosh", 0.3], [2370, "pop", 0.25], [2430, "pop", 0.22], [2515, "pop", 0.22],
-  [2540, "whoosh", 0.3], [2590, "trava", 0.35], [2681, "pop", 0.25],
-  [2780, "whoosh", 0.3], [2790, "plim", 0.3],
+  [584, "whoosh", 0.3], [689, "pop", 0.25], [822, "pop", 0.22], [1019, "trava", 0.42],
+  [1059, "whoosh", 0.3], [1233, "pop", 0.25], [1298, "pop", 0.2], [1317, "pop", 0.2], [1355, "pop", 0.2],
+  [1405, "whoosh", 0.3], [1539, "trava", 0.38], [1653, "plim", 0.28], [1764, "pop", 0.22],
+  [1838, "whoosh", 0.3], [1910, "pop", 0.22], [1943, "pop", 0.22], [1998, "pop", 0.22], [2156, "plim", 0.22], [2230, "pop", 0.2],
+  [2240, "whoosh", 0.3], [2278, "pop", 0.25], [2338, "pop", 0.22], [2423, "pop", 0.22],
+  [2448, "whoosh", 0.3], [2498, "trava", 0.35], [2589, "pop", 0.25],
+  [2674, "whoosh", 0.3], [2684, "plim", 0.28], [2740, "pop", 0.22], [2770, "pop", 0.22],
+  [2826, "whoosh", 0.3], [2830, "plim", 0.3],
 ];
 const MENSAGEM_FINAL = ["Consulte um", "profissional de saúde", "para orientações."];
 
@@ -217,11 +219,11 @@ const S3: React.FC = () => {
       <Caixa f={f} y={672} t="Mevalonato" cor={C.ink} at={T.enzima} />
       <Caixa f={f} y={888} t="Colesterol" cor={GORD} at={T.enzima + 8} />
       <Title f={f} at={T.velocidade} y={1010} size={36} font={SANS} weight={600} color={C.dim} from={GORD}>ela define a velocidade da fábrica</Title>
-      <Card f={f} at={T.livro} x={110} y={1100} w={860} h={200} tilt={-0.6} border={rgba(NOITE, 0.7)} style={{ display: "flex", alignItems: "center", gap: 26, padding: "0 34px", boxShadow: `0 0 30px ${rgba(NOITE, 0.2)}` }}>
-        <span style={{ fontFamily: EMOJI, fontSize: 84 }}>📘</span>
+      <Card f={f} at={T.exatamente} x={110} y={1100} w={860} h={180} tilt={-0.6} border={rgba(COR, 0.7)} style={{ display: "flex", alignItems: "center", gap: 26, padding: "0 34px", boxShadow: `0 0 30px ${rgba(COR, 0.2)}` }}>
+        <span style={{ fontFamily: EMOJI, fontSize: 80 }}>🎯</span>
         <span style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <span style={{ fontFamily: SERIF, fontWeight: 600, fontSize: 46, color: NOITE }}>Farmacologia Ilustrada</span>
-          <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 30, color: f >= T.exatamente ? C.ink : C.dim }}>estatinas inibem a HMG-CoA redutase</span>
+          <span style={{ fontFamily: SERIF, fontWeight: 600, fontSize: 48, color: COR }}>O alvo das estatinas</span>
+          <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 30, color: C.ink }}>elas inibem a HMG-CoA redutase</span>
         </span>
       </Card>
       <Pill x={540} y={1400} text="💊 estatina bloqueia ✕" color={VERM} size={36} k={P(f, T.bloqueiam, T.bloqueiam + 12)} />
@@ -343,11 +345,24 @@ const S8: React.FC = () => {
   );
 };
 
-// 9. mensagem final
+// 9. chamada para seguir
 const S9: React.FC = () => {
   const f = useCurrentFrame();
   return (
-    <Part from={R(8)[0]} to={R(8)[1]} inY={100} outDur={1}>
+    <Part from={R(8)[0]} to={R(8)[1]} inY={100}>
+      <Emoji f={f} at={T.siga - 4} x={540} y={520} size={200}>👩‍⚕️</Emoji>
+      <Title f={f} at={T.siga} y={700} size={92} weight={600} color={C.ink} from={COR}>Me siga</Title>
+      <Item f={f} at={T.siga + 56} y={860} icone="💊" texto="dicas de farmacologia" cor={COR} />
+      <Item f={f} at={T.siga + 86} y={1040} icone="🔬" texto="curiosidades sobre a área" cor={NOITE} />
+    </Part>
+  );
+};
+
+// 10. mensagem final
+const S10: React.FC = () => {
+  const f = useCurrentFrame();
+  return (
+    <Part from={R(9)[0]} to={R(9)[1]} inY={100} outDur={1}>
       {MENSAGEM_FINAL.map((l, i) => {
         const at = T.final + 4 + i * 8;
         const k = it(f, at, at + 14, 0, 1, OUT);
@@ -361,8 +376,8 @@ export const VideoSinvaNoite: React.FC = () => {
   const f = useCurrentFrame();
   return (
     <AbsoluteFill>
-      <Background color={f >= T.outras - 10 && f < T.resumindo - 10 ? LONGA : f >= T.esquecer - 10 && f < T.final - 10 ? VERM : NOITE} pulses={[T.noite, T.pico, T.bloqueiam, T.sobrou, T.auge, T.nunca, T.final]} />
-      <S1 /><S2 /><S3 /><S4 /><S5 /><S6 /><S7 /><S8 /><S9 />
+      <Background color={f >= T.outras - 10 && f < T.resumindo - 10 ? LONGA : f >= T.esquecer - 10 && f < T.siga - 10 ? VERM : NOITE} pulses={[T.noite, T.pico, T.bloqueiam, T.sobrou, T.auge, T.nunca, T.final]} />
+      <S1 /><S2 /><S3 /><S4 /><S5 /><S6 /><S7 /><S8 /><S9 /><S10 />
       <Grain />
       <Audio src={staticFile("sinvaNoite/narracao.mp3")} />
       <Audio src={staticFile("sinvaNoite/musica.wav")} volume={(fr) => 0.11 * (1 - P(fr, DURATION - 60, DURATION))} />

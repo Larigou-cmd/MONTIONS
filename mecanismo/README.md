@@ -60,3 +60,10 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 - Narração: `public/amoxi/narracao.mp3`; tempos palavra a palavra: `audio/amoxi_palavras.json`
 - Textos, tempos e efeitos: `src/amoxi/config.ts`; desenhos (molécula, bactéria, PBP, betalactamase, escudo): `src/amoxi/shapes.tsx`; cenas: `src/amoxi/Video.tsx`
 - Renderizar: `npx remotion render Amoxi out/amoxicilina_clavulanato.mp4 --crf=22`
+
+## Vídeo 9: Forxiga (dapagliflozina) (modelo aula elegante)
+
+- Vídeo: `out/forxiga.mp4` (1080×1920, 139 s, voz Juliana, música própria `public/forxiga/musica.wav` e efeitos, sem legendas)
+- Narração: `public/forxiga/narracao.mp3`; tempos palavra a palavra: `audio/forxiga_palavras.json`
+- Textos, tempos e efeitos: `src/forxiga/config.ts`; cenas (rim com SGLT2, Farmácia Popular, CEAF com CIDs, processo): `src/forxiga/Video.tsx`
+- Renderizar: `npx remotion render Forxiga out/forxiga.mp4 --crf=22`

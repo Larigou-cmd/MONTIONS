@@ -19,6 +19,8 @@ import { VideoSinvaNoite, DURATION as DURATION_SINVA_NOITE } from "./sinvaNoite/
 import { VideoTosse, DURATION as DURATION_TOSSE } from "./tosse/Video";
 import { VideoTosse2, DURATION as DURATION_TOSSE2 } from "./tosse2/Video";
 import { CapaTosse2 } from "./tosse2/Capa";
+import { VideoJejum, DURATION as DURATION_JEJUM } from "./jejum/Video";
+import { CapaJejum } from "./jejum/Capa";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -35,6 +37,8 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="Tosse" component={VideoTosse} durationInFrames={DURATION_TOSSE} fps={FPS} width={1080} height={1920} />
     <Composition id="Tosse2" component={VideoTosse2} durationInFrames={DURATION_TOSSE2} fps={FPS} width={1080} height={1920} />
     <Composition id="Tosse2Capa" component={CapaTosse2} durationInFrames={1} fps={FPS} width={1080} height={1920} />
+    <Composition id="Jejum" component={VideoJejum} durationInFrames={DURATION_JEJUM} fps={FPS} width={1080} height={1920} />
+    <Composition id="JejumCapa" component={CapaJejum} durationInFrames={1} fps={FPS} width={1080} height={1920} />
     <Composition id="IBP" component={VideoIBP} durationInFrames={DURATION_IBP} fps={FPS} width={1080} height={1920} />
   </>
 );

@@ -1538,10 +1538,6 @@ export const VideoTosse2: React.FC = () => {
       <S9 />
       <Grain />
       <Audio src={staticFile("tosse2/narracao.mp3")} />
-      <Audio
-        src={staticFile("tosse2/musica.wav")}
-        volume={(fr) => 0.1 * (1 - P(fr, DURATION - 60, DURATION))}
-      />
       {SFX.map(([fr, name, vol], i) => (
         <Sequence key={i} from={fr} durationInFrames={60}>
           <Audio src={staticFile(`sfx/${name}.wav`)} volume={vol} />

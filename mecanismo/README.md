@@ -88,3 +88,10 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 - Narração: `public/tosse/narracao.mp3`; tempos palavra a palavra: `audio/tosse_palavras.json`
 - Cenas, tempos e efeitos: `src/tosse/Video.tsx` (tesoura ECA com dois trabalhos: angiotensina II e bradicinina)
 - Renderizar: `npx remotion render Tosse out/tosse_ieca.mp4 --crf=22`
+
+## Vídeo 13: Tosse que não passa? Pode ser o seu remédio (versão 2 do vídeo da tosse, voz mais calma)
+
+- Vídeo: `out/tosse_que_nao_passa.mp4` (1080×1920, 150 s, voz Juliana com tags [warmly]/[slowly] e desacelerada 10% com `atempo=0.9`)
+- Narração: `public/tosse2/narracao.mp3` (original em `narracao_original.mp3`); tempos: `audio/tosse2_palavras_original.json` × 30 ÷ 0,9
+- Cenas: `src/tosse2/Video.tsx` (selos "mecanismo.exe ▓▓░░" e "⚠️ ERRO: efeito grave detectado")
+- Renderizar: `npx remotion render Tosse2 out/tosse_que_nao_passa.mp4 --crf=22`

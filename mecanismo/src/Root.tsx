@@ -17,6 +17,7 @@ import { VideoForxiga, DURATION as DURATION_FORXIGA } from "./forxiga/Video";
 import { VideoSinva, DURATION as DURATION_SINVA } from "./sinva/Video";
 import { VideoSinvaNoite, DURATION as DURATION_SINVA_NOITE } from "./sinvaNoite/Video";
 import { VideoTosse, DURATION as DURATION_TOSSE } from "./tosse/Video";
+import { VideoTosse2, DURATION as DURATION_TOSSE2 } from "./tosse2/Video";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -31,6 +32,7 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="Sinvastatina" component={VideoSinva} durationInFrames={DURATION_SINVA} fps={FPS} width={1080} height={1920} />
     <Composition id="SinvaNoite" component={VideoSinvaNoite} durationInFrames={DURATION_SINVA_NOITE} fps={FPS} width={1080} height={1920} />
     <Composition id="Tosse" component={VideoTosse} durationInFrames={DURATION_TOSSE} fps={FPS} width={1080} height={1920} />
+    <Composition id="Tosse2" component={VideoTosse2} durationInFrames={DURATION_TOSSE2} fps={FPS} width={1080} height={1920} />
     <Composition id="IBP" component={VideoIBP} durationInFrames={DURATION_IBP} fps={FPS} width={1080} height={1920} />
   </>
 );

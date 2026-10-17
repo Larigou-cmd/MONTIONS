@@ -95,3 +95,10 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 - Narração: `public/tosse2/narracao.mp3` (original em `narracao_original.mp3`); tempos: `audio/tosse2_palavras_original.json` × 30 ÷ 0,9
 - Cenas: `src/tosse2/Video.tsx` (selos "mecanismo.exe ▓▓░░" e "⚠️ ERRO: efeito grave detectado")
 - Renderizar: `npx remotion render Tosse2 out/tosse_que_nao_passa.mp4 --crf=22`
+
+## Vídeo 14: Por que alguns remédios devem ser tomados em jejum? (modelo aula elegante, roteiro da Larissa)
+
+- Vídeo: `out/jejum.mp4` (1080×1920, 179,6 s, narração gravada pela Larissa, trilha calma `scripts/musica_calma.py`)
+- Narração: `public/jejum/narracao.mp3` (original `narracao_usuaria.mp3` com pausas longas encurtadas para 0,32 s e `atempo=1.0804`, para caber em 3 min); tempos: `audio/jejum_palavras_usuaria.json` (alinhados por DTW com `narracao_gerada_claude.mp3`)
+- Cenas: `src/jejum/Video.tsx`; capa: `src/jejum/Capa.tsx` (composição `JejumCapa`) → `youtube/capas/capa_jejum.png`
+- Renderizar: `npx remotion render Jejum out/jejum.mp4 --crf=22`

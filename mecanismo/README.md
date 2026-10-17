@@ -81,3 +81,10 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 - Narração: `public/sinvaNoite/narracao.mp3` (sem a menção ao livro, cortada de 31,24 s a 34,30 s, + `narracao_siga.mp3` no fim; original em `narracao_v1_com_livro.mp3`); tempos palavra a palavra da versão original: `audio/sinvaNoite_palavras.json` (no vídeo, tudo depois de 34,3 s fica 92 quadros antes)
 - Cenas, tempos e efeitos: `src/sinvaNoite/Video.tsx` (gráficos de 24 h esquemáticos: produção de colesterol × remédio no sangue)
 - Renderizar: `npx remotion render SinvaNoite out/sinvastatina_noite.mp4 --crf=22`
+
+## Vídeo 12: Seu remédio está te dando tosse? (IECA e tosse seca, modelo aula elegante, roteiro da Larissa)
+
+- Vídeo: `out/tosse_ieca.mp4` (1080×1920, 132 s, voz Juliana, faixa fixa "REMÉDIO DE PRESSÃO × TOSSE SECA", música própria `public/tosse/musica.wav` e efeitos, sem legendas)
+- Narração: `public/tosse/narracao.mp3`; tempos palavra a palavra: `audio/tosse_palavras.json`
+- Cenas, tempos e efeitos: `src/tosse/Video.tsx` (tesoura ECA com dois trabalhos: angiotensina II e bradicinina)
+- Renderizar: `npx remotion render Tosse out/tosse_ieca.mp4 --crf=22`

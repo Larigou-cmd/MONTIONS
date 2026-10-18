@@ -1,0 +1,20 @@
+{
+  "name": "video-motion",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render GLP1 out/glp1-mecanismo-vertical.mp4",
+    "render:intro": "remotion render Intro out/intro.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.405",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.405"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}

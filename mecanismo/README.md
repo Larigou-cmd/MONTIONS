@@ -102,3 +102,10 @@ Fotos de conferência: `node scripts/stills.mjs 120 520 880`
 - Narração: `public/jejum/narracao.mp3` (original `narracao_usuaria.mp3` com pausas longas encurtadas para 0,32 s e `atempo=1.0804`, para caber em 3 min); tempos: `audio/jejum_palavras_usuaria.json` (alinhados por DTW com `narracao_gerada_claude.mp3`)
 - Cenas: `src/jejum/Video.tsx`; capa: `src/jejum/Capa.tsx` (composição `JejumCapa`) → `youtube/capas/capa_jejum.png`
 - Renderizar: `npx remotion render Jejum out/jejum.mp4 --crf=22`
+
+## Vídeo 15: Começou a tomar metformina e veio a diarreia? (modelo aula elegante, série "Começou a tomar X e sentiu Y?")
+
+- Vídeo: `out/metformina_diarreia.mp4` (1080×1920, 92,3 s, narração da Juliana no ElevenLabs, trilha calma `scripts/musica_calma.py`)
+- Narração: `public/metformina/narracao.mp3`; tempos: `audio/metformina_palavras.json` (transcrição Scribe)
+- Cenas: `src/metformina/Video.tsx`; capa: `src/metformina/Capa.tsx` (composição `MetforminaCapa`, 20% de baixo livres por causa do contador do TikTok) → `youtube/capas/capa_metformina.png`
+- Renderizar: `npx remotion render Metformina out/metformina_diarreia.mp4 --crf=22`

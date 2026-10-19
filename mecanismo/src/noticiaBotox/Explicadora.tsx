@@ -879,3 +879,101 @@ export const NoticiaBotoxExplicadora: React.FC = () => {
     </AbsoluteFill>
   );
 };
+
+// Capa (1080×1920) no mesmo estilo. Os 20% de baixo ficam livres por causa do contador do TikTok.
+export const CapaNoticiaBotoxExplicadora: React.FC = () => (
+  <AbsoluteFill>
+    <Fundo f={0} />
+    <div
+      style={{
+        position: "absolute",
+        top: 120,
+        width: 1080,
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <span
+        style={{
+          fontFamily: PIX,
+          fontSize: 28,
+          color: K.branco,
+          background: K.vermelho,
+          border: `5px solid ${K.tinta}`,
+          boxShadow: `8px 8px 0 ${K.tinta}`,
+          padding: "16px 26px",
+          display: "flex",
+          alignItems: "center",
+          gap: 16,
+        }}
+      >
+        <span style={{ width: 20, height: 20, background: K.branco }} />
+        <span>
+          <Pixelado texto="NOTÍCIAS DA FARMÁCIA #1" size={28} />
+        </span>
+      </span>
+    </div>
+    <Titulo
+      f={100}
+      at={0}
+      top={290}
+      size={92}
+      linhas={[[{ t: "BOTOX" }], [{ t: "FALSIFICADO", cor: K.vermelho }]]}
+    />
+    <Janela f={100} at={0} x={50} y={600} w={640} h={560} titulo="anvisa · alerta">
+      <FrascoPix x={220} y={50} px={20} falso />
+      <Selo f={100} at={0} x={315} y={240} texto="LOTE 025155" size={32} />
+      <div
+        style={{
+          position: "absolute",
+          top: 330,
+          width: 630,
+          textAlign: "center",
+          fontFamily: SANS,
+          fontWeight: 800,
+          fontSize: 46,
+          lineHeight: 1.15,
+          color: K.tinta,
+        }}
+      >
+        Anvisa manda
+        <br />
+        <span style={{ background: K.amarelo, padding: "0 12px" }}>apreender</span>
+      </div>
+    </Janela>
+    <div
+      style={{
+        position: "absolute",
+        left: 715,
+        top: 680,
+        transform: "scale(0.56)",
+        transformOrigin: "0 0",
+        filter: "drop-shadow(8px 8px 0 rgba(22,22,26,0.25))",
+      }}
+    >
+      <Reporter f={1} boca={[2, 2]} />
+    </div>
+    <div
+      style={{
+        position: "absolute",
+        top: 1250,
+        width: 1080,
+        textAlign: "center",
+        fontFamily: VT,
+        fontSize: 64,
+        color: K.tinta,
+      }}
+    >
+      <span
+        style={{
+          background: K.branco,
+          border: `4px solid ${K.tinta}`,
+          boxShadow: `6px 6px 0 ${K.tinta}`,
+          padding: "6px 24px",
+        }}
+      >
+        como identificar e se proteger
+      </span>
+    </div>
+  </AbsoluteFill>
+);

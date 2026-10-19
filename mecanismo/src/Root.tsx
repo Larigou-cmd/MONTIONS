@@ -41,7 +41,10 @@ import {
   DURATION as DURATION_NOTICIA_BOTOX,
 } from "./noticiaBotox/Video";
 import { CapaNoticiaBotox } from "./noticiaBotox/Capa";
-import { NoticiaBotoxExplicadora } from "./noticiaBotox/Explicadora";
+import {
+  NoticiaBotoxExplicadora,
+  CapaNoticiaBotoxExplicadora,
+} from "./noticiaBotox/Explicadora";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -193,6 +196,14 @@ export const RemotionRoot: React.FC = () => (
       id="NoticiaBotoxExplicadora"
       component={NoticiaBotoxExplicadora}
       durationInFrames={DURATION_NOTICIA_BOTOX}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="NoticiaBotoxExplicadoraCapa"
+      component={CapaNoticiaBotoxExplicadora}
+      durationInFrames={1}
       fps={FPS}
       width={1080}
       height={1920}

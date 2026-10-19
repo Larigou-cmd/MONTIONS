@@ -22,6 +22,8 @@ import {
   rgba,
 } from "../lib";
 import { Card, EMOJI, Emoji, Title } from "../aas/ui";
+import { Personagem, PW } from "../sema2/Personagem";
+import boca from "./boca.json";
 
 // Quadro "Notícias da Farmácia" #1: Anvisa manda apreender lote falsificado de toxina botulínica (19/10/2026).
 // Narração gravada pela Larissa no ElevenLabs (Juliana, tom de repórter). Tempos: audio/noticiaBotox_palavras.json (quadro = segundos × 30).
@@ -413,36 +415,42 @@ const S1: React.FC = () => {
         size={32}
         k={P(f, T.anvisa, T.anvisa + 12)}
       />
+      {/* coluna da esquerda: a âncora fica à direita (VideoNoticiaBotox) */}
       <Tela>
         <g opacity={P(f, T.anvisa + 10, T.anvisa + 24)}>
-          <Frasco x={540} y={830} s={1.25} />
+          <Frasco x={320} y={820} s={1.15} />
         </g>
       </Tela>
       <Carimbo
         f={f}
         at={T.falsificado}
-        x={540}
-        y={840}
+        x={320}
+        y={830}
         texto="LOTE FALSIFICADO"
-        size={58}
+        size={42}
       />
-      <Title
-        f={f}
-        at={T.botulinica}
-        y={1080}
-        size={58}
-        weight={600}
-        color={C.ink}
-        from={COR}
+      <div
+        style={{
+          position: "absolute",
+          top: 1060,
+          left: 40,
+          width: 560,
+          textAlign: "center",
+          fontFamily: SERIF,
+          fontWeight: 600,
+          fontSize: 54,
+          color: bornColor(f, T.botulinica, C.ink, COR),
+          opacity: P(f, T.botulinica, T.botulinica + 12),
+        }}
       >
         toxina botulínica
-      </Title>
+      </div>
       <Pill
-        x={540}
-        y={1200}
+        x={320}
+        y={1180}
         text="💉 o famoso “botox”"
         color={COR}
-        size={38}
+        size={34}
         k={P(f, T.botox, T.botox + 12)}
       />
     </Part>
@@ -577,8 +585,24 @@ const S3: React.FC = () => {
   const f = useCurrentFrame();
   const linhas: [string, string, number, string, number, string, number][] = [
     ["📅", "validade", T.validade, "jun/2027", T.original, "jun/2028", T.v2028],
-    ["🧪", "frasco", T.frasco, "formato padrão", T.frasco + 8, "outro formato", T.frasco + 14],
-    ["▮▮▯▮", "código de barras", T.codigo, "lote 025155", T.codigo + 10, "de OUTRO lote", T.outroLote],
+    [
+      "🧪",
+      "frasco",
+      T.frasco,
+      "formato padrão",
+      T.frasco + 8,
+      "outro formato",
+      T.frasco + 14,
+    ],
+    [
+      "▮▮▯▮",
+      "código de barras",
+      T.codigo,
+      "lote 025155",
+      T.codigo + 10,
+      "de OUTRO lote",
+      T.outroLote,
+    ],
   ];
   return (
     <Part from={R(2)[0]} to={R(2)[1]} inY={100}>
@@ -980,6 +1004,41 @@ const S9: React.FC = () => {
   );
 };
 
+// a âncora do jornal: a farmacêutica do perfil, com a boca seguindo a narração (scripts/boca.py → boca.json).
+// Grande à direita na vinheta, pequena no canto de baixo durante a notícia e no centro no "me siga".
+const Ancora: React.FC<{ f: number }> = ({ f }) => {
+  type Pose = { x: number; y: number; s: number };
+  const grande: Pose = { x: 620, y: 600, s: 0.78 };
+  const canto: Pose = { x: 24, y: 1300, s: 0.5 };
+  const centro: Pose = { x: 540 - (PW * 0.62) / 2, y: 1040, s: 0.62 };
+  const vai = (a: Pose, b: Pose, k: number): Pose => ({
+    x: a.x + (b.x - a.x) * k,
+    y: a.y + (b.y - a.y) * k,
+    s: a.s + (b.s - a.s) * k,
+  });
+  const k1 = it(f, R(1)[0] - 8, R(1)[0] + 16, 0, 1, OUT);
+  const k2 = it(f, R(7)[0], R(7)[0] + 20, 0, 1, OUT);
+  const p = vai(vai(grande, canto, k1), centro, k2);
+  const entra = it(f, 8, 24, 0, 1, OUT);
+  const sai = 1 - P(f, R(8)[0], R(8)[0] + 10);
+  if (sai <= 0) return null;
+  return (
+    <div
+      style={{
+        position: "absolute",
+        left: p.x + (1 - entra) * 120,
+        top: p.y + Math.sin(f / 26) * 4,
+        transform: `scale(${p.s})`,
+        transformOrigin: "0 0",
+        opacity: Math.min(entra, sai),
+        filter: `drop-shadow(0 0 24px ${rgba(COR, 0.35)})`,
+      }}
+    >
+      <Personagem f={f} boca={boca as number[]} />
+    </div>
+  );
+};
+
 export const VideoNoticiaBotox: React.FC = () => {
   const f = useCurrentFrame();
   const cor =
@@ -995,6 +1054,7 @@ export const VideoNoticiaBotox: React.FC = () => {
         pulses={[T.falsificado, T.lote, T.ninguem, T.emergencia, T.final]}
       />
       <Faixa f={f} />
+      <Ancora f={f} />
       <S1 />
       <S2 />
       <S3 />

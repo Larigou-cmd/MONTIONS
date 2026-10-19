@@ -298,8 +298,7 @@ const noIntestino = (s: number): [number, number] => {
   if (i === 2) return [SX1 - r, yRow(1)];
   if (i === 4) return [SX0 + r, yRow(2)];
   const a = r / SR; // ângulo percorrido na curva
-  if (i === 1)
-    return [SX1 + Math.sin(a) * SR, yRow(0) + SR - Math.cos(a) * SR];
+  if (i === 1) return [SX1 + Math.sin(a) * SR, yRow(0) + SR - Math.cos(a) * SR];
   return [SX0 - Math.sin(a) * SR, yRow(1) + SR - Math.cos(a) * SR];
 };
 const SNAKE_D = `M${SX0},${SY0} H${SX1} A${SR},${SR} 0 0,1 ${SX1},${SY0 + SG} H${SX0} A${SR},${SR} 0 0,0 ${SX0},${SY0 + 2 * SG} H${SX1}`;

@@ -30,8 +30,11 @@ const Rect: React.FC<{
   />
 );
 
-export const Personagem: React.FC<{ f: number }> = ({ f }) => {
-  const L = (boca as number[])[f] ?? 0;
+export const Personagem: React.FC<{ f: number; boca?: number[] }> = ({
+  f,
+  boca: abertura = boca as number[],
+}) => {
+  const L = abertura[f] ?? 0;
   const blink = f % 128 >= 120 && f % 128 < 125;
   const glow = 0.35 + 0.25 * Math.sin(f / 9);
   return (

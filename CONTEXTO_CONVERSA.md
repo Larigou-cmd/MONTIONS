@@ -41,6 +41,7 @@
 | Tosse que não passa? Pode ser o seu remédio (v2) | `tosse2/` | Com a minha narração; capa em `tosse2/Capa.tsx` |
 | Por que alguns remédios devem ser tomados em jejum? | `jejum/` | Com a minha narração, pausas encurtadas, 179,6 s; capa em `jejum/Capa.tsx` |
 
+- **Próximo vídeo (em andamento):** pílula do dia seguinte. O roteiro foi aprovado e está em `pilula_dia_seguinte/roteiro.md`. Falta a narração; depois vêm as prévias, o vídeo, a capa e o pin.
 - Capas prontas: `youtube/capas/`.
 - Textos para YouTube e TikTok: `youtube/descricoes_shorts.md`.
 

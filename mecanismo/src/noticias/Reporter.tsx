@@ -13,7 +13,8 @@ const Ret: React.FC<{
   w: number;
   h: number;
   bg: string;
-}> = ({ x, y, w, h, bg }) => (
+  r?: string;
+}> = ({ x, y, w, h, bg, r }) => (
   <div
     style={{
       position: "absolute",
@@ -22,6 +23,7 @@ const Ret: React.FC<{
       width: w,
       height: h,
       background: bg,
+      borderRadius: r,
     }}
   />
 );
@@ -54,32 +56,38 @@ export const Reporter: React.FC<{ f: number; boca: number[] }> = ({
         </>
       )}
       {/* a boca original já é um sorriso aberto: cobre com pele e redesenha conforme a fala */}
-      <Ret x={186} y={180} w={46} h={30} bg={PELE} />
+      {/* a boca original vai de x 176 a 240 (y 180 a 206): cobre toda ela, cantos incluídos */}
+      <Ret x={172} y={177} w={74} h={31} bg={PELE} />
       {L === 0 ? (
         <>
-          <Ret x={194} y={190} w={30} h={4} bg="rgb(116,53,9)" />
-          <Ret x={190} y={188} w={4} h={4} bg="rgb(116,53,9)" />
-          <Ret x={224} y={188} w={4} h={4} bg="rgb(116,53,9)" />
+          <Ret x={184} y={190} w={50} h={4} bg="rgb(116,53,9)" />
+          <Ret x={180} y={187} w={4} h={4} bg="rgb(116,53,9)" />
+          <Ret x={234} y={187} w={4} h={4} bg="rgb(116,53,9)" />
         </>
       ) : (
         <>
+          {/* lábios, abertura e dentes crescem juntos; os cantos acompanham a largura */}
           <Ret
-            x={195 - 2 * L}
-            y={186}
-            w={28 + 4 * L}
-            h={6 + 5 * L}
+            x={180 - L}
+            y={184}
+            w={58 + 2 * L}
+            h={8 + 5 * L}
             bg="rgb(169,118,79)"
+            r={`3px 3px ${10 + 4 * L}px ${10 + 4 * L}px`}
           />
           <Ret
-            x={198 - 2 * L}
-            y={188}
-            w={22 + 4 * L}
-            h={2 + 5 * L}
+            x={183 - L}
+            y={186}
+            w={52 + 2 * L}
+            h={4 + 5 * L}
             bg="rgb(70,25,15)"
+            r={`2px 2px ${8 + 4 * L}px ${8 + 4 * L}px`}
           />
           {L >= 2 && (
-            <Ret x={199 - 2 * L} y={188} w={20 + 4 * L} h={4} bg="#efe7e2" />
+            <Ret x={185 - L} y={186} w={48 + 2 * L} h={4} bg="#efe7e2" />
           )}
+          <Ret x={177 - L} y={183} w={4} h={4} bg="rgb(116,53,9)" />
+          <Ret x={237 + L} y={183} w={4} h={4} bg="rgb(116,53,9)" />
         </>
       )}
     </div>

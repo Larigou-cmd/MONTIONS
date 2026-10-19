@@ -22,6 +22,8 @@ import { CapaTosse2 } from "./tosse2/Capa";
 import { VideoJejum, DURATION as DURATION_JEJUM } from "./jejum/Video";
 import { CapaJejum } from "./jejum/Capa";
 import { PinJejum, PinTosse, PinSinvaNoite, PinSinvaDor, PinAmoxi } from "./pins/Pins";
+import { VideoMetformina, DURATION as DURATION_METFORMINA } from "./metformina/Video";
+import { CapaMetformina } from "./metformina/Capa";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -40,6 +42,8 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="Tosse2Capa" component={CapaTosse2} durationInFrames={1} fps={FPS} width={1080} height={1920} />
     <Composition id="Jejum" component={VideoJejum} durationInFrames={DURATION_JEJUM} fps={FPS} width={1080} height={1920} />
     <Composition id="JejumCapa" component={CapaJejum} durationInFrames={1} fps={FPS} width={1080} height={1920} />
+    <Composition id="Metformina" component={VideoMetformina} durationInFrames={DURATION_METFORMINA} fps={FPS} width={1080} height={1920} />
+    <Composition id="MetforminaCapa" component={CapaMetformina} durationInFrames={1} fps={FPS} width={1080} height={1920} />
     <Composition id="PinJejum" component={PinJejum} durationInFrames={1} fps={FPS} width={1000} height={1500} />
     <Composition id="PinTosse" component={PinTosse} durationInFrames={1} fps={FPS} width={1000} height={1500} />
     <Composition id="PinSinvaNoite" component={PinSinvaNoite} durationInFrames={1} fps={FPS} width={1000} height={1500} />

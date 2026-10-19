@@ -42,6 +42,8 @@
 | Por que alguns remédios devem ser tomados em jejum? | `jejum/` | Com a minha narração, pausas encurtadas, 179,6 s; capa em `jejum/Capa.tsx` |
 
 - **Próximo vídeo (em andamento):** pílula do dia seguinte. O roteiro foi aprovado e está em `pilula_dia_seguinte/roteiro.md`. Falta a narração; depois vêm as prévias, o vídeo, a capa e o pin.
+- **Metformina e diarreia** (série "Começou a tomar X e sentiu Y?"): `src/metformina/`, vídeo `out/metformina_diarreia.mp4`.
+- **Quadro "Notícias da Farmácia":** estilo explicadora (fundo claro, títulos pixel, legenda palavra por palavra) com a repórter pixel de microfone no canto. O passo a passo para novos episódios está em `prompts/prompt_noticias_da_farmacia.md`. O episódio #1 (botox falsificado) está em `src/noticiaBotox/`.
 - Capas prontas: `youtube/capas/`.
 - Textos para YouTube e TikTok: `youtube/descricoes_shorts.md`.
 

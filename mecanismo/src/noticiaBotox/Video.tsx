@@ -22,7 +22,7 @@ import {
   rgba,
 } from "../lib";
 import { Card, EMOJI, Emoji, Title } from "../aas/ui";
-import { Personagem, PW } from "../sema2/Personagem";
+import { Reporter, RW } from "../noticias/Reporter";
 import boca from "./boca.json";
 
 // Quadro "Notícias da Farmácia" #1: Anvisa manda apreender lote falsificado de toxina botulínica (19/10/2026).
@@ -1008,9 +1008,9 @@ const S9: React.FC = () => {
 // Grande à direita na vinheta, pequena no canto de baixo durante a notícia e no centro no "me siga".
 const Ancora: React.FC<{ f: number }> = ({ f }) => {
   type Pose = { x: number; y: number; s: number };
-  const grande: Pose = { x: 620, y: 600, s: 0.78 };
-  const canto: Pose = { x: 24, y: 1300, s: 0.5 };
-  const centro: Pose = { x: 540 - (PW * 0.62) / 2, y: 1040, s: 0.62 };
+  const grande: Pose = { x: 680, y: 570, s: 0.62 };
+  const canto: Pose = { x: 30, y: 1330, s: 0.3 };
+  const centro: Pose = { x: 540 - (RW * 0.45) / 2, y: 1040, s: 0.45 };
   const vai = (a: Pose, b: Pose, k: number): Pose => ({
     x: a.x + (b.x - a.x) * k,
     y: a.y + (b.y - a.y) * k,
@@ -1034,7 +1034,7 @@ const Ancora: React.FC<{ f: number }> = ({ f }) => {
         filter: `drop-shadow(0 0 24px ${rgba(COR, 0.35)})`,
       }}
     >
-      <Personagem f={f} boca={boca as number[]} />
+      <Reporter f={f} boca={boca as number[]} />
     </div>
   );
 };

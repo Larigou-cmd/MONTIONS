@@ -34,7 +34,7 @@ const VERDE = "#4ade80",
   AZUL = "#38bdf8";
 
 // TEMPOS
-const T = {
+export const T = {
   noticias: 26,
   hoje: 79,
   anvisa: 109,
@@ -78,7 +78,7 @@ const T = {
   final: 2370,
 };
 export const DURATION = 2460; // 82 s (narração de 78,4 s + mensagem final)
-const PARTES: [number, number][] = [
+export const PARTES: [number, number][] = [
   [0, 309],
   [303, 667],
   [661, 1082],

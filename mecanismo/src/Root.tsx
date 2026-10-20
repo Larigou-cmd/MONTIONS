@@ -46,7 +46,11 @@ import {
   CapaNoticiaBotoxExplicadora,
 } from "./noticiaBotox/Explicadora";
 
-import { VideoMetforminaMec, DURATION as DURATION_METFORMINA_MEC } from "./metforminaMec/Video";
+import {
+  VideoMetforminaMec,
+  CapaMetforminaMec,
+  DURATION as DURATION_METFORMINA_MEC,
+} from "./metforminaMec/Video";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -270,6 +274,14 @@ export const RemotionRoot: React.FC = () => (
       id="MetforminaMecanismo"
       component={VideoMetforminaMec}
       durationInFrames={DURATION_METFORMINA_MEC}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="MetforminaMecanismoCapa"
+      component={CapaMetforminaMec}
+      durationInFrames={1}
       fps={FPS}
       width={1080}
       height={1920}

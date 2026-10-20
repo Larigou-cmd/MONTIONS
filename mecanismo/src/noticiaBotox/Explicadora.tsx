@@ -50,7 +50,9 @@ const Fundo: React.FC<{ f: number }> = ({ f }) => (
         backgroundSize: "7px 7px",
       }}
     />
-    <AbsoluteFill style={{ boxShadow: "inset 0 0 220px rgba(47,91,255,0.12)" }} />
+    <AbsoluteFill
+      style={{ boxShadow: "inset 0 0 220px rgba(47,91,255,0.12)" }}
+    />
   </AbsoluteFill>
 );
 
@@ -152,7 +154,10 @@ const Titulo: React.FC<{
           {l.map((p, j) => (
             <span
               key={j}
-              style={{ color: p.cor, textShadow: "5px 5px 0 rgba(22,22,26,0.12)" }}
+              style={{
+                color: p.cor,
+                textShadow: "5px 5px 0 rgba(22,22,26,0.12)",
+              }}
             >
               <Pixelado texto={p.t} size={size} />
             </span>
@@ -282,12 +287,12 @@ const Selo: React.FC<{
   );
 };
 // frasco em pixel (blocos)
-const FrascoPix: React.FC<{ x: number; y: number; px?: number; falso?: boolean }> = ({
-  x,
-  y,
-  px = 14,
-  falso,
-}) => {
+const FrascoPix: React.FC<{
+  x: number;
+  y: number;
+  px?: number;
+  falso?: boolean;
+}> = ({ x, y, px = 14, falso }) => {
   const mapa = [
     "..TTTTTT..",
     "..TTTTTT..",
@@ -315,18 +320,20 @@ const FrascoPix: React.FC<{ x: number; y: number; px?: number; falso?: boolean }
       height={10 * px}
     >
       {mapa.flatMap((l, j) =>
-        l.split("").map((c, i) =>
-          c === "." ? null : (
-            <rect
-              key={`${i}-${j}`}
-              x={i * px}
-              y={j * px}
-              width={px}
-              height={px}
-              fill={cores[c]}
-            />
+        l
+          .split("")
+          .map((c, i) =>
+            c === "." ? null : (
+              <rect
+                key={`${i}-${j}`}
+                x={i * px}
+                y={j * px}
+                width={px}
+                height={px}
+                fill={cores[c]}
+              />
+            ),
           ),
-        ),
       )}
     </svg>
   );
@@ -374,7 +381,8 @@ const Legenda: React.FC<{ f: number }> = ({ f }) => {
       }}
     >
       {b.map((w, i) => {
-        const ativa = t >= w.start - 0.03 && t < (b[i + 1]?.start ?? w.end + 0.6);
+        const ativa =
+          t >= w.start - 0.03 && t < (b[i + 1]?.start ?? w.end + 0.6);
         return (
           <span
             key={i}
@@ -454,7 +462,14 @@ const S1: React.FC<{ f: number }> = ({ f }) =>
       />
       <Janela f={f} at={T.anvisa} y={520} h={520} titulo="anvisa · alerta">
         <FrascoPix x={340} y={60} px={22} />
-        <Selo f={f} at={T.falsificado} x={450} y={250} texto="LOTE FALSIFICADO" size={30} />
+        <Selo
+          f={f}
+          at={T.falsificado}
+          x={450}
+          y={250}
+          texto="LOTE FALSIFICADO"
+          size={30}
+        />
         <div
           style={{
             position: "absolute",
@@ -469,7 +484,9 @@ const S1: React.FC<{ f: number }> = ({ f }) =>
           }}
         >
           toxina botulínica{" "}
-          <span style={{ color: K.vermelho, opacity: P(f, T.botox, T.botox + 10) }}>
+          <span
+            style={{ color: K.vermelho, opacity: P(f, T.botox, T.botox + 10) }}
+          >
             (o “botox”)
           </span>
         </div>
@@ -486,7 +503,13 @@ const S2: React.FC<{ f: number }> = ({ f }) =>
         linhas={[[{ t: "SAIU NO" }], [{ t: "DIÁRIO OFICIAL", cor: K.azul }]]}
         size={52}
       />
-      <Janela f={f} at={T.diario} y={500} h={560} titulo="diário oficial · 19/10/2026">
+      <Janela
+        f={f}
+        at={T.diario}
+        y={500}
+        h={560}
+        titulo="diário oficial · 19/10/2026"
+      >
         <div
           style={{
             position: "absolute",
@@ -512,7 +535,14 @@ const S2: React.FC<{ f: number }> = ({ f }) =>
             ⚠️ unidades falsas circulando
           </Linha>
         </div>
-        <Selo f={f} at={T.lote + 20} x={640} y={370} texto="APREENSÃO" size={30} />
+        <Selo
+          f={f}
+          at={T.lote + 20}
+          x={640}
+          y={370}
+          texto="APREENSÃO"
+          size={30}
+        />
       </Janela>
     </>
   );
@@ -545,8 +575,12 @@ const S3: React.FC<{ f: number }> = ({ f }) => {
           }}
         >
           <div style={{ width: 250 }} />
-          <div style={{ width: 280, textAlign: "center", color: K.verde }}>ORIGINAL</div>
-          <div style={{ width: 280, textAlign: "center", color: K.vermelho }}>FALSO</div>
+          <div style={{ width: 280, textAlign: "center", color: K.verde }}>
+            ORIGINAL
+          </div>
+          <div style={{ width: 280, textAlign: "center", color: K.vermelho }}>
+            FALSO
+          </div>
         </div>
         {linhas.map(([rot, ok, atOk, ruim, atRuim], i) => (
           <div
@@ -566,10 +600,20 @@ const S3: React.FC<{ f: number }> = ({ f }) => {
               opacity: P(f, atOk - 8, atOk),
             }}
           >
-            <div style={{ width: 250, paddingLeft: 24, fontFamily: VT, fontSize: 40, color: K.cinza }}>
+            <div
+              style={{
+                width: 250,
+                paddingLeft: 24,
+                fontFamily: VT,
+                fontSize: 40,
+                color: K.cinza,
+              }}
+            >
               {rot}
             </div>
-            <div style={{ width: 280, textAlign: "center", color: K.verde }}>✓ {ok}</div>
+            <div style={{ width: 280, textAlign: "center", color: K.verde }}>
+              ✓ {ok}
+            </div>
             <div
               style={{
                 width: 280,
@@ -705,7 +749,13 @@ const S6: React.FC<{ f: number }> = ({ f }) =>
         at={T.seDepois}
         linhas={[[{ t: "DEPOIS DA" }], [{ t: "APLICAÇÃO", cor: K.vermelho }]]}
       />
-      <Janela f={f} at={T.seDepois + 10} y={500} h={600} titulo="sinais de alerta">
+      <Janela
+        f={f}
+        at={T.seDepois + 10}
+        y={500}
+        h={600}
+        titulo="sinais de alerta"
+      >
         <div
           style={{
             position: "absolute",
@@ -786,7 +836,13 @@ const S7: React.FC<{ f: number }> = ({ f }) =>
 const S8: React.FC<{ f: number }> = ({ f }) =>
   !cena(f, 7) ? null : (
     <>
-      <Titulo f={f} at={T.siga} linhas={[[{ t: "ME SIGA", cor: K.azul }]]} size={84} top={560} />
+      <Titulo
+        f={f}
+        at={T.siga}
+        linhas={[[{ t: "ME SIGA", cor: K.azul }]]}
+        size={84}
+        top={560}
+      />
       <div
         style={{
           position: "absolute",
@@ -832,7 +888,9 @@ const S9: React.FC<{ f: number }> = ({ f }) =>
   );
 
 const SFX: [number, string, number][] = [
-  ...PARTES.slice(1).map(([de]) => [de, "whoosh", 0.25] as [number, string, number]),
+  ...PARTES.slice(1).map(
+    ([de]) => [de, "whoosh", 0.25] as [number, string, number],
+  ),
   [T.falsificado, "trava", 0.35],
   [T.lote, "pop", 0.25],
   [T.lote + 20, "trava", 0.32],
@@ -920,7 +978,15 @@ export const CapaNoticiaBotoxExplicadora: React.FC = () => (
       size={92}
       linhas={[[{ t: "BOTOX" }], [{ t: "FALSIFICADO", cor: K.vermelho }]]}
     />
-    <Janela f={100} at={0} x={50} y={600} w={640} h={560} titulo="anvisa · alerta">
+    <Janela
+      f={100}
+      at={0}
+      x={50}
+      y={600}
+      w={640}
+      h={560}
+      titulo="anvisa · alerta"
+    >
       <FrascoPix x={220} y={50} px={20} falso />
       <Selo f={100} at={0} x={315} y={240} texto="LOTE 025155" size={32} />
       <div
@@ -938,7 +1004,9 @@ export const CapaNoticiaBotoxExplicadora: React.FC = () => (
       >
         Anvisa manda
         <br />
-        <span style={{ background: K.amarelo, padding: "0 12px" }}>apreender</span>
+        <span style={{ background: K.amarelo, padding: "0 12px" }}>
+          apreender
+        </span>
       </div>
     </Janela>
     <div

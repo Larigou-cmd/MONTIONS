@@ -158,7 +158,12 @@ const Item: React.FC<{
     w={960}
     h={h}
     border={rgba(cor, 0.6)}
-    style={{ display: "flex", alignItems: "center", gap: 24, padding: "0 32px" }}
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: 24,
+      padding: "0 32px",
+    }}
   >
     <span style={{ fontFamily: EMOJI, fontSize: 58, flexShrink: 0 }}>
       {icone}
@@ -558,8 +563,7 @@ const S4: React.FC = () => {
   const f = useCurrentFrame();
   const de = T.mitocondria + 34;
   const freada = it(f, T.freada, T.freada + 30, 0, 1, OUT);
-  const carga =
-    1 - 0.75 * it(f, T.freada + 6, T.energiaBaixa + 10, 0, 1, EASE);
+  const carga = 1 - 0.75 * it(f, T.freada + 6, T.energiaBaixa + 10, 0, 1, EASE);
   const raios = Array.from({ length: 10 }, (_, i) => i);
   return (
     <Part from={R(3)[0]} to={R(3)[1]} inY={60}>
@@ -713,7 +717,9 @@ const S5: React.FC = () => {
             strokeWidth={8}
             style={{
               filter:
-                ampk > 0 ? `drop-shadow(0 0 ${30 * ampk}px ${AMAR})` : undefined,
+                ampk > 0
+                  ? `drop-shadow(0 0 ${30 * ampk}px ${AMAR})`
+                  : undefined,
             }}
           />
           <text
@@ -1155,6 +1161,169 @@ export const VideoMetforminaMec: React.FC = () => {
           <Audio src={staticFile(`sfx/${name}.wav`)} volume={vol} />
         </Sequence>
       ))}
+    </AbsoluteFill>
+  );
+};
+
+// Capa (1080×1920): a viagem corpo → fígado → mitocôndria. Os 20% de baixo ficam livres (contador do TikTok).
+export const CapaMetforminaMec: React.FC = () => {
+  const bolha = (
+    cx: number,
+    cy: number,
+    cor: string,
+    rotulo: string,
+    filho: React.ReactNode,
+  ) => (
+    <g>
+      <circle
+        cx={cx}
+        cy={cy}
+        r={150}
+        fill={rgba(cor, 0.12)}
+        stroke={cor}
+        strokeWidth={6}
+        style={{ filter: `drop-shadow(0 0 22px ${rgba(cor, 0.6)})` }}
+      />
+      {filho}
+      <text
+        x={cx}
+        y={cy + 200}
+        textAnchor="middle"
+        fontFamily={SANS}
+        fontWeight={800}
+        fontSize={38}
+        fill={C.ink}
+      >
+        {rotulo}
+      </text>
+    </g>
+  );
+  return (
+    <AbsoluteFill>
+      <Background color={COR} pulses={[]} />
+      <div
+        style={{
+          position: "absolute",
+          top: 170,
+          width: W,
+          textAlign: "center",
+          fontFamily: SANS,
+          fontWeight: 900,
+          fontSize: 88,
+          lineHeight: 1.05,
+          color: C.ink,
+          textShadow: `0 0 40px ${rgba(COR, 0.5)}`,
+        }}
+      >
+        O QUE A
+        <br />
+        <span style={{ color: COR }}>METFORMINA</span>
+        <br />
+        FAZ NO SEU CORPO?
+      </div>
+      <Tela>
+        {bolha(
+          250,
+          720,
+          COR,
+          "corpo",
+          <g stroke={COR} strokeWidth={8} fill="none" strokeLinecap="round">
+            <circle cx={250} cy={640} r={26} />
+            <path d="M 205 680 Q 250 668 295 680 L 300 770 Q 250 780 200 770 Z" />
+            <path d="M 230 775 L 225 840 M 270 775 L 275 840" />
+          </g>,
+        )}
+        <text
+          x={540}
+          y={740}
+          textAnchor="middle"
+          fontFamily={SANS}
+          fontWeight={900}
+          fontSize={80}
+          fill={C.dim}
+        >
+          →
+        </text>
+        {bolha(
+          830,
+          720,
+          FIGADO,
+          "fígado",
+          <path
+            d="M 740 720 Q 760 670 850 680 Q 930 690 910 735 Q 850 770 780 760 Q 735 750 740 720 Z"
+            fill={FIGADO}
+            stroke="#fdba74"
+            strokeWidth={4}
+          />,
+        )}
+        <text
+          x={700}
+          y={960}
+          textAnchor="middle"
+          fontFamily={SANS}
+          fontWeight={900}
+          fontSize={80}
+          fill={C.dim}
+          transform="rotate(35,700,940)"
+        >
+          ↓
+        </text>
+        {bolha(
+          540,
+          1110,
+          MITO,
+          "mitocôndria",
+          <g>
+            <ellipse
+              cx={540}
+              cy={1110}
+              rx={110}
+              ry={56}
+              fill={rgba(MITO, 0.3)}
+              stroke={MITO}
+              strokeWidth={5}
+            />
+            <path
+              d="M 460 1110 q 16 -30 32 0 q 16 30 32 0 q 16 -30 32 0 q 16 30 32 0 q 16 -30 32 0"
+              fill="none"
+              stroke={MITO}
+              strokeWidth={4}
+            />
+            <circle
+              cx={470}
+              cy={1080}
+              r={20}
+              fill="#f8fafc"
+              style={{ filter: `drop-shadow(0 0 10px ${COR})` }}
+            />
+          </g>,
+        )}
+      </Tela>
+      <div
+        style={{
+          position: "absolute",
+          top: 1400,
+          width: W,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <span
+          style={{
+            fontFamily: SANS,
+            fontWeight: 800,
+            fontSize: 40,
+            color: C.ink,
+            padding: "14px 32px",
+            borderRadius: 40,
+            border: `2px solid ${rgba(COR, 0.7)}`,
+            background: rgba(COR, 0.14),
+          }}
+        >
+          <span style={{ fontFamily: EMOJI }}>🔬</span> do corpo até a molécula
+        </span>
+      </div>
+      <Grain />
     </AbsoluteFill>
   );
 };

@@ -58,6 +58,12 @@ import {
   DURATION as DURATION_LOSARTANA,
 } from "./losartana/Video";
 
+import {
+  VideoAmoxiPreparo,
+  CapaAmoxiPreparo,
+  DURATION as DURATION_AMOXI_PREPARO,
+} from "./amoxiPreparo/Video";
+
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -303,6 +309,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="LosartanaCapa"
       component={CapaLosartana}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="AmoxiPreparo"
+      component={VideoAmoxiPreparo}
+      durationInFrames={DURATION_AMOXI_PREPARO}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="AmoxiPreparoCapa"
+      component={CapaAmoxiPreparo}
       durationInFrames={1}
       fps={FPS}
       width={1080}

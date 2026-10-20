@@ -52,6 +52,12 @@ import {
   DURATION as DURATION_METFORMINA_MEC,
 } from "./metforminaMec/Video";
 
+import {
+  VideoLosartana,
+  CapaLosartana,
+  DURATION as DURATION_LOSARTANA,
+} from "./losartana/Video";
+
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -281,6 +287,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="MetforminaMecanismoCapa"
       component={CapaMetforminaMec}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Losartana"
+      component={VideoLosartana}
+      durationInFrames={DURATION_LOSARTANA}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="LosartanaCapa"
+      component={CapaLosartana}
       durationInFrames={1}
       fps={FPS}
       width={1080}

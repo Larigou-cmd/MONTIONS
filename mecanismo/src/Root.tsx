@@ -64,6 +64,12 @@ import {
   DURATION as DURATION_AMOXI_PREPARO,
 } from "./amoxiPreparo/Video";
 
+import {
+  VideoInsulina,
+  CapaInsulina,
+  DURATION as DURATION_INSULINA,
+} from "./insulina/Video";
+
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -325,6 +331,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="AmoxiPreparoCapa"
       component={CapaAmoxiPreparo}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Insulina"
+      component={VideoInsulina}
+      durationInFrames={DURATION_INSULINA}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="InsulinaCapa"
+      component={CapaInsulina}
       durationInFrames={1}
       fps={FPS}
       width={1080}

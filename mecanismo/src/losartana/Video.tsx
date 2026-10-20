@@ -729,6 +729,32 @@ const S10: React.FC = () => {
   );
 };
 
+// som do coração: um "tum-tum" (public/losartana/batida.wav) no pico de cada batida do coração na tela,
+// só nas cenas em que ele aparece, com o mesmo ritmo das cenas (calmo → acelera → acalma).
+const ritmoNaTela = (f: number): number | null => {
+  if (f < R(2)[0]) return 1.1;
+  if (f < R(2)[1]) return 1.1 + 0.9 * it(f, T.sobe, T.trabalhar, 0, 1, EASE);
+  if (f >= R(4)[0] && f < R(4)[1])
+    return 2 - 0.9 * it(f, T.cai, T.tranquilo, 0, 1, EASE);
+  return null;
+};
+const BATIDAS: number[] = (() => {
+  const out: number[] = [];
+  let antes = -1;
+  for (let f = 0; f < DURATION; f++) {
+    const r = ritmoNaTela(f);
+    if (r === null) {
+      antes = -1;
+      continue;
+    }
+    const fase = ((f / 30) * r) % 1;
+    // pico do pulso visual em fase 0,25; o som começa um pouco antes
+    if (antes >= 0 && antes < 0.2 && fase >= 0.2) out.push(f);
+    antes = fase;
+  }
+  return out;
+})();
+
 export const VideoLosartana: React.FC = () => {
   const f = useCurrentFrame();
   const cor =
@@ -761,6 +787,11 @@ export const VideoLosartana: React.FC = () => {
       {SFX.map(([fr, name, vol], i) => (
         <Sequence key={i} from={fr} durationInFrames={60}>
           <Audio src={staticFile(`sfx/${name}.wav`)} volume={vol} />
+        </Sequence>
+      ))}
+      {BATIDAS.map((fr, i) => (
+        <Sequence key={`b${i}`} from={fr} durationInFrames={20}>
+          <Audio src={staticFile("losartana/batida.wav")} volume={0.32} />
         </Sequence>
       ))}
     </AbsoluteFill>

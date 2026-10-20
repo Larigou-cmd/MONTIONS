@@ -150,7 +150,12 @@ const Item: React.FC<{
     w={960}
     h={h}
     border={rgba(cor, 0.6)}
-    style={{ display: "flex", alignItems: "center", gap: 24, padding: "0 32px" }}
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: 24,
+      padding: "0 32px",
+    }}
   >
     <span style={{ fontFamily: EMOJI, fontSize: 58, flexShrink: 0 }}>
       {icone}
@@ -209,7 +214,14 @@ const Passo: React.FC<{ f: number; at: number; n: number; texto: string }> = ({
       >
         {n}
       </span>
-      <span style={{ fontFamily: SERIF, fontWeight: 600, fontSize: 56, color: C.ink }}>
+      <span
+        style={{
+          fontFamily: SERIF,
+          fontWeight: 600,
+          fontSize: 56,
+          color: C.ink,
+        }}
+      >
         {texto}
       </span>
     </div>
@@ -253,7 +265,13 @@ const Frasco: React.FC<{ f: number }> = ({ f }) => {
       <g opacity={entra * sai} transform={`rotate(${ang},${FX},${FUNDO})`}>
         <defs>
           <clipPath id="vidro">
-            <rect x={FX - 150} y={TOPO} width={300} height={FUNDO - TOPO} rx={46} />
+            <rect
+              x={FX - 150}
+              y={TOPO}
+              width={300}
+              height={FUNDO - TOPO}
+              rx={46}
+            />
           </clipPath>
           <linearGradient id="ambar" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="#78350f" />
@@ -262,9 +280,25 @@ const Frasco: React.FC<{ f: number }> = ({ f }) => {
           </linearGradient>
         </defs>
         {/* gargalo */}
-        <rect x={FX - 62} y={TOPO - 70} width={124} height={80} rx={14} fill="url(#ambar)" opacity={0.85} />
+        <rect
+          x={FX - 62}
+          y={TOPO - 70}
+          width={124}
+          height={80}
+          rx={14}
+          fill="url(#ambar)"
+          opacity={0.85}
+        />
         {/* corpo de vidro âmbar */}
-        <rect x={FX - 150} y={TOPO} width={300} height={FUNDO - TOPO} rx={46} fill="url(#ambar)" opacity={0.55} />
+        <rect
+          x={FX - 150}
+          y={TOPO}
+          width={300}
+          height={FUNDO - TOPO}
+          rx={46}
+          fill="url(#ambar)"
+          opacity={0.55}
+        />
         <g clipPath="url(#vidro)">
           {/* pó (antes da água) */}
           {!temAgua && (
@@ -272,69 +306,217 @@ const Frasco: React.FC<{ f: number }> = ({ f }) => {
               {Array.from({ length: 70 }, (_, i) => {
                 const px = FX - 135 + ((i * 37) % 270);
                 const pula =
-                  f < T.po + 25 ? Math.abs(Math.sin(i + f / 5)) * 30 * solto : 0;
-                const py = FUNDO - 14 - ((i * 13) % 90) * (0.4 + 0.6 * solto) - pula;
-                return <circle key={i} cx={px} cy={py} r={7} fill="#fffbeb" opacity={0.95} />;
+                  f < T.po + 25
+                    ? Math.abs(Math.sin(i + f / 5)) * 30 * solto
+                    : 0;
+                const py =
+                  FUNDO - 14 - ((i * 13) % 90) * (0.4 + 0.6 * solto) - pula;
+                return (
+                  <circle
+                    key={i}
+                    cx={px}
+                    cy={py}
+                    r={7}
+                    fill="#fffbeb"
+                    opacity={0.95}
+                  />
+                );
               })}
             </g>
           )}
           {/* suspensão */}
           {temAgua && (
             <g>
-              <rect x={FX - 150} y={nivel} width={300} height={FUNDO - nivel} fill={CREME} opacity={0.9 - 0.5 * assentado} />
+              <rect
+                x={FX - 150}
+                y={nivel}
+                width={300}
+                height={FUNDO - nivel}
+                fill={CREME}
+                opacity={0.9 - 0.5 * assentado}
+              />
               {assentado > 0 && (
-                <rect x={FX - 150} y={FUNDO - 120} width={300} height={120} fill="#fde68a" opacity={assentado} />
+                <rect
+                  x={FX - 150}
+                  y={FUNDO - 120}
+                  width={300}
+                  height={120}
+                  fill="#fde68a"
+                  opacity={assentado}
+                />
               )}
               {espuma > 0 &&
                 Array.from({ length: 14 }, (_, i) => (
-                  <circle key={i} cx={FX - 130 + i * 20} cy={nivel - 8 - (i % 3) * 8} r={12 + (i % 3) * 4} fill="#ffffff" opacity={espuma * 0.95} />
+                  <circle
+                    key={i}
+                    cx={FX - 130 + i * 20}
+                    cy={nivel - 8 - (i % 3) * 8}
+                    r={12 + (i % 3) * 4}
+                    fill="#ffffff"
+                    opacity={espuma * 0.95}
+                  />
                 ))}
             </g>
           )}
         </g>
         {/* marca do frasco */}
-        <line x1={FX - 150} y1={MARCA} x2={FX - 90} y2={MARCA} stroke="#ffffff" strokeWidth={6} />
+        <line
+          x1={FX - 150}
+          y1={MARCA}
+          x2={FX - 90}
+          y2={MARCA}
+          stroke="#ffffff"
+          strokeWidth={6}
+        />
         {/* rótulo */}
-        <rect x={FX - 140} y={860} width={280} height={200} rx={14} fill="#f8fafc" />
+        <rect
+          x={FX - 140}
+          y={860}
+          width={280}
+          height={200}
+          rx={14}
+          fill="#f8fafc"
+        />
         <rect x={FX - 140} y={860} width={280} height={54} rx={14} fill={COR} />
         <rect x={FX - 140} y={890} width={280} height={24} fill={COR} />
-        <text x={FX} y={900} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={30} fill="#0f172a">
+        <text
+          x={FX}
+          y={900}
+          textAnchor="middle"
+          fontFamily={SANS}
+          fontWeight={900}
+          fontSize={30}
+          fill="#0f172a"
+        >
           AMOXICILINA
         </text>
-        <text x={FX} y={960} textAnchor="middle" fontFamily={SANS} fontWeight={700} fontSize={24} fill="#334155">
+        <text
+          x={FX}
+          y={960}
+          textAnchor="middle"
+          fontFamily={SANS}
+          fontWeight={700}
+          fontSize={24}
+          fill="#334155"
+        >
           pó para suspensão oral
         </text>
-        <text x={FX} y={1000} textAnchor="middle" fontFamily={SANS} fontWeight={600} fontSize={22} fill="#64748b">
+        <text
+          x={FX}
+          y={1000}
+          textAnchor="middle"
+          fontFamily={SANS}
+          fontWeight={600}
+          fontSize={22}
+          fill="#64748b"
+        >
           agite antes de usar
         </text>
         {/* reflexo */}
-        <rect x={FX - 125} y={TOPO + 30} width={22} height={FUNDO - TOPO - 80} rx={11} fill="#ffffff" opacity={0.18} />
+        <rect
+          x={FX - 125}
+          y={TOPO + 30}
+          width={22}
+          height={FUNDO - TOPO - 80}
+          rx={11}
+          fill="#ffffff"
+          opacity={0.18}
+        />
         {/* tampa */}
-        <g transform={`translate(${(1 - tampa) * 260},${(1 - tampa) * -120}) rotate(${(1 - tampa) * 30},${FX},${TOPO - 90})`}>
-          <rect x={FX - 76} y={TOPO - 120} width={152} height={64} rx={14} fill="#f8fafc" stroke="#cbd5e1" strokeWidth={4} />
+        <g
+          transform={`translate(${(1 - tampa) * 260},${(1 - tampa) * -120}) rotate(${(1 - tampa) * 30},${FX},${TOPO - 90})`}
+        >
+          <rect
+            x={FX - 76}
+            y={TOPO - 120}
+            width={152}
+            height={64}
+            rx={14}
+            fill="#f8fafc"
+            stroke="#cbd5e1"
+            strokeWidth={4}
+          />
           {[0, 1, 2, 3, 4, 5].map((i) => (
-            <line key={i} x1={FX - 60 + i * 24} y1={TOPO - 112} x2={FX - 60 + i * 24} y2={TOPO - 64} stroke="#cbd5e1" strokeWidth={3} />
+            <line
+              key={i}
+              x1={FX - 60 + i * 24}
+              y1={TOPO - 112}
+              x2={FX - 60 + i * 24}
+              y2={TOPO - 64}
+              stroke="#cbd5e1"
+              strokeWidth={3}
+            />
           ))}
         </g>
       </g>
       {/* seta da marca (fora da rotação) */}
-      <g opacity={P(f, T.marca - 6, T.marca + 6) * (1 - P(f, R(4)[0], R(4)[0] + 10)) * sai}>
-        <polygon points={`${FX - 175},${MARCA} ${FX - 215},${MARCA - 22} ${FX - 215},${MARCA + 22}`} fill={AMAR} />
-        <text x={FX - 225} y={MARCA + 12} textAnchor="end" fontFamily={SANS} fontWeight={900} fontSize={36} fill={AMAR}>
+      <g
+        opacity={
+          P(f, T.marca - 6, T.marca + 6) *
+          (1 - P(f, R(4)[0], R(4)[0] + 10)) *
+          sai
+        }
+      >
+        <polygon
+          points={`${FX - 175},${MARCA} ${FX - 215},${MARCA - 22} ${FX - 215},${MARCA + 22}`}
+          fill={AMAR}
+        />
+        <text
+          x={FX - 225}
+          y={MARCA + 12}
+          textAnchor="end"
+          fontFamily={SANS}
+          fontWeight={900}
+          fontSize={36}
+          fill={AMAR}
+        >
           marca
         </text>
       </g>
       {/* copo de água filtrada despejando */}
       {f >= T.agua - 30 && f < T.marca + 30 && (
-        <g opacity={P(f, T.agua - 30, T.agua - 12) * (1 - P(f, T.marca + 10, T.marca + 30))}>
-          <g transform={`rotate(${-70 * it(f, T.agua - 20, T.agua, 0, 1, OUT)},800,470)`}>
-            <path d="M 740 380 L 860 380 L 845 560 L 755 560 Z" fill={rgba(COR, 0.25)} stroke="#e0f2fe" strokeWidth={5} />
-            <rect x={760} y={430} width={80} height={125} fill={rgba(COR, 0.6)} />
+        <g
+          opacity={
+            P(f, T.agua - 30, T.agua - 12) *
+            (1 - P(f, T.marca + 10, T.marca + 30))
+          }
+        >
+          <g
+            transform={`rotate(${-70 * it(f, T.agua - 20, T.agua, 0, 1, OUT)},800,470)`}
+          >
+            <path
+              d="M 740 380 L 860 380 L 845 560 L 755 560 Z"
+              fill={rgba(COR, 0.25)}
+              stroke="#e0f2fe"
+              strokeWidth={5}
+            />
+            <rect
+              x={760}
+              y={430}
+              width={80}
+              height={125}
+              fill={rgba(COR, 0.6)}
+            />
           </g>
           {f >= T.agua && (
-            <path d={`M 690 470 Q ${620 + Math.sin(f / 3) * 4} 520 ${FX} ${TOPO - 70}`} stroke={COR} strokeWidth={14} fill="none" strokeLinecap="round" opacity={0.85} />
+            <path
+              d={`M 690 470 Q ${620 + Math.sin(f / 3) * 4} 520 ${FX} ${TOPO - 70}`}
+              stroke={COR}
+              strokeWidth={14}
+              fill="none"
+              strokeLinecap="round"
+              opacity={0.85}
+            />
           )}
-          <text x={800} y={620} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={30} fill={COR}>
+          <text
+            x={800}
+            y={620}
+            textAnchor="middle"
+            fontFamily={SANS}
+            fontWeight={800}
+            fontSize={30}
+            fill={COR}
+          >
             água filtrada
           </text>
         </g>
@@ -374,8 +556,22 @@ const S1: React.FC = () => {
         <br />
         <span style={{ color: COR }}>AMOXICILINA</span> CERTO?
       </div>
-      <Pill x={540} y={420} text="⚠️ um erro muda a dose de cada colherada" color={VERM} size={30} k={P(f, T.erro, T.erro + 12)} />
-      <Pill x={540} y={1320} text="🧑‍🍳 o passo a passo" color={AMAR} size={40} k={P(f, T.passoAPasso, T.passoAPasso + 12)} />
+      <Pill
+        x={540}
+        y={420}
+        text="⚠️ um erro muda a dose de cada colherada"
+        color={VERM}
+        size={30}
+        k={P(f, T.erro, T.erro + 12)}
+      />
+      <Pill
+        x={540}
+        y={1320}
+        text="🧑‍🍳 o passo a passo"
+        color={AMAR}
+        size={40}
+        k={P(f, T.passoAPasso, T.passoAPasso + 12)}
+      />
     </Part>
   );
 };
@@ -386,8 +582,22 @@ const S2: React.FC = () => {
   return (
     <Part from={R(1)[0]} to={R(1)[1]} inY={40}>
       <Passo f={f} at={T.passo1} n={1} texto="Agite o pó" />
-      <Pill x={540} y={360} text="🔒 frasco ainda fechado" color={COR} size={32} k={P(f, T.fechado, T.fechado + 12)} />
-      <Pill x={540} y={1320} text="solta o pó do fundo" color={AMAR} size={34} k={P(f, T.po, T.po + 12)} />
+      <Pill
+        x={540}
+        y={360}
+        text="🔒 frasco ainda fechado"
+        color={COR}
+        size={32}
+        k={P(f, T.fechado, T.fechado + 12)}
+      />
+      <Pill
+        x={540}
+        y={1320}
+        text="solta o pó do fundo"
+        color={AMAR}
+        size={34}
+        k={P(f, T.po, T.po + 12)}
+      />
     </Part>
   );
 };
@@ -396,8 +606,22 @@ const S3: React.FC = () => {
   return (
     <Part from={R(2)[0]} to={R(2)[1]} inY={40}>
       <Passo f={f} at={T.passo2} n={2} texto="Água até a marca" />
-      <Pill x={540} y={360} text="💧 água filtrada, com calma" color={COR} size={32} k={P(f, T.agua, T.agua + 12)} />
-      <Pill x={540} y={1320} text="🎯 até a marca do frasco" color={AMAR} size={34} k={P(f, T.marca, T.marca + 12)} />
+      <Pill
+        x={540}
+        y={360}
+        text="💧 água filtrada, com calma"
+        color={COR}
+        size={32}
+        k={P(f, T.agua, T.agua + 12)}
+      />
+      <Pill
+        x={540}
+        y={1320}
+        text="🎯 até a marca do frasco"
+        color={AMAR}
+        size={34}
+        k={P(f, T.marca, T.marca + 12)}
+      />
     </Part>
   );
 };
@@ -406,8 +630,22 @@ const S4: React.FC = () => {
   return (
     <Part from={R(3)[0]} to={R(3)[1]} inY={40}>
       <Passo f={f} at={T.passo3} n={3} texto="Agite e confira" />
-      <Pill x={540} y={360} text="⏳ deixe descansar um pouquinho" color={COR} size={32} k={P(f, T.descansar, T.descansar + 12)} />
-      <Pill x={540} y={1320} text="baixou? complete até a marca ✅" color={VERDE} size={34} k={P(f, T.baixou, T.baixou + 12)} />
+      <Pill
+        x={540}
+        y={360}
+        text="⏳ deixe descansar um pouquinho"
+        color={COR}
+        size={32}
+        k={P(f, T.descansar, T.descansar + 12)}
+      />
+      <Pill
+        x={540}
+        y={1320}
+        text="baixou? complete até a marca ✅"
+        color={VERDE}
+        size={34}
+        k={P(f, T.baixou, T.baixou + 12)}
+      />
     </Part>
   );
 };
@@ -419,9 +657,30 @@ const S5: React.FC = () => {
       <Title f={f} at={T.antes} y={200} size={56} weight={600} from={COR}>
         Antes de CADA dose
       </Title>
-      <Pill x={540} y={330} text="🔄 agite de novo" color={COR} size={36} k={P(f, T.agiteNovo, T.agiteNovo + 12)} />
-      <Pill x={540} y={1320} text="o remédio assenta no fundo" color={AMAR} size={32} k={P(f, T.fundo, T.fundo + 12)} />
-      <Pill x={540} y={1410} text="❌ sem agitar, a dose sai errada" color={VERM} size={32} k={P(f, T.errada, T.errada + 12)} />
+      <Pill
+        x={540}
+        y={330}
+        text="🔄 agite de novo"
+        color={COR}
+        size={36}
+        k={P(f, T.agiteNovo, T.agiteNovo + 12)}
+      />
+      <Pill
+        x={540}
+        y={1320}
+        text="o remédio assenta no fundo"
+        color={AMAR}
+        size={32}
+        k={P(f, T.fundo, T.fundo + 12)}
+      />
+      <Pill
+        x={540}
+        y={1410}
+        text="❌ sem agitar, a dose sai errada"
+        color={VERM}
+        size={32}
+        k={P(f, T.errada, T.errada + 12)}
+      />
     </Part>
   );
 };
@@ -429,10 +688,35 @@ const S5: React.FC = () => {
 // ---------- 6. medir certo ----------
 const Seringa: React.FC<{ x: number; y: number }> = ({ x, y }) => (
   <g transform={`translate(${x},${y})`}>
-    <rect x={-40} y={-200} width={80} height={330} rx={14} fill={rgba("#e0f2fe", 0.35)} stroke="#e0f2fe" strokeWidth={5} />
-    <rect x={-36} y={-40} width={72} height={166} rx={10} fill={CREME} opacity={0.9} />
+    <rect
+      x={-40}
+      y={-200}
+      width={80}
+      height={330}
+      rx={14}
+      fill={rgba("#e0f2fe", 0.35)}
+      stroke="#e0f2fe"
+      strokeWidth={5}
+    />
+    <rect
+      x={-36}
+      y={-40}
+      width={72}
+      height={166}
+      rx={10}
+      fill={CREME}
+      opacity={0.9}
+    />
     {Array.from({ length: 9 }, (_, i) => (
-      <line key={i} x1={-40} y1={-180 + i * 36} x2={i % 2 ? -20 : -6} y2={-180 + i * 36} stroke="#e0f2fe" strokeWidth={4} />
+      <line
+        key={i}
+        x1={-40}
+        y1={-180 + i * 36}
+        x2={i % 2 ? -20 : -6}
+        y2={-180 + i * 36}
+        stroke="#e0f2fe"
+        strokeWidth={4}
+      />
     ))}
     <rect x={-12} y={130} width={24} height={50} rx={6} fill="#e0f2fe" />
     <rect x={-56} y={-230} width={112} height={30} rx={8} fill="#e0f2fe" />
@@ -442,7 +726,15 @@ const Seringa: React.FC<{ x: number; y: number }> = ({ x, y }) => (
 );
 const Colher: React.FC<{ x: number; y: number; s: number }> = ({ x, y, s }) => (
   <g transform={`translate(${x},${y}) scale(${s}) rotate(-30)`}>
-    <ellipse cx={0} cy={0} rx={46} ry={32} fill="#cbd5e1" stroke="#f1f5f9" strokeWidth={4} />
+    <ellipse
+      cx={0}
+      cy={0}
+      rx={46}
+      ry={32}
+      fill="#cbd5e1"
+      stroke="#f1f5f9"
+      strokeWidth={4}
+    />
     <rect x={40} y={-8} width={150} height={16} rx={8} fill="#cbd5e1" />
   </g>
 );
@@ -457,7 +749,15 @@ const S6: React.FC = () => {
       <Tela>
         <g opacity={P(f, T.seringa, T.seringa + 14)}>
           <Seringa x={290} y={780} />
-          <text x={290} y={1040} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={34} fill={VERDE}>
+          <text
+            x={290}
+            y={1040}
+            textAnchor="middle"
+            fontFamily={SANS}
+            fontWeight={800}
+            fontSize={34}
+            fill={VERDE}
+          >
             seringa / copinho ✓
           </text>
         </g>
@@ -465,17 +765,42 @@ const S6: React.FC = () => {
           <Colher x={720} y={620} s={0.7} />
           <Colher x={760} y={780} s={1} />
           <Colher x={720} y={930} s={1.3} />
-          <text x={760} y={1080} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={34} fill={VERM}>
+          <text
+            x={760}
+            y={1080}
+            textAnchor="middle"
+            fontFamily={SANS}
+            fontWeight={800}
+            fontSize={34}
+            fill={VERM}
+          >
             colher de cozinha ✕
           </text>
           {xk > 0 && (
-            <text x={760} y={850} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={260 * xk} fill={VERM} opacity={0.85} style={{ filter: `drop-shadow(0 0 16px ${VERM})` }}>
+            <text
+              x={760}
+              y={850}
+              textAnchor="middle"
+              fontFamily={SANS}
+              fontWeight={900}
+              fontSize={260 * xk}
+              fill={VERM}
+              opacity={0.85}
+              style={{ filter: `drop-shadow(0 0 16px ${VERM})` }}
+            >
               ✕
             </text>
           )}
         </g>
       </Tela>
-      <Pill x={540} y={1200} text="📏 cada colher tem um tamanho" color={AMAR} size={34} k={P(f, T.tamanho - 30, T.tamanho - 18)} />
+      <Pill
+        x={540}
+        y={1200}
+        text="📏 cada colher tem um tamanho"
+        color={AMAR}
+        size={34}
+        k={P(f, T.tamanho - 30, T.tamanho - 18)}
+      />
     </Part>
   );
 };
@@ -501,21 +826,96 @@ const S7: React.FC = () => {
       <Title f={f} at={T.prazo} y={200} size={56} weight={600} from={AMAR}>
         Depois de pronta, tem prazo
       </Title>
-      <Card f={f} at={T.sozinha} x={70} y={340} w={940} h={360} border={rgba(AMAR, 0.7)}>
-        <div style={{ position: "absolute", top: 30, left: 40, fontWeight: 900, fontSize: 42, color: AMAR }}>amoxicilina</div>
-        <div style={{ position: "absolute", top: 90, left: 40, fontWeight: 700, fontSize: 34 }}>
+      <Card
+        f={f}
+        at={T.sozinha}
+        x={70}
+        y={340}
+        w={940}
+        h={360}
+        border={rgba(AMAR, 0.7)}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: 30,
+            left: 40,
+            fontWeight: 900,
+            fontSize: 42,
+            color: AMAR,
+          }}
+        >
+          amoxicilina
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: 90,
+            left: 40,
+            fontWeight: 700,
+            fontSize: 34,
+          }}
+        >
           <span style={{ fontFamily: EMOJI }}>🌡️</span> temperatura ambiente
         </div>
-        <div style={{ position: "absolute", top: 160, right: 50, fontWeight: 900, fontSize: 70, color: AMAR, opacity: P(f, T.catorze, T.catorze + 10) }}>
+        <div
+          style={{
+            position: "absolute",
+            top: 160,
+            right: 50,
+            fontWeight: 900,
+            fontSize: 70,
+            color: AMAR,
+            opacity: P(f, T.catorze, T.catorze + 10),
+          }}
+        >
           14 dias
         </div>
       </Card>
-      <Card f={f} at={T.clav} x={70} y={740} w={940} h={360} border={rgba(GELO, 0.7)}>
-        <div style={{ position: "absolute", top: 30, left: 40, fontWeight: 900, fontSize: 42, color: GELO }}>amoxicilina + clavulanato</div>
-        <div style={{ position: "absolute", top: 90, left: 40, fontWeight: 700, fontSize: 34, opacity: P(f, T.geladeira, T.geladeira + 10) }}>
+      <Card
+        f={f}
+        at={T.clav}
+        x={70}
+        y={740}
+        w={940}
+        h={360}
+        border={rgba(GELO, 0.7)}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: 30,
+            left: 40,
+            fontWeight: 900,
+            fontSize: 42,
+            color: GELO,
+          }}
+        >
+          amoxicilina + clavulanato
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: 90,
+            left: 40,
+            fontWeight: 700,
+            fontSize: 34,
+            opacity: P(f, T.geladeira, T.geladeira + 10),
+          }}
+        >
           <span style={{ fontFamily: EMOJI }}>❄️</span> geladeira
         </div>
-        <div style={{ position: "absolute", top: 160, right: 50, fontWeight: 900, fontSize: 70, color: GELO, opacity: P(f, T.sete, T.sete + 10) }}>
+        <div
+          style={{
+            position: "absolute",
+            top: 160,
+            right: 50,
+            fontWeight: 900,
+            fontSize: 70,
+            color: GELO,
+            opacity: P(f, T.sete, T.sete + 10),
+          }}
+        >
           7 dias
         </div>
       </Card>
@@ -523,7 +923,14 @@ const S7: React.FC = () => {
         {f >= T.sozinha + 6 && quadros(110, 520, 14, AMAR, T.catorze)}
         {f >= T.clav + 6 && quadros(110, 920, 7, GELO, T.sete)}
       </Tela>
-      <Pill x={540} y={1180} text="📄 confira sempre a bula do seu frasco" color={COR} size={34} k={P(f, T.confiraBula, T.confiraBula + 12)} />
+      <Pill
+        x={540}
+        y={1180}
+        text="📄 confira sempre a bula do seu frasco"
+        color={COR}
+        size={34}
+        k={P(f, T.confiraBula, T.confiraBula + 12)}
+      />
     </Part>
   );
 };
@@ -536,7 +943,14 @@ const S8: React.FC = () => {
       <Title f={f} at={T.faca} y={200} size={56} weight={600} from={VERDE}>
         Tratamento até o fim
       </Title>
-      <Item f={f} at={T.faca + 10} y={340} icone="⏰" cor={VERDE} texto="no horário certo" />
+      <Item
+        f={f}
+        at={T.faca + 10}
+        y={340}
+        icone="⏰"
+        cor={VERDE}
+        texto="no horário certo"
+      />
       <Item
         f={f}
         at={T.fim}
@@ -557,7 +971,8 @@ const S8: React.FC = () => {
         cor={VERM}
         texto={
           <>
-            passou do prazo? <b style={{ color: VERM }}>descarte</b> o que sobrou
+            passou do prazo? <b style={{ color: VERM }}>descarte</b> o que
+            sobrou
           </>
         }
       />
@@ -619,7 +1034,10 @@ const S10: React.FC = () => {
               fontFamily: SERIF,
               fontWeight: i === 1 ? 600 : 400,
               fontSize: i === 1 ? 92 : 80,
-              color: i === 1 ? bornColor(f, at, COR, "#f0f9ff", 20) : bornColor(f, at, C.ink, COR),
+              color:
+                i === 1
+                  ? bornColor(f, at, COR, "#f0f9ff", 20)
+                  : bornColor(f, at, C.ink, COR),
               textShadow: i === 1 ? `0 0 30px ${rgba(COR, 0.45)}` : "none",
               opacity: k,
               transform: `translateY(${(1 - k) * 40}px) scale(${0.98 + 0.04 * it(f, T.final, DURATION, 0, 1, (x) => x)})`,
@@ -637,10 +1055,17 @@ const S10: React.FC = () => {
 export const VideoAmoxiPreparo: React.FC = () => {
   const f = useCurrentFrame();
   const cor =
-    f >= R(6)[0] && f < R(7)[0] ? AMAR : f >= R(7)[0] && f < R(8)[0] ? VERDE : COR;
+    f >= R(6)[0] && f < R(7)[0]
+      ? AMAR
+      : f >= R(7)[0] && f < R(8)[0]
+        ? VERDE
+        : COR;
   return (
     <AbsoluteFill>
-      <Background color={cor} pulses={[T.erro, T.marca, T.complete + 30, T.errada, T.colher, T.final]} />
+      <Background
+        color={cor}
+        pulses={[T.erro, T.marca, T.complete + 30, T.errada, T.colher, T.final]}
+      />
       <Frasco f={f} />
       <S1 />
       <S2 />
@@ -655,7 +1080,10 @@ export const VideoAmoxiPreparo: React.FC = () => {
       <Grain />
       <Audio src={staticFile("amoxiPreparo/narracao.mp3")} />
       {/* trilha calma (scripts/musica_calma.py), bem baixa embaixo da voz */}
-      <Audio src={staticFile("amoxiPreparo/musica.wav")} volume={(fr) => 0.07 * (1 - P(fr, DURATION - 60, DURATION))} />
+      <Audio
+        src={staticFile("amoxiPreparo/musica.wav")}
+        volume={(fr) => 0.07 * (1 - P(fr, DURATION - 60, DURATION))}
+      />
       {SFX.map(([fr, name, vol], i) => (
         <Sequence key={i} from={fr} durationInFrames={60}>
           <Audio src={staticFile(`sfx/${name}.wav`)} volume={vol} />
@@ -689,10 +1117,29 @@ export const CapaAmoxiPreparo: React.FC = () => (
       <br />
       DO JEITO CERTO?
     </div>
-    <div style={{ position: "absolute", top: 0, left: 0, width: W, height: 1920, transform: "translateY(20px) scale(0.85)", transformOrigin: "540px 900px" }}>
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: W,
+        height: 1920,
+        transform: "translateY(20px) scale(0.85)",
+        transformOrigin: "540px 900px",
+      }}
+    >
       <Frasco f={T.complete + 60} />
     </div>
-    <div style={{ position: "absolute", top: 1250, width: W, display: "flex", justifyContent: "center", gap: 14 }}>
+    <div
+      style={{
+        position: "absolute",
+        top: 1250,
+        width: W,
+        display: "flex",
+        justifyContent: "center",
+        gap: 14,
+      }}
+    >
       {["1 agite", "2 água até a marca", "3 confira"].map((t) => (
         <span
           key={t}
@@ -711,7 +1158,18 @@ export const CapaAmoxiPreparo: React.FC = () => (
         </span>
       ))}
     </div>
-    <div style={{ position: "absolute", top: 1370, width: W, textAlign: "center", fontFamily: SANS, fontWeight: 800, fontSize: 38, color: AMAR }}>
+    <div
+      style={{
+        position: "absolute",
+        top: 1370,
+        width: W,
+        textAlign: "center",
+        fontFamily: SANS,
+        fontWeight: 800,
+        fontSize: 38,
+        color: AMAR,
+      }}
+    >
       + quanto tempo ela dura depois de pronta
     </div>
     <Grain />

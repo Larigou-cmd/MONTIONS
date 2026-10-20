@@ -159,7 +159,12 @@ const Item: React.FC<{
     w={960}
     h={h}
     border={rgba(cor, 0.6)}
-    style={{ display: "flex", alignItems: "center", gap: 24, padding: "0 32px" }}
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: 24,
+      padding: "0 32px",
+    }}
   >
     <span style={{ fontFamily: EMOJI, fontSize: 58, flexShrink: 0 }}>
       {icone}
@@ -194,7 +199,9 @@ export const Coracao: React.FC<{
   const sx = 0.82 + 0.18 * Math.cos(ang * 0.9);
   const luz = 30 + ang * 25;
   return (
-    <g transform={`translate(${x},${y}) scale(${esc * sx},${esc}) skewY(${ang * 4})`}>
+    <g
+      transform={`translate(${x},${y}) scale(${esc * sx},${esc}) skewY(${ang * 4})`}
+    >
       <defs>
         <radialGradient id="musculo" cx={`${luz}%`} cy="30%" r="80%">
           <stop offset="0%" stopColor="#fb7185" />
@@ -211,7 +218,13 @@ export const Coracao: React.FC<{
         </linearGradient>
       </defs>
       {/* veia cava (azul), atrás */}
-      <path d="M 105 -80 L 118 -250" stroke="#2563eb" strokeWidth={40} strokeLinecap="round" fill="none" />
+      <path
+        d="M 105 -80 L 118 -250"
+        stroke="#2563eb"
+        strokeWidth={40}
+        strokeLinecap="round"
+        fill="none"
+      />
       {/* tronco pulmonar */}
       <path
         d="M -30 -100 C -50 -190 -130 -200 -170 -150"
@@ -249,38 +262,99 @@ export const Coracao: React.FC<{
         fill="url(#musculo)"
         stroke="#fecdd3"
         strokeWidth={4}
-        style={{ filter: `drop-shadow(0 0 ${30 + 30 * bate}px ${rgba(COR, 0.7)})` }}
+        style={{
+          filter: `drop-shadow(0 0 ${30 + 30 * bate}px ${rgba(COR, 0.7)})`,
+        }}
       />
       {/* artérias coronárias e veias na superfície */}
-      <path d="M -5 -105 C -40 -20 -55 80 -45 195" stroke="#fda4af" strokeWidth={7} fill="none" opacity={0.9} />
-      <path d="M 70 -95 C 130 -40 145 45 110 125" stroke="#fda4af" strokeWidth={6} fill="none" opacity={0.85} />
-      <path d="M 25 -80 C 35 0 25 100 -5 185" stroke="#93c5fd" strokeWidth={5} fill="none" opacity={0.75} />
+      <path
+        d="M -5 -105 C -40 -20 -55 80 -45 195"
+        stroke="#fda4af"
+        strokeWidth={7}
+        fill="none"
+        opacity={0.9}
+      />
+      <path
+        d="M 70 -95 C 130 -40 145 45 110 125"
+        stroke="#fda4af"
+        strokeWidth={6}
+        fill="none"
+        opacity={0.85}
+      />
+      <path
+        d="M 25 -80 C 35 0 25 100 -5 185"
+        stroke="#93c5fd"
+        strokeWidth={5}
+        fill="none"
+        opacity={0.75}
+      />
       {/* brilho de volume */}
-      <ellipse cx={-60 + ang * 40} cy={-50} rx={46} ry={28} fill="#ffffff" opacity={0.18} transform="rotate(-25)" />
+      <ellipse
+        cx={-60 + ang * 40}
+        cy={-50}
+        rx={46}
+        ry={28}
+        fill="#ffffff"
+        opacity={0.18}
+        transform="rotate(-25)"
+      />
     </g>
   );
 };
 
 // ---------- vaso sanguíneo (corte longitudinal) ----------
-const Vaso: React.FC<{ f: number; y: number; raio: number; k: number; vel?: number }> = ({
-  f,
-  y,
-  raio,
-  k,
-  vel = 4,
-}) => {
+const Vaso: React.FC<{
+  f: number;
+  y: number;
+  raio: number;
+  k: number;
+  vel?: number;
+}> = ({ f, y, raio, k, vel = 4 }) => {
   if (k <= 0) return null;
   const celulas = Array.from({ length: 9 }, (_, i) => i);
   return (
     <g opacity={k}>
-      <rect x={-20} y={y - raio - 26} width={1120} height={26} rx={13} fill={rgba(COR, 0.55)} stroke="#fecdd3" strokeWidth={3} />
-      <rect x={-20} y={y + raio} width={1120} height={26} rx={13} fill={rgba(COR, 0.55)} stroke="#fecdd3" strokeWidth={3} />
-      <rect x={-20} y={y - raio} width={1120} height={raio * 2} fill={rgba(VERM, 0.12)} />
+      <rect
+        x={-20}
+        y={y - raio - 26}
+        width={1120}
+        height={26}
+        rx={13}
+        fill={rgba(COR, 0.55)}
+        stroke="#fecdd3"
+        strokeWidth={3}
+      />
+      <rect
+        x={-20}
+        y={y + raio}
+        width={1120}
+        height={26}
+        rx={13}
+        fill={rgba(COR, 0.55)}
+        stroke="#fecdd3"
+        strokeWidth={3}
+      />
+      <rect
+        x={-20}
+        y={y - raio}
+        width={1120}
+        height={raio * 2}
+        fill={rgba(VERM, 0.12)}
+      />
       {celulas.map((i) => {
         const cx = ((f * vel + i * 130) % 1200) - 60;
         const cy = y + Math.sin(i * 1.7) * raio * 0.5;
         return (
-          <ellipse key={i} cx={cx} cy={cy} rx={Math.min(30, raio * 0.45)} ry={Math.min(14, raio * 0.22)} fill="#dc2626" stroke="#fca5a5" strokeWidth={2} />
+          <ellipse
+            key={i}
+            cx={cx}
+            cy={cy}
+            rx={Math.min(30, raio * 0.45)}
+            ry={Math.min(14, raio * 0.22)}
+            fill="#dc2626"
+            stroke="#fca5a5"
+            strokeWidth={2}
+          />
         );
       })}
     </g>
@@ -288,13 +362,24 @@ const Vaso: React.FC<{ f: number; y: number; raio: number; k: number; vel?: numb
 };
 
 // ---------- medidor de pressão (mostrador) ----------
-const Manometro: React.FC<{ x: number; y: number; nivel: number; k: number }> = ({ x, y, nivel, k }) => {
+const Manometro: React.FC<{
+  x: number;
+  y: number;
+  nivel: number;
+  k: number;
+}> = ({ x, y, nivel, k }) => {
   if (k <= 0) return null;
   const a = Math.PI * (1 - nivel);
   const cor = mix(VERDE, VERM, nivel);
   return (
     <g opacity={k}>
-      <path d={`M ${x - 120} ${y} A 120 120 0 0 1 ${x + 120} ${y}`} fill="none" stroke={C.dim} strokeWidth={14} strokeLinecap="round" />
+      <path
+        d={`M ${x - 120} ${y} A 120 120 0 0 1 ${x + 120} ${y}`}
+        fill="none"
+        stroke={C.dim}
+        strokeWidth={14}
+        strokeLinecap="round"
+      />
       <path
         d={`M ${x - 120} ${y} A 120 120 0 0 1 ${x + 120 * Math.cos(a)} ${y - 120 * Math.sin(a)}`}
         fill="none"
@@ -303,9 +388,25 @@ const Manometro: React.FC<{ x: number; y: number; nivel: number; k: number }> = 
         strokeLinecap="round"
         style={{ filter: `drop-shadow(0 0 10px ${cor})` }}
       />
-      <line x1={x} y1={y} x2={x + 95 * Math.cos(a)} y2={y - 95 * Math.sin(a)} stroke={C.ink} strokeWidth={8} strokeLinecap="round" />
+      <line
+        x1={x}
+        y1={y}
+        x2={x + 95 * Math.cos(a)}
+        y2={y - 95 * Math.sin(a)}
+        stroke={C.ink}
+        strokeWidth={8}
+        strokeLinecap="round"
+      />
       <circle cx={x} cy={y} r={12} fill={C.ink} />
-      <text x={x} y={y + 50} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={28} fill={C.ink}>
+      <text
+        x={x}
+        y={y + 50}
+        textAnchor="middle"
+        fontFamily={SANS}
+        fontWeight={800}
+        fontSize={28}
+        fill={C.ink}
+      >
         pressão
       </text>
     </g>
@@ -313,10 +414,23 @@ const Manometro: React.FC<{ x: number; y: number; nivel: number; k: number }> = 
 };
 
 // angiotensina II: cadeia de 8 bolinhas (octapeptídeo)
-const Angio: React.FC<{ x: number; y: number; s?: number; o?: number }> = ({ x, y, s = 1, o = 1 }) => (
+const Angio: React.FC<{ x: number; y: number; s?: number; o?: number }> = ({
+  x,
+  y,
+  s = 1,
+  o = 1,
+}) => (
   <g transform={`translate(${x},${y}) scale(${s})`} opacity={o}>
     {Array.from({ length: 8 }, (_, i) => (
-      <circle key={i} cx={i * 18 - 63} cy={Math.sin(i * 1.3) * 8} r={10} fill={ANG} stroke="#fed7aa" strokeWidth={2} />
+      <circle
+        key={i}
+        cx={i * 18 - 63}
+        cy={Math.sin(i * 1.3) * 8}
+        r={10}
+        fill={ANG}
+        stroke="#fed7aa"
+        strokeWidth={2}
+      />
     ))}
   </g>
 );
@@ -350,7 +464,14 @@ const S1: React.FC = () => {
           <Coracao f={f} x={540} y={900} s={1.55} />
         </g>
       </Tela>
-      <Pill x={540} y={1400} text="❤️ coração e 🩸 vasos" color={COR} size={38} k={P(f, T.coracao, T.coracao + 12)} />
+      <Pill
+        x={540}
+        y={1400}
+        text="❤️ coração e 🩸 vasos"
+        color={COR}
+        size={38}
+        k={P(f, T.coracao, T.coracao + 12)}
+      />
     </Part>
   );
 };
@@ -373,16 +494,46 @@ const S2: React.FC = () => {
             const d = 10 * Math.sin(f / 6 + i);
             return (
               <g key={i} opacity={seta}>
-                <path d={`M ${x} 1080 L ${x} ${990 - d}`} stroke={AMAR} strokeWidth={8} />
-                <polygon points={`${x - 16},${1000 - d} ${x + 16},${1000 - d} ${x},${975 - d}`} fill={AMAR} />
-                <path d={`M ${x} 1080 L ${x} ${1170 + d}`} stroke={AMAR} strokeWidth={8} />
-                <polygon points={`${x - 16},${1160 + d} ${x + 16},${1160 + d} ${x},${1185 + d}`} fill={AMAR} />
+                <path
+                  d={`M ${x} 1080 L ${x} ${990 - d}`}
+                  stroke={AMAR}
+                  strokeWidth={8}
+                />
+                <polygon
+                  points={`${x - 16},${1000 - d} ${x + 16},${1000 - d} ${x},${975 - d}`}
+                  fill={AMAR}
+                />
+                <path
+                  d={`M ${x} 1080 L ${x} ${1170 + d}`}
+                  stroke={AMAR}
+                  strokeWidth={8}
+                />
+                <polygon
+                  points={`${x - 16},${1160 + d} ${x + 16},${1160 + d} ${x},${1185 + d}`}
+                  fill={AMAR}
+                />
               </g>
             );
           })}
       </Tela>
-      <Pill x={540} y={850} text="💨 empurra o sangue pelos vasos" color={COR} size={34} k={P(f, T.empurra, T.empurra + 12)} />
-      <Title f={f} at={T.pressao} y={1290} size={46} font={SANS} weight={700} color={C.ink} from={AMAR}>
+      <Pill
+        x={540}
+        y={850}
+        text="💨 empurra o sangue pelos vasos"
+        color={COR}
+        size={34}
+        k={P(f, T.empurra, T.empurra + 12)}
+      />
+      <Title
+        f={f}
+        at={T.pressao}
+        y={1290}
+        size={46}
+        font={SANS}
+        weight={700}
+        color={C.ink}
+        from={AMAR}
+      >
         pressão = força do sangue na parede
       </Title>
     </Part>
@@ -403,12 +554,27 @@ const S3: React.FC = () => {
         O vilão: angiotensina II
       </Title>
       <Tela>
-        <Vaso f={f} y={560} raio={raio} k={P(f, T.corpo + 10, T.corpo + 24)} vel={4 + 3 * aperto} />
+        <Vaso
+          f={f}
+          y={560}
+          raio={raio}
+          k={P(f, T.corpo + 10, T.corpo + 24)}
+          vel={4 + 3 * aperto}
+        />
         {f >= T.angiotensina &&
           [0, 1, 2, 3].map((i) => {
-            const k = it(f, T.angiotensina + i * 8, T.angiotensina + 30 + i * 8, 0, 1, OUT);
+            const k = it(
+              f,
+              T.angiotensina + i * 8,
+              T.angiotensina + 30 + i * 8,
+              0,
+              1,
+              OUT,
+            );
             const xs = 180 + i * 240;
-            const ys = (i % 2 === 0 ? 560 - raio - 50 : 560 + raio + 50) + (1 - k) * (i % 2 === 0 ? -200 : 200);
+            const ys =
+              (i % 2 === 0 ? 560 - raio - 50 : 560 + raio + 50) +
+              (1 - k) * (i % 2 === 0 ? -200 : 200);
             return <Angio key={i} x={xs} y={ys} s={0.9} o={k} />;
           })}
         {/* sal e água acumulando */}
@@ -427,11 +593,37 @@ const S3: React.FC = () => {
             </text>
           ))}
         <Coracao f={f} x={330} y={1150} s={0.7} ritmo={ritmo} />
-        <Manometro x={780} y={1180} nivel={nivel} k={P(f, T.resultado, T.resultado + 12)} />
+        <Manometro
+          x={780}
+          y={1180}
+          nivel={nivel}
+          k={P(f, T.resultado, T.resultado + 12)}
+        />
       </Tela>
-      <Pill x={540} y={370} text="🤏 aperta o vaso, como uma mangueira" color={ANG} size={32} k={P(f, T.mangueira, T.mangueira + 12)} />
-      <Pill x={540} y={900} text="segura sal e água no corpo" color={AZUL} size={30} k={P(f, T.sal, T.sal + 12)} />
-      <Pill x={540} y={1340} text="📈 pressão sobe · coração trabalha mais" color={VERM} size={32} k={P(f, T.sobe, T.sobe + 12)} />
+      <Pill
+        x={540}
+        y={370}
+        text="🤏 aperta o vaso, como uma mangueira"
+        color={ANG}
+        size={32}
+        k={P(f, T.mangueira, T.mangueira + 12)}
+      />
+      <Pill
+        x={540}
+        y={900}
+        text="segura sal e água no corpo"
+        color={AZUL}
+        size={30}
+        k={P(f, T.sal, T.sal + 12)}
+      />
+      <Pill
+        x={540}
+        y={1340}
+        text="📈 pressão sobe · coração trabalha mais"
+        color={VERM}
+        size={32}
+        k={P(f, T.sobe, T.sobe + 12)}
+      />
     </Part>
   );
 };
@@ -443,7 +635,10 @@ const S4: React.FC = () => {
   // a chave (angiotensina) tenta entrar e volta quando a fechadura está bloqueada
   const tenta = it(f, T.encaixa - 20, T.encaixa + 10, 0, 1, OUT);
   const volta = it(f, T.bloqueia + 10, T.bloqueia + 30, 0, 1, OUT);
-  const bate = f >= T.bloqueia + 4 && f < T.bloqueia + 14 ? Math.sin((f - T.bloqueia) * 2) * 10 : 0;
+  const bate =
+    f >= T.bloqueia + 4 && f < T.bloqueia + 14
+      ? Math.sin((f - T.bloqueia) * 2) * 10
+      : 0;
   const chaveY = 380 + 240 * tenta - 200 * volta;
   return (
     <Part from={R(3)[0]} to={R(3)[1]} inY={60}>
@@ -453,28 +648,77 @@ const S4: React.FC = () => {
       <Tela>
         {/* membrana da célula do vaso */}
         <g opacity={P(f, T.angio2 + 10, T.angio2 + 24)}>
-          <rect x={-20} y={860} width={1120} height={70} fill={rgba(ROXO, 0.18)} />
+          <rect
+            x={-20}
+            y={860}
+            width={1120}
+            height={70}
+            fill={rgba(ROXO, 0.18)}
+          />
           {Array.from({ length: 28 }, (_, i) => (
-            <circle key={i} cx={i * 40} cy={865} r={12} fill={rgba(ROXO, 0.6)} />
+            <circle
+              key={i}
+              cx={i * 40}
+              cy={865}
+              r={12}
+              fill={rgba(ROXO, 0.6)}
+            />
           ))}
           {Array.from({ length: 28 }, (_, i) => (
-            <circle key={`b${i}`} cx={i * 40} cy={925} r={12} fill={rgba(ROXO, 0.6)} />
+            <circle
+              key={`b${i}`}
+              cx={i * 40}
+              cy={925}
+              r={12}
+              fill={rgba(ROXO, 0.6)}
+            />
           ))}
         </g>
         {/* receptor AT1 em forma de fechadura */}
         <g opacity={P(f, T.fechadura - 6, T.fechadura + 8)}>
-          <rect x={430} y={700} width={220} height={300} rx={40} fill={rgba(ROXO, 0.35)} stroke={ROXO} strokeWidth={8} />
+          <rect
+            x={430}
+            y={700}
+            width={220}
+            height={300}
+            rx={40}
+            fill={rgba(ROXO, 0.35)}
+            stroke={ROXO}
+            strokeWidth={8}
+          />
           <circle cx={540} cy={790} r={34} fill="#0f172a" />
           <rect x={524} y={790} width={32} height={80} rx={8} fill="#0f172a" />
-          <text x={540} y={1050} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={44} fill={ROXO}>
+          <text
+            x={540}
+            y={1050}
+            textAnchor="middle"
+            fontFamily={SANS}
+            fontWeight={900}
+            fontSize={44}
+            fill={ROXO}
+          >
             receptor AT1
           </text>
         </g>
         {/* losartana tampando a fechadura */}
         {kLos > 0 && (
-          <g transform={`translate(${540 + (1 - kLos) * 420},${790 - (1 - kLos) * 200})`}>
-            <circle r={58} fill={LOS} opacity={0.9} style={{ filter: `drop-shadow(0 0 20px ${LOS})` }} />
-            <text y={14} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={30} fill="#0f172a">
+          <g
+            transform={`translate(${540 + (1 - kLos) * 420},${790 - (1 - kLos) * 200})`}
+          >
+            <circle
+              r={58}
+              fill={LOS}
+              opacity={0.9}
+              style={{ filter: `drop-shadow(0 0 20px ${LOS})` }}
+            />
+            <text
+              y={14}
+              textAnchor="middle"
+              fontFamily={SANS}
+              fontWeight={900}
+              fontSize={30}
+              fill="#0f172a"
+            >
               LOS
             </text>
           </g>
@@ -496,8 +740,22 @@ const S4: React.FC = () => {
           </text>
         )}
       </Tela>
-      <Pill x={540} y={330} text="🔑 angiotensina II = a chave" color={ANG} size={32} k={P(f, T.encaixa, T.encaixa + 12)} />
-      <Pill x={540} y={1170} text="💊 a losartana BLOQUEIA a fechadura" color={LOS} size={36} k={P(f, T.bloqueia, T.bloqueia + 12)} />
+      <Pill
+        x={540}
+        y={330}
+        text="🔑 angiotensina II = a chave"
+        color={ANG}
+        size={32}
+        k={P(f, T.encaixa, T.encaixa + 12)}
+      />
+      <Pill
+        x={540}
+        y={1170}
+        text="💊 a losartana BLOQUEIA a fechadura"
+        color={LOS}
+        size={36}
+        k={P(f, T.bloqueia, T.bloqueia + 12)}
+      />
     </Part>
   );
 };
@@ -514,13 +772,45 @@ const S5: React.FC = () => {
         Sem o encaixe…
       </Title>
       <Tela>
-        <Vaso f={f} y={560} raio={55 + 75 * relax} k={P(f, T.sem + 6, T.sem + 18)} vel={7 - 3 * relax} />
+        <Vaso
+          f={f}
+          y={560}
+          raio={55 + 75 * relax}
+          k={P(f, T.sem + 6, T.sem + 18)}
+          vel={7 - 3 * relax}
+        />
         <Coracao f={f} x={330} y={1100} s={0.7} ritmo={ritmo} />
-        <Manometro x={780} y={1130} nivel={nivel} k={P(f, T.sem + 20, T.sem + 32)} />
+        <Manometro
+          x={780}
+          y={1130}
+          nivel={nivel}
+          k={P(f, T.sem + 20, T.sem + 32)}
+        />
       </Tela>
-      <Pill x={540} y={370} text="😮‍💨 o vaso relaxa" color={VERDE} size={36} k={P(f, T.relaxa, T.relaxa + 12)} />
-      <Pill x={540} y={820} text="💧 segura menos sal e água" color={AZUL} size={32} k={P(f, T.segura, T.segura + 12)} />
-      <Pill x={540} y={1300} text="📉 pressão cai · ❤️ coração mais tranquilo" color={VERDE} size={32} k={P(f, T.cai, T.cai + 12)} />
+      <Pill
+        x={540}
+        y={370}
+        text="😮‍💨 o vaso relaxa"
+        color={VERDE}
+        size={36}
+        k={P(f, T.relaxa, T.relaxa + 12)}
+      />
+      <Pill
+        x={540}
+        y={820}
+        text="💧 segura menos sal e água"
+        color={AZUL}
+        size={32}
+        k={P(f, T.segura, T.segura + 12)}
+      />
+      <Pill
+        x={540}
+        y={1300}
+        text="📉 pressão cai · ❤️ coração mais tranquilo"
+        color={VERDE}
+        size={32}
+        k={P(f, T.cai, T.cai + 12)}
+      />
     </Part>
   );
 };
@@ -528,7 +818,15 @@ const S5: React.FC = () => {
 // ---------- 6. a ligação com a tosse ----------
 const S6: React.FC = () => {
   const f = useCurrentFrame();
-  const card = (x: number, at: number, cor: string, nome: string, icone: string, texto: string, sub: string) => (
+  const card = (
+    x: number,
+    at: number,
+    cor: string,
+    nome: string,
+    icone: string,
+    texto: string,
+    sub: string,
+  ) => (
     <Card
       f={f}
       at={at}
@@ -558,10 +856,40 @@ const S6: React.FC = () => {
       <Title f={f} at={T.lembra} y={200} size={54} weight={600} from={AMAR}>
         Lembra do vídeo da tosse?
       </Title>
-      {card(70, T.enalapril, VERM, "enalapril / captopril", "😣", "tosse seca", "acumula bradicinina")}
-      {card(570, T.tosseSeca, VERDE, "losartana", "🙂", "tosse rara", "não acumula bradicinina")}
-      <Pill x={540} y={330} text="mesmo sistema, ponto diferente" color={AMAR} size={30} k={P(f, T.ponto, T.ponto + 12)} />
-      <Pill x={540} y={1030} text="🔄 troca comum quando o enalapril dá tosse" color={LOS} size={34} k={P(f, T.troca, T.troca + 12)} />
+      {card(
+        70,
+        T.enalapril,
+        VERM,
+        "enalapril / captopril",
+        "😣",
+        "tosse seca",
+        "acumula bradicinina",
+      )}
+      {card(
+        570,
+        T.tosseSeca,
+        VERDE,
+        "losartana",
+        "🙂",
+        "tosse rara",
+        "não acumula bradicinina",
+      )}
+      <Pill
+        x={540}
+        y={330}
+        text="mesmo sistema, ponto diferente"
+        color={AMAR}
+        size={30}
+        k={P(f, T.ponto, T.ponto + 12)}
+      />
+      <Pill
+        x={540}
+        y={1030}
+        text="🔄 troca comum quando o enalapril dá tosse"
+        color={LOS}
+        size={34}
+        k={P(f, T.troca, T.troca + 12)}
+      />
     </Part>
   );
 };
@@ -582,7 +910,8 @@ const S7: React.FC = () => {
         cor={AMAR}
         texto={
           <>
-            pode dar <b style={{ color: AMAR }}>tontura</b> no começo: levante devagar
+            pode dar <b style={{ color: AMAR }}>tontura</b> no começo: levante
+            devagar
           </>
         }
         h={160}
@@ -595,7 +924,8 @@ const S7: React.FC = () => {
         cor={ANG}
         texto={
           <>
-            pode subir o <b style={{ color: ANG }}>potássio</b>: sal light ou suplemento só com orientação
+            pode subir o <b style={{ color: ANG }}>potássio</b>: sal light ou
+            suplemento só com orientação
           </>
         }
         h={180}
@@ -627,12 +957,24 @@ const S8: React.FC = () => {
         Pressão alta é silenciosa
       </Title>
       <Tela>
-        <Manometro x={540} y={620} nivel={0.8} k={P(f, T.lembre + 10, T.lembre + 22)} />
+        <Manometro
+          x={540}
+          y={620}
+          nivel={0.8}
+          k={P(f, T.lembre + 10, T.lembre + 22)}
+        />
       </Tela>
       <Emoji f={f} at={T.sintomas} x={540} y={820} size={110}>
         😶
       </Emoji>
-      <Pill x={540} y={950} text="quase não dá sintomas" color={AMAR} size={34} k={P(f, T.sintomas, T.sintomas + 12)} />
+      <Pill
+        x={540}
+        y={950}
+        text="quase não dá sintomas"
+        color={AMAR}
+        size={34}
+        k={P(f, T.sintomas, T.sintomas + 12)}
+      />
       {f >= T.naoPare && (
         <div
           style={{
@@ -714,7 +1056,10 @@ const S10: React.FC = () => {
               fontFamily: SERIF,
               fontWeight: i === 1 ? 600 : 400,
               fontSize: i === 1 ? 92 : 80,
-              color: i === 1 ? bornColor(f, at, COR, "#fff1f2", 20) : bornColor(f, at, C.ink, COR),
+              color:
+                i === 1
+                  ? bornColor(f, at, COR, "#fff1f2", 20)
+                  : bornColor(f, at, C.ink, COR),
               textShadow: i === 1 ? `0 0 30px ${rgba(COR, 0.45)}` : "none",
               opacity: k,
               transform: `translateY(${(1 - k) * 40}px) scale(${0.98 + 0.04 * it(f, T.final, DURATION, 0, 1, (x) => x)})`,
@@ -769,7 +1114,19 @@ export const VideoLosartana: React.FC = () => {
             : COR;
   return (
     <AbsoluteFill>
-      <Background color={cor} pulses={[T.coracao, T.aperta, T.sobe, T.bloqueia, T.cai, T.troca, T.naoPare, T.final]} />
+      <Background
+        color={cor}
+        pulses={[
+          T.coracao,
+          T.aperta,
+          T.sobe,
+          T.bloqueia,
+          T.cai,
+          T.troca,
+          T.naoPare,
+          T.final,
+        ]}
+      />
       <S1 />
       <S2 />
       <S3 />
@@ -783,7 +1140,10 @@ export const VideoLosartana: React.FC = () => {
       <Grain />
       <Audio src={staticFile("losartana/narracao.mp3")} />
       {/* trilha calma (scripts/musica_calma.py), bem baixa embaixo da voz */}
-      <Audio src={staticFile("losartana/musica.wav")} volume={(fr) => 0.07 * (1 - P(fr, DURATION - 60, DURATION))} />
+      <Audio
+        src={staticFile("losartana/musica.wav")}
+        volume={(fr) => 0.07 * (1 - P(fr, DURATION - 60, DURATION))}
+      />
       {SFX.map(([fr, name, vol], i) => (
         <Sequence key={i} from={fr} durationInFrames={60}>
           <Audio src={staticFile(`sfx/${name}.wav`)} volume={vol} />
@@ -827,14 +1187,41 @@ export const CapaLosartana: React.FC = () => (
     <svg width={W} height={1920} style={{ position: "absolute" }}>
       <Coracao f={0} x={540} y={980} s={1.2} giro={false} />
       <g transform="translate(790,840)">
-        <circle r={78} fill={LOS} style={{ filter: `drop-shadow(0 0 24px ${LOS})` }} />
-        <text y={20} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={54} fill="#0f172a">
+        <circle
+          r={78}
+          fill={LOS}
+          style={{ filter: `drop-shadow(0 0 24px ${LOS})` }}
+        />
+        <text
+          y={20}
+          textAnchor="middle"
+          fontFamily={SANS}
+          fontWeight={900}
+          fontSize={54}
+          fill="#0f172a"
+        >
           AT1
         </text>
-        <line x1={-55} y1={-55} x2={55} y2={55} stroke="#0f172a" strokeWidth={12} strokeLinecap="round" />
+        <line
+          x1={-55}
+          y1={-55}
+          x2={55}
+          y2={55}
+          stroke="#0f172a"
+          strokeWidth={12}
+          strokeLinecap="round"
+        />
       </g>
     </svg>
-    <div style={{ position: "absolute", top: 1330, width: W, display: "flex", justifyContent: "center" }}>
+    <div
+      style={{
+        position: "absolute",
+        top: 1330,
+        width: W,
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       <span
         style={{
           fontFamily: SANS,

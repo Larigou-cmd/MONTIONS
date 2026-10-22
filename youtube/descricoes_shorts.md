@@ -687,6 +687,34 @@ Você prepara a amoxicilina em pó do jeito certo? 💊 Um erro aqui muda a dose
 
 #amoxicilina #antibiotico #farmacia #farmacologia #maternidade #estudantedefarmacia
 
+### Instagram
+
+**Legenda:**
+Você prepara a amoxicilina em pó do jeito certo? 💊 Um erro aqui muda a dose de cada colherada!
+
+O passo a passo:
+1️⃣ Com o frasco fechado, agite para soltar o pó do fundo
+2️⃣ Coloque água filtrada, com calma, até a marca do frasco
+3️⃣ Tampe, agite bem, deixe descansar e confira: se baixou da marca, complete
+
+🔄 Agite antes de CADA dose
+📏 Meça com a seringa ou o copinho dosador, nunca com colher de cozinha
+🌡️ Amoxicilina: em geral 14 dias em temperatura ambiente depois de pronta
+❄️ Amoxicilina + clavulanato: geladeira e só 7 dias
+📄 Confira sempre a bula do seu frasco
+⏰ Tratamento até o fim, no horário certo, mesmo se melhorar
+
+💾 Salva e manda pra quem tem criança em casa!
+
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações. Narração gerada com voz sintética.
+
+#amoxicilina #antibiotico #farmacia #maternidade #saude
+
+### Kwai
+
+**Legenda:** igual à do Instagram, trocando as hashtags por:
+#amoxicilina #antibiotico #farmacia #maes #kwai
+
 ---
 
 ## Onde guardar a insulina? (`mecanismo/out/insulina_onde_guardar.mp4`, capa `youtube/capas/capa_insulina.png`)

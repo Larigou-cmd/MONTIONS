@@ -17,9 +17,9 @@ import palavras from "../../audio/noticiaBotox_palavras.json";
 // "Notícias da Farmácia" #1 no estilo explicadora: fundo claro quadriculado, título pixel com palavra colorida,
 // janelinhas de computador, legenda palavra por palavra e a repórter no canto de baixo falando.
 // Mesma narração e mesmos tempos do vídeo noticiaBotox/Video.tsx.
-const PIX = "'Press Start TwoP', monospace";
-const VT = "'VTThreeTwoThree', monospace";
-const K = {
+export const PIX = "'Press Start TwoP', monospace";
+export const VT = "'VTThreeTwoThree', monospace";
+export const K = {
   claro: "#e9ecf8",
   azul: "#2f5bff",
   tinta: "#16161a",
@@ -33,7 +33,7 @@ const K = {
 const R = (i: number) => PARTES[i];
 
 // ---------- fundo claro quadriculado ----------
-const Fundo: React.FC<{ f: number }> = ({ f }) => (
+export const Fundo: React.FC<{ f: number }> = ({ f }) => (
   <AbsoluteFill style={{ background: K.claro }}>
     <AbsoluteFill
       style={{
@@ -87,7 +87,7 @@ const BLOCOS_ACENTO = {
     [2, 1],
   ],
 };
-const Pixelado: React.FC<{ texto: string; size: number }> = ({
+export const Pixelado: React.FC<{ texto: string; size: number }> = ({
   texto,
   size,
 }) => (
@@ -120,7 +120,7 @@ const Pixelado: React.FC<{ texto: string; size: number }> = ({
   </>
 );
 type Pal = { t: string; cor?: string };
-const Titulo: React.FC<{
+export const Titulo: React.FC<{
   f: number;
   at: number;
   linhas: Pal[][];
@@ -168,7 +168,7 @@ const Titulo: React.FC<{
   </div>
 );
 // janelinha de computador com barra de título
-const Janela: React.FC<{
+export const Janela: React.FC<{
   f: number;
   at: number;
   y: number;
@@ -227,7 +227,7 @@ const Janela: React.FC<{
   );
 };
 // linha de texto dentro da janela, que aparece no tempo da fala
-const Linha: React.FC<{
+export const Linha: React.FC<{
   f: number;
   at: number;
   children: React.ReactNode;
@@ -254,7 +254,7 @@ const Linha: React.FC<{
     </div>
   );
 };
-const Selo: React.FC<{
+export const Selo: React.FC<{
   f: number;
   at: number;
   x: number;

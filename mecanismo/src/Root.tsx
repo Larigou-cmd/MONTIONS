@@ -70,6 +70,12 @@ import {
   DURATION as DURATION_INSULINA,
 } from "./insulina/Video";
 
+import {
+  VideoSarampo,
+  CapaSarampo,
+  DURATION as DURATION_SARAMPO,
+} from "./sarampo/Video";
+
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -347,6 +353,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="InsulinaCapa"
       component={CapaInsulina}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Sarampo"
+      component={VideoSarampo}
+      durationInFrames={DURATION_SARAMPO}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SarampoCapa"
+      component={CapaSarampo}
       durationInFrames={1}
       fps={FPS}
       width={1080}

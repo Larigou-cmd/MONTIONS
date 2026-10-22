@@ -10,10 +10,9 @@ import { OUT, P, SNAP, it } from "../lib";
 import { EMOJI } from "../aas/ui";
 import { JORNAL, MAO, SANS } from "../fonts";
 import { DURATION, PARTES, T } from "./Video";
-import palavras from "../../audio/sarampo_palavras.json";
 
 // "Notícias da Farmácia" #2 (sarampo) no estilo Vox: papel bege com textura, recortes de jornal,
-// marca-texto amarelo, círculos e setas à mão em vermelho e a câmera se aproximando devagar.
+// marca-texto amarelo, círculos e setas à mão em vermelho e a câmera se aproximando devagar. Sem legenda.
 // Mesma narração e mesmos tempos do sarampo/Video.tsx.
 const V = {
   papel: "#efe9dc",
@@ -285,56 +284,6 @@ const Capitulo: React.FC<{ f: number; at: number; kicker: string; children: Reac
     <div style={{ position: "absolute", left: 70, width: 940, top, opacity: k, transform: `translateY(${(1 - k) * 30}px)` }}>
       <Kicker>{kicker}</Kicker>
       <div style={{ fontFamily: JORNAL, fontWeight: 900, fontSize: size, lineHeight: 1.05, color: V.tinta, marginTop: 10 }}>{children}</div>
-    </div>
-  );
-};
-
-// ---------- legenda palavra por palavra ----------
-type Pw = { text: string; start: number; end: number };
-const PAL = (palavras as { words: Pw[] }).words;
-const BLOCOS: Pw[][] = (() => {
-  const out: Pw[][] = [];
-  let cur: Pw[] = [];
-  PAL.forEach((w) => {
-    cur.push(w);
-    if (cur.length >= 5 || /[.?!:,]$/.test(w.text)) {
-      out.push(cur);
-      cur = [];
-    }
-  });
-  if (cur.length) out.push(cur);
-  return out;
-})();
-const Legenda: React.FC<{ f: number }> = ({ f }) => {
-  const t = f / 30;
-  if (f >= T.siga - 4) return null;
-  const b = BLOCOS.find((bl, i) => t >= bl[0].start - 0.05 && (i === BLOCOS.length - 1 || t < BLOCOS[i + 1][0].start - 0.05));
-  if (!b || t > b[b.length - 1].end + 0.6) return null;
-  return (
-    <div style={{ position: "absolute", left: 60, width: 960, top: 1560, display: "flex", justifyContent: "center" }}>
-      <div
-        style={{
-          background: V.tinta,
-          padding: "14px 24px",
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: "4px 12px",
-          fontFamily: SANS,
-          fontWeight: 800,
-          fontSize: 50,
-          lineHeight: 1.15,
-        }}
-      >
-        {b.map((w, i) => {
-          const ativa = t >= w.start - 0.03 && t < (b[i + 1]?.start ?? w.end + 0.6);
-          return (
-            <span key={i} style={{ color: ativa ? V.amarelo : V.creme }}>
-              {w.text.replace(/[.,:]$/, "")}
-            </span>
-          );
-        })}
-      </div>
     </div>
   );
 };
@@ -781,7 +730,6 @@ export const VideoSarampoVox: React.FC = () => {
       <S10 f={f} />
       <S11 f={f} />
       <S12 f={f} />
-      <Legenda f={f} />
       <Audio src={staticFile("sarampo/narracao.mp3")} />
       <Audio src={staticFile("sarampo/musica.wav")} volume={(fr) => 0.07 * (1 - P(fr, DURATION - 60, DURATION))} />
       {SFX.map(([fr, name, vol], i) => (

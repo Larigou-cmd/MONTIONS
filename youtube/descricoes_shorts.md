@@ -773,7 +773,7 @@ Sertralina: você sabe como ela funciona? 🧠💊
 
 ---
 
-## Notícias da Farmácia #2: preciso tomar a vacina do sarampo de novo? (`mecanismo/out/noticias_farmacia_02_sarampo.mp4`, capa `youtube/capas/capa_noticias_02_sarampo_vox.png`)
+## Notícias da Farmácia #2: preciso tomar a vacina do sarampo de novo? (versão Vox sem legenda: `mecanismo/out/noticias_farmacia_02_sarampo_vox.mp4`, capa `youtube/capas/capa_noticias_02_sarampo_vox.png`; versão pixel com a repórter: `mecanismo/out/noticias_farmacia_02_sarampo_pixel.mp4`, capa `youtube/capas/capa_noticias_02_sarampo.png`)
 
 ### YouTube Shorts
 

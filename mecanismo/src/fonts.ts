@@ -10,3 +10,5 @@ for (const f of files) {
 export const SERIF = "'Source Serif Four', serif";
 export const SANS = "Inter, sans-serif";
 export const DISPLAY = "Unbounded, sans-serif";
+export const MAO = "Caveat, cursive"; // letra à mão (estilo Vox)
+export const JORNAL = "'Playfair Display', serif"; // manchete de jornal (estilo Vox)

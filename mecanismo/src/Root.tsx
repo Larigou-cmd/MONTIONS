@@ -76,6 +76,8 @@ import {
   DURATION as DURATION_SARAMPO,
 } from "./sarampo/Video";
 
+import { VideoSarampoVox, CapaSarampoVox } from "./sarampo/Vox";
+
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -369,6 +371,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="SarampoCapa"
       component={CapaSarampo}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SarampoVox"
+      component={VideoSarampoVox}
+      durationInFrames={DURATION_SARAMPO}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SarampoVoxCapa"
+      component={CapaSarampoVox}
       durationInFrames={1}
       fps={FPS}
       width={1080}

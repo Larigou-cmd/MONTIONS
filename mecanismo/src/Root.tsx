@@ -91,6 +91,12 @@ import { VideoRim, DURATION_RIM } from "./rim/Video";
 import { VideoLei8080, DURATION as DURATION_LEI8080 } from "./lei8080/Video";
 import { CapaLei8080Ep1 } from "./lei8080/Capa";
 
+import {
+  VideoAntidotos,
+  CapaAntidotos,
+  DURATION as DURATION_ANTIDOTOS,
+} from "./antidotos/Video";
+
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -500,6 +506,22 @@ export const RemotionRoot: React.FC = () => (
       fps={FPS}
       width={1280}
       height={720}
+    />
+    <Composition
+      id="Antidotos"
+      component={VideoAntidotos}
+      durationInFrames={DURATION_ANTIDOTOS}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="AntidotosCapa"
+      component={CapaAntidotos}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
     />
   </>
 );

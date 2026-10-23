@@ -45,8 +45,9 @@
 - **Próximo vídeo (em andamento):** pílula do dia seguinte. O roteiro foi aprovado e está em `pilula_dia_seguinte/roteiro.md`. Falta a narração; depois vêm as prévias, o vídeo, a capa e o pin.
 - **Metformina e diarreia** (série "Começou a tomar X e sentiu Y?"): `src/metformina/`, vídeo `out/metformina_diarreia.mp4`.
 - **Quadro "Notícias da Farmácia":** estilo explicadora (fundo claro, títulos pixel, legenda palavra por palavra) com a repórter pixel de microfone no canto. O passo a passo para novos episódios está em `prompts/prompt_noticias_da_farmacia.md`. O episódio #1 (botox falsificado) está em `src/noticiaBotox/`.
-- Capas prontas: `youtube/capas/`.
-- Textos para YouTube e TikTok: `youtube/descricoes_shorts.md`.
+- Capas prontas: `youtube/capas/` (nome `capa_<tema>.png`).
+- Textos de postagem: um arquivo por vídeo em `youtube/textos/NN_<tema>.md`, com índice em `youtube/README.md`. Vídeo novo = arquivo novo com o próximo número + linha no índice.
+- **Antídotos** (flumazenil e N-acetilcisteína, estilo Vox): `src/antidotos/Video.tsx` (Id `Antidotos`), reaproveita as peças exportadas de `src/sarampo/Vox.tsx`.
 
 ## Pinterest
 - 5 pins de 1000×1500 em `pinterest/`: jejum, tosse, sinvastatina à noite, sinvastatina e dor muscular, amoxicilina.
@@ -78,7 +79,7 @@
 ## Série "Lei 8.080 para concursos" (YouTube, vídeo LONGO horizontal)
 - Formato: 1920×1080, 7 a 15 min. Estrutura: mapa da lei → lei seca "digitada" com grifos no tempo da fala → explicação → pegadinha (carimbo ERRADO com tremida) → questões inéditas com 5 s de "pause e responda" → resumo → "Me siga para mais dicas sobre leis" → "Bons estudos!".
 - Mesmo canal da farmacologia. Plano da série e roteiros: `concurso_lei8080/` (plano_serie.md, roteiro_ep01.md, narracao_ep01.txt).
-- Código: `mecanismo/src/lei8080/Video.tsx` (Id `Lei8080Ep1`) e `Capa.tsx` (Id `Lei8080Ep1Capa`, capa 1280×720 em `youtube/capas/`). Textos: `youtube/descricoes_lei8080.md`.
+- Código: `mecanismo/src/lei8080/Video.tsx` (Id `Lei8080Ep1`) e `Capa.tsx` (Id `Lei8080Ep1Capa`, capa 1280×720 em `youtube/capas/`). Textos: `youtube/textos/lei8080.md`.
 - Tempos: em SEGUNDOS da narração original; `fr()` soma as pausas de 5 s (lista `CORTES`). A narração com pausas é gerada por ffmpeg (`public/lei8080/narracao.mp3`).
 - Transcrição local: faster-whisper (modelo small), lendo o áudio convertido pelo ffmpeg para 16 kHz (o PyAV do Python 3.14 falha).
 - Episódio 1 (Arts. 1º ao 4º): FINALIZADO. Próximo: Ep. 2, Arts. 5º e 6º (conferir na internet as Leis 15.390/2026 e 15.471/2026 antes).

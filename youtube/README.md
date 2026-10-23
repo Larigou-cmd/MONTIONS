@@ -30,7 +30,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 20 | A origem dos remédios #1 — Captopril e a jararaca | [20_origem_captopril.md](textos/20_origem_captopril.md) | [capa_origem_captopril.png](capas/capa_origem_captopril.png) |
 | 21 | Por que dá cãibra de madrugada? | [21_caibra.md](textos/21_caibra.md) | [capa_caibra.png](capas/capa_caibra.png) |
 | 22 | O que acontece no corpo quando a glicose sobe? | [22_glicose.md](textos/22_glicose.md) | [capa_glicose.png](capas/capa_glicose.png) |
-| 23 | O rim e os diuréticos | [23_rim_diureticos.md](textos/23_rim_diureticos.md) | — (capa_rim.png não está na pasta) |
+| 23 | O rim e os diuréticos | [23_rim_diureticos.md](textos/23_rim_diureticos.md) | [capa_rim.png](capas/capa_rim.png) |
 | 24 | Começou a tomar metformina e veio a diarreia? | [24_metformina_diarreia.md](textos/24_metformina_diarreia.md) | [capa_metformina.png](capas/capa_metformina.png) |
 | 25 | Notícias da Farmácia #1: botox falsificado | [25_noticias_01_botox.md](textos/25_noticias_01_botox.md) | [capa_noticias_01_botox.png](capas/capa_noticias_01_botox.png) |
 | 26 | Como a metformina age: do corpo à molécula | [26_metformina_mecanismo.md](textos/26_metformina_mecanismo.md) | [capa_metformina_mecanismo.png](capas/capa_metformina_mecanismo.png) |

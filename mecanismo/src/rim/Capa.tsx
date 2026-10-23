@@ -5,6 +5,7 @@ import { SANS, SERIF } from "../fonts";
 import { Grain, W, rgba } from "../lib";
 
 // Capa (thumbnail vertical 1080×1920) de "O rim e os diuréticos" — fundo: quadro do clipe do rim (Google Vids).
+// Os 20% de baixo ficam livres por causa do contador do TikTok.
 const AZUL = "#60a5fa";
 
 export const CapaRim: React.FC = () => (
@@ -18,7 +19,7 @@ export const CapaRim: React.FC = () => (
       <br />
       POR DIA
     </div>
-    <div style={{ position: "absolute", top: 1540, width: W, textAlign: "center", fontFamily: SERIF, fontWeight: 600, fontSize: 64, lineHeight: 1.15, color: C.ink }}>
+    <div style={{ position: "absolute", top: 1330, width: W, textAlign: "center", fontFamily: SERIF, fontWeight: 600, fontSize: 64, lineHeight: 1.15, color: C.ink, textShadow: "0 0 18px rgba(5,8,20,0.95), 0 4px 30px rgba(5,8,20,0.9)" }}>
       e onde age cada
       <br />
       <span style={{ color: AZUL }}>diurético</span>

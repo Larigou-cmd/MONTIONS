@@ -88,6 +88,7 @@ import { CapaCaibra } from "./caibra/Capa";
 import { VideoGlicose, DURATION_GLICOSE } from "./glicose/Video";
 import { CapaGlicose } from "./glicose/Capa";
 import { VideoRim, DURATION_RIM } from "./rim/Video";
+import { CapaRim } from "./rim/Capa";
 import { VideoLei8080, DURATION as DURATION_LEI8080 } from "./lei8080/Video";
 import { CapaLei8080Ep1 } from "./lei8080/Capa";
 
@@ -487,6 +488,14 @@ export const RemotionRoot: React.FC = () => (
       id="Rim"
       component={VideoRim}
       durationInFrames={DURATION_RIM}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="RimCapa"
+      component={CapaRim}
+      durationInFrames={1}
       fps={FPS}
       width={1080}
       height={1920}

@@ -15,12 +15,12 @@ Modelo 1, cerca de 2 minutos. **Status:** roteiro aprovado com o gancho novo. Fa
 10. **Me siga.**
 11. **Tela final:** "Consulte um profissional de saúde para orientações."
 
-## Texto da fala (ElevenLabs, voz Juliana, eleven_v4, sem tags)
+## Texto da fala (ElevenLabs, voz Juliana, eleven_v4, sem tags) — versão atual
 Você sabe como a pílula do dia seguinte funciona? Muita gente acha que ela é abortiva, ou que funciona a qualquer hora. Vem entender o que ela realmente faz no seu corpo.
 
-A pílula do dia seguinte mais usada no Brasil é o levonorgestrel, um hormônio parecido com a progesterona. Ela pode ser tomada em dose única de um vírgula cinco miligrama.
+A pílula do dia seguinte mais usada no Brasil é o levonorgestrel, conhecido como Postinor Uno, Pozato Uni, Diad, Poslov, entre outros. Ele é um hormônio parecido com a progesterona. Ela pode ser tomada em dose única de um vírgula cinco miligrama.
 
-Para entender como ela age, lembra de uma coisa: os espermatozoides podem sobreviver até cinco dias dentro do corpo, esperando o óvulo ser liberado.
+Para entender como ela age, lembra de uma coisa: alguns espermatozoides podem sobreviver até cinco dias dentro do corpo, esperando o óvulo ser liberado.
 
 Para o óvulo sair do ovário, o cérebro manda um sinal: o pico de um hormônio chamado LH. A pílula age justamente aí. Ela bloqueia ou atrasa esse pico, e a ovulação não acontece. Sem óvulo, os espermatozoides não têm o que encontrar.
 
@@ -32,7 +32,7 @@ Outro erro comum: achar que ela protege o resto do mês. Não protege. Ela vale 
 
 Fique atenta: se vomitar até três horas depois de tomar, procure orientação, porque pode ser preciso repetir a dose. E é normal a próxima menstruação vir um pouco antes ou um pouco depois.
 
-A pílula do dia seguinte é um método de emergência, não um anticoncepcional de rotina. Para se proteger todos os dias, converse com um profissional de saúde sobre o método ideal para você.
+Então lembre: o levonorgestrel, o famoso Postinor Uno, é um método de emergência, não um anticoncepcional de rotina. Para se proteger todos os dias, converse com um profissional de saúde sobre o método ideal para você.
 
 Me siga para mais dicas de farmacologia e curiosidades sobre a área.
 
@@ -42,4 +42,5 @@ Me siga para mais dicas de farmacologia e curiosidades sobre a área.
 - OMS Prequalification – documento do produto: https://extranet.who.int/prequal/sites/default/files/whopar_files/RH032part4v3.pdf
 - MSF – Levonorgestrel para anticoncepção de urgência: https://medicalguidelines.msf.org/es/node/431
 - Fiocruz/RETS – Contracepção de emergência: https://www.rets.epsjv.fiocruz.br/print/1993
+- Wilcox AJ et al. Timing of sexual intercourse in relation to ovulation. N Engl J Med 1995 (janela fértil de 6 dias)
 - Bula levonorgestrel 1,5 mg (Cifarma): https://www.sara.com.br/bula-do-paciente-levonorgestrel-15-mg-comprimido-com-1-cifarma/7908020502043

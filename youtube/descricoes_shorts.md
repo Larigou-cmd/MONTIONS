@@ -531,6 +531,26 @@ Você toma remédio junto com o café da manhã? ☕💊 Talvez ele esteja funci
 
 ---
 
+## Você sabe como a pílula do dia seguinte funciona? (`mecanismo/out/pilula_dia_seguinte_v2.mp4`, com a narração da Larissa; capa `youtube/capas/capa_pilula.png`)
+
+### YouTube Shorts
+
+**Título:** Pílula do dia seguinte: como ela REALMENTE funciona? 💊 3 mitos #shorts
+
+**Descrição:**
+A pílula do dia seguinte (levonorgestrel 1,5 mg, conhecida como Postinor Uno, Pozato Uni, Diad, Poslov e outras) é um dos remédios mais cercados de dúvidas. Entenda:
+🧠 Como age: bloqueia ou atrasa o pico de LH, e a ovulação não acontece
+❌ Mito 1: "é abortiva". Não interrompe uma gravidez que já começou
+❌ Mito 2: "funciona a qualquer hora". Pode ser usada em até 5 dias, mas é mais eficaz nas primeiras 72 h. Quanto antes, melhor
+❌ Mito 3: "protege o resto do mês". Vale só para aquela relação e não protege contra ISTs
+⚠️ Vomitou até 3 h depois? Procure orientação: pode ser preciso repetir a dose
+🚨 É um método de EMERGÊNCIA, não um anticoncepcional de rotina
+
+Referências: FIGO – Mechanism of Action for Emergency Contraception; ICEC/OMS – Segurança do levonorgestrel; MSF – Levonorgestrel para anticoncepção de urgência; Fiocruz/RETS – Contracepção de emergência; bula do levonorgestrel 1,5 mg.
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações. Narração gerada com voz sintética.
+
+#piluladodiaseguinte #levonorgestrel #contracepcao #saudedamulher #farmacologia #farmacia #saude #shorts
+
 ## Começou a tomar metformina e veio a diarreia? (`mecanismo/out/metformina_diarreia.mp4`, capa `youtube/capas/capa_metformina.png`)
 
 ### YouTube Shorts
@@ -553,6 +573,90 @@ Referências: metanálise sobre intolerância gastrointestinal da metformina (Fr
 ### TikTok
 
 **Legenda:**
+A pílula do dia seguinte é abortiva? Funciona a qualquer hora? Protege o mês todo? 💊 Os 3 mitos que muita gente ainda acredita 👇 Manda pra uma amiga!
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
+
+#piluladodiaseguinte #levonorgestrel #saudedamulher #anticoncepcional #farmacologia #farmacia #estudantedefarmacia
+
+---
+
+## A origem dos remédios #1 — Captopril e a jararaca (`mecanismo/out/origem_captopril.mp4`, capa `youtube/capas/capa_origem_captopril.png`)
+
+### YouTube Shorts
+
+**Título:** O remédio de pressão que nasceu do VENENO de uma cobra brasileira 🐍💊 #shorts
+
+**Descrição:**
+O captopril, um dos remédios de pressão mais famosos do mundo, começou com a jararaca 🐍
+🇧🇷 Nos anos 60, em Ribeirão Preto, o cientista Sérgio Henrique Ferreira descobriu no veneno moléculas que faziam a pressão cair
+🔬 Em Londres, no laboratório de John Vane, a virada: elas bloqueavam a ECA, a enzima que faz a pressão subir
+💊 Em 1975, a Squibb transformou a ideia em comprimido: o captopril
+O mundo lembra do remédio. Poucos lembram da cobra… e do brasileiro que começou tudo.
+
+Série "A origem dos remédios" #1.
+Fontes: Revista Pesquisa FAPESP ("O rebelde da ciência"); USP ("Veneno valioso"); The Pharmaceutical Journal ("From snake venom to ACE inhibitor"); Univ. de Bristol (Molecule of the Month).
+Imagens: Wikimedia Commons (jararaca: Uptoblue; John Vane: Wellcome Collection, CC BY 4.0; anúncio Squibb 1923, domínio público). Música: "Documentary Piano", leberch (Pixabay).
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações. Narração gerada com voz sintética.
+
+#captopril #jararaca #historiadamedicina #farmacologia #ciencianobrasil #pressaoalta #farmacia #shorts
+
+### TikTok
+
+**Legenda:**
+Você sabia que um dos remédios de pressão mais famosos do mundo veio do veneno da jararaca? 🐍➡️💊 E quem começou tudo foi um cientista brasileiro 🇧🇷 #1 da série "A origem dos remédios" 👇
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
+
+#captopril #jararaca #historiadamedicina #ciencianobrasil #farmacologia #farmacia #curiosidades
+
+### Kwai
+
+**Legenda:**
+O remédio de pressão que veio do VENENO da jararaca 🐍➡️💊 Um cientista brasileiro descobriu tudo nos anos 60 e quase ninguém conhece essa história 🇧🇷 Você sabia? Comenta aqui 👇
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
+
+#captopril #jararaca #curiosidades #historia #ciencia #brasil #farmacia #saude #kwai
+
+### Instagram (Reels)
+
+**Legenda:**
+Um dos remédios de pressão mais famosos do mundo nasceu do veneno de uma cobra brasileira 🐍
+
+Nos anos 60, em Ribeirão Preto, o cientista Sérgio Henrique Ferreira quis entender por que a picada da jararaca derrubava a pressão. No veneno, ele encontrou pequenas moléculas que faziam exatamente isso.
+
+Em Londres, no laboratório de John Vane, veio a virada: essas moléculas bloqueavam a ECA, a enzima que faz a pressão subir. Em 1975, a Squibb transformou a ideia em comprimido: o captopril 💊
+
+O mundo lembra do remédio. Poucos lembram da cobra… e do brasileiro que começou tudo 🇧🇷
+
+Você conhecia essa história? Me conta nos comentários 👇
+Salva para mostrar para alguém e me segue para mais "A origem dos remédios".
+
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações.
+Fontes: Pesquisa FAPESP; USP; The Pharmaceutical Journal.
+
+#captopril #historiadamedicina #farmacologia #ciencianobrasil #farmacia
+
+---
+
+## Por que dá cãibra de madrugada? (`mecanismo/out/caibra.mp4`, capa `youtube/capas/capa_caibra.png`)
+
+### YouTube Shorts
+
+**Título:** Por que dá CÃIBRA de madrugada? O que acontece DENTRO do músculo 🔬 #shorts
+
+**Descrição:**
+Mais da metade dos adultos já acordou com a perna travada de dor. Entenda o que acontece dentro do músculo:
+⚡ O nervo que comanda a panturrilha fica agitado e dispara sinais sem parar
+🔒 A fibra se contrai sozinha… e não solta
+🌙 De madrugada, o pé fica esticado para baixo e a panturrilha passa horas encurtada; cansaço, pouca água e alguns remédios ajudam a disparar
+✅ Na hora da dor: puxe a ponta do pé na sua direção. O sensor do tendão manda o músculo relaxar
+💊 Magnésio: para a maioria das pessoas, não previne cãibra
+Se acontece sempre, procure um profissional de saúde e leve a lista dos seus remédios.
+
+Fontes: Allen & Kirby, Nocturnal Leg Cramps, American Family Physician 2012; Am Fam Physician 2017; Cochrane 2020 (magnésio).
+Animações 3D geradas com IA (OpenArt).
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações. Narração gerada com voz sintética.
+
+#caibra #fisiologia #farmacologia #saude #musculo #sono #farmacia #shorts
 Começou a tomar metformina e o intestino soltou? 🚽💊 Calma, é muito comum e tem como ajudar 👇 Manda pra quem acabou de começar a metformina!
 ⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
 
@@ -649,6 +753,61 @@ Referências: bula da losartana potássica; DrugBank DB00678.
 ### TikTok
 
 **Legenda:**
+Acordou com a perna travada de madrugada? 😫 Olha o que acontece DENTRO do músculo na hora da cãibra 🔬 e o truque para aliviar na hora 👇
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
+
+#caibra #fisiologia #saude #curiosidades #farmacia #dicadesaude #estudantedefarmacia
+
+### Kwai
+
+**Legenda:**
+Cãibra de madrugada? 😫 Veja o que acontece dentro do seu músculo e o truque que alivia na hora ✅ Já aconteceu com você? Comenta aqui 👇
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
+
+#caibra #saude #dicas #curiosidades #corpohumano #farmacia #kwai
+
+### Instagram (Reels)
+
+**Legenda:**
+Você já acordou de madrugada com a perna travada de dor? 😫 Mais da metade dos adultos já passou por isso.
+
+Na cãibra, o nervo que comanda a panturrilha fica agitado e dispara sinais sem parar. A fibra do músculo se contrai sozinha… e não solta 🔒
+
+E por que de madrugada? Deitada, o pé fica esticado para baixo e a panturrilha passa horas encurtada. Cansaço, pouca água e alguns remédios ajudam a disparar.
+
+✅ O truque na hora: puxe a ponta do pé na sua direção. Um sensor no tendão manda o músculo relaxar.
+💊 E o magnésio? Para a maioria das pessoas, ele não previne a cãibra.
+
+Se acontece sempre, procure um profissional de saúde e leve a lista dos seus remédios.
+Salva para lembrar na próxima cãibra e me segue para mais 🔬
+
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
+
+#caibra #fisiologia #saude #farmacia #corpohumano
+
+---
+
+## O que acontece no corpo quando a glicose sobe? (`mecanismo/out/glicose.mp4`, capa `youtube/capas/capa_glicose.png`)
+
+### YouTube Shorts
+
+**Título:** O que acontece no seu corpo quando a GLICOSE sobe? 🔑 A insulina é a chave #shorts
+
+**Descrição:**
+Você comeu um pão… e o seu corpo entra em ação:
+🍞 A glicose do sangue sobe em poucos minutos
+✨ As células beta do pâncreas liberam insulina
+🔑 A insulina é a chave: abre as portas do músculo e da gordura para a glicose entrar
+🔋 No fígado, a sobra vira glicogênio, um estoque de energia
+⏱️ Em cerca de 2 horas, a glicose volta ao normal; se cair demais, o glucagon solta o estoque
+🔒 No diabetes tipo 2, a fechadura emperra: é a resistência à insulina
+💊 A metformina freia a produção de glicose no fígado
+
+Fontes: Guyton & Hall (fisiologia), Farmacologia Ilustrada; referência de glicemia pós-prandial (< 140 mg/dL em 2 h).
+Imagens geradas com IA (OpenArt).
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações. Narração gerada com voz sintética.
+
+#glicose #insulina #diabetes #metformina #fisiologia #farmacologia #saude #shorts
 Toma losartana pra pressão? ❤️ Veja o que ela faz no seu coração e nos seus vasos, e por que ela quase não dá aquela tosse seca 👇 Manda pra quem toma remédio de pressão!
 ⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
 
@@ -744,6 +903,60 @@ Referências: TelessaúdeRS-UFRGS; ANAD (Associação Nacional de Atenção ao D
 ### TikTok
 
 **Legenda:**
+Comeu um pão? 🍞 Olha o que acontece dentro do seu corpo quando a glicose sobe 🔑 (e por que no diabetes a "fechadura" emperra) 👇
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
+
+#glicose #insulina #diabetes #fisiologia #saude #farmacia #estudantedefarmacia
+
+### Kwai
+
+**Legenda:**
+Você sabe o que acontece no seu corpo depois de comer um pão? 🍞 A insulina funciona como uma CHAVE 🔑 Entenda em 1 minuto e manda pra quem tem diabetes 👇
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
+
+#glicose #diabetes #insulina #saude #curiosidades #farmacia #kwai
+
+### Instagram (Reels)
+
+**Legenda:**
+Você comeu um pão 🍞 e, em poucos minutos, a glicose do seu sangue começa a subir. E o seu corpo entra em ação:
+
+✨ As células beta do pâncreas liberam insulina
+🔑 A insulina funciona como uma chave: abre as portas do músculo e da gordura para a glicose entrar
+🔋 No fígado, a sobra vira glicogênio, um estoque de energia
+⏱️ Em cerca de 2 horas, tudo volta ao normal. E, se a glicose cair demais, o glucagon libera esse estoque
+
+No diabetes tipo 2, a chave existe, mas a fechadura emperra 🔒 É a resistência à insulina, e a glicose fica sobrando no sangue. É aí que entram remédios como a metformina.
+
+Salva para entender de vez e manda para alguém que tem diabetes 💛
+
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
+
+#glicose #insulina #diabetes #fisiologia #farmacia
+
+---
+
+## O rim e os diuréticos (`mecanismo/out/rim_diureticos.mp4`, capa `youtube/capas/capa_rim.png`)
+
+### YouTube Shorts
+
+**Título:** Seus rins filtram 180 LITROS por dia 😱 E onde age cada diurético #shorts
+
+**Descrição:**
+Os seus rins filtram quase 180 litros de sangue por dia, e só cerca de 1 litro vira urina. Entenda:
+🧺 Cada rim tem cerca de 1 milhão de néfrons; o glomérulo é a "peneira"
+🔄 Mais de 99% da água e do sal voltam para o sangue
+💊 O diurético faz o rim devolver menos sal, e onde vai o sal, vai a água: a pressão cai
+📍 Furosemida: alça de Henle, o mais forte
+📍 Hidroclorotiazida: túbulo distal, muito usada na pressão alta
+📍 Espironolactona: ducto coletor, bloqueia a aldosterona e poupa potássio
+🩸 Furosemida e HCTZ podem baixar o potássio; a espironolactona pode aumentar. Exames em dia!
+
+Fontes: Guyton & Hall (fisiologia renal), Farmacologia Ilustrada.
+Animações geradas com IA (Google Vids / Veo).
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações. Narração gerada com voz sintética.
+
+#rim #diuretico #furosemida #hidroclorotiazida #espironolactona #farmacologia #fisiologia #shorts
 Você guarda a insulina na porta da geladeira? ❄️ Então para tudo! Veja onde guardar a fechada, a que está em uso e como levar em viagem 👇 Manda pra quem usa insulina!
 ⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
 
@@ -804,6 +1017,40 @@ Fontes: Ministério da Saúde (gov.br/saude), Agência Brasil, SBIm.
 ### TikTok
 
 **Legenda:**
+Seus rins filtram 180 LITROS por dia 😱 e você faz só 1 litro de xixi. E onde age cada diurético? Furosemida, HCTZ e espironolactona 👇
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
+
+#rim #diuretico #furosemida #farmacologia #fisiologia #farmacia #estudantedefarmacia
+
+### Kwai
+
+**Legenda:**
+Sabia que os seus rins filtram 180 litros por dia? 😱 Veja como funciona o remédio que "faz fazer xixi" e por que ele baixa a pressão 💊 Manda pra quem toma remédio de pressão 👇
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
+
+#rim #diuretico #pressaoalta #saude #curiosidades #farmacia #kwai
+
+### Instagram (Reels)
+
+**Legenda:**
+Seus rins filtram quase 180 litros de sangue por dia 😱 e só cerca de 1 litro vira xixi.
+
+🧺 Cada rim tem cerca de 1 milhão de néfrons, os filtros. O glomérulo funciona como uma peneira.
+🔄 Mais de 99% da água e do sal voltam para o sangue.
+💊 O diurético faz o rim devolver menos sal. E onde vai o sal, vai a água: mais xixi e a pressão cai.
+
+Onde age cada um:
+📍 Furosemida: alça de Henle (o mais forte)
+📍 Hidroclorotiazida: túbulo distal (muito usada na pressão alta)
+📍 Espironolactona: ducto coletor (bloqueia a aldosterona e poupa potássio)
+
+🩸 Atenção ao potássio: furosemida e HCTZ podem baixar; a espironolactona pode aumentar. Exames em dia!
+
+Salva para estudar e manda para quem toma diurético 💙
+
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
+
+#rim #diuretico #farmacologia #fisiologia #farmacia
 Preciso tomar a vacina do sarampo de novo? 💉 Depois do alerta do Ministério da Saúde, muita gente ficou com essa dúvida. Veja quem já está protegido, quem precisa tomar e quem NÃO pode tomar 👇 Manda pra família!
 ⚠️ Conteúdo educativo. Consulte um profissional de saúde para orientações.
 

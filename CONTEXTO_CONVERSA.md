@@ -16,8 +16,9 @@
 4. **Tela final:** "Consulte um profissional de saúde para orientações." Antes dela vem a cena "Me siga para mais dicas de farmacologia e curiosidades sobre a área".
 5. **Entrega:**
    - Mandar o MP4 no chat.
-   - Mandar título, descrição e legenda para o YouTube e o TikTok.
-   - Lembrar de marcar a voz de IA: no TikTok, "Conteúdo gerado por IA"; no YouTube, "conteúdo alterado ou sintético: Sim".
+   - Quando o vídeo estiver realmente finalizado (depois do "aprovado"), salvar uma cópia do MP4 em `C:\Users\laris\Downloads\Videos\videos reels\`, com o nome do tema.
+   - Mandar título, descrição e legenda para o YouTube, o TikTok, o Kwai e o Instagram.
+   - Lembrar de marcar a voz de IA: no TikTok, "Conteúdo gerado por IA"; no YouTube, "conteúdo alterado ou sintético: Sim"; no Instagram, "Rótulo de IA"; no Kwai, a opção de IA se aparecer.
 6. **Duração:** no máximo **3 minutos** (limite de Shorts e Reels).
 7. **Música de fundo:** suave, com acordes calmos, em volume baixo (0.07).
    - Gerar com `python3 mecanismo/scripts/musica_calma.py <segundos> <saida.wav>`.
@@ -73,3 +74,19 @@
   - Conferir o resultado com as pausas encontradas pelo `silencedetect` do ffmpeg.
 - **Encurtar pausas:** cortar cada silêncio para 0,32 s e depois aplicar `atempo` do ffmpeg até caber em 3 min.
 - **Arquivos fora do GitHub:** a pasta `out/` (MP4s) está no `.gitignore`.
+
+## Série "Lei 8.080 para concursos" (YouTube, vídeo LONGO horizontal)
+- Formato: 1920×1080, 7 a 15 min. Estrutura: mapa da lei → lei seca "digitada" com grifos no tempo da fala → explicação → pegadinha (carimbo ERRADO com tremida) → questões inéditas com 5 s de "pause e responda" → resumo → "Me siga para mais dicas sobre leis" → "Bons estudos!".
+- Mesmo canal da farmacologia. Plano da série e roteiros: `concurso_lei8080/` (plano_serie.md, roteiro_ep01.md, narracao_ep01.txt).
+- Código: `mecanismo/src/lei8080/Video.tsx` (Id `Lei8080Ep1`) e `Capa.tsx` (Id `Lei8080Ep1Capa`, capa 1280×720 em `youtube/capas/`). Textos: `youtube/descricoes_lei8080.md`.
+- Tempos: em SEGUNDOS da narração original; `fr()` soma as pausas de 5 s (lista `CORTES`). A narração com pausas é gerada por ffmpeg (`public/lei8080/narracao.mp3`).
+- Transcrição local: faster-whisper (modelo small), lendo o áudio convertido pelo ffmpeg para 16 kHz (o PyAV do Python 3.14 falha).
+- Episódio 1 (Arts. 1º ao 4º): FINALIZADO. Próximo: Ep. 2, Arts. 5º e 6º (conferir na internet as Leis 15.390/2026 e 15.471/2026 antes).
+- Ideias aprovadas para depois: linha do tempo das alterações da lei; Shorts verticais de 30 s com cada pegadinha, levando para a aula completa.
+
+## VoiceStudio (voz local, testado em 2026-10-20/21)
+- Instalado (v0.5.6), driver NVIDIA atualizado para 617.42 (GTX 1650, 4 GB). API local em http://127.0.0.1:3900 (`POST /generate`, campos `text`, `language=Portuguese`, `instruct="female, young adult, moderate pitch"`, `seed=42`).
+- Resultado: pronúncia boa na maior parte, mas com tropeços (~2 por minuto). Gera ~7 min por minuto de áudio. Por enquanto NÃO usar para vídeos publicados; a usuária decidiu não seguir com nenhuma opção.
+- Existe um perfil "Juliana" (clone) no VoiceStudio: não usar (voz do ElevenLabs licenciada só lá).
+- Texto da Lei 8.080 pronto para audiolivro, em 16 partes: `concurso_lei8080/audiolivro/*.txt` (~64 min). Amostra: `audiolivro/audio/01_titulo_i_amostra.mp3`.
+- Microfone interno estava mudo (captava -91 dB); provável tecla F4 de mudo do Lenovo.

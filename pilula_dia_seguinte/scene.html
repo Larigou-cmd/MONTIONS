@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Pílula do dia seguinte</title>
+<style>html,body{margin:0;background:#000}canvas{display:block}</style>
+<script src="words.js"></script>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// Vídeo "PILULA.EXE" (Modelo 2): tudo é desenhado por draw(t), t em segundos da narração (narracao.mp3, voz da Juliana).
+// Os tempos abaixo vêm da transcrição palavra a palavra (words.js). Roteiro: roteiro.md.
+const W = 1080, H = 1920;
+const NARR = 101.52;            // duração da narração
+window.END = NARR + 3.2;       // segura a tela final um pouco depois da última palavra
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const G = '#39ff6a', A = '#ffc23d', R = '#ff4d6d', CY = '#3de0ff', BG = '#020c06', WH = '#eafff0', PK = '#ff8ad8';
+const SILK = "'Silk'", VT = "'VT'";
+
+// ---------- utilidades ----------
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const k = (t, a, d = 0.35) => cl((t - a) / d);
+const eo = x => 1 - Math.pow(1 - x, 3);
+const back = x => { const c = 1.9; x = cl(x); return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const lerp = (a, b, u) => a + (b - a) * u;
+const rnd = i => { const s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+function rgba(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; }
+
+function text(s, x, y, size, { font = VT, color = WH, align = 'left', alpha = 1, glow = 0, bold = false, base = 'alphabetic' } = {}) {
+  if (alpha <= 0) return;
+  g.save(); g.globalAlpha *= alpha; g.font = `${bold ? 700 : 400} ${size}px ${font}`; g.textAlign = align; g.textBaseline = base;
+  if (glow) { g.shadowColor = color; g.shadowBlur = glow; }
+  g.fillStyle = color; g.fillText(s, x, y); g.restore();
+}
+// texto digitado letra por letra (com cursor enquanto digita)
+function typed(s, t, at, x, y, size, opt = {}) {
+  if (t < at) return;
+  const cps = opt.cps || 22;
+  const n = Math.min(s.length, Math.floor((t - at) * cps) + 1);
+  const shown = s.slice(0, n) + (n < s.length || opt.cursor ? (Math.floor(t * 2.5) % 2 ? '█' : ' ') : '');
+  text(shown, x, y, size, opt);
+}
+function box(x, y, w, h, color, { lit = 0, alpha = 1, fill = 'rgba(2,20,10,0.88)', lw = 4 } = {}) {
+  if (alpha <= 0) return;
+  g.save(); g.globalAlpha *= alpha;
+  g.fillStyle = fill; g.fillRect(x, y, w, h);
+  g.shadowColor = color; g.shadowBlur = 8 + 30 * lit;
+  g.strokeStyle = color; g.lineWidth = lw + 2 * lit; g.strokeRect(x, y, w, h);
+  g.shadowBlur = 0;
+  g.fillStyle = color; [[x, y], [x + w - 12, y], [x, y + h - 12], [x + w - 12, y + h - 12]].forEach(([a, b]) => g.fillRect(a, b, 12, 12));
+  g.restore();
+}
+// carimbo torto que cai com impacto
+function stamp(s, t, at, x, y, color, { rot = -8, size = 64, font = SILK } = {}) {
+  if (t < at) return;
+  const u = cl((t - at) / 0.22);
+  const sc = lerp(2.6, 1, eo(u));
+  const shake = u >= 1 ? Math.max(0, 1 - (t - at - 0.22) / 0.25) * 8 * Math.sin((t - at) * 90) : 0;
+  g.save(); g.translate(x + shake, y); g.rotate(rot * Math.PI / 180); g.scale(sc, sc); g.globalAlpha *= cl(u * 1.6);
+  g.font = `700 ${size}px ${font}`; g.textAlign = 'center'; g.textBaseline = 'middle';
+  const w = g.measureText(s).width + 50, h = size + 34;
+  g.fillStyle = 'rgba(0,0,0,0.6)'; g.fillRect(-w / 2, -h / 2, w, h);
+  g.strokeStyle = color; g.lineWidth = 8; g.shadowColor = color; g.shadowBlur = 24; g.strokeRect(-w / 2, -h / 2, w, h);
+  g.lineWidth = 3; g.strokeRect(-w / 2 + 12, -h / 2 + 12, w - 24, h - 24);
+  g.shadowBlur = 12; g.fillStyle = color; g.fillText(s, 0, 4);
+  g.restore();
+}
+const px = (x, y, w, h, c) => { g.fillStyle = c; g.fillRect(Math.round(x / 6) * 6, Math.round(y / 6) * 6, Math.round(w / 6) * 6, Math.round(h / 6) * 6); };
+// card que desliza de um lado
+function slide(t, at, dir, fn) {
+  if (t < at) return;
+  const u = eo(k(t, at, 0.35));
+  g.save(); g.translate((1 - u) * 600 * dir, 0); g.globalAlpha *= cl(u * 1.5); fn(); g.restore();
+}
+
+// ---------- fundo ----------
+function fundo(t) {
+  const rg = g.createRadialGradient(540, 800, 100, 540, 900, 1300);
+  rg.addColorStop(0, '#062a14'); rg.addColorStop(1, BG);
+  g.fillStyle = rg; g.fillRect(0, 0, W, H);
+  g.font = `34px ${VT}`; g.textAlign = 'left'; g.textBaseline = 'alphabetic';
+  for (let c = 0; c < 27; c++) {
+    const sp = 40 + rnd(c) * 70, off = rnd(c + 50) * 2400;
+    for (let r = 0; r < 14; r++) {
+      const y = ((t * sp + off + r * 40) % 2400) - 300;
+      const bit = (Math.floor(t * 3 + c * 7 + r * 3) % 3) === 0 ? '1' : '0';
+      g.fillStyle = rgba(G, (0.03 + 0.05 * (r / 14)) * (0.6 + 0.4 * rnd(c + r)));
+      g.fillText(bit, c * 40 + 6, y);
+    }
+  }
+  const hy = 1380, vx = 540;
+  g.save(); g.strokeStyle = rgba(G, 0.22); g.lineWidth = 2;
+  for (let i = -12; i <= 12; i++) { g.beginPath(); g.moveTo(vx + i * 30, hy); g.lineTo(vx + i * 260, H); g.stroke(); }
+  for (let j = 0; j < 14; j++) {
+    const u = ((j + (t * 0.6) % 1) / 14);
+    const y = hy + Math.pow(u, 2.2) * (H - hy);
+    g.globalAlpha = 0.25 + 0.75 * u; g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke();
+  }
+  g.restore();
+  const fade = g.createLinearGradient(0, hy - 40, 0, hy + 200);
+  fade.addColorStop(0, BG); fade.addColorStop(1, 'rgba(2,12,6,0)');
+  g.fillStyle = fade; g.fillRect(0, hy - 40, W, 240);
+}
+function crt() {
+  g.fillStyle = 'rgba(0,0,0,0.18)';
+  for (let y = 0; y < H; y += 4) g.fillRect(0, y, W, 2);
+  const v = g.createRadialGradient(540, 960, 520, 540, 960, 1250);
+  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.78)');
+  g.fillStyle = v; g.fillRect(0, 0, W, H);
+}
+function barra(t) {
+  g.fillStyle = 'rgba(0,10,4,0.92)'; g.fillRect(0, 60, W, 104);
+  g.fillStyle = G; g.fillRect(0, 160, W, 4);
+  text('C:\\> PILULA_DIA_SEGUINTE.EXE', 40, 126, 34, { font: SILK, color: G, glow: 10, bold: true });
+}
+
+// ---------- legendas palavra por palavra ----------
+const KEYS = ['pílula', 'seguinte', 'abortiva', 'hora', 'corpo', 'levonorgestrel', 'progesterona', 'única', '1,5', 'cinco', 'dias', 'liberado', 'lh', 'bloqueia', 'atrasa', 'acontece', 'encontrar', 'gravidez', 'útero', 'interrompe', '72', 'menos', 'melhor', 'mês', 'aquela', 'transmissíveis', 'atenta', 'vomitar', 'três', 'dose', 'menstruação', 'emergência', 'rotina', 'profissional', 'você', 'siga', 'farmacologia', 'área', 'sinal', 'ovário', 'cérebro', 'espermatozoides'];
+const clean = w => w.toLowerCase().replace(/[.,!?:;]/g, '');
+const GRUPOS = (() => {
+  const out = []; let cur = [];
+  WORDS.forEach((w, i) => {
+    cur.push(w);
+    const end = /[.?!:]$/.test(w.w) || cur.length >= 7 || (/,$/.test(w.w) && cur.length >= 4);
+    if (end || i === WORDS.length - 1) { out.push(cur); cur = []; }
+  });
+  return out.map((ws, i) => {
+    let key = ws.findIndex(w => KEYS.includes(clean(w.w)));
+    if (key < 0) key = ws.reduce((b, w, j) => clean(w.w).length > clean(ws[b].w).length ? j : b, 0);
+    return { ws, key, de: ws[0].s, ate: (out[i + 1] ? out[i + 1][0].s : ws[ws.length - 1].e + 0.5) };
+  });
+})();
+function legenda(t) {
+  if (t >= S.consulte - 0.05) return;
+  const gr = GRUPOS.find(gp => t >= gp.de - 0.05 && t < gp.ate);
+  if (!gr) return;
+  const size = 50; g.font = `700 ${size}px ${SILK}`;
+  const sp = g.measureText(' ').width;
+  const items = gr.ws.map((w, j) => ({ w: w.w.toUpperCase(), s: w.s, key: j === gr.key, wd: g.measureText(w.w.toUpperCase()).width }));
+  const lines = [[]]; let lw = 0;
+  items.forEach(it => { if (lw + it.wd > 960 && lines[lines.length - 1].length) { lines.push([]); lw = 0; } lines[lines.length - 1].push(it); lw += it.wd + sp; });
+  const y0 = 1490 - (lines.length - 1) * 34;
+  lines.forEach((ln, li) => {
+    const total = ln.reduce((s, it) => s + it.wd, 0) + sp * (ln.length - 1);
+    let x = 540 - total / 2;
+    ln.forEach(it => {
+      if (t >= it.s - 0.04) {
+        const u = cl((t - it.s + 0.04) / 0.12);
+        g.save(); g.font = `700 ${size}px ${SILK}`; g.textBaseline = 'middle';
+        g.translate(x + it.wd / 2, y0 + li * 68); g.scale(0.85 + 0.15 * u, 0.85 + 0.15 * u); g.globalAlpha = u;
+        g.textAlign = 'center'; g.lineJoin = 'round'; g.lineWidth = 12; g.strokeStyle = '#000'; g.strokeText(it.w, 0, 0);
+        g.fillStyle = it.key ? A : '#ffffff'; if (it.key) { g.shadowColor = A; g.shadowBlur = 14; }
+        g.fillText(it.w, 0, 0); g.restore();
+      }
+      x += it.wd + sp;
+    });
+  });
+}
+
+// ---------- tempos: procurados na transcrição (palavra, ocorrência) ----------
+const norm = w => w.toLowerCase().replace(/[.,!?:;]/g, '');
+function T(word, n = 1) {
+  let c = 0;
+  for (const w of WORDS) if (norm(w.w) === word && ++c === n) return w.s;
+  console.warn('tempo não achado', word, n); return 1e9;
+}
+const S = {
+  abortiva: T('abortiva'), qualquer: T('qualquer'), vem: T('vem'),
+  oque: T('pílula', 2) - 0.3, levo: T('levonorgestrel'), hormonio: T('hormônio'), proges: T('progesterona'), dose: T('dose'), mg: T('1,5'),
+  ciclo: T('lembra') - 0.5, esperma: T('espermatozoides'), cinco: T('cinco'), liberado: T('liberado'),
+  mec: T('sair') - 0.9, ovario: T('ovário'), cerebro: T('cérebro'), sinal: T('sinal'), lh: T('lh'), pilula3: T('pílula', 3), bloqueia: T('bloqueia'), acontece: T('acontece'), sem: T('sem'), encontrar: T('encontrar'),
+  mito1: T('por') - 0.1, abortiva2: T('abortiva', 2), gravidez: T('gravidez'), embriao: T('embrião'), utero: T('útero'), interrompe: T('interrompe'),
+  mito2: T('usada', 2) - 0.6, cinco2: T('cinco', 2), h72: T('72'), aconteceu: T('aconteceu'), menos: T('menos'), quanto: T('quanto'),
+  mito3: T('outro') - 0.1, resto: T('resto'), naoProtege: T('protege', 2), aquela: T('aquela'), ists: T('infecções'),
+  cuidados: T('fique') - 0.2, vomitar: T('vomitar'), tres: T('três'), orientacao: T('orientação'), repetir: T('repetir'), menstruacao: T('menstruação'),
+  fim: T('pílula', 5) - 0.3, emergencia: T('emergência'), rotina: T('rotina'), proteger: T('proteger'), profissional: T('profissional'),
+  siga: T('me'), consulte: NARR + 0.2,
+};
+const CENAS = [0, S.oque, S.ciclo, S.mec, S.mito1, S.mito2, S.mito3, S.cuidados, S.fim, S.siga, S.consulte - 0.05];
+const vis = (t, a, b, fi = 0.25, fo = 0.25) => Math.min(cl((t - a) / fi), cl((b - t) / fo));
+
+// ---------- peças em pixel art ----------
+function comprimido(x, y, s) {
+  g.save(); g.translate(x, y); g.scale(s, s);
+  g.shadowColor = PK; g.shadowBlur = 34;
+  px(-60, -90, 120, 180, '#fbe8f4'); px(-90, -60, 180, 120, '#fbe8f4'); px(-78, -78, 156, 156, '#fbe8f4');
+  g.shadowBlur = 0;
+  px(-54, -66, 48, 18, '#ffffff');
+  text('1,5', 0, 22, 56, { font: SILK, color: '#c0398f', align: 'center', bold: true });
+  g.restore();
+}
+function cartela(x, y, s, t, at) {
+  g.save(); g.translate(x, y); g.scale(s, s);
+  g.shadowColor = CY; g.shadowBlur = 16; px(-150, -110, 300, 220, rgba(CY, 0.18)); g.shadowBlur = 0;
+  g.strokeStyle = CY; g.lineWidth = 6; g.strokeRect(-150, -110, 300, 220);
+  g.restore();
+  comprimido(x, y, s * 0.75);
+}
+function esperma(x, y, t, i, rot = 0, alpha = 1, s = 1) {
+  g.save(); g.globalAlpha *= alpha; g.translate(x, y); g.rotate(rot); g.scale(s, s);
+  for (let j = 0; j < 7; j++) px(-24 - j * 12, Math.sin(t * 9 + i + j * 0.9) * (3 + j * 1.6) - 3, 12, 6, rgba(WH, 0.85 - j * 0.08));
+  g.shadowColor = WH; g.shadowBlur = 10; px(-18, -12, 30, 24, WH); g.restore();
+}
+function ovulo(x, y, s, t, alpha = 1) {
+  g.save(); g.globalAlpha *= alpha; g.translate(x, y); g.scale(s, s);
+  g.shadowColor = A; g.shadowBlur = 20; px(-36, -24, 72, 48, A); px(-24, -36, 48, 72, A); g.shadowBlur = 0;
+  px(-12, -12, 24, 24, '#ffe7a3'); g.restore();
+}
+function ovario(x, y, t, trava) {
+  g.save(); g.translate(x, y);
+  g.shadowColor = CY; g.shadowBlur = 16;
+  px(-180, -84, 360, 168, rgba(CY, 0.18)); g.shadowBlur = 0;
+  g.strokeStyle = CY; g.lineWidth = 6; g.strokeRect(-180, -84, 360, 168);
+  [[-130, -50], [100, 30], [-90, 40], [120, -50]].forEach(([a, b]) => px(a, b, 24, 24, rgba(CY, 0.5)));
+  ovulo(0, 0, 1, t);
+  if (trava > 0) {
+    g.globalAlpha *= trava; g.strokeStyle = G; g.lineWidth = 6; g.setLineDash([12, 10]); g.strokeRect(-70, -66, 140, 132); g.setLineDash([]);
+    px(-24, -132, 48, 42, G); px(-14, -150, 6, 24, G); px(8, -150, 6, 24, G); px(-14, -156, 28, 8, G);
+  }
+  g.restore();
+}
+function cerebro(x, y, s, lit) {
+  g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = PK; g.shadowBlur = 10 + 20 * lit;
+  px(-96, -48, 192, 96, rgba(PK, 0.9)); px(-72, -72, 144, 30, rgba(PK, 0.9)); px(-72, 42, 144, 24, rgba(PK, 0.9));
+  g.shadowBlur = 0;
+  px(-6, -66, 12, 120, '#8a2a6c'); px(-72, -12, 48, 8, '#8a2a6c'); px(30, 6, 48, 8, '#8a2a6c'); px(-54, 24, 36, 8, '#8a2a6c'); px(24, -36, 42, 8, '#8a2a6c');
+  g.restore();
+}
+function escudo(x, y, s, cor, quebra = 0) {
+  g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = cor; g.shadowBlur = 24;
+  for (const lado of [-1, 1]) {
+    g.save(); g.translate(lado * 18 * quebra, 10 * quebra); g.rotate(lado * 0.15 * quebra);
+    const cols = lado < 0 ? [-72, -48, -24] : [0, 24, 48];
+    cols.forEach((cx, i) => {
+      const d = Math.abs(cx + 12) / 72;
+      const h = 150 - d * 70;
+      px(cx, -78, 24, h, rgba(cor, 0.9));
+    });
+    g.restore();
+  }
+  g.restore();
+}
+function utero(x, y, t, emb) {
+  g.save(); g.translate(x, y); g.shadowColor = PK; g.shadowBlur = 16;
+  px(-240, -120, 90, 24, PK); px(150, -120, 90, 24, PK);
+  px(-150, -120, 300, 36, PK); px(-150, -84, 36, 150, PK); px(114, -84, 36, 150, PK);
+  px(-114, 60, 36, 48, PK); px(78, 60, 36, 48, PK); px(-78, 102, 156, 36, PK); px(-30, 132, 60, 60, PK);
+  g.shadowBlur = 0; px(-114, -84, 228, 186, rgba(PK, 0.16));
+  if (emb > 0) { g.globalAlpha *= emb; ovulo(30, -50, 0.9 + 0.1 * Math.sin(t * 4), t); }
+  g.restore();
+}
+
+// ---------- cenas ----------
+function cena1(t) {
+  const a = vis(t, -1, S.oque + 0.05);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  const pop = back(k(t, 0.2, 0.5));
+  if (pop > 0) comprimido(540, 470 + Math.sin(t * 2) * 10, pop * 1.4);
+  if (t > 0.6) text('?', 760, 420 + Math.sin(t * 3) * 8, 150, { font: SILK, color: A, bold: true, glow: 20, alpha: cl((t - 0.6) / 0.3) });
+  typed('PÍLULA DO', t, 0.6, 540, 730, 92, { font: SILK, color: G, glow: 22, bold: true, align: 'center', cps: 18 });
+  typed('DIA SEGUINTE', t, 1.2, 540, 830, 92, { font: SILK, color: G, glow: 22, bold: true, align: 'center', cps: 18 });
+  stamp('ABORTIVA?', t, S.abortiva, 290, 950, R, { rot: -7, size: 50 });
+  stamp('QUALQUER HORA?', t, S.qualquer, 700, 1060, A, { rot: 6, size: 44 });
+  if (t >= S.vem - 0.2) {
+    const u = eo(k(t, S.vem - 0.2, 0.3));
+    box(70, 1150, 940, 170, G, { alpha: u, lit: 0.5 + 0.3 * Math.sin(t * 6) });
+    text('C:\\> pergunta.txt', 100, 1195, 32, { color: rgba(G, 0.7), alpha: u });
+    typed('> o que ela faz no corpo?', t, S.vem, 100, 1275, 58, { color: G, glow: 10, cps: 16, cursor: true });
+  }
+  g.restore();
+}
+
+function cena2(t) {
+  const a = vis(t, S.oque, S.ciclo);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('O QUE É', t, S.oque + 0.1, 540, 270, 70, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 18 });
+  typed('> a mais usada no Brasil', t, S.oque + 0.6, 540, 340, 46, { color: A, align: 'center', cps: 28 });
+  slide(t, S.levo - 0.2, -1, () => {
+    box(70, 390, 940, 170, G, { lit: t < S.hormonio ? 0.9 : 0.2 });
+    text('LEVONORGESTREL', 540, 495, 66, { font: SILK, color: G, bold: true, align: 'center', glow: 14 });
+  });
+  // marcas mais conhecidas nas farmácias
+  if (t >= S.levo + 0.2) text('NAS FARMÁCIAS:', 540, 600, 30, { font: SILK, color: rgba(CY, 0.85), bold: true, align: 'center', alpha: cl((t - S.levo - 0.2) / 0.3) });
+  const MARCAS = [['POSTINOR UNO', 250, 660], ['POZATO UNI', 620, 660], ['DIAD', 900, 660], ['NEODIA', 250, 740], ['POSLOV', 560, 740], ['GENÉRICOS', 850, 740]];
+  MARCAS.forEach(([m, x, y], i) => {
+    const at = S.levo + 0.4 + i * 0.18;
+    if (t < at) return;
+    const u = back(k(t, at, 0.3));
+    g.save(); g.translate(x, y); g.scale(u, u);
+    g.font = `700 32px ${SILK}`; const w = g.measureText(m).width + 40;
+    box(-w / 2, -30, w, 60, CY, { lit: 0.5, lw: 3 });
+    text(m, 0, 12, 32, { font: SILK, color: i === 5 ? A : WH, bold: true, align: 'center' });
+    g.restore();
+  });
+  slide(t, S.hormonio - 0.1, 1, () => {
+    box(70, 800, 940, 180, PK, { lit: t < S.dose ? 0.8 : 0.15 });
+    text('HORMÔNIO PARECIDO COM A', 540, 870, 38, { font: SILK, color: PK, bold: true, align: 'center' });
+    if (t >= S.proges) text('PROGESTERONA', 540, 945, 60, { font: SILK, color: WH, bold: true, align: 'center', glow: 12, alpha: cl((t - S.proges) / 0.3) });
+  });
+  if (t >= S.dose - 0.2) {
+    const u = back(k(t, S.dose - 0.2, 0.45));
+    cartela(300, 1140, u * 0.8, t);
+    text('1 COMPRIMIDO', 720, 1080, 44, { font: SILK, color: WH, bold: true, align: 'center', alpha: cl(u) });
+  }
+  stamp('DOSE ÚNICA', t, S.dose + 0.3, 720, 1160, A, { rot: -6, size: 46 });
+  stamp('1,5 mg', t, S.mg, 720, 1280, G, { rot: 5, size: 58 });
+  g.restore();
+}
+
+function cena3(t) {
+  const a = vis(t, S.ciclo, S.mec);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('LEMBRA DISSO', t, S.ciclo + 0.1, 540, 270, 64, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 20 });
+  // trompa
+  const tr = eo(k(t, S.ciclo + 0.2, 0.6));
+  for (let i = 0; i < 30; i++) {
+    if (i / 30 > tr) continue;
+    const x = 60 + i * 32, y = 560 + Math.sin(i / 5) * 40;
+    px(x, y - 60, 30, 12, rgba(CY, 0.8)); px(x, y + 60, 30, 12, rgba(CY, 0.8));
+  }
+  text('TROMPA', 540, 720, 30, { font: SILK, color: rgba(CY, 0.8), bold: true, align: 'center', alpha: tr });
+  if (t >= S.esperma - 0.2) {
+    const u = eo(k(t, S.esperma - 0.2, 1.4));
+    for (let i = 0; i < 7; i++) {
+      const tx = 200 + i * 70 + Math.sin(t * 1.3 + i) * 16;
+      const ty = 560 + Math.sin((tx - 60) / 160) * 40 + Math.cos(t * 2 + i * 2) * 14;
+      esperma(lerp(-60, tx, u), ty, t, i, Math.sin(t + i) * 0.2);
+    }
+  }
+  // lugar do óvulo: vazio
+  if (t >= S.liberado - 1.2) {
+    const u = cl((t - S.liberado + 1.2) / 0.3);
+    g.save(); g.globalAlpha *= u; g.strokeStyle = A; g.lineWidth = 6; g.setLineDash([10, 10]); g.strokeRect(860, 520, 90, 90); g.setLineDash([]); g.restore();
+    text('?', 905, 590, 64, { font: SILK, color: A, bold: true, align: 'center', alpha: u, glow: 10 });
+    text('ÓVULO', 905, 660, 28, { font: SILK, color: A, bold: true, align: 'center', alpha: u });
+  }
+  // contador de dias
+  if (t >= S.cinco - 0.4) {
+    const u = eo(k(t, S.cinco - 0.4, 0.3));
+    box(70, 800, 940, 230, A, { alpha: u, lit: 0.6 });
+    text('ELES SOBREVIVEM ATÉ', 540, 865, 38, { font: SILK, color: A, bold: true, align: 'center', alpha: u });
+    for (let i = 0; i < 5; i++) {
+      const on = t >= S.cinco + i * 0.22;
+      g.save(); g.shadowColor = A; g.shadowBlur = on ? 14 : 0; px(130 + i * 168, 900, 150, 100, on ? A : rgba(A, 0.15)); g.restore();
+      text(`DIA ${i + 1}`, 205 + i * 168, 965, 34, { font: SILK, color: on ? BG : rgba(A, 0.5), bold: true, align: 'center' });
+    }
+  }
+  stamp('5 DIAS', t, S.cinco + 1.2, 800, 800, A, { rot: 7, size: 56 });
+  if (t >= S.liberado - 1.4) typed('esperando o óvulo ser liberado', t, S.liberado - 1.4, 540, 1110, 46, { color: WH, align: 'center', cps: 30 });
+  g.restore();
+}
+
+function cena4(t) {
+  const a = vis(t, S.mec, S.mito1);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('COMO ELA AGE', t, S.mec + 0.1, 540, 270, 66, { font: SILK, color: G, glow: 18, bold: true, align: 'center', cps: 20 });
+  if (t >= S.cerebro - 0.2) {
+    cerebro(540, 410, back(k(t, S.cerebro - 0.2, 0.4)), t >= S.sinal ? 1 : 0);
+    text('CÉREBRO', 760, 420, 32, { font: SILK, color: PK, bold: true, alpha: cl((t - S.cerebro) / 0.3) });
+  }
+  if (t >= S.ovario - 0.3) {
+    const u = eo(k(t, S.ovario - 0.3, 0.4));
+    g.save(); g.globalAlpha *= u; ovario(540, 1060, t, cl((t - S.acontece) / 0.4)); g.restore();
+    text('OVÁRIO', 540, 1190, 32, { font: SILK, color: CY, bold: true, align: 'center', alpha: u });
+  }
+  // raio do LH descendo
+  const yEsc = 760;
+  const bloq = cl((t - S.bloqueia) / 0.25);
+  if (t >= S.sinal) {
+    const desce = eo(cl((t - S.sinal) / 1.6));
+    let yb = lerp(480, 960, desce);
+    if (t >= S.bloqueia) yb = Math.min(yb, yEsc - 90);
+    g.save(); g.shadowColor = A; g.shadowBlur = 20;
+    const flick = bloq > 0 ? 0.5 + 0.5 * Math.abs(Math.sin(t * 20)) : 1;
+    g.globalAlpha *= flick;
+    for (let y = 480, i = 0; y < yb; y += 24, i++) px(516 + (i % 2 ? 24 : 0), y, 24, 24, A);
+    g.restore();
+    if (t >= S.lh - 0.2) {
+      const u = back(k(t, S.lh - 0.2, 0.35));
+      g.save(); g.translate(690, 600); g.scale(u, u); box(-80, -45, 160, 90, A, { lit: 0.7 }); text('LH', 0, 22, 56, { font: SILK, color: A, bold: true, align: 'center', glow: 12 }); g.restore();
+    }
+  }
+  if (t >= S.pilula3 - 0.2) {
+    const u = eo(k(t, S.pilula3 - 0.2, 0.8));
+    comprimido(lerp(1100, 260, u), yEsc, 0.55);
+  }
+  if (bloq > 0) { escudo(540, yEsc, 0.8 + 0.2 * back(bloq), G); }
+  stamp('BLOQUEADO!', t, S.bloqueia + 0.3, 790, 790, R, { rot: -8, size: 44 });
+  // espermatozoides esperando ao lado do ovário e desistindo
+  if (t >= S.ovario) {
+    const d = eo(cl((t - S.sem) / 1.4));
+    for (let i = 0; i < 4; i++) esperma(130 + i * 40 - d * 60, 1010 + i * 36 + d * 50, t * (1 - 0.8 * d), i, d * 1.1, 1 - 0.7 * d, 0.8);
+  }
+  if (t >= S.acontece - 0.3) {
+    const u = eo(k(t, S.acontece - 0.3, 0.3));
+    box(70, 1230, 940, 110, G, { alpha: u, lit: 0.8 });
+    text('A OVULAÇÃO NÃO ACONTECE', 540, 1300, 42, { font: SILK, color: G, bold: true, align: 'center', alpha: u, glow: 8 });
+  }
+  stamp('SEM ENCONTRO', t, S.encontrar, 800, 1000, CY, { rot: 6, size: 40 });
+  g.restore();
+}
+
+function cena5(t) {
+  const a = vis(t, S.mito1, S.mito2);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('MITO 1', t, S.mito1 + 0.1, 540, 270, 70, { font: SILK, color: R, glow: 18, bold: true, align: 'center', cps: 16 });
+  typed('> "ela é abortiva"', t, S.mito1 + 0.4, 540, 345, 56, { color: A, align: 'center', cps: 24 });
+  stamp('NÃO É ABORTIVA', t, S.abortiva2 + 0.2, 540, 450, G, { rot: -6, size: 52 });
+  if (t >= S.gravidez - 0.3) {
+    const u = eo(k(t, S.gravidez - 0.3, 0.5));
+    g.save(); g.globalAlpha *= u; utero(540, 740, t, cl((t - S.embriao) / 0.4)); g.restore();
+  }
+  if (t >= S.utero - 0.3) text('embrião já implantado no útero', 540, 990, 42, { color: PK, align: 'center', alpha: cl((t - S.utero + 0.3) / 0.3) });
+  slide(t, S.interrompe - 0.3, -1, () => {
+    box(70, 1050, 940, 200, G, { lit: 0.8 });
+    text('A PÍLULA NÃO INTERROMPE', 540, 1125, 40, { font: SILK, color: G, bold: true, align: 'center', glow: 8 });
+    text('uma gravidez que já começou', 540, 1200, 48, { color: WH, align: 'center' });
+  });
+  g.restore();
+}
+
+function cena6(t) {
+  const a = vis(t, S.mito2, S.mito3);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('MITO 2', t, S.mito2 + 0.1, 540, 270, 70, { font: SILK, color: R, glow: 18, bold: true, align: 'center', cps: 16 });
+  typed('> "funciona a qualquer hora"', t, S.mito2 + 0.4, 540, 345, 50, { color: A, align: 'center', cps: 28 });
+  // barra de 0 a 120 h
+  if (t >= S.cinco2 - 0.4) {
+    const u = eo(k(t, S.cinco2 - 0.4, 0.3));
+    box(70, 420, 940, 330, CY, { alpha: u, lit: 0.3 });
+    text('ATÉ 5 DIAS (120 h) DEPOIS DA RELAÇÃO', 540, 480, 32, { font: SILK, color: CY, bold: true, align: 'center', alpha: u });
+    const cores = [G, G, G, A, R];
+    for (let i = 0; i < 5; i++) {
+      const on = t >= S.cinco2 + 0.2 + i * 0.25;
+      g.save(); g.globalAlpha *= u; g.shadowColor = cores[i]; g.shadowBlur = on ? 14 : 0;
+      px(110 + i * 172, 530, 160, 90, on ? cores[i] : rgba(cores[i], 0.12)); g.restore();
+      text(`${(i + 1) * 24}h`, 190 + i * 172, 680, 36, { font: SILK, color: i === 2 ? WH : rgba(WH, 0.7), bold: true, align: 'center', alpha: u });
+    }
+    if (t >= S.h72) {
+      const v = cl((t - S.h72) / 0.3);
+      g.save(); g.globalAlpha *= v; g.strokeStyle = G; g.lineWidth = 8; g.shadowColor = G; g.shadowBlur = 24; g.strokeRect(98, 518, 3 * 172 + 8, 114); g.restore();
+    }
+  }
+  stamp('PRIMEIRAS 72 h: MAIS EFICAZ', t, S.h72 + 0.4, 540, 820, G, { rot: -4, size: 40 });
+  slide(t, S.aconteceu - 1.2, 1, () => {
+    box(70, 900, 940, 190, R, { lit: t < S.quanto ? 0.8 : 0.15 });
+    text('SE A OVULAÇÃO JÁ ACONTECEU', 540, 970, 38, { font: SILK, color: R, bold: true, align: 'center' });
+    if (t >= S.menos - 0.6) text('ela funciona bem menos', 540, 1045, 50, { color: WH, align: 'center', alpha: cl((t - S.menos + 0.6) / 0.3) });
+  });
+  stamp('QUANTO ANTES, MELHOR', t, S.quanto, 540, 1200, A, { rot: -6, size: 50 });
+  g.restore();
+}
+
+function cena7(t) {
+  const a = vis(t, S.mito3, S.cuidados);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('MITO 3', t, S.mito3 + 0.1, 540, 270, 70, { font: SILK, color: R, glow: 18, bold: true, align: 'center', cps: 16 });
+  typed('> "protege o resto do mês"', t, S.mito3 + 0.4, 540, 345, 50, { color: A, align: 'center', cps: 28 });
+  if (t >= S.resto - 0.3) {
+    const u = eo(k(t, S.resto - 0.3, 0.4));
+    box(110, 400, 860, 520, CY, { alpha: u, lit: 0.3 });
+    text('MÊS', 150, 455, 34, { font: SILK, color: CY, bold: true, alpha: u });
+    for (let i = 0; i < 30; i++) {
+      const x = 150 + (i % 7) * 114, y = 480 + Math.floor(i / 7) * 84;
+      const dia = i === 11;
+      const lit = dia && t >= S.aquela;
+      const risca = !dia && t >= S.naoProtege + i * 0.03;
+      g.save(); g.globalAlpha *= u;
+      if (lit) { g.shadowColor = PK; g.shadowBlur = 22; }
+      px(x, y, 96, 66, lit ? PK : rgba(CY, 0.14)); g.shadowBlur = 0;
+      text(String(i + 1), x + 48, y + 46, 34, { font: SILK, color: lit ? BG : risca ? rgba(WH, 0.3) : WH, bold: true, align: 'center' });
+      if (risca) { g.strokeStyle = R; g.lineWidth = 6; g.beginPath(); g.moveTo(x + 14, y + 56); g.lineTo(x + 82, y + 10); g.stroke(); }
+      g.restore();
+    }
+  }
+  g.save(); g.globalAlpha *= 1 - cl((t - S.aquela + 0.5) / 0.3); stamp('NÃO PROTEGE', t, S.naoProtege, 540, 640, R, { rot: -8, size: 60 }); g.restore();
+  slide(t, S.aquela - 0.6, -1, () => {
+    box(70, 960, 940, 110, PK, { lit: 0.8 });
+    text('VALE SÓ PARA AQUELA RELAÇÃO', 540, 1030, 40, { font: SILK, color: PK, bold: true, align: 'center', glow: 8 });
+  });
+  if (t >= S.ists - 0.3) {
+    const u = cl((t - S.ists + 0.3) / 0.3);
+    g.save(); g.globalAlpha *= u; escudo(190, 1210, 0.8, R, eo(cl((t - S.ists) / 0.6))); g.restore();
+    slide(t, S.ists - 0.3, 1, () => {
+      box(330, 1110, 680, 200, R, { lit: 0.6 });
+      text('NÃO PROTEGE CONTRA', 670, 1180, 36, { font: SILK, color: R, bold: true, align: 'center' });
+      text('ISTs', 670, 1265, 70, { font: SILK, color: WH, bold: true, align: 'center', glow: 10 });
+    });
+  }
+  g.restore();
+}
+
+function cena8(t) {
+  const a = vis(t, S.cuidados, S.fim);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  typed('FIQUE ATENTA', t, S.cuidados + 0.1, 540, 270, 68, { font: SILK, color: A, glow: 18, bold: true, align: 'center', cps: 18 });
+  slide(t, S.vomitar - 0.3, -1, () => {
+    box(70, 340, 940, 190, A, { lit: t < S.orientacao ? 0.8 : 0.15 });
+    // relógio de 3 h
+    g.save(); g.shadowColor = A; g.shadowBlur = 16; g.strokeStyle = A; g.lineWidth = 8; g.strokeRect(110, 385, 100, 100);
+    const an = Math.min(t - S.vomitar, 2.5) * 1.6 - Math.PI / 2; g.beginPath(); g.moveTo(160, 435); g.lineTo(160 + Math.cos(an) * 34, 435 + Math.sin(an) * 34); g.stroke(); g.restore();
+    text('VOMITOU ATÉ', 250, 420, 40, { font: SILK, color: A, bold: true });
+    if (t >= S.tres - 0.1) text('3 HORAS DEPOIS?', 250, 490, 52, { font: SILK, color: WH, bold: true, glow: 8, alpha: cl((t - S.tres + 0.1) / 0.3) });
+  });
+  slide(t, S.orientacao - 0.3, 1, () => {
+    box(70, 570, 940, 200, G, { lit: t < S.menstruacao ? 0.8 : 0.15 });
+    text('PROCURE ORIENTAÇÃO', 540, 645, 44, { font: SILK, color: G, bold: true, align: 'center', glow: 8 });
+    if (t >= S.repetir - 0.4) text('pode ser preciso repetir a dose', 540, 720, 48, { color: WH, align: 'center', alpha: cl((t - S.repetir + 0.4) / 0.3) });
+  });
+  slide(t, S.menstruacao - 0.4, -1, () => {
+    box(70, 810, 940, 230, PK, { lit: 0.7 });
+    text('PRÓXIMA MENSTRUAÇÃO', 540, 880, 42, { font: SILK, color: PK, bold: true, align: 'center' });
+    text('pode vir um pouco antes', 540, 950, 48, { color: WH, align: 'center' });
+    text('ou um pouco depois', 540, 1010, 48, { color: WH, align: 'center' });
+  });
+  stamp('É NORMAL', t, S.menstruacao + 1.5, 540, 1120, G, { rot: -5, size: 46 });
+  g.restore();
+}
+
+function cena9(t) {
+  const a = vis(t, S.fim, S.siga);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  const pop = back(k(t, S.fim + 0.1, 0.5));
+  if (pop > 0) comprimido(540, 430 + Math.sin(t * 2) * 8, pop * 1.1);
+  stamp('EMERGÊNCIA', t, S.emergencia, 540, 640, R, { rot: -6, size: 76 });
+  slide(t, S.rotina - 0.8, -1, () => {
+    box(70, 760, 940, 150, R, { lit: 0.5 });
+    text('NÃO É ANTICONCEPCIONAL', 540, 825, 40, { font: SILK, color: R, bold: true, align: 'center' });
+    text('DE ROTINA', 540, 880, 40, { font: SILK, color: R, bold: true, align: 'center' });
+  });
+  slide(t, S.proteger - 0.3, 1, () => {
+    box(70, 950, 940, 260, G, { lit: 0.8 });
+    text('PARA TODOS OS DIAS:', 540, 1020, 40, { font: SILK, color: G, bold: true, align: 'center', glow: 8 });
+    if (t >= S.profissional - 0.8) {
+      const v = cl((t - S.profissional + 0.8) / 0.3);
+      text('converse com um profissional', 540, 1095, 48, { color: WH, align: 'center', alpha: v });
+      text('sobre o método ideal para você', 540, 1160, 48, { color: A, align: 'center', alpha: v });
+    }
+  });
+  g.restore();
+}
+
+function cena10(t) {
+  const a = vis(t, S.siga, S.consulte - 0.05);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  box(70, 520, 940, 480, G, { lit: 0.6 + 0.3 * Math.sin(t * 5) });
+  text('C:\\> seguir.exe', 110, 590, 36, { color: rgba(G, 0.7) });
+  typed('ME SIGA', t, S.siga, 540, 720, 104, { font: SILK, color: G, bold: true, align: 'center', glow: 22, cps: 14 });
+  typed('para mais dicas de farmacologia', t, S.siga + 0.5, 540, 830, 50, { color: WH, align: 'center', cps: 40 });
+  typed('e curiosidades sobre a área', t, S.siga + 1.3, 540, 900, 50, { color: A, align: 'center', cps: 40, cursor: true });
+  g.restore();
+}
+
+function cena11(t) {
+  const a = cl((t - S.consulte + 0.05) / 0.3);
+  if (a <= 0) return;
+  g.save(); g.globalAlpha = a;
+  box(70, 560, 940, 560, G, { lit: 0.6 + 0.3 * Math.sin(t * 4) });
+  text('C:\\> encerrar.exe', 110, 630, 36, { color: rgba(G, 0.7) });
+  ['CONSULTE UM', 'PROFISSIONAL', 'DE SAÚDE PARA', 'ORIENTAÇÕES.'].forEach((l, i) =>
+    typed(l, t, S.consulte + i * 0.35, 540, 770 + i * 95, 66, { font: SILK, color: i === 1 ? A : G, bold: true, align: 'center', glow: 16, cps: 30 }));
+  text('Ref.: FIGO · ICEC/OMS · MSF · Fiocruz · Bula do levonorgestrel 1,5 mg', 540, 1330, 24, { color: rgba(WH, 0.65), align: 'center', alpha: cl((t - S.consulte - 1.2) / 0.4) });
+  g.restore();
+}
+
+// glitch rápido na troca de cena
+function glitch(t) {
+  const c = CENAS.find(s => s > 0 && t >= s && t < s + 0.22);
+  if (c === undefined) return;
+  const u = 1 - (t - c) / 0.22;
+  for (let i = 0; i < 9; i++) {
+    const y = Math.floor(rnd(i + Math.floor(t * 30)) * H), h = 20 + rnd(i + 7) * 90;
+    const dx = (rnd(i + 3 + Math.floor(t * 60)) - 0.5) * 120 * u;
+    g.drawImage(cv, 0, y, W, h, dx, y, W, h);
+  }
+  g.fillStyle = rgba(R, 0.12 * u); g.fillRect(0, 0, W, H);
+  g.fillStyle = rgba(CY, 0.08 * u); g.fillRect(8 * u, 0, W, H);
+}
+
+window.draw = function (t) {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.shadowBlur = 0;
+  fundo(t);
+  cena1(t); cena2(t); cena3(t); cena4(t); cena5(t); cena6(t); cena7(t); cena8(t); cena9(t); cena10(t); cena11(t);
+  legenda(t);
+  barra(t);
+  glitch(t);
+  crt();
+};
+window.render = window.draw;
+window.S = S;
+
+const faces = [
+  ['Silk', 'fonts/silk400.woff2', '400'], ['Silk', 'fonts/silk400ext.woff2', '400', 'U+0100-024F'],
+  ['Silk', 'fonts/silk700.woff2', '700'], ['Silk', 'fonts/silk700ext.woff2', '700', 'U+0100-024F'],
+  ['VT', 'fonts/vt.woff2', '400'], ['VT', 'fonts/vtext.woff2', '400', 'U+0100-024F'],
+];
+Promise.all(faces.map(([f, u, w, r]) => new FontFace(f, `url(${u})`, r ? { weight: w, unicodeRange: r } : { weight: w }).load().then(ff => document.fonts.add(ff))))
+  .then(() => { draw(0); window.ready = true; });
+</script>
+</body>
+</html>

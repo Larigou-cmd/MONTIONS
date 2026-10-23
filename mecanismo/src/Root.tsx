@@ -78,6 +78,19 @@ import {
 
 import { VideoSarampoVox, CapaSarampoVox } from "./sarampo/Vox";
 
+import { VideoPilula, DURATION as DURATION_PILULA } from "./pilula/Video";
+import { CapaPilula } from "./pilula/Capa";
+import { OrigemCaptopril, DURATION_CAPTOPRIL } from "./origens/Captopril";
+import { CapaCaptopril } from "./origens/CapaCaptopril";
+import { VideoCaibra, DURATION_CAIBRA } from "./caibra/Video";
+import { VideoCaibraOpenArt } from "./caibra/VideoOpenArt";
+import { CapaCaibra } from "./caibra/Capa";
+import { VideoGlicose, DURATION_GLICOSE } from "./glicose/Video";
+import { CapaGlicose } from "./glicose/Capa";
+import { VideoRim, DURATION_RIM } from "./rim/Video";
+import { VideoLei8080, DURATION as DURATION_LEI8080 } from "./lei8080/Video";
+import { CapaLei8080Ep1 } from "./lei8080/Capa";
+
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -391,6 +404,102 @@ export const RemotionRoot: React.FC = () => (
       fps={FPS}
       width={1080}
       height={1920}
+    />
+    <Composition
+      id="Pilula"
+      component={VideoPilula}
+      durationInFrames={DURATION_PILULA}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="PilulaCapa"
+      component={CapaPilula}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="OrigemCaptopril"
+      component={OrigemCaptopril}
+      durationInFrames={DURATION_CAPTOPRIL}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="OrigemCaptoprilCapa"
+      component={CapaCaptopril}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Caibra"
+      component={VideoCaibra}
+      durationInFrames={DURATION_CAIBRA}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="CaibraOpenArt"
+      component={VideoCaibraOpenArt}
+      durationInFrames={DURATION_CAIBRA}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="CaibraCapa"
+      component={CapaCaibra}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Glicose"
+      component={VideoGlicose}
+      durationInFrames={DURATION_GLICOSE}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="GlicoseCapa"
+      component={CapaGlicose}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Rim"
+      component={VideoRim}
+      durationInFrames={DURATION_RIM}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Lei8080Ep1"
+      component={VideoLei8080}
+      durationInFrames={DURATION_LEI8080}
+      fps={FPS}
+      width={1920}
+      height={1080}
+    />
+    <Composition
+      id="Lei8080Ep1Capa"
+      component={CapaLei8080Ep1}
+      durationInFrames={1}
+      fps={FPS}
+      width={1280}
+      height={720}
     />
   </>
 );

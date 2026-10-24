@@ -40,6 +40,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 30 | Sertralina | [30_sertralina.md](textos/30_sertralina.md) | — |
 | 31 | Notícias da Farmácia #2: preciso tomar a vacina do sarampo de novo? (Vox e pixel) | [31_noticias_02_sarampo.md](textos/31_noticias_02_sarampo.md) | [Vox](capas/capa_noticias_02_sarampo_vox.png) · [pixel](capas/capa_noticias_02_sarampo.png) |
 | 32 | Antídotos: flumazenil e N-acetilcisteína | [32_antidotos.md](textos/32_antidotos.md) | [capa_antidotos.png](capas/capa_antidotos.png) |
+| 33 | A origem dos remédios #2: a aspirina e o salgueiro | [33_origem_aspirina.md](textos/33_origem_aspirina.md) | [capa_origem_aspirina.png](capas/capa_origem_aspirina.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

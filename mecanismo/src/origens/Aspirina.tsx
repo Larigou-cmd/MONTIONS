@@ -107,7 +107,11 @@ const GRUPOS = (() => {
   let cur: Pal[] = [];
   FALA.forEach((p, i) => {
     cur.push(p);
-    if (/[.,:?]$|\.\.\.$/.test(p.w) || cur.length >= 3 || i === FALA.length - 1) {
+    if (
+      /[.,:?]$|\.\.\.$/.test(p.w) ||
+      cur.length >= 3 ||
+      i === FALA.length - 1
+    ) {
       gs.push(cur);
       cur = [];
     }
@@ -185,13 +189,13 @@ const Legenda: React.FC<{ y?: number; cor?: string }> = ({
 };
 
 // número grande em serifa (os anos da história)
-const Ano: React.FC<{ x: number; y: number; at: number; txt: string; size?: number }> = ({
-  x,
-  y,
-  at,
-  txt,
-  size = 170,
-}) => {
+const Ano: React.FC<{
+  x: number;
+  y: number;
+  at: number;
+  txt: string;
+  size?: number;
+}> = ({ x, y, at, txt, size = 170 }) => {
   const f = useCurrentFrame();
   if (f < at) return null;
   const k = it(f, at, at + 10, 0, 1, OUT);
@@ -214,13 +218,13 @@ const Ano: React.FC<{ x: number; y: number; at: number; txt: string; size?: numb
 };
 
 // comprimido branco de aspirina
-const Comprimido: React.FC<{ x: number; y: number; at: number; r?: number; s?: number }> = ({
-  x,
-  y,
-  at,
-  r = 120,
-  s = 1,
-}) => {
+const Comprimido: React.FC<{
+  x: number;
+  y: number;
+  at: number;
+  r?: number;
+  s?: number;
+}> = ({ x, y, at, r = 120, s = 1 }) => {
   const f = useCurrentFrame();
   if (f < at) return null;
   const k = it(f, at, at + 12, 0, 1, SNAP) * s;
@@ -234,7 +238,14 @@ const Comprimido: React.FC<{ x: number; y: number; at: number; r?: number; s?: n
           strokeWidth={6}
           style={{ filter: "drop-shadow(0 14px 24px rgba(40,30,15,.35))" }}
         />
-        <line x1={-r * 0.8} y1={0} x2={r * 0.8} y2={0} stroke="#c9c2b4" strokeWidth={8} />
+        <line
+          x1={-r * 0.8}
+          y1={0}
+          x2={r * 0.8}
+          y2={0}
+          stroke="#c9c2b4"
+          strokeWidth={8}
+        />
         <text
           y={-r * 0.25}
           textAnchor="middle"
@@ -305,12 +316,33 @@ const Carta: React.FC<{ at: number }> = ({ at }) => {
           for (let x = 0; x < w; x += 20)
             d += ` q10,${(random(`c${i}${x}`) - 0.5) * 16} 20,0`;
           return (
-            <path key={i} d={d} fill="none" stroke="#4a3f30" strokeWidth={4} opacity={0.75} />
+            <path
+              key={i}
+              d={d}
+              fill="none"
+              stroke="#4a3f30"
+              strokeWidth={4}
+              opacity={0.75}
+            />
           );
         })}
         <circle cx={200} cy={300} r={62} fill={VERM} />
-        <circle cx={200} cy={300} r={44} fill="none" stroke="#8e0b20" strokeWidth={6} />
-        <text x={200} y={316} textAnchor="middle" fontFamily={SERIF} fontSize={46} fill="#8e0b20">
+        <circle
+          cx={200}
+          cy={300}
+          r={44}
+          fill="none"
+          stroke="#8e0b20"
+          strokeWidth={6}
+        />
+        <text
+          x={200}
+          y={316}
+          textAnchor="middle"
+          fontFamily={SERIF}
+          fontSize={46}
+          fill="#8e0b20"
+        >
           RS
         </text>
       </g>
@@ -327,14 +359,25 @@ const Estomago: React.FC<{ at: number }> = ({ at }) => {
   return (
     <svg width={W} height={1920} style={{ position: "absolute" }}>
       <g transform={`translate(560,1300) scale(${1.1 * k})`}>
-        <path d="M-10,-330 L-10,-200" stroke={TINTA} strokeWidth={46} strokeLinecap="round" />
+        <path
+          d="M-10,-330 L-10,-200"
+          stroke={TINTA}
+          strokeWidth={46}
+          strokeLinecap="round"
+        />
         <path
           d="M-40,-210 C-60,-110 -170,-60 -150,60 C-130,190 60,230 170,140 C250,70 210,-50 110,-40 C40,-35 30,-110 30,-210 Z"
           fill={`rgba(200,16,46,${0.25 + 0.5 * pulso})`}
           stroke={TINTA}
           strokeWidth={10}
         />
-        <path d="M150,150 C180,200 230,210 260,190" fill="none" stroke={TINTA} strokeWidth={30} strokeLinecap="round" />
+        <path
+          d="M150,150 C180,200 230,210 260,190"
+          fill="none"
+          stroke={TINTA}
+          strokeWidth={30}
+          strokeLinecap="round"
+        />
         {[0, 1, 2].map((i) => (
           <text
             key={i}
@@ -355,14 +398,14 @@ const Estomago: React.FC<{ at: number }> = ({ at }) => {
 };
 
 // molécula (PNG do Wikimedia) que entra com leve giro
-const Molecula: React.FC<{ src: string; x: number; y: number; w: number; at: number; rot?: number }> = ({
-  src,
-  x,
-  y,
-  w,
-  at,
-  rot = 0,
-}) => {
+const Molecula: React.FC<{
+  src: string;
+  x: number;
+  y: number;
+  w: number;
+  at: number;
+  rot?: number;
+}> = ({ src, x, y, w, at, rot = 0 }) => {
   const f = useCurrentFrame();
   if (f < at) return null;
   const k = it(f, at, at + 14, 0, 1, SNAP);
@@ -405,7 +448,9 @@ const Nome: React.FC = () => {
     >
       {pecas.map((p, i) => (
         <div key={i} style={{ textAlign: "center" }}>
-          <div style={{ color: i === 1 && separa > 0.5 ? VERM : TINTA }}>{p}</div>
+          <div style={{ color: i === 1 && separa > 0.5 ? VERM : TINTA }}>
+            {p}
+          </div>
           <div
             style={{
               fontFamily: "'Courier New', monospace",
@@ -467,7 +512,14 @@ const Bloqueio: React.FC = () => {
         if (f < at) return null;
         const u = it(f, at, at + 8, 0, 1, OUT);
         return (
-          <Etiqueta key={c} x={760} y={1040 + i * 100} at={at} rot={i % 2 ? 2 : -2} cor={VERM}>
+          <Etiqueta
+            key={c}
+            x={760}
+            y={1040 + i * 100}
+            at={at}
+            rot={i % 2 ? 2 : -2}
+            cor={VERM}
+          >
             <span style={{ opacity: u }}>{c} ↓</span>
           </Etiqueta>
         );
@@ -485,12 +537,28 @@ const Medalha: React.FC<{ at: number }> = ({ at }) => {
     <svg width={W} height={1920} style={{ position: "absolute" }}>
       <g transform={`translate(330,1580) scale(${k}) rotate(${(1 - k) * 40})`}>
         <path d="M-60,-200 L-20,-90 L20,-90 L60,-200" fill={VERM} />
-        <circle r={120} fill={OURO} style={{ filter: "drop-shadow(0 10px 20px rgba(40,30,15,.35))" }} />
+        <circle
+          r={120}
+          fill={OURO}
+          style={{ filter: "drop-shadow(0 10px 20px rgba(40,30,15,.35))" }}
+        />
         <circle r={98} fill="none" stroke="#8a6a26" strokeWidth={6} />
-        <text y={-6} textAnchor="middle" fontFamily={SERIF} fontSize={52} fill="#5a4416">
+        <text
+          y={-6}
+          textAnchor="middle"
+          fontFamily={SERIF}
+          fontSize={52}
+          fill="#5a4416"
+        >
           NOBEL
         </text>
-        <text y={48} textAnchor="middle" fontFamily={SERIF} fontSize={44} fill="#5a4416">
+        <text
+          y={48}
+          textAnchor="middle"
+          fontFamily={SERIF}
+          fontSize={44}
+          fill="#5a4416"
+        >
           1982
         </text>
       </g>
@@ -501,7 +569,9 @@ const Medalha: React.FC<{ at: number }> = ({ at }) => {
 // contador de toneladas por ano
 const Contador: React.FC = () => {
   const f = useCurrentFrame();
-  const v = Math.round(40000 * it(f, S.quarenta - 6, S.quarenta + 30, 0, 1, OUT));
+  const v = Math.round(
+    40000 * it(f, S.quarenta - 6, S.quarenta + 30, 0, 1, OUT),
+  );
   return (
     <div
       style={{
@@ -548,12 +618,27 @@ export const OrigemAspirina: React.FC = () => {
             }}
           />
         </AbsoluteFill>
-        <Comprimido x={540} y={1250} at={0} r={170} s={1 - 0.55 * P(f, 30, C[1])} />
+        <Comprimido
+          x={540}
+          y={1250}
+          at={0}
+          r={170}
+          s={1 - 0.55 * P(f, 30, C[1])}
+        />
         <Legenda y={420} cor="#f4efe6" />
       </Cena>
       {/* 2. o salgueiro recortado */}
       <Cena de={C[1]} ate={C[2]}>
-        <Foto src="aspirina/img/salgueiro2.jpg" x={540} y={1150} w={880} h={640} at={C[1]} rot={-3} pos="62% 50%" />
+        <Foto
+          src="aspirina/img/salgueiro2.jpg"
+          x={540}
+          y={1150}
+          w={880}
+          h={640}
+          at={C[1]}
+          rot={-3}
+          pos="62% 50%"
+        />
         <Fita x={300} y={830} rot={-14} />
         <Fita x={800} y={830} rot={10} />
         <Etiqueta x={700} y={1500} at={C[1] + 8} rot={3}>
@@ -582,7 +667,14 @@ export const OrigemAspirina: React.FC = () => {
             <Etiqueta x={560} y={1650} at={S.salicina} rot={-3}>
               salicina → ácido salicílico
             </Etiqueta>
-            <Molecula src="aspirina/img/salicilico.png" x={560} y={1180} w={520} at={S.salicilico - 8} rot={-6} />
+            <Molecula
+              src="aspirina/img/salicilico.png"
+              x={560}
+              y={1180}
+              w={520}
+              at={S.salicilico - 8}
+              rot={-6}
+            />
           </>
         )}
         <Estomago at={S.atacava - 6} />
@@ -590,25 +682,82 @@ export const OrigemAspirina: React.FC = () => {
       </Cena>
       {/* 5. Felix Hoffmann, Bayer, 1897 */}
       <Cena de={C[4]} ate={C[5]}>
-        <Foto src="aspirina/img/protocolo.jpg" x={760} y={1250} w={460} h={630} at={S.bayer} rot={5} pos="50% 0%" zoom={0.02} cor />
-        <Foto src="aspirina/img/hoffmann.jpg" x={320} y={1150} w={460} h={580} at={C[4]} rot={-4} pos="50% 20%" />
+        <Foto
+          src="aspirina/img/protocolo.jpg"
+          x={760}
+          y={1250}
+          w={460}
+          h={630}
+          at={S.bayer}
+          rot={5}
+          pos="50% 0%"
+          zoom={0.02}
+          cor
+        />
+        <Foto
+          src="aspirina/img/hoffmann.jpg"
+          x={320}
+          y={1150}
+          w={460}
+          h={580}
+          at={C[4]}
+          rot={-4}
+          pos="50% 20%"
+        />
         <Fita x={320} y={870} rot={-6} />
         <Ano x={780} y={760} at={S.a1897} txt="1897" />
         <Etiqueta x={320} y={1480} at={S.hoffmann} rot={2}>
           Felix Hoffmann · Bayer
         </Etiqueta>
-        <Molecula src="aspirina/img/aas.png" x={560} y={1730} w={340} at={S.acetil - 10} rot={-4} />
+        <Molecula
+          src="aspirina/img/aas.png"
+          x={560}
+          y={1730}
+          w={340}
+          at={S.acetil - 10}
+          rot={-4}
+        />
         <Legenda />
       </Cena>
       {/* 6. 1899: Aspirin, e o "spir" da spiraea */}
       <Cena de={C[5]} ate={C[6]}>
         {f < S.aspirina - 4 && (
-          <Foto src="aspirina/img/anuncio_1918.png" x={540} y={1150} w={520} h={690} at={C[5]} rot={3} pos="50% 0%" zoom={0.02} />
+          <Foto
+            src="aspirina/img/anuncio_1918.png"
+            x={540}
+            y={1150}
+            w={520}
+            h={690}
+            at={C[5]}
+            rot={3}
+            pos="50% 0%"
+            zoom={0.02}
+          />
         )}
         <Ano x={540} y={610} at={S.a1899} txt="1899" size={130} />
         <Nome />
-        <Foto src="aspirina/img/frasco.jpg" x={290} y={1360} w={360} h={500} at={S.aspirina} rot={-5} pos="50% 50%" cor zoom={0.02} />
-        <Foto src="aspirina/img/spiraea.jpg" x={780} y={1360} w={380} h={500} at={S.spiraea - 4} rot={4} pos="50% 40%" />
+        <Foto
+          src="aspirina/img/frasco.jpg"
+          x={290}
+          y={1360}
+          w={360}
+          h={500}
+          at={S.aspirina}
+          rot={-5}
+          pos="50% 50%"
+          cor
+          zoom={0.02}
+        />
+        <Foto
+          src="aspirina/img/spiraea.jpg"
+          x={780}
+          y={1360}
+          w={380}
+          h={500}
+          at={S.spiraea - 4}
+          rot={4}
+          pos="50% 40%"
+        />
         <Etiqueta x={780} y={1650} at={S.spiraea} rot={-3} cor={VERM}>
           spiraea
         </Etiqueta>
@@ -617,7 +766,16 @@ export const OrigemAspirina: React.FC = () => {
       {/* 7. John Vane, 1971, as prostaglandinas e o Nobel */}
       <Cena de={C[6]} ate={C[7]}>
         <Ano x={540} y={640} at={S.a1971} txt="1971" size={150} />
-        <Foto src="aspirina/img/vane.jpg" x={290} y={1060} w={420} h={560} at={S.vane - 6} rot={-4} pos="50% 25%" />
+        <Foto
+          src="aspirina/img/vane.jpg"
+          x={290}
+          y={1060}
+          w={420}
+          h={560}
+          at={S.vane - 6}
+          rot={-4}
+          pos="50% 25%"
+        />
         <Fita x={290} y={790} rot={-6} />
         <Bloqueio />
         <Medalha at={S.nobel - 4} />
@@ -625,7 +783,16 @@ export const OrigemAspirina: React.FC = () => {
       </Cena>
       {/* 8. e ao lado dele: Sérgio Henrique Ferreira */}
       <Cena de={C[7]} ate={C[8]}>
-        <Foto src="aspirina/img/vane.jpg" x={300} y={1150} w={420} h={550} at={C[7]} rot={-5} pos="50% 25%" />
+        <Foto
+          src="aspirina/img/vane.jpg"
+          x={300}
+          y={1150}
+          w={420}
+          h={550}
+          at={C[7]}
+          rot={-5}
+          pos="50% 25%"
+        />
         <Retrato x={790} y={1150} at={S.conhecido - 4} s={0.85} />
         <Etiqueta x={790} y={830} at={S.conhecido + 6} rot={5} cor={VERM}>
           de novo ele!
@@ -640,11 +807,27 @@ export const OrigemAspirina: React.FC = () => {
         {f < S.tudo - 6 ? (
           <>
             <Contador />
-            <Carimbo x={540} y={1560} at={S.quarenta + 30} texto="POR ANO" rot={-8} size={70} />
+            <Carimbo
+              x={540}
+              y={1560}
+              at={S.quarenta + 30}
+              texto="POR ANO"
+              rot={-8}
+              size={70}
+            />
           </>
         ) : (
           <>
-            <Foto src="aspirina/img/salgueiro2.jpg" x={540} y={1180} w={820} h={600} at={S.tudo - 6} rot={-2} pos="62% 50%" />
+            <Foto
+              src="aspirina/img/salgueiro2.jpg"
+              x={540}
+              y={1180}
+              w={820}
+              h={600}
+              at={S.tudo - 6}
+              rot={-2}
+              pos="62% 50%"
+            />
             <Comprimido x={540} y={1180} at={S.tudo + 6} r={110} />
           </>
         )}
@@ -661,7 +844,9 @@ export const OrigemAspirina: React.FC = () => {
       {/* trilha "Documentary Piano" de leberch (Pixabay), a mesma do #1, baixa embaixo da voz */}
       <Audio
         src={staticFile("captopril/musica_piano.mp3")}
-        volume={(fr) => 0.07 * (1 - P(fr, DURATION_ASPIRINA - 60, DURATION_ASPIRINA))}
+        volume={(fr) =>
+          0.07 * (1 - P(fr, DURATION_ASPIRINA - 60, DURATION_ASPIRINA))
+        }
       />
       {SFX.map(([fr, name, vol], i) => (
         <Sequence key={i} from={fr} durationInFrames={60}>
@@ -670,28 +855,37 @@ export const OrigemAspirina: React.FC = () => {
       ))}
       {/* 11. tela final */}
       <Cena de={S.final} ate={DURATION_ASPIRINA}>
-        {["Consulte um", "profissional de saúde", "para orientações."].map((l, i) => {
-          const k = it(f, S.final + 4 + i * 8, S.final + 18 + i * 8, 0, 1, OUT);
-          return (
-            <div
-              key={i}
-              style={{
-                position: "absolute",
-                top: 760 + i * 120,
-                width: W,
-                textAlign: "center",
-                fontFamily: SERIF,
-                fontStyle: i === 1 ? "italic" : "normal",
-                fontSize: i === 1 ? 110 : 90,
-                color: i === 1 ? VERM : TINTA,
-                opacity: k,
-                transform: `translateY(${(1 - k) * 30}px)`,
-              }}
-            >
-              {l}
-            </div>
-          );
-        })}
+        {["Consulte um", "profissional de saúde", "para orientações."].map(
+          (l, i) => {
+            const k = it(
+              f,
+              S.final + 4 + i * 8,
+              S.final + 18 + i * 8,
+              0,
+              1,
+              OUT,
+            );
+            return (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  top: 760 + i * 120,
+                  width: W,
+                  textAlign: "center",
+                  fontFamily: SERIF,
+                  fontStyle: i === 1 ? "italic" : "normal",
+                  fontSize: i === 1 ? 110 : 90,
+                  color: i === 1 ? VERM : TINTA,
+                  opacity: k,
+                  transform: `translateY(${(1 - k) * 30}px)`,
+                }}
+              >
+                {l}
+              </div>
+            );
+          },
+        )}
       </Cena>
     </AbsoluteFill>
   );

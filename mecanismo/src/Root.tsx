@@ -85,6 +85,7 @@ import { CapaCaptopril } from "./origens/CapaCaptopril";
 import { OrigemAspirina, DURATION_ASPIRINA } from "./origens/Aspirina";
 import { CapaAspirina } from "./origens/CapaAspirina";
 import { VideoVencido, DURATION_VENCIDO } from "./vencido/Video";
+import { CapaVencido } from "./vencido/Capa";
 import { VideoCaibra, DURATION_CAIBRA } from "./caibra/Video";
 import { VideoCaibraOpenArt } from "./caibra/VideoOpenArt";
 import { CapaCaibra } from "./caibra/Capa";
@@ -443,6 +444,14 @@ export const RemotionRoot: React.FC = () => (
       id="Vencido"
       component={VideoVencido}
       durationInFrames={DURATION_VENCIDO}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="VencidoCapa"
+      component={CapaVencido}
+      durationInFrames={1}
       fps={FPS}
       width={1080}
       height={1920}

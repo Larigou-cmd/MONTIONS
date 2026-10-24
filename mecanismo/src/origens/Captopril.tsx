@@ -342,7 +342,7 @@ export const Etiqueta: React.FC<{
 };
 
 // carimbo
-const Carimbo: React.FC<{
+export const Carimbo: React.FC<{
   x: number;
   y: number;
   at: number;
@@ -377,7 +377,7 @@ const Carimbo: React.FC<{
   );
 };
 
-const Cena: React.FC<{
+export const Cena: React.FC<{
   de: number;
   ate: number;
   children: React.ReactNode;
@@ -477,7 +477,7 @@ const Medidor: React.FC = () => {
 };
 
 // silhueta do cientista (não há foto livre de Sérgio Henrique Ferreira)
-const Retrato: React.FC<{ x: number; y: number; at: number; s?: number }> = ({
+export const Retrato: React.FC<{ x: number; y: number; at: number; s?: number }> = ({
   x,
   y,
   at,

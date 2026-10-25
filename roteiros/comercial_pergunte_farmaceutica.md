@@ -65,3 +65,19 @@ Regras:
 - https://pmc.ncbi.nlm.nih.gov/articles/PMC12177323
 - https://rfm.pt/atualidade/amp/21828/partir-comprimidos-afinal-podes-ou-nao-podes
 - https://www.tuasaude.com/news/?p=115988
+
+## Decisões (2026-10-25)
+- Marca: **Farma.exe** (logo em letra de pixel Press Start, verde #16a34a, fundo claro). Formato: **9:16** (1080×1920), 45 s, 30 fps.
+- Tema do episódio 1: as 3 dúvidas originais (pílula esquecida, antibiótico × anticoncepcional, partir comprimido).
+- Música: `mecanismo/scripts/musica_comercial.py` (própria, sem direitos), 120 bpm. Medida por dois métodos (`scripts/medir_bpm.py`): autocorrelação dos ataques = 120,1 bpm; intervalo entre bumbos = 120,2 bpm. 1 batida = 0,5 s = 15 quadros.
+- Peças: `mecanismo/src/farmaexe/ui.tsx`; foto de estilo: composição `FarmaEstilo`.
+
+## Mapa de som (b = batida; b4 = 2,0 s)
+| Cena | Tempo | O que acontece, na batida |
+|---|---|---|
+| 1 | 0–6 s (b0–b12) | b0–b4 logo FARMA.EXE se digita letra a letra, cursor pisca na batida · b4 logo sobe e o celular entra deslizando (b4→b6) · b6 Ana: "Oi! Posso tirar umas dúvidas de remédio?" · b7 digitando · b9 "Claro, manda! 💊" · b10→b12 zoom no chat (arranca devagar, acelera, borrão, freia) |
+| 2 | 6–14 s (b12–b28) | b12 Ana: "Esqueci a pílula ontem 😰 e agora?" · b14 digitando · b16 câmera desliza do celular para o card · b17/b19/b21 entram os 3 itens · b24 câmera volta ao celular · b26 a resposta vira bolha no chat ✓✓ |
+| 3 | 14–22 s (b28–b44) | mesmo ritmo: b28 pergunta do antibiótico · b30 digitando · b32 card · b33/b35/b37 itens · b40 volta · b42 bolha |
+| 4 | 22–30 s (b44–b60) | mesmo ritmo: b44 pergunta do comprimido · b46 digitando · b48 card · b49/b51/b53 itens · b56 volta · b58 bolha |
+| 5 | 30–38 s (b60–b76) | b60 "Pronto." · b62 Ana: "Obrigada!! ❤️" · b64 coração pulsa · b66 câmera se afasta e o celular sai · b68 assinatura FARMA.EXE + "Pergunte à Farmacêutica" |
+| final | 38–45 s (b76–b90) | b76 "Consulte um profissional de saúde para orientações." · b80→b90 música abafada (passa-baixa) com eco, apagando sem corte seco |

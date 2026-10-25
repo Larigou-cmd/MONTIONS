@@ -11,7 +11,7 @@ export const CapaAspirina: React.FC = () => (
     <div
       style={{
         position: "absolute",
-        top: 170,
+        top: 310,
         width: W,
         textAlign: "center",
         fontFamily: SANS,
@@ -26,12 +26,12 @@ export const CapaAspirina: React.FC = () => (
     <div
       style={{
         position: "absolute",
-        top: 250,
+        top: 370,
         left: 60,
         width: W - 120,
         textAlign: "center",
         fontFamily: SERIF,
-        fontSize: 112,
+        fontSize: 96,
         lineHeight: 1.0,
         color: TINTA,
       }}
@@ -40,7 +40,7 @@ export const CapaAspirina: React.FC = () => (
       <br />
       começou na
       <br />
-      <span style={{ fontStyle: "italic", color: VERM, fontSize: 150 }}>
+      <span style={{ fontStyle: "italic", color: VERM, fontSize: 128 }}>
         casca
       </span>
       <br />
@@ -49,23 +49,23 @@ export const CapaAspirina: React.FC = () => (
     <Foto
       src="aspirina/img/salgueiro2.jpg"
       x={540}
-      y={1250}
-      w={880}
-      h={600}
+      y={1150}
+      w={800}
+      h={460}
       at={-30}
       rot={-3}
       pos="62% 50%"
       zoom={0}
     />
-    <Fita x={290} y={960} rot={-14} />
-    <Fita x={800} y={960} rot={10} />
-    <Etiqueta x={700} y={1585} at={-30} rot={3}>
+    <Fita x={330} y={925} rot={-14} />
+    <Fita x={760} y={925} rot={10} />
+    <Etiqueta x={680} y={1395} at={-30} rot={3}>
       Salix alba · salgueiro
     </Etiqueta>
     <div
       style={{
         position: "absolute",
-        top: 1680,
+        top: 1470,
         width: W,
         textAlign: "center",
         fontFamily: SERIF,

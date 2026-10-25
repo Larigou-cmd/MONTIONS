@@ -14,12 +14,12 @@ export const CapaVencido: React.FC = () => (
     <div
       style={{
         position: "absolute",
-        top: 190,
+        top: 330,
         width: W,
         textAlign: "center",
         fontFamily: SANS,
         fontWeight: 900,
-        fontSize: 110,
+        fontSize: 100,
         lineHeight: 1.05,
         color: C.ink,
       }}
@@ -29,7 +29,7 @@ export const CapaVencido: React.FC = () => (
       <span
         style={{
           color: VERM,
-          fontSize: 150,
+          fontSize: 136,
           textShadow: `0 0 40px ${rgba(VERM, 0.6)}`,
         }}
       >
@@ -41,11 +41,11 @@ export const CapaVencido: React.FC = () => (
     <div
       style={{
         position: "absolute",
-        top: 820,
+        top: 760,
         width: W,
         textAlign: "center",
         fontFamily: EMOJI,
-        fontSize: 300,
+        fontSize: 260,
         lineHeight: 1,
       }}
     >
@@ -55,7 +55,7 @@ export const CapaVencido: React.FC = () => (
       style={{
         position: "absolute",
         left: 540,
-        top: 1300,
+        top: 1190,
         transform: "translate(-50%,-50%) rotate(-8deg)",
         border: `9px solid ${VERM}`,
         borderRadius: 16,
@@ -73,7 +73,7 @@ export const CapaVencido: React.FC = () => (
     <div
       style={{
         position: "absolute",
-        top: 1560,
+        top: 1430,
         width: W,
         textAlign: "center",
         fontFamily: SERIF,

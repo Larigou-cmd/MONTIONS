@@ -51,6 +51,17 @@
 - Capas prontas: `youtube/capas/` (nome `capa_<tema>.png`).
 - Textos de postagem: um arquivo por vídeo em `youtube/textos/NN_<tema>.md`, com índice em `youtube/README.md`. Vídeo novo = arquivo novo com o próximo número + linha no índice.
 - **Antídotos** (flumazenil e N-acetilcisteína, estilo Vox): `src/antidotos/Video.tsx` (Id `Antidotos`), reaproveita as peças exportadas de `src/sarampo/Vox.tsx`.
+- **Feitos em 2026-10-24 e 25** (todos finalizados, com MP4 em `videos reels`, capa e textos):
+  | Vídeo | Modelo | Código | Textos |
+  |---|---|---|---|
+  | A origem dos remédios #2: aspirina | 6 | `src/origens/Aspirina.tsx` | `33_origem_aspirina.md` |
+  | Remédio vencido vira veneno? | 1 | `src/vencido/` | `34_remedio_vencido.md` |
+  | Genérico presta? Mitos e verdades | 2 | `genericos/` (scene.html) | `35_genericos.md` |
+  | Seu glóbulo vermelho vive só 120 dias | 1 | `src/globulo/` | `36_globulo_vermelho.md` |
+  | Por que a fumaça de incêndio faz desmaiar? | 1 | `src/fumaca/` | `37_fumaca_incendio.md` |
+- **Capas:** todo o conteúdo deve ficar entre y≈300 e y≈1620, que é o recorte 3:4 que o TikTok e o Instagram mostram. Conferir com `crop=1080:1440:0:240` antes de entregar.
+- **Entrega:** colar no chat os textos completos das 4 redes, e não só dizer que estão no arquivo.
+- **Parado:** comercial Modelo 7 "Pergunte à Farmacêutica" (`roteiros/comercial_pergunte_farmaceutica.md`). Falta o logo, a música e a escolha do formato.
 
 ## Pinterest
 - 5 pins de 1000×1500 em `pinterest/`: jejum, tosse, sinvastatina à noite, sinvastatina e dor muscular, amoxicilina.

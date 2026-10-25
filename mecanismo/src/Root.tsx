@@ -94,6 +94,7 @@ import { FarmaEstilo } from "./farmaexe/Estilo";
 import { FarmaComercial, DURATION_FARMA } from "./farmaexe/Comercial";
 import { CapaFarma } from "./farmaexe/Capa";
 import { FarmaCarrossel } from "./farmaexe/Carrossel";
+import { CarrosselGlobulo, CarrosselFumaca, CarrosselVencido, CarrosselGenericos, GLOBULO, FUMACA, VENCIDO, GENERICOS } from "./carrosseis/Carrosseis";
 import { VideoCaibra, DURATION_CAIBRA } from "./caibra/Video";
 import { VideoCaibraOpenArt } from "./caibra/VideoOpenArt";
 import { CapaCaibra } from "./caibra/Capa";
@@ -447,6 +448,38 @@ export const RemotionRoot: React.FC = () => (
       fps={FPS}
       width={1080}
       height={1920}
+    />
+    <Composition
+      id="CarrosselGlobulo"
+      component={CarrosselGlobulo}
+      durationInFrames={GLOBULO.length}
+      fps={FPS}
+      width={1080}
+      height={1350}
+    />
+    <Composition
+      id="CarrosselFumaca"
+      component={CarrosselFumaca}
+      durationInFrames={FUMACA.length}
+      fps={FPS}
+      width={1080}
+      height={1350}
+    />
+    <Composition
+      id="CarrosselVencido"
+      component={CarrosselVencido}
+      durationInFrames={VENCIDO.length}
+      fps={FPS}
+      width={1080}
+      height={1350}
+    />
+    <Composition
+      id="CarrosselGenericos"
+      component={CarrosselGenericos}
+      durationInFrames={GENERICOS.length}
+      fps={FPS}
+      width={1080}
+      height={1350}
     />
     <Composition
       id="FarmaCarrossel"

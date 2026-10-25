@@ -59,3 +59,21 @@ Salva e manda para quem você ama 👇
 - YouTube: "conteúdo alterado ou sintético: Sim"
 - Instagram: "Rótulo de IA"
 - Kwai: a opção de IA, se aparecer
+
+### Instagram (carrossel de fotos, 8 fotos 4:5)
+Fotos em `instagram/fumaca_carrossel/` (composição `CarrosselFumaca`). Postar na ordem 1 → 8.
+
+**Legenda:**
+Por que a fumaça de incêndio faz desmaiar? 💨 Arrasta para o lado ➡️
+
+O culpado é o monóxido de carbono: sem cor, sem cheiro, e gruda na hemoglobina cerca de 250 vezes mais forte que o oxigênio. O corpo não percebe, e a pessoa desmaia antes de entender o perigo 😵
+
+E ainda tem o cianeto, o oxímetro que pode enganar e o tratamento com oxigênio puro 💉
+
+Num incêndio: saia abaixado e ligue 193 🚒
+
+Salva e manda para quem você ama 📌
+
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações.
+
+#incendio #fumaca #monoxidodecarbono #fisiologia #primeirossocorros #saude

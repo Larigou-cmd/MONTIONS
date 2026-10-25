@@ -58,3 +58,24 @@ Fontes: Lei 9.787/1999; RDC Anvisa 16/2007; Idec; CFF.
 - YouTube: "conteúdo alterado ou sintético: Sim"
 - Instagram: "Rótulo de IA"
 - Kwai: a opção de IA, se aparecer
+
+### Instagram (carrossel de fotos, 8 fotos 4:5)
+Fotos em `instagram/genericos_carrossel/` (composição `CarrosselGenericos`). Postar na ordem 1 → 8.
+
+**Legenda:**
+Genérico presta? 💊 6 mitos e verdades. Arrasta para o lado ➡️
+
+❌ É mais fraco? Mito.
+❌ Só tem 80% do remédio? Mito.
+❌ É mais barato porque é pior? Mito.
+✅ O farmacêutico pode trocar? Verdade (a não ser que o médico proíba na receita).
+❌ Genérico e similar são iguais? Mito.
+✅ Cor e formato podem mudar? Verdade.
+
+Qual desses você acreditava? Me conta nos comentários 👇
+Salva e manda para quem só compra o de marca 📌
+
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações.
+Fontes: Lei 9.787/1999; RDC Anvisa 16/2007; Idec; CFF.
+
+#generico #farmacia #farmacologia #mitoseverdades #anvisa #saude

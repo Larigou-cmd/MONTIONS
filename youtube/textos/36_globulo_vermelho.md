@@ -57,3 +57,19 @@ Salva e manda para alguém curioso 👇
 - YouTube: "conteúdo alterado ou sintético: Sim"
 - Instagram: "Rótulo de IA"
 - Kwai: a opção de IA, se aparecer
+
+### Instagram (carrossel de fotos, 8 fotos 4:5)
+Fotos em `instagram/globulo_carrossel/` (composição `CarrosselGlobulo`). Postar na ordem 1 → 8.
+
+**Legenda:**
+Seu glóbulo vermelho vive só 120 dias 🩸 Arrasta para o lado ➡️
+
+Ele nasce na medula óssea, o corpo fabrica milhões por segundo, perde o núcleo para virar um disco cheio de hemoglobina... e termina a vida espremido no baço 💥 E nada se perde: o ferro vira glóbulo novo ♻️
+
+Você sabia que é por isso que a hemoglobina glicada mostra a média de 3 meses? 🧪
+
+Salva e manda para alguém curioso 📌
+
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações.
+
+#fisiologia #sangue #hemacias #curiosidades #saude #farmacologia

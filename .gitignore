@@ -16,3 +16,7 @@ mecanismo/public/**/*.mp3
 concurso_lei8080/audiolivro/audio/
 out/
 node_modules/
+
+# Modelo 2: vídeos gerados ficam só no PC
+genericos/*.mp4
+genericos/previas/

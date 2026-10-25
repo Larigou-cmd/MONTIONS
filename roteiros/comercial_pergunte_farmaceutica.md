@@ -25,6 +25,39 @@ Regras do modelo de comercial colado pela usuária:
 - Renderizar sem som.
 - Fazer o render completo só depois do "vai".
 
+## Prompt adaptado (versão de 2026-10-24)
+Quero um comercial de 45 segundos, 16:9, 30 quadros por segundo, feito no Remotion, mostrando o meu atendimento "Pergunte à Farmacêutica" resolvendo as dúvidas de uma cliente pelo WhatsApp.
+
+Você fala comigo em português simples. Eu não sou programadora: nunca me peça para escrever código nem para abrir terminal. Se precisar instalar algo, instale e me avise em uma frase.
+
+Material que eu dou (se faltar, peça tudo de uma vez, em lista curta):
+- Não há prints de ferramenta: o WhatsApp e os cards de resposta são desenhados no código, com conversas fictícias. Nunca use marca de remédio.
+- Pasta marca/: o meu logo (se não houver, faça um com o meu nome no estilo dos meus vídeos).
+- Pasta musica/: uma música (opcional). Sem música, use uma faixa livre e me diga a fonte.
+- Cliente fictícia: Ana.
+
+Antes de qualquer cena (numa única resposta):
+1. Meça os BPM da música por dois métodos e me mostre um mapa de som curto: uma linha por cena, com a batida e o tempo de cada ação.
+2. Mostre como ficam a conversa e os cards de resposta.
+Espere meu "ok" antes de fazer a cena 1.
+
+Estrutura:
+- Cena 1 (6 s): abertura com "Pergunte à Farmacêutica" num fundo claro; a Ana manda "Oi! Posso tirar umas dúvidas de remédio?"; três pontinhos de "digitando" e a resposta "Claro, manda!".
+- Cena 2: "Esqueci a pílula ontem 😰 e agora?" → card: tome assim que lembrar, mesmo que sejam 2 no mesmo dia, e siga no horário de sempre; esqueceu 2 ou mais, use camisinha por 7 dias.
+- Cena 3: "Antibiótico corta o efeito do anticoncepcional?" → card: a maioria não corta; a exceção é a rifampicina (e a rifabutina, em menor grau): com elas, use outro método junto.
+- Cena 4: "Posso partir o comprimido pra engolir melhor?" → card: depende! Liberação prolongada não pode ser partida; manda a foto da caixa que eu confiro 📸.
+- Cena 5: "Pronto.", a Ana agradece ("Obrigada!! ❤️") e a assinatura com o meu logo. Depois, a tela "Consulte um profissional de saúde para orientações."
+
+Regras:
+- Todo movimento começa e termina numa batida da música.
+- Um mundo só: mesmo fundo, mesma luz e mesmas fontes. A câmera desliza do celular para o card de resposta e de volta, sem corte seco.
+- Todo zoom arranca devagar, acelera, freia e tem borrão no meio; ao fim do zoom a peça continua inteira na tela.
+- Entre uma ação e a próxima, no máximo meio segundo parado (exceto os 2 primeiros segundos).
+- Sempre tem algo se mexendo na tela.
+- Uma cena por vez, de 5 a 8 segundos. Antes de renderizar, me mostre 4 fotos da cena (PNG, em fotos/) e espere meu ok. Renderize sem som e junte o som depois.
+- Final com a música abafada e eco, nunca cortando seco.
+- Não renderize o vídeo inteiro nem gaste muito processamento sem eu dizer "vai".
+
 ## Fontes
 - https://www.mdsaude.com/ginecologia/anticoncepcionais/como-tomar-anticoncepcional/
 - https://helloclue.com/pt/artigos/sexo/esqueci-de-tomar-a-pilula-anticoncepcional-o-que-fazer

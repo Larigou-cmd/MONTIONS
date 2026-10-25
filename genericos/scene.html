@@ -463,6 +463,22 @@ window.draw = function (t) {
   crt();
 };
 window.render = window.draw;
+// capa vertical 1080x1920 (gerada por capa.mjs)
+window.capa = function () {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.shadowBlur = 0;
+  const t = 2;
+  fundo(t);
+  text('GENÉRICO', 540, 380, 130, { font: SILK, color: G, glow: 26, bold: true, align: 'center' });
+  text('PRESTA?', 540, 530, 130, { font: SILK, color: A, glow: 26, bold: true, align: 'center' });
+  caixa(280, 820, 1.1, 'gen');
+  text('VS', 540, 845, 70, { font: SILK, color: WH, bold: true, align: 'center', glow: 14 });
+  caixa(800, 820, 1.1, 'marca');
+  stamp('MITO', 9, 0, 290, 1100, R, { rot: -8, size: 84 });
+  stamp('VERDADE', 9, 0, 690, 1270, G, { rot: 5, size: 70 });
+  text('6 dúvidas que todo mundo tem', 540, 1470, 56, { color: WH, align: 'center', glow: 8 });
+  barra(t);
+  crt();
+};
 window.S = S;
 
 const faces = [

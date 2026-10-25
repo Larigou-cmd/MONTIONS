@@ -45,6 +45,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 35 | Genérico presta? Mitos e verdades (Modelo 2) | [35_genericos.md](textos/35_genericos.md) | [capa_genericos.png](capas/capa_genericos.png) |
 | 36 | Seu glóbulo vermelho vive só 120 dias | [36_globulo_vermelho.md](textos/36_globulo_vermelho.md) | [capa_globulo.png](capas/capa_globulo.png) |
 | 37 | Por que a fumaça de incêndio faz desmaiar? | [37_fumaca_incendio.md](textos/37_fumaca_incendio.md) | [capa_fumaca.png](capas/capa_fumaca.png) |
+| 38 | Farma.exe: Pergunte à Farmacêutica (comercial, Modelo 7) | [38_farma_exe_comercial.md](textos/38_farma_exe_comercial.md) | [capa_farma_exe.png](capas/capa_farma_exe.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

@@ -1,8 +1,9 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { Easing } from "remotion";
-import { it } from "../lib";
-import { Bolha, CardResposta, Celular, Digitando, Fundo, Logo, b } from "./ui";
+import { OUT, SNAP, it } from "../lib";
+import { SANS } from "../fonts";
+import { Bolha, CardResposta, Celular, Digitando, Fundo, Logo, TINTA, VERDE, b } from "./ui";
 
 // Comercial Farma.exe (Modelo 7), 9:16, 45 s a 120 bpm. Roteiro e mapa de som: roteiros/comercial_pergunte_farmaceutica.md.
 // Tudo começa e termina numa batida: b(n) = quadro da batida n (15 quadros cada).
@@ -42,9 +43,9 @@ const camCelular = (f: number) => {
   const zoom = mov(f, b(10), b(12)); // b10→b12 zoom no chat
   return {
     x: 540 - 1300 * panX(f),
-    y: 2700 - (2700 - 1010) * entra,
-    s: 1 + 0.32 * zoom,
-    blur: borrao(f, b(4), b(6), 10) + borrao(f, b(10), b(12), 8) + panBlur(f),
+    y: 2700 - (2700 - 1010) * entra + 1700 * mov(f, b(66), b(68)), // b66→b68 a câmera se afasta e o celular sai por baixo
+    s: 1 + 0.32 * zoom - 0.6 * mov(f, b(66), b(68)),
+    blur: borrao(f, b(4), b(6), 10) + borrao(f, b(10), b(12), 8) + panBlur(f) + borrao(f, b(66), b(68), 12),
   };
 };
 
@@ -182,6 +183,9 @@ export const FarmaComercial: React.FC = () => {
             texto="Depende! Liberação prolongada não pode ser partida ❌ Me manda a foto da caixa que eu confiro 📸"
             hora="14:04"
           />
+          {/* CENA 5 (30–38 s): pronto e o agradecimento */}
+          <Bolha at={b(60)} texto="Pronto." hora="14:05" />
+          <Bolha at={b(62)} dela texto="Obrigada!! ❤️" hora="14:05" />
           </div>
         </Celular>
       </div>
@@ -268,6 +272,79 @@ export const FarmaComercial: React.FC = () => {
           ]}
         />
       </CardNaCamera>
+      <Coracao />
+      <Assinatura />
+      <TelaFinal />
     </AbsoluteFill>
+  );
+};
+
+// coração que pula do agradecimento e bate na batida (b64→b66)
+const Coracao: React.FC = () => {
+  const f = useCurrentFrame();
+  if (f < b(64) || f > b(67)) return null;
+  const k = it(f, b(64), b(64.6), 0, 1, SNAP);
+  const bate = 1 + 0.15 * Math.max(0, Math.cos(((f - b(64)) / b(1)) * Math.PI * 2));
+  const sai = mov(f, b(66), b(67));
+  return (
+    <div style={{ position: "absolute", left: 640, top: 1180 - 200 * k, transform: `translate(-50%,-50%) scale(${k * bate * (1 - sai)})`, fontFamily: "'Noto Color Emoji', sans-serif", fontSize: 260 }}>
+      ❤️
+    </div>
+  );
+};
+
+// assinatura: logo FARMA.EXE e "Pergunte à Farmacêutica" (b68), frase (b72); sobe na tela final (b76→b77)
+const Assinatura: React.FC = () => {
+  const f = useCurrentFrame();
+  if (f < b(68)) return null;
+  const k = it(f, b(68), b(69), 0, 1, SNAP);
+  const sobe = mov(f, b(76), b(77));
+  const flutua = Math.sin((f / b(2)) * Math.PI) * 6;
+  const linha = (at: number) => it(f, at, at + 10, 0, 1, OUT);
+  return (
+    <div style={{ position: "absolute", inset: 0, transform: `translateY(${-470 * sobe + flutua}px) scale(${1 - 0.25 * sobe})` }}>
+      <div style={{ position: "absolute", inset: 0, transform: `scale(${0.7 + 0.3 * k})`, opacity: Math.min(1, k * 1.4) }}>
+        <Logo y={860} size={100} at={b(68) - 200} />
+      </div>
+      <div style={{ position: "absolute", top: 960, width: "100%", textAlign: "center", fontFamily: SANS, fontWeight: 700, fontSize: 52, color: VERDE, opacity: linha(b(69)), transform: `translateY(${(1 - linha(b(69))) * 30}px)` }}>
+        Pergunte à Farmacêutica
+      </div>
+      <div style={{ position: "absolute", top: 1060, width: "100%", textAlign: "center", fontFamily: SANS, fontWeight: 500, fontSize: 40, color: TINTA, opacity: linha(b(72)) * (1 - sobe), transform: `translateY(${(1 - linha(b(72))) * 30}px)` }}>
+        Tire suas dúvidas com quem entende de remédio 💊
+      </div>
+    </div>
+  );
+};
+
+// tela final (b76–b90): uma linha por batida
+const TelaFinal: React.FC = () => {
+  const f = useCurrentFrame();
+  if (f < b(76)) return null;
+  const linhas = ["Consulte um", "profissional de saúde", "para orientações."];
+  return (
+    <>
+      {linhas.map((l, i) => {
+        const k = it(f, b(76 + i), b(76 + i) + 10, 0, 1, OUT);
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              top: 820 + i * 110,
+              width: "100%",
+              textAlign: "center",
+              fontFamily: SANS,
+              fontWeight: i === 1 ? 800 : 600,
+              fontSize: i === 1 ? 84 : 70,
+              color: i === 1 ? VERDE : TINTA,
+              opacity: k,
+              transform: `translateY(${(1 - k) * 40}px)`,
+            }}
+          >
+            {l}
+          </div>
+        );
+      })}
+    </>
   );
 };

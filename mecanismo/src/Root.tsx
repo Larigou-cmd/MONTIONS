@@ -88,6 +88,7 @@ import { VideoVencido, DURATION_VENCIDO } from "./vencido/Video";
 import { CapaVencido } from "./vencido/Capa";
 import { VideoGlobulo, DURATION_GLOBULO } from "./globulo/Video";
 import { CapaGlobulo } from "./globulo/Capa";
+import { VideoFumaca, DURATION_FUMACA } from "./fumaca/Video";
 import { VideoCaibra, DURATION_CAIBRA } from "./caibra/Video";
 import { VideoCaibraOpenArt } from "./caibra/VideoOpenArt";
 import { CapaCaibra } from "./caibra/Capa";
@@ -438,6 +439,14 @@ export const RemotionRoot: React.FC = () => (
       id="OrigemCaptopril"
       component={OrigemCaptopril}
       durationInFrames={DURATION_CAPTOPRIL}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Fumaca"
+      component={VideoFumaca}
+      durationInFrames={DURATION_FUMACA}
       fps={FPS}
       width={1080}
       height={1920}

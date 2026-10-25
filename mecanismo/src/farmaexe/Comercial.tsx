@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { Easing } from "remotion";
 import { it } from "../lib";
-import { Bolha, Celular, Digitando, Fundo, Logo, b } from "./ui";
+import { Bolha, CardResposta, Celular, Digitando, Fundo, Logo, b } from "./ui";
 
 // Comercial Farma.exe (Modelo 7), 9:16, 45 s a 120 bpm. Roteiro e mapa de som: roteiros/comercial_pergunte_farmaceutica.md.
 // Tudo começa e termina numa batida: b(n) = quadro da batida n (15 quadros cada).
@@ -12,17 +12,49 @@ export const DURATION_FARMA = b(90);
 // movimento de câmera: arranca devagar, acelera, freia; o borrão é máximo no meio
 const SUAVE = Easing.bezier(0.65, 0, 0.35, 1);
 const mov = (f: number, de: number, ate: number) => it(f, de, ate, 0, 1, SUAVE);
-const borrao = (f: number, de: number, ate: number, max: number) => (f > de && f < ate ? Math.sin(Math.PI * ((f - de) / (ate - de))) * max : 0);
+const borrao = (f: number, de: number, ate: number, max: number) =>
+  f > de && f < ate ? Math.sin(Math.PI * ((f - de) / (ate - de))) * max : 0;
 
-// câmera sobre o celular: posição vertical, escala e borrão
+// idas e voltas da câmera entre o celular e o card de resposta: [vai, volta] em batidas
+const PANS: [number, number][] = [[16, 24]];
+const panX = (f: number) => PANS.reduce((acc, [vai, volta]) => acc + mov(f, b(vai), b(vai + 1)) - mov(f, b(volta), b(volta + 1)), 0);
+const panBlur = (f: number) => PANS.reduce((acc, [vai, volta]) => acc + borrao(f, b(vai), b(vai + 1), 12) + borrao(f, b(volta), b(volta + 1), 12), 0);
+
+// câmera sobre o celular: posição, escala e borrão
 const camCelular = (f: number) => {
   const entra = mov(f, b(4), b(6)); // b4→b6 o celular sobe da parte de baixo
   const zoom = mov(f, b(10), b(12)); // b10→b12 zoom no chat
   return {
+    x: 540 - 1300 * panX(f),
     y: 2700 - (2700 - 1010) * entra,
     s: 1 + 0.32 * zoom,
-    blur: borrao(f, b(4), b(6), 10) + borrao(f, b(10), b(12), 8),
+    blur: borrao(f, b(4), b(6), 10) + borrao(f, b(10), b(12), 8) + panBlur(f),
   };
+};
+
+// marca-texto que passa por cima de um trecho na batida
+const Marca: React.FC<{ at: number; children: React.ReactNode }> = ({ at, children }) => {
+  const f = useCurrentFrame();
+  const k = mov(f, at, at + 8);
+  return (
+    <span style={{ backgroundImage: "linear-gradient(#fde68a, #fde68a)", backgroundRepeat: "no-repeat", backgroundSize: `${k * 100}% 100%`, borderRadius: 6, padding: "0 4px" }}>
+      {children}
+    </span>
+  );
+};
+
+// card que entra da direita quando a câmera vai e sai quando ela volta
+const CardNaCamera: React.FC<{ vai: number; volta: number; children: React.ReactNode }> = ({ vai, volta, children }) => {
+  const f = useCurrentFrame();
+  if (f < b(vai) || f > b(volta + 1)) return null;
+  const x = 1300 * (1 - mov(f, b(vai), b(vai + 1))) + 1300 * mov(f, b(volta), b(volta + 1));
+  const blur = borrao(f, b(vai), b(vai + 1), 12) + borrao(f, b(volta), b(volta + 1), 12);
+  const flutua = Math.sin((f / b(2)) * Math.PI) * 8;
+  return (
+    <div style={{ position: "absolute", inset: 0, transform: `translate(${x}px, ${flutua}px)`, filter: blur > 0.3 ? `blur(${blur}px)` : undefined }}>
+      {children}
+    </div>
+  );
 };
 
 export const FarmaComercial: React.FC = () => {
@@ -35,17 +67,32 @@ export const FarmaComercial: React.FC = () => {
   return (
     <AbsoluteFill>
       <Fundo />
-      {/* CENA 1 (0–6 s) */}
+      {/* CENA 1 (0–6 s): logo e abertura do chat */}
       <div style={{ position: "absolute", inset: 0, opacity: 1 - some, transform: `translateY(${-90 * some}px)` }}>
         <Logo y={900 - 690 * sobe + flutua * (1 - sobe)} size={92 - 30 * sobe} at={b(0)} passo={b(0.5)} />
       </div>
       <div style={{ position: "absolute", inset: 0, filter: cam.blur > 0.3 ? `blur(${cam.blur}px)` : undefined }}>
-        <Celular y={cam.y + flutua * 0.5} s={cam.s}>
+        <Celular x={cam.x} y={cam.y + flutua * 0.5} s={cam.s}>
           <Bolha at={b(6)} dela texto="Oi! Posso tirar umas dúvidas de remédio?" hora="14:01" />
           <Digitando de={b(7)} ate={b(9)} />
           <Bolha at={b(9)} texto="Claro, manda! 💊" hora="14:01" />
+          {/* CENA 2 (6–14 s): a pílula esquecida */}
+          <Bolha at={b(12)} dela texto="Esqueci a pílula ontem 😰 e agora?" hora="14:02" />
+          <Digitando de={b(14)} ate={b(16)} />
+          <Bolha at={b(26)} texto="Tome assim que lembrar e siga no horário 💊 Esqueceu 2 ou mais? Camisinha por 7 dias ✅" hora="14:02" />
         </Celular>
       </div>
+      <CardNaCamera vai={16} volta={24}>
+        <CardResposta
+          at={b(16)}
+          titulo="Esqueceu a pílula?"
+          itens={[
+            { at: b(17), icone: "💊", txt: <>Tome assim que lembrar, <Marca at={b(22)}>mesmo que sejam 2 no mesmo dia</Marca></> },
+            { at: b(19), icone: "⏰", txt: "Siga no horário de sempre" },
+            { at: b(21), icone: "⚠️", txt: <>Esqueceu 2 ou mais? <Marca at={b(23)}>Use camisinha por 7 dias</Marca></> },
+          ]}
+        />
+      </CardNaCamera>
     </AbsoluteFill>
   );
 };

@@ -111,11 +111,19 @@ export const Logo: React.FC<{
         {/* as letras ainda não digitadas ficam invisíveis, para o logo não andar enquanto digita */}
         {txt.split("").map((c, i) => (
           <React.Fragment key={i}>
-            {i === n && <span style={{ color: VERDE, opacity: pisca ? 1 : 0 }}>█</span>}
-            <span style={{ color: i >= 5 ? VERDE : TINTA, opacity: i < n ? 1 : 0 }}>{c}</span>
+            {i === n && (
+              <span style={{ color: VERDE, opacity: pisca ? 1 : 0 }}>█</span>
+            )}
+            <span
+              style={{ color: i >= 5 ? VERDE : TINTA, opacity: i < n ? 1 : 0 }}
+            >
+              {c}
+            </span>
           </React.Fragment>
         ))}
-        {n >= txt.length && <span style={{ color: VERDE, opacity: pisca ? 1 : 0 }}>█</span>}
+        {n >= txt.length && (
+          <span style={{ color: VERDE, opacity: pisca ? 1 : 0 }}>█</span>
+        )}
       </span>
     </div>
   );

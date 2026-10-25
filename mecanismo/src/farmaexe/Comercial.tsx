@@ -16,9 +16,24 @@ const borrao = (f: number, de: number, ate: number, max: number) =>
   f > de && f < ate ? Math.sin(Math.PI * ((f - de) / (ate - de))) * max : 0;
 
 // idas e voltas da câmera entre o celular e o card de resposta: [vai, volta] em batidas
-const PANS: [number, number][] = [[16, 24]];
-const panX = (f: number) => PANS.reduce((acc, [vai, volta]) => acc + mov(f, b(vai), b(vai + 1)) - mov(f, b(volta), b(volta + 1)), 0);
-const panBlur = (f: number) => PANS.reduce((acc, [vai, volta]) => acc + borrao(f, b(vai), b(vai + 1), 12) + borrao(f, b(volta), b(volta + 1), 12), 0);
+const PANS: [number, number][] = [
+  [16, 24],
+  [32, 40],
+];
+const panX = (f: number) =>
+  PANS.reduce(
+    (acc, [vai, volta]) =>
+      acc + mov(f, b(vai), b(vai + 1)) - mov(f, b(volta), b(volta + 1)),
+    0,
+  );
+const panBlur = (f: number) =>
+  PANS.reduce(
+    (acc, [vai, volta]) =>
+      acc +
+      borrao(f, b(vai), b(vai + 1), 12) +
+      borrao(f, b(volta), b(volta + 1), 12),
+    0,
+  );
 
 // câmera sobre o celular: posição, escala e borrão
 const camCelular = (f: number) => {
@@ -33,25 +48,50 @@ const camCelular = (f: number) => {
 };
 
 // marca-texto que passa por cima de um trecho na batida
-const Marca: React.FC<{ at: number; children: React.ReactNode }> = ({ at, children }) => {
+const Marca: React.FC<{ at: number; children: React.ReactNode }> = ({
+  at,
+  children,
+}) => {
   const f = useCurrentFrame();
   const k = mov(f, at, at + 8);
   return (
-    <span style={{ backgroundImage: "linear-gradient(#fde68a, #fde68a)", backgroundRepeat: "no-repeat", backgroundSize: `${k * 100}% 100%`, borderRadius: 6, padding: "0 4px" }}>
+    <span
+      style={{
+        backgroundImage: "linear-gradient(#fde68a, #fde68a)",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: `${k * 100}% 100%`,
+        borderRadius: 6,
+        padding: "0 4px",
+      }}
+    >
       {children}
     </span>
   );
 };
 
 // card que entra da direita quando a câmera vai e sai quando ela volta
-const CardNaCamera: React.FC<{ vai: number; volta: number; children: React.ReactNode }> = ({ vai, volta, children }) => {
+const CardNaCamera: React.FC<{
+  vai: number;
+  volta: number;
+  children: React.ReactNode;
+}> = ({ vai, volta, children }) => {
   const f = useCurrentFrame();
   if (f < b(vai) || f > b(volta + 1)) return null;
-  const x = 1300 * (1 - mov(f, b(vai), b(vai + 1))) + 1300 * mov(f, b(volta), b(volta + 1));
-  const blur = borrao(f, b(vai), b(vai + 1), 12) + borrao(f, b(volta), b(volta + 1), 12);
+  const x =
+    1300 * (1 - mov(f, b(vai), b(vai + 1))) +
+    1300 * mov(f, b(volta), b(volta + 1));
+  const blur =
+    borrao(f, b(vai), b(vai + 1), 12) + borrao(f, b(volta), b(volta + 1), 12);
   const flutua = Math.sin((f / b(2)) * Math.PI) * 8;
   return (
-    <div style={{ position: "absolute", inset: 0, transform: `translate(${x}px, ${flutua}px)`, filter: blur > 0.3 ? `blur(${blur}px)` : undefined }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        transform: `translate(${x}px, ${flutua}px)`,
+        filter: blur > 0.3 ? `blur(${blur}px)` : undefined,
+      }}
+    >
       {children}
     </div>
   );
@@ -64,22 +104,71 @@ export const FarmaComercial: React.FC = () => {
   const sobe = mov(f, b(4), b(6));
   const some = mov(f, b(10), b(12));
   const flutua = Math.sin((f / b(2)) * Math.PI) * 6; // respira a cada 2 batidas
+  // o chat rola para cima antes de cada pergunta nova (meia batida antes)
+  const rolagem = 680 * mov(f, b(27), b(28));
   return (
     <AbsoluteFill>
       <Fundo />
       {/* CENA 1 (0–6 s): logo e abertura do chat */}
-      <div style={{ position: "absolute", inset: 0, opacity: 1 - some, transform: `translateY(${-90 * some}px)` }}>
-        <Logo y={900 - 690 * sobe + flutua * (1 - sobe)} size={92 - 30 * sobe} at={b(0)} passo={b(0.5)} />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 1 - some,
+          transform: `translateY(${-90 * some}px)`,
+        }}
+      >
+        <Logo
+          y={900 - 690 * sobe + flutua * (1 - sobe)}
+          size={92 - 30 * sobe}
+          at={b(0)}
+          passo={b(0.5)}
+        />
       </div>
-      <div style={{ position: "absolute", inset: 0, filter: cam.blur > 0.3 ? `blur(${cam.blur}px)` : undefined }}>
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          filter: cam.blur > 0.3 ? `blur(${cam.blur}px)` : undefined,
+        }}
+      >
         <Celular x={cam.x} y={cam.y + flutua * 0.5} s={cam.s}>
-          <Bolha at={b(6)} dela texto="Oi! Posso tirar umas dúvidas de remédio?" hora="14:01" />
+          <div style={{ display: "flex", flexDirection: "column", gap: 18, transform: `translateY(${-rolagem}px)` }}>
+          <Bolha
+            at={b(6)}
+            dela
+            texto="Oi! Posso tirar umas dúvidas de remédio?"
+            hora="14:01"
+          />
           <Digitando de={b(7)} ate={b(9)} />
           <Bolha at={b(9)} texto="Claro, manda! 💊" hora="14:01" />
           {/* CENA 2 (6–14 s): a pílula esquecida */}
-          <Bolha at={b(12)} dela texto="Esqueci a pílula ontem 😰 e agora?" hora="14:02" />
+          <Bolha
+            at={b(12)}
+            dela
+            texto="Esqueci a pílula ontem 😰 e agora?"
+            hora="14:02"
+          />
           <Digitando de={b(14)} ate={b(16)} />
-          <Bolha at={b(26)} texto="Tome assim que lembrar e siga no horário 💊 Esqueceu 2 ou mais? Camisinha por 7 dias ✅" hora="14:02" />
+          <Bolha
+            at={b(26)}
+            texto="Tome assim que lembrar e siga no horário 💊 Esqueceu 2 ou mais? Camisinha por 7 dias ✅"
+            hora="14:02"
+          />
+          {/* CENA 3 (14–22 s): antibiótico e anticoncepcional */}
+          <Bolha
+            at={b(28)}
+            dela
+            texto="Antibiótico corta o efeito do anticoncepcional? 🤔"
+            hora="14:03"
+          />
+          <Digitando de={b(30)} ate={b(32)} />
+          <Bolha
+            at={b(42)}
+            texto="A maioria não corta ✅ A exceção é a rifampicina (e a rifabutina): com elas, use outro método junto 🛡️"
+            hora="14:03"
+          />
+          </div>
         </Celular>
       </div>
       <CardNaCamera vai={16} volta={24}>
@@ -87,9 +176,54 @@ export const FarmaComercial: React.FC = () => {
           at={b(16)}
           titulo="Esqueceu a pílula?"
           itens={[
-            { at: b(17), icone: "💊", txt: <>Tome assim que lembrar, <Marca at={b(22)}>mesmo que sejam 2 no mesmo dia</Marca></> },
+            {
+              at: b(17),
+              icone: "💊",
+              txt: (
+                <>
+                  Tome assim que lembrar,{" "}
+                  <Marca at={b(22)}>mesmo que sejam 2 no mesmo dia</Marca>
+                </>
+              ),
+            },
             { at: b(19), icone: "⏰", txt: "Siga no horário de sempre" },
-            { at: b(21), icone: "⚠️", txt: <>Esqueceu 2 ou mais? <Marca at={b(23)}>Use camisinha por 7 dias</Marca></> },
+            {
+              at: b(21),
+              icone: "⚠️",
+              txt: (
+                <>
+                  Esqueceu 2 ou mais?{" "}
+                  <Marca at={b(23)}>Use camisinha por 7 dias</Marca>
+                </>
+              ),
+            },
+          ]}
+        />
+      </CardNaCamera>
+      <CardNaCamera vai={32} volta={40}>
+        <CardResposta
+          at={b(32)}
+          titulo="Antibiótico corta a pílula?"
+          itens={[
+            { at: b(33), icone: "✅", txt: "A maioria dos antibióticos não corta o efeito" },
+            {
+              at: b(35),
+              icone: "⚠️",
+              txt: (
+                <>
+                  A exceção: <Marca at={b(38)}>rifampicina</Marca> (e rifabutina, em menor grau)
+                </>
+              ),
+            },
+            {
+              at: b(37),
+              icone: "🛡️",
+              txt: (
+                <>
+                  Com elas, <Marca at={b(39)}>use outro método junto</Marca>
+                </>
+              ),
+            },
           ]}
         />
       </CardNaCamera>

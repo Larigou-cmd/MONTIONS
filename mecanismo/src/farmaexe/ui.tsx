@@ -218,11 +218,12 @@ export const Celular: React.FC<{
       <div
         style={{
           position: "absolute",
-          top: 190,
+          top: 170,
           left: 0,
           right: 0,
           bottom: 0,
-          padding: "0 26px",
+          padding: "20px 26px 0",
+          overflow: "hidden", // o chat rola por baixo da barra de cima
           display: "flex",
           flexDirection: "column",
           gap: 18,

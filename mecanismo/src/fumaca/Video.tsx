@@ -1,8 +1,27 @@
 import React from "react";
-import { AbsoluteFill, Audio, Sequence, random, staticFile, useCurrentFrame } from "remotion";
+import {
+  AbsoluteFill,
+  Audio,
+  Sequence,
+  random,
+  staticFile,
+  useCurrentFrame,
+} from "remotion";
 import { C } from "../config";
 import { SANS, SERIF } from "../fonts";
-import { Background, Grain, OUT, P, Part, Pill, SNAP, W, bornColor, it, rgba } from "../lib";
+import {
+  Background,
+  Grain,
+  OUT,
+  P,
+  Part,
+  Pill,
+  SNAP,
+  W,
+  bornColor,
+  it,
+  rgba,
+} from "../lib";
 import { Card, EMOJI, Emoji, Title } from "../aas/ui";
 import falaJson from "./fala.json";
 
@@ -107,33 +126,72 @@ const Svg: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 );
 
 // fumaça: bolas cinzas subindo devagar
-const Fumaca: React.FC<{ f: number; n?: number; y0?: number; alpha?: number }> = ({ f, n = 26, y0 = 1900, alpha = 0.45 }) => (
+const Fumaca: React.FC<{
+  f: number;
+  n?: number;
+  y0?: number;
+  alpha?: number;
+}> = ({ f, n = 26, y0 = 1900, alpha = 0.45 }) => (
   <Svg>
     {Array.from({ length: n }, (_, i) => {
       const sp = 1.4 + random(`v${i}`) * 1.6;
       const t = (f * sp + random(`o${i}`) * 1400) % 1400;
       const x = 80 + random(`x${i}`) * 920 + Math.sin(f / 30 + i) * 40;
       const r = 60 + random(`r${i}`) * 90 + t * 0.08;
-      return <circle key={i} cx={x} cy={y0 - t} r={r} fill={CINZA} opacity={alpha * (1 - t / 1400)} style={{ filter: "blur(18px)" }} />;
+      return (
+        <circle
+          key={i}
+          cx={x}
+          cy={y0 - t}
+          r={r}
+          fill={CINZA}
+          opacity={alpha * (1 - t / 1400)}
+          style={{ filter: "blur(18px)" }}
+        />
+      );
     })}
   </Svg>
 );
 
 // moléculas
-const O2: React.FC<{ x: number; y: number; s?: number; alpha?: number }> = ({ x, y, s = 1.5, alpha = 1 }) => (
+const O2: React.FC<{ x: number; y: number; s?: number; alpha?: number }> = ({
+  x,
+  y,
+  s = 1.5,
+  alpha = 1,
+}) => (
   <g transform={`translate(${x},${y}) scale(${s})`} opacity={alpha}>
     <circle cx={-20} r={28} fill={AZUL} />
     <circle cx={20} r={28} fill={AZUL} />
-    <text y={10} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={28} fill="#0b1220">
+    <text
+      y={10}
+      textAnchor="middle"
+      fontFamily={SANS}
+      fontWeight={900}
+      fontSize={28}
+      fill="#0b1220"
+    >
       O₂
     </text>
   </g>
 );
-const CO: React.FC<{ x: number; y: number; s?: number; alpha?: number }> = ({ x, y, s = 1.5, alpha = 1 }) => (
+const CO: React.FC<{ x: number; y: number; s?: number; alpha?: number }> = ({
+  x,
+  y,
+  s = 1.5,
+  alpha = 1,
+}) => (
   <g transform={`translate(${x},${y}) scale(${s})`} opacity={alpha}>
     <circle cx={-20} r={30} fill="#334155" stroke={CINZA} strokeWidth={3} />
     <circle cx={20} r={28} fill={VERM} />
-    <text y={10} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={28} fill="#fff">
+    <text
+      y={10}
+      textAnchor="middle"
+      fontFamily={SANS}
+      fontWeight={900}
+      fontSize={28}
+      fill="#fff"
+    >
       CO
     </text>
   </g>
@@ -146,35 +204,112 @@ const VAGAS = [
   [0, 230],
   [-230, 0],
 ];
-const Hemoglobina: React.FC<{ f: number; cx?: number; cy?: number; s?: number; modo: "troca" | "ocupada" | "solta" }> = ({ f, cx = 540, cy = 1000, s = 1, modo }) => {
+const Hemoglobina: React.FC<{
+  f: number;
+  cx?: number;
+  cy?: number;
+  s?: number;
+  modo: "troca" | "ocupada" | "solta";
+}> = ({ f, cx = 540, cy = 1000, s = 1, modo }) => {
   return (
     <Svg>
       <g transform={`translate(${cx},${cy}) scale(${s})`}>
-        <circle r={200} fill="url(#hemGradF)" style={{ filter: `drop-shadow(0 0 40px ${rgba(VERM, 0.5)})` }} />
-        <text y={14} textAnchor="middle" fontFamily={SERIF} fontWeight={600} fontSize={48} fill="#fff">
+        <circle
+          r={200}
+          fill="url(#hemGradF)"
+          style={{ filter: `drop-shadow(0 0 40px ${rgba(VERM, 0.5)})` }}
+        />
+        <text
+          y={14}
+          textAnchor="middle"
+          fontFamily={SERIF}
+          fontWeight={600}
+          fontSize={48}
+          fill="#fff"
+        >
           hemoglobina
         </text>
         {VAGAS.map(([vx, vy], i) => {
           if (modo === "troca") {
-            const chegaO2 = it(f, T.oxigenio1 - 6 + i * 4, T.oxigenio1 + 10 + i * 4, 0, 1, OUT);
-            const chegaCO = it(f, T.encaixa - 4 + i * 6, T.encaixa + 14 + i * 6, 0, 1, OUT);
+            const chegaO2 = it(
+              f,
+              T.oxigenio1 - 6 + i * 4,
+              T.oxigenio1 + 10 + i * 4,
+              0,
+              1,
+              OUT,
+            );
+            const chegaCO = it(
+              f,
+              T.encaixa - 4 + i * 6,
+              T.encaixa + 14 + i * 6,
+              0,
+              1,
+              OUT,
+            );
             const o2x = vx * (1 + 1.8 * (1 - chegaO2)) + vx * 1.6 * chegaCO;
             const o2y = vy * (1 + 1.8 * (1 - chegaO2)) + vy * 1.6 * chegaCO;
             return (
               <g key={i}>
-                <circle cx={vx} cy={vy} r={44} fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth={4} strokeDasharray="8 8" />
-                {chegaO2 > 0 && <O2 x={o2x} y={o2y} alpha={1 - 0.6 * chegaCO} />}
-                {chegaCO > 0 && <CO x={vx + (vx || 300) * (1 - chegaCO) * 0.0 + (1 - chegaCO) * 500} y={vy - (1 - chegaCO) * 300} />}
+                <circle
+                  cx={vx}
+                  cy={vy}
+                  r={44}
+                  fill="none"
+                  stroke="rgba(255,255,255,0.35)"
+                  strokeWidth={4}
+                  strokeDasharray="8 8"
+                />
+                {chegaO2 > 0 && (
+                  <O2 x={o2x} y={o2y} alpha={1 - 0.6 * chegaCO} />
+                )}
+                {chegaCO > 0 && (
+                  <CO
+                    x={
+                      vx +
+                      (vx || 300) * (1 - chegaCO) * 0.0 +
+                      (1 - chegaCO) * 500
+                    }
+                    y={vy - (1 - chegaCO) * 300}
+                  />
+                )}
               </g>
             );
           }
           if (modo === "ocupada") return <CO key={i} x={vx} y={vy} />;
           // solta: o O2 puro empurra o CO para fora
-          const sai = it(f, T.empurrando - 6 + i * 6, T.empurrando + 20 + i * 6, 0, 1, OUT);
+          const sai = it(
+            f,
+            T.empurrando - 6 + i * 6,
+            T.empurrando + 20 + i * 6,
+            0,
+            1,
+            OUT,
+          );
           return (
             <g key={i}>
-              <CO x={vx * (1 + 2.2 * sai)} y={vy * (1 + 2.2 * sai)} alpha={1 - sai} />
-              {sai > 0.4 && <O2 x={vx} y={vy} s={1.5 * it(f, T.empurrando + 4 + i * 6, T.empurrando + 16 + i * 6, 0, 1, SNAP)} />}
+              <CO
+                x={vx * (1 + 2.2 * sai)}
+                y={vy * (1 + 2.2 * sai)}
+                alpha={1 - sai}
+              />
+              {sai > 0.4 && (
+                <O2
+                  x={vx}
+                  y={vy}
+                  s={
+                    1.5 *
+                    it(
+                      f,
+                      T.empurrando + 4 + i * 6,
+                      T.empurrando + 16 + i * 6,
+                      0,
+                      1,
+                      SNAP,
+                    )
+                  }
+                />
+              )}
             </g>
           );
         })}
@@ -205,7 +340,13 @@ const Cerebro: React.FC<{ f: number }> = ({ f }) => {
 };
 
 // card riscado: "o corpo não percebe"
-const Risco: React.FC<{ f: number; at: number; y: number; txt: string; ok?: boolean }> = ({ f, at, y, txt }) => {
+const Risco: React.FC<{
+  f: number;
+  at: number;
+  y: number;
+  txt: string;
+  ok?: boolean;
+}> = ({ f, at, y, txt }) => {
   if (f < at - 4) return null;
   const k = it(f, at - 4, at + 10, 0, 1, SNAP);
   return (
@@ -239,26 +380,74 @@ const Celula: React.FC<{ f: number }> = ({ f }) => {
   return (
     <Svg>
       <g transform={`translate(540,1080) scale(${k})`}>
-        <ellipse rx={360} ry={260} fill={rgba(ROXO, 0.12)} stroke={ROXO} strokeWidth={5} />
-        <ellipse rx={170} ry={90} fill={rgba(AMBAR, 0.25)} stroke={AMBAR} strokeWidth={5} />
-        <path d="M-130,0 C-90,-50 -50,50 -10,0 C30,-50 70,50 110,0" fill="none" stroke={AMBAR} strokeWidth={6} />
-        <text y={140} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={36} fill={AMBAR}>
+        <ellipse
+          rx={360}
+          ry={260}
+          fill={rgba(ROXO, 0.12)}
+          stroke={ROXO}
+          strokeWidth={5}
+        />
+        <ellipse
+          rx={170}
+          ry={90}
+          fill={rgba(AMBAR, 0.25)}
+          stroke={AMBAR}
+          strokeWidth={5}
+        />
+        <path
+          d="M-130,0 C-90,-50 -50,50 -10,0 C30,-50 70,50 110,0"
+          fill="none"
+          stroke={AMBAR}
+          strokeWidth={6}
+        />
+        <text
+          y={140}
+          textAnchor="middle"
+          fontFamily={SANS}
+          fontWeight={800}
+          fontSize={36}
+          fill={AMBAR}
+        >
           mitocôndria (a usina)
         </text>
         <g transform={`translate(${200 - 60 * trava},${-150 + 120 * trava})`}>
-          <circle r={52} fill="#7c3aed" style={{ filter: "drop-shadow(0 0 16px #7c3aed)" }} />
-          <text y={14} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={38} fill="#fff">
+          <circle
+            r={52}
+            fill="#7c3aed"
+            style={{ filter: "drop-shadow(0 0 16px #7c3aed)" }}
+          />
+          <text
+            y={14}
+            textAnchor="middle"
+            fontFamily={SANS}
+            fontWeight={900}
+            fontSize={38}
+            fill="#fff"
+          >
             CN⁻
           </text>
         </g>
         {trava > 0 && (
-          <g opacity={trava} stroke={VERM} strokeWidth={14} strokeLinecap="round">
+          <g
+            opacity={trava}
+            stroke={VERM}
+            strokeWidth={14}
+            strokeLinecap="round"
+          >
             <line x1={-150} y1={-110} x2={150} y2={110} />
             <line x1={150} y1={-110} x2={-150} y2={110} />
           </g>
         )}
         {f >= T.impede &&
-          [0, 1, 2].map((i) => <O2 key={i} x={-300 + i * 70} y={-200 + Math.sin(f / 10 + i) * 10} s={0.8} alpha={0.8} />)}
+          [0, 1, 2].map((i) => (
+            <O2
+              key={i}
+              x={-300 + i * 70}
+              y={-200 + Math.sin(f / 10 + i) * 10}
+              s={0.8}
+              alpha={0.8}
+            />
+          ))}
       </g>
     </Svg>
   );
@@ -268,18 +457,75 @@ const Celula: React.FC<{ f: number }> = ({ f }) => {
 const Oximetro: React.FC<{ f: number }> = ({ f }) => {
   const k = it(f, T.oximetro + 2, T.oximetro + 16, 0, 1, SNAP);
   return (
-    <div style={{ position: "absolute", left: 540, top: 950, transform: `translate(-50%,-50%) scale(${k})` }}>
-      <div style={{ width: 560, height: 360, borderRadius: 90, background: "#e2e8f0", boxShadow: "0 20px 50px rgba(0,0,0,.5)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: 400, height: 220, borderRadius: 24, background: "#0b1220", display: "flex", alignItems: "center", justifyContent: "center", gap: 18 }}>
-          <span style={{ fontFamily: SANS, fontWeight: 900, fontSize: 140, color: VERDE, textShadow: `0 0 20px ${VERDE}` }}>98</span>
-          <span style={{ fontFamily: SANS, fontWeight: 800, fontSize: 60, color: VERDE }}>%</span>
+    <div
+      style={{
+        position: "absolute",
+        left: 540,
+        top: 950,
+        transform: `translate(-50%,-50%) scale(${k})`,
+      }}
+    >
+      <div
+        style={{
+          width: 560,
+          height: 360,
+          borderRadius: 90,
+          background: "#e2e8f0",
+          boxShadow: "0 20px 50px rgba(0,0,0,.5)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          style={{
+            width: 400,
+            height: 220,
+            borderRadius: 24,
+            background: "#0b1220",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 18,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: SANS,
+              fontWeight: 900,
+              fontSize: 140,
+              color: VERDE,
+              textShadow: `0 0 20px ${VERDE}`,
+            }}
+          >
+            98
+          </span>
+          <span
+            style={{
+              fontFamily: SANS,
+              fontWeight: 800,
+              fontSize: 60,
+              color: VERDE,
+            }}
+          >
+            %
+          </span>
         </div>
       </div>
     </div>
   );
 };
 
-const Carimbo: React.FC<{ f: number; at: number; x: number; y: number; texto: string; cor?: string; size?: number; rot?: number }> = ({ f, at, x, y, texto, cor = VERM, size = 70, rot = -10 }) => {
+const Carimbo: React.FC<{
+  f: number;
+  at: number;
+  x: number;
+  y: number;
+  texto: string;
+  cor?: string;
+  size?: number;
+  rot?: number;
+}> = ({ f, at, x, y, texto, cor = VERM, size = 70, rot = -10 }) => {
   if (f < at) return null;
   const u = it(f, at, at + 7, 0, 1, OUT);
   return (
@@ -309,15 +555,45 @@ const Carimbo: React.FC<{ f: number; at: number; x: number; y: number; texto: st
 
 export const VideoFumaca: React.FC = () => {
   const f = useCurrentFrame();
-  const corFundo = f < T.hemo ? CINZA : f < T.cianetoCena ? VERM : f < T.tratamento ? ROXO : f < T.saia ? AZUL : AMBAR;
+  const corFundo =
+    f < T.hemo
+      ? CINZA
+      : f < T.cianetoCena
+        ? VERM
+        : f < T.tratamento
+          ? ROXO
+          : f < T.saia
+            ? AZUL
+            : AMBAR;
   return (
     <AbsoluteFill>
-      <Background color={corFundo} pulses={[T.monoxido, T.encaixa, T.forte, T.desmaia, T.cianeto, T.enganar, T.antidoto, T.bombeiros, T.final]} />
+      <Background
+        color={corFundo}
+        pulses={[
+          T.monoxido,
+          T.encaixa,
+          T.forte,
+          T.desmaia,
+          T.cianeto,
+          T.enganar,
+          T.antidoto,
+          T.bombeiros,
+          T.final,
+        ]}
+      />
 
       {/* 1. gancho: a fumaça e o gás invisível */}
       <Part from={0} to={T.hemo}>
         <Fumaca f={f} />
-        <Title f={f} at={2} y={300} size={74} font={SANS} weight={900} from={CINZA}>
+        <Title
+          f={f}
+          at={2}
+          y={300}
+          size={74}
+          font={SANS}
+          weight={900}
+          from={CINZA}
+        >
           POR QUE A FUMAÇA
           <br />
           FAZ DESMAIAR?
@@ -337,7 +613,14 @@ export const VideoFumaca: React.FC = () => {
         <Emoji f={f} at={T.cheiro + 6} x={800} y={1200} size={60}>
           ❌
         </Emoji>
-        <Pill x={540} y={1420} text="MONÓXIDO DE CARBONO (CO)" color={VERM} size={46} k={P(f, T.monoxido, T.monoxido + 12)} />
+        <Pill
+          x={540}
+          y={1420}
+          text="MONÓXIDO DE CARBONO (CO)"
+          color={VERM}
+          size={46}
+          k={P(f, T.monoxido, T.monoxido + 12)}
+        />
       </Part>
 
       {/* 2. o CO toma o lugar do O2 */}
@@ -368,7 +651,14 @@ export const VideoFumaca: React.FC = () => {
 
       {/* 3. hemoglobina ocupada, o cérebro sente */}
       <Part from={T.ocupada} to={T.percebe}>
-        <Title f={f} at={T.ocupada + 4} y={300} size={72} weight={600} from={VERM}>
+        <Title
+          f={f}
+          at={T.ocupada + 4}
+          y={300}
+          size={72}
+          weight={600}
+          from={VERM}
+        >
           hemoglobina <span style={{ color: VERM }}>ocupada</span>
         </Title>
         {f < T.cerebro - 6 ? (
@@ -376,22 +666,47 @@ export const VideoFumaca: React.FC = () => {
             <Hemoglobina f={f} modo="ocupada" />
             {[0, 1, 2].map((i) => (
               <Svg key={i}>
-                <O2 x={260 + i * 280} y={1400 + Math.sin(f / 8 + i) * 12} alpha={0.7} />
+                <O2
+                  x={260 + i * 280}
+                  y={1400 + Math.sin(f / 8 + i) * 12}
+                  alpha={0.7}
+                />
               </Svg>
             ))}
-            <Pill x={540} y={1540} text="❌ o oxigênio não chega" color={AZUL} size={42} k={P(f, T.chega - 4, T.chega + 8)} />
+            <Pill
+              x={540}
+              y={1540}
+              text="❌ o oxigênio não chega"
+              color={AZUL}
+              size={42}
+              k={P(f, T.chega - 4, T.chega + 8)}
+            />
           </>
         ) : (
           <>
             <Cerebro f={f} />
-            <Pill x={540} y={1400} text="o cérebro é um dos primeiros" color={ROXO} size={44} k={P(f, T.cerebro, T.cerebro + 10)} />
+            <Pill
+              x={540}
+              y={1400}
+              text="o cérebro é um dos primeiros"
+              color={ROXO}
+              size={44}
+              k={P(f, T.cerebro, T.cerebro + 10)}
+            />
           </>
         )}
       </Part>
 
       {/* 4. o corpo não percebe */}
       <Part from={T.percebe} to={T.cianetoCena}>
-        <Title f={f} at={T.percebe + 4} y={300} size={72} weight={600} from={VERM}>
+        <Title
+          f={f}
+          at={T.percebe + 4}
+          y={300}
+          size={72}
+          weight={600}
+          from={VERM}
+        >
           o corpo <span style={{ color: VERM }}>não percebe</span>
         </Title>
         <Risco f={f} at={T.vermelho} y={620} txt="🩸 o sangue segue vermelho" />
@@ -400,45 +715,147 @@ export const VideoFumaca: React.FC = () => {
         <Emoji f={f} at={T.confusa - 4} x={540} y={1230} size={200}>
           😵
         </Emoji>
-        <Carimbo f={f} at={T.desmaia} x={540} y={1460} texto="DESMAIA" size={80} rot={-6} />
+        <Carimbo
+          f={f}
+          at={T.desmaia}
+          x={540}
+          y={1460}
+          texto="DESMAIA"
+          size={80}
+          rot={-6}
+        />
       </Part>
 
       {/* 5. o cianeto */}
       <Part from={T.cianetoCena} to={T.oximetro}>
-        <Title f={f} at={T.cianetoCena + 4} y={300} size={72} weight={600} from={ROXO}>
+        <Title
+          f={f}
+          at={T.cianetoCena + 4}
+          y={300}
+          size={72}
+          weight={600}
+          from={ROXO}
+        >
           e tem o <span style={{ color: ROXO }}>cianeto</span>
         </Title>
-        <Pill x={540} y={520} text="🔥 plástico e espuma queimando" color={AMBAR} size={42} k={P(f, T.plastico - 4, T.plastico + 8)} />
+        <Pill
+          x={540}
+          y={520}
+          text="🔥 plástico e espuma queimando"
+          color={AMBAR}
+          size={42}
+          k={P(f, T.plastico - 4, T.plastico + 8)}
+        />
         <Celula f={f} />
-        <Pill x={540} y={1450} text="a célula não usa o oxigênio" color={ROXO} size={44} k={P(f, T.impede, T.impede + 10)} />
+        <Pill
+          x={540}
+          y={1450}
+          text="a célula não usa o oxigênio"
+          color={ROXO}
+          size={44}
+          k={P(f, T.impede, T.impede + 10)}
+        />
       </Part>
 
       {/* 6. o oxímetro engana */}
       <Part from={T.oximetro} to={T.tratamento}>
-        <Title f={f} at={T.oximetro + 4} y={300} size={72} weight={600} from={VERDE}>
+        <Title
+          f={f}
+          at={T.oximetro + 4}
+          y={300}
+          size={72}
+          weight={600}
+          from={VERDE}
+        >
           até o oxímetro engana
         </Title>
         <Oximetro f={f} />
-        <Carimbo f={f} at={T.enganar} x={540} y={1260} texto="PODE ENGANAR" size={72} rot={-8} />
-        <Pill x={540} y={1460} text="mostra um valor “normal”" color={AMBAR} size={42} k={P(f, T.normal - 4, T.normal + 8)} />
+        <Carimbo
+          f={f}
+          at={T.enganar}
+          x={540}
+          y={1260}
+          texto="PODE ENGANAR"
+          size={72}
+          rot={-8}
+        />
+        <Pill
+          x={540}
+          y={1460}
+          text="mostra um valor “normal”"
+          color={AMBAR}
+          size={42}
+          k={P(f, T.normal - 4, T.normal + 8)}
+        />
       </Part>
 
       {/* 7. o tratamento */}
       <Part from={T.tratamento} to={T.saia}>
-        <Title f={f} at={T.tratamento + 4} y={300} size={72} weight={600} from={AZUL}>
+        <Title
+          f={f}
+          at={T.tratamento + 4}
+          y={300}
+          size={72}
+          weight={600}
+          from={AZUL}
+        >
           tratamento: <span style={{ color: AZUL }}>oxigênio puro</span>
         </Title>
         {f < T.antidoto - 8 ? (
           <>
             <Hemoglobina f={f} modo="solta" s={0.85} cy={960} />
-            <Pill x={540} y={1400} text="O₂ 100% empurra o CO para fora" color={AZUL} size={42} k={P(f, T.puro, T.puro + 10)} />
+            <Pill
+              x={540}
+              y={1400}
+              text="O₂ 100% empurra o CO para fora"
+              color={AZUL}
+              size={42}
+              k={P(f, T.puro, T.puro + 10)}
+            />
           </>
         ) : (
-          <Card f={f} at={T.antidoto - 8} x={110} y={700} w={860} h={420} border={rgba(VERDE, 0.7)} style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 18, textAlign: "center", padding: "0 40px" }}>
+          <Card
+            f={f}
+            at={T.antidoto - 8}
+            x={110}
+            y={700}
+            w={860}
+            h={420}
+            border={rgba(VERDE, 0.7)}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 18,
+              textAlign: "center",
+              padding: "0 40px",
+            }}
+          >
             <span style={{ fontFamily: EMOJI, fontSize: 110 }}>💉</span>
-            <span style={{ fontWeight: 700, fontSize: 40 }}>antídoto do cianeto</span>
-            <span style={{ fontFamily: SERIF, fontWeight: 600, fontSize: 70, color: bornColor(f, T.hidroxo, C.ink, VERDE) }}>hidroxocobalamina</span>
-            <span style={{ fontWeight: 700, fontSize: 38, color: "#f472b6", opacity: P(f, T.b12 - 10, T.b12 + 2) }}>uma forma de vitamina B12</span>
+            <span style={{ fontWeight: 700, fontSize: 40 }}>
+              antídoto do cianeto
+            </span>
+            <span
+              style={{
+                fontFamily: SERIF,
+                fontWeight: 600,
+                fontSize: 70,
+                color: bornColor(f, T.hidroxo, C.ink, VERDE),
+              }}
+            >
+              hidroxocobalamina
+            </span>
+            <span
+              style={{
+                fontWeight: 700,
+                fontSize: 38,
+                color: "#f472b6",
+                opacity: P(f, T.b12 - 10, T.b12 + 2),
+              }}
+            >
+              uma forma de vitamina B12
+            </span>
           </Card>
         )}
       </Part>
@@ -446,16 +863,54 @@ export const VideoFumaca: React.FC = () => {
       {/* 8. o que fazer */}
       <Part from={T.saia} to={T.siga}>
         <Fumaca f={f} n={18} y0={900} alpha={0.55} />
-        <Title f={f} at={T.saia + 4} y={300} size={80} font={SANS} weight={900} from={AMBAR}>
+        <Title
+          f={f}
+          at={T.saia + 4}
+          y={300}
+          size={80}
+          font={SANS}
+          weight={900}
+          from={AMBAR}
+        >
           SAIA ABAIXADO
         </Title>
         <Emoji f={f} at={T.abaixado - 4} x={540} y={1080} size={220}>
           🧎
         </Emoji>
-        <Pill x={540} y={1300} text="longe da fumaça ⬇️" color={AMBAR} size={44} k={P(f, T.abaixado + 6, T.abaixado + 18)} />
-        <Card f={f} at={T.bombeiros - 6} x={240} y={1390} w={600} h={190} border={rgba(VERM, 0.8)} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 24 }}>
+        <Pill
+          x={540}
+          y={1300}
+          text="longe da fumaça ⬇️"
+          color={AMBAR}
+          size={44}
+          k={P(f, T.abaixado + 6, T.abaixado + 18)}
+        />
+        <Card
+          f={f}
+          at={T.bombeiros - 6}
+          x={240}
+          y={1390}
+          w={600}
+          h={190}
+          border={rgba(VERM, 0.8)}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 24,
+          }}
+        >
           <span style={{ fontFamily: EMOJI, fontSize: 90 }}>📞</span>
-          <span style={{ fontFamily: SANS, fontWeight: 900, fontSize: 110, color: VERM }}>193</span>
+          <span
+            style={{
+              fontFamily: SANS,
+              fontWeight: 900,
+              fontSize: 110,
+              color: VERM,
+            }}
+          >
+            193
+          </span>
         </Card>
       </Part>
 
@@ -464,41 +919,86 @@ export const VideoFumaca: React.FC = () => {
         <Emoji f={f} at={T.siga + 4} x={540} y={620} size={150}>
           👩‍⚕️
         </Emoji>
-        <Card f={f} at={T.siga} x={110} y={760} w={860} h={300} border={rgba(AZUL, 0.7)} style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, textAlign: "center", padding: "0 40px" }}>
-          <span style={{ fontFamily: SERIF, fontWeight: 600, fontSize: 84, color: bornColor(f, T.siga, C.ink, AZUL) }}>Me siga</span>
-          <span style={{ fontFamily: SANS, fontWeight: 700, fontSize: 36, lineHeight: 1.3 }}>para mais dicas de farmacologia e curiosidades sobre a área</span>
+        <Card
+          f={f}
+          at={T.siga}
+          x={110}
+          y={760}
+          w={860}
+          h={300}
+          border={rgba(AZUL, 0.7)}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 14,
+            textAlign: "center",
+            padding: "0 40px",
+          }}
+        >
+          <span
+            style={{
+              fontFamily: SERIF,
+              fontWeight: 600,
+              fontSize: 84,
+              color: bornColor(f, T.siga, C.ink, AZUL),
+            }}
+          >
+            Me siga
+          </span>
+          <span
+            style={{
+              fontFamily: SANS,
+              fontWeight: 700,
+              fontSize: 36,
+              lineHeight: 1.3,
+            }}
+          >
+            para mais dicas de farmacologia e curiosidades sobre a área
+          </span>
         </Card>
       </Part>
 
       {/* 10. tela final */}
       <Part from={T.final - 4} to={DURATION_FUMACA} inY={100} outDur={1}>
-        {["Consulte um", "profissional de saúde", "para orientações."].map((l, i) => {
-          const at = T.final + 4 + i * 8;
-          const k = it(f, at, at + 14, 0, 1, OUT);
-          return (
-            <div
-              key={i}
-              style={{
-                position: "absolute",
-                top: 700 + i * 110,
-                width: W,
-                textAlign: "center",
-                fontFamily: SERIF,
-                fontWeight: i === 1 ? 600 : 400,
-                fontSize: i === 1 ? 92 : 80,
-                color: i === 1 ? bornColor(f, at, AZUL, "#eff6ff", 20) : bornColor(f, at, C.ink, AZUL),
-                opacity: k,
-                transform: `translateY(${(1 - k) * 40}px)`,
-              }}
-            >
-              {l}
-            </div>
-          );
-        })}
+        {["Consulte um", "profissional de saúde", "para orientações."].map(
+          (l, i) => {
+            const at = T.final + 4 + i * 8;
+            const k = it(f, at, at + 14, 0, 1, OUT);
+            return (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  top: 700 + i * 110,
+                  width: W,
+                  textAlign: "center",
+                  fontFamily: SERIF,
+                  fontWeight: i === 1 ? 600 : 400,
+                  fontSize: i === 1 ? 92 : 80,
+                  color:
+                    i === 1
+                      ? bornColor(f, at, AZUL, "#eff6ff", 20)
+                      : bornColor(f, at, C.ink, AZUL),
+                  opacity: k,
+                  transform: `translateY(${(1 - k) * 40}px)`,
+                }}
+              >
+                {l}
+              </div>
+            );
+          },
+        )}
       </Part>
       <Grain />
       <Audio src={staticFile("fumaca/narracao.mp3")} />
-      <Audio src={staticFile("fumaca/musica.wav")} volume={(fr) => 0.07 * (1 - P(fr, DURATION_FUMACA - 60, DURATION_FUMACA))} />
+      <Audio
+        src={staticFile("fumaca/musica.wav")}
+        volume={(fr) =>
+          0.07 * (1 - P(fr, DURATION_FUMACA - 60, DURATION_FUMACA))
+        }
+      />
       {SFX.map(([fr, name, vol], i) => (
         <Sequence key={i} from={fr} durationInFrames={60}>
           <Audio src={staticFile(`sfx/${name}.wav`)} volume={vol} />

@@ -37,7 +37,11 @@ export const CapaGlobulo: React.FC = () => (
         </radialGradient>
       </defs>
       <g transform="translate(540,960)">
-        <circle r={300} fill="url(#capaHem)" style={{ filter: `drop-shadow(0 0 80px ${rgba(VERM, 0.6)})` }} />
+        <circle
+          r={300}
+          fill="url(#capaHem)"
+          style={{ filter: `drop-shadow(0 0 80px ${rgba(VERM, 0.6)})` }}
+        />
         <circle r={150} fill="rgba(255,190,190,0.25)" />
       </g>
     </svg>

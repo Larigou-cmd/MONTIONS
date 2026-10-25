@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Img, staticFile, useCurrentFrame } from "remotion";
 import { SANS } from "../fonts";
 import { OUT, SNAP, W, it, rgba } from "../lib";
 
@@ -176,22 +176,17 @@ export const Celular: React.FC<{
           borderBottom: "1px solid #e2e8f0",
         }}
       >
-        <div
+        {/* foto de perfil da farmacêutica (personagem em pixel) */}
+        <Img
+          src={staticFile("farmaexe/avatar.png")}
           style={{
             width: 78,
             height: 78,
             borderRadius: 39,
-            background: VERDE,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: PIXEL,
-            fontSize: 30,
-            color: "#fff",
+            objectFit: "cover",
+            boxShadow: `0 0 0 3px ${VERDE}`,
           }}
-        >
-          F
-        </div>
+        />
         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
           <span
             style={{

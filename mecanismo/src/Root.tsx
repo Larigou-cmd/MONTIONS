@@ -91,6 +91,7 @@ import { CapaGlobulo } from "./globulo/Capa";
 import { VideoFumaca, DURATION_FUMACA } from "./fumaca/Video";
 import { CapaFumaca } from "./fumaca/Capa";
 import { FarmaEstilo } from "./farmaexe/Estilo";
+import { FarmaComercial, DURATION_FARMA } from "./farmaexe/Comercial";
 import { VideoCaibra, DURATION_CAIBRA } from "./caibra/Video";
 import { VideoCaibraOpenArt } from "./caibra/VideoOpenArt";
 import { CapaCaibra } from "./caibra/Capa";
@@ -441,6 +442,14 @@ export const RemotionRoot: React.FC = () => (
       id="OrigemCaptopril"
       component={OrigemCaptopril}
       durationInFrames={DURATION_CAPTOPRIL}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="FarmaComercial"
+      component={FarmaComercial}
+      durationInFrames={DURATION_FARMA}
       fps={FPS}
       width={1080}
       height={1920}

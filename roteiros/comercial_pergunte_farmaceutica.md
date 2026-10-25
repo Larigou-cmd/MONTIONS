@@ -1,4 +1,4 @@
-# Comercial "Pergunte à farmacêutica" (PARADO, retomar depois)
+# Modelo 7 ("Comercial WhatsApp"): comercial "Pergunte à farmacêutica" (PARADO, retomar depois)
 
 Ideia escolhida em 2026-10-23. O comercial vende o atendimento farmacêutico pelo WhatsApp, e não um remédio (a RDC 96/2008 da Anvisa proíbe propaganda de remédio de tarja ao público).
 Duração de 45 s. O WhatsApp é desenhado no código, com conversas fictícias.

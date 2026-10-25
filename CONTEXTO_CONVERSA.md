@@ -32,7 +32,10 @@
 ## Modelos de vídeo
 - **Modelo 1:** Remotion, pasta `mecanismo/`, visual escuro e elegante.
   - Composições registradas em `mecanismo/src/Root.tsx`.
-- **PHARMACIST.EXE:** visual de terminal retrô.
+- **Modelo 2, PHARMACIST.EXE:** visual de terminal retrô.
+- **Modelos 3 a 5:** personagem farmacêutica, explicadora e personagens/história (ver `prompts/guia_prompts.html`).
+- **Modelo 6, "Origens":** colagem de papel e fotos em P&B (série "A origem dos remédios": captopril, aspirina). Código em `mecanismo/src/origens/`.
+- **Modelo 7, "Comercial WhatsApp":** comercial de 45 s, com cliente mandando pedidos no WhatsApp, movimento na batida da música e uma cena por vez, com 4 fotos antes de cada render. O prompt completo, adaptado para "Pergunte à Farmacêutica", está em `roteiros/comercial_pergunte_farmaceutica.md`.
 
 ## Vídeos já feitos (pasta `mecanismo/src/`)
 | Vídeo | Pasta | Observação |

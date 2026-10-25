@@ -43,6 +43,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 33 | A origem dos remédios #2: a aspirina e o salgueiro | [33_origem_aspirina.md](textos/33_origem_aspirina.md) | [capa_origem_aspirina.png](capas/capa_origem_aspirina.png) |
 | 34 | Remédio vencido vira veneno? | [34_remedio_vencido.md](textos/34_remedio_vencido.md) | [capa_remedio_vencido.png](capas/capa_remedio_vencido.png) |
 | 35 | Genérico presta? Mitos e verdades (Modelo 2) | [35_genericos.md](textos/35_genericos.md) | [capa_genericos.png](capas/capa_genericos.png) |
+| 36 | Seu glóbulo vermelho vive só 120 dias | [36_globulo_vermelho.md](textos/36_globulo_vermelho.md) | [capa_globulo.png](capas/capa_globulo.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

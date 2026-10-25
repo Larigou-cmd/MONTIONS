@@ -57,3 +57,20 @@ Qual é a sua dúvida? Deixa aqui nos comentários que ela pode virar o próximo
 - YouTube: "conteúdo alterado ou sintético: Sim"
 - Instagram: "Rótulo de IA"
 - Kwai: a opção de IA, se aparecer
+
+### Instagram (carrossel de fotos, 5 fotos 4:5)
+Fotos em `instagram/farma_exe_carrossel/` (composição `FarmaCarrossel`). Postar na ordem 1 → 5.
+
+**Legenda:**
+Tem dúvida de remédio? Pergunte à Farmacêutica 💊 Arrasta para o lado ➡️
+
+1️⃣ Esqueceu a pílula? Tome assim que lembrar, mesmo que sejam 2 no mesmo dia, e siga no horário de sempre. Esqueceu 2 ou mais? Use camisinha por 7 dias.
+2️⃣ Antibiótico corta o anticoncepcional? A maioria não corta. A exceção é a rifampicina (e a rifabutina, em menor grau): com elas, use outro método junto.
+3️⃣ Posso partir o comprimido? Depende! Liberação prolongada não pode ser partida. Na dúvida, mostre a caixa para o farmacêutico.
+
+Qual é a sua dúvida? Deixa aqui nos comentários que ela pode virar o próximo post 👇
+Salva para consultar depois 📌
+
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações.
+
+#perguntefarmaceutica #farmaceutica #farmacia #duvidasderemedio #anticoncepcional #saude

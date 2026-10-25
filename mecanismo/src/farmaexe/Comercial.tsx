@@ -19,6 +19,7 @@ const borrao = (f: number, de: number, ate: number, max: number) =>
 const PANS: [number, number][] = [
   [16, 24],
   [32, 40],
+  [48, 56],
 ];
 const panX = (f: number) =>
   PANS.reduce(
@@ -105,7 +106,7 @@ export const FarmaComercial: React.FC = () => {
   const some = mov(f, b(10), b(12));
   const flutua = Math.sin((f / b(2)) * Math.PI) * 6; // respira a cada 2 batidas
   // o chat rola para cima antes de cada pergunta nova (meia batida antes)
-  const rolagem = 680 * mov(f, b(27), b(28));
+  const rolagem = 680 * mov(f, b(27), b(28)) + 395 * mov(f, b(43), b(44));
   return (
     <AbsoluteFill>
       <Fundo />
@@ -168,6 +169,19 @@ export const FarmaComercial: React.FC = () => {
             texto="A maioria não corta ✅ A exceção é a rifampicina (e a rifabutina): com elas, use outro método junto 🛡️"
             hora="14:03"
           />
+          {/* CENA 4 (22–30 s): partir o comprimido */}
+          <Bolha
+            at={b(44)}
+            dela
+            texto="Posso partir o comprimido pra engolir melhor? ✂️"
+            hora="14:04"
+          />
+          <Digitando de={b(46)} ate={b(48)} />
+          <Bolha
+            at={b(58)}
+            texto="Depende! Liberação prolongada não pode ser partida ❌ Me manda a foto da caixa que eu confiro 📸"
+            hora="14:04"
+          />
           </div>
         </Celular>
       </div>
@@ -221,6 +235,33 @@ export const FarmaComercial: React.FC = () => {
               txt: (
                 <>
                   Com elas, <Marca at={b(39)}>use outro método junto</Marca>
+                </>
+              ),
+            },
+          ]}
+        />
+      </CardNaCamera>
+      <CardNaCamera vai={48} volta={56}>
+        <CardResposta
+          at={b(48)}
+          titulo="Posso partir o comprimido?"
+          itens={[
+            { at: b(49), icone: "🤔", txt: "Depende do remédio" },
+            {
+              at: b(51),
+              icone: "❌",
+              txt: (
+                <>
+                  Liberação prolongada <Marca at={b(54)}>não pode</Marca>: soltaria a dose toda de uma vez
+                </>
+              ),
+            },
+            {
+              at: b(53),
+              icone: "📸",
+              txt: (
+                <>
+                  Manda a <Marca at={b(55)}>foto da caixa</Marca> que eu confiro
                 </>
               ),
             },

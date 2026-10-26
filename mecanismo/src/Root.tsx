@@ -96,7 +96,7 @@ import { FarmaEstilo } from "./farmaexe/Estilo";
 import { FarmaComercial, DURATION_FARMA } from "./farmaexe/Comercial";
 import { CapaFarma } from "./farmaexe/Capa";
 import { FarmaCarrossel } from "./farmaexe/Carrossel";
-import { CarrosselGlobulo, CarrosselFumaca, CarrosselVencido, CarrosselGenericos, GLOBULO, FUMACA, VENCIDO, GENERICOS } from "./carrosseis/Carrosseis";
+import { CarrosselGlobulo, CarrosselFumaca, CarrosselVencido, CarrosselGenericos, CarrosselAlcool, ALCOOL, GLOBULO, FUMACA, VENCIDO, GENERICOS } from "./carrosseis/Carrosseis";
 import { VideoCaibra, DURATION_CAIBRA } from "./caibra/Video";
 import { VideoCaibraOpenArt } from "./caibra/VideoOpenArt";
 import { CapaCaibra } from "./caibra/Capa";
@@ -450,6 +450,14 @@ export const RemotionRoot: React.FC = () => (
       fps={FPS}
       width={1080}
       height={1920}
+    />
+    <Composition
+      id="CarrosselAlcool"
+      component={CarrosselAlcool}
+      durationInFrames={ALCOOL.length}
+      fps={FPS}
+      width={1080}
+      height={1350}
     />
     <Composition
       id="CarrosselGlobulo"

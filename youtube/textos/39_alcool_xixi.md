@@ -58,3 +58,21 @@ Salva e manda para aquele amigo que vive no banheiro no rolê 👇
 - YouTube: "conteúdo alterado ou sintético: Sim"
 - Instagram: "Rótulo de IA"
 - Kwai: a opção de IA, se aparecer
+
+### Instagram (carrossel de fotos, 8 fotos 4:5)
+Fotos em `instagram/alcool_carrossel/` (composição `CarrosselAlcool`). Postar na ordem 1 → 8.
+
+**Legenda:**
+Por que a cerveja dá tanto xixi? 🍺🚽 Arrasta para o lado ➡️
+
+Não é só o líquido: o álcool desliga o ADH, o hormônio que manda os rins segurarem a água. Sem ele, as "portas de água" (aquaporinas) ficam fechadas e a água vai direto para a bexiga 🚪💧
+
+Resultado: mais xixi, mais claro e mais sede no dia seguinte. Dica: intercale a bebida com água 💧
+
+Toma remédio para pressão ou diurético? Converse com o médico ou o farmacêutico antes de beber 💊
+
+Salva e manda para aquele amigo que vive no banheiro no rolê 📌
+
+⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações.
+
+#fisiologia #alcool #cerveja #rins #curiosidades #saude

@@ -790,6 +790,73 @@ export const VENCIDO: Foto[] = [
   { tipo: "final", cor: VERDE },
 ];
 
+export const ALCOOL: Foto[] = [
+  { tipo: "capa", cor: AMBAR, topo: "VOCÊ SABIA?", titulo: <>Por que a <Hi c={AMBAR}>cerveja</Hi> dá tanto xixi?</>, destaque: <EmojiGrande e="🍺🚽" />, sub: "não é só por causa do líquido: tem um hormônio nessa história" },
+  {
+    tipo: "lista",
+    cor: AMBAR,
+    emoji: "🫘",
+    titulo: <>Lembra dos <Hi c={AMBAR}>rins</Hi>?</>,
+    itens: [
+      { e: "🧽", t: "Eles filtram o sangue e devolvem quase toda a água" },
+      { e: "🎛️", t: <>Quem decide quanta água volta é o <Hi c={AZUL}>ADH</Hi>, o hormônio antidiurético (vasopressina)</> },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: ROXO,
+    emoji: "🧠",
+    titulo: <>Ele vem do <Hi c={ROXO}>cérebro</Hi></>,
+    itens: [
+      { e: "🏭", t: <>Fabricado no <Hi c={ROXO}>hipotálamo</Hi></> },
+      { e: "📤", t: <>Liberado pela <Hi c={AZUL}>hipófise</Hi>, na base do cérebro</> },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: AZUL,
+    emoji: "🚪",
+    titulo: <>Ele abre <Hi c={AZUL}>portas de água</Hi></>,
+    itens: [
+      { e: "📍", t: "No fim do caminho dentro do rim, no ducto coletor" },
+      { e: "💧", t: <>Abre canais de água, as <Hi c={AZUL}>aquaporinas</Hi>, e a água volta para o sangue</> },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: VERM,
+    emoji: "🍺",
+    titulo: <>O álcool <Hi c={VERM}>desliga</Hi> o ADH</>,
+    itens: [
+      { e: "🚫", t: "O álcool inibe a liberação desse hormônio" },
+      { e: "🚪", t: "Sem ADH, os canais ficam fechados" },
+      { e: "➡️", t: <>A água não volta e segue direto para a <Hi c={AMBAR}>bexiga</Hi></> },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: AZUL,
+    emoji: "🚽",
+    titulo: <>Resultado</>,
+    itens: [
+      { e: "🚻", t: <>Mais xixi, e <Hi c={AMBAR}>mais claro</Hi></> },
+      { e: "🥵", t: "A perda de água pode deixar a boca seca e dar mais sede no dia seguinte" },
+      { e: "💧", t: <>Dica: <Hi c={AZUL}>intercale a bebida com água</Hi></> },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: VERDE,
+    emoji: "💊",
+    titulo: <>Toma remédio?</>,
+    itens: [
+      { e: "🩺", t: "Para pressão ou diurético?" },
+      { e: "💬", t: <>Converse com o <Hi c={VERDE}>médico ou o farmacêutico</Hi> antes de beber</> },
+    ],
+  },
+  { tipo: "final", cor: AMBAR },
+];
+
 // ---------- genéricos: visual PHARMACIST.EXE ----------
 const PX = "'Press Start TwoP', monospace",
   VT = "'VTThreeTwoThree', monospace";
@@ -1195,6 +1262,7 @@ const Escuro = (fotos: Foto[], serie: string) => {
 export const CarrosselGlobulo = Escuro(GLOBULO, "FISIOLOGIA CURIOSA");
 export const CarrosselFumaca = Escuro(FUMACA, "FISIOLOGIA CURIOSA");
 export const CarrosselVencido = Escuro(VENCIDO, "FARMÁCIA SEM MITOS");
+export const CarrosselAlcool = Escuro(ALCOOL, "FISIOLOGIA CURIOSA");
 export const CarrosselGenericos: React.FC = () => {
   const f = useCurrentFrame();
   return <FotoGenerico g={GENERICOS[f]} n={f + 1} total={GENERICOS.length} />;

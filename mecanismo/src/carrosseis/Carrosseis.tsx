@@ -857,6 +857,72 @@ export const ALCOOL: Foto[] = [
   { tipo: "final", cor: AMBAR },
 ];
 
+export const NASAL: Foto[] = [
+  { tipo: "capa", cor: AZUL, topo: "MITO OU VERDADE?", titulo: <>Descongestionante nasal <Hi c={VERM}>vicia</Hi>?</>, destaque: <EmojiGrande e="👃💧" />, sub: "para quem pinga todo dia e, sem ele, não respira" },
+  {
+    tipo: "lista",
+    cor: AZUL,
+    emoji: "💧",
+    titulo: <>Como ele <Hi c={AZUL}>desentope</Hi></>,
+    itens: [
+      { e: "🧪", t: <>Nafazolina e oximetazolina <Hi c={AZUL}>apertam os vasos</Hi> do nariz</> },
+      { e: "😮‍💨", t: "A mucosa desincha, e o nariz desentope em minutos" },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: VERM,
+    emoji: "⏳",
+    titulo: <>O problema: usar <Hi c={VERM}>todo dia</Hi></>,
+    itens: [
+      { e: "🎈", t: "Quando o efeito passa, os vasos se abrem ainda mais do que antes" },
+      { e: "😤", t: <>É o <Hi c={VERM}>efeito rebote</Hi>: o nariz entope de novo, e pior</> },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: ROXO,
+    emoji: "🔄",
+    titulo: <>Vira um <Hi c={ROXO}>ciclo</Hi></>,
+    itens: [
+      { e: "💧", t: "A pessoa pinga outra vez..." },
+      { e: "⏱️", t: "...e o efeito dura cada vez menos" },
+      { e: "🏷️", t: <>Isso tem nome: <Hi c={ROXO}>rinite medicamentosa</Hi></> },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: AZUL,
+    emoji: "📄",
+    titulo: <>Não é vício de droga</>,
+    itens: [
+      { e: "👃", t: <>É o nariz que <Hi c={AZUL}>se acostuma</Hi> com o remédio</> },
+      { e: "📅", t: <>A bula avisa: no máximo <Hi c={AMBAR}>3 a 5 dias seguidos</Hi></> },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: AMBAR,
+    emoji: "👶",
+    titulo: <>Atenção com as <Hi c={AMBAR}>crianças</Hi></>,
+    itens: [
+      { e: "⚠️", t: <>A nafazolina <Hi c={AMBAR}>não é indicada para menores de 12 anos</Hi></> },
+      { e: "☠️", t: "E é uma causa comum de intoxicação nos pequenos" },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: VERDE,
+    emoji: "🧴",
+    titulo: <>E o <Hi c={VERDE}>soro fisiológico</Hi>?</>,
+    itens: [
+      { e: "✅", t: "Não causa esse efeito, e pode ajudar a limpar o nariz" },
+      { e: "🩺", t: <>Preso no ciclo? <Hi c={VERDE}>Procure um médico</Hi>: existem tratamentos para sair dele</> },
+    ],
+  },
+  { tipo: "final", cor: AZUL },
+];
+
 // ---------- genéricos: visual PHARMACIST.EXE ----------
 const PX = "'Press Start TwoP', monospace",
   VT = "'VTThreeTwoThree', monospace";
@@ -1263,6 +1329,7 @@ export const CarrosselGlobulo = Escuro(GLOBULO, "FISIOLOGIA CURIOSA");
 export const CarrosselFumaca = Escuro(FUMACA, "FISIOLOGIA CURIOSA");
 export const CarrosselVencido = Escuro(VENCIDO, "FARMÁCIA SEM MITOS");
 export const CarrosselAlcool = Escuro(ALCOOL, "FISIOLOGIA CURIOSA");
+export const CarrosselNasal = Escuro(NASAL, "FARMÁCIA SEM MITOS");
 export const CarrosselGenericos: React.FC = () => {
   const f = useCurrentFrame();
   return <FotoGenerico g={GENERICOS[f]} n={f + 1} total={GENERICOS.length} />;

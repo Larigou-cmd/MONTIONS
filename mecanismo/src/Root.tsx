@@ -93,11 +93,12 @@ import { CapaFumaca } from "./fumaca/Capa";
 import { VideoAlcool, DURATION_ALCOOL } from "./alcool/Video";
 import { CapaAlcool } from "./alcool/Capa";
 import { VideoNasal, DURATION_NASAL } from "./nasal/Video";
+import { CapaNasal } from "./nasal/Capa";
 import { FarmaEstilo } from "./farmaexe/Estilo";
 import { FarmaComercial, DURATION_FARMA } from "./farmaexe/Comercial";
 import { CapaFarma } from "./farmaexe/Capa";
 import { FarmaCarrossel } from "./farmaexe/Carrossel";
-import { CarrosselGlobulo, CarrosselFumaca, CarrosselVencido, CarrosselGenericos, CarrosselAlcool, ALCOOL, GLOBULO, FUMACA, VENCIDO, GENERICOS } from "./carrosseis/Carrosseis";
+import { CarrosselGlobulo, CarrosselFumaca, CarrosselVencido, CarrosselGenericos, CarrosselAlcool, ALCOOL, CarrosselNasal, NASAL, GLOBULO, FUMACA, VENCIDO, GENERICOS } from "./carrosseis/Carrosseis";
 import { VideoCaibra, DURATION_CAIBRA } from "./caibra/Video";
 import { VideoCaibraOpenArt } from "./caibra/VideoOpenArt";
 import { CapaCaibra } from "./caibra/Capa";
@@ -448,6 +449,22 @@ export const RemotionRoot: React.FC = () => (
       id="OrigemCaptopril"
       component={OrigemCaptopril}
       durationInFrames={DURATION_CAPTOPRIL}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="CarrosselNasal"
+      component={CarrosselNasal}
+      durationInFrames={NASAL.length}
+      fps={FPS}
+      width={1080}
+      height={1350}
+    />
+    <Composition
+      id="NasalCapa"
+      component={CapaNasal}
+      durationInFrames={1}
       fps={FPS}
       width={1080}
       height={1920}

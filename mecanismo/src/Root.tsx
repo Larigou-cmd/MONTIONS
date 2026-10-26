@@ -91,6 +91,7 @@ import { CapaGlobulo } from "./globulo/Capa";
 import { VideoFumaca, DURATION_FUMACA } from "./fumaca/Video";
 import { CapaFumaca } from "./fumaca/Capa";
 import { VideoAlcool, DURATION_ALCOOL } from "./alcool/Video";
+import { CapaAlcool } from "./alcool/Capa";
 import { FarmaEstilo } from "./farmaexe/Estilo";
 import { FarmaComercial, DURATION_FARMA } from "./farmaexe/Comercial";
 import { CapaFarma } from "./farmaexe/Capa";
@@ -517,6 +518,14 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="FumacaCapa"
       component={CapaFumaca}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="AlcoolCapa"
+      component={CapaAlcool}
       durationInFrames={1}
       fps={FPS}
       width={1080}

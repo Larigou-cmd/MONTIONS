@@ -19,40 +19,150 @@ const VERM = "#ef4444",
 
 type Item = { e: string; t: React.ReactNode };
 type Foto =
-  | { tipo: "capa"; cor: string; topo: string; titulo: React.ReactNode; destaque: React.ReactNode; sub: string }
-  | { tipo: "lista"; cor: string; emoji: string; titulo: React.ReactNode; itens: Item[]; nota?: string }
+  | {
+      tipo: "capa";
+      cor: string;
+      topo: string;
+      titulo: React.ReactNode;
+      destaque: React.ReactNode;
+      sub: string;
+    }
+  | {
+      tipo: "lista";
+      cor: string;
+      emoji: string;
+      titulo: React.ReactNode;
+      itens: Item[];
+      nota?: string;
+    }
   | { tipo: "final"; cor: string };
 
-const Hi: React.FC<{ c: string; children: React.ReactNode }> = ({ c, children }) => <span style={{ color: c }}>{children}</span>;
+const Hi: React.FC<{ c: string; children: React.ReactNode }> = ({
+  c,
+  children,
+}) => <span style={{ color: c }}>{children}</span>;
 
 // ---------- visual escuro (Modelo 1) ----------
 const FundoEscuro: React.FC<{ cor: string }> = ({ cor }) => (
   <AbsoluteFill style={{ background: C.bg }}>
-    <AbsoluteFill style={{ background: `radial-gradient(ellipse 1200px 900px at 50% 30%, ${C.bg2} 0%, rgba(7,11,26,0) 70%)` }} />
-    <AbsoluteFill style={{ background: `radial-gradient(ellipse 1000px 520px at 50% ${H4 + 80}px, ${rgba(cor, 0.45)} 0%, rgba(0,0,0,0) 70%)` }} />
+    <AbsoluteFill
+      style={{
+        background: `radial-gradient(ellipse 1200px 900px at 50% 30%, ${C.bg2} 0%, rgba(7,11,26,0) 70%)`,
+      }}
+    />
+    <AbsoluteFill
+      style={{
+        background: `radial-gradient(ellipse 1000px 520px at 50% ${H4 + 80}px, ${rgba(cor, 0.45)} 0%, rgba(0,0,0,0) 70%)`,
+      }}
+    />
   </AbsoluteFill>
 );
 
-const Rodape: React.FC<{ n: number; total: number; cor: string }> = ({ n, total, cor }) => (
+const Rodape: React.FC<{ n: number; total: number; cor: string }> = ({
+  n,
+  total,
+  cor,
+}) => (
   <>
-    <div style={{ position: "absolute", bottom: 56, left: 80, fontFamily: SANS, fontWeight: 700, fontSize: 28, color: rgba("#ffffff", 0.5) }}>
+    <div
+      style={{
+        position: "absolute",
+        bottom: 56,
+        left: 80,
+        fontFamily: SANS,
+        fontWeight: 700,
+        fontSize: 28,
+        color: rgba("#ffffff", 0.5),
+      }}
+    >
       {n}/{total}
     </div>
     {n < total && (
-      <div style={{ position: "absolute", bottom: 52, right: 80, fontFamily: SANS, fontWeight: 800, fontSize: 32, color: cor }}>arrasta ➜</div>
+      <div
+        style={{
+          position: "absolute",
+          bottom: 52,
+          right: 80,
+          fontFamily: SANS,
+          fontWeight: 800,
+          fontSize: 32,
+          color: cor,
+        }}
+      >
+        arrasta ➜
+      </div>
     )}
   </>
 );
 
-const FotoEscura: React.FC<{ foto: Foto; n: number; total: number; serie: string }> = ({ foto, n, total, serie }) => {
+const FotoEscura: React.FC<{
+  foto: Foto;
+  n: number;
+  total: number;
+  serie: string;
+}> = ({ foto, n, total, serie }) => {
   if (foto.tipo === "capa")
     return (
       <AbsoluteFill>
         <FundoEscuro cor={foto.cor} />
-        <div style={{ position: "absolute", top: 120, width: "100%", textAlign: "center", fontFamily: SANS, fontWeight: 800, fontSize: 30, letterSpacing: 6, color: foto.cor }}>{foto.topo}</div>
-        <div style={{ position: "absolute", top: 200, left: 70, right: 70, textAlign: "center", fontFamily: SANS, fontWeight: 900, fontSize: 92, lineHeight: 1.05, color: C.ink }}>{foto.titulo}</div>
-        <div style={{ position: "absolute", top: 560, width: "100%", display: "flex", justifyContent: "center" }}>{foto.destaque}</div>
-        <div style={{ position: "absolute", top: 1060, left: 80, right: 80, textAlign: "center", fontFamily: SERIF, fontWeight: 600, fontSize: 50, lineHeight: 1.25, color: C.ink }}>{foto.sub}</div>
+        <div
+          style={{
+            position: "absolute",
+            top: 120,
+            width: "100%",
+            textAlign: "center",
+            fontFamily: SANS,
+            fontWeight: 800,
+            fontSize: 30,
+            letterSpacing: 6,
+            color: foto.cor,
+          }}
+        >
+          {foto.topo}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: 200,
+            left: 70,
+            right: 70,
+            textAlign: "center",
+            fontFamily: SANS,
+            fontWeight: 900,
+            fontSize: 92,
+            lineHeight: 1.05,
+            color: C.ink,
+          }}
+        >
+          {foto.titulo}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: 560,
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {foto.destaque}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: 1060,
+            left: 80,
+            right: 80,
+            textAlign: "center",
+            fontFamily: SERIF,
+            fontWeight: 600,
+            fontSize: 50,
+            lineHeight: 1.25,
+            color: C.ink,
+          }}
+        >
+          {foto.sub}
+        </div>
         <Rodape n={n} total={total} cor={foto.cor} />
       </AbsoluteFill>
     );
@@ -60,14 +170,83 @@ const FotoEscura: React.FC<{ foto: Foto; n: number; total: number; serie: string
     return (
       <AbsoluteFill>
         <FundoEscuro cor={foto.cor} />
-        <div style={{ position: "absolute", top: 200, width: "100%", textAlign: "center", fontFamily: EMOJI, fontSize: 150 }}>👩‍⚕️</div>
-        <div style={{ position: "absolute", top: 420, left: 110, right: 110, padding: "50px 40px", borderRadius: 34, background: C.box, border: `2px solid ${rgba(foto.cor, 0.7)}`, textAlign: "center" }}>
-          <div style={{ fontFamily: SERIF, fontWeight: 600, fontSize: 90, color: foto.cor }}>Me siga</div>
-          <div style={{ fontFamily: SANS, fontWeight: 700, fontSize: 40, lineHeight: 1.3, color: C.ink, marginTop: 10 }}>para mais dicas de farmacologia e curiosidades sobre a área</div>
+        <div
+          style={{
+            position: "absolute",
+            top: 200,
+            width: "100%",
+            textAlign: "center",
+            fontFamily: EMOJI,
+            fontSize: 150,
+          }}
+        >
+          👩‍⚕️
         </div>
-        <div style={{ position: "absolute", top: 880, width: "100%", textAlign: "center", fontFamily: SANS, fontWeight: 700, fontSize: 40, color: C.ink }}>Salva e manda para alguém 📌</div>
-        <div style={{ position: "absolute", top: 1010, left: 100, right: 100, textAlign: "center", fontFamily: SERIF, fontSize: 40, lineHeight: 1.3, color: rgba("#ffffff", 0.75) }}>
-          Conteúdo educativo. Consulte um profissional de saúde para orientações.
+        <div
+          style={{
+            position: "absolute",
+            top: 420,
+            left: 110,
+            right: 110,
+            padding: "50px 40px",
+            borderRadius: 34,
+            background: C.box,
+            border: `2px solid ${rgba(foto.cor, 0.7)}`,
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: SERIF,
+              fontWeight: 600,
+              fontSize: 90,
+              color: foto.cor,
+            }}
+          >
+            Me siga
+          </div>
+          <div
+            style={{
+              fontFamily: SANS,
+              fontWeight: 700,
+              fontSize: 40,
+              lineHeight: 1.3,
+              color: C.ink,
+              marginTop: 10,
+            }}
+          >
+            para mais dicas de farmacologia e curiosidades sobre a área
+          </div>
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: 880,
+            width: "100%",
+            textAlign: "center",
+            fontFamily: SANS,
+            fontWeight: 700,
+            fontSize: 40,
+            color: C.ink,
+          }}
+        >
+          Salva e manda para alguém 📌
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: 1010,
+            left: 100,
+            right: 100,
+            textAlign: "center",
+            fontFamily: SERIF,
+            fontSize: 40,
+            lineHeight: 1.3,
+            color: rgba("#ffffff", 0.75),
+          }}
+        >
+          Conteúdo educativo. Consulte um profissional de saúde para
+          orientações.
         </div>
         <Rodape n={n} total={total} cor={foto.cor} />
       </AbsoluteFill>
@@ -75,9 +254,49 @@ const FotoEscura: React.FC<{ foto: Foto; n: number; total: number; serie: string
   return (
     <AbsoluteFill>
       <FundoEscuro cor={foto.cor} />
-      <div style={{ position: "absolute", top: 90, left: 80, fontFamily: SANS, fontWeight: 800, fontSize: 26, letterSpacing: 5, color: rgba(foto.cor, 0.85) }}>{serie}</div>
-      <div style={{ position: "absolute", top: 150, width: "100%", textAlign: "center", fontFamily: EMOJI, fontSize: 130, lineHeight: 1 }}>{foto.emoji}</div>
-      <div style={{ position: "absolute", top: 320, left: 70, right: 70, textAlign: "center", fontFamily: SERIF, fontWeight: 600, fontSize: 74, lineHeight: 1.12, color: C.ink }}>{foto.titulo}</div>
+      <div
+        style={{
+          position: "absolute",
+          top: 90,
+          left: 80,
+          fontFamily: SANS,
+          fontWeight: 800,
+          fontSize: 26,
+          letterSpacing: 5,
+          color: rgba(foto.cor, 0.85),
+        }}
+      >
+        {serie}
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          top: 150,
+          width: "100%",
+          textAlign: "center",
+          fontFamily: EMOJI,
+          fontSize: 130,
+          lineHeight: 1,
+        }}
+      >
+        {foto.emoji}
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          top: 320,
+          left: 70,
+          right: 70,
+          textAlign: "center",
+          fontFamily: SERIF,
+          fontWeight: 600,
+          fontSize: 74,
+          lineHeight: 1.12,
+          color: C.ink,
+        }}
+      >
+        {foto.titulo}
+      </div>
       <div
         style={{
           position: "absolute",
@@ -95,14 +314,43 @@ const FotoEscura: React.FC<{ foto: Foto; n: number; total: number; serie: string
         }}
       >
         {foto.itens.map((it, i) => (
-          <div key={i} style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
-            <span style={{ fontFamily: EMOJI, fontSize: 52, lineHeight: 1.1 }}>{it.e}</span>
-            <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 44, lineHeight: 1.3, color: C.ink }}>{it.t}</span>
+          <div
+            key={i}
+            style={{ display: "flex", gap: 24, alignItems: "flex-start" }}
+          >
+            <span style={{ fontFamily: EMOJI, fontSize: 52, lineHeight: 1.1 }}>
+              {it.e}
+            </span>
+            <span
+              style={{
+                fontFamily: SANS,
+                fontWeight: 600,
+                fontSize: 44,
+                lineHeight: 1.3,
+                color: C.ink,
+              }}
+            >
+              {it.t}
+            </span>
           </div>
         ))}
       </div>
       {foto.nota && (
-        <div style={{ position: "absolute", bottom: 130, left: 80, right: 80, textAlign: "center", fontFamily: SERIF, fontStyle: "italic", fontSize: 38, color: rgba("#ffffff", 0.7) }}>{foto.nota}</div>
+        <div
+          style={{
+            position: "absolute",
+            bottom: 130,
+            left: 80,
+            right: 80,
+            textAlign: "center",
+            fontFamily: SERIF,
+            fontStyle: "italic",
+            fontSize: 38,
+            color: rgba("#ffffff", 0.7),
+          }}
+        >
+          {foto.nota}
+        </div>
       )}
       <Rodape n={n} total={total} cor={foto.cor} />
     </AbsoluteFill>
@@ -116,7 +364,8 @@ const Disco: React.FC<{ txt: string; sub: string }> = ({ txt, sub }) => (
       width: 440,
       height: 440,
       borderRadius: 220,
-      background: "radial-gradient(circle at 45% 40%, #ff8a8a, #dc2626 55%, #7f1d1d)",
+      background:
+        "radial-gradient(circle at 45% 40%, #ff8a8a, #dc2626 55%, #7f1d1d)",
       boxShadow: `0 0 90px ${rgba(VERM, 0.55)}`,
       display: "flex",
       flexDirection: "column",
@@ -131,28 +380,62 @@ const Disco: React.FC<{ txt: string; sub: string }> = ({ txt, sub }) => (
     <span style={{ fontSize: 64 }}>{sub}</span>
   </div>
 );
-const EmojiGrande: React.FC<{ e: string }> = ({ e }) => <div style={{ fontFamily: EMOJI, fontSize: 300, lineHeight: 1.3 }}>{e}</div>;
+const EmojiGrande: React.FC<{ e: string }> = ({ e }) => (
+  <div style={{ fontFamily: EMOJI, fontSize: 300, lineHeight: 1.3 }}>{e}</div>
+);
 
 export const GLOBULO: Foto[] = [
-  { tipo: "capa", cor: VERM, topo: "VOCÊ SABIA?", titulo: <>Seu glóbulo vermelho vive só</>, destaque: <Disco txt="120" sub="DIAS" />, sub: "e o fim dele acontece no baço" },
+  {
+    tipo: "capa",
+    cor: VERM,
+    topo: "VOCÊ SABIA?",
+    titulo: <>Seu glóbulo vermelho vive só</>,
+    destaque: <Disco txt="120" sub="DIAS" />,
+    sub: "e o fim dele acontece no baço",
+  },
   {
     tipo: "lista",
     cor: VERM,
     emoji: "🦴",
-    titulo: <>Ele nasce na <Hi c={VERM}>medula óssea</Hi></>,
+    titulo: (
+      <>
+        Ele nasce na <Hi c={VERM}>medula óssea</Hi>
+      </>
+    ),
     itens: [
-      { e: "📍", t: "Dentro de ossos como as vértebras, o esterno, as costelas e a bacia" },
-      { e: "⚡", t: <>O corpo fabrica <Hi c={VERM}>milhões</Hi> deles a cada segundo</> },
+      {
+        e: "📍",
+        t: "Dentro de ossos como as vértebras, o esterno, as costelas e a bacia",
+      },
+      {
+        e: "⚡",
+        t: (
+          <>
+            O corpo fabrica <Hi c={VERM}>milhões</Hi> deles a cada segundo
+          </>
+        ),
+      },
     ],
   },
   {
     tipo: "lista",
     cor: AMBAR,
     emoji: "🫘",
-    titulo: <>Quem dá a ordem são os <Hi c={AMBAR}>rins</Hi></>,
+    titulo: (
+      <>
+        Quem dá a ordem são os <Hi c={AMBAR}>rins</Hi>
+      </>
+    ),
     itens: [
       { e: "⚠️", t: "Quando falta oxigênio..." },
-      { e: "💌", t: <>eles liberam um hormônio, a <Hi c={AZUL}>eritropoetina</Hi></> },
+      {
+        e: "💌",
+        t: (
+          <>
+            eles liberam um hormônio, a <Hi c={AZUL}>eritropoetina</Hi>
+          </>
+        ),
+      },
       { e: "🏭", t: "que manda a medula produzir mais" },
     ],
   },
@@ -160,10 +443,21 @@ export const GLOBULO: Foto[] = [
     tipo: "lista",
     cor: ROXO,
     emoji: "🔴",
-    titulo: <>Ele abre mão do <Hi c={ROXO}>núcleo</Hi></>,
+    titulo: (
+      <>
+        Ele abre mão do <Hi c={ROXO}>núcleo</Hi>
+      </>
+    ),
     itens: [
       { e: "📦", t: "Assim cabe em tudo quanto é lugar" },
-      { e: "💿", t: <>Vira um disco cheio de <Hi c={VERM}>hemoglobina</Hi></> },
+      {
+        e: "💿",
+        t: (
+          <>
+            Vira um disco cheio de <Hi c={VERM}>hemoglobina</Hi>
+          </>
+        ),
+      },
       { e: "🫁", t: "que carrega o oxigênio" },
     ],
   },
@@ -171,10 +465,22 @@ export const GLOBULO: Foto[] = [
     tipo: "lista",
     cor: VERM,
     emoji: "💥",
-    titulo: <>O fim acontece no <Hi c={VERM}>baço</Hi></>,
+    titulo: (
+      <>
+        O fim acontece no <Hi c={VERM}>baço</Hi>
+      </>
+    ),
     itens: [
       { e: "⏳", t: "Com o tempo, ele vai ficando frágil" },
-      { e: "📏", t: <>Precisa se espremer por espaços de <Hi c={AMBAR}>3 µm</Hi>, sendo que ele mede <Hi c={AMBAR}>8 µm</Hi></> },
+      {
+        e: "📏",
+        t: (
+          <>
+            Precisa se espremer por espaços de <Hi c={AMBAR}>3 µm</Hi>, sendo
+            que ele mede <Hi c={AMBAR}>8 µm</Hi>
+          </>
+        ),
+      },
       { e: "💔", t: "O velho não aguenta e se rompe" },
     ],
   },
@@ -184,8 +490,23 @@ export const GLOBULO: Foto[] = [
     emoji: "♻️",
     titulo: <>Nada se perde</>,
     itens: [
-      { e: "🧲", t: <>O <Hi c={AMBAR}>ferro</Hi> volta para a medula e vira glóbulo novo</> },
-      { e: "🟡", t: <>O resto da hemoglobina vira <Hi c={AMBAR}>bilirrubina</Hi>, que dá a cor marrom das fezes</> },
+      {
+        e: "🧲",
+        t: (
+          <>
+            O <Hi c={AMBAR}>ferro</Hi> volta para a medula e vira glóbulo novo
+          </>
+        ),
+      },
+      {
+        e: "🟡",
+        t: (
+          <>
+            O resto da hemoglobina vira <Hi c={AMBAR}>bilirrubina</Hi>, que dá a
+            cor marrom das fezes
+          </>
+        ),
+      },
     ],
   },
   {
@@ -194,20 +515,49 @@ export const GLOBULO: Foto[] = [
     emoji: "🧪",
     titulo: <>E é por isso que...</>,
     itens: [
-      { e: "🩸", t: <>a <Hi c={ROXO}>hemoglobina glicada</Hi> (HbA1c)</> },
-      { e: "📅", t: <>mostra a média da glicose dos <Hi c={ROXO}>últimos 3 meses</Hi></> },
+      {
+        e: "🩸",
+        t: (
+          <>
+            a <Hi c={ROXO}>hemoglobina glicada</Hi> (HbA1c)
+          </>
+        ),
+      },
+      {
+        e: "📅",
+        t: (
+          <>
+            mostra a média da glicose dos <Hi c={ROXO}>últimos 3 meses</Hi>
+          </>
+        ),
+      },
     ],
   },
   { tipo: "final", cor: VERM },
 ];
 
 export const FUMACA: Foto[] = [
-  { tipo: "capa", cor: CINZA, topo: "VOCÊ SABIA?", titulo: <>Por que a fumaça faz <Hi c={VERM}>desmaiar</Hi>?</>, destaque: <EmojiGrande e="💨" />, sub: "num incêndio, muita gente não se machuca pelo fogo, e sim pela fumaça" },
+  {
+    tipo: "capa",
+    cor: CINZA,
+    topo: "VOCÊ SABIA?",
+    titulo: (
+      <>
+        Por que a fumaça faz <Hi c={VERM}>desmaiar</Hi>?
+      </>
+    ),
+    destaque: <EmojiGrande e="💨" />,
+    sub: "num incêndio, muita gente não se machuca pelo fogo, e sim pela fumaça",
+  },
   {
     tipo: "lista",
     cor: CINZA,
     emoji: "☠️",
-    titulo: <>O culpado: <Hi c={VERM}>monóxido de carbono</Hi></>,
+    titulo: (
+      <>
+        O culpado: <Hi c={VERM}>monóxido de carbono</Hi>
+      </>
+    ),
     itens: [
       { e: "👁️", t: "Você não vê" },
       { e: "👃", t: "e nem sente o cheiro" },
@@ -217,18 +567,39 @@ export const FUMACA: Foto[] = [
     tipo: "lista",
     cor: VERM,
     emoji: "🔴",
-    titulo: <>Ele rouba o lugar do <Hi c={AZUL}>oxigênio</Hi></>,
+    titulo: (
+      <>
+        Ele rouba o lugar do <Hi c={AZUL}>oxigênio</Hi>
+      </>
+    ),
     itens: [
-      { e: "🧩", t: "Se encaixa na hemoglobina, exatamente no mesmo lugar do oxigênio" },
-      { e: "🧲", t: <>Gruda cerca de <Hi c={VERM}>250 vezes</Hi> mais forte</> },
-      { e: "🧠", t: "O oxigênio não chega aos tecidos, e o cérebro é um dos primeiros a sentir" },
+      {
+        e: "🧩",
+        t: "Se encaixa na hemoglobina, exatamente no mesmo lugar do oxigênio",
+      },
+      {
+        e: "🧲",
+        t: (
+          <>
+            Gruda cerca de <Hi c={VERM}>250 vezes</Hi> mais forte
+          </>
+        ),
+      },
+      {
+        e: "🧠",
+        t: "O oxigênio não chega aos tecidos, e o cérebro é um dos primeiros a sentir",
+      },
     ],
   },
   {
     tipo: "lista",
     cor: VERM,
     emoji: "😵",
-    titulo: <>O corpo <Hi c={VERM}>não percebe</Hi></>,
+    titulo: (
+      <>
+        O corpo <Hi c={VERM}>não percebe</Hi>
+      </>
+    ),
     itens: [
       { e: "🩸", t: "O sangue continua vermelho" },
       { e: "🟣", t: "A pessoa não fica roxa" },
@@ -240,11 +611,18 @@ export const FUMACA: Foto[] = [
     tipo: "lista",
     cor: ROXO,
     emoji: "🧪",
-    titulo: <>E tem o <Hi c={ROXO}>cianeto</Hi></>,
+    titulo: (
+      <>
+        E tem o <Hi c={ROXO}>cianeto</Hi>
+      </>
+    ),
     itens: [
       { e: "🔥", t: "Sai quando plástico e espuma queimam" },
       { e: "🚫", t: "Impede as células de usar o oxigênio que ainda resta" },
-      { e: "📟", t: "Até o oxímetro de dedo pode enganar e mostrar um valor normal" },
+      {
+        e: "📟",
+        t: "Até o oxímetro de dedo pode enganar e mostrar um valor normal",
+      },
     ],
   },
   {
@@ -253,8 +631,24 @@ export const FUMACA: Foto[] = [
     emoji: "💉",
     titulo: <>O tratamento</>,
     itens: [
-      { e: "😷", t: <><Hi c={AZUL}>Oxigênio puro</Hi>, que empurra o monóxido para fora da hemoglobina</> },
-      { e: "🏥", t: <>Para o cianeto existe antídoto: a <Hi c={VERDE}>hidroxocobalamina</Hi>, uma forma de vitamina B12</> },
+      {
+        e: "😷",
+        t: (
+          <>
+            <Hi c={AZUL}>Oxigênio puro</Hi>, que empurra o monóxido para fora da
+            hemoglobina
+          </>
+        ),
+      },
+      {
+        e: "🏥",
+        t: (
+          <>
+            Para o cianeto existe antídoto: a{" "}
+            <Hi c={VERDE}>hidroxocobalamina</Hi>, uma forma de vitamina B12
+          </>
+        ),
+      },
     ],
   },
   {
@@ -263,20 +657,49 @@ export const FUMACA: Foto[] = [
     emoji: "🚒",
     titulo: <>Num incêndio</>,
     itens: [
-      { e: "🧎", t: <>Saia <Hi c={AMBAR}>abaixado</Hi>, longe da fumaça</> },
-      { e: "📞", t: <>Ligue para os bombeiros: <Hi c={VERM}>193</Hi></> },
+      {
+        e: "🧎",
+        t: (
+          <>
+            Saia <Hi c={AMBAR}>abaixado</Hi>, longe da fumaça
+          </>
+        ),
+      },
+      {
+        e: "📞",
+        t: (
+          <>
+            Ligue para os bombeiros: <Hi c={VERM}>193</Hi>
+          </>
+        ),
+      },
     ],
   },
   { tipo: "final", cor: AZUL },
 ];
 
 export const VENCIDO: Foto[] = [
-  { tipo: "capa", cor: VERM, topo: "MITO OU VERDADE?", titulo: <>Remédio <Hi c={VERM}>vencido</Hi> vira veneno?</>, destaque: <EmojiGrande e="💊☠️" />, sub: "na maioria das vezes, não. Mas isso não quer dizer que pode tomar" },
+  {
+    tipo: "capa",
+    cor: VERM,
+    topo: "MITO OU VERDADE?",
+    titulo: (
+      <>
+        Remédio <Hi c={VERM}>vencido</Hi> vira veneno?
+      </>
+    ),
+    destaque: <EmojiGrande e="💊☠️" />,
+    sub: "na maioria das vezes, não. Mas isso não quer dizer que pode tomar",
+  },
   {
     tipo: "lista",
     cor: VERDE,
     emoji: "📉",
-    titulo: <>Ele vai <Hi c={VERDE}>perdendo a força</Hi></>,
+    titulo: (
+      <>
+        Ele vai <Hi c={VERDE}>perdendo a força</Hi>
+      </>
+    ),
     itens: [
       { e: "📅", t: "A data de validade é o limite que o fabricante garante" },
       { e: "✅", t: "Até ali, a dose está certa" },
@@ -286,10 +709,17 @@ export const VENCIDO: Foto[] = [
     tipo: "lista",
     cor: AMBAR,
     emoji: "⚠️",
-    titulo: <>Remédio fraco = <Hi c={VERM}>perigo</Hi></>,
+    titulo: (
+      <>
+        Remédio fraco = <Hi c={VERM}>perigo</Hi>
+      </>
+    ),
     itens: [
       { e: "💉", t: "Uma insulina que não baixa a glicose" },
-      { e: "🦠", t: "Um antibiótico que não mata a bactéria: a infecção continua" },
+      {
+        e: "🦠",
+        t: "Um antibiótico que não mata a bactéria: a infecção continua",
+      },
       { e: "🛡️", t: "e a bactéria pode ficar mais resistente" },
     ],
   },
@@ -297,10 +727,25 @@ export const VENCIDO: Foto[] = [
     tipo: "lista",
     cor: AMBAR,
     emoji: "💧",
-    titulo: <>Os <Hi c={AMBAR}>líquidos</Hi> são os mais delicados</>,
+    titulo: (
+      <>
+        Os <Hi c={AMBAR}>líquidos</Hi> são os mais delicados
+      </>
+    ),
     itens: [
-      { e: "🧴", t: "Xaropes, colírios e antibióticos em suspensão podem se contaminar com fungos e bactérias" },
-      { e: "🔓", t: <>Depois de aberto ou preparado, muitos têm validade <Hi c={AMBAR}>bem menor</Hi></> },
+      {
+        e: "🧴",
+        t: "Xaropes, colírios e antibióticos em suspensão podem se contaminar com fungos e bactérias",
+      },
+      {
+        e: "🔓",
+        t: (
+          <>
+            Depois de aberto ou preparado, muitos têm validade{" "}
+            <Hi c={AMBAR}>bem menor</Hi>
+          </>
+        ),
+      },
       { e: "📄", t: "Está escrito na bula" },
     ],
   },
@@ -310,7 +755,14 @@ export const VENCIDO: Foto[] = [
     emoji: "📜",
     titulo: <>O caso que fez mal de verdade</>,
     itens: [
-      { e: "💊", t: <>Um antibiótico antigo, a <Hi c={AMBAR}>tetraciclina</Hi></> },
+      {
+        e: "💊",
+        t: (
+          <>
+            Um antibiótico antigo, a <Hi c={AMBAR}>tetraciclina</Hi>
+          </>
+        ),
+      },
       { e: "🕰️", t: "Numa fórmula dos anos 60 que nem é mais vendida" },
     ],
   },
@@ -318,10 +770,21 @@ export const VENCIDO: Foto[] = [
     tipo: "lista",
     cor: VERDE,
     emoji: "✋",
-    titulo: <>Venceu? <Hi c={VERM}>Não tome</Hi></>,
+    titulo: (
+      <>
+        Venceu? <Hi c={VERM}>Não tome</Hi>
+      </>
+    ),
     itens: [
       { e: "🚫", t: "Não jogue no lixo, na pia nem no vaso" },
-      { e: "♻️", t: <>Leve a um <Hi c={VERDE}>ponto de coleta</Hi>: muitas farmácias têm</> },
+      {
+        e: "♻️",
+        t: (
+          <>
+            Leve a um <Hi c={VERDE}>ponto de coleta</Hi>: muitas farmácias têm
+          </>
+        ),
+      },
     ],
   },
   { tipo: "final", cor: VERDE },
@@ -336,64 +799,301 @@ const G = "#39ff6a",
   CY = "#3de0ff",
   BG = "#020c06",
   WH = "#eafff0";
-type Gen = { tipo: "capa" } | { tipo: "mito"; n: number; frase: string; verdade: boolean; itens: string[] } | { tipo: "final" };
+type Gen =
+  | { tipo: "capa" }
+  | {
+      tipo: "mito";
+      n: number;
+      frase: string;
+      verdade: boolean;
+      itens: string[];
+    }
+  | { tipo: "final" };
 export const GENERICOS: Gen[] = [
   { tipo: "capa" },
-  { tipo: "mito", n: 1, frase: "é mais fraco", verdade: false, itens: ["Mesmo princípio ativo, mesma dose e mesma forma do remédio de marca", "Para ser aprovado pela Anvisa, passa no teste de bioequivalência: chega no sangue na mesma quantidade e velocidade"] },
-  { tipo: "mito", n: 2, frase: "só tem 80% do remédio", verdade: false, itens: ["80% a 125% é uma regra estatística do teste", "Não é a quantidade de remédio no comprimido"] },
-  { tipo: "mito", n: 3, frase: "é mais barato porque é pior", verdade: false, itens: ["Não precisa repetir a pesquisa nem pagar a propaganda da marca", "Por lei, o preço máximo é pelo menos 35% menor"] },
-  { tipo: "mito", n: 4, frase: "o farmacêutico pode trocar", verdade: true, itens: ["Pode trocar o de marca pelo genérico", "A não ser que o médico escreva na receita que não autoriza a troca"] },
-  { tipo: "mito", n: 5, frase: "genérico e similar são iguais", verdade: false, itens: ["O similar tem nome de marca", "O genérico tem o nome do princípio ativo e a faixa amarela com a letra G"] },
-  { tipo: "mito", n: 6, frase: "cor e formato podem mudar", verdade: true, itens: ["Mudam os ingredientes que não são o remédio, como corantes e lactose", "Tem alergia ou intolerância? Confira na bula"] },
+  {
+    tipo: "mito",
+    n: 1,
+    frase: "é mais fraco",
+    verdade: false,
+    itens: [
+      "Mesmo princípio ativo, mesma dose e mesma forma do remédio de marca",
+      "Para ser aprovado pela Anvisa, passa no teste de bioequivalência: chega no sangue na mesma quantidade e velocidade",
+    ],
+  },
+  {
+    tipo: "mito",
+    n: 2,
+    frase: "só tem 80% do remédio",
+    verdade: false,
+    itens: [
+      "80% a 125% é uma regra estatística do teste",
+      "Não é a quantidade de remédio no comprimido",
+    ],
+  },
+  {
+    tipo: "mito",
+    n: 3,
+    frase: "é mais barato porque é pior",
+    verdade: false,
+    itens: [
+      "Não precisa repetir a pesquisa nem pagar a propaganda da marca",
+      "Por lei, o preço máximo é pelo menos 35% menor",
+    ],
+  },
+  {
+    tipo: "mito",
+    n: 4,
+    frase: "o farmacêutico pode trocar",
+    verdade: true,
+    itens: [
+      "Pode trocar o de marca pelo genérico",
+      "A não ser que o médico escreva na receita que não autoriza a troca",
+    ],
+  },
+  {
+    tipo: "mito",
+    n: 5,
+    frase: "genérico e similar são iguais",
+    verdade: false,
+    itens: [
+      "O similar tem nome de marca",
+      "O genérico tem o nome do princípio ativo e a faixa amarela com a letra G",
+    ],
+  },
+  {
+    tipo: "mito",
+    n: 6,
+    frase: "cor e formato podem mudar",
+    verdade: true,
+    itens: [
+      "Mudam os ingredientes que não são o remédio, como corantes e lactose",
+      "Tem alergia ou intolerância? Confira na bula",
+    ],
+  },
   { tipo: "final" },
 ];
 
-const Caixa: React.FC<{ cor: string; children: React.ReactNode; style?: React.CSSProperties }> = ({ cor, children, style }) => (
-  <div style={{ border: `5px solid ${cor}`, boxShadow: `0 0 26px ${rgba(cor, 0.5)}, inset 0 0 20px ${rgba(cor, 0.12)}`, background: "rgba(2,20,10,0.9)", padding: "34px 40px", ...style }}>{children}</div>
+const Caixa: React.FC<{
+  cor: string;
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}> = ({ cor, children, style }) => (
+  <div
+    style={{
+      border: `5px solid ${cor}`,
+      boxShadow: `0 0 26px ${rgba(cor, 0.5)}, inset 0 0 20px ${rgba(cor, 0.12)}`,
+      background: "rgba(2,20,10,0.9)",
+      padding: "34px 40px",
+      ...style,
+    }}
+  >
+    {children}
+  </div>
 );
-const Carimbo: React.FC<{ txt: string; cor: string; rot?: number }> = ({ txt, cor, rot = -6 }) => (
-  <div style={{ display: "inline-block", transform: `rotate(${rot}deg)`, border: `7px solid ${cor}`, padding: "18px 34px", fontFamily: PX, fontSize: 54, color: cor, textShadow: `0 0 18px ${cor}`, boxShadow: `0 0 24px ${rgba(cor, 0.5)}`, background: "rgba(0,0,0,0.55)" }}>{txt}</div>
+const Carimbo: React.FC<{ txt: string; cor: string; rot?: number }> = ({
+  txt,
+  cor,
+  rot = -6,
+}) => (
+  <div
+    style={{
+      display: "inline-block",
+      transform: `rotate(${rot}deg)`,
+      border: `7px solid ${cor}`,
+      padding: "18px 34px",
+      fontFamily: PX,
+      fontSize: 54,
+      color: cor,
+      textShadow: `0 0 18px ${cor}`,
+      boxShadow: `0 0 24px ${rgba(cor, 0.5)}`,
+      background: "rgba(0,0,0,0.55)",
+    }}
+  >
+    {txt}
+  </div>
 );
 const FundoExe: React.FC = () => (
-  <AbsoluteFill style={{ background: `radial-gradient(ellipse 900px 900px at 50% 40%, #062a14, ${BG})` }}>
-    <AbsoluteFill style={{ backgroundImage: "repeating-linear-gradient(0deg, rgba(0,0,0,0.18) 0 2px, transparent 2px 4px)" }} />
-    <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 96, background: "rgba(0,10,4,0.92)", borderBottom: `4px solid ${G}` }} />
-    <div style={{ position: "absolute", top: 34, left: 40, fontFamily: PX, fontSize: 26, color: G, textShadow: `0 0 10px ${G}` }}>C:\&gt; GENERICO.EXE</div>
+  <AbsoluteFill
+    style={{
+      background: `radial-gradient(ellipse 900px 900px at 50% 40%, #062a14, ${BG})`,
+    }}
+  >
+    <AbsoluteFill
+      style={{
+        backgroundImage:
+          "repeating-linear-gradient(0deg, rgba(0,0,0,0.18) 0 2px, transparent 2px 4px)",
+      }}
+    />
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 96,
+        background: "rgba(0,10,4,0.92)",
+        borderBottom: `4px solid ${G}`,
+      }}
+    />
+    <div
+      style={{
+        position: "absolute",
+        top: 34,
+        left: 40,
+        fontFamily: PX,
+        fontSize: 26,
+        color: G,
+        textShadow: `0 0 10px ${G}`,
+      }}
+    >
+      C:\&gt; GENERICO.EXE
+    </div>
   </AbsoluteFill>
 );
 const RodapeExe: React.FC<{ n: number; total: number }> = ({ n, total }) => (
   <>
-    <div style={{ position: "absolute", bottom: 52, left: 60, fontFamily: PX, fontSize: 22, color: rgba(G, 0.6) }}>{n}/{total}</div>
-    {n < total && <div style={{ position: "absolute", bottom: 48, right: 60, fontFamily: VT, fontSize: 46, color: A }}>arrasta &gt;&gt;</div>}
+    <div
+      style={{
+        position: "absolute",
+        bottom: 52,
+        left: 60,
+        fontFamily: PX,
+        fontSize: 22,
+        color: rgba(G, 0.6),
+      }}
+    >
+      {n}/{total}
+    </div>
+    {n < total && (
+      <div
+        style={{
+          position: "absolute",
+          bottom: 48,
+          right: 60,
+          fontFamily: VT,
+          fontSize: 46,
+          color: A,
+        }}
+      >
+        arrasta &gt;&gt;
+      </div>
+    )}
   </>
 );
-const FotoGenerico: React.FC<{ g: Gen; n: number; total: number }> = ({ g, n, total }) => (
+const FotoGenerico: React.FC<{ g: Gen; n: number; total: number }> = ({
+  g,
+  n,
+  total,
+}) => (
   <AbsoluteFill>
     <FundoExe />
     {g.tipo === "capa" && (
       <>
-        <div style={{ position: "absolute", top: 190, width: "100%", textAlign: "center", fontFamily: VT, fontSize: 200, lineHeight: 0.95, color: G, textShadow: `0 0 26px ${G}` }}>
+        <div
+          style={{
+            position: "absolute",
+            top: 190,
+            width: "100%",
+            textAlign: "center",
+            fontFamily: VT,
+            fontSize: 200,
+            lineHeight: 0.95,
+            color: G,
+            textShadow: `0 0 26px ${G}`,
+          }}
+        >
           GENÉRICO
           <br />
           <span style={{ color: A, textShadow: `0 0 26px ${A}` }}>PRESTA?</span>
         </div>
-        <div style={{ position: "absolute", top: 640, width: "100%", display: "flex", justifyContent: "center", gap: 70 }}>
+        <div
+          style={{
+            position: "absolute",
+            top: 640,
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            gap: 70,
+          }}
+        >
           <Carimbo txt="MITO" cor={R} rot={-8} />
           <Carimbo txt="VERDADE" cor={G} rot={6} />
         </div>
-        <div style={{ position: "absolute", top: 900, width: "100%", textAlign: "center", fontFamily: VT, fontSize: 64, color: WH }}>6 dúvidas que todo mundo tem</div>
+        <div
+          style={{
+            position: "absolute",
+            top: 900,
+            width: "100%",
+            textAlign: "center",
+            fontFamily: VT,
+            fontSize: 64,
+            color: WH,
+          }}
+        >
+          6 dúvidas que todo mundo tem
+        </div>
       </>
     )}
     {g.tipo === "mito" && (
       <>
-        <div style={{ position: "absolute", top: 160, width: "100%", textAlign: "center", fontFamily: PX, fontSize: 64, color: G, textShadow: `0 0 18px ${G}` }}>#{g.n}</div>
-        <div style={{ position: "absolute", top: 270, left: 60, right: 60, textAlign: "center", fontFamily: VT, fontSize: 70, lineHeight: 1.05, color: A }}>&gt; "{g.frase}"</div>
-        <div style={{ position: "absolute", top: 440, width: "100%", textAlign: "center" }}>
-          <Carimbo txt={g.verdade ? "VERDADE" : "MITO"} cor={g.verdade ? G : R} />
+        <div
+          style={{
+            position: "absolute",
+            top: 160,
+            width: "100%",
+            textAlign: "center",
+            fontFamily: PX,
+            fontSize: 64,
+            color: G,
+            textShadow: `0 0 18px ${G}`,
+          }}
+        >
+          #{g.n}
         </div>
-        <Caixa cor={g.verdade ? G : CY} style={{ position: "absolute", top: 640, left: 70, right: 70 }}>
+        <div
+          style={{
+            position: "absolute",
+            top: 270,
+            left: 60,
+            right: 60,
+            textAlign: "center",
+            fontFamily: VT,
+            fontSize: 70,
+            lineHeight: 1.05,
+            color: A,
+          }}
+        >
+          &gt; "{g.frase}"
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: 440,
+            width: "100%",
+            textAlign: "center",
+          }}
+        >
+          <Carimbo
+            txt={g.verdade ? "VERDADE" : "MITO"}
+            cor={g.verdade ? G : R}
+          />
+        </div>
+        <Caixa
+          cor={g.verdade ? G : CY}
+          style={{ position: "absolute", top: 640, left: 70, right: 70 }}
+        >
           {g.itens.map((t, i) => (
-            <div key={i} style={{ fontFamily: VT, fontSize: 56, lineHeight: 1.1, color: WH, marginTop: i ? 26 : 0 }}>
+            <div
+              key={i}
+              style={{
+                fontFamily: VT,
+                fontSize: 56,
+                lineHeight: 1.1,
+                color: WH,
+                marginTop: i ? 26 : 0,
+              }}
+            >
               <span style={{ color: g.verdade ? G : CY }}>&gt; </span>
               {t}
             </div>
@@ -403,16 +1103,74 @@ const FotoGenerico: React.FC<{ g: Gen; n: number; total: number }> = ({ g, n, to
     )}
     {g.tipo === "final" && (
       <>
-        <Caixa cor={G} style={{ position: "absolute", top: 300, left: 70, right: 70, textAlign: "center" }}>
-          <div style={{ fontFamily: VT, fontSize: 40, color: rgba(G, 0.7), textAlign: "left" }}>C:\&gt; seguir.exe</div>
-          <div style={{ fontFamily: PX, fontSize: 84, color: G, textShadow: `0 0 22px ${G}`, margin: "30px 0" }}>ME SIGA</div>
-          <div style={{ fontFamily: VT, fontSize: 56, color: WH }}>para mais dicas de farmacologia</div>
-          <div style={{ fontFamily: VT, fontSize: 56, color: A }}>e curiosidades sobre a área</div>
+        <Caixa
+          cor={G}
+          style={{
+            position: "absolute",
+            top: 300,
+            left: 70,
+            right: 70,
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: VT,
+              fontSize: 40,
+              color: rgba(G, 0.7),
+              textAlign: "left",
+            }}
+          >
+            C:\&gt; seguir.exe
+          </div>
+          <div
+            style={{
+              fontFamily: PX,
+              fontSize: 84,
+              color: G,
+              textShadow: `0 0 22px ${G}`,
+              margin: "30px 0",
+            }}
+          >
+            ME SIGA
+          </div>
+          <div style={{ fontFamily: VT, fontSize: 56, color: WH }}>
+            para mais dicas de farmacologia
+          </div>
+          <div style={{ fontFamily: VT, fontSize: 56, color: A }}>
+            e curiosidades sobre a área
+          </div>
         </Caixa>
-        <div style={{ position: "absolute", top: 860, left: 80, right: 80, textAlign: "center", fontFamily: VT, fontSize: 50, lineHeight: 1.1, color: WH }}>
-          Conteúdo educativo. Consulte um profissional de saúde para orientações.
+        <div
+          style={{
+            position: "absolute",
+            top: 860,
+            left: 80,
+            right: 80,
+            textAlign: "center",
+            fontFamily: VT,
+            fontSize: 50,
+            lineHeight: 1.1,
+            color: WH,
+          }}
+        >
+          Conteúdo educativo. Consulte um profissional de saúde para
+          orientações.
         </div>
-        <div style={{ position: "absolute", top: 1030, left: 80, right: 80, textAlign: "center", fontFamily: VT, fontSize: 38, color: rgba(WH, 0.6) }}>Ref.: Lei 9.787/1999 · RDC Anvisa 16/2007 · Idec · CFF</div>
+        <div
+          style={{
+            position: "absolute",
+            top: 1030,
+            left: 80,
+            right: 80,
+            textAlign: "center",
+            fontFamily: VT,
+            fontSize: 38,
+            color: rgba(WH, 0.6),
+          }}
+        >
+          Ref.: Lei 9.787/1999 · RDC Anvisa 16/2007 · Idec · CFF
+        </div>
       </>
     )}
     <RodapeExe n={n} total={total} />
@@ -423,7 +1181,14 @@ const FotoGenerico: React.FC<{ g: Gen; n: number; total: number }> = ({ g, n, to
 const Escuro = (fotos: Foto[], serie: string) => {
   const Comp: React.FC = () => {
     const f = useCurrentFrame();
-    return <FotoEscura foto={fotos[f]} n={f + 1} total={fotos.length} serie={serie} />;
+    return (
+      <FotoEscura
+        foto={fotos[f]}
+        n={f + 1}
+        total={fotos.length}
+        serie={serie}
+      />
+    );
   };
   return Comp;
 };

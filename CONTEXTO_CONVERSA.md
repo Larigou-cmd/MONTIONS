@@ -96,6 +96,7 @@
 - Código: `mecanismo/src/lei8080/Video.tsx` (Id `Lei8080Ep1`) e `Capa.tsx` (Id `Lei8080Ep1Capa`, capa 1280×720 em `youtube/capas/`). Textos: `youtube/textos/lei8080.md`.
 - Tempos: em SEGUNDOS da narração original; `fr()` soma as pausas de 5 s (lista `CORTES`). A narração com pausas é gerada por ffmpeg (`public/lei8080/narracao.mp3`).
 - Transcrição local: faster-whisper (modelo small), lendo o áudio convertido pelo ffmpeg para 16 kHz (o PyAV do Python 3.14 falha).
+- **Tempos das palavras (desde 2026-10-25):** `%LOCALAPPDATA%\montions-whisper\Scripts\python.exe mecanismo/scripts/transcrever.py <narracao.mp3> <roteiro.md> <fala.json>`. O ambiente fica fora da pasta temporária, porque o Windows apagou a versão antiga.
 - Episódio 1 (Arts. 1º ao 4º): FINALIZADO. Próximo: Ep. 2, Arts. 5º e 6º (conferir na internet as Leis 15.390/2026 e 15.471/2026 antes).
 - Ideias aprovadas para depois: linha do tempo das alterações da lei; Shorts verticais de 30 s com cada pegadinha, levando para a aula completa.
 

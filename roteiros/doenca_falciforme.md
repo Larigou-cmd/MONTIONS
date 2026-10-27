@@ -6,7 +6,7 @@ Dica de gravação (ElevenLabs, Juliana, Eleven v4): números já escritos por e
 ## Narração
 
 1. **Gancho**
-Hoje, vinte e sete de outubro, é o Dia Nacional de Luta pelos Direitos das Pessoas com Doença Falciforme. Você sabe o que é essa doença, em que o sangue muda de forma e pode entupir os vasos? E sabia que o SUS tem tratamento para ela?
+Hoje, vinte e sete de outubro, é o Dia Nacional de Luta pelos Direitos das Pessoas com Doença Falciforme. Você sabe o que é essa doença, que muda a forma do sangue? E que o SUS tem tratamento?
 
 2. **O que é**
 A doença falciforme é genética: passa de pais para filhos. Ela altera a hemoglobina, a proteína que leva o oxigênio no sangue. Com isso, as hemácias, que normalmente são redondinhas e macias, ficam duras e com formato de foice. Por isso o nome: falciforme.
@@ -24,13 +24,13 @@ As hemácias em foice entopem os vasinhos e se quebram rápido. Isso causa anemi
 Procure a emergência na hora se aparecer: febre; falta de ar ou dor no peito; palidez forte com a barriga inchada; fraqueza de um lado do corpo, dificuldade para falar ou convulsão; ou uma ereção dolorosa que não passa. Na criança, febre é sempre urgência, porque a infecção é a principal causa de morte.
 
 7. **Diagnóstico**
-Por isso, o diagnóstico precoce faz toda a diferença. Ele é feito no teste do pezinho, de graça no SUS, que deve ser feito entre o terceiro e o quinto dia de vida do bebê. Quem não fez o teste pode fazer, a partir dos quatro meses de idade, o exame chamado eletroforese de hemoglobina, também pelo SUS.
+Por isso, o diagnóstico precoce faz toda a diferença: o teste do pezinho, de graça no SUS, deve ser feito entre o terceiro e o quinto dia de vida. Quem não fez pode fazer, a partir dos quatro meses, o exame de eletroforese de hemoglobina, também pelo SUS.
 
 8. **O que o SUS oferece**
-E quem tem a doença tem direito ao cuidado integral no SUS. Para as crianças: penicilina para prevenir infecções até os cinco anos, e vacinas especiais nos CRIEs, os Centros de Referência de Imunobiológicos Especiais. O Doppler transcraniano, um exame que mostra o risco de AVC. A hidroxiureia, o principal remédio da doença, que diminui as crises de dor e as internações. Desde a atualização do protocolo, ela existe em cápsula de cem miligramas, que pode ser usada a partir dos nove meses de idade. A alfaepoetina, para quem tem problema nos rins e anemia. Transfusões de sangue, e remédios que tiram o excesso de ferro que as transfusões deixam. E o transplante de medula, a única chance de cura, para casos selecionados, com um doador compatível da família.
+E quem tem a doença tem direito ao cuidado integral no SUS. Para as crianças: penicilina para prevenir infecções até os cinco anos, e vacinas especiais nos CRIEs. O Doppler transcraniano, um exame que mostra o risco de AVC. A hidroxiureia, o principal remédio, que diminui as crises de dor e as internações, agora também em cápsula de cem miligramas, a partir dos nove meses. A alfaepoetina, para quem tem problema nos rins e anemia. Transfusões de sangue, e remédios que tiram o excesso de ferro que as transfusões deixam. E o transplante de medula, a única chance de cura, para casos selecionados, com um doador compatível da família.
 
 9. **No dia a dia**
-No dia a dia: beba bastante água, evite frio intenso e esforço exagerado, e faça o acompanhamento com o hematologista ou no hemocentro.
+No dia a dia: beba bastante água, evite frio intenso e esforço exagerado, e faça o acompanhamento no hemocentro.
 
 10. **Me siga**
 Me siga para mais dicas de farmacologia e curiosidades sobre a área.

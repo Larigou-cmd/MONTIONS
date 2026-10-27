@@ -117,6 +117,12 @@ import {
   DURATION as DURATION_ANTIDOTOS,
 } from "./antidotos/Video";
 
+import {
+  VideoFalciforme,
+  CapaFalciforme,
+  DURATION as DURATION_FALCIFORME,
+} from "./falciforme/Video";
+
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -746,6 +752,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="AntidotosCapa"
       component={CapaAntidotos}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Falciforme"
+      component={VideoFalciforme}
+      durationInFrames={DURATION_FALCIFORME}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="FalciformeCapa"
+      component={CapaFalciforme}
       durationInFrames={1}
       fps={FPS}
       width={1080}

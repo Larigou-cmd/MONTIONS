@@ -94,6 +94,7 @@ import { VideoAlcool, DURATION_ALCOOL } from "./alcool/Video";
 import { CapaAlcool } from "./alcool/Capa";
 import { VideoNasal, DURATION_NASAL } from "./nasal/Video";
 import { CapaNasal } from "./nasal/Capa";
+import { VideoAntialergico, DURATION_ANTIALERGICO } from "./antialergico/Video";
 import { FarmaEstilo } from "./farmaexe/Estilo";
 import { FarmaComercial, DURATION_FARMA } from "./farmaexe/Comercial";
 import { CapaFarma } from "./farmaexe/Capa";
@@ -545,6 +546,14 @@ export const RemotionRoot: React.FC = () => (
       id="FumacaCapa"
       component={CapaFumaca}
       durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Antialergico"
+      component={VideoAntialergico}
+      durationInFrames={DURATION_ANTIALERGICO}
       fps={FPS}
       width={1080}
       height={1920}

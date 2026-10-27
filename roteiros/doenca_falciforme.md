@@ -6,7 +6,7 @@ Dica de gravação (ElevenLabs, Juliana, Eleven v4): números já escritos por e
 ## Narração
 
 1. **Gancho**
-Hoje, vinte e sete de outubro, é o Dia Nacional de Luta pelos Direitos das Pessoas com Doença Falciforme. Você sabe o que é essa doença, que muda a forma do sangue? E que o SUS tem tratamento?
+Hoje, vinte e sete de outubro, é o Dia Nacional de Luta pelos Direitos das Pessoas com Doenças Falciformes. Você sabe o que é essa doença, que muda a forma do sangue? E que o SUS tem tratamento?
 
 2. **O que é**
 A doença falciforme é genética: passa de pais para filhos. Ela altera a hemoglobina, a proteína que leva o oxigênio no sangue. Com isso, as hemácias, que normalmente são redondinhas e macias, ficam duras e com formato de foice. Por isso o nome: falciforme.

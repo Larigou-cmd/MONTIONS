@@ -773,5 +773,13 @@ export const RemotionRoot: React.FC = () => (
       width={1080}
       height={1920}
     />
+    <Composition
+      id="FalciformeCapa34"
+      component={CapaFalciforme}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1440}
+    />
   </>
 );

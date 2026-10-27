@@ -8,3 +8,15 @@ repasse/node_modules
 */video_mudo.mp4
 */*_envio.mp4
 compras/node_modules
+
+# mídia pesada gerada (fica só no PC)
+mecanismo/public/**/*.mp4
+mecanismo/public/**/*.wav
+mecanismo/public/**/*.mp3
+concurso_lei8080/audiolivro/audio/
+out/
+node_modules/
+
+# Modelo 2: vídeos gerados ficam só no PC
+genericos/*.mp4
+genericos/previas/

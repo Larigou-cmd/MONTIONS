@@ -14,7 +14,7 @@ import { DURATION, PARTES, T } from "./Video";
 // "Notícias da Farmácia" #2 (sarampo) no estilo Vox: papel bege com textura, recortes de jornal,
 // marca-texto amarelo, círculos e setas à mão em vermelho e a câmera se aproximando devagar. Sem legenda.
 // Mesma narração e mesmos tempos do sarampo/Video.tsx.
-const V = {
+export const V = {
   papel: "#efe9dc",
   creme: "#fbf8f1",
   tinta: "#1b1b1b",
@@ -27,8 +27,8 @@ const V = {
 const R = (i: number) => PARTES[i];
 const W = 1080;
 
-// ---------- fundo de papel ----------
-const Fundo: React.FC = () => (
+// ---------- fundo de papel (peças exportadas: reaproveitadas pelos outros vídeos no estilo Vox) ----------
+export const Fundo: React.FC = () => (
   <AbsoluteFill style={{ background: V.papel }}>
     <svg width={W} height={1920} style={{ position: "absolute" }}>
       <filter id="papel">
@@ -85,7 +85,7 @@ const rasgo = (seed: number) => {
     );
   return `polygon(${pts.join(",")})`;
 };
-const Recorte: React.FC<{
+export const Recorte: React.FC<{
   f: number;
   at: number;
   x: number;
@@ -138,7 +138,7 @@ const Recorte: React.FC<{
   );
 };
 // cartão de papel liso (sem borda rasgada)
-const Cartao: React.FC<{
+export const Cartao: React.FC<{
   f: number;
   at: number;
   x: number;
@@ -172,7 +172,7 @@ const Cartao: React.FC<{
     </div>
   );
 };
-const Kicker: React.FC<{
+export const Kicker: React.FC<{
   children: React.ReactNode;
   cor?: string;
   size?: number;
@@ -190,10 +190,10 @@ const Kicker: React.FC<{
     {children}
   </div>
 );
-const Manchete: React.FC<{ children: React.ReactNode; size?: number }> = ({
-  children,
-  size = 54,
-}) => (
+export const Manchete: React.FC<{
+  children: React.ReactNode;
+  size?: number;
+}> = ({ children, size = 54 }) => (
   <div
     style={{
       fontFamily: JORNAL,
@@ -208,7 +208,7 @@ const Manchete: React.FC<{ children: React.ReactNode; size?: number }> = ({
   </div>
 );
 // linhas cinzas de "texto de jornal"
-const Corpo: React.FC<{ n?: number }> = ({ n = 3 }) => (
+export const Corpo: React.FC<{ n?: number }> = ({ n = 3 }) => (
   <div
     style={{ marginTop: 22, display: "flex", flexDirection: "column", gap: 12 }}
   >
@@ -226,7 +226,7 @@ const Corpo: React.FC<{ n?: number }> = ({ n = 3 }) => (
   </div>
 );
 // marca-texto que passa da esquerda para a direita
-const Marca: React.FC<{
+export const Marca: React.FC<{
   f: number;
   at: number;
   children: React.ReactNode;
@@ -250,7 +250,7 @@ const Marca: React.FC<{
   );
 };
 // traço à mão que se desenha (círculo, seta, sublinhado, check, X)
-const Traco: React.FC<{
+export const Traco: React.FC<{
   f: number;
   at: number;
   d: string;
@@ -285,14 +285,14 @@ const Traco: React.FC<{
     </svg>
   );
 };
-const circulo = (w: number, h: number) =>
+export const circulo = (w: number, h: number) =>
   `M ${w * 0.55} ${h * 0.04} C ${w * 0.95} ${h * 0.02} ${w * 1.02} ${h * 0.7} ${w * 0.6} ${h * 0.96} C ${w * 0.2} ${h * 1.04} ${-w * 0.04} ${h * 0.55} ${w * 0.1} ${h * 0.25} C ${w * 0.2} ${h * 0.04} ${w * 0.42} ${h * 0.0} ${w * 0.7} ${h * 0.1}`;
-const xis = (s: number) =>
+export const xis = (s: number) =>
   `M 4 4 L ${s - 4} ${s - 4} M ${s - 6} 6 L 6 ${s - 6}`;
-const check = (s: number) =>
+export const check = (s: number) =>
   `M 4 ${s * 0.55} L ${s * 0.38} ${s - 6} L ${s - 4} 6`;
 // nota escrita à mão
-const Nota: React.FC<{
+export const Nota: React.FC<{
   f: number;
   at: number;
   x: number;
@@ -336,7 +336,7 @@ const Nota: React.FC<{
     </div>
   );
 };
-const Carimbo: React.FC<{
+export const Carimbo: React.FC<{
   f: number;
   at: number;
   x: number;
@@ -374,7 +374,7 @@ const Carimbo: React.FC<{
   );
 };
 // título grande de capítulo
-const Capitulo: React.FC<{
+export const Capitulo: React.FC<{
   f: number;
   at: number;
   kicker: string;

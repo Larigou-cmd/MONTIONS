@@ -48,6 +48,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 38 | Farma.exe: Pergunte à Farmacêutica (comercial, Modelo 7) | [38_farma_exe_comercial.md](textos/38_farma_exe_comercial.md) | [capa_farma_exe.png](capas/capa_farma_exe.png) |
 | 39 | Por que bebida alcoólica faz fazer tanto xixi? | [39_alcool_xixi.md](textos/39_alcool_xixi.md) | [capa_alcool.png](capas/capa_alcool.png) |
 | 40 | Descongestionante nasal vicia? | [40_descongestionante_nasal.md](textos/40_descongestionante_nasal.md) | [capa_nasal.png](capas/capa_nasal.png) |
+| 41 | Por que o antialérgico dá sono? | [41_antialergico_sono.md](textos/41_antialergico_sono.md) | [capa_antialergico.png](capas/capa_antialergico.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

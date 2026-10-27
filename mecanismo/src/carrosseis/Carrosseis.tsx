@@ -923,6 +923,70 @@ export const NASAL: Foto[] = [
   { tipo: "final", cor: AZUL },
 ];
 
+export const ANTIALERGICO: Foto[] = [
+  { tipo: "capa", cor: ROXO, topo: "VOCÊ SABIA?", titulo: <>Por que o <Hi c={ROXO}>antialérgico</Hi> dá sono?</>, destaque: <EmojiGrande e="💊🥱" />, sub: "uns chegam ao cérebro e outros não" },
+  {
+    tipo: "lista",
+    cor: "#f472b6",
+    emoji: "🤧",
+    titulo: <>A <Hi c="#f472b6">histamina</Hi></>,
+    itens: [
+      { e: "🌸", t: "É a substância por trás da alergia: coceira, espirro, nariz escorrendo" },
+      { e: "🛡️", t: <>O antialérgico bloqueia o receptor dela, o <Hi c={AZUL}>H1</Hi></> },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: AMBAR,
+    emoji: "🧠",
+    titulo: <>No cérebro, ela te mantém <Hi c={AMBAR}>acordado</Hi></>,
+    itens: [{ e: "☀️", t: "A histamina também trabalha no cérebro, ajudando a manter você acordado" }],
+  },
+  {
+    tipo: "lista",
+    cor: ROXO,
+    emoji: "😴",
+    titulo: <><Hi c={ROXO}>1ª geração</Hi>: dá sono</>,
+    itens: [
+      { e: "💊", t: "Dexclorfeniramina, prometazina, hidroxizina" },
+      { e: "🧱", t: "Atravessam a barreira que protege o cérebro" },
+      { e: "🌙", t: "Bloqueiam a histamina lá dentro também: vem o sono" },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: VERDE,
+    emoji: "😊",
+    titulo: <><Hi c={VERDE}>2ª geração</Hi>: pouco sono</>,
+    itens: [
+      { e: "💊", t: "Loratadina, desloratadina, fexofenadina" },
+      { e: "🔄", t: "O cérebro tem uma espécie de bomba que joga esses remédios de volta para fora" },
+      { e: "ℹ️", t: <>A <Hi c={AMBAR}>cetirizina</Hi> ainda pode dar um pouco de sono em parte das pessoas</> },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: VERM,
+    emoji: "⚠️",
+    titulo: <>Atenção</>,
+    itens: [
+      { e: "🚗", t: <>Se o seu antialérgico dá sono, <Hi c={VERM}>não dirija</Hi></> },
+      { e: "🍺", t: "A bebida alcoólica aumenta esse efeito" },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: AMBAR,
+    emoji: "🚌",
+    titulo: <>Curiosidade</>,
+    itens: [
+      { e: "🤢", t: <>O remédio para enjoo de viagem, o <Hi c={ROXO}>dimenidrinato</Hi>...</> },
+      { e: "😴", t: "...também é um antialérgico de 1ª geração. Por isso dá tanto sono" },
+    ],
+  },
+  { tipo: "final", cor: ROXO },
+];
+
 // ---------- genéricos: visual PHARMACIST.EXE ----------
 const PX = "'Press Start TwoP', monospace",
   VT = "'VTThreeTwoThree', monospace";
@@ -1330,6 +1394,7 @@ export const CarrosselFumaca = Escuro(FUMACA, "FISIOLOGIA CURIOSA");
 export const CarrosselVencido = Escuro(VENCIDO, "FARMÁCIA SEM MITOS");
 export const CarrosselAlcool = Escuro(ALCOOL, "FISIOLOGIA CURIOSA");
 export const CarrosselNasal = Escuro(NASAL, "FARMÁCIA SEM MITOS");
+export const CarrosselAntialergico = Escuro(ANTIALERGICO, "FARMÁCIA SEM MITOS");
 export const CarrosselGenericos: React.FC = () => {
   const f = useCurrentFrame();
   return <FotoGenerico g={GENERICOS[f]} n={f + 1} total={GENERICOS.length} />;

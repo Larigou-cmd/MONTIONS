@@ -96,11 +96,13 @@ import { VideoNasal, DURATION_NASAL } from "./nasal/Video";
 import { CapaNasal } from "./nasal/Capa";
 import { VideoAntialergico, DURATION_ANTIALERGICO } from "./antialergico/Video";
 import { CapaAntialergico } from "./antialergico/Capa";
+import { VideoAnlodipino, DURATION_ANLODIPINO } from "./anlodipino/Video";
+import { CapaAnlodipino } from "./anlodipino/Capa";
 import { FarmaEstilo } from "./farmaexe/Estilo";
 import { FarmaComercial, DURATION_FARMA } from "./farmaexe/Comercial";
 import { CapaFarma } from "./farmaexe/Capa";
 import { FarmaCarrossel } from "./farmaexe/Carrossel";
-import { CarrosselGlobulo, CarrosselFumaca, CarrosselVencido, CarrosselGenericos, CarrosselAlcool, ALCOOL, CarrosselNasal, NASAL, CarrosselAntialergico, ANTIALERGICO, GLOBULO, FUMACA, VENCIDO, GENERICOS } from "./carrosseis/Carrosseis";
+import { CarrosselGlobulo, CarrosselFumaca, CarrosselVencido, CarrosselGenericos, CarrosselAlcool, ALCOOL, CarrosselNasal, NASAL, CarrosselAntialergico, ANTIALERGICO, CarrosselAnlodipino, ANLODIPINO, GLOBULO, FUMACA, VENCIDO, GENERICOS } from "./carrosseis/Carrosseis";
 import { VideoCaibra, DURATION_CAIBRA } from "./caibra/Video";
 import { VideoCaibraOpenArt } from "./caibra/VideoOpenArt";
 import { CapaCaibra } from "./caibra/Capa";
@@ -462,12 +464,28 @@ export const RemotionRoot: React.FC = () => (
       height={1920}
     />
     <Composition
+      id="CarrosselAnlodipino"
+      component={CarrosselAnlodipino}
+      durationInFrames={ANLODIPINO.length}
+      fps={FPS}
+      width={1080}
+      height={1350}
+    />
+    <Composition
       id="CarrosselAntialergico"
       component={CarrosselAntialergico}
       durationInFrames={ANTIALERGICO.length}
       fps={FPS}
       width={1080}
       height={1350}
+    />
+    <Composition
+      id="AnlodipinoCapa"
+      component={CapaAnlodipino}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
     />
     <Composition
       id="AntialergicoCapa"
@@ -569,6 +587,14 @@ export const RemotionRoot: React.FC = () => (
       id="FumacaCapa"
       component={CapaFumaca}
       durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Anlodipino"
+      component={VideoAnlodipino}
+      durationInFrames={DURATION_ANLODIPINO}
       fps={FPS}
       width={1080}
       height={1920}

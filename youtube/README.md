@@ -49,6 +49,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 39 | Por que bebida alcoólica faz fazer tanto xixi? | [39_alcool_xixi.md](textos/39_alcool_xixi.md) | [capa_alcool.png](capas/capa_alcool.png) |
 | 40 | Descongestionante nasal vicia? | [40_descongestionante_nasal.md](textos/40_descongestionante_nasal.md) | [capa_nasal.png](capas/capa_nasal.png) |
 | 41 | Por que o antialérgico dá sono? | [41_antialergico_sono.md](textos/41_antialergico_sono.md) | [capa_antialergico.png](capas/capa_antialergico.png) |
+| 42 | O que o anlodipino faz nos seus vasos? | [42_anlodipino_tornozelo.md](textos/42_anlodipino_tornozelo.md) | [capa_anlodipino.png](capas/capa_anlodipino.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

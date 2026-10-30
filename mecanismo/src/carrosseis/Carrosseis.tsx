@@ -987,6 +987,71 @@ export const ANTIALERGICO: Foto[] = [
   { tipo: "final", cor: ROXO },
 ];
 
+export const ANLODIPINO: Foto[] = [
+  { tipo: "capa", cor: "#2dd4bf", topo: "VOCÊ SABIA?", titulo: <>O que o <Hi c="#2dd4bf">anlodipino</Hi> faz nos seus vasos?</>, destaque: <EmojiGrande e="💊🦶" />, sub: "e por que o tornozelo incha" },
+  {
+    tipo: "lista",
+    cor: "#f43f5e",
+    emoji: "💪",
+    titulo: <>O vaso tem <Hi c="#f43f5e">músculo</Hi></>,
+    itens: [
+      { e: "⚡", t: "Quando o cálcio entra nesse músculo, ele aperta o vaso" },
+      { e: "📈", t: "Vaso apertado: a pressão sobe" },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: "#2dd4bf",
+    emoji: "🔒",
+    titulo: <>O anlodipino <Hi c="#2dd4bf">fecha os portões</Hi></>,
+    itens: [
+      { e: "🚪", t: <>O cálcio entra por portões na célula, os <Hi c={ROXO}>canais de cálcio</Hi></> },
+      { e: "😌", t: "Com menos cálcio, o músculo relaxa e o vaso abre" },
+      { e: "📉", t: "A pressão cai" },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: "#2dd4bf",
+    emoji: "⏰",
+    titulo: <>Dura <Hi c="#2dd4bf">muito tempo</Hi></>,
+    itens: [{ e: "💊", t: "Ele fica muito tempo no corpo: basta um comprimido por dia" }],
+  },
+  {
+    tipo: "lista",
+    cor: AZUL,
+    emoji: "🦶",
+    titulo: <>Por que o <Hi c={AZUL}>tornozelo</Hi> incha?</>,
+    itens: [
+      { e: "➡️", t: <>Abre muito as <Hi c={VERM}>artérias</Hi> pequenas, mas quase não abre as <Hi c={AZUL}>veias</Hi></> },
+      { e: "💧", t: "Entra mais sangue do que sai: a pressão nos vasinhos sobe e o líquido escapa" },
+      { e: "⬇️", t: "A gravidade leva esse líquido para os pés e tornozelos" },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: ROXO,
+    emoji: "🤔",
+    titulo: <>Não é <Hi c={AZUL}>retenção de água</Hi></>,
+    itens: [
+      { e: "💧", t: "Por isso, diurético costuma ajudar pouco nesse inchaço" },
+      { e: "📈", t: "É mais comum nas doses maiores e nas mulheres" },
+      { e: "🤝", t: <>Combinado com a família da <Hi c="#f43f5e">losartana</Hi> ou do <Hi c="#f43f5e">enalapril</Hi>, costuma diminuir</> },
+    ],
+  },
+  {
+    tipo: "lista",
+    cor: VERM,
+    emoji: "⚠️",
+    titulo: <>Atenção</>,
+    itens: [
+      { e: "🤕", t: "No começo, pode dar dor de cabeça, rosto vermelho e tontura" },
+      { e: "👩‍⚕️", t: <>Inchou? <Hi c={VERM}>Não pare sozinho</Hi>: o médico pode ajustar a dose ou a combinação</> },
+    ],
+  },
+  { tipo: "final", cor: "#2dd4bf" },
+];
+
 // ---------- genéricos: visual PHARMACIST.EXE ----------
 const PX = "'Press Start TwoP', monospace",
   VT = "'VTThreeTwoThree', monospace";
@@ -1395,6 +1460,7 @@ export const CarrosselVencido = Escuro(VENCIDO, "FARMÁCIA SEM MITOS");
 export const CarrosselAlcool = Escuro(ALCOOL, "FISIOLOGIA CURIOSA");
 export const CarrosselNasal = Escuro(NASAL, "FARMÁCIA SEM MITOS");
 export const CarrosselAntialergico = Escuro(ANTIALERGICO, "FARMÁCIA SEM MITOS");
+export const CarrosselAnlodipino = Escuro(ANLODIPINO, "REMÉDIO POR DENTRO");
 export const CarrosselGenericos: React.FC = () => {
   const f = useCurrentFrame();
   return <FotoGenerico g={GENERICOS[f]} n={f + 1} total={GENERICOS.length} />;

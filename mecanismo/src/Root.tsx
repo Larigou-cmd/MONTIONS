@@ -98,6 +98,8 @@ import { VideoAntialergico, DURATION_ANTIALERGICO } from "./antialergico/Video";
 import { CapaAntialergico } from "./antialergico/Capa";
 import { VideoAnlodipino, DURATION_ANLODIPINO } from "./anlodipino/Video";
 import { CapaAnlodipino } from "./anlodipino/Capa";
+import { VideoInteracoes, DURATION_INTERACOES } from "./interacoes/Video";
+import { CapaInteracoes } from "./interacoes/Capa";
 import { FarmaEstilo } from "./farmaexe/Estilo";
 import { FarmaComercial, DURATION_FARMA } from "./farmaexe/Comercial";
 import { CapaFarma } from "./farmaexe/Capa";
@@ -590,6 +592,22 @@ export const RemotionRoot: React.FC = () => (
       fps={FPS}
       width={1080}
       height={1920}
+    />
+    <Composition
+      id="Interacoes"
+      component={VideoInteracoes}
+      durationInFrames={DURATION_INTERACOES}
+      fps={FPS}
+      width={1920}
+      height={1080}
+    />
+    <Composition
+      id="InteracoesCapa"
+      component={CapaInteracoes}
+      durationInFrames={1}
+      fps={FPS}
+      width={1280}
+      height={720}
     />
     <Composition
       id="Anlodipino"

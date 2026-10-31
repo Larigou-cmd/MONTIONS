@@ -98,7 +98,7 @@ const SFX: [number, string, number][] = [
 
 const W = 1080;
 // efeitos do SFX Kit (Wyzowl, licença CC0), baixado em public/sfxkit
-const KIT: Record<string, string> = {
+export const KIT: Record<string, string> = {
   whoosh: "sfxkit/sfx-kit-main/sounds/whooshes/whoosh-medium-soft.wav",
   pop: "sfxkit/sfx-kit-main/sounds/pops/pop-medium-in.wav",
   plim: "sfxkit/sfx-kit-main/sounds/notifications/notification-attention-clear.wav",
@@ -125,7 +125,7 @@ const FALANDO = (() => {
 const musica = (fr: number) => 0.22 - 0.13 * (FALANDO[Math.max(0, Math.min(FALANDO.length - 1, Math.round(fr)))] ?? 0);
 
 // ---------- versão de fundo escuro (pedido da usuária): recortes de papel claro sobre um quadro escuro ----------
-const E = {
+export const E = {
   fundo: "#111827",
   texto: "#f3efe6",
   azul: "#7aa2ff",
@@ -141,7 +141,7 @@ const rasgo = (seed: number) => {
   for (let i = 24; i >= 0; i--) pts.push(`${(i / 24) * 100}% ${(100 - Math.abs(Math.sin(seed * 5 + i * 2.3)) * 2.4).toFixed(2)}%`);
   return `polygon(${pts.join(",")})`;
 };
-const Recorte: React.FC<{ f: number; at: number; x: number; y: number; w: number; rot?: number; seed?: number; children: React.ReactNode }> = ({
+export const Recorte: React.FC<{ f: number; at: number; x: number; y: number; w: number; rot?: number; seed?: number; children: React.ReactNode }> = ({
   f,
   at,
   x,
@@ -172,10 +172,10 @@ const Recorte: React.FC<{ f: number; at: number; x: number; y: number; w: number
     </div>
   );
 };
-const Manchete: React.FC<{ children: React.ReactNode; size?: number }> = ({ children, size = 54 }) => (
+export const Manchete: React.FC<{ children: React.ReactNode; size?: number }> = ({ children, size = 54 }) => (
   <div style={{ fontFamily: JORNAL, fontWeight: 900, fontSize: size, lineHeight: 1.12, color: E.texto, marginTop: 14 }}>{children}</div>
 );
-const Fundo: React.FC = () => (
+export const Fundo: React.FC = () => (
   <AbsoluteFill style={{ background: E.fundo }}>
     <svg width={W} height={1920} style={{ position: "absolute" }}>
       <filter id="papelEscuro">
@@ -189,12 +189,12 @@ const Fundo: React.FC = () => (
   </AbsoluteFill>
 );
 // marca-texto amarelo com letra escura (para ler bem em cima do fundo escuro)
-const MarcaE: React.FC<{ f: number; at: number; children: React.ReactNode }> = ({ f, at, children }) => (
+export const MarcaE: React.FC<{ f: number; at: number; children: React.ReactNode }> = ({ f, at, children }) => (
   <Marca f={f} at={at}>
     <span style={{ color: f >= at ? V.tinta : E.texto }}>{children}</span>
   </Marca>
 );
-const Capitulo: React.FC<{ f: number; at: number; kicker: string; children: React.ReactNode; top?: number; size?: number }> = ({
+export const Capitulo: React.FC<{ f: number; at: number; kicker: string; children: React.ReactNode; top?: number; size?: number }> = ({
   f,
   at,
   kicker,
@@ -210,7 +210,7 @@ const Capitulo: React.FC<{ f: number; at: number; kicker: string; children: Reac
     </div>
   );
 };
-const Carimbo: React.FC<{ f: number; at: number; x: number; y: number; texto: string; cor?: string; size?: number; rot?: number }> = ({
+export const Carimbo: React.FC<{ f: number; at: number; x: number; y: number; texto: string; cor?: string; size?: number; rot?: number }> = ({
   f,
   at,
   x,
@@ -661,7 +661,7 @@ const Suor: React.FC<{ f: number }> = ({ f }) => {
   );
 };
 
-const Item: React.FC<{
+export const Item: React.FC<{
   f: number;
   at: number;
   y: number;

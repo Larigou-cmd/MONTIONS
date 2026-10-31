@@ -1,7 +1,7 @@
 # Por que o frio dá vontade de fazer xixi?
 
 Formato: Reels/Shorts vertical (1080×1920), cerca de 1 min 10 s. Modelo escolhido: **estilo Vox escuro** (o mesmo do vídeo da febre): é um mecanismo do corpo, que fica claro com um desenho (vasos da pele, sangue indo para o centro, rim e bexiga enchendo). Fala no estilo de conversa.
-Status: roteiro para a usuária gerar o áudio (31/10/2026). Livro de fisiologia (Guyton) só como referência, sem citar.
+Status: aprovado e entregue (31/10/2026). Narração feita pela usuária (OpenArt). Código: mecanismo/src/xixi/ (Id `Xixi`, capa `XixiCapa`). Livro de fisiologia (Guyton) só como referência, sem citar.
 
 ## Texto da fala
 Basta esfriar um pouco e lá vai você para o banheiro de novo? Não é impressão sua. Isso tem nome: diurese do frio.

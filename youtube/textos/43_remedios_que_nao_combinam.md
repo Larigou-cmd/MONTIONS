@@ -1,25 +1,25 @@
-# 7 remédios que não combinam (`mecanismo/out/remedios_que_nao_combinam.mp4`, capa `youtube/capas/capa_interacoes.png`)
+# 7 remédios que não combinam (`interacoes_exe/remedios_que_nao_combinam_exe.mp4`, capa `youtube/capas/capa_interacoes_exe.png`)
 
-Vídeo longo horizontal (1920×1080, cerca de 4 min 20 s). Narração: voz sintética do VoiceStudio (perfil "Farmacêutica PT-BR").
+Vídeo longo horizontal (1920×1080, cerca de 5 min 20 s), Modelo 2 (INTERACOES.EXE, terminal retrô) com trilha synthwave suave. Narração feita pela usuária com voz sintética (ElevenLabs, pelo OpenArt). Código: `interacoes_exe/` (scene.html, render.mjs, capa.mjs).
 
 ### YouTube (vídeo longo)
 
-**Título:** 7 REMÉDIOS QUE NÃO COMBINAM 💊⚡ (e o que fazer em cada caso)
+**Título:** 7 REMÉDIOS QUE NÃO COMBINAM 💊⚡ (você toma algum?)
 
 **Descrição:**
-Dois remédios seguros, tomados juntos, podem virar um problema. Isso se chama interação medicamentosa: um remédio pode cortar o efeito do outro, ou somar os efeitos de um jeito perigoso. Neste vídeo, uma farmacêutica explica 7 combinações comuns do dia a dia e o que fazer em cada caso 👇
+Dois remédios seguros, tomados juntos, podem virar um problema. Isso se chama interação medicamentosa: um remédio pode cortar o efeito do outro, ou somar os efeitos de um jeito perigoso. Neste vídeo, uma farmacêutica explica 7 combinações bem comuns do dia a dia e o que fazer em cada caso 👇
 
 ⏱️ Capítulos
 0:00 O que é interação medicamentosa
-0:18 1. Anticoncepcional + antibiótico (mito ou verdade?)
-0:54 2. Anti-inflamatório + remédio de pressão
-1:29 3. Omeprazol + clopidogrel
-1:56 4. Varfarina + anti-inflamatório
-2:21 5. Sinvastatina + claritromicina (e a toranja)
-2:52 6. Levotiroxina + cálcio, ferro ou antiácido
-3:12 7. Sildenafila + nitrato
-3:37 Resumo das 7 combinações
-4:00 A regra de ouro
+0:24 1. Anticoncepcional + antibiótico (mito ou verdade?)
+1:10 2. Anti-inflamatório + remédio de pressão
+1:50 3. Omeprazol + clopidogrel
+2:20 4. Varfarina + anti-inflamatório
+2:53 5. Sinvastatina + claritromicina (e a toranja)
+3:30 6. Levotiroxina + cálcio, ferro ou antiácido
+3:56 7. Sildenafila + nitrato
+4:30 Resumo das 7 combinações
+4:58 A regra de ouro
 
 📌 Resumo
 💊 Anticoncepcional só perde efeito com a rifampicina (e com vômito ou diarreia forte)

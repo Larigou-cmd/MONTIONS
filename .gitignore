@@ -20,3 +20,11 @@ node_modules/
 # Modelo 2: vídeos gerados ficam só no PC
 genericos/*.mp4
 genericos/previas/
+
+# Modelo 2 (7 remédios): mídia gerada fica só no PC
+interacoes_exe/*.mp4
+interacoes_exe/*.mp3
+interacoes_exe/*.wav
+interacoes_exe/previas/
+interacoes_exe/capa_*.png
+interacoes_exe/sfx/

@@ -50,7 +50,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 40 | Descongestionante nasal vicia? | [40_descongestionante_nasal.md](textos/40_descongestionante_nasal.md) | [capa_nasal.png](capas/capa_nasal.png) |
 | 41 | Por que o antialérgico dá sono? | [41_antialergico_sono.md](textos/41_antialergico_sono.md) | [capa_antialergico.png](capas/capa_antialergico.png) |
 | 42 | O que o anlodipino faz nos seus vasos? | [42_anlodipino_tornozelo.md](textos/42_anlodipino_tornozelo.md) | [capa_anlodipino.png](capas/capa_anlodipino.png) |
-| 43 | 7 remédios que não combinam (longo, horizontal) | [43_remedios_que_nao_combinam.md](textos/43_remedios_que_nao_combinam.md) | [capa_interacoes.png](capas/capa_interacoes.png) |
+| 43 | 7 remédios que não combinam (longo, horizontal, Modelo 2) | [43_remedios_que_nao_combinam.md](textos/43_remedios_que_nao_combinam.md) | [capa_interacoes_exe.png](capas/capa_interacoes_exe.png) |
 | 44 | Antibiótico: por que não pode parar quando melhora? | [44_antibiotico_parar.md](textos/44_antibiotico_parar.md) | [capa_antibiotico.png](capas/capa_antibiotico.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)

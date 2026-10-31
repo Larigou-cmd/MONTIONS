@@ -1,7 +1,7 @@
 # Por que a gente sente frio quando está com febre?
 
 Formato: Reels/Shorts vertical (1080×1920), cerca de 1 min 30 s, estilo Vox (documentário, recortes e destaques). Estilo de fala: conversa, frases curtas, falando direto com a pessoa.
-Status: roteiro para a usuária gerar o áudio (31/10/2026). Livros (Guyton, farmacologia) só como referência, sem citar no vídeo.
+Status: aprovado e entregue (31/10/2026). Narração feita pela usuária (OpenArt). Código: mecanismo/src/febre/ (Id `Febre`, capa `FebreCapa`). Livros (Guyton, farmacologia) só como referência, sem citar no vídeo.
 
 ## Texto da fala
 Já teve febre e ficou tremendo de frio, mesmo com o corpo pelando? Parece que não faz sentido. Mas faz. E a explicação está no seu cérebro.

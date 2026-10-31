@@ -96,6 +96,7 @@ import { VideoNasal, DURATION_NASAL } from "./nasal/Video";
 import { VideoAntibiotico, DURATION_ANTIBIOTICO } from "./antibiotico/Video";
 import { CapaNasal } from "./nasal/Capa";
 import { CapaAntibiotico } from "./antibiotico/Capa";
+import { VideoFebre, CapaFebre, DURATION_FEBRE } from "./febre/Video";
 import { VideoAntialergico, DURATION_ANTIALERGICO } from "./antialergico/Video";
 import { CapaAntialergico } from "./antialergico/Capa";
 import { VideoAnlodipino, DURATION_ANLODIPINO } from "./anlodipino/Video";
@@ -510,6 +511,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="NasalCapa"
       component={CapaNasal}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Febre"
+      component={VideoFebre}
+      durationInFrames={DURATION_FEBRE}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="FebreCapa"
+      component={CapaFebre}
       durationInFrames={1}
       fps={FPS}
       width={1080}

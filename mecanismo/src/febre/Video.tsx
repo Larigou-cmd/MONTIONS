@@ -93,7 +93,7 @@ const SFX: [number, string, number][] = [
   [T.bebe, "bip", 0.2],
   [T.manchas, "bip", 0.2],
   [T.siga, "whoosh", 0.25],
-  [T.final, "plim", 0.3],
+  [T.final - 4, "final", 0.5],
 ];
 
 const W = 1080;
@@ -104,7 +104,25 @@ const KIT: Record<string, string> = {
   plim: "sfxkit/sfx-kit-main/sounds/notifications/notification-attention-clear.wav",
   bip: "sfxkit/sfx-kit-main/sounds/interface/click-tap-medium.wav",
   trava: "sfxkit/sfx-kit-main/sounds/impacts/impact-medium-firm.wav",
+  final: "sfxkit/sfx-kit-main/sounds/logo-stings/sting-airy-short.wav",
 };
+// trilha mais presente (a revisão do Earshot mostrou que em 0,07 ela quase não era ouvida):
+// 0,22 nas pausas e 0,09 enquanto a narração fala, com subida e descida suaves
+const FALANDO = (() => {
+  const v = new Float32Array(DURATION_FEBRE + 1);
+  FALA.forEach((p, i) => {
+    const fim = i + 1 < FALA.length && FALA[i + 1].f - p.f < 20 ? FALA[i + 1].f : p.f + 12;
+    for (let fr = Math.max(0, p.f - 4); fr <= Math.min(DURATION_FEBRE, fim + 6); fr++) v[fr] = 1;
+  });
+  const suave = new Float32Array(v.length);
+  let acc = 0;
+  for (let fr = 0; fr < v.length; fr++) {
+    acc += (v[fr] - acc) * (v[fr] > acc ? 0.25 : 0.08);
+    suave[fr] = acc;
+  }
+  return suave;
+})();
+const musica = (fr: number) => 0.22 - 0.13 * (FALANDO[Math.max(0, Math.min(FALANDO.length - 1, Math.round(fr)))] ?? 0);
 
 // ---------- versão de fundo escuro (pedido da usuária): recortes de papel claro sobre um quadro escuro ----------
 const E = {
@@ -1022,7 +1040,7 @@ export const VideoFebre: React.FC = () => {
       <Audio src={staticFile("febre/narracao.mp3")} />
       <Audio
         src={staticFile("febre/musica.wav")}
-        volume={(fr) => 0.07 * (1 - P(fr, DURATION_FEBRE - 60, DURATION_FEBRE))}
+        volume={(fr) => musica(fr) * (1 - P(fr, DURATION_FEBRE - 60, DURATION_FEBRE))}
       />
       {SFX.map(([fr, name, vol], i) => (
         <Sequence key={i} from={fr} durationInFrames={60}>

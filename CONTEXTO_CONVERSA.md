@@ -20,8 +20,11 @@
    - Mandar título, descrição e legenda para o YouTube, o TikTok, o Kwai e o Instagram.
    - Lembrar de marcar a voz de IA: no TikTok, "Conteúdo gerado por IA"; no YouTube, "conteúdo alterado ou sintético: Sim"; no Instagram, "Rótulo de IA"; no Kwai, a opção de IA se aparecer.
 6. **Duração:** no máximo **3 minutos** (limite de Shorts e Reels).
-7. **Música de fundo:** suave, com acordes calmos, em volume baixo (0.07).
+7. **Música de fundo:** suave, com acordes calmos.
    - Gerar com `python3 mecanismo/scripts/musica_calma.py <segundos> <saida.wav>`.
+   - **Desde 31/10/2026:** trilha mais presente, 0.22 nas pausas e 0.09 enquanto a narração fala (abaixa sozinha sob a voz, como em `src/febre/Video.tsx`). Em 0.07 o Earshot mostrou que ela quase não era ouvida.
+   - Terminar com um "sting" curto (SFX Kit, `logo-stings`) em vez de sumir devagar.
+   - Antes de entregar, masterizar em −14 LUFS: `ffmpeg -i in.mp4 -af "loudnorm=I=-14:TP=-1:LRA=11" -c:v copy -c:a aac -b:a 192k out.mp4`, e conferir com `earshot critique`.
 8. **Capa:** sempre fazer uma thumbnail vertical de 1080×1920.
 9. **Modelo do vídeo:** se o roteiro tiver ".exe" ou "ERRO", perguntar qual modelo usar. Prefiro o **Modelo 1**.
 10. **Minha própria narração:** às vezes eu mando uma narração em MP3 gravada por mim no ElevenLabs.

@@ -1,7 +1,7 @@
 # Pode partir o comprimido? (3 tipos que você não deve partir)
 
 Formato: Reels/Shorts vertical (1080×1920), cerca de 50 s a 1 min. Estilo do vídeo de referência que a usuária mandou (WhatsApp Video 2026-10-31 17.36.17): fundo preto com verde-limão neon, visual de interface/tecnologia, lista "01 · 02 · 03" com cadeados que vão sendo destravados um a um ("UNLOCKED 1/3"), cortes rápidos, frases curtas e um chamado no final.
-Status: roteiro para a usuária gerar o áudio (31/10/2026).
+Status: aprovado e entregue (31/10/2026). Narração feita pela usuária (OpenArt). Código: mecanismo/src/partir/ (Id `Partir`, capa `PartirCapa`).
 
 ## Texto da fala
 Pode partir o comprimido? Depende. Tem três tipos que você não deve partir, a não ser que a bula libere. Vamos lá.

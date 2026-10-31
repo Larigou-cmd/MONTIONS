@@ -38,6 +38,7 @@
 - **Modelo 2, PHARMACIST.EXE:** visual de terminal retrô.
 - **Modelos 3 a 5:** personagem farmacêutica, explicadora e personagens/história (ver `prompts/guia_prompts.html`).
 - **Modelo 6, "Origens":** colagem de papel e fotos em P&B (série "A origem dos remédios": captopril, aspirina). Código em `mecanismo/src/origens/`.
+- **Modelo 8, "Lista neon" (desde 31/10/2026):** fundo preto com verde-limão neon, visual de app, lista 01/02/03 com cadeados que destravam um a um, legenda curta no centro e trilha retrô. **Usar sempre que o vídeo for do tipo "3 coisas que..."** (listas). Código de base: `mecanismo/src/partir/Video.tsx` (Id `Partir`).
 - **Modelo 7, "Comercial WhatsApp":** comercial de 45 s, com cliente mandando pedidos no WhatsApp, movimento na batida da música e uma cena por vez, com 4 fotos antes de cada render. O prompt completo, adaptado para "Pergunte à Farmacêutica", está em `roteiros/comercial_pergunte_farmaceutica.md`.
 
 ## Vídeos já feitos (pasta `mecanismo/src/`)

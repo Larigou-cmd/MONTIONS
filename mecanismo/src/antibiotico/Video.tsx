@@ -25,7 +25,7 @@ import { Card, EMOJI, Emoji, Title } from "../aas/ui";
 import falaJson from "./fala.json";
 
 // "Antibiótico: por que não pode parar quando melhora?" — Modelo 1, tudo desenhado em código.
-// Roteiro e fontes: roteiros/antibiotico_parar_quando_melhora.md. Narração feita pela usuária (ElevenLabs no OpenArt); tempos em fala.json (scripts/transcrever.py).
+// Roteiro e fontes: roteiros/antibiotico_parar_quando_melhora.md. Narração da Juliana (ElevenLabs), gerada pela usuária; tempos em fala.json (scripts/transcrever.py).
 const AZUL = "#60a5fa",
   VERM = "#ef4444",
   ROXO = "#a78bfa",

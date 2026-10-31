@@ -1,6 +1,6 @@
 # Antibiótico: por que não pode parar quando melhora? (`mecanismo/out/antibiotico_parar.mp4`, capa `youtube/capas/capa_antibiotico.png`)
 
-Narração feita pela usuária (ElevenLabs, pelo OpenArt). Cerca de 1 min 53 s.
+Narração da Juliana (ElevenLabs), gerada pela usuária. Cerca de 1 min 44 s.
 
 ### YouTube Shorts
 

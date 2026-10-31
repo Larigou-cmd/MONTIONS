@@ -1,7 +1,7 @@
 # Antibiótico: por que não pode parar quando melhora?
 
 Formato: Reels/Shorts vertical (1080×1920), cerca de 1 min 15 s. Estilo conversa: frases curtas, falando direto com a pessoa.
-Status: aprovado e entregue (31/10/2026). Narração feita pela usuária (ElevenLabs no OpenArt). Código: mecanismo/src/antibiotico/ (Id `Antibiotico`, capa `AntibioticoCapa`).
+Status: aprovado e entregue (31/10/2026). Narração da Juliana (ElevenLabs), gerada pela usuária; a versão do OpenArt ficou em public/antibiotico/narracao_openart.mp3. Código: mecanismo/src/antibiotico/ (Id `Antibiotico`, capa `AntibioticoCapa`).
 
 ## Texto da fala
 Melhorou no terceiro dia e já quer parar o antibiótico? Espera. A resposta é mais interessante do que "toma até o fim".

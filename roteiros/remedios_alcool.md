@@ -1,7 +1,7 @@
 # 3 remédios que não combinam com álcool
 
 Formato: Reels/Shorts vertical (1080×1920), cerca de 1 min 10 s. Modelo 8 (lista neon: preto e verde-limão, cadeados 01/02/03). Fala no estilo de conversa.
-Status: roteiro para a usuária gerar o áudio (31/10/2026).
+Status: aprovado e entregue (31/10/2026). Narração feita pela usuária (OpenArt). Código: mecanismo/src/remalcool/ (Id `RemAlcool`, capa `RemAlcoolCapa`).
 
 ## Texto da fala
 Vai beber hoje e está tomando remédio? Para tudo. Tem três tipos que não combinam com álcool. Vamos lá.

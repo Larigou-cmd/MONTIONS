@@ -55,6 +55,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 45 | Por que a gente sente frio quando está com febre? (estilo Vox) | [45_frio_na_febre.md](textos/45_frio_na_febre.md) | [capa_febre.png](capas/capa_febre.png) |
 | 46 | Pode partir o comprimido? (estilo lista neon) | [46_partir_comprimido.md](textos/46_partir_comprimido.md) | [capa_partir.png](capas/capa_partir.png) |
 | 47 | Por que o frio dá vontade de fazer xixi? (estilo Vox escuro) | [47_frio_xixi.md](textos/47_frio_xixi.md) | [capa_xixi.png](capas/capa_xixi.png) |
+| 48 | 3 remédios que não combinam com álcool (Modelo 8) | [48_remedios_alcool.md](textos/48_remedios_alcool.md) | [capa_remedios_alcool.png](capas/capa_remedios_alcool.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

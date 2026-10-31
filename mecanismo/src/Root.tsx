@@ -93,7 +93,9 @@ import { CapaFumaca } from "./fumaca/Capa";
 import { VideoAlcool, DURATION_ALCOOL } from "./alcool/Video";
 import { CapaAlcool } from "./alcool/Capa";
 import { VideoNasal, DURATION_NASAL } from "./nasal/Video";
+import { VideoAntibiotico, DURATION_ANTIBIOTICO } from "./antibiotico/Video";
 import { CapaNasal } from "./nasal/Capa";
+import { CapaAntibiotico } from "./antibiotico/Capa";
 import { VideoAntialergico, DURATION_ANTIALERGICO } from "./antialergico/Video";
 import { CapaAntialergico } from "./antialergico/Capa";
 import { VideoAnlodipino, DURATION_ANLODIPINO } from "./anlodipino/Video";
@@ -514,6 +516,14 @@ export const RemotionRoot: React.FC = () => (
       height={1920}
     />
     <Composition
+      id="AntibioticoCapa"
+      component={CapaAntibiotico}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
       id="CarrosselAlcool"
       component={CarrosselAlcool}
       durationInFrames={ALCOOL.length}
@@ -629,6 +639,14 @@ export const RemotionRoot: React.FC = () => (
       id="Nasal"
       component={VideoNasal}
       durationInFrames={DURATION_NASAL}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Antibiotico"
+      component={VideoAntibiotico}
+      durationInFrames={DURATION_ANTIBIOTICO}
       fps={FPS}
       width={1080}
       height={1920}

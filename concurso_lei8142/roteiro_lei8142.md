@@ -1,8 +1,8 @@
 # Leis do SUS para concursos — Lei 8.142/1990
 ## "Lei 8.142: Conselho, Conferência e o dinheiro do SUS" (Arts. 1º ao 7º)
 
-Formato: vídeo longo horizontal 1920×1080 · duração-alvo ~9 min
-Estrutura: **abertura → mapa da lei → lei seca na tela → explicação simples → pegadinha de banca → questões (pausa e responde) → resumo → "Me siga"**
+Formato: vídeo longo horizontal 1920×1080 · duração-alvo ~6 min 30 s
+Estrutura: **abertura → mapa da lei → lei seca na tela → explicação simples → pegadinha de banca → resumo → "Me siga"**
 Narração pronta para colar: `narracao_lei8142.txt`.
 
 Fontes conferidas em 2026-10-31:
@@ -16,7 +16,7 @@ Fontes conferidas em 2026-10-31:
 ### CENA 1 — Abertura (~20 s)
 **Tela:** "LEI 8.142/1990" · selo "Participação da comunidade e recursos do SUS"
 **Narração:**
-A Lei 8.142 tem só sete artigos, e mesmo assim cai em praticamente todo concurso da saúde. Ela é curta, mas é cheia de números e de palavras que a banca adora trocar. Hoje a gente vai ler a lei seca, entender cada detalhe e, no final, você resolve questões comigo. Pega papel e caneta.
+A Lei 8.142 tem só sete artigos, e mesmo assim cai em praticamente todo concurso da saúde. Ela é curta, mas é cheia de números e de palavras que a banca adora trocar. Hoje a gente vai ler a lei seca e entender cada detalhe. Pega papel e caneta.
 
 ### CENA 2 — Mapa da lei (~40 s)
 **Tela:** linha do tempo: 1988 Constituição → set/1990 Lei 8.080 → dez/1990 Lei 8.142. Depois, a lei dividida em dois blocos: "Participação da comunidade (art. 1º)" e "Recursos (arts. 2º a 4º)".
@@ -123,42 +123,14 @@ Um detalhe para quem quer ir além: a Lei Complementar 141 só permite condicion
 **Narração:**
 Fechando: o artigo quinto autoriza o Ministério da Saúde a estabelecer condições para aplicar a lei, por portaria do ministro. Os artigos sexto e sétimo tratam da vigência e da revogação.
 
-### CENA 11 — Questões: pausa e responde (~2 min 30 s)
-**Tela:** enunciado + "⏸ PAUSE E RESPONDA" com contador de 5 s; depois o gabarito com a palavra-chave destacada.
-*(Questões inéditas no estilo das bancas, feitas com base no texto da lei. Não citar nenhuma banca como autora.)*
-
-**Q1 (Certo ou Errado).** A Conferência de Saúde reúne-se a cada dois anos e é convocada exclusivamente pelo Poder Executivo.
-→ **ERRADO.** Art. 1º, § 1º: a cada quatro anos e, extraordinariamente, também por ela mesma ou pelo Conselho.
-
-**Q2 (Certo ou Errado).** O Conselho de Saúde tem caráter permanente e deliberativo, e suas decisões são homologadas pelo chefe do poder legalmente constituído em cada esfera do governo.
-→ **CERTO.** Art. 1º, § 2º.
-
-**Q3 (Certo ou Errado).** A representação dos usuários nos Conselhos de Saúde e Conferências será paritária em relação a cada um dos demais segmentos.
-→ **ERRADO.** Art. 1º, § 4º: em relação ao conjunto dos demais segmentos.
-
-**Q4 (múltipla escolha).** Dos recursos repassados de forma regular e automática, a Lei 8.142/1990 destina aos Municípios:
-a) no máximo 50%  b) exatamente 60%  c) pelo menos 70%  d) no máximo 70%  e) pelo menos 80%
-→ **C.** Art. 3º, § 2º.
-
-**Q5 (múltipla escolha).** NÃO é requisito do art. 4º da Lei 8.142/1990 para o recebimento dos recursos:
-a) Fundo de Saúde
-b) plano de saúde
-c) relatórios de gestão
-d) contrapartida de recursos no respectivo orçamento
-e) hospital público próprio
-→ **E.** Não está entre os seis requisitos do art. 4º.
-
-**Q6 (Certo ou Errado).** Se um Município não atender aos requisitos do art. 4º, os recursos serão administrados pela União.
-→ **ERRADO.** Art. 4º, parágrafo único: pelo Estado.
-
-### CENA 12 — Resumo em 30 segundos (~35 s)
+### CENA 11 — Resumo em 30 segundos (~35 s)
 **Tela:** cartão com 5 tópicos.
 **Narração:**
 Resumindo. Um: Conferência a cada quatro anos, ela avalia e propõe. Dois: Conselho permanente e deliberativo, com decisões homologadas pelo chefe do poder. Três: usuários paritários em relação ao conjunto dos demais segmentos. Quatro: repasse regular e automático, com pelo menos setenta por cento para os Municípios. Cinco: seis requisitos para receber, e quem não cumpre tem os recursos administrados pelo Estado ou pela União.
 
-### CENA 13 — Me siga (~8 s)
+### CENA 12 — Me siga (~8 s)
 **Tela:** "Me siga para mais dicas sobre leis"
 **Narração:** Me siga para mais dicas sobre leis.
 
-### CENA 14 — Tela final (~5 s)
+### CENA 13 — Tela final (~5 s)
 **Tela:** "Bons estudos!" + "Fonte: Lei nº 8.142/1990; LC nº 141/2012; Resolução CNS nº 453/2012."

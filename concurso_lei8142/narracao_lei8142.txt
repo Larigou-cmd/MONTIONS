@@ -1,0 +1,59 @@
+A Lei 8.142 tem só sete artigos, e mesmo assim cai em praticamente todo concurso da saúde. Ela é curta, mas é cheia de números e de palavras que a banca adora trocar. Hoje a gente vai ler a lei seca, entender cada detalhe e, no final, você resolve questões comigo. Pega papel e caneta.
+
+A Lei 8.142 é de 28 de dezembro de 1990, três meses depois da Lei 8.080. Ela trata de dois assuntos, e a ementa já entrega os dois: a participação da comunidade na gestão do SUS e as transferências de recursos entre os governos. Então pense na lei em dois blocos. O artigo primeiro fala de quem participa. Os artigos segundo, terceiro e quarto falam do dinheiro.
+
+O artigo primeiro cria duas instâncias colegiadas: a Conferência de Saúde e o Conselho de Saúde. E elas existem em cada esfera de governo: na União, nos Estados, no Distrito Federal e nos Municípios. Repare na expressão "sem prejuízo das funções do Poder Legislativo". Quer dizer que a Conferência e o Conselho não tiram nenhuma função do Legislativo. A pegadinha: "as instâncias colegiadas existem apenas na esfera federal". Errado. Existem em cada esfera de governo.
+
+A Conferência se reúne a cada quatro anos. Ela tem dois verbos: avaliar a situação de saúde e propor diretrizes. Guarde bem: a Conferência propõe. Quem convoca é o Poder Executivo. Mas, de forma extraordinária, ela pode ser convocada pela própria Conferência ou pelo Conselho de Saúde. Duas pegadinhas. "A Conferência se reúne a cada dois anos." Errado, é a cada quatro. "A Conferência é convocada somente pelo Poder Executivo." Errado. Extraordinariamente, também por ela mesma ou pelo Conselho.
+
+O Conselho é o oposto da Conferência em duas coisas. Primeiro, ele é permanente, não acontece só de tempos em tempos. Segundo, ele é deliberativo, ou seja, ele decide. Tem quatro segmentos: governo, prestadores de serviço, profissionais de saúde e usuários. Ele atua na formulação de estratégias e no controle da execução da política de saúde, inclusive nos aspectos econômicos e financeiros. E as decisões do Conselho são homologadas pelo chefe do poder legalmente constituído em cada esfera. No município, por exemplo, é o prefeito. A pegadinha: "o Conselho de Saúde tem caráter temporário e consultivo". Errado. É permanente e deliberativo.
+
+O parágrafo terceiro diz que o Conass, dos secretários estaduais, e o Conasems, dos secretários municipais, têm representação no Conselho Nacional de Saúde.
+
+O parágrafo quarto é o mais cobrado da lei. A representação dos usuários é paritária em relação ao conjunto dos demais segmentos. Em outras palavras: de um lado os usuários, do outro todo o resto somado. Por isso os usuários ficam com metade das vagas. Os percentuais não estão na lei. Eles estão na Resolução 453 de 2012, do Conselho Nacional de Saúde: 50% de usuários, 25% de trabalhadores da saúde e 25% de governo e prestadores. Vale também para as Conferências, e não só para os Conselhos.
+
+Por fim, o parágrafo quinto: Conferências e Conselhos têm regimento próprio, aprovado pelo respectivo conselho. Duas pegadinhas. "Paritária em relação a cada um dos demais segmentos." Errado, é em relação ao conjunto. "A Lei 8.142 fixa em 50% a representação dos usuários." Errado. A lei fala em paridade, e o percentual está na resolução.
+
+Agora o dinheiro. O artigo segundo mostra quatro destinos para os recursos do Fundo Nacional de Saúde. Um: custeio e capital do Ministério da Saúde. Dois: investimentos previstos em lei orçamentária. Três: investimentos previstos no Plano Quinquenal do Ministério. Quatro: a cobertura das ações e serviços de saúde de Municípios, Estados e Distrito Federal. Grave o inciso quatro, porque é ele que os próximos artigos usam. Esse dinheiro vai para investimentos na rede de serviços, para a cobertura ambulatorial e hospitalar e para as demais ações de saúde.
+
+O repasse é regular e automático. Não depende de convênio caso a caso. E vem o número campeão: pelo menos setenta por cento vão para os Municípios, e o restante para os Estados. Pelo menos: é um mínimo. Os Municípios também podem formar consórcio e remanejar parcelas desses recursos entre si.
+
+Agora, um cuidado. A lei remete aos critérios do artigo 35 da Lei 8.080, e o parágrafo primeiro manda usar o parágrafo primeiro daquele artigo. Só que esse parágrafo foi revogado pela Lei Complementar 141, de 2012, que hoje trata do rateio no artigo 17. Na prova de lei seca, responda com o texto da 8.142. Se a questão perguntar sobre as regras atuais de rateio, pense na Lei Complementar 141. Duas pegadinhas. "No máximo setenta por cento." Errado, é pelo menos. "Os Municípios deverão formar consórcio." Errado, é poderão.
+
+Para receber o dinheiro, o ente precisa cumprir seis requisitos. Aqui vai um macete: F, C, P e depois R, C, C. Fundo, Conselho e Plano. Depois Relatórios de gestão, Contrapartida e Comissão do plano de carreira, com prazo de dois anos para implantar.
+
+E se não cumprir? O parágrafo único é a segunda pegadinha mais cobrada da lei. O dinheiro não some nem volta para o caixa: quem passa a administrar é outro ente. Se foi o Município, os recursos são administrados pelo Estado. Se foi o Estado ou o Distrito Federal, pela União. Então, "se o Município não cumprir, os recursos serão administrados pela União" está errado. É pelo Estado.
+
+Um detalhe para quem quer ir além: a Lei Complementar 141 só permite condicionar a entrega dos repasses regulares e automáticos ao Fundo, ao Conselho e ao Plano. É o trio F, C, P do macete. Se a questão pedir a letra da Lei 8.142, continue com os seis.
+
+Fechando: o artigo quinto autoriza o Ministério da Saúde a estabelecer condições para aplicar a lei, por portaria do ministro. Os artigos sexto e sétimo tratam da vigência e da revogação.
+
+Agora é com você. Pause e responda.
+
+Questão um. Certo ou errado: a Conferência de Saúde reúne-se a cada dois anos e é convocada exclusivamente pelo Poder Executivo.
+
+Errado. É a cada quatro anos e, extraordinariamente, também por ela mesma ou pelo Conselho.
+
+Questão dois. Certo ou errado: o Conselho de Saúde tem caráter permanente e deliberativo, e suas decisões são homologadas pelo chefe do poder legalmente constituído em cada esfera do governo.
+
+Certo. É o texto do parágrafo segundo do artigo primeiro.
+
+Questão três. Certo ou errado: a representação dos usuários nos Conselhos de Saúde e Conferências será paritária em relação a cada um dos demais segmentos.
+
+Errado. É em relação ao conjunto dos demais segmentos.
+
+Questão quatro. Dos recursos repassados de forma regular e automática, a Lei 8.142 destina aos Municípios: A, no máximo 50%. B, exatamente 60%. C, pelo menos 70%. D, no máximo 70%. E, pelo menos 80%.
+
+Letra C. Pelo menos setenta por cento.
+
+Questão cinco. Não é requisito do artigo quarto para o recebimento dos recursos: A, Fundo de Saúde. B, plano de saúde. C, relatórios de gestão. D, contrapartida de recursos no respectivo orçamento. E, hospital público próprio.
+
+Letra E. Hospital público próprio não está entre os seis requisitos.
+
+Questão seis. Certo ou errado: se um Município não atender aos requisitos do artigo quarto, os recursos serão administrados pela União.
+
+Errado. Serão administrados pelo Estado.
+
+Resumindo. Um: Conferência a cada quatro anos, ela avalia e propõe. Dois: Conselho permanente e deliberativo, com decisões homologadas pelo chefe do poder. Três: usuários paritários em relação ao conjunto dos demais segmentos. Quatro: repasse regular e automático, com pelo menos setenta por cento para os Municípios. Cinco: seis requisitos para receber, e quem não cumpre tem os recursos administrados pelo Estado ou pela União.
+
+Me siga para mais dicas sobre leis.

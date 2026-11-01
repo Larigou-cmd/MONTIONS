@@ -81,6 +81,29 @@ Um gancho falha quando é longo, confuso, vago, batido, sem público definido, d
 - [ ] Tem até 140 palavras (ou há um motivo para passar)?
 - [ ] Fatos conferidos em fontes, sem marcas, com o "Me siga" e a tela final?
 
+## Formatos de vídeo tirados dos livros
+
+| Formato | De onde vem | Como fica no vídeo | Exemplo |
+|---|---|---|---|
+| O mistério | Whydunit (Snyder) | Uma pergunta do corpo; a resposta vem no fim | Por que o café dá vontade de ir ao banheiro? |
+| O perigo dentro de casa | Monster in the House (Snyder) | Algo comum esconde um risco | O que você guarda errado na farmacinha |
+| A viagem | Golden Fleece (Snyder) | Acompanhar algo de um ponto a outro, com etapas | O caminho do comprimido da boca até a dor |
+| A dupla | Buddy Love (Snyder) | Dois que mudam um ao outro, para o bem ou para o mal | Remédio e suco de toranja |
+| O acaso que venceu | Fool Triumphant (Snyder) | Quem ninguém levava a sério dá certo | A penicilina que nasceu por acidente |
+| Por dentro do sistema | Institutionalized (Snyder) | Mostrar as regras de um grupo por dentro | O que a farmacêutica olha na sua receita |
+| A fase difícil | Rites of Passage (Snyder) | Uma fase da vida que todo mundo atravessa | Remédios na gravidez: por que perguntar antes |
+| Mito derrubado | Quebra de crença (Hook Point) | Crença comum, virada, verdade | Vitamina C previne gripe? |
+| "Sabe quando...?" | "You know how...?" (Hook Point) | Frases com que a pessoa concorda, até a surpresa | Sabe quando você esquece a dose? |
+| Do balcão | Impact Arcs (Hook Point) | Pergunta de "sim", "eu já vi isso", descoberta, chamada | Só com caso real, sem dados de paciente |
+
+## As 4 redes
+Os livros não falam de TikTok, Kwai nem Shorts. O Hook Point fala de Instagram, Facebook e YouTube, e traz uma dica útil: uma caixa de texto fixa no topo ou no pé do vídeo, com o gancho (a "meme card"), ajuda quem está rolando a tela a entender o assunto.
+
+Plano, a validar com os números:
+- O mesmo vídeo vai para as 4 redes.
+- Em cada uma mudam a legenda e, se possível, o gancho, para comparar qual segura mais.
+- O gancho fica escrito na tela durante os primeiros segundos, para quem assiste sem som.
+
 ## Como vamos trabalhar
 1. Junto com cada roteiro, envio **3 opções de gancho** para você escolher.
 2. Depois de postar, compare a retenção dos 3 primeiros segundos e o tempo médio assistido.

@@ -1,0 +1,28 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="quem" data-start="0" data-duration="13.44" data-width="1080" data-height="1920">
+<div id="q0" class="a tit" style="top:210px;font-size:92px">QUEM PERDE ESSA CORRIDA?</div>
+<div id="q1" class="a card" style="top:450px"><span class="n" style="color:#ffc83d">1</span>desidratado</div>
+<div id="q2" class="a card" style="top:592px"><span class="n" style="color:#ffc83d">2</span>quem bebeu</div>
+<div id="q3" class="a card" style="top:734px"><span class="n" style="color:#ffc83d">3</span>mais idade</div>
+<div id="q4" class="a card" style="top:876px"><span class="n" style="color:#ffc83d">4</span>alguns remédios</div>
+<div id="q5" class="a sub" style="top:1020px;font-size:46px;color:#ffc83d">como diuréticos e outros remédios de pressão</div>
+<div id="q6" class="a stamp" style="left:170px;top:1170px;font-size:42px;color:#ff3b47;border-color:#ff3b47">NÃO PARE POR CONTA PRÓPRIA</div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#q0",{opacity:0,y:34},{opacity:1,y:0,duration:.34,ease:"power3.out"},0.05);
+tl.fromTo("#q1",{opacity:0,y:34},{opacity:1,y:0,duration:.34,ease:"power3.out"},2.92);
+tl.fromTo("#q2",{opacity:0,y:34},{opacity:1,y:0,duration:.34,ease:"power3.out"},4.25);
+tl.fromTo("#q3",{opacity:0,y:34},{opacity:1,y:0,duration:.34,ease:"power3.out"},5.69);
+tl.fromTo("#q4",{opacity:0,y:34},{opacity:1,y:0,duration:.34,ease:"power3.out"},6.65);
+tl.fromTo("#q5",{opacity:0,y:34},{opacity:1,y:0,duration:.34,ease:"power3.out"},8.14);
+tl.fromTo("#q6",{opacity:0,scale:1.9,rotation:-4},{opacity:1,scale:1,rotation:-4,duration:.24,ease:"power4.in"},11.50);
+
+window.__timelines["quem"] = tl;
+</script>
+</template>
+</body></html>

@@ -1,0 +1,13 @@
+@font-face{font-family:"Archivo Black";src:url("fonts/archivo-black.woff2");font-weight:400}
+
+.a{position:absolute}
+.tit{font-family:"Archivo Black",sans-serif;line-height:1.04;color:#f4f7ff;text-align:center;left:70px;width:940px;letter-spacing:-.01em}
+.sub{font-family:Inter,sans-serif;font-weight:700;line-height:1.22;color:#f4f7ff;text-align:center;left:90px;width:900px}
+.stamp{font-family:"Archivo Black",sans-serif;text-align:center;border:7px solid;border-radius:12px;padding:10px 24px;background:rgba(0,0,0,.45);white-space:nowrap}
+.card{box-sizing:border-box;left:90px;width:900px;height:124px;border-radius:20px;background:#121b30;border:3px solid #2c3c60;display:flex;align-items:center;padding:0 36px;font:700 54px Inter,sans-serif;color:#f4f7ff;gap:28px}
+.n{font-family:"Archivo Black",sans-serif;font-size:50px}
+.bar{left:140px;width:800px;height:44px;border-radius:22px;background:#1a2540;overflow:hidden}
+.fill{width:100%;height:100%;transform-origin:0 50%;background:#33d6ff;border-radius:22px}
+.lab{font:700 34px Inter,sans-serif;letter-spacing:.1em;color:#9fb0d0;left:140px}
+.pt{width:20px;height:20px;border-radius:50%;background:#ff3b47}
+.anel{border:6px solid #ff3b47;border-radius:50%}

@@ -58,6 +58,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 48 | 3 remédios que não combinam com álcool (Modelo 8) | [48_remedios_alcool.md](textos/48_remedios_alcool.md) | [capa_remedios_alcool.png](capas/capa_remedios_alcool.png) |
 | 50 | Vitamina C previne gripe? (Modelo 1) | [50_vitamina_c_gripe.md](textos/50_vitamina_c_gripe.md) | [capa_vitamina_c_gripe.png](capas/capa_vitamina_c_gripe.png) |
 | 51 | Toma omeprazol todo dia há anos? (Modelo 1) | [51_omeprazol_todo_dia.md](textos/51_omeprazol_todo_dia.md) | [capa_omeprazol_todo_dia.png](capas/capa_omeprazol_todo_dia.png) |
+| 52 | Por que você levanta rápido e a vista escurece? (HyperFrames) | [52_vista_escurece.md](textos/52_vista_escurece.md) | [capa_vista_escurece.png](capas/capa_vista_escurece.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="alarme" data-start="0" data-duration="2.4" data-width="1080" data-height="1920">
+<div id="al" class="a" style="inset:0;background:#ff3b47;opacity:0"></div>
+<div id="a1" class="a anel" style="left:290px;top:560px;width:500px;height:500px"></div>
+<div id="a2" class="a anel" style="left:290px;top:560px;width:500px;height:500px"></div>
+<div id="a3" class="a tit" style="top:690px;font-size:150px">ALARME</div>
+<div id="a4" class="a sub" style="top:440px;font-size:60px">só que o seu corpo tem um</div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#a4",{opacity:0,y:34},{opacity:1,y:0,duration:.34,ease:"power3.out"},0.05);
+tl.fromTo("#a3",{opacity:0,scale:1.9,rotation:0},{opacity:1,scale:1,rotation:0,duration:.24,ease:"power4.in"},1.30);
+tl.fromTo("#al",{opacity:0},{opacity:.5,duration:.14,repeat:5,yoyo:true},.1);
+tl.fromTo("#a1",{scale:.5,opacity:1},{scale:1.6,opacity:0,duration:1,repeat:1},.1);
+tl.fromTo("#a2",{scale:.5,opacity:1},{scale:1.6,opacity:0,duration:1},.6);
+
+window.__timelines["alarme"] = tl;
+</script>
+</template>
+</body></html>

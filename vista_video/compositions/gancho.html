@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="gancho" data-start="0" data-duration="5.53" data-width="1080" data-height="1920">
+<div id="g1" class="a tit" style="top:270px;font-size:124px">LEVANTOU RÁPIDO?</div>
+<div id="g2" class="a tit" style="top:560px;font-size:130px;color:#ff3b47">A VISTA ESCURECE?</div>
+<div id="gv" class="a" style="inset:0;opacity:0;background:radial-gradient(circle at 50% 42%,rgba(0,0,0,0) 8%,rgba(0,0,0,.96) 46%,#000 70%)"></div>
+<div id="g3" class="a sub" style="top:980px;font-size:60px">seu corpo acabou de perder</div>
+<div id="g4" class="a tit" style="top:1070px;font-size:112px;color:#ffc83d">UMA CORRIDA</div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#g2",{opacity:0,y:34},{opacity:1,y:0,duration:.34,ease:"power3.out"},1.47);
+tl.fromTo("#gv",{opacity:0},{opacity:.97,duration:.7,ease:"power2.in"},1.70);
+tl.to("#gv",{opacity:.35,duration:.4},2.73);
+tl.fromTo("#g3",{opacity:0,y:34},{opacity:1,y:0,duration:.34,ease:"power3.out"},2.83);
+tl.fromTo("#g4",{opacity:0,scale:1.9,rotation:-4},{opacity:1,scale:1,rotation:-4,duration:.24,ease:"power4.in"},4.60);
+
+window.__timelines["gancho"] = tl;
+</script>
+</template>
+</body></html>

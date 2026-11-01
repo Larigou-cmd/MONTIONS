@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="chamada" data-start="0" data-duration="12.56" data-width="1080" data-height="1920">
+<div id="c1" class="a tit" style="top:230px;font-size:128px;color:#5dffa0">LEVANTE DEVAGAR</div>
+<div id="c2" class="a card" style="top:600px;height:170px;font-size:52px">Acontece sempre? Avise seu médico</div>
+<div id="c3" class="a card" style="top:800px;height:170px;font-size:52px;border-color:#ff3b47">Desmaiou? Procure atendimento</div>
+<div id="c4" class="a sub" style="top:1060px;font-size:56px;color:#ffc83d">Manda para quem vive levantando tonto</div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#c1",{opacity:0,scale:1.9,rotation:0},{opacity:1,scale:1,rotation:0,duration:.24,ease:"power4.in"},0.73);
+tl.fromTo("#c2",{opacity:0,y:34},{opacity:1,y:0,duration:.34,ease:"power3.out"},2.56);
+tl.fromTo("#c3",{opacity:0,y:34},{opacity:1,y:0,duration:.34,ease:"power3.out"},5.50);
+tl.fromTo("#c4",{opacity:0,y:34},{opacity:1,y:0,duration:.34,ease:"power3.out"},9.86);
+
+window.__timelines["chamada"] = tl;
+</script>
+</template>
+</body></html>

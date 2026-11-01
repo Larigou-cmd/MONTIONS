@@ -60,7 +60,7 @@ Base: os dois guias de Fernando Alvaric (estrutura de 8 etapas para vídeo curto
 | 37–48 s | Solução | A melhor parte; responde ao gancho e fecha as pontas |
 | 48–60 s | Chamada | Pedido ligado ao tema + "Me siga..." + tela final |
 
-**Medida:** a narração atual fala cerca de 2,3 palavras por segundo. Para 60 segundos, são cerca de **140 palavras**, contando a chamada final. "Vitamina C" teve cerca de 210.
+**Medida:** a narração atual fala cerca de 2,3 palavras por segundo. Para 60 segundos, são cerca de **140 palavras**, contando a chamada final. Isso é um teste, e não regra: nos dados do canal, a duração não explicou o resultado.
 
 **Valor cedo, melhor parte no fim.** O Hook Point manda entregar cedo o que é mais interessante; Alvaric manda guardar a resposta para o fim. As duas coisas se combinam: mostre logo uma primeira parte útil e guarde a melhor para a solução.
 
@@ -104,7 +104,7 @@ Escrever solto primeiro e só depois passar esta lista (Alvaric: escrever e revi
 **Regras do canal**
 - [ ] O gancho é verdadeiro e o vídeo cumpre a promessa?
 - [ ] Uma ideia só, com a frase final clara?
-- [ ] Até 140 palavras, ou há motivo para passar?
+- [ ] A duração se justifica? Corte o que não prende, sem meta fixa.
 - [ ] Fatos conferidos em fontes, sem marcas, com o "Me siga" e a tela final?
 
 ## Formatos de vídeo tirados dos livros
@@ -129,6 +129,15 @@ Plano, a validar com os números:
 - O mesmo vídeo vai para as 4 redes.
 - Em cada uma mudam a legenda e, se possível, o gancho, para comparar qual segura mais.
 - O gancho fica escrito na tela durante os primeiros segundos, para quem assiste sem som.
+
+## O que os dados do canal mostram (YouTube, 1º/11/2026)
+Amostra pequena, com 16 Shorts em 3 semanas. Serve para orientar testes, e não como regra.
+
+- Prendem mais: sintoma ou hábito de quem assiste (tosse, jejum, sinvastatina), com 67% a 83% do vídeo assistido, e histórias de origem (aspirina, captopril), com 70% a 86%.
+- Prendem menos: curiosidades do corpo (cerveja, frio), com 38% a 39%.
+- Duração não explicou o resultado: vídeos de 3 min seguraram 69%, e vários de 1:12 ficaram abaixo de 45%.
+- A perda aparece cedo: os melhores têm 74% a 99% da audiência aos 30 s; cerveja e losartana têm cerca de 30%.
+- Visualização engana: a losartana teve 1.194 visualizações, mas só 9,6% continuaram assistindo.
 
 ## Como vamos trabalhar
 1. Junto com cada roteiro, envio **3 opções de gancho** para você escolher.

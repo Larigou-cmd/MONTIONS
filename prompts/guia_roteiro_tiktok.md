@@ -1,8 +1,8 @@
 # Guia de roteiro para TikTok e Reels
 
-Resumo próprio, feito a partir de seis livros: Hook Point (Brendan Kane), Manual do Roteiro (Syd Field), Story (Robert McKee), Save the Cat (Blake Snyder), Anatomia da História (John Truby) e O Guia Completo do Storytelling (Terenzzo). Os livros servem só de referência e nunca são citados nos vídeos.
+Resumo próprio, feito a partir de seis livros: Hook Point (Brendan Kane), Manual do Roteiro (Syd Field), Story (Robert McKee), Save the Cat (Blake Snyder), Anatomia da História (John Truby) e O Guia Completo do Storytelling (Terenzzo), e de dois guias de Fernando Alvaric sobre vídeo curto. Os materiais servem só de referência e nunca são citados nos vídeos.
 
-As regras de vídeo dos livros são sobre Facebook, Instagram e YouTube (2020) ou sobre cinema. A adaptação para TikTok é minha, e deve ser ajustada com os números reais dos vídeos.
+As regras de vídeo dos livros são sobre Facebook, Instagram e YouTube (2020) ou sobre cinema. Os guias de Alvaric falam de Reels e TikTok, mas os tempos são a prática dele, sem dados. Tudo deve ser ajustado com os números reais dos vídeos.
 
 ## A ideia central
 Filme tem dez minutos para prender o público. TikTok tem três segundos. Os princípios são os mesmos, só que comprimidos: quem assiste precisa saber logo do que se trata, por que importa e que algo vai mudar até o fim.
@@ -47,18 +47,30 @@ Um gancho falha quando é longo, confuso, vago, batido, sem público definido, d
 **Regra de honestidade:** o gancho tem que ser verdadeiro e cumprido pelo vídeo. Sem substância, vira isca, e a pessoa perde a confiança. Em saúde, isso pesa ainda mais: nada de assustar além do que as fontes dizem.
 
 ## Estrutura para 45 a 60 segundos
+Base: os dois guias de Fernando Alvaric (estrutura de 8 etapas para vídeo curto). Ele usa 40 segundos; aqui o tempo foi esticado, porque a chamada fixa e a tela final ocupam mais espaço. A ordem não muda.
 
-| Tempo | Bloco | Função |
+| Tempo | Etapa | Função |
 |---|---|---|
-| 0–3 s | Gancho | Promessa e curiosidade |
-| 3–10 s | Por que importa | "Isso afeta você porque..."; já entrega algo útil |
-| 10–40 s | 2 ou 3 viradas | Cada uma: "parece X, mas é Y" |
-| 40–50 s | Revelação | A resposta completa, com uma imagem que fica na cabeça |
-| 50–60 s | Guarda essa + me siga | Frase final e chamada fixa |
+| 0–3 s | Gancho | Fala, texto na tela, imagem e som juntos |
+| 3–10 s | Introdução | Abre a curiosidade, com o mínimo de contexto |
+| 10–20 s | Bloco 1 | Primeira parte útil, sem a resposta principal |
+| 20–22 s | Ponta solta | Frase curta que promete algo que ainda vem |
+| 22–35 s | Bloco 2 | Informação nova, nunca a mesma com outras palavras |
+| 35–37 s | Ponta solta | Puxa para a solução |
+| 37–48 s | Solução | A melhor parte; responde ao gancho e fecha as pontas |
+| 48–60 s | Chamada | Pedido ligado ao tema + "Me siga..." + tela final |
 
 **Medida:** a narração atual fala cerca de 2,3 palavras por segundo. Para 60 segundos, são cerca de **140 palavras**, contando a chamada final. "Vitamina C" teve cerca de 210.
 
-**Dê parte da resposta cedo (Hook Point).** Em vídeo curto, a linha reta de filme não segura ninguém: entregue logo o ponto mais interessante e use o resto para explicar por quê.
+**Valor cedo, melhor parte no fim.** O Hook Point manda entregar cedo o que é mais interessante; Alvaric manda guardar a resposta para o fim. As duas coisas se combinam: mostre logo uma primeira parte útil e guarde a melhor para a solução.
+
+**Pontas soltas:** uma a cada 8 ou 10 segundos, antes da atenção cair. Toda ponta aberta precisa ser fechada, e precisa ser verdadeira. Exemplos para farmácia:
+- "E isso nem é o mais perigoso."
+- "Só que o seu corpo faz uma coisa aqui."
+- "É nesse ponto que quase todo mundo erra a dose."
+- "Lembra do que eu falei do fígado?"
+
+**Chamada:** antes do "Me siga", vem um pedido ligado ao vídeo, com um motivo real. Salvar: "Salva para quando esquecer a dose." Compartilhar: "Manda para quem toma esse remédio." Comentar: uma pergunta de resposta curta. O texto fixo do "Me siga" e a tela final continuam iguais.
 
 ## Como manter a pessoa até o fim
 
@@ -70,15 +82,29 @@ Um gancho falha quando é longo, confuso, vago, batido, sem público definido, d
 - **Foque no efeito (Hook Point).** A reação buscada é "nossa, não sabia", "isso sou eu" ou "que satisfatório".
 - **O que faz compartilhar (Hook Point):** aventura, humor, emoção, inspiração e surpresa. Para este canal: surpresa e identificação.
 
-## Lista final antes de enviar o roteiro
-- [ ] A frase final existe e está clara?
-- [ ] É uma ideia só?
-- [ ] O gancho funciona em 3 segundos, sem contexto?
+## Revisão antes de enviar o roteiro
+Escrever solto primeiro e só depois passar esta lista (Alvaric: escrever e revisar ao mesmo tempo trava a escrita).
+
+**Ficar**
+- [ ] Qual crença do público o vídeo contraria? Se for uma afirmação forte, a prova vem rápido?
+- [ ] O que é prometido antes de ser entregue, e onde? Toda ponta foi fechada?
+- [ ] Qual emoção o vídeo busca? Surpresa ou alívio, sem criar medo além do que as fontes dizem.
+
+**Entender**
+- [ ] Alguém de fora da farmácia entende? Termo técnico vem com tradução.
+- [ ] O ponto principal aparece duas vezes: com o nome certo e com uma comparação do dia a dia?
+- [ ] Tem três frases seguidas do mesmo tamanho? Lido em voz alta, alguma pede respiração no meio?
+
+**Levar**
+- [ ] Se cortar a primeira frase, o vídeo continua funcionando? Então ela era aquecimento.
+- [ ] Em quantos segundos aparece o primeiro sinal de valor?
+- [ ] Qual frase dá para cortar sem perder nada?
+- [ ] O que a pessoa pode fazer hoje depois de assistir? O passo não pode ser mudar dose ou parar remédio por conta própria.
+
+**Regras do canal**
 - [ ] O gancho é verdadeiro e o vídeo cumpre a promessa?
-- [ ] A pessoa sabe por que isso importa para ela em até 10 segundos?
-- [ ] Cada bloco tem uma virada?
-- [ ] Há algo útil logo no começo?
-- [ ] Tem até 140 palavras (ou há um motivo para passar)?
+- [ ] Uma ideia só, com a frase final clara?
+- [ ] Até 140 palavras, ou há motivo para passar?
 - [ ] Fatos conferidos em fontes, sem marcas, com o "Me siga" e a tela final?
 
 ## Formatos de vídeo tirados dos livros
@@ -97,7 +123,7 @@ Um gancho falha quando é longo, confuso, vago, batido, sem público definido, d
 | Do balcão | Impact Arcs (Hook Point) | Pergunta de "sim", "eu já vi isso", descoberta, chamada | Só com caso real, sem dados de paciente |
 
 ## As 4 redes
-Os livros não falam de TikTok, Kwai nem Shorts. O Hook Point fala de Instagram, Facebook e YouTube, e traz uma dica útil: uma caixa de texto fixa no topo ou no pé do vídeo, com o gancho (a "meme card"), ajuda quem está rolando a tela a entender o assunto.
+Os livros não falam de TikTok, Kwai nem Shorts, e os guias de Alvaric tratam só de Reels e TikTok. O Hook Point fala de Instagram, Facebook e YouTube, e traz uma dica útil: uma caixa de texto fixa no topo ou no pé do vídeo, com o gancho (a "meme card"), ajuda quem está rolando a tela a entender o assunto.
 
 Plano, a validar com os números:
 - O mesmo vídeo vai para as 4 redes.

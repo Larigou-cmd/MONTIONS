@@ -99,6 +99,7 @@ import { CapaAntibiotico } from "./antibiotico/Capa";
 import { VideoFebre, CapaFebre, DURATION_FEBRE } from "./febre/Video";
 import { VideoPartir, CapaPartir, DURATION_PARTIR } from "./partir/Video";
 import { VideoXixi, CapaXixi, DURATION_XIXI } from "./xixi/Video";
+import { VideoVitaminaC, CapaVitaminaC, DURATION_VITAMINAC } from "./vitaminac/Video";
 import { VideoRemAlcool, CapaRemAlcool, DURATION_REMALCOOL } from "./remalcool/Video";
 import { VideoAntialergico, DURATION_ANTIALERGICO } from "./antialergico/Video";
 import { CapaAntialergico } from "./antialergico/Capa";
@@ -530,6 +531,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="RemAlcoolCapa"
       component={CapaRemAlcool}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="VitaminaC"
+      component={VideoVitaminaC}
+      durationInFrames={DURATION_VITAMINAC}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="VitaminaCCapa"
+      component={CapaVitaminaC}
       durationInFrames={1}
       fps={FPS}
       width={1080}

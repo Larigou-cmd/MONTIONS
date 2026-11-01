@@ -56,6 +56,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 46 | Pode partir o comprimido? (estilo lista neon) | [46_partir_comprimido.md](textos/46_partir_comprimido.md) | [capa_partir.png](capas/capa_partir.png) |
 | 47 | Por que o frio dá vontade de fazer xixi? (estilo Vox escuro) | [47_frio_xixi.md](textos/47_frio_xixi.md) | [capa_xixi.png](capas/capa_xixi.png) |
 | 48 | 3 remédios que não combinam com álcool (Modelo 8) | [48_remedios_alcool.md](textos/48_remedios_alcool.md) | [capa_remedios_alcool.png](capas/capa_remedios_alcool.png) |
+| 50 | Vitamina C previne gripe? (Modelo 1) | [50_vitamina_c_gripe.md](textos/50_vitamina_c_gripe.md) | [capa_vitamina_c_gripe.png](capas/capa_vitamina_c_gripe.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

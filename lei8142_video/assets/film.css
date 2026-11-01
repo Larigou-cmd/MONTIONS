@@ -1,0 +1,29 @@
+* { box-sizing: border-box; }
+.camera, .palco { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.txt, .caixa, .lei, .f-falsa, .carimbo, .seta, .barra { position: absolute; }
+.f-corpo { font-family: Inter, sans-serif; font-weight: 400; line-height: 1.25; }
+.f-cheio { font-family: Inter, sans-serif; font-weight: 700; line-height: 1.2; }
+.f-tit { font-family: "Archivo Black", sans-serif; font-weight: 400; line-height: 1.08; letter-spacing: -.01em; }
+.f-lei { font-family: "EB Garamond", serif; font-weight: 400; line-height: 1.32; color: #1b1a17; }
+.f-falsa { font-family: "EB Garamond", serif; font-style: italic; line-height: 1.22; color: #1b1a17; }
+.lei { padding-left: 34px; border-left: 8px solid #1b1a17; }
+.rot { font: 700 28px Inter, sans-serif; letter-spacing: .14em; color: #6b6557; margin-bottom: 12px; }
+.vao { height: 16px; }
+.pal { display: inline; }
+.grifo { background-image: linear-gradient(#ffd92e, #ffd92e); background-repeat: no-repeat; background-size: 0% 100%; padding: 0 4px; margin: 0 -4px; -webkit-box-decoration-break: slice; box-decoration-break: slice; }
+.gv { background-image: linear-gradient(#f6b8ad, #f6b8ad); }
+.risco { background-image: linear-gradient(#c62f1e, #c62f1e); background-repeat: no-repeat; background-position: 0 56%; background-size: 0% 6px; box-decoration-break: slice; -webkit-box-decoration-break: slice; }
+.caixa { border: 3px solid #1b1a17; box-shadow: 8px 8px 0 rgba(27, 26, 23, .16); color: #1b1a17; font-family: Inter, sans-serif; overflow: hidden; }
+.ct { font: 900 58px/1.1 Inter, sans-serif; }
+.cs { font: 700 34px/1.2 Inter, sans-serif; margin-top: 8px; }
+.rom { font-family: "Archivo Black", sans-serif; font-size: 52px; min-width: 96px; }
+.m { background: #ffd92e; padding: 0 8px; }
+.selo { background: #c62f1e; color: #fff; padding: 8px 18px; letter-spacing: .05em; text-transform: uppercase; }
+.carimbo { padding: .16em .42em; border: .1em solid; border-radius: 12px; font-family: "Archivo Black", sans-serif; letter-spacing: .04em; white-space: nowrap; background: rgba(243, 236, 221, .88); }
+.seta { height: 6px; transform-origin: 0 50%; }
+.seta::after { content: ""; position: absolute; right: -2px; top: -11px; border-left: 22px solid currentColor; border-top: 14px solid transparent; border-bottom: 14px solid transparent; }
+.barra { display: grid; place-items: center; text-align: center; transform-origin: 0 50%; padding: 0 16px; }
+.hud-parte { position: absolute; left: 120px; top: 44px; font: 700 28px Inter, sans-serif; letter-spacing: .06em; color: #6b6557; }
+#hud-trilho, #hud-barra { position: absolute; left: 0; bottom: 0; width: 1920px; height: 8px; }
+#hud-trilho { background: rgba(27, 26, 23, .1); }
+#hud-barra { background: #1b1a17; transform-origin: 0 50%; }

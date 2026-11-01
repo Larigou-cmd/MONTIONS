@@ -1,0 +1,37 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="peg2" data-start="0" data-duration="16.3" data-width="1920" data-height="1080">
+<div id="peg2-camera" class="camera"><div id="peg2-palco" class="palco">
+<div id="peg2-e1" class="txt f-tit" style="left:120px;top:128px;width:1680px;font-size:30px;color:#1b1a17;text-align:left;"><span class="selo">Pegadinha de banca</span></div>
+<div id="peg2-e2" class="f-falsa" style="left:120px;top:200px;width:1270px;font-size:56px;"><span id="peg2-e2-r" class="risco">“A Conferência se reúne a cada dois anos.”</span></div>
+<div id="peg2-e3" class="carimbo" style="left:1440px;top:130px;font-size:62px;color:#c62f1e;border-color:#c62f1e;">ERRADO</div>
+<div id="peg2-e4" class="txt f-cheio" style="left:120px;top:340px;width:1680px;font-size:50px;color:#0e6b52;text-align:left;">✓ A cada quatro anos.</div>
+<div id="peg2-e5" class="txt f-tit" style="left:120px;top:518px;width:1680px;font-size:30px;color:#1b1a17;text-align:left;"><span class="selo">Pegadinha de banca</span></div>
+<div id="peg2-e6" class="f-falsa" style="left:120px;top:590px;width:1270px;font-size:56px;"><span id="peg2-e6-r" class="risco">“A Conferência é convocada somente pelo Poder Executivo.”</span></div>
+<div id="peg2-e7" class="carimbo" style="left:1440px;top:520px;font-size:62px;color:#c62f1e;border-color:#c62f1e;">ERRADO</div>
+<div id="peg2-e8" class="txt f-cheio" style="left:120px;top:810px;width:1680px;font-size:50px;color:#0e6b52;text-align:left;">✓ Extraordinariamente, também por ela mesma ou pelo Conselho.</div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#peg2-camera",{scale:1},{scale:1.022,duration:16.3,ease:"none"},0);
+tl.fromTo("#peg2-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#peg2-e1",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},1.55);
+tl.fromTo("#peg2-e2",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},1.6);
+tl.fromTo("#peg2-e2-r",{backgroundSize:"0% 6px"},{backgroundSize:"100% 6px",duration:.35,ease:"power2.inOut"},4.6);
+tl.fromTo("#peg2-e3",{opacity:0,scale:1.9,rotation:-7},{opacity:1,scale:1,rotation:-7,duration:.16,ease:"power4.in"},4.4799999999999995);
+tl.fromTo("#peg2-palco",{x:0,y:0},{immediateRender:false,keyframes:[{x:7,y:-4,duration:.04},{x:-5,y:3,duration:.05},{x:3,y:-1,duration:.05},{x:0,y:0,duration:.06}]},4.64);
+tl.fromTo("#peg2-e4",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},5.5);
+tl.fromTo("#peg2-e5",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},6.65);
+tl.fromTo("#peg2-e6",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},6.7);
+tl.fromTo("#peg2-e6-r",{backgroundSize:"0% 6px"},{backgroundSize:"100% 6px",duration:.35,ease:"power2.inOut"},10.9);
+tl.fromTo("#peg2-e7",{opacity:0,scale:1.9,rotation:-7},{opacity:1,scale:1,rotation:-7,duration:.16,ease:"power4.in"},10.780000000000001);
+tl.fromTo("#peg2-palco",{x:0,y:0},{immediateRender:false,keyframes:[{x:7,y:-4,duration:.04},{x:-5,y:3,duration:.05},{x:3,y:-1,duration:.05},{x:0,y:0,duration:.06}]},10.94);
+tl.fromTo("#peg2-e8",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},12.2);
+window.__timelines["peg2"] = tl;
+</script>
+</template>
+</body></html>

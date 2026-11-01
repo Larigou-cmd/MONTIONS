@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="conselho2" data-start="0" data-duration="18.9" data-width="1920" data-height="1080">
+<div id="conselho2-camera" class="camera"><div id="conselho2-palco" class="palco">
+<div id="conselho2-e1" class="lei" style="left:120px;top:150px;width:1680px;"><div class="rot">LEI SECA</div><div class="f-lei" style="font-size:46px"><span class="conselho2-e1-w pal">§</span> <span class="conselho2-e1-w pal">2º</span> <span class="conselho2-e1-w pal">O</span> <span class="conselho2-e1-w pal">Conselho</span> <span class="conselho2-e1-w pal">de</span> <span class="conselho2-e1-w pal">Saúde,</span> <span class="conselho2-e1-w pal">em</span> <span class="conselho2-e1-w pal">caráter</span> <span class="conselho2-e1-w pal">permanente</span> <span class="conselho2-e1-w pal">e</span> <span class="conselho2-e1-w pal">deliberativo,</span> <span class="conselho2-e1-w pal">[...]</span> <span class="conselho2-e1-w pal">atua</span> <span class="conselho2-e1-w pal">na</span> <span id="conselho2-e1-g1" class="grifo"><span class="conselho2-e1-w pal">formulação</span> <span class="conselho2-e1-w pal">de</span> <span class="conselho2-e1-w pal">estratégias</span></span> <span class="conselho2-e1-w pal">e</span> <span class="conselho2-e1-w pal">no</span> <span id="conselho2-e1-g2" class="grifo"><span class="conselho2-e1-w pal">controle</span> <span class="conselho2-e1-w pal">da</span> <span class="conselho2-e1-w pal">execução</span></span> <span class="conselho2-e1-w pal">da</span> <span class="conselho2-e1-w pal">política</span> <span class="conselho2-e1-w pal">de</span> <span class="conselho2-e1-w pal">saúde</span> <span class="conselho2-e1-w pal">na</span> <span class="conselho2-e1-w pal">instância</span> <span class="conselho2-e1-w pal">correspondente,</span> <span id="conselho2-e1-g3" class="grifo"><span class="conselho2-e1-w pal">inclusive</span> <span class="conselho2-e1-w pal">nos</span> <span class="conselho2-e1-w pal">aspectos</span> <span class="conselho2-e1-w pal">econômicos</span> <span class="conselho2-e1-w pal">e</span> <span class="conselho2-e1-w pal">financeiros</span></span><span class="conselho2-e1-w pal">,</span> <span class="conselho2-e1-w pal">cujas</span> <span class="conselho2-e1-w pal">decisões</span> <span class="conselho2-e1-w pal">serão</span> <span id="conselho2-e1-g4" class="grifo"><span class="conselho2-e1-w pal">homologadas</span> <span class="conselho2-e1-w pal">pelo</span> <span class="conselho2-e1-w pal">chefe</span> <span class="conselho2-e1-w pal">do</span> <span class="conselho2-e1-w pal">poder</span> <span class="conselho2-e1-w pal">legalmente</span> <span class="conselho2-e1-w pal">constituído</span></span> <span class="conselho2-e1-w pal">em</span> <span class="conselho2-e1-w pal">cada</span> <span class="conselho2-e1-w pal">esfera</span> <span class="conselho2-e1-w pal">do</span> <span class="conselho2-e1-w pal">governo.</span></div></div>
+<div id="conselho2-e2" class="txt f-cheio" style="left:120px;top:640px;width:500px;font-size:50px;color:#1b1a17;text-align:left;">No município:</div>
+<div id="conselho2-e3" class="carimbo" style="left:560px;top:620px;font-size:70px;color:#0e6b52;border-color:#0e6b52;">O PREFEITO</div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#conselho2-camera",{scale:1},{scale:1.022,duration:18.9,ease:"none"},0);
+tl.fromTo("#conselho2-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#conselho2-e1-g1",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},1.1);
+tl.fromTo("#conselho2-e1-g2",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},3);
+tl.fromTo("#conselho2-e1-g3",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},5.9);
+tl.fromTo("#conselho2-e1-g4",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},11.3);
+tl.fromTo("#conselho2-e1",{opacity:0},{opacity:1,duration:.2},0.2);
+tl.fromTo(".conselho2-e1-w",{opacity:0},{opacity:1,duration:.1,stagger:.022},0.25);
+tl.fromTo("#conselho2-e2",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},16.1);
+tl.fromTo("#conselho2-e3",{opacity:0,scale:1.9,rotation:-3},{opacity:1,scale:1,rotation:-3,duration:.16,ease:"power4.in"},17.68);
+tl.fromTo("#conselho2-palco",{x:0,y:0},{immediateRender:false,keyframes:[{x:7,y:-4,duration:.04},{x:-5,y:3,duration:.05},{x:3,y:-1,duration:.05},{x:0,y:0,duration:.06}]},17.84);
+window.__timelines["conselho2"] = tl;
+</script>
+</template>
+</body></html>

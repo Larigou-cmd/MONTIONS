@@ -1,0 +1,41 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="art2" data-start="0" data-duration="39.4" data-width="1920" data-height="1080">
+<div id="art2-camera" class="camera"><div id="art2-palco" class="palco">
+<div id="art2-e1" class="txt f-tit" style="left:120px;top:120px;width:1680px;font-size:60px;color:#1b1a17;text-align:left;">Agora, o dinheiro</div>
+<div id="art2-e2" class="caixa" style="left:120px;top:330px;width:460px;height:300px;background:#1b1a17;border-color:#1b1a17;color:#fff;padding:60px 36px;text-align:center;"><div style="font:900 96px Inter">FNS</div><div class="cs">Fundo Nacional de Saúde</div></div>
+<div id="art2-e3" class="seta" style="left:590px;top:268px;width:120px;background:#1b1a17;color:#1b1a17"></div>
+<div id="art2-e4" class="caixa" style="left:730px;top:212px;width:1070px;height:124px;background:#fffdf7;border-color:#1b1a17;display:flex;gap:26px;align-items:center;padding:0 28px;font:700 36px Inter;"><span class="rom">I</span><span>custeio e capital do Ministério da Saúde</span></div>
+<div id="art2-e5" class="seta" style="left:590px;top:410px;width:120px;background:#1b1a17;color:#1b1a17"></div>
+<div id="art2-e6" class="caixa" style="left:730px;top:354px;width:1070px;height:124px;background:#fffdf7;border-color:#1b1a17;display:flex;gap:26px;align-items:center;padding:0 28px;font:700 36px Inter;"><span class="rom">II</span><span>investimentos previstos em lei orçamentária</span></div>
+<div id="art2-e7" class="seta" style="left:590px;top:552px;width:120px;background:#1b1a17;color:#1b1a17"></div>
+<div id="art2-e8" class="caixa" style="left:730px;top:496px;width:1070px;height:124px;background:#fffdf7;border-color:#1b1a17;display:flex;gap:26px;align-items:center;padding:0 28px;font:700 36px Inter;"><span class="rom">III</span><span>investimentos do Plano Quinquenal do Ministério</span></div>
+<div id="art2-e9" class="seta" style="left:590px;top:694px;width:120px;background:#1b1a17;color:#1b1a17"></div>
+<div id="art2-e10" class="caixa" style="left:730px;top:638px;width:1070px;height:124px;background:#ffd92e;border-color:#1b1a17;display:flex;gap:26px;align-items:center;padding:0 28px;font:700 36px Inter;"><span class="rom">IV</span><span>cobertura das ações e serviços de saúde de Municípios, Estados e DF</span></div>
+<div id="art2-e11" class="txt f-cheio" style="left:120px;top:690px;width:460px;font-size:44px;color:#c62f1e;text-align:left;">Grave o inciso IV</div>
+<div id="art2-e12" class="txt f-corpo" style="left:120px;top:860px;width:1680px;font-size:40px;color:#1b1a17;text-align:left;">rede de serviços · ambulatorial e hospitalar · demais ações</div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#art2-camera",{scale:1},{scale:1.022,duration:39.4,ease:"none"},0);
+tl.fromTo("#art2-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#art2-e1",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},0.1);
+tl.fromTo("#art2-e2",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},5.1);
+tl.fromTo("#art2-e3",{scaleX:0},{scaleX:1,duration:.35,ease:"power2.out"},7.1);
+tl.fromTo("#art2-e4",{opacity:0,x:-40},{opacity:1,x:0,duration:.4,ease:"power3.out"},7.1);
+tl.fromTo("#art2-e5",{scaleX:0},{scaleX:1,duration:.35,ease:"power2.out"},10.9);
+tl.fromTo("#art2-e6",{opacity:0,x:-40},{opacity:1,x:0,duration:.4,ease:"power3.out"},10.9);
+tl.fromTo("#art2-e7",{scaleX:0},{scaleX:1,duration:.35,ease:"power2.out"},14.7);
+tl.fromTo("#art2-e8",{opacity:0,x:-40},{opacity:1,x:0,duration:.4,ease:"power3.out"},14.7);
+tl.fromTo("#art2-e9",{scaleX:0},{scaleX:1,duration:.35,ease:"power2.out"},19.4);
+tl.fromTo("#art2-e10",{opacity:0,x:-40},{opacity:1,x:0,duration:.4,ease:"power3.out"},19.4);
+tl.fromTo("#art2-e11",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},26.3);
+tl.fromTo("#art2-e12",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},31.8);
+window.__timelines["art2"] = tl;
+</script>
+</template>
+</body></html>

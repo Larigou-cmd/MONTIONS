@@ -1,0 +1,37 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="mapa" data-start="0" data-duration="29.5" data-width="1920" data-height="1080">
+<div id="mapa-camera" class="camera"><div id="mapa-palco" class="palco">
+<div id="mapa-e1" class="txt f-tit" style="left:180px;top:170px;width:500px;font-size:50px;color:#1b1a17;text-align:left;">19 set 1990</div>
+<div id="mapa-e2" class="txt f-lei" style="left:180px;top:240px;width:500px;font-size:72px;color:#1b1a17;text-align:left;">Lei 8.080</div>
+<div id="mapa-e3" class="seta" style="left:620px;top:262px;width:480px;background:#1b1a17;color:#1b1a17"></div>
+<div id="mapa-e4" class="txt f-cheio" style="left:640px;top:192px;width:440px;font-size:34px;color:#6b6557;text-align:center;">3 meses depois</div>
+<div id="mapa-e5" class="txt f-tit" style="left:1160px;top:170px;width:640px;font-size:50px;color:#1b1a17;text-align:left;">28 dez 1990</div>
+<div id="mapa-e6" class="txt f-lei" style="left:1160px;top:240px;width:640px;font-size:72px;color:#1b1a17;text-align:left;">Lei 8.142</div>
+<div id="mapa-e7" class="caixa" style="left:120px;top:450px;width:820px;height:300px;background:#ffd92e;border-color:#1b1a17;padding:44px;"><div class="ct">participação da comunidade</div><div class="cs">na gestão do SUS</div></div>
+<div id="mapa-e8" class="caixa" style="left:980px;top:450px;width:820px;height:300px;background:#fffdf7;border-color:#1b1a17;padding:44px;"><div class="ct">transferências de recursos</div><div class="cs">entre os governos</div></div>
+<div id="mapa-e9" class="txt f-cheio" style="left:120px;top:800px;width:820px;font-size:46px;color:#1b1a17;text-align:left;">Art. 1º → quem participa</div>
+<div id="mapa-e10" class="txt f-cheio" style="left:980px;top:800px;width:820px;font-size:46px;color:#1b1a17;text-align:left;">Arts. 2º a 4º → o dinheiro</div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#mapa-camera",{scale:1},{scale:1.022,duration:29.5,ease:"none"},0);
+tl.fromTo("#mapa-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#mapa-e1",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},6.7);
+tl.fromTo("#mapa-e2",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},7.4);
+tl.fromTo("#mapa-e3",{scaleX:0},{scaleX:1,duration:.35,ease:"power2.out"},5.2);
+tl.fromTo("#mapa-e4",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},5.3);
+tl.fromTo("#mapa-e5",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},2.6);
+tl.fromTo("#mapa-e6",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},1.2);
+tl.fromTo("#mapa-e7",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},13.3);
+tl.fromTo("#mapa-e8",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},16.5);
+tl.fromTo("#mapa-e9",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},22.4);
+tl.fromTo("#mapa-e10",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},25.4);
+window.__timelines["mapa"] = tl;
+</script>
+</template>
+</body></html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="cuidado" data-start="0" data-duration="32.4" data-width="1920" data-height="1080">
+<div id="cuidado-camera" class="camera"><div id="cuidado-palco" class="palco">
+<div id="cuidado-e1" class="txt f-tit" style="left:120px;top:120px;width:1680px;font-size:60px;color:#c62f1e;text-align:left;">Um cuidado</div>
+<div id="cuidado-e2" class="caixa" style="left:120px;top:260px;width:460px;height:200px;background:#fffdf7;border-color:#1b1a17;padding:34px;"><div class="cs">Lei 8.142</div><div class="ct" style="font-size:44px">art. 3º, § 1º</div></div>
+<div id="cuidado-e3" class="seta" style="left:590px;top:354px;width:130px;background:#1b1a17;color:#1b1a17"></div>
+<div id="cuidado-e4" class="caixa" style="left:730px;top:260px;width:460px;height:200px;background:#fffdf7;border-color:#1b1a17;padding:34px;"><div class="cs">Lei 8.080</div><div class="ct" style="font-size:44px">art. 35, § 1º</div></div>
+<div id="cuidado-e5" class="carimbo" style="left:770px;top:400px;font-size:54px;color:#c62f1e;border-color:#c62f1e;">REVOGADO</div>
+<div id="cuidado-e6" class="seta" style="left:1200px;top:354px;width:130px;background:#0e6b52;color:#0e6b52"></div>
+<div id="cuidado-e7" class="caixa" style="left:1340px;top:260px;width:460px;height:200px;background:#ffd92e;border-color:#1b1a17;padding:34px;"><div class="cs">LC 141/2012</div><div class="ct" style="font-size:44px">art. 17: rateio</div></div>
+<div id="cuidado-e8" class="txt f-cheio" style="left:120px;top:610px;width:1680px;font-size:54px;color:#1b1a17;text-align:left;">Prova de lei seca → texto da 8.142</div>
+<div id="cuidado-e9" class="txt f-cheio" style="left:120px;top:720px;width:1680px;font-size:54px;color:#0e6b52;text-align:left;">Regras atuais de rateio → LC 141</div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#cuidado-camera",{scale:1},{scale:1.022,duration:32.4,ease:"none"},0);
+tl.fromTo("#cuidado-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#cuidado-e1",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},0.1);
+tl.fromTo("#cuidado-e2",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},2.1);
+tl.fromTo("#cuidado-e3",{scaleX:0},{scaleX:1,duration:.35,ease:"power2.out"},7.3);
+tl.fromTo("#cuidado-e4",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},8.8);
+tl.fromTo("#cuidado-e5",{opacity:0,scale:1.9,rotation:-7},{opacity:1,scale:1,rotation:-7,duration:.16,ease:"power4.in"},12.780000000000001);
+tl.fromTo("#cuidado-palco",{x:0,y:0},{immediateRender:false,keyframes:[{x:7,y:-4,duration:.04},{x:-5,y:3,duration:.05},{x:3,y:-1,duration:.05},{x:0,y:0,duration:.06}]},12.94);
+tl.fromTo("#cuidado-e6",{scaleX:0},{scaleX:1,duration:.35,ease:"power2.out"},14.3);
+tl.fromTo("#cuidado-e7",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},14.7);
+tl.fromTo("#cuidado-e8",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},20.5);
+tl.fromTo("#cuidado-e9",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},25.9);
+window.__timelines["cuidado"] = tl;
+</script>
+</template>
+</body></html>

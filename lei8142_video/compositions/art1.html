@@ -1,0 +1,34 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="art1" data-start="0" data-duration="25.9" data-width="1920" data-height="1080">
+<div id="art1-camera" class="camera"><div id="art1-palco" class="palco">
+<div id="art1-e1" class="lei" style="left:120px;top:150px;width:1060px;"><div class="rot">LEI SECA</div><div class="f-lei" style="font-size:44px"><span class="art1-e1-w pal">Art.</span> <span class="art1-e1-w pal">1º</span> <span class="art1-e1-w pal">O</span> <span class="art1-e1-w pal">Sistema</span> <span class="art1-e1-w pal">Único</span> <span class="art1-e1-w pal">de</span> <span class="art1-e1-w pal">Saúde</span> <span class="art1-e1-w pal">(SUS)</span> <span class="art1-e1-w pal">[...]</span> <span class="art1-e1-w pal">contará,</span> <span id="art1-e1-g1" class="grifo"><span class="art1-e1-w pal">em</span> <span class="art1-e1-w pal">cada</span> <span class="art1-e1-w pal">esfera</span> <span class="art1-e1-w pal">de</span> <span class="art1-e1-w pal">governo</span></span><span class="art1-e1-w pal">,</span> <span id="art1-e1-g2" class="grifo"><span class="art1-e1-w pal">sem</span> <span class="art1-e1-w pal">prejuízo</span> <span class="art1-e1-w pal">das</span> <span class="art1-e1-w pal">funções</span> <span class="art1-e1-w pal">do</span> <span class="art1-e1-w pal">Poder</span> <span class="art1-e1-w pal">Legislativo</span></span><span class="art1-e1-w pal">,</span> <span class="art1-e1-w pal">com</span> <span class="art1-e1-w pal">as</span> <span class="art1-e1-w pal">seguintes</span> <span class="art1-e1-w pal">instâncias</span> <span class="art1-e1-w pal">colegiadas:</span><div class="vao"></div><span class="art1-e1-w pal">I</span> <span class="art1-e1-w pal">-</span> <span class="art1-e1-w pal">a</span> <span id="art1-e1-g3" class="grifo"><span class="art1-e1-w pal">Conferência</span> <span class="art1-e1-w pal">de</span> <span class="art1-e1-w pal">Saúde</span></span><span class="art1-e1-w pal">;</span> <span class="art1-e1-w pal">e</span><div class="vao"></div><span class="art1-e1-w pal">II</span> <span class="art1-e1-w pal">-</span> <span class="art1-e1-w pal">o</span> <span id="art1-e1-g4" class="grifo"><span class="art1-e1-w pal">Conselho</span> <span class="art1-e1-w pal">de</span> <span class="art1-e1-w pal">Saúde</span></span><span class="art1-e1-w pal">.</span></div></div>
+<div id="art1-e2" class="caixa" style="left:1270px;top:170px;width:530px;height:98px;background:#fffdf7;border-color:#1b1a17;padding:18px 30px;"><div class="ct" style="font-size:44px">União</div></div>
+<div id="art1-e3" class="caixa" style="left:1270px;top:288px;width:530px;height:98px;background:#fffdf7;border-color:#1b1a17;padding:18px 30px;"><div class="ct" style="font-size:44px">Estados</div></div>
+<div id="art1-e4" class="caixa" style="left:1270px;top:406px;width:530px;height:98px;background:#fffdf7;border-color:#1b1a17;padding:18px 30px;"><div class="ct" style="font-size:44px">Distrito Federal</div></div>
+<div id="art1-e5" class="caixa" style="left:1270px;top:524px;width:530px;height:98px;background:#fffdf7;border-color:#1b1a17;padding:18px 30px;"><div class="ct" style="font-size:44px">Municípios</div></div>
+<div id="art1-e6" class="txt f-corpo" style="left:1270px;top:680px;width:530px;font-size:40px;color:#1b1a17;text-align:left;">Conferência e Conselho <b>não tiram</b> nenhuma função do Legislativo.</div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#art1-camera",{scale:1},{scale:1.022,duration:25.9,ease:"none"},0);
+tl.fromTo("#art1-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#art1-e1-g1",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},7.7);
+tl.fromTo("#art1-e1-g2",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},16.8);
+tl.fromTo("#art1-e1-g3",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},3.9);
+tl.fromTo("#art1-e1-g4",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},5.7);
+tl.fromTo("#art1-e1",{opacity:0},{opacity:1,duration:.2},0.2);
+tl.fromTo(".art1-e1-w",{opacity:0},{opacity:1,duration:.1,stagger:.022},0.25);
+tl.fromTo("#art1-e2",{opacity:0,x:-40},{opacity:1,x:0,duration:.4,ease:"power3.out"},10.5);
+tl.fromTo("#art1-e3",{opacity:0,x:-40},{opacity:1,x:0,duration:.4,ease:"power3.out"},11.5);
+tl.fromTo("#art1-e4",{opacity:0,x:-40},{opacity:1,x:0,duration:.4,ease:"power3.out"},12.4);
+tl.fromTo("#art1-e5",{opacity:0,x:-40},{opacity:1,x:0,duration:.4,ease:"power3.out"},14);
+tl.fromTo("#art1-e6",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},22.7);
+window.__timelines["art1"] = tl;
+</script>
+</template>
+</body></html>

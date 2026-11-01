@@ -104,6 +104,11 @@
 - Episódio 1 (Arts. 1º ao 4º): FINALIZADO. Próximo: Ep. 2, Arts. 5º e 6º (conferir na internet as Leis 15.390/2026 e 15.471/2026 antes).
 - Ideias aprovadas para depois: linha do tempo das alterações da lei; Shorts verticais de 30 s com cada pegadinha, levando para a aula completa.
 
+## Lei 8.142 (HyperFrames, 2026-10-31)
+- Primeiro vídeo feito no HyperFrames: `lei8142_video/` (gerar cenas com `node tools/build.mjs`; papel e trilha com `python tools/assets.py`; roteiro em `concurso_lei8142/`). Capa em `lei8142_capa/`.
+- Sem bloco de questões: pedido dela, "só quero que fale sobre as leis". Visual: papel, marca-texto e carimbo.
+- `lei8142_video/fala.json` = tempo de cada palavra. Render local ~12 min para 8 min de vídeo. Depois masterizar com loudnorm.
+
 ## VoiceStudio (voz local, testado em 2026-10-20/21)
 - Instalado (v0.5.6), driver NVIDIA atualizado para 617.42 (GTX 1650, 4 GB). API local em http://127.0.0.1:3900 (`POST /generate`, campos `text`, `language=Portuguese`, `instruct="female, young adult, moderate pitch"`, `seed=42`).
 - Resultado: pronúncia boa na maior parte, mas com tropeços (~2 por minuto). Gera ~7 min por minuto de áudio. Por enquanto NÃO usar para vídeos publicados; a usuária decidiu não seguir com nenhuma opção.

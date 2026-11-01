@@ -1,0 +1,41 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="paridade" data-start="0" data-duration="41" data-width="1920" data-height="1080">
+<div id="paridade-camera" class="camera"><div id="paridade-palco" class="palco">
+<div id="paridade-e1" class="lei" style="left:120px;top:130px;width:1680px;"><div class="rot">LEI SECA</div><div class="f-lei" style="font-size:46px"><span class="paridade-e1-w pal">§</span> <span class="paridade-e1-w pal">4º</span> <span class="paridade-e1-w pal">A</span> <span class="paridade-e1-w pal">representação</span> <span class="paridade-e1-w pal">dos</span> <span id="paridade-e1-g1" class="grifo"><span class="paridade-e1-w pal">usuários</span></span> <span class="paridade-e1-w pal">[...]</span> <span class="paridade-e1-w pal">será</span> <span id="paridade-e1-g2" class="grifo"><span class="paridade-e1-w pal">paritária</span></span> <span class="paridade-e1-w pal">em</span> <span class="paridade-e1-w pal">relação</span> <span class="paridade-e1-w pal">ao</span> <span id="paridade-e1-g3" class="grifo"><span class="paridade-e1-w pal">conjunto</span> <span class="paridade-e1-w pal">dos</span> <span class="paridade-e1-w pal">demais</span> <span class="paridade-e1-w pal">segmentos</span></span><span class="paridade-e1-w pal">.</span></div></div>
+<div id="paridade-e2" class="barra f-cheio" style="left:120px;top:500px;width:836px;height:220px;background:#1b1a17;color:#fff;font-size:58px;">usuários</div>
+<div id="paridade-e3" class="barra f-cheio" style="left:964px;top:500px;width:416px;height:220px;background:#0e6b52;color:#fff;font-size:40px;">trabalhadores</div>
+<div id="paridade-e4" class="barra f-cheio" style="left:1388px;top:500px;width:412px;height:220px;background:#7a6a2c;color:#fff;font-size:38px;">governo e prestadores</div>
+<div id="paridade-e5" class="txt f-cheio" style="left:120px;top:410px;width:836px;font-size:48px;color:#1b1a17;text-align:left;">metade das vagas</div>
+<div id="paridade-e6" class="txt f-cheio" style="left:120px;top:330px;width:1680px;font-size:40px;color:#c62f1e;text-align:left;">Não está na lei → Resolução CNS 453/2012</div>
+<div id="paridade-e7" class="txt f-tit" style="left:120px;top:730px;width:836px;font-size:110px;color:#1b1a17;text-align:center;">50%</div>
+<div id="paridade-e8" class="txt f-tit" style="left:964px;top:730px;width:416px;font-size:110px;color:#0e6b52;text-align:center;">25%</div>
+<div id="paridade-e9" class="txt f-tit" style="left:1388px;top:730px;width:412px;font-size:110px;color:#7a6a2c;text-align:center;">25%</div>
+<div id="paridade-e10" class="txt f-cheio" style="left:120px;top:900px;width:1680px;font-size:46px;color:#1b1a17;text-align:left;">Vale para Conselhos <span class='m'>e Conferências</span></div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#paridade-camera",{scale:1},{scale:1.022,duration:41,ease:"none"},0);
+tl.fromTo("#paridade-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#paridade-e1-g1",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},4.3);
+tl.fromTo("#paridade-e1-g2",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},5.1);
+tl.fromTo("#paridade-e1-g3",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},6.8);
+tl.fromTo("#paridade-e1",{opacity:0},{opacity:1,duration:.2},0.2);
+tl.fromTo(".paridade-e1-w",{opacity:0},{opacity:1,duration:.1,stagger:.022},0.25);
+tl.fromTo("#paridade-e2",{scaleX:0},{scaleX:1,duration:.55,ease:"power3.out"},11);
+tl.fromTo("#paridade-e3",{scaleX:0},{scaleX:1,duration:.55,ease:"power3.out"},12.6);
+tl.fromTo("#paridade-e4",{scaleX:0},{scaleX:1,duration:.55,ease:"power3.out"},13.1);
+tl.fromTo("#paridade-e5",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},17);
+tl.fromTo("#paridade-e6",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},19.1);
+tl.fromTo("#paridade-e7",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},27.9);
+tl.fromTo("#paridade-e8",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},30.1);
+tl.fromTo("#paridade-e9",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},33.2);
+tl.fromTo("#paridade-e10",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},37.6);
+window.__timelines["paridade"] = tl;
+</script>
+</template>
+</body></html>

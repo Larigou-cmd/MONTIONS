@@ -62,3 +62,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | Ep. | Vídeo | Textos | Capa |
 |---|---|---|---|
 | 1 | Arts. 1º ao 4º | [lei8080.md](textos/lei8080.md) | [capa_lei8080_ep01.png](capas/capa_lei8080_ep01.png) |
+
+## Concursos (longos)
+
+- Lei 8.142: [49_lei8142.md](textos/49_lei8142.md) · capa `capas/capa_lei8142.png`

@@ -1,0 +1,30 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="art3" data-start="0" data-duration="21.6" data-width="1920" data-height="1080">
+<div id="art3-camera" class="camera"><div id="art3-palco" class="palco">
+<div id="art3-e1" class="lei" style="left:120px;top:130px;width:1680px;"><div class="rot">LEI SECA</div><div class="f-lei" style="font-size:42px"><span class="art3-e1-w pal">Art.</span> <span class="art3-e1-w pal">3º</span> <span class="art3-e1-w pal">Os</span> <span class="art3-e1-w pal">recursos</span> <span class="art3-e1-w pal">referidos</span> <span class="art3-e1-w pal">no</span> <span class="art3-e1-w pal">inciso</span> <span class="art3-e1-w pal">IV</span> <span class="art3-e1-w pal">do</span> <span class="art3-e1-w pal">art.</span> <span class="art3-e1-w pal">2º</span> <span class="art3-e1-w pal">[...]</span> <span class="art3-e1-w pal">serão</span> <span class="art3-e1-w pal">repassados</span> <span class="art3-e1-w pal">de</span> <span class="art3-e1-w pal">forma</span> <span id="art3-e1-g1" class="grifo"><span class="art3-e1-w pal">regular</span> <span class="art3-e1-w pal">e</span> <span class="art3-e1-w pal">automática</span></span> <span class="art3-e1-w pal">para</span> <span class="art3-e1-w pal">os</span> <span class="art3-e1-w pal">Municípios,</span> <span class="art3-e1-w pal">Estados</span> <span class="art3-e1-w pal">e</span> <span class="art3-e1-w pal">Distrito</span> <span class="art3-e1-w pal">Federal</span> <span class="art3-e1-w pal">[...].</span><div class="vao"></div><span class="art3-e1-w pal">§</span> <span class="art3-e1-w pal">2º</span> <span class="art3-e1-w pal">[...]</span> <span id="art3-e1-g2" class="grifo"><span class="art3-e1-w pal">pelo</span> <span class="art3-e1-w pal">menos</span> <span class="art3-e1-w pal">setenta</span> <span class="art3-e1-w pal">por</span> <span class="art3-e1-w pal">cento</span></span><span class="art3-e1-w pal">,</span> <span class="art3-e1-w pal">aos</span> <span class="art3-e1-w pal">Municípios,</span> <span class="art3-e1-w pal">afetando-se</span> <span class="art3-e1-w pal">o</span> <span class="art3-e1-w pal">restante</span> <span class="art3-e1-w pal">aos</span> <span class="art3-e1-w pal">Estados.</span></div></div>
+<div id="art3-e2" class="barra f-cheio" style="left:120px;top:540px;width:1176px;height:170px;background:#0e6b52;color:#fff;font-size:58px;">≥ 70% Municípios</div>
+<div id="art3-e3" class="barra f-cheio" style="left:1304px;top:540px;width:496px;height:170px;background:#1b1a17;color:#fff;font-size:36px;">restante: Estados</div>
+<div id="art3-e4" class="txt f-cheio" style="left:120px;top:730px;width:1680px;font-size:46px;color:#1b1a17;text-align:left;"><span class='m'>Pelo menos</span>: é um mínimo</div>
+<div id="art3-e5" class="txt f-corpo" style="left:120px;top:830px;width:1680px;font-size:42px;color:#1b1a17;text-align:left;">§ 3º Municípios <b>poderão</b> formar consórcio e remanejar recursos entre si</div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#art3-camera",{scale:1},{scale:1.022,duration:21.6,ease:"none"},0);
+tl.fromTo("#art3-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#art3-e1-g1",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},0.8);
+tl.fromTo("#art3-e1-g2",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},7.8);
+tl.fromTo("#art3-e1",{opacity:0},{opacity:1,duration:.2},0.2);
+tl.fromTo(".art3-e1-w",{opacity:0},{opacity:1,duration:.1,stagger:.022},0.25);
+tl.fromTo("#art3-e2",{scaleX:0},{scaleX:1,duration:.55,ease:"power3.out"},8.2);
+tl.fromTo("#art3-e3",{scaleX:0},{scaleX:1,duration:.55,ease:"power3.out"},11.3);
+tl.fromTo("#art3-e4",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},13.3);
+tl.fromTo("#art3-e5",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},16.5);
+window.__timelines["art3"] = tl;
+</script>
+</template>
+</body></html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="regimento" data-start="0" data-duration="8.6" data-width="1920" data-height="1080">
+<div id="regimento-camera" class="camera"><div id="regimento-palco" class="palco">
+<div id="regimento-e1" class="lei" style="left:120px;top:240px;width:1680px;"><div class="rot">LEI SECA</div><div class="f-lei" style="font-size:54px"><span class="regimento-e1-w pal">§</span> <span class="regimento-e1-w pal">5º</span> <span class="regimento-e1-w pal">As</span> <span class="regimento-e1-w pal">Conferências</span> <span class="regimento-e1-w pal">de</span> <span class="regimento-e1-w pal">Saúde</span> <span class="regimento-e1-w pal">e</span> <span class="regimento-e1-w pal">os</span> <span class="regimento-e1-w pal">Conselhos</span> <span class="regimento-e1-w pal">de</span> <span class="regimento-e1-w pal">Saúde</span> <span class="regimento-e1-w pal">terão</span> <span class="regimento-e1-w pal">sua</span> <span class="regimento-e1-w pal">organização</span> <span class="regimento-e1-w pal">e</span> <span class="regimento-e1-w pal">normas</span> <span class="regimento-e1-w pal">de</span> <span class="regimento-e1-w pal">funcionamento</span> <span class="regimento-e1-w pal">definidas</span> <span class="regimento-e1-w pal">em</span> <span id="regimento-e1-g1" class="grifo"><span class="regimento-e1-w pal">regimento</span> <span class="regimento-e1-w pal">próprio</span></span><span class="regimento-e1-w pal">,</span> <span id="regimento-e1-g2" class="grifo"><span class="regimento-e1-w pal">aprovadas</span> <span class="regimento-e1-w pal">pelo</span> <span class="regimento-e1-w pal">respectivo</span> <span class="regimento-e1-w pal">conselho</span></span><span class="regimento-e1-w pal">.</span></div></div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#regimento-camera",{scale:1},{scale:1.022,duration:8.6,ease:"none"},0);
+tl.fromTo("#regimento-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#regimento-e1-g1",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},4.3);
+tl.fromTo("#regimento-e1-g2",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},5.6);
+tl.fromTo("#regimento-e1",{opacity:0},{opacity:1,duration:.2},0.2);
+tl.fromTo(".regimento-e1-w",{opacity:0},{opacity:1,duration:.1,stagger:.022},0.25);
+window.__timelines["regimento"] = tl;
+</script>
+</template>
+</body></html>

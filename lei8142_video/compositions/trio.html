@@ -1,0 +1,47 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="trio" data-start="0" data-duration="20.2" data-width="1920" data-height="1080">
+<div id="trio-camera" class="camera"><div id="trio-palco" class="palco">
+<div id="trio-e1" class="txt f-tit" style="left:120px;top:120px;width:1680px;font-size:60px;color:#1b1a17;text-align:left;">Lei Complementar 141/2012</div>
+<div id="trio-e2" class="txt f-corpo" style="left:120px;top:215px;width:1680px;font-size:42px;color:#1b1a17;text-align:left;">Condicionar repasses regulares e automáticos: só a</div>
+<div id="trio-e3" class="txt f-tit" style="left:120px;top:330px;width:270px;font-size:200px;color:#1b1a17;text-align:center;line-height:1;">F</div>
+<div id="trio-e4" class="txt f-cheio" style="left:120px;top:560px;width:270px;font-size:34px;color:#1b1a17;text-align:center;">Fundo de Saúde</div>
+<div id="trio-e5" class="txt f-tit" style="left:403px;top:330px;width:270px;font-size:200px;color:#1b1a17;text-align:center;line-height:1;">C</div>
+<div id="trio-e6" class="txt f-cheio" style="left:403px;top:560px;width:270px;font-size:34px;color:#1b1a17;text-align:center;">Conselho de Saúde</div>
+<div id="trio-e7" class="txt f-tit" style="left:686px;top:330px;width:270px;font-size:200px;color:#1b1a17;text-align:center;line-height:1;">P</div>
+<div id="trio-e8" class="txt f-cheio" style="left:686px;top:560px;width:270px;font-size:34px;color:#1b1a17;text-align:center;">Plano de saúde</div>
+<div id="trio-e9" class="txt f-tit" style="left:969px;top:330px;width:270px;font-size:200px;color:#cbc3ae;text-align:center;line-height:1;">R</div>
+<div id="trio-e10" class="txt f-cheio" style="left:969px;top:560px;width:270px;font-size:34px;color:#8d8672;text-align:center;">Relatórios de gestão</div>
+<div id="trio-e11" class="txt f-tit" style="left:1252px;top:330px;width:270px;font-size:200px;color:#cbc3ae;text-align:center;line-height:1;">C</div>
+<div id="trio-e12" class="txt f-cheio" style="left:1252px;top:560px;width:270px;font-size:34px;color:#8d8672;text-align:center;">Contrapartida</div>
+<div id="trio-e13" class="txt f-tit" style="left:1535px;top:330px;width:270px;font-size:200px;color:#cbc3ae;text-align:center;line-height:1;">C</div>
+<div id="trio-e14" class="txt f-cheio" style="left:1535px;top:560px;width:270px;font-size:34px;color:#8d8672;text-align:center;">Comissão do PCCS</div>
+<div id="trio-e15" class="txt f-cheio" style="left:120px;top:780px;width:1680px;font-size:50px;color:#1b1a17;text-align:left;">Questão pede a letra da Lei 8.142? <span class='m'>Continue com os seis.</span></div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#trio-camera",{scale:1},{scale:1.022,duration:20.2,ease:"none"},0);
+tl.fromTo("#trio-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#trio-e1",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},2.4);
+tl.fromTo("#trio-e2",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},4.3);
+tl.fromTo("#trio-e3",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},9);
+tl.fromTo("#trio-e4",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},9);
+tl.fromTo("#trio-e5",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},9.9);
+tl.fromTo("#trio-e6",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},9.9);
+tl.fromTo("#trio-e7",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},10.9);
+tl.fromTo("#trio-e8",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},10.9);
+tl.fromTo("#trio-e9",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},12.4);
+tl.fromTo("#trio-e10",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},12.4);
+tl.fromTo("#trio-e11",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},12.4);
+tl.fromTo("#trio-e12",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},12.4);
+tl.fromTo("#trio-e13",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},12.4);
+tl.fromTo("#trio-e14",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},12.4);
+tl.fromTo("#trio-e15",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},14.7);
+window.__timelines["trio"] = tl;
+</script>
+</template>
+</body></html>

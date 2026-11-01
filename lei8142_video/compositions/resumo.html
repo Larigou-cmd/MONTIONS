@@ -1,0 +1,39 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="resumo" data-start="0" data-duration="32.5" data-width="1920" data-height="1080">
+<div id="resumo-camera" class="camera"><div id="resumo-palco" class="palco">
+<div id="resumo-e1" class="txt f-tit" style="left:120px;top:110px;width:1680px;font-size:62px;color:#1b1a17;text-align:left;">Resumindo</div>
+<div id="resumo-e2" class="txt f-tit" style="left:120px;top:240px;width:110px;font-size:104px;color:#0e6b52;text-align:left;line-height:1.05;">1</div>
+<div id="resumo-e3" class="txt f-cheio" style="left:250px;top:256px;width:1550px;font-size:46px;color:#1b1a17;text-align:left;">Conferência: a cada 4 anos, avalia e propõe</div>
+<div id="resumo-e4" class="txt f-tit" style="left:120px;top:390px;width:110px;font-size:104px;color:#0e6b52;text-align:left;line-height:1.05;">2</div>
+<div id="resumo-e5" class="txt f-cheio" style="left:250px;top:406px;width:1550px;font-size:46px;color:#1b1a17;text-align:left;">Conselho: permanente, deliberativo, homologado pelo chefe do poder</div>
+<div id="resumo-e6" class="txt f-tit" style="left:120px;top:540px;width:110px;font-size:104px;color:#0e6b52;text-align:left;line-height:1.05;">3</div>
+<div id="resumo-e7" class="txt f-cheio" style="left:250px;top:556px;width:1550px;font-size:46px;color:#1b1a17;text-align:left;">Usuários: paritários ao conjunto dos demais segmentos</div>
+<div id="resumo-e8" class="txt f-tit" style="left:120px;top:690px;width:110px;font-size:104px;color:#0e6b52;text-align:left;line-height:1.05;">4</div>
+<div id="resumo-e9" class="txt f-cheio" style="left:250px;top:706px;width:1550px;font-size:46px;color:#1b1a17;text-align:left;">Repasse regular e automático: pelo menos 70% aos Municípios</div>
+<div id="resumo-e10" class="txt f-tit" style="left:120px;top:840px;width:110px;font-size:104px;color:#0e6b52;text-align:left;line-height:1.05;">5</div>
+<div id="resumo-e11" class="txt f-cheio" style="left:250px;top:856px;width:1550px;font-size:46px;color:#1b1a17;text-align:left;">6 requisitos: quem não cumpre, Estado ou União administra</div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#resumo-camera",{scale:1},{scale:1.022,duration:32.5,ease:"none"},0);
+tl.fromTo("#resumo-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#resumo-e1",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},0.1);
+tl.fromTo("#resumo-e2",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},1);
+tl.fromTo("#resumo-e3",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},1.15);
+tl.fromTo("#resumo-e4",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},6.1);
+tl.fromTo("#resumo-e5",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},6.25);
+tl.fromTo("#resumo-e6",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},12.8);
+tl.fromTo("#resumo-e7",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},12.95);
+tl.fromTo("#resumo-e8",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},17.9);
+tl.fromTo("#resumo-e9",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},18.05);
+tl.fromTo("#resumo-e10",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},24.5);
+tl.fromTo("#resumo-e11",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},24.65);
+window.__timelines["resumo"] = tl;
+</script>
+</template>
+</body></html>

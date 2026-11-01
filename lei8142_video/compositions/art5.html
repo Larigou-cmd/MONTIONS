@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="art5" data-start="0" data-duration="13.1" data-width="1920" data-height="1080">
+<div id="art5-camera" class="camera"><div id="art5-palco" class="palco">
+<div id="art5-e1" class="lei" style="left:120px;top:170px;width:1680px;"><div class="rot">LEI SECA</div><div class="f-lei" style="font-size:54px"><span class="art5-e1-w pal">Art.</span> <span class="art5-e1-w pal">5º</span> <span class="art5-e1-w pal">É</span> <span class="art5-e1-w pal">o</span> <span id="art5-e1-g1" class="grifo"><span class="art5-e1-w pal">Ministério</span> <span class="art5-e1-w pal">da</span> <span class="art5-e1-w pal">Saúde</span></span><span class="art5-e1-w pal">,</span> <span class="art5-e1-w pal">mediante</span> <span id="art5-e1-g2" class="grifo"><span class="art5-e1-w pal">portaria</span> <span class="art5-e1-w pal">do</span> <span class="art5-e1-w pal">Ministro</span> <span class="art5-e1-w pal">de</span> <span class="art5-e1-w pal">Estado</span></span><span class="art5-e1-w pal">,</span> <span class="art5-e1-w pal">autorizado</span> <span class="art5-e1-w pal">a</span> <span class="art5-e1-w pal">estabelecer</span> <span class="art5-e1-w pal">condições</span> <span class="art5-e1-w pal">para</span> <span class="art5-e1-w pal">aplicação</span> <span class="art5-e1-w pal">desta</span> <span class="art5-e1-w pal">lei.</span></div></div>
+<div id="art5-e2" class="txt f-cheio" style="left:120px;top:560px;width:1680px;font-size:50px;color:#6b6557;text-align:left;">Art. 6º vigência · Art. 7º revogação</div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#art5-camera",{scale:1},{scale:1.022,duration:13.1,ease:"none"},0);
+tl.fromTo("#art5-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#art5-e1-g1",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},2.8);
+tl.fromTo("#art5-e1-g2",{backgroundSize:"0% 100%"},{backgroundSize:"100% 100%",duration:.45,ease:"power2.out"},6.9);
+tl.fromTo("#art5-e1",{opacity:0},{opacity:1,duration:.2},1.2);
+tl.fromTo(".art5-e1-w",{opacity:0},{opacity:1,duration:.1,stagger:.022},1.25);
+tl.fromTo("#art5-e2",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},8.9);
+window.__timelines["art5"] = tl;
+</script>
+</template>
+</body></html>

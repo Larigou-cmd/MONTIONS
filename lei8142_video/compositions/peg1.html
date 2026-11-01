@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="peg1" data-start="0" data-duration="8.9" data-width="1920" data-height="1080">
+<div id="peg1-camera" class="camera"><div id="peg1-palco" class="palco">
+<div id="peg1-e1" class="txt f-tit" style="left:120px;top:268px;width:1680px;font-size:30px;color:#1b1a17;text-align:left;"><span class="selo">Pegadinha de banca</span></div>
+<div id="peg1-e2" class="f-falsa" style="left:120px;top:340px;width:1270px;font-size:74px;"><span id="peg1-e2-r" class="risco">“As instâncias colegiadas existem apenas na esfera federal.”</span></div>
+<div id="peg1-e3" class="carimbo" style="left:1440px;top:270px;font-size:62px;color:#c62f1e;border-color:#c62f1e;">ERRADO</div>
+<div id="peg1-e4" class="txt f-cheio" style="left:120px;top:670px;width:1680px;font-size:50px;color:#0e6b52;text-align:left;">✓ Existem em cada esfera de governo.</div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#peg1-camera",{scale:1},{scale:1.022,duration:8.9,ease:"none"},0);
+tl.fromTo("#peg1-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#peg1-e1",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},1.25);
+tl.fromTo("#peg1-e2",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},1.3);
+tl.fromTo("#peg1-e2-r",{backgroundSize:"0% 6px"},{backgroundSize:"100% 6px",duration:.35,ease:"power2.inOut"},5.4);
+tl.fromTo("#peg1-e3",{opacity:0,scale:1.9,rotation:-7},{opacity:1,scale:1,rotation:-7,duration:.16,ease:"power4.in"},5.28);
+tl.fromTo("#peg1-palco",{x:0,y:0},{immediateRender:false,keyframes:[{x:7,y:-4,duration:.04},{x:-5,y:3,duration:.05},{x:3,y:-1,duration:.05},{x:0,y:0,duration:.06}]},5.44);
+tl.fromTo("#peg1-e4",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},6.4);
+window.__timelines["peg1"] = tl;
+</script>
+</template>
+</body></html>

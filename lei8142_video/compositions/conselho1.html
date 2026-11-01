@@ -1,0 +1,35 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="conselho1" data-start="0" data-duration="19.5" data-width="1920" data-height="1080">
+<div id="conselho1-camera" class="camera"><div id="conselho1-palco" class="palco">
+<div id="conselho1-e1" class="txt f-tit" style="left:120px;top:130px;width:1680px;font-size:64px;color:#1b1a17;text-align:left;">Conselho é o oposto da Conferência</div>
+<div id="conselho1-e2" class="caixa" style="left:120px;top:260px;width:820px;height:280px;background:#fffdf7;border-color:#1b1a17;padding:36px 44px;"><div class="cs">Conferência</div><div class="ct" style="font-size:54px">a cada 4 anos</div><div class="cs" style="margin-top:14px">avalia e propõe</div></div>
+<div id="conselho1-e3" class="caixa" style="left:980px;top:260px;width:820px;height:140px;background:#ffd92e;border-color:#1b1a17;padding:18px 44px;"><div class="cs" style="color:#3a3200">Conselho</div><div class="ct" style="font-size:54px">permanente</div></div>
+<div id="conselho1-e4" class="caixa" style="left:980px;top:420px;width:820px;height:120px;background:#ffd92e;border-color:#1b1a17;padding:26px 44px;"><div class="ct" style="font-size:54px">deliberativo: decide</div></div>
+<div id="conselho1-e5" class="txt f-cheio" style="left:120px;top:660px;width:280px;font-size:42px;color:#1b1a17;text-align:left;">governo</div>
+<div id="conselho1-e6" class="txt f-cheio" style="left:420px;top:660px;width:540px;font-size:42px;color:#1b1a17;text-align:left;">prestadores de serviço</div>
+<div id="conselho1-e7" class="txt f-cheio" style="left:980px;top:660px;width:540px;font-size:42px;color:#1b1a17;text-align:left;">profissionais de saúde</div>
+<div id="conselho1-e8" class="txt f-cheio" style="left:1540px;top:660px;width:380px;font-size:42px;color:#1b1a17;text-align:left;">usuários</div>
+<div id="conselho1-e9" class="txt f-tit" style="left:120px;top:590px;width:1680px;font-size:40px;color:#6b6557;text-align:left;">4 segmentos</div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#conselho1-camera",{scale:1},{scale:1.022,duration:19.5,ease:"none"},0);
+tl.fromTo("#conselho1-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#conselho1-e1",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},0.2);
+tl.fromTo("#conselho1-e2",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},2);
+tl.fromTo("#conselho1-e3",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},4.9);
+tl.fromTo("#conselho1-e4",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},9.4);
+tl.fromTo("#conselho1-e5",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},14.5);
+tl.fromTo("#conselho1-e6",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},15.5);
+tl.fromTo("#conselho1-e7",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},17.1);
+tl.fromTo("#conselho1-e8",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},18.7);
+tl.fromTo("#conselho1-e9",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},12.9);
+window.__timelines["conselho1"] = tl;
+</script>
+</template>
+</body></html>

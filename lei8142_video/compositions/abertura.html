@@ -1,0 +1,44 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="abertura" data-start="0" data-duration="19.3" data-width="1920" data-height="1080">
+<div id="abertura-camera" class="camera"><div id="abertura-palco" class="palco">
+<div id="abertura-e1" class="txt f-tit" style="left:120px;top:130px;width:1680px;font-size:36px;color:#6b6557;text-align:left;">Legislação do SUS para concursos</div>
+<div id="abertura-e2" class="txt f-tit" style="left:120px;top:190px;width:1680px;font-size:260px;color:#1b1a17;text-align:left;letter-spacing:-.03em;line-height:1;">Lei 8.142</div>
+<div id="abertura-e3" class="txt f-lei" style="left:120px;top:470px;width:1680px;font-size:84px;color:#1b1a17;text-align:left;">só 7 artigos</div>
+<div id="abertura-e4" class="caixa" style="left:700px;top:462px;width:130px;height:120px;background:#fffdf7;border-color:#1b1a17;display:grid;place-items:center;font:900 44px Inter;"><b>1º</b></div>
+<div id="abertura-e5" class="caixa" style="left:850px;top:462px;width:130px;height:120px;background:#fffdf7;border-color:#1b1a17;display:grid;place-items:center;font:900 44px Inter;"><b>2º</b></div>
+<div id="abertura-e6" class="caixa" style="left:1000px;top:462px;width:130px;height:120px;background:#fffdf7;border-color:#1b1a17;display:grid;place-items:center;font:900 44px Inter;"><b>3º</b></div>
+<div id="abertura-e7" class="caixa" style="left:1150px;top:462px;width:130px;height:120px;background:#fffdf7;border-color:#1b1a17;display:grid;place-items:center;font:900 44px Inter;"><b>4º</b></div>
+<div id="abertura-e8" class="caixa" style="left:1300px;top:462px;width:130px;height:120px;background:#fffdf7;border-color:#1b1a17;display:grid;place-items:center;font:900 44px Inter;"><b>5º</b></div>
+<div id="abertura-e9" class="caixa" style="left:1450px;top:462px;width:130px;height:120px;background:#fffdf7;border-color:#1b1a17;display:grid;place-items:center;font:900 44px Inter;"><b>6º</b></div>
+<div id="abertura-e10" class="caixa" style="left:1600px;top:462px;width:130px;height:120px;background:#fffdf7;border-color:#1b1a17;display:grid;place-items:center;font:900 44px Inter;"><b>7º</b></div>
+<div id="abertura-e11" class="txt f-cheio" style="left:120px;top:640px;width:1680px;font-size:56px;color:#1b1a17;text-align:left;">cheia de <span class='m'>números</span> e <span class='m'>palavras</span> que a banca adora trocar</div>
+<div id="abertura-e12" class="txt f-lei" style="left:120px;top:790px;width:1680px;font-size:50px;color:#1b1a17;text-align:left;">Hoje: lei seca + cada detalhe</div>
+<div id="abertura-e13" class="carimbo" style="left:900px;top:860px;font-size:52px;color:#0e6b52;border-color:#0e6b52;">PEGA PAPEL E CANETA</div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#abertura-camera",{scale:1},{scale:1.022,duration:19.3,ease:"none"},0);
+tl.fromTo("#abertura-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#abertura-e1",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},0.05);
+tl.fromTo("#abertura-e2",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},0.2);
+tl.fromTo("#abertura-e3",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},2.6);
+tl.fromTo("#abertura-e4",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},2.7);
+tl.fromTo("#abertura-e5",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},2.79);
+tl.fromTo("#abertura-e6",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},2.88);
+tl.fromTo("#abertura-e7",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},2.97);
+tl.fromTo("#abertura-e8",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},3.06);
+tl.fromTo("#abertura-e9",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},3.15);
+tl.fromTo("#abertura-e10",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},3.24);
+tl.fromTo("#abertura-e11",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},8.2);
+tl.fromTo("#abertura-e12",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},13.5);
+tl.fromTo("#abertura-e13",{opacity:0,scale:1.9,rotation:-3},{opacity:1,scale:1,rotation:-3,duration:.16,ease:"power4.in"},17.08);
+tl.fromTo("#abertura-palco",{x:0,y:0},{immediateRender:false,keyframes:[{x:7,y:-4,duration:.04},{x:-5,y:3,duration:.05},{x:3,y:-1,duration:.05},{x:0,y:0,duration:.06}]},17.24);
+window.__timelines["abertura"] = tl;
+</script>
+</template>
+</body></html>

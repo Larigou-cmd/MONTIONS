@@ -1,0 +1,46 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" /></head><body>
+<template>
+<link rel="stylesheet" href="assets/film.css" />
+<style>#root{position:absolute;inset:0;overflow:hidden}</style>
+<div id="root" data-composition-id="art4" data-start="0" data-duration="21.3" data-width="1920" data-height="1080">
+<div id="art4-camera" class="camera"><div id="art4-palco" class="palco">
+<div id="art4-e1" class="txt f-tit" style="left:120px;top:120px;width:1680px;font-size:62px;color:#1b1a17;text-align:left;">Para receber: 6 requisitos</div>
+<div id="art4-e2" class="txt f-tit" style="left:120px;top:270px;width:270px;font-size:200px;color:#1b1a17;text-align:center;line-height:1;">F</div>
+<div id="art4-e3" class="txt f-cheio" style="left:120px;top:500px;width:270px;font-size:36px;color:#1b1a17;text-align:center;">Fundo de Saúde</div>
+<div id="art4-e4" class="txt f-tit" style="left:403px;top:270px;width:270px;font-size:200px;color:#1b1a17;text-align:center;line-height:1;">C</div>
+<div id="art4-e5" class="txt f-cheio" style="left:403px;top:500px;width:270px;font-size:36px;color:#1b1a17;text-align:center;">Conselho de Saúde</div>
+<div id="art4-e6" class="txt f-tit" style="left:686px;top:270px;width:270px;font-size:200px;color:#1b1a17;text-align:center;line-height:1;">P</div>
+<div id="art4-e7" class="txt f-cheio" style="left:686px;top:500px;width:270px;font-size:36px;color:#1b1a17;text-align:center;">Plano de saúde</div>
+<div id="art4-e8" class="txt f-tit" style="left:969px;top:270px;width:270px;font-size:200px;color:#0e6b52;text-align:center;line-height:1;">R</div>
+<div id="art4-e9" class="txt f-cheio" style="left:969px;top:500px;width:270px;font-size:36px;color:#1b1a17;text-align:center;">Relatórios de gestão</div>
+<div id="art4-e10" class="txt f-tit" style="left:1252px;top:270px;width:270px;font-size:200px;color:#0e6b52;text-align:center;line-height:1;">C</div>
+<div id="art4-e11" class="txt f-cheio" style="left:1252px;top:500px;width:270px;font-size:36px;color:#1b1a17;text-align:center;">Contrapartida</div>
+<div id="art4-e12" class="txt f-tit" style="left:1535px;top:270px;width:270px;font-size:200px;color:#0e6b52;text-align:center;line-height:1;">C</div>
+<div id="art4-e13" class="txt f-cheio" style="left:1535px;top:500px;width:270px;font-size:36px;color:#1b1a17;text-align:center;">Comissão do PCCS</div>
+<div id="art4-e14" class="carimbo" style="left:1280px;top:720px;font-size:56px;color:#0e6b52;border-color:#0e6b52;">PCCS: 2 ANOS</div>
+</div></div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+tl.fromTo("#art4-camera",{scale:1},{scale:1.022,duration:21.3,ease:"none"},0);
+tl.fromTo("#art4-palco",{opacity:0},{opacity:1,duration:.18},0);
+tl.fromTo("#art4-e1",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},0.5);
+tl.fromTo("#art4-e2",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},5.5);
+tl.fromTo("#art4-e3",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},10.3);
+tl.fromTo("#art4-e4",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},6.5);
+tl.fromTo("#art4-e5",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},11.1);
+tl.fromTo("#art4-e6",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},7.2);
+tl.fromTo("#art4-e7",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},12);
+tl.fromTo("#art4-e8",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},8.4);
+tl.fromTo("#art4-e9",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},13.6);
+tl.fromTo("#art4-e10",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},9.4);
+tl.fromTo("#art4-e11",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},15.4);
+tl.fromTo("#art4-e12",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},9.7);
+tl.fromTo("#art4-e13",{opacity:0,y:26},{opacity:1,y:0,duration:.4,ease:"power3.out"},16.6);
+tl.fromTo("#art4-e14",{opacity:0,scale:1.9,rotation:-3},{opacity:1,scale:1,rotation:-3,duration:.16,ease:"power4.in"},19.18);
+tl.fromTo("#art4-palco",{x:0,y:0},{immediateRender:false,keyframes:[{x:7,y:-4,duration:.04},{x:-5,y:3,duration:.05},{x:3,y:-1,duration:.05},{x:0,y:0,duration:.06}]},19.34);
+window.__timelines["art4"] = tl;
+</script>
+</template>
+</body></html>

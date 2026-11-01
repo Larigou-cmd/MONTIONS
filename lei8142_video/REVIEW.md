@@ -6,4 +6,5 @@
 - Final 4,6 LU abaixo do corpo do vídeo: ainda fora da faixa do Earshot; sting na última tela.
 - Som medido, não ouvido.
 - Aviso mantido: HUD com 24 rótulos na mesma faixa, um por parte.
-- Mais fraco: cenas de pegadinha com a metade de baixo vazia.
+- Mais fraco: cenas de pegadinha com a metade de baixo vazia e até 2 s de tela limpa antes da primeira frase.
+- Fontes: Archivo Black e EB Garamond ficam em assets/fonts; sem isso o render troca a letra, embora o snapshot pareça certo.

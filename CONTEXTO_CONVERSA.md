@@ -107,6 +107,7 @@
 ## Lei 8.142 (HyperFrames, 2026-10-31)
 - Primeiro vídeo feito no HyperFrames: `lei8142_video/` (gerar cenas com `node tools/build.mjs`; papel e trilha com `python tools/assets.py`; roteiro em `concurso_lei8142/`). Capa em `lei8142_capa/`.
 - Sem bloco de questões: pedido dela, "só quero que fale sobre as leis". Visual: papel, marca-texto e carimbo.
+- **Fontes no HyperFrames:** embutir com @font-face em `assets/fonts/`. Sem isso o MP4 sai com outra letra, mesmo com o snapshot certo. Conferir sempre quadros do MP4.
 - `lei8142_video/fala.json` = tempo de cada palavra. Render local ~12 min para 8 min de vídeo. Depois masterizar com loudnorm.
 
 ## VoiceStudio (voz local, testado em 2026-10-20/21)

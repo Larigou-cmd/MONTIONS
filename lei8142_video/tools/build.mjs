@@ -182,6 +182,7 @@ s = new Cena("peg3", 160.4, 169.1, "PEGADINHA");
 s.peg({ frase: "O Conselho de Saúde tem caráter temporário e consultivo.", at: 161.7, err: 165.8, fix: 166.8, certo: "Permanente e deliberativo.", h: 400 });
 
 s = new Cena("conass", 169.1, 179.5, "ART. 1º, § 3º");
+s.t("Quem mais tem cadeira?", { y: 110, size: 62, font: "tit", at: 169.2 });
 s.t("Conselho Nacional de Saúde", { x: 120, y: 700, w: 1680, size: 74, font: "tit", at: 177.6, align: "center" });
 s.caixa(`<div class="ct">Conass</div><div class="cs">secretários estaduais</div>`, { x: 200, y: 230, w: 700, h: 240, at: 171.3, fundo: OURO, extra: "padding:40px 48px;" });
 s.caixa(`<div class="ct">Conasems</div><div class="cs">secretários municipais</div>`, { x: 1020, y: 230, w: 700, h: 240, at: 173.9, extra: "padding:40px 48px;" });

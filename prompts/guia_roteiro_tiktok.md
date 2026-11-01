@@ -131,11 +131,13 @@ Plano, a validar com os números:
 - O gancho fica escrito na tela durante os primeiros segundos, para quem assiste sem som.
 
 ## O que os dados do canal mostram (YouTube, 1º/11/2026)
-Amostra pequena, com 16 Shorts em 3 semanas. Serve para orientar testes, e não como regra.
+Leitura dos 28 Shorts em 3 semanas. Vídeos com poucas visualizações ou recentes têm percentuais instáveis. Serve para orientar testes, e não como regra.
 
-- Prendem mais: sintoma ou hábito de quem assiste (tosse, jejum, sinvastatina), com 67% a 83% do vídeo assistido, e histórias de origem (aspirina, captopril), com 70% a 86%.
-- Prendem menos: curiosidades do corpo (cerveja, frio), com 38% a 39%.
-- Duração não explicou o resultado: vídeos de 3 min seguraram 69%, e vários de 1:12 ficaram abaixo de 45%.
+- Maior alcance: título com sintoma ou hábito de quem assiste (jejum 1.567, sinvastatina 1.383, tosse 929) e histórias de origem (aspirina 1.288, captopril 1.064).
+- Melhor retenção com alcance: tosse 83%, captopril 86%, aspirina 70%, jejum 69%, sinvastatina 67%.
+- "Como funciona": a maioria segura 52% a 81%, mas alcança pouco (41 a 265 visualizações). Quem chega fica; o problema parece ser atrair a pessoa.
+- Curiosidades variam: febre 61%, frio 39%, cerveja 38%.
+- Duração não explicou o resultado: vídeos de 3 min seguraram 69%, e vários de 1:12 ficaram abaixo de 50%.
 - A perda aparece cedo: os melhores têm 74% a 99% da audiência aos 30 s; cerveja e losartana têm cerca de 30%.
 - Visualização engana: a losartana teve 1.194 visualizações, mas só 9,6% continuaram assistindo.
 

@@ -141,6 +141,14 @@ Leitura dos 28 Shorts em 3 semanas. Vídeos com poucas visualizações ou recent
 - A perda aparece cedo: os melhores têm 74% a 99% da audiência aos 30 s; cerveja e losartana têm cerca de 30%.
 - Visualização engana: a losartana teve 1.194 visualizações, mas só 9,6% continuaram assistindo.
 
+## O que os dados do TikTok mostram (1º/11/2026)
+- Um vídeo explica quase todo o alcance: sinvastatina e dor na perna teve 578 mil visualizações, cerca de 11 mil curtidas e 2,3 mil seguidores novos, quase todos os da conta. Os outros: losartana 23 mil, jejum 9,7 mil, sinvastatina à noite 3,2 mil; a maioria fica entre 100 e 800.
+- Os quatro falam com quem toma um remédio comum: "Começou a tomar...", "Toma... pra pressão?", "Você toma...", "Por que a sinvastatina...".
+- Fórmula a testar: remédio de uso contínuo + sintoma ou hábito concreto + sinal de alerta ou utilidade.
+- O mesmo vídeo muda muito entre redes: sinvastatina 578 mil no TikTok e 1.383 no YouTube; losartana 23 mil no TikTok e 10% passando da abertura no YouTube.
+- A maior queda vem em 0:01 a 0:02 em todos os vídeos vistos; o tempo médio fica entre 16 e 39 s, e só 2% a 8% assistem até o fim. A informação principal precisa aparecer cedo.
+- Quase tudo vem do Para Você (66% a 99% na maioria), mas o vídeo da sinvastatina também mostra buscas pelo nome do remédio e pela dose.
+
 ## Como vamos trabalhar
 1. Junto com cada roteiro, envio **3 opções de gancho** para você escolher.
 2. Depois de postar, compare a retenção dos 3 primeiros segundos e o tempo médio assistido.

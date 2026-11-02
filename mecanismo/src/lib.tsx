@@ -45,7 +45,7 @@ export const Background: React.FC<{ color?: string; pulses?: number[] }> = ({ co
   return (
     <AbsoluteFill style={{ background: C.bg }}>
       <AbsoluteFill
-        style={{ background: `radial-gradient(ellipse 1300px 1100px at 50% 38%, ${C.bg2} 0%, rgba(7,11,26,0) 70%)` }}
+        style={{ background: `radial-gradient(ellipse 1300px 1100px at 50% 38%, ${C.bg2} 0%, rgba(4,18,15,0) 70%)` }}
       />
       <AbsoluteFill
         style={{ background: `radial-gradient(ellipse 1100px ${rh}px at 50% ${H + 120}px, ${stops})` }}
@@ -56,7 +56,7 @@ export const Background: React.FC<{ color?: string; pulses?: number[] }> = ({ co
           const sp = 0.25 + random(`s${i}`) * 0.6, r0 = 1 + random(`r${i}`) * 2.4;
           const y = (((y0 - f * sp) % H) + H) % H;
           const x = x0 + Math.sin(f / 40 + i) * 10;
-          return <circle key={i} cx={x} cy={y} r={r0} fill="rgb(170,185,255)" opacity={0.1 + 0.08 * Math.sin(f / 25 + i)} />;
+          return <circle key={i} cx={x} cy={y} r={r0} fill="rgb(150,235,200)" opacity={0.1 + 0.08 * Math.sin(f / 25 + i)} />;
         })}
       </svg>
     </AbsoluteFill>

@@ -36,13 +36,13 @@ export const config = {
 };
 
 export const C = {
-  bg: "#070b1a",
-  bg2: "#101a3a",
-  ink: "#eef2ff",
-  dim: "#94a3c8",
+  bg: "#04120f",
+  bg2: "#0a2a22",
+  ink: "#f7f3df",
+  dim: "#8fc4ae",
   alert: "#fb7185",
   num: "#fde047",
-  box: "rgba(20,24,44,0.92)",
+  box: "rgba(9,32,26,0.92)",
   boxBorder: "rgba(255,255,255,0.10)",
 };
 

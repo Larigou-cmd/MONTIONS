@@ -102,6 +102,7 @@ import { VideoXixi, CapaXixi, DURATION_XIXI } from "./xixi/Video";
 import { VideoVitaminaC, CapaVitaminaC, DURATION_VITAMINAC } from "./vitaminac/Video";
 import { VideoOmeprazol, CapaOmeprazol, DURATION_OMEPRAZOL } from "./omeprazol/Video";
 import { VideoAnticoncepcional, CapaAnticoncepcional, DURATION_ANTICONCEPCIONAL } from "./anticoncepcional/Video";
+import { VideoAnlodipinoNovo, CapaAnlodipinoNovo, DURATION_ANLODIPINO_NOVO } from "./anlodipinoNovo/Video";
 import { VideoRemAlcool, CapaRemAlcool, DURATION_REMALCOOL } from "./remalcool/Video";
 import { VideoAntialergico, DURATION_ANTIALERGICO } from "./antialergico/Video";
 import { CapaAntialergico } from "./antialergico/Capa";
@@ -533,6 +534,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="RemAlcoolCapa"
       component={CapaRemAlcool}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="AnlodipinoNovo"
+      component={VideoAnlodipinoNovo}
+      durationInFrames={DURATION_ANLODIPINO_NOVO}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="AnlodipinoNovoCapa"
+      component={CapaAnlodipinoNovo}
       durationInFrames={1}
       fps={FPS}
       width={1080}

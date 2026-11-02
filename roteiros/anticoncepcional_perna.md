@@ -1,6 +1,6 @@
 # Toma anticoncepcional? Se uma perna inchar e doer, não espera passar
 
-Formato: Reels/Shorts/TikTok vertical (1080×1920), cerca de 1 min 18 s. Sugestão: coágulo em 3D no gancho. Feito com prompts/guia_roteiro_tiktok.md.
+Formato: Reels/Shorts/TikTok vertical (1080×1920), cerca de 1 min 18 s. Coágulo em 3D na abertura. Feito com prompts/guia_roteiro_tiktok.md.
 Status: aprovado e entregue (01/11/2026). Narração feita pela usuária (OpenArt), com o gancho A. Código: mecanismo/src/anticoncepcional/ (Id `Anticoncepcional`, capa `AnticoncepcionalCapa`).
 
 ## Opções de gancho

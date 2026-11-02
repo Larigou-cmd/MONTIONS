@@ -104,6 +104,7 @@ import { VideoOmeprazol, CapaOmeprazol, DURATION_OMEPRAZOL } from "./omeprazol/V
 import { VideoAnticoncepcional, CapaAnticoncepcional, DURATION_ANTICONCEPCIONAL } from "./anticoncepcional/Video";
 import { VideoAnlodipinoNovo, CapaAnlodipinoNovo, DURATION_ANLODIPINO_NOVO } from "./anlodipinoNovo/Video";
 import { VideoTirzepAlimentos, CapaTirzepAlimentos, DURATION_TIRZEP } from "./tirzepAlimentos/Video";
+import { VideoLevotiroxina, CapaLevotiroxina, DURATION_LEVO } from "./levotiroxina/Video";
 import { VideoRemAlcool, CapaRemAlcool, DURATION_REMALCOOL } from "./remalcool/Video";
 import { VideoAntialergico, DURATION_ANTIALERGICO } from "./antialergico/Video";
 import { CapaAntialergico } from "./antialergico/Capa";
@@ -535,6 +536,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="RemAlcoolCapa"
       component={CapaRemAlcool}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Levotiroxina"
+      component={VideoLevotiroxina}
+      durationInFrames={DURATION_LEVO}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="LevotiroxinaCapa"
+      component={CapaLevotiroxina}
       durationInFrames={1}
       fps={FPS}
       width={1080}

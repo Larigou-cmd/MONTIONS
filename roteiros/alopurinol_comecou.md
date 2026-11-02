@@ -1,7 +1,7 @@
 # Começou a tomar alopurinol? Sabe o que ele faz?
 
-Formato: Reels/Shorts/TikTok vertical (1080×1920), cerca de 1 min 20 s. Modelo 1 com a paleta verde nova e abertura em 3D (cristais de ácido úrico). Feito com prompts/guia_roteiro_tiktok.md. Série "Começou a tomar...".
-Status: roteiro enviado, aguardando o áudio da usuária (OpenArt/ElevenLabs).
+Formato: Reels/Shorts/TikTok vertical (1080×1920), cerca de 1 min 20 s. Modelo 1 com a paleta verde nova; 3D só na explicação (cristais de ácido úrico). Feito com prompts/guia_roteiro_tiktok.md. Série "Começou a tomar...".
+Status: aprovado e entregue em 02/11/2026 (Downloads\Videos\videos reels\alopurinol_comecou.mp4); textos em youtube/textos/57_alopurinol_comecou.md.
 
 ## Opções de gancho
 A. Começou a tomar alopurinol? Sabe o que ele faz no seu corpo?
@@ -32,9 +32,9 @@ No dia a dia, tome depois de comer e beba bastante água. Salva e manda para que
 Me siga para mais dicas de farmacologia e curiosidades sobre a área.
 
 ## Cenas (a definir com o áudio)
-1. Gancho em 3D: cristais em agulha dentro de uma articulação, câmera recuando.
+1. Gancho sem 3D: comprimido e articulação do dedão (emoji), "SABE O QUE ELE FAZ?".
 2. Promessa: "pode piorar no começo"; "guarda isso".
-3. Bloco 1: ácido úrico em excesso formando cristais.
+3. Bloco 1 em 3D: ácido úrico em excesso formando cristais em agulha na articulação.
 4. Bloco 1: enzima travada; ácido úrico caindo; cristais diminuindo.
 5. Ponta solta: "não é remédio para dor".
 6. Bloco 2: crise no início; remédio junto nos primeiros meses; "não pare por conta própria".

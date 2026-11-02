@@ -105,6 +105,7 @@ import { VideoAnticoncepcional, CapaAnticoncepcional, DURATION_ANTICONCEPCIONAL 
 import { VideoAnlodipinoNovo, CapaAnlodipinoNovo, DURATION_ANLODIPINO_NOVO } from "./anlodipinoNovo/Video";
 import { VideoTirzepAlimentos, CapaTirzepAlimentos, DURATION_TIRZEP } from "./tirzepAlimentos/Video";
 import { VideoLevotiroxina, CapaLevotiroxina, DURATION_LEVO } from "./levotiroxina/Video";
+import { VideoAlopurinol, CapaAlopurinol, DURATION_ALOP } from "./alopurinol/Video";
 import { VideoRemAlcool, CapaRemAlcool, DURATION_REMALCOOL } from "./remalcool/Video";
 import { VideoAntialergico, DURATION_ANTIALERGICO } from "./antialergico/Video";
 import { CapaAntialergico } from "./antialergico/Capa";
@@ -545,6 +546,31 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="RemAlcoolCapa"
       component={CapaRemAlcool}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Alopurinol"
+      component={VideoAlopurinol}
+      durationInFrames={DURATION_ALOP}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="AlopurinolSem3D"
+      component={VideoAlopurinol}
+      durationInFrames={DURATION_ALOP}
+      fps={FPS}
+      width={1080}
+      height={1920}
+      defaultProps={{ sem3D: true }}
+    />
+    <Composition
+      id="AlopurinolCapa"
+      component={CapaAlopurinol}
       durationInFrames={1}
       fps={FPS}
       width={1080}

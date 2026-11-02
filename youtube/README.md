@@ -59,6 +59,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 50 | Vitamina C previne gripe? (Modelo 1) | [50_vitamina_c_gripe.md](textos/50_vitamina_c_gripe.md) | [capa_vitamina_c_gripe.png](capas/capa_vitamina_c_gripe.png) |
 | 51 | Toma omeprazol todo dia há anos? (Modelo 1) | [51_omeprazol_todo_dia.md](textos/51_omeprazol_todo_dia.md) | [capa_omeprazol_todo_dia.png](capas/capa_omeprazol_todo_dia.png) |
 | 52 | Por que você levanta rápido e a vista escurece? (HyperFrames) | [52_vista_escurece.md](textos/52_vista_escurece.md) | [capa_vista_escurece.png](capas/capa_vista_escurece.png) |
+| 53 | Toma anticoncepcional? Se uma perna inchar e doer (Modelo 1 com 3D) | [53_anticoncepcional_perna.md](textos/53_anticoncepcional_perna.md) | [capa_anticoncepcional_perna.png](capas/capa_anticoncepcional_perna.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

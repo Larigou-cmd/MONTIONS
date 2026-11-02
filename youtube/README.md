@@ -63,6 +63,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 54 | Começou a tomar anlodipino? (Modelo 1 verde com 3D) | [54_anlodipino_comecou.md](textos/54_anlodipino_comecou.md) | [capa_anlodipino_comecou.png](capas/capa_anlodipino_comecou.png) |
 | 55 | Toma tirzepatida? Evite estes 3 (Modelo 8) | [55_tirzepatida_alimentos.md](textos/55_tirzepatida_alimentos.md) | [capa_tirzepatida_alimentos.png](capas/capa_tirzepatida_alimentos.png) |
 | 56 | Começou a tomar levotiroxina? (Modelo 1 verde com 3D) | [56_levotiroxina_comecou.md](textos/56_levotiroxina_comecou.md) | [capa_levotiroxina_comecou.png](capas/capa_levotiroxina_comecou.png) |
+| 57 | Começou a tomar alopurinol? (Modelo 1 verde com 3D) | [57_alopurinol_comecou.md](textos/57_alopurinol_comecou.md) | [capa_alopurinol_comecou.png](capas/capa_alopurinol_comecou.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

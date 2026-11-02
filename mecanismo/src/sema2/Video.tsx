@@ -1155,7 +1155,8 @@ const Apresentadora: React.FC = () => {
   );
 };
 
-export const VideoSema2: React.FC = () => (
+// Modelo 4 sem a personagem: a pedido da usuária (02/11/2026), os próximos vídeos deste modelo não usam a apresentadora.
+export const VideoSema2: React.FC<{ semPersonagem?: boolean }> = ({ semPersonagem = false }) => (
   <AbsoluteFill>
     <Fundo />
     <Abertura />
@@ -1166,7 +1167,7 @@ export const VideoSema2: React.FC = () => (
     <CenaOff />
     <CenaParar />
     <Final />
-    <Apresentadora />
+    {!semPersonagem && <Apresentadora />}
     <Audio src={staticFile("sema/narracao.mp3")} />
     <Audio src={staticFile("sema/musica.wav")} volume={0.11} />
     {SFX.map(([fr, name, vol], i) => (

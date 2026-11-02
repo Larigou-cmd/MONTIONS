@@ -174,6 +174,15 @@ export const RemotionRoot: React.FC = () => (
       height={1920}
     />
     <Composition
+      id="Modelo4SemPersonagem"
+      component={VideoSema2}
+      durationInFrames={DURATION_SEMA2}
+      fps={FPS}
+      width={1080}
+      height={1920}
+      defaultProps={{ semPersonagem: true }}
+    />
+    <Composition
       id="SemaglutidaIBP"
       component={VideoSemaIBP}
       durationInFrames={DURATION_SEMA_IBP}

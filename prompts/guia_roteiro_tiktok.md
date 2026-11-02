@@ -149,6 +149,15 @@ Leitura dos 28 Shorts em 3 semanas. Vídeos com poucas visualizações ou recent
 - A maior queda vem em 0:01 a 0:02 em todos os vídeos vistos; o tempo médio fica entre 16 e 39 s, e só 2% a 8% assistem até o fim. A informação principal precisa aparecer cedo.
 - Quase tudo vem do Para Você (66% a 99% na maioria), mas o vídeo da sinvastatina também mostra buscas pelo nome do remédio e pela dose.
 
+## Cor nos vídeos (a partir de Color Design Workbook, Adams e Stone)
+Proposta a validar com a usuária.
+
+- Primeiro o fundo, depois os destaques: fundo verde bem escuro + verde neon do logo como cor principal + amarelo para atenção.
+- Vermelho só para alerta. Se aparece em tudo, deixa de avisar.
+- Cada cor com uma função fixa no vídeo: verde = certo ou solução, amarelo = atenção, vermelho = perigo.
+- Poucas cores por cena. O destaque precisa contrastar com o fundo para chamar o olho primeiro.
+- Conferir no celular: a mesma cor muda conforme o fundo, e nem todo mundo enxerga as cores igual. Nunca passar um aviso só pela cor; manter sempre a palavra.
+
 ## Como vamos trabalhar
 1. Junto com cada roteiro, envio **3 opções de gancho** para você escolher.
 2. Depois de postar, compare a retenção dos 3 primeiros segundos e o tempo médio assistido.

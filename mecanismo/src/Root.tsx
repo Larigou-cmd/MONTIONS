@@ -103,6 +103,7 @@ import { VideoVitaminaC, CapaVitaminaC, DURATION_VITAMINAC } from "./vitaminac/V
 import { VideoOmeprazol, CapaOmeprazol, DURATION_OMEPRAZOL } from "./omeprazol/Video";
 import { VideoAnticoncepcional, CapaAnticoncepcional, DURATION_ANTICONCEPCIONAL } from "./anticoncepcional/Video";
 import { VideoAnlodipinoNovo, CapaAnlodipinoNovo, DURATION_ANLODIPINO_NOVO } from "./anlodipinoNovo/Video";
+import { VideoTirzepAlimentos, CapaTirzepAlimentos, DURATION_TIRZEP } from "./tirzepAlimentos/Video";
 import { VideoRemAlcool, CapaRemAlcool, DURATION_REMALCOOL } from "./remalcool/Video";
 import { VideoAntialergico, DURATION_ANTIALERGICO } from "./antialergico/Video";
 import { CapaAntialergico } from "./antialergico/Capa";
@@ -534,6 +535,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="RemAlcoolCapa"
       component={CapaRemAlcool}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="TirzepAlimentos"
+      component={VideoTirzepAlimentos}
+      durationInFrames={DURATION_TIRZEP}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="TirzepAlimentosCapa"
+      component={CapaTirzepAlimentos}
       durationInFrames={1}
       fps={FPS}
       width={1080}

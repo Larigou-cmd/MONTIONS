@@ -67,6 +67,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 58 | Como um mofo esquecido salvou a humanidade (TBT, Google Vids + final no Remotion) | [58_penicilina_mofo.md](textos/58_penicilina_mofo.md) | [capa_penicilina_mofo.png](capas/capa_penicilina_mofo.png) |
 | 59 | Sua pressão melhorou: pode parar o remédio? (Modelo 8) | [59_pressao_parar_remedio.md](textos/59_pressao_parar_remedio.md) | [capa_pressao_parar.png](capas/capa_pressao_parar.png) |
 | 60 | Por que não existe insulina em comprimido? (clipes do Google Flow montados no Remotion) | [60_insulina_comprimido.md](textos/60_insulina_comprimido.md) | [capa_insulina_comprimido.png](capas/capa_insulina_comprimido.png) |
+| 61 | Você construiu a vacina: o cartaz de procurado (clipes do Google Flow montados no Remotion) | [61_vacina_procurado.md](textos/61_vacina_procurado.md) | [capa_vacina_procurado.png](capas/capa_vacina_procurado.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

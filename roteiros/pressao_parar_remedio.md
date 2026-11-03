@@ -1,7 +1,7 @@
 # Sua pressão melhorou: pode parar o remédio? (3 erros com remédio de pressão)
 
 Formato: Reels/Shorts/TikTok vertical (1080×1920), cerca de 1 min 15 s. Modelo 8 (lista neon: preto e verde-limão, cadeados 01/02/03), com o logo no "Me siga". Agenda: 04/11/2026. Mesmo público da losartana e da sinvastatina (remédio de uso contínuo + hábito concreto). Feito com prompts/guia_roteiro_tiktok.md, formato "Mito derrubado".
-Status: roteiro enviado, aguardando o áudio da usuária (OpenArt/ElevenLabs).
+Status: aprovado e entregue em 02/11/2026 (gancho A); textos em youtube/textos/59_pressao_parar_remedio.md.
 
 ## Opções de gancho
 A. Sua pressão melhorou? Então pode parar o remédio, certo? Errado.

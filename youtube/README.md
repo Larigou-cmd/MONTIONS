@@ -65,6 +65,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 56 | Começou a tomar levotiroxina? (Modelo 1 verde com 3D) | [56_levotiroxina_comecou.md](textos/56_levotiroxina_comecou.md) | [capa_levotiroxina_comecou.png](capas/capa_levotiroxina_comecou.png) |
 | 57 | Começou a tomar alopurinol? (Modelo 1 verde com 3D) | [57_alopurinol_comecou.md](textos/57_alopurinol_comecou.md) | [capa_alopurinol_comecou.png](capas/capa_alopurinol_comecou.png) |
 | 58 | Como um mofo esquecido salvou a humanidade (TBT, Google Vids + final no Remotion) | [58_penicilina_mofo.md](textos/58_penicilina_mofo.md) | [capa_penicilina_mofo.png](capas/capa_penicilina_mofo.png) |
+| 59 | Sua pressão melhorou: pode parar o remédio? (Modelo 8) | [59_pressao_parar_remedio.md](textos/59_pressao_parar_remedio.md) | [capa_pressao_parar.png](capas/capa_pressao_parar.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

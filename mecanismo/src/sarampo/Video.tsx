@@ -106,14 +106,14 @@ const cena = (f: number, i: number) => f >= R(i)[0] && f < R(i)[1];
 
 // ---------- peças ----------
 // emoji grande que "salta" no tempo da fala
-const Icone: React.FC<{ f: number; at: number; x: number; y: number; e: string; size?: number }> = ({
-  f,
-  at,
-  x,
-  y,
-  e,
-  size = 90,
-}) => {
+const Icone: React.FC<{
+  f: number;
+  at: number;
+  x: number;
+  y: number;
+  e: string;
+  size?: number;
+}> = ({ f, at, x, y, e, size = 90 }) => {
   if (f < at) return null;
   const k = it(f, at, at + 12, 0, 1, SNAP);
   return (
@@ -134,15 +134,15 @@ const Icone: React.FC<{ f: number; at: number; x: number; y: number; e: string; 
   );
 };
 // número grande dentro da janela
-const Numero: React.FC<{ f: number; at: number; x: number; y: number; texto: string; legenda: string; cor?: string }> = ({
-  f,
-  at,
-  x,
-  y,
-  texto,
-  legenda,
-  cor = K.vermelho,
-}) => {
+const Numero: React.FC<{
+  f: number;
+  at: number;
+  x: number;
+  y: number;
+  texto: string;
+  legenda: string;
+  cor?: string;
+}> = ({ f, at, x, y, texto, legenda, cor = K.vermelho }) => {
   if (f < at) return null;
   const k = it(f, at, at + 12, 0, 1, SNAP);
   return (
@@ -157,21 +157,40 @@ const Numero: React.FC<{ f: number; at: number; x: number; y: number; texto: str
         transform: `scale(${0.7 + 0.3 * k})`,
       }}
     >
-      <div style={{ fontFamily: PIX, fontSize: 64, color: cor, lineHeight: "84px" }}>{texto}</div>
-      <div style={{ fontFamily: SANS, fontWeight: 800, fontSize: 28, color: K.tinta, lineHeight: 1.2 }}>{legenda}</div>
+      <div
+        style={{
+          fontFamily: PIX,
+          fontSize: 64,
+          color: cor,
+          lineHeight: "84px",
+        }}
+      >
+        {texto}
+      </div>
+      <div
+        style={{
+          fontFamily: SANS,
+          fontWeight: 800,
+          fontSize: 28,
+          color: K.tinta,
+          lineHeight: 1.2,
+        }}
+      >
+        {legenda}
+      </div>
     </div>
   );
 };
 // cartão de faixa etária
-const Faixa: React.FC<{ f: number; at: number; y: number; icone: string; idade: string; doses: string; cor?: string }> = ({
-  f,
-  at,
-  y,
-  icone,
-  idade,
-  doses,
-  cor = K.azul,
-}) => {
+const Faixa: React.FC<{
+  f: number;
+  at: number;
+  y: number;
+  icone: string;
+  idade: string;
+  doses: string;
+  cor?: string;
+}> = ({ f, at, y, icone, idade, doses, cor = K.azul }) => {
   if (f < at) return null;
   const k = it(f, at, at + 12, 0, 1, SNAP);
   return (
@@ -195,8 +214,27 @@ const Faixa: React.FC<{ f: number; at: number; y: number; icone: string; idade: 
       }}
     >
       <span style={{ fontFamily: EMOJI, fontSize: 52 }}>{icone}</span>
-      <span style={{ fontFamily: SANS, fontWeight: 800, fontSize: 38, color: K.tinta, flex: 1 }}>{idade}</span>
-      <span style={{ fontFamily: PIX, fontSize: 26, color: K.branco, background: cor, padding: "12px 14px", border: `3px solid ${K.tinta}` }}>
+      <span
+        style={{
+          fontFamily: SANS,
+          fontWeight: 800,
+          fontSize: 38,
+          color: K.tinta,
+          flex: 1,
+        }}
+      >
+        {idade}
+      </span>
+      <span
+        style={{
+          fontFamily: PIX,
+          fontSize: 26,
+          color: K.branco,
+          background: cor,
+          padding: "12px 14px",
+          border: `3px solid ${K.tinta}`,
+        }}
+      >
         <Pixelado texto={doses} size={26} />
       </span>
     </div>
@@ -207,7 +245,11 @@ const Faixa: React.FC<{ f: number; at: number; y: number; icone: string; idade: 
 const Contagio: React.FC<{ f: number; at: number }> = ({ f, at }) => {
   const k = P(f, at, at + 40);
   return (
-    <svg width={890} height={500} style={{ position: "absolute", left: 0, top: 0 }}>
+    <svg
+      width={890}
+      height={500}
+      style={{ position: "absolute", left: 0, top: 0 }}
+    >
       {Array.from({ length: 10 }, (_, i) => {
         const ang = (i / 10) * Math.PI * 2 - Math.PI / 2;
         const x = 445 + Math.cos(ang) * 300;
@@ -218,18 +260,69 @@ const Contagio: React.FC<{ f: number; at: number }> = ({ f, at }) => {
         return (
           <g key={i}>
             {f >= at && (
-              <line x1={445} y1={240} x2={x} y2={y} stroke={vac ? "#cbd5e1" : K.vermelho} strokeWidth={4} strokeDasharray="10 10" opacity={vac ? 0.5 : 0.5 * Math.max(0, Math.min(1, k * 10 - i))} />
+              <line
+                x1={445}
+                y1={240}
+                x2={x}
+                y2={y}
+                stroke={vac ? "#cbd5e1" : K.vermelho}
+                strokeWidth={4}
+                strokeDasharray="10 10"
+                opacity={vac ? 0.5 : 0.5 * Math.max(0, Math.min(1, k * 10 - i))}
+              />
             )}
-            <circle cx={x} cy={y - 22} r={18} fill={cor} stroke={K.tinta} strokeWidth={4} />
-            <rect x={x - 22} y={y - 2} width={44} height={40} rx={12} fill={cor} stroke={K.tinta} strokeWidth={4} />
-            {vac && f >= at + 10 && <text x={x + 26} y={y - 30} fontFamily={EMOJI} fontSize={36}>🛡️</text>}
+            <circle
+              cx={x}
+              cy={y - 22}
+              r={18}
+              fill={cor}
+              stroke={K.tinta}
+              strokeWidth={4}
+            />
+            <rect
+              x={x - 22}
+              y={y - 2}
+              width={44}
+              height={40}
+              rx={12}
+              fill={cor}
+              stroke={K.tinta}
+              strokeWidth={4}
+            />
+            {vac && f >= at + 10 && (
+              <text x={x + 26} y={y - 30} fontFamily={EMOJI} fontSize={36}>
+                🛡️
+              </text>
+            )}
           </g>
         );
       })}
-      <circle cx={445} cy={212} r={26} fill={K.vermelho} stroke={K.tinta} strokeWidth={5} />
-      <rect x={415} y={244} width={60} height={56} rx={14} fill={K.vermelho} stroke={K.tinta} strokeWidth={5} />
+      <circle
+        cx={445}
+        cy={212}
+        r={26}
+        fill={K.vermelho}
+        stroke={K.tinta}
+        strokeWidth={5}
+      />
+      <rect
+        x={415}
+        y={244}
+        width={60}
+        height={56}
+        rx={14}
+        fill={K.vermelho}
+        stroke={K.tinta}
+        strokeWidth={5}
+      />
       {[0, 1, 2, 3, 4].map((i) => (
-        <circle key={i} cx={430 + (i % 3) * 15} cy={200 + Math.floor(i / 3) * 18} r={4} fill={K.amarelo} />
+        <circle
+          key={i}
+          cx={430 + (i % 3) * 15}
+          cy={200 + Math.floor(i / 3) * 18}
+          r={4}
+          fill={K.amarelo}
+        />
       ))}
     </svg>
   );
@@ -277,7 +370,8 @@ const Legenda: React.FC<{ f: number }> = ({ f }) => {
       }}
     >
       {b.map((w, i) => {
-        const ativa = t >= w.start - 0.03 && t < (b[i + 1]?.start ?? w.end + 0.6);
+        const ativa =
+          t >= w.start - 0.03 && t < (b[i + 1]?.start ?? w.end + 0.6);
         return (
           <span
             key={i}
@@ -334,7 +428,15 @@ const Plantao: React.FC<{ f: number }> = ({ f }) => (
       opacity: 0.4 + 0.6 * Math.abs(Math.sin(f / 9)),
     }}
   >
-    <span style={{ display: "inline-block", width: 22, height: 22, background: K.vermelho, marginRight: 16 }} />
+    <span
+      style={{
+        display: "inline-block",
+        width: 22,
+        height: 22,
+        background: K.vermelho,
+        marginRight: 16,
+      }}
+    />
     <Pixelado texto="NOTÍCIAS DA FARMÁCIA #2" size={26} />
   </div>
 );
@@ -344,10 +446,32 @@ const S1: React.FC<{ f: number }> = ({ f }) =>
   !cena(f, 0) ? null : (
     <>
       <Plantao f={f} />
-      <Titulo f={f} at={4} linhas={[[{ t: "VACINA DO" }], [{ t: "SARAMPO", cor: K.vermelho }], [{ t: "DE NOVO?" }]]} size={64} />
-      <Janela f={f} at={T.alerta - 10} y={600} h={480} titulo="ministério da saúde · alerta">
+      <Titulo
+        f={f}
+        at={4}
+        linhas={[
+          [{ t: "VACINA DO" }],
+          [{ t: "SARAMPO", cor: K.vermelho }],
+          [{ t: "DE NOVO?" }],
+        ]}
+        size={64}
+      />
+      <Janela
+        f={f}
+        at={T.alerta - 10}
+        y={600}
+        h={480}
+        titulo="ministério da saúde · alerta"
+      >
         <Icone f={f} at={T.alerta - 4} x={445} y={150} e="💉" size={140} />
-        <Selo f={f} at={T.alerta + 14} x={445} y={330} texto="ALERTA" size={40} />
+        <Selo
+          f={f}
+          at={T.alerta + 14}
+          x={445}
+          y={330}
+          texto="ALERTA"
+          size={40}
+        />
       </Janela>
     </>
   );
@@ -355,26 +479,80 @@ const S1: React.FC<{ f: number }> = ({ f }) =>
 const S2: React.FC<{ f: number }> = ({ f }) =>
   !cena(f, 1) ? null : (
     <>
-      <Titulo f={f} at={R(1)[0]} linhas={[[{ t: "SARAMPO NAS" }], [{ t: "AMÉRICAS", cor: K.vermelho }]]} size={56} />
+      <Titulo
+        f={f}
+        at={R(1)[0]}
+        linhas={[[{ t: "SARAMPO NAS" }], [{ t: "AMÉRICAS", cor: K.vermelho }]]}
+        size={56}
+      />
       <Janela f={f} at={T.eua} y={480} h={330} titulo="estados unidos">
         <Icone f={f} at={T.eua + 4} x={110} y={120} e="🇺🇸" size={110} />
-        <Numero f={f} at={T.anos35} x={200} y={20} texto="+35" legenda="anos sem tantos casos" />
-        <Numero f={f} at={T.noventa} x={545} y={20} texto="90%" legenda="dos doentes não estavam vacinados" />
+        <Numero
+          f={f}
+          at={T.anos35}
+          x={200}
+          y={20}
+          texto="+35"
+          legenda="anos sem tantos casos"
+        />
+        <Numero
+          f={f}
+          at={T.noventa}
+          x={545}
+          y={20}
+          texto="90%"
+          legenda="dos doentes não estavam vacinados"
+        />
       </Janela>
       <Janela f={f} at={T.brasil} y={850} h={330} titulo="brasil · 2026">
         <Icone f={f} at={T.brasil + 4} x={110} y={120} e="🇧🇷" size={110} />
-        <Numero f={f} at={T.casos52} x={200} y={20} texto="52" legenda="casos, todos vindos de fora" cor={K.laranja} />
-        <Numero f={f} at={T.circulando} x={545} y={20} texto="0" legenda="circulação do vírus aqui" cor={K.verde} />
+        <Numero
+          f={f}
+          at={T.casos52}
+          x={200}
+          y={20}
+          texto="52"
+          legenda="casos, todos vindos de fora"
+          cor={K.laranja}
+        />
+        <Numero
+          f={f}
+          at={T.circulando}
+          x={545}
+          y={20}
+          texto="0"
+          legenda="circulação do vírus aqui"
+          cor={K.verde}
+        />
       </Janela>
-      <Selo f={f} at={T.chegar} x={540} y={830} texto="RISCO DE CHEGAR" size={30} cor={K.laranja} />
+      <Selo
+        f={f}
+        at={T.chegar}
+        x={540}
+        y={830}
+        texto="RISCO DE CHEGAR"
+        size={30}
+        cor={K.laranja}
+      />
     </>
   );
 
 const S3: React.FC<{ f: number }> = ({ f }) =>
   !cena(f, 2) ? null : (
     <>
-      <Titulo f={f} at={R(2)[0]} linhas={[[{ t: "SUPER" }], [{ t: "CONTAGIOSO", cor: K.vermelho }]]} size={60} />
-      <Janela f={f} at={T.contagiosas - 20} y={500} h={560} titulo="1 doente → 9 de 10 sem vacina">
+      <Titulo
+        f={f}
+        at={R(2)[0]}
+        linhas={[[{ t: "SUPER" }], [{ t: "CONTAGIOSO", cor: K.vermelho }]]}
+        size={60}
+      />
+      <Janela
+        f={f}
+        at={T.contagiosas - 20}
+        y={500}
+        h={560}
+        titulo="1 doente → 9 de 10 sem vacina"
+      >
         {f >= T.contagiosas && <Contagio f={f} at={T.nove - 20} />}
       </Janela>
       <div
@@ -418,15 +596,60 @@ const S3: React.FC<{ f: number }> = ({ f }) =>
 const S4: React.FC<{ f: number }> = ({ f }) =>
   !cena(f, 3) ? null : (
     <>
-      <Titulo f={f} at={R(3)[0]} linhas={[[{ t: "TRÍPLICE" }], [{ t: "VIRAL", cor: K.azul }]]} size={60} />
-      <div style={{ position: "absolute", top: 450, width: 1080, textAlign: "center", fontFamily: VT, fontSize: 44, color: K.tinta, opacity: P(f, T.triplice + 30, T.triplice + 44) }}>
+      <Titulo
+        f={f}
+        at={R(3)[0]}
+        linhas={[[{ t: "TRÍPLICE" }], [{ t: "VIRAL", cor: K.azul }]]}
+        size={60}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: 450,
+          width: 1080,
+          textAlign: "center",
+          fontFamily: VT,
+          fontSize: 44,
+          color: K.tinta,
+          opacity: P(f, T.triplice + 30, T.triplice + 44),
+        }}
+      >
         sarampo + caxumba + rubéola
       </div>
       <Janela f={f} at={T.emDia} y={530} h={630} titulo="quem está em dia ✓">
-        <Faixa f={f} at={T.doze} y={20} icone="👶" idade="criança: 12 e 15 meses" doses="2 DOSES" />
-        <Faixa f={f} at={T.ate29} y={150} icone="🧑" idade="de 1 a 29 anos" doses="2 DOSES" />
-        <Faixa f={f} at={T.ate59} y={280} icone="🧔" idade="de 30 a 59 anos" doses="1 DOSE" />
-        <Faixa f={f} at={T.profissionais} y={410} icone="🩺" idade="profissional de saúde" doses="2 DOSES" cor={K.verde} />
+        <Faixa
+          f={f}
+          at={T.doze}
+          y={20}
+          icone="👶"
+          idade="criança: 12 e 15 meses"
+          doses="2 DOSES"
+        />
+        <Faixa
+          f={f}
+          at={T.ate29}
+          y={150}
+          icone="🧑"
+          idade="de 1 a 29 anos"
+          doses="2 DOSES"
+        />
+        <Faixa
+          f={f}
+          at={T.ate59}
+          y={280}
+          icone="🧔"
+          idade="de 30 a 59 anos"
+          doses="1 DOSE"
+        />
+        <Faixa
+          f={f}
+          at={T.profissionais}
+          y={410}
+          icone="🩺"
+          idade="profissional de saúde"
+          doses="2 DOSES"
+          cor={K.verde}
+        />
       </Janela>
     </>
   );
@@ -434,11 +657,32 @@ const S4: React.FC<{ f: number }> = ({ f }) =>
 const S5: React.FC<{ f: number }> = ({ f }) =>
   !cena(f, 4) ? null : (
     <>
-      <Titulo f={f} at={R(4)[0]} linhas={[[{ t: "JÁ ESTÁ" }], [{ t: "EM DIA?", cor: K.verde }]]} size={64} />
-      <Janela f={f} at={R(4)[0] + 10} y={520} h={560} titulo="caderneta de vacinação">
+      <Titulo
+        f={f}
+        at={R(4)[0]}
+        linhas={[[{ t: "JÁ ESTÁ" }], [{ t: "EM DIA?", cor: K.verde }]]}
+        size={64}
+      />
+      <Janela
+        f={f}
+        at={R(4)[0] + 10}
+        y={520}
+        h={560}
+        titulo="caderneta de vacinação"
+      >
         <Icone f={f} at={R(4)[0] + 16} x={445} y={170} e="📒" size={170} />
         <Icone f={f} at={T.protegido - 10} x={560} y={110} e="✅" size={90} />
-        <div style={{ position: "absolute", top: 320, width: 890, display: "flex", flexDirection: "column", alignItems: "center", gap: 18 }}>
+        <div
+          style={{
+            position: "absolute",
+            top: 320,
+            width: 890,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 18,
+          }}
+        >
           <Linha f={f} at={T.protegido} size={48} cor={K.verde}>
             protegido!
           </Linha>
@@ -453,18 +697,55 @@ const S5: React.FC<{ f: number }> = ({ f }) =>
 const S6: React.FC<{ f: number }> = ({ f }) =>
   !cena(f, 5) ? null : (
     <>
-      <Titulo f={f} at={R(5)[0]} linhas={[[{ t: "QUEM DEVE" }], [{ t: "TOMAR", cor: K.laranja }]]} size={64} />
+      <Titulo
+        f={f}
+        at={R(5)[0]}
+        linhas={[[{ t: "QUEM DEVE" }], [{ t: "TOMAR", cor: K.laranja }]]}
+        size={64}
+      />
       <Janela f={f} at={T.agora + 10} y={500} h={340} titulo="vá ao posto se…">
-        <div style={{ position: "absolute", inset: 30, display: "flex", flexDirection: "column", gap: 16 }}>
-          <Linha f={f} at={T.agora + 20}>❌ não tem as doses</Linha>
-          <Linha f={f} at={T.perdeu}>📒 perdeu a caderneta</Linha>
-          <Linha f={f} at={T.perdeu + 40}>🤔 não lembra</Linha>
+        <div
+          style={{
+            position: "absolute",
+            inset: 30,
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+          }}
+        >
+          <Linha f={f} at={T.agora + 20}>
+            ❌ não tem as doses
+          </Linha>
+          <Linha f={f} at={T.perdeu}>
+            📒 perdeu a caderneta
+          </Linha>
+          <Linha f={f} at={T.perdeu + 40}>
+            🤔 não lembra
+          </Linha>
         </div>
-        <Selo f={f} at={T.malNao} x={680} y={200} texto="DOSE A MAIS: OK" size={22} cor={K.verde} />
+        <Selo
+          f={f}
+          at={T.malNao}
+          x={680}
+          y={200}
+          texto="DOSE A MAIS: OK"
+          size={22}
+          cor={K.verde}
+        />
       </Janela>
       <Janela f={f} at={T.viajar} y={880} h={300} titulo="vai viajar? ✈️">
-        <div style={{ position: "absolute", inset: 26, display: "flex", flexDirection: "column", gap: 14 }}>
-          <Linha f={f} at={T.paises} size={38}>🇺🇸 EUA · 🇲🇽 México · 🇨🇦 Canadá</Linha>
+        <div
+          style={{
+            position: "absolute",
+            inset: 26,
+            display: "flex",
+            flexDirection: "column",
+            gap: 14,
+          }}
+        >
+          <Linha f={f} at={T.paises} size={38}>
+            🇺🇸 EUA · 🇲🇽 México · 🇨🇦 Canadá
+          </Linha>
           <Linha f={f} at={T.antes15} size={42} fundo={K.amarelo}>
             vacine 15 dias antes
           </Linha>
@@ -476,10 +757,31 @@ const S6: React.FC<{ f: number }> = ({ f }) =>
 const S7: React.FC<{ f: number }> = ({ f }) =>
   !cena(f, 6) ? null : (
     <>
-      <Titulo f={f} at={R(6)[0]} linhas={[[{ t: "A EXCEÇÃO:" }], [{ t: "BLOQUEIO", cor: K.vermelho }]]} size={60} />
-      <Janela f={f} at={T.casosRegiao} y={500} h={360} titulo="casos na região 📍">
-        <div style={{ position: "absolute", inset: 30, display: "flex", flexDirection: "column", gap: 16 }}>
-          <Linha f={f} at={T.bloqueio} size={44}>bloqueio vacinal</Linha>
+      <Titulo
+        f={f}
+        at={R(6)[0]}
+        linhas={[[{ t: "A EXCEÇÃO:" }], [{ t: "BLOQUEIO", cor: K.vermelho }]]}
+        size={60}
+      />
+      <Janela
+        f={f}
+        at={T.casosRegiao}
+        y={500}
+        h={360}
+        titulo="casos na região 📍"
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 30,
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+          }}
+        >
+          <Linha f={f} at={T.bloqueio} size={44}>
+            bloqueio vacinal
+          </Linha>
           <Linha f={f} at={T.extra} size={40} fundo={K.amarelo}>
             dose extra para todos
           </Linha>
@@ -489,8 +791,18 @@ const S7: React.FC<{ f: number }> = ({ f }) =>
         </div>
       </Janela>
       <Janela f={f} at={T.sp} y={900} h={290} titulo="2026 · são paulo">
-        <div style={{ position: "absolute", inset: 24, display: "flex", flexDirection: "column", gap: 12 }}>
-          <Linha f={f} at={T.sp + 30} size={34}>São Paulo · Guarulhos · S. Bernardo</Linha>
+        <div
+          style={{
+            position: "absolute",
+            inset: 24,
+            display: "flex",
+            flexDirection: "column",
+            gap: 12,
+          }}
+        >
+          <Linha f={f} at={T.sp + 30} size={34}>
+            São Paulo · Guarulhos · S. Bernardo
+          </Linha>
           <Linha f={f} at={T.doseZero} size={36} cor={K.azul}>
             👶 6 a 11 meses: dose zero
           </Linha>
@@ -502,9 +814,28 @@ const S7: React.FC<{ f: number }> = ({ f }) =>
 const S8: React.FC<{ f: number }> = ({ f }) =>
   !cena(f, 7) ? null : (
     <>
-      <Titulo f={f} at={R(7)[0]} linhas={[[{ t: "QUEM NÃO" }], [{ t: "PODE TOMAR", cor: K.vermelho }]]} size={60} />
-      <Janela f={f} at={T.vivo - 10} y={500} h={620} titulo="vírus vivo enfraquecido 🦠">
-        <div style={{ position: "absolute", inset: 34, display: "flex", flexDirection: "column", gap: 26 }}>
+      <Titulo
+        f={f}
+        at={R(7)[0]}
+        linhas={[[{ t: "QUEM NÃO" }], [{ t: "PODE TOMAR", cor: K.vermelho }]]}
+        size={60}
+      />
+      <Janela
+        f={f}
+        at={T.vivo - 10}
+        y={500}
+        h={620}
+        titulo="vírus vivo enfraquecido 🦠"
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 34,
+            display: "flex",
+            flexDirection: "column",
+            gap: 26,
+          }}
+        >
           <Linha f={f} at={T.gestantes} size={48} cor={K.vermelho}>
             🤰 gestantes
           </Linha>
@@ -525,15 +856,51 @@ const S8: React.FC<{ f: number }> = ({ f }) =>
 const S9: React.FC<{ f: number }> = ({ f }) =>
   !cena(f, 8) ? null : (
     <>
-      <Titulo f={f} at={R(8)[0]} linhas={[[{ t: "COMO" }], [{ t: "CONFERIR", cor: K.azul }]]} size={64} />
-      <Janela f={f} at={T.caderneta - 10} y={500} h={560} titulo="onde ver suas vacinas">
+      <Titulo
+        f={f}
+        at={R(8)[0]}
+        linhas={[[{ t: "COMO" }], [{ t: "CONFERIR", cor: K.azul }]]}
+        size={64}
+      />
+      <Janela
+        f={f}
+        at={T.caderneta - 10}
+        y={500}
+        h={560}
+        titulo="onde ver suas vacinas"
+      >
         <Icone f={f} at={T.caderneta} x={260} y={180} e="📒" size={150} />
         <Icone f={f} at={T.app} x={620} y={180} e="📱" size={150} />
-        <div style={{ position: "absolute", top: 300, left: 0, width: 890, display: "flex", justifyContent: "space-around", fontFamily: SANS, fontWeight: 800, fontSize: 34, color: K.tinta }}>
-          <span style={{ opacity: P(f, T.caderneta, T.caderneta + 10) }}>caderneta</span>
-          <span style={{ opacity: P(f, T.app, T.app + 10) }}>Meu SUS Digital</span>
+        <div
+          style={{
+            position: "absolute",
+            top: 300,
+            left: 0,
+            width: 890,
+            display: "flex",
+            justifyContent: "space-around",
+            fontFamily: SANS,
+            fontWeight: 800,
+            fontSize: 34,
+            color: K.tinta,
+          }}
+        >
+          <span style={{ opacity: P(f, T.caderneta, T.caderneta + 10) }}>
+            caderneta
+          </span>
+          <span style={{ opacity: P(f, T.app, T.app + 10) }}>
+            Meu SUS Digital
+          </span>
         </div>
-        <Selo f={f} at={T.gratis + 10} x={445} y={430} texto="GRÁTIS NO SUS" size={34} cor={K.verde} />
+        <Selo
+          f={f}
+          at={T.gratis + 10}
+          x={445}
+          y={430}
+          texto="GRÁTIS NO SUS"
+          size={34}
+          cor={K.verde}
+        />
       </Janela>
     </>
   );
@@ -542,13 +909,37 @@ const S10: React.FC<{ f: number }> = ({ f }) =>
   !cena(f, 9) ? null : (
     <>
       <Titulo f={f} at={R(9)[0]} linhas={[[{ t: "SINTOMAS" }]]} size={68} />
-      <Janela f={f} at={T.sintomas + 10} y={420} h={700} titulo="fique de olho 👀">
-        <div style={{ position: "absolute", inset: 30, display: "flex", flexDirection: "column", gap: 18 }}>
-          <Linha f={f} at={T.febre} size={44}>🌡️ febre alta</Linha>
-          <Linha f={f} at={T.manchas} size={44}>🔴 manchas vermelhas</Linha>
-          <Linha f={f} at={T.tosse} size={44}>😷 tosse</Linha>
-          <Linha f={f} at={T.nariz} size={44}>🤧 nariz escorrendo</Linha>
-          <Linha f={f} at={T.olhos} size={44}>👁️ olhos vermelhos</Linha>
+      <Janela
+        f={f}
+        at={T.sintomas + 10}
+        y={420}
+        h={700}
+        titulo="fique de olho 👀"
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 30,
+            display: "flex",
+            flexDirection: "column",
+            gap: 18,
+          }}
+        >
+          <Linha f={f} at={T.febre} size={44}>
+            🌡️ febre alta
+          </Linha>
+          <Linha f={f} at={T.manchas} size={44}>
+            🔴 manchas vermelhas
+          </Linha>
+          <Linha f={f} at={T.tosse} size={44}>
+            😷 tosse
+          </Linha>
+          <Linha f={f} at={T.nariz} size={44}>
+            🤧 nariz escorrendo
+          </Linha>
+          <Linha f={f} at={T.olhos} size={44}>
+            👁️ olhos vermelhos
+          </Linha>
           <Linha f={f} at={T.atendimento} size={40} fundo={K.amarelo}>
             🏥 procure atendimento
           </Linha>
@@ -560,7 +951,13 @@ const S10: React.FC<{ f: number }> = ({ f }) =>
 const S11: React.FC<{ f: number }> = ({ f }) =>
   !cena(f, 10) ? null : (
     <>
-      <Titulo f={f} at={T.siga} linhas={[[{ t: "ME SIGA", cor: K.azul }]]} size={84} top={560} />
+      <Titulo
+        f={f}
+        at={T.siga}
+        linhas={[[{ t: "ME SIGA", cor: K.azul }]]}
+        size={84}
+        top={560}
+      />
       <div
         style={{
           position: "absolute",
@@ -605,7 +1002,9 @@ const S12: React.FC<{ f: number }> = ({ f }) =>
   );
 
 const SFX: [number, string, number][] = [
-  ...PARTES.slice(1).map(([de]) => [de, "whoosh", 0.25] as [number, string, number]),
+  ...PARTES.slice(1).map(
+    ([de]) => [de, "whoosh", 0.25] as [number, string, number],
+  ),
   [T.alerta + 14, "trava", 0.32],
   [T.anos35, "pop", 0.2],
   [T.noventa, "pop", 0.2],
@@ -644,7 +1043,10 @@ export const VideoSarampo: React.FC = () => {
       <Canto f={f} />
       <Legenda f={f} />
       <Audio src={staticFile("sarampo/narracao.mp3")} />
-      <Audio src={staticFile("sarampo/musica.wav")} volume={(fr) => 0.07 * (1 - P(fr, DURATION - 60, DURATION))} />
+      <Audio
+        src={staticFile("sarampo/musica.wav")}
+        volume={(fr) => 0.07 * (1 - P(fr, DURATION - 60, DURATION))}
+      />
       {SFX.map(([fr, name, vol], i) => (
         <Sequence key={i} from={fr} durationInFrames={60}>
           <Audio src={staticFile(`sfx/${name}.wav`)} volume={vol} />
@@ -658,7 +1060,15 @@ export const VideoSarampo: React.FC = () => {
 export const CapaSarampo: React.FC = () => (
   <AbsoluteFill>
     <Fundo f={0} />
-    <div style={{ position: "absolute", top: 120, width: 1080, display: "flex", justifyContent: "center" }}>
+    <div
+      style={{
+        position: "absolute",
+        top: 120,
+        width: 1080,
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       <span
         style={{
           fontFamily: PIX,
@@ -679,13 +1089,56 @@ export const CapaSarampo: React.FC = () => (
         </span>
       </span>
     </div>
-    <Titulo f={100} at={0} top={290} size={80} linhas={[[{ t: "SARAMPO:" }], [{ t: "VACINA", cor: K.vermelho }], [{ t: "DE NOVO?" }]]} />
-    <Janela f={100} at={0} x={50} y={680} w={640} h={500} titulo="ministério da saúde">
-      <div style={{ position: "absolute", top: 40, width: 630, textAlign: "center", fontFamily: EMOJI, fontSize: 130 }}>💉</div>
-      <div style={{ position: "absolute", top: 230, width: 630, textAlign: "center", fontFamily: SANS, fontWeight: 800, fontSize: 44, lineHeight: 1.2, color: K.tinta }}>
+    <Titulo
+      f={100}
+      at={0}
+      top={290}
+      size={80}
+      linhas={[
+        [{ t: "SARAMPO:" }],
+        [{ t: "VACINA", cor: K.vermelho }],
+        [{ t: "DE NOVO?" }],
+      ]}
+    />
+    <Janela
+      f={100}
+      at={0}
+      x={50}
+      y={680}
+      w={640}
+      h={500}
+      titulo="ministério da saúde"
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: 40,
+          width: 630,
+          textAlign: "center",
+          fontFamily: EMOJI,
+          fontSize: 130,
+        }}
+      >
+        💉
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          top: 230,
+          width: 630,
+          textAlign: "center",
+          fontFamily: SANS,
+          fontWeight: 800,
+          fontSize: 44,
+          lineHeight: 1.2,
+          color: K.tinta,
+        }}
+      >
         quem precisa
         <br />
-        <span style={{ background: K.amarelo, padding: "0 12px" }}>tomar e quem não</span>
+        <span style={{ background: K.amarelo, padding: "0 12px" }}>
+          tomar e quem não
+        </span>
       </div>
     </Janela>
     <div
@@ -700,8 +1153,26 @@ export const CapaSarampo: React.FC = () => (
     >
       <Reporter f={1} boca={[2, 2]} />
     </div>
-    <div style={{ position: "absolute", top: 1240, left: 50, width: 640, textAlign: "center", fontFamily: VT, fontSize: 56, color: K.tinta }}>
-      <span style={{ background: K.branco, border: `4px solid ${K.tinta}`, boxShadow: `6px 6px 0 ${K.tinta}`, padding: "6px 24px" }}>
+    <div
+      style={{
+        position: "absolute",
+        top: 1240,
+        left: 50,
+        width: 640,
+        textAlign: "center",
+        fontFamily: VT,
+        fontSize: 56,
+        color: K.tinta,
+      }}
+    >
+      <span
+        style={{
+          background: K.branco,
+          border: `4px solid ${K.tinta}`,
+          boxShadow: `6px 6px 0 ${K.tinta}`,
+          padding: "6px 24px",
+        }}
+      >
         alerta nas Américas 🔴
       </span>
     </div>

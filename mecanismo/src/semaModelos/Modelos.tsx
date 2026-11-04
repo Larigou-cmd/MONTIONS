@@ -44,7 +44,11 @@ const CENAS: CenaC[] = [
     destaque: "comprimido",
     itens: [
       { at: T.hoje, e: "🏛️", t: "Anvisa · 4 de novembro" },
-      { at: T.comprimido, e: "💊", t: "a mesma substância das canetas, para engolir" },
+      {
+        at: T.comprimido,
+        e: "💊",
+        t: "a mesma substância das canetas, para engolir",
+      },
       { at: T.fica, e: "👀", t: "fica até o final!" },
     ],
     selo: { at: T.comprimido + 20, t: "APROVADO" },
@@ -55,7 +59,11 @@ const CENAS: CenaC[] = [
     destaque: "comprimido",
     itens: [
       { at: T.wegovy, e: "🏷️", t: "da Novo Nordisk" },
-      { at: T.primeiro, e: "🥇", t: "1º GLP-1 em comprimido para obesidade no Brasil" },
+      {
+        at: T.primeiro,
+        e: "🥇",
+        t: "1º GLP-1 em comprimido para obesidade no Brasil",
+      },
       { at: T.ja, e: "🩸", t: "já existia o oral para diabetes tipo 2" },
     ],
     selo: { at: T.primeiraVez, t: "1ª VEZ P/ OBESIDADE" },
@@ -107,7 +115,11 @@ const CENAS: CenaC[] = [
     kicker: "Estudo principal",
     titulo: "O",
     destaque: "resultado",
-    grande: { at: T.treze, t: "-13,6%", sub: "do peso, em média, em ~1 ano e 3 meses" },
+    grande: {
+      at: T.treze,
+      t: "-13,6%",
+      sub: "do peso, em média, em ~1 ano e 3 meses",
+    },
   },
   {
     kicker: "Parecidos com a caneta",
@@ -182,7 +194,11 @@ const BLOCOS: Pw[][] = (() => {
 const blocoAtual = (f: number) => {
   const t = f / 30;
   if (f >= T.siga - 4) return null;
-  const b = BLOCOS.find((bl, i) => t >= bl[0].start - 0.05 && (i === BLOCOS.length - 1 || t < BLOCOS[i + 1][0].start - 0.05));
+  const b = BLOCOS.find(
+    (bl, i) =>
+      t >= bl[0].start - 0.05 &&
+      (i === BLOCOS.length - 1 || t < BLOCOS[i + 1][0].start - 0.05),
+  );
   if (!b || t > b[b.length - 1].end + 0.6) return null;
   return { b, t };
 };
@@ -197,34 +213,100 @@ type Tema = {
 };
 
 // cada cena entra com fade/deslize
-const Entra: React.FC<{ f: number; i: number; children: React.ReactNode; dy?: number }> = ({ f, i, children, dy = 50 }) => {
+const Entra: React.FC<{
+  f: number;
+  i: number;
+  children: React.ReactNode;
+  dy?: number;
+}> = ({ f, i, children, dy = 50 }) => {
   const [a, b] = R(i);
   if (f < a || f >= b) return null;
   const k = Math.min(it(f, a, a + 12, 0, 1, OUT), 1 - P(f, b - 8, b));
-  return <AbsoluteFill style={{ opacity: k, transform: `translateY(${(1 - it(f, a, a + 14, 0, 1, OUT)) * dy}px)` }}>{children}</AbsoluteFill>;
+  return (
+    <AbsoluteFill
+      style={{
+        opacity: k,
+        transform: `translateY(${(1 - it(f, a, a + 14, 0, 1, OUT)) * dy}px)`,
+      }}
+    >
+      {children}
+    </AbsoluteFill>
+  );
 };
 const kIn = (f: number, at: number, d = 12) => it(f, at, at + d, 0, 1, SNAP);
 
 // =============== MODELO 1: escuro e elegante ===============
 const M1C = { cor: "#38bdf8", ruim: "#f87171", ok: "#4ade80" };
 const M1Siga: React.FC<{ f: number }> = ({ f }) => (
-  <div style={{ position: "absolute", top: 720, left: 110, width: 860, height: 300, borderRadius: 30, background: C.box, border: `2px solid ${rgba(M1C.cor, 0.7)}`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12, opacity: P(f, T.siga, T.siga + 14) }}>
-    <span style={{ fontFamily: SERIF, fontWeight: 600, fontSize: 78, color: C.ink }}>
+  <div
+    style={{
+      position: "absolute",
+      top: 720,
+      left: 110,
+      width: 860,
+      height: 300,
+      borderRadius: 30,
+      background: C.box,
+      border: `2px solid ${rgba(M1C.cor, 0.7)}`,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 12,
+      opacity: P(f, T.siga, T.siga + 14),
+    }}
+  >
+    <span
+      style={{ fontFamily: SERIF, fontWeight: 600, fontSize: 78, color: C.ink }}
+    >
       <span style={{ fontFamily: EMOJI }}>👩‍⚕️</span> Me siga
     </span>
-    <span style={{ fontFamily: SANS, fontWeight: 700, fontSize: 34, color: C.ink, textAlign: "center" }}>
+    <span
+      style={{
+        fontFamily: SANS,
+        fontWeight: 700,
+        fontSize: 34,
+        color: C.ink,
+        textAlign: "center",
+      }}
+    >
       para mais dicas de farmacologia
       <br />e curiosidades sobre a área
     </span>
   </div>
 );
-const FinalSerif: React.FC<{ f: number; cor: string; claro?: boolean; font?: string }> = ({ f, cor, claro, font = SERIF }) => (
-  <div style={{ position: "absolute", top: 720, left: 80, width: 920, textAlign: "center", fontFamily: font, fontWeight: 600, fontSize: 80, lineHeight: 1.2, color: claro ? C.ink : "#1b1b1b", opacity: it(f, T.final, T.final + 14, 0, 1, OUT) }}>
-    Consulte um <span style={{ color: cor }}>profissional de saúde</span> para orientações.
+const FinalSerif: React.FC<{
+  f: number;
+  cor: string;
+  claro?: boolean;
+  font?: string;
+}> = ({ f, cor, claro, font = SERIF }) => (
+  <div
+    style={{
+      position: "absolute",
+      top: 720,
+      left: 80,
+      width: 920,
+      textAlign: "center",
+      fontFamily: font,
+      fontWeight: 600,
+      fontSize: 80,
+      lineHeight: 1.2,
+      color: claro ? C.ink : "#1b1b1b",
+      opacity: it(f, T.final, T.final + 14, 0, 1, OUT),
+    }}
+  >
+    Consulte um <span style={{ color: cor }}>profissional de saúde</span> para
+    orientações.
   </div>
 );
 const M1: Tema = {
-  Fundo: ({ f }) => <Background color={cenaDe(f) === 9 ? M1C.ruim : M1C.cor} pulses={[T.comprimido + 20, T.treze, T.desconfie, T.comenta, T.final]} />,
+  Fundo: ({ f }) => (
+    <Background
+      color={cenaDe(f) === 9 ? M1C.ruim : M1C.cor}
+      pulses={[T.comprimido + 20, T.treze, T.desconfie, T.comenta, T.final]}
+    />
+  ),
   Cena: ({ f, i, c }) => (
     <Entra f={f} i={i}>
       {c.especial === "siga" ? (
@@ -233,11 +315,43 @@ const M1: Tema = {
         <FinalSerif f={f} cor={M1C.cor} claro />
       ) : (
         <>
-          <div style={{ position: "absolute", top: 190, width: W, textAlign: "center", fontFamily: SANS, fontWeight: 800, fontSize: 30, letterSpacing: 5, textTransform: "uppercase", color: M1C.cor, opacity: P(f, R(i)[0] + 4, R(i)[0] + 16) }}>
+          <div
+            style={{
+              position: "absolute",
+              top: 190,
+              width: W,
+              textAlign: "center",
+              fontFamily: SANS,
+              fontWeight: 800,
+              fontSize: 30,
+              letterSpacing: 5,
+              textTransform: "uppercase",
+              color: M1C.cor,
+              opacity: P(f, R(i)[0] + 4, R(i)[0] + 16),
+            }}
+          >
             {c.kicker}
           </div>
-          <div style={{ position: "absolute", top: 250, left: 50, width: W - 100, textAlign: "center", fontFamily: SERIF, fontWeight: 600, fontSize: 76, lineHeight: 1.1, color: C.ink, opacity: P(f, R(i)[0] + 6, R(i)[0] + 20), textShadow: `0 0 30px ${rgba(M1C.cor, 0.35)}` }}>
-            {c.titulo} <span style={{ color: i === 9 ? M1C.ruim : M1C.cor }}>{c.destaque}</span>
+          <div
+            style={{
+              position: "absolute",
+              top: 250,
+              left: 50,
+              width: W - 100,
+              textAlign: "center",
+              fontFamily: SERIF,
+              fontWeight: 600,
+              fontSize: 76,
+              lineHeight: 1.1,
+              color: C.ink,
+              opacity: P(f, R(i)[0] + 6, R(i)[0] + 20),
+              textShadow: `0 0 30px ${rgba(M1C.cor, 0.35)}`,
+            }}
+          >
+            {c.titulo}{" "}
+            <span style={{ color: i === 9 ? M1C.ruim : M1C.cor }}>
+              {c.destaque}
+            </span>
           </div>
           {c.itens?.map((x, j) => {
             if (f < x.at) return null;
@@ -265,12 +379,29 @@ const M1: Tema = {
                 }}
               >
                 <span style={{ fontFamily: EMOJI, fontSize: 54 }}>{x.e}</span>
-                <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 38, color: C.ink }}>{x.t}</span>
+                <span
+                  style={{
+                    fontFamily: SANS,
+                    fontWeight: 600,
+                    fontSize: 38,
+                    color: C.ink,
+                  }}
+                >
+                  {x.t}
+                </span>
               </div>
             );
           })}
           {c.selo && f >= c.selo.at && (
-            <div style={{ position: "absolute", top: 1170, width: W, display: "flex", justifyContent: "center" }}>
+            <div
+              style={{
+                position: "absolute",
+                top: 1170,
+                width: W,
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
               <span
                 style={{
                   fontFamily: SANS,
@@ -290,9 +421,37 @@ const M1: Tema = {
             </div>
           )}
           {c.grande && f >= c.grande.at && (
-            <div style={{ position: "absolute", top: 600, width: W, textAlign: "center", transform: `scale(${0.7 + 0.3 * kIn(f, c.grande.at, 16)})` }}>
-              <div style={{ fontFamily: SANS, fontWeight: 900, fontSize: 200, color: M1C.ok, textShadow: `0 0 50px ${rgba(M1C.ok, 0.5)}` }}>{c.grande.t}</div>
-              <div style={{ fontFamily: SANS, fontWeight: 600, fontSize: 40, color: C.ink, marginTop: 10 }}>{c.grande.sub}</div>
+            <div
+              style={{
+                position: "absolute",
+                top: 600,
+                width: W,
+                textAlign: "center",
+                transform: `scale(${0.7 + 0.3 * kIn(f, c.grande.at, 16)})`,
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: SANS,
+                  fontWeight: 900,
+                  fontSize: 200,
+                  color: M1C.ok,
+                  textShadow: `0 0 50px ${rgba(M1C.ok, 0.5)}`,
+                }}
+              >
+                {c.grande.t}
+              </div>
+              <div
+                style={{
+                  fontFamily: SANS,
+                  fontWeight: 600,
+                  fontSize: 40,
+                  color: C.ink,
+                  marginTop: 10,
+                }}
+              >
+                {c.grande.sub}
+              </div>
             </div>
           )}
         </>
@@ -305,13 +464,37 @@ const M1: Tema = {
 const VERDEF = "#39ff14",
   AMBAR = "#ffb000",
   VERM2 = "#ff4d4d";
-const digita = (s: string, f: number, at: number, cps = 1.4) => s.slice(0, Math.max(0, Math.floor((f - at) * cps)));
+const digita = (s: string, f: number, at: number, cps = 1.4) =>
+  s.slice(0, Math.max(0, Math.floor((f - at) * cps)));
 const M2: Tema = {
   Fundo: ({ f }) => (
     <AbsoluteFill style={{ background: "#050805" }}>
-      <AbsoluteFill style={{ backgroundImage: "repeating-linear-gradient(0deg, rgba(57,255,20,0.05) 0 2px, transparent 2px 5px)" }} />
-      <AbsoluteFill style={{ boxShadow: "inset 0 0 260px rgba(57,255,20,0.12)" }} />
-      <div style={{ position: "absolute", top: 70, left: 40, right: 40, height: 70, border: `3px solid ${VERDEF}`, display: "flex", alignItems: "center", padding: "0 24px", fontFamily: PIX, fontSize: 24, color: VERDEF, justifyContent: "space-between" }}>
+      <AbsoluteFill
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, rgba(57,255,20,0.05) 0 2px, transparent 2px 5px)",
+        }}
+      />
+      <AbsoluteFill
+        style={{ boxShadow: "inset 0 0 260px rgba(57,255,20,0.12)" }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: 70,
+          left: 40,
+          right: 40,
+          height: 70,
+          border: `3px solid ${VERDEF}`,
+          display: "flex",
+          alignItems: "center",
+          padding: "0 24px",
+          fontFamily: PIX,
+          fontSize: 24,
+          color: VERDEF,
+          justifyContent: "space-between",
+        }}
+      >
         <span>PHARMACIST.EXE</span>
         <span style={{ opacity: f % 30 < 15 ? 1 : 0.3 }}>● REC</span>
       </div>
@@ -320,40 +503,144 @@ const M2: Tema = {
   Cena: ({ f, i, c }) => (
     <Entra f={f} i={i} dy={0}>
       {c.especial === "siga" ? (
-        <div style={{ position: "absolute", top: 760, width: W, textAlign: "center", fontFamily: VT, fontSize: 70, color: VERDEF }}>
+        <div
+          style={{
+            position: "absolute",
+            top: 760,
+            width: W,
+            textAlign: "center",
+            fontFamily: VT,
+            fontSize: 70,
+            color: VERDEF,
+          }}
+        >
           {">"} {digita("ME SIGA", f, T.siga)}
-          <div style={{ fontSize: 48, marginTop: 20 }}>{digita("para mais dicas de farmacologia", f, T.siga + 10, 2)}</div>
+          <div style={{ fontSize: 48, marginTop: 20 }}>
+            {digita("para mais dicas de farmacologia", f, T.siga + 10, 2)}
+          </div>
         </div>
       ) : c.especial === "final" ? (
-        <div style={{ position: "absolute", top: 760, left: 80, width: 920, textAlign: "center", fontFamily: VT, fontSize: 64, lineHeight: 1.2, color: VERDEF }}>
-          {digita("Consulte um profissional de saúde para orientações.", f, T.final, 2)}
+        <div
+          style={{
+            position: "absolute",
+            top: 760,
+            left: 80,
+            width: 920,
+            textAlign: "center",
+            fontFamily: VT,
+            fontSize: 64,
+            lineHeight: 1.2,
+            color: VERDEF,
+          }}
+        >
+          {digita(
+            "Consulte um profissional de saúde para orientações.",
+            f,
+            T.final,
+            2,
+          )}
         </div>
       ) : (
         <>
-          <div style={{ position: "absolute", top: 200, left: 60, fontFamily: VT, fontSize: 38, color: AMBAR }}>C:\NOTICIAS\{c.kicker.toUpperCase().replace(/ /g, "_")}</div>
-          <div style={{ position: "absolute", top: 260, left: 60, right: 60, fontFamily: PIX, fontSize: 54, lineHeight: 1.4, color: VERDEF, textShadow: `0 0 18px ${rgba(VERDEF, 0.6)}` }}>
-            {digita(`${c.titulo} ${c.destaque ?? ""}`.trim().toUpperCase(), f, R(i)[0] + 4, 1.2)}
+          <div
+            style={{
+              position: "absolute",
+              top: 200,
+              left: 60,
+              fontFamily: VT,
+              fontSize: 38,
+              color: AMBAR,
+            }}
+          >
+            C:\NOTICIAS\{c.kicker.toUpperCase().replace(/ /g, "_")}
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              top: 260,
+              left: 60,
+              right: 60,
+              fontFamily: PIX,
+              fontSize: 54,
+              lineHeight: 1.4,
+              color: VERDEF,
+              textShadow: `0 0 18px ${rgba(VERDEF, 0.6)}`,
+            }}
+          >
+            {digita(
+              `${c.titulo} ${c.destaque ?? ""}`.trim().toUpperCase(),
+              f,
+              R(i)[0] + 4,
+              1.2,
+            )}
             <span style={{ opacity: f % 20 < 10 ? 1 : 0 }}>_</span>
           </div>
           {c.itens?.map((x, j) =>
             f < x.at ? null : (
-              <div key={j} style={{ position: "absolute", left: 60, right: 60, top: 520 + j * 120, fontFamily: VT, fontSize: 50, color: VERDEF, display: "flex", gap: 18 }}>
+              <div
+                key={j}
+                style={{
+                  position: "absolute",
+                  left: 60,
+                  right: 60,
+                  top: 520 + j * 120,
+                  fontFamily: VT,
+                  fontSize: 50,
+                  color: VERDEF,
+                  display: "flex",
+                  gap: 18,
+                }}
+              >
                 <span style={{ color: AMBAR }}>{">"}</span>
                 <span>{digita(x.t, f, x.at, 2)}</span>
               </div>
             ),
           )}
           {c.selo && f >= c.selo.at && (
-            <div style={{ position: "absolute", top: 1100, width: W, textAlign: "center" }}>
-              <span style={{ fontFamily: PIX, fontSize: 34, color: "#050805", background: c.selo.ruim ? VERM2 : VERDEF, padding: "16px 26px", opacity: f - c.selo.at < 24 && f % 8 < 4 ? 0.3 : 1 }}>
+            <div
+              style={{
+                position: "absolute",
+                top: 1100,
+                width: W,
+                textAlign: "center",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: PIX,
+                  fontSize: 34,
+                  color: "#050805",
+                  background: c.selo.ruim ? VERM2 : VERDEF,
+                  padding: "16px 26px",
+                  opacity: f - c.selo.at < 24 && f % 8 < 4 ? 0.3 : 1,
+                }}
+              >
                 [ {c.selo.ruim ? "!!" : "OK"} ] {c.selo.t}
               </span>
             </div>
           )}
           {c.grande && f >= c.grande.at && (
-            <div style={{ position: "absolute", top: 600, width: W, textAlign: "center", fontFamily: PIX, color: VERDEF }}>
-              <div style={{ fontSize: 130, textShadow: `0 0 30px ${rgba(VERDEF, 0.7)}` }}>{digita(c.grande.t, f, c.grande.at, 0.8)}</div>
-              <div style={{ fontFamily: VT, fontSize: 48, marginTop: 30 }}>{digita(c.grande.sub, f, c.grande.at + 10, 2)}</div>
+            <div
+              style={{
+                position: "absolute",
+                top: 600,
+                width: W,
+                textAlign: "center",
+                fontFamily: PIX,
+                color: VERDEF,
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 130,
+                  textShadow: `0 0 30px ${rgba(VERDEF, 0.7)}`,
+                }}
+              >
+                {digita(c.grande.t, f, c.grande.at, 0.8)}
+              </div>
+              <div style={{ fontFamily: VT, fontSize: 48, marginTop: 30 }}>
+                {digita(c.grande.sub, f, c.grande.at + 10, 2)}
+              </div>
             </div>
           )}
         </>
@@ -364,9 +651,28 @@ const M2: Tema = {
     const a = blocoAtual(f);
     if (!a) return null;
     return (
-      <div style={{ position: "absolute", top: 1450, left: 40, right: 40, borderTop: `3px solid ${VERDEF}`, paddingTop: 20, fontFamily: VT, fontSize: 56, color: VERDEF, textAlign: "center" }}>
+      <div
+        style={{
+          position: "absolute",
+          top: 1450,
+          left: 40,
+          right: 40,
+          borderTop: `3px solid ${VERDEF}`,
+          paddingTop: 20,
+          fontFamily: VT,
+          fontSize: 56,
+          color: VERDEF,
+          textAlign: "center",
+        }}
+      >
         {a.b.map((w, i) => (
-          <span key={i} style={{ color: a.t >= w.start - 0.03 ? VERDEF : rgba(VERDEF, 0.35), marginRight: 14 }}>
+          <span
+            key={i}
+            style={{
+              color: a.t >= w.start - 0.03 ? VERDEF : rgba(VERDEF, 0.35),
+              marginRight: 14,
+            }}
+          >
             {limpa(w.text)}
           </span>
         ))}
@@ -376,22 +682,40 @@ const M2: Tema = {
 };
 
 // =============== MODELOS 3 e 4: explicadora clara (com e sem personagem) ===============
-const K4 = { claro: "#ecebe5", azul: "#2f5bff", tinta: "#16161a", amarelo: "#ffe14d", verde: "#16a34a", vermelho: "#e5383b", branco: "#ffffff" };
+const K4 = {
+  claro: "#ecebe5",
+  azul: "#2f5bff",
+  tinta: "#16161a",
+  amarelo: "#ffe14d",
+  verde: "#16a34a",
+  vermelho: "#e5383b",
+  branco: "#ffffff",
+};
 const AZUIS = [0, 3, 6, 10];
 const ehAzul = (i: number) => AZUIS.includes(i);
 const FundoClaro: React.FC<{ f: number }> = ({ f }) => {
   const i = cenaDe(f);
   const antes = i > 0 && ehAzul(i - 1) ? 1 : 0;
-  const k = antes + ((ehAzul(i) ? 1 : 0) - antes) * it(f, R(i)[0], R(i)[0] + 10, 0, 1, EASE);
+  const k =
+    antes +
+    ((ehAzul(i) ? 1 : 0) - antes) * it(f, R(i)[0], R(i)[0] + 10, 0, 1, EASE);
   const linha = k > 0.5 ? "rgba(255,255,255,0.10)" : "rgba(22,22,26,0.06)";
   return (
     <AbsoluteFill style={{ background: mix(K4.claro, K4.azul, k) }}>
-      <AbsoluteFill style={{ backgroundImage: `linear-gradient(${linha} 2px, transparent 2px), linear-gradient(90deg, ${linha} 2px, transparent 2px)`, backgroundSize: "60px 60px", backgroundPosition: `0 ${(f * 0.6) % 60}px` }} />
+      <AbsoluteFill
+        style={{
+          backgroundImage: `linear-gradient(${linha} 2px, transparent 2px), linear-gradient(90deg, ${linha} 2px, transparent 2px)`,
+          backgroundSize: "60px 60px",
+          backgroundPosition: `0 ${(f * 0.6) % 60}px`,
+        }}
+      />
       <AbsoluteFill style={{ boxShadow: "inset 0 0 200px rgba(0,0,0,0.18)" }} />
     </AbsoluteFill>
   );
 };
-const CenaClara = (comPersonagem: boolean): React.FC<{ f: number; i: number; c: CenaC }> =>
+const CenaClara = (
+  comPersonagem: boolean,
+): React.FC<{ f: number; i: number; c: CenaC }> =>
   function CenaClaraInner({ f, i, c }) {
     const azul = ehAzul(i);
     const tinta = azul ? K4.branco : K4.tinta;
@@ -399,23 +723,83 @@ const CenaClara = (comPersonagem: boolean): React.FC<{ f: number; i: number; c: 
     return (
       <Entra f={f} i={i}>
         {c.especial === "siga" ? (
-          <div style={{ position: "absolute", top: comPersonagem ? 300 : 620, left: 50, fontFamily: PIX, fontSize: 70, color: K4.tinta, opacity: P(f, T.siga, T.siga + 12) }}>
+          <div
+            style={{
+              position: "absolute",
+              top: comPersonagem ? 300 : 620,
+              left: 50,
+              fontFamily: PIX,
+              fontSize: 70,
+              color: K4.tinta,
+              opacity: P(f, T.siga, T.siga + 12),
+            }}
+          >
             ME SIGA
-            <div style={{ fontFamily: VT, fontSize: 52, marginTop: 30, lineHeight: 1 }}>
+            <div
+              style={{
+                fontFamily: VT,
+                fontSize: 52,
+                marginTop: 30,
+                lineHeight: 1,
+              }}
+            >
               para mais dicas de
               <br />
               farmacologia 💊
             </div>
           </div>
         ) : c.especial === "final" ? (
-          <div style={{ position: "absolute", top: comPersonagem ? 300 : 700, left: 50, width: 980, fontFamily: PIX, fontSize: 44, lineHeight: "78px", color: K4.tinta, textAlign: comPersonagem ? "left" : "center", opacity: it(f, T.final, T.final + 14, 0, 1, OUT) }}>
-            Consulte um <span style={{ color: K4.azul }}>profissional de saúde</span> para orientações.
+          <div
+            style={{
+              position: "absolute",
+              top: comPersonagem ? 300 : 700,
+              left: 50,
+              width: 980,
+              fontFamily: PIX,
+              fontSize: 44,
+              lineHeight: "78px",
+              color: K4.tinta,
+              textAlign: comPersonagem ? "left" : "center",
+              opacity: it(f, T.final, T.final + 14, 0, 1, OUT),
+            }}
+          >
+            Consulte um{" "}
+            <span style={{ color: K4.azul }}>profissional de saúde</span> para
+            orientações.
           </div>
         ) : (
           <>
-            <div style={{ position: "absolute", top: 170, left: 50, fontFamily: VT, fontSize: 40, color: azul ? K4.amarelo : K4.azul, opacity: P(f, R(i)[0], R(i)[0] + 10) }}>{c.kicker.toUpperCase()}</div>
-            <div style={{ position: "absolute", top: 230, left: 50, right: 50, fontFamily: PIX, fontSize: 56, lineHeight: "78px", color: tinta, textShadow: "5px 5px 0 rgba(22,22,26,0.15)", opacity: P(f, R(i)[0] + 4, R(i)[0] + 16) }}>
-              {c.titulo.toUpperCase()} <span style={{ color: azul ? K4.amarelo : K4.azul }}>{(c.destaque ?? "").toUpperCase()}</span>
+            <div
+              style={{
+                position: "absolute",
+                top: 170,
+                left: 50,
+                fontFamily: VT,
+                fontSize: 40,
+                color: azul ? K4.amarelo : K4.azul,
+                opacity: P(f, R(i)[0], R(i)[0] + 10),
+              }}
+            >
+              {c.kicker.toUpperCase()}
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                top: 230,
+                left: 50,
+                right: 50,
+                fontFamily: PIX,
+                fontSize: 56,
+                lineHeight: "78px",
+                color: tinta,
+                textShadow: "5px 5px 0 rgba(22,22,26,0.15)",
+                opacity: P(f, R(i)[0] + 4, R(i)[0] + 16),
+              }}
+            >
+              {c.titulo.toUpperCase()}{" "}
+              <span style={{ color: azul ? K4.amarelo : K4.azul }}>
+                {(c.destaque ?? "").toUpperCase()}
+              </span>
             </div>
             {c.itens?.map((x, j) => {
               if (f < x.at) return null;
@@ -443,7 +827,16 @@ const CenaClara = (comPersonagem: boolean): React.FC<{ f: number; i: number; c: 
                   }}
                 >
                   <span style={{ fontFamily: EMOJI, fontSize: 54 }}>{x.e}</span>
-                  <span style={{ fontFamily: VT, fontSize: 50, lineHeight: "48px", color: K4.tinta }}>{x.t}</span>
+                  <span
+                    style={{
+                      fontFamily: VT,
+                      fontSize: 50,
+                      lineHeight: "48px",
+                      color: K4.tinta,
+                    }}
+                  >
+                    {x.t}
+                  </span>
                 </div>
               );
             })}
@@ -470,9 +863,37 @@ const CenaClara = (comPersonagem: boolean): React.FC<{ f: number; i: number; c: 
               </div>
             )}
             {c.grande && f >= c.grande.at && (
-              <div style={{ position: "absolute", top: 520, left: 50, width: larg, transform: `scale(${0.7 + 0.3 * kIn(f, c.grande.at, 16)})`, transformOrigin: "left center" }}>
-                <div style={{ fontFamily: PIX, fontSize: comPersonagem ? 96 : 140, color: K4.amarelo, textShadow: "8px 8px 0 rgba(0,0,0,0.3)" }}>{c.grande.t}</div>
-                <div style={{ fontFamily: VT, fontSize: 56, color: K4.branco, marginTop: 30, lineHeight: 1 }}>{c.grande.sub}</div>
+              <div
+                style={{
+                  position: "absolute",
+                  top: 520,
+                  left: 50,
+                  width: larg,
+                  transform: `scale(${0.7 + 0.3 * kIn(f, c.grande.at, 16)})`,
+                  transformOrigin: "left center",
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: PIX,
+                    fontSize: comPersonagem ? 96 : 140,
+                    color: K4.amarelo,
+                    textShadow: "8px 8px 0 rgba(0,0,0,0.3)",
+                  }}
+                >
+                  {c.grande.t}
+                </div>
+                <div
+                  style={{
+                    fontFamily: VT,
+                    fontSize: 56,
+                    color: K4.branco,
+                    marginTop: 30,
+                    lineHeight: 1,
+                  }}
+                >
+                  {c.grande.sub}
+                </div>
               </div>
             )}
           </>
@@ -484,11 +905,37 @@ const LegendaClara: React.FC<{ f: number }> = ({ f }) => {
   const a = blocoAtual(f);
   if (!a) return null;
   return (
-    <div style={{ position: "absolute", top: 1380, left: 40, right: 40, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "6px 14px", fontFamily: VT, fontSize: 70, lineHeight: 1 }}>
+    <div
+      style={{
+        position: "absolute",
+        top: 1380,
+        left: 40,
+        right: 40,
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        gap: "6px 14px",
+        fontFamily: VT,
+        fontSize: 70,
+        lineHeight: 1,
+      }}
+    >
       {a.b.map((w, i) => {
-        const ativa = a.t >= w.start - 0.03 && a.t < (a.b[i + 1]?.start ?? w.end + 0.6);
+        const ativa =
+          a.t >= w.start - 0.03 && a.t < (a.b[i + 1]?.start ?? w.end + 0.6);
         return (
-          <span key={i} style={{ color: ativa ? K4.tinta : K4.branco, background: ativa ? K4.amarelo : "transparent", padding: "0 8px", border: ativa ? `3px solid ${K4.tinta}` : "3px solid transparent", textShadow: ativa ? "none" : `-3px -3px 0 ${K4.tinta}, 3px -3px 0 ${K4.tinta}, -3px 3px 0 ${K4.tinta}, 3px 3px 0 ${K4.tinta}` }}>
+          <span
+            key={i}
+            style={{
+              color: ativa ? K4.tinta : K4.branco,
+              background: ativa ? K4.amarelo : "transparent",
+              padding: "0 8px",
+              border: ativa ? `3px solid ${K4.tinta}` : "3px solid transparent",
+              textShadow: ativa
+                ? "none"
+                : `-3px -3px 0 ${K4.tinta}, 3px -3px 0 ${K4.tinta}, -3px 3px 0 ${K4.tinta}, 3px 3px 0 ${K4.tinta}`,
+            }}
+          >
             {limpa(w.text)}
           </span>
         );
@@ -496,7 +943,21 @@ const LegendaClara: React.FC<{ f: number }> = ({ f }) => {
     </div>
   );
 };
-const ICONES = ["💊", "📢", "👤", "🧬", "💉", "⏱️", "📉", "🤢", "📅", "⚠️", "💬", "💙", "🩺"];
+const ICONES = [
+  "💊",
+  "📢",
+  "👤",
+  "🧬",
+  "💉",
+  "⏱️",
+  "📉",
+  "🤢",
+  "📅",
+  "⚠️",
+  "💬",
+  "💙",
+  "🩺",
+];
 const Apresentadora: React.FC<{ f: number }> = ({ f }) => {
   const i = cenaDe(f);
   const de = R(i)[0];
@@ -504,37 +965,109 @@ const Apresentadora: React.FC<{ f: number }> = ({ f }) => {
   const w = 380 + 120 * fim;
   const x = 680 + (290 - 680) * fim;
   const y = 700 + (900 - 700) * fim;
-  const pulo = i === 0 ? (1 - it(f, 0, 18, 0, 1, SNAP)) * 700 : -Math.sin(Math.min(1, (f - de) / 14) * Math.PI) * 40;
+  const pulo =
+    i === 0
+      ? (1 - it(f, 0, 18, 0, 1, SNAP)) * 700
+      : -Math.sin(Math.min(1, (f - de) / 14) * Math.PI) * 40;
   const respira = Math.sin(f / 20) * 4;
   const ki = it(f, de + 6, de + 16, 0, 1, SNAP);
   return (
     <>
-      <div style={{ position: "absolute", left: x, top: y + pulo + respira, width: w, filter: "drop-shadow(10px 10px 0 rgba(22,22,26,0.22))" }}>
-        <div style={{ transform: `scale(${w / PW})`, transformOrigin: "0 0", width: PW }}>
+      <div
+        style={{
+          position: "absolute",
+          left: x,
+          top: y + pulo + respira,
+          width: w,
+          filter: "drop-shadow(10px 10px 0 rgba(22,22,26,0.22))",
+        }}
+      >
+        <div
+          style={{
+            transform: `scale(${w / PW})`,
+            transformOrigin: "0 0",
+            width: PW,
+          }}
+        >
           <Personagem f={f} boca={boca as number[]} />
         </div>
       </div>
-      <div style={{ position: "absolute", left: x + w - 150, top: y - 50 + respira, width: 116, height: 116, borderRadius: 26, background: K4.branco, border: `5px solid ${K4.tinta}`, boxShadow: `6px 6px 0 ${K4.tinta}`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: EMOJI, fontSize: 62, transform: `scale(${ki}) rotate(${-8 + 4 * Math.sin(f / 15)}deg)` }}>
+      <div
+        style={{
+          position: "absolute",
+          left: x + w - 150,
+          top: y - 50 + respira,
+          width: 116,
+          height: 116,
+          borderRadius: 26,
+          background: K4.branco,
+          border: `5px solid ${K4.tinta}`,
+          boxShadow: `6px 6px 0 ${K4.tinta}`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontFamily: EMOJI,
+          fontSize: 62,
+          transform: `scale(${ki}) rotate(${-8 + 4 * Math.sin(f / 15)}deg)`,
+        }}
+      >
         {ICONES[i]}
       </div>
     </>
   );
 };
-const M3: Tema = { Fundo: FundoClaro, Cena: CenaClara(true), Extra: Apresentadora };
-const M4: Tema = { Fundo: FundoClaro, Cena: CenaClara(false), Legenda: LegendaClara };
+const M3: Tema = {
+  Fundo: FundoClaro,
+  Cena: CenaClara(true),
+  Extra: Apresentadora,
+};
+const M4: Tema = {
+  Fundo: FundoClaro,
+  Cena: CenaClara(false),
+  Legenda: LegendaClara,
+};
 
 // =============== MODELO 6: Origens / colagem de papel ===============
 const M6: Tema = {
   Fundo: () => <Vx.Fundo />,
   Cena: ({ f, i, c }) => (
     <Entra f={f} i={i} dy={0}>
-      <AbsoluteFill style={{ transform: `scale(${1 + 0.04 * P(f, R(i)[0], R(i)[1])})`, transformOrigin: "540px 820px" }}>
+      <AbsoluteFill
+        style={{
+          transform: `scale(${1 + 0.04 * P(f, R(i)[0], R(i)[1])})`,
+          transformOrigin: "540px 820px",
+        }}
+      >
         {c.especial === "siga" ? (
-          <div style={{ position: "absolute", top: 640, width: W, textAlign: "center" }}>
-            <div style={{ fontFamily: JORNAL, fontWeight: 900, fontSize: 110, color: Vx.V.tinta }}>
-              <Vx.Marca f={f} at={T.siga + 10}>Me siga</Vx.Marca>
+          <div
+            style={{
+              position: "absolute",
+              top: 640,
+              width: W,
+              textAlign: "center",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: JORNAL,
+                fontWeight: 900,
+                fontSize: 110,
+                color: Vx.V.tinta,
+              }}
+            >
+              <Vx.Marca f={f} at={T.siga + 10}>
+                Me siga
+              </Vx.Marca>
             </div>
-            <div style={{ fontFamily: MAO, fontWeight: 700, fontSize: 64, color: Vx.V.vermelho, marginTop: 20 }}>
+            <div
+              style={{
+                fontFamily: MAO,
+                fontWeight: 700,
+                fontSize: 64,
+                color: Vx.V.vermelho,
+                marginTop: 20,
+              }}
+            >
               para mais dicas de farmacologia
               <br />e curiosidades sobre a área
             </div>
@@ -544,26 +1077,104 @@ const M6: Tema = {
         ) : (
           <>
             <Vx.Capitulo f={f} at={R(i)[0]} kicker={c.kicker}>
-              {c.titulo} <Vx.Marca f={f} at={R(i)[0] + 16}>{c.destaque}</Vx.Marca>
+              {c.titulo}{" "}
+              <Vx.Marca f={f} at={R(i)[0] + 16}>
+                {c.destaque}
+              </Vx.Marca>
             </Vx.Capitulo>
             {c.itens && (
-              <Vx.Recorte f={f} at={c.itens[0].at - 10} x={80} y={420} w={920} rot={i % 2 ? 1.2 : -1.2} seed={i + 2}>
+              <Vx.Recorte
+                f={f}
+                at={c.itens[0].at - 10}
+                x={80}
+                y={420}
+                w={920}
+                rot={i % 2 ? 1.2 : -1.2}
+                seed={i + 2}
+              >
                 {c.itens.map((x, j) => (
-                  <div key={j} style={{ display: "flex", alignItems: "center", gap: 20, minHeight: 110, borderBottom: j < (c.itens?.length ?? 0) - 1 ? "2px solid rgba(27,27,27,0.12)" : "none", opacity: P(f, x.at, x.at + 8) }}>
-                    <span style={{ fontFamily: EMOJI, fontSize: 52 }}>{x.e}</span>
-                    <span style={{ fontFamily: SANS, fontWeight: 700, fontSize: 42, color: Vx.V.tinta }}>{x.t}</span>
+                  <div
+                    key={j}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 20,
+                      minHeight: 110,
+                      borderBottom:
+                        j < (c.itens?.length ?? 0) - 1
+                          ? "2px solid rgba(27,27,27,0.12)"
+                          : "none",
+                      opacity: P(f, x.at, x.at + 8),
+                    }}
+                  >
+                    <span style={{ fontFamily: EMOJI, fontSize: 52 }}>
+                      {x.e}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: SANS,
+                        fontWeight: 700,
+                        fontSize: 42,
+                        color: Vx.V.tinta,
+                      }}
+                    >
+                      {x.t}
+                    </span>
                   </div>
                 ))}
               </Vx.Recorte>
             )}
-            {c.selo && <Vx.Carimbo f={f} at={c.selo.at} x={540} y={1260} texto={c.selo.t} cor={c.selo.ruim ? Vx.V.vermelho : Vx.V.verde} size={44} />}
+            {c.selo && (
+              <Vx.Carimbo
+                f={f}
+                at={c.selo.at}
+                x={540}
+                y={1260}
+                texto={c.selo.t}
+                cor={c.selo.ruim ? Vx.V.vermelho : Vx.V.verde}
+                size={44}
+              />
+            )}
             {c.grande && f >= c.grande.at && (
-              <div style={{ position: "absolute", top: 560, width: W, textAlign: "center" }}>
-                <div style={{ position: "relative", display: "inline-block", fontFamily: JORNAL, fontWeight: 900, fontSize: 210, color: Vx.V.tinta }}>
+              <div
+                style={{
+                  position: "absolute",
+                  top: 560,
+                  width: W,
+                  textAlign: "center",
+                }}
+              >
+                <div
+                  style={{
+                    position: "relative",
+                    display: "inline-block",
+                    fontFamily: JORNAL,
+                    fontWeight: 900,
+                    fontSize: 210,
+                    color: Vx.V.tinta,
+                  }}
+                >
                   {c.grande.t}
-                  <Vx.Traco f={f} at={c.grande.at + 10} d={Vx.circulo(660, 230)} x={20} y={30} w={660} h={230} />
+                  <Vx.Traco
+                    f={f}
+                    at={c.grande.at + 10}
+                    d={Vx.circulo(660, 230)}
+                    x={20}
+                    y={30}
+                    w={660}
+                    h={230}
+                  />
                 </div>
-                <Vx.Nota f={f} at={c.grande.at + 30} x={140} y={300} w={800} rot={-3} cor={Vx.V.vermelho} size={58}>
+                <Vx.Nota
+                  f={f}
+                  at={c.grande.at + 30}
+                  x={140}
+                  y={300}
+                  w={800}
+                  rot={-3}
+                  cor={Vx.V.vermelho}
+                  size={58}
+                >
                   {c.grande.sub}
                 </Vx.Nota>
               </div>
@@ -582,8 +1193,31 @@ const LIMA = "#c8ff3d",
 const M8: Tema = {
   Fundo: ({ f }) => (
     <AbsoluteFill style={{ background: PRETO }}>
-      <AbsoluteFill style={{ backgroundImage: `radial-gradient(${rgba(LIMA, 0.08)} 1.5px, transparent 1.5px)`, backgroundSize: "36px 36px", backgroundPosition: `0 ${(f * 0.4) % 36}px` }} />
-      <div style={{ position: "absolute", top: 80, left: 50, right: 50, height: 74, borderRadius: 40, border: `2px solid ${rgba(LIMA, 0.5)}`, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 30px", fontFamily: VT, fontSize: 36, color: LIMA }}>
+      <AbsoluteFill
+        style={{
+          backgroundImage: `radial-gradient(${rgba(LIMA, 0.08)} 1.5px, transparent 1.5px)`,
+          backgroundSize: "36px 36px",
+          backgroundPosition: `0 ${(f * 0.4) % 36}px`,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: 80,
+          left: 50,
+          right: 50,
+          height: 74,
+          borderRadius: 40,
+          border: `2px solid ${rgba(LIMA, 0.5)}`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "0 30px",
+          fontFamily: VT,
+          fontSize: 36,
+          color: LIMA,
+        }}
+      >
         <span>● notícias da farmácia</span>
         <span>#3</span>
       </div>
@@ -592,17 +1226,70 @@ const M8: Tema = {
   Cena: ({ f, i, c }) => (
     <Entra f={f} i={i} dy={30}>
       {c.especial === "siga" ? (
-        <div style={{ position: "absolute", top: 700, width: W, textAlign: "center", fontFamily: SANS, fontWeight: 900, fontSize: 100, color: LIMA, textShadow: `0 0 30px ${rgba(LIMA, 0.6)}` }}>
+        <div
+          style={{
+            position: "absolute",
+            top: 700,
+            width: W,
+            textAlign: "center",
+            fontFamily: SANS,
+            fontWeight: 900,
+            fontSize: 100,
+            color: LIMA,
+            textShadow: `0 0 30px ${rgba(LIMA, 0.6)}`,
+          }}
+        >
           ME SIGA
-          <div style={{ fontFamily: VT, fontSize: 52, color: "#fff", marginTop: 20, fontWeight: 400, textShadow: "none" }}>para mais dicas de farmacologia</div>
+          <div
+            style={{
+              fontFamily: VT,
+              fontSize: 52,
+              color: "#fff",
+              marginTop: 20,
+              fontWeight: 400,
+              textShadow: "none",
+            }}
+          >
+            para mais dicas de farmacologia
+          </div>
         </div>
       ) : c.especial === "final" ? (
         <FinalSerif f={f} cor={LIMA} claro font={SANS} />
       ) : (
         <>
-          <div style={{ position: "absolute", top: 210, left: 60, fontFamily: VT, fontSize: 40, color: CINZA8 }}>{c.kicker.toLowerCase()}</div>
-          <div style={{ position: "absolute", top: 260, left: 60, right: 60, fontFamily: SANS, fontWeight: 900, fontSize: 82, lineHeight: 1.05, color: "#fff", textTransform: "uppercase", opacity: P(f, R(i)[0] + 2, R(i)[0] + 14) }}>
-            {c.titulo} <span style={{ color: LIMA, textShadow: `0 0 26px ${rgba(LIMA, 0.6)}` }}>{c.destaque}</span>
+          <div
+            style={{
+              position: "absolute",
+              top: 210,
+              left: 60,
+              fontFamily: VT,
+              fontSize: 40,
+              color: CINZA8,
+            }}
+          >
+            {c.kicker.toLowerCase()}
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              top: 260,
+              left: 60,
+              right: 60,
+              fontFamily: SANS,
+              fontWeight: 900,
+              fontSize: 82,
+              lineHeight: 1.05,
+              color: "#fff",
+              textTransform: "uppercase",
+              opacity: P(f, R(i)[0] + 2, R(i)[0] + 14),
+            }}
+          >
+            {c.titulo}{" "}
+            <span
+              style={{ color: LIMA, textShadow: `0 0 26px ${rgba(LIMA, 0.6)}` }}
+            >
+              {c.destaque}
+            </span>
           </div>
           {c.itens?.map((x, j) => {
             const ab = P(f, x.at, x.at + 10);
@@ -626,21 +1313,82 @@ const M8: Tema = {
                   opacity: P(f, R(i)[0] + 8 + j * 4, R(i)[0] + 18 + j * 4),
                 }}
               >
-                <span style={{ fontFamily: VT, fontSize: 50, color: ab > 0 ? LIMA : CINZA8 }}>{String(j + 1).padStart(2, "0")}</span>
-                <span style={{ fontFamily: EMOJI, fontSize: 46 }}>{ab > 0 ? x.e : "🔒"}</span>
-                <span style={{ fontFamily: SANS, fontWeight: 700, fontSize: 38, color: ab > 0 ? "#fff" : "#444", filter: ab > 0 ? "none" : "blur(6px)" }}>{x.t}</span>
+                <span
+                  style={{
+                    fontFamily: VT,
+                    fontSize: 50,
+                    color: ab > 0 ? LIMA : CINZA8,
+                  }}
+                >
+                  {String(j + 1).padStart(2, "0")}
+                </span>
+                <span style={{ fontFamily: EMOJI, fontSize: 46 }}>
+                  {ab > 0 ? x.e : "🔒"}
+                </span>
+                <span
+                  style={{
+                    fontFamily: SANS,
+                    fontWeight: 700,
+                    fontSize: 38,
+                    color: ab > 0 ? "#fff" : "#444",
+                    filter: ab > 0 ? "none" : "blur(6px)",
+                  }}
+                >
+                  {x.t}
+                </span>
               </div>
             );
           })}
           {c.selo && f >= c.selo.at && (
-            <div style={{ position: "absolute", top: 1130, width: W, textAlign: "center" }}>
-              <span style={{ fontFamily: SANS, fontWeight: 900, fontSize: 46, color: PRETO, background: c.selo.ruim ? "#ff5a5a" : LIMA, padding: "16px 34px", borderRadius: 999, display: "inline-block", transform: `scale(${0.7 + 0.3 * kIn(f, c.selo.at)})` }}>{c.selo.t}</span>
+            <div
+              style={{
+                position: "absolute",
+                top: 1130,
+                width: W,
+                textAlign: "center",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: SANS,
+                  fontWeight: 900,
+                  fontSize: 46,
+                  color: PRETO,
+                  background: c.selo.ruim ? "#ff5a5a" : LIMA,
+                  padding: "16px 34px",
+                  borderRadius: 999,
+                  display: "inline-block",
+                  transform: `scale(${0.7 + 0.3 * kIn(f, c.selo.at)})`,
+                }}
+              >
+                {c.selo.t}
+              </span>
             </div>
           )}
           {c.grande && f >= c.grande.at && (
-            <div style={{ position: "absolute", top: 600, width: W, textAlign: "center", transform: `scale(${0.7 + 0.3 * kIn(f, c.grande.at, 16)})` }}>
-              <div style={{ fontFamily: SANS, fontWeight: 900, fontSize: 210, color: LIMA, textShadow: `0 0 50px ${rgba(LIMA, 0.6)}` }}>{c.grande.t}</div>
-              <div style={{ fontFamily: VT, fontSize: 50, color: "#fff" }}>{c.grande.sub}</div>
+            <div
+              style={{
+                position: "absolute",
+                top: 600,
+                width: W,
+                textAlign: "center",
+                transform: `scale(${0.7 + 0.3 * kIn(f, c.grande.at, 16)})`,
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: SANS,
+                  fontWeight: 900,
+                  fontSize: 210,
+                  color: LIMA,
+                  textShadow: `0 0 50px ${rgba(LIMA, 0.6)}`,
+                }}
+              >
+                {c.grande.t}
+              </div>
+              <div style={{ fontFamily: VT, fontSize: 50, color: "#fff" }}>
+                {c.grande.sub}
+              </div>
             </div>
           )}
         </>
@@ -651,11 +1399,27 @@ const M8: Tema = {
     const a = blocoAtual(f);
     if (!a) return null;
     return (
-      <div style={{ position: "absolute", top: 1420, left: 60, right: 60, textAlign: "center", fontFamily: SANS, fontWeight: 800, fontSize: 52, color: "#fff" }}>
+      <div
+        style={{
+          position: "absolute",
+          top: 1420,
+          left: 60,
+          right: 60,
+          textAlign: "center",
+          fontFamily: SANS,
+          fontWeight: 800,
+          fontSize: 52,
+          color: "#fff",
+        }}
+      >
         {a.b.map((w, i) => {
-          const ativa = a.t >= w.start - 0.03 && a.t < (a.b[i + 1]?.start ?? w.end + 0.6);
+          const ativa =
+            a.t >= w.start - 0.03 && a.t < (a.b[i + 1]?.start ?? w.end + 0.6);
           return (
-            <span key={i} style={{ color: ativa ? LIMA : "#fff", marginRight: 12 }}>
+            <span
+              key={i}
+              style={{ color: ativa ? LIMA : "#fff", marginRight: 12 }}
+            >
               {limpa(w.text)}
             </span>
           );
@@ -667,7 +1431,9 @@ const M8: Tema = {
 
 // ---------- motor ----------
 const SFX: [number, string, number][] = [
-  ...PARTES.slice(1).map(([de]) => [de, "whoosh", 0.22] as [number, string, number]),
+  ...PARTES.slice(1).map(
+    ([de]) => [de, "whoosh", 0.22] as [number, string, number],
+  ),
   [T.comprimido + 20, "plim", 0.26],
   [T.receita, "trava", 0.26],
   [T.quase, "trava", 0.26],
@@ -689,7 +1455,10 @@ const Motor: React.FC<{ tema: Tema }> = ({ tema }) => {
       {Extra && <Extra f={f} />}
       {Legenda && <Legenda f={f} />}
       <Audio src={staticFile("semaComprimido/narracao.mp3")} />
-      <Audio src={staticFile("semaComprimido/musica.wav")} volume={(fr) => 0.07 * (1 - P(fr, DURATION - 60, DURATION))} />
+      <Audio
+        src={staticFile("semaComprimido/musica.wav")}
+        volume={(fr) => 0.07 * (1 - P(fr, DURATION - 60, DURATION))}
+      />
       {SFX.map(([fr, name, vol], i) => (
         <Sequence key={i} from={fr} durationInFrames={60}>
           <Audio src={staticFile(`sfx/${name}.wav`)} volume={vol} />

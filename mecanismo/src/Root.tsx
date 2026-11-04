@@ -167,6 +167,8 @@ import { VideoSemaFichas } from "./semaModelos/Fichas";
 
 import { VideoSemaFichasEscuro } from "./semaModelos/FichasEscuro";
 
+import { VideoSemaPainel3D } from "./semaModelos/Painel3D";
+
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -1262,6 +1264,14 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="SemaFichasEscuro"
       component={VideoSemaFichasEscuro}
+      durationInFrames={DURATION_SEMA_MODELOS}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SemaPainel3D"
+      component={VideoSemaPainel3D}
       durationInFrames={DURATION_SEMA_MODELOS}
       fps={FPS}
       width={1080}

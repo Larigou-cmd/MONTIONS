@@ -107,6 +107,7 @@ import { VideoTirzepAlimentos, CapaTirzepAlimentos, DURATION_TIRZEP } from "./ti
 import { VideoPenicilinaVids, CapaPenicilinaVids, DURATION_PENICILINA_VIDS } from "./penicilinaVids/Video";
 import { VideoPressaoParar, CapaPressaoParar, DURATION_PRESSAO } from "./pressaoParar/Video";
 import { VideoInsulinaFlow, CapaInsulinaFlow, DURATION_INSULINA_FLOW } from "./insulinaFlow/Video";
+import { VideoMetforminaOrigem, CapaMetforminaOrigem, DURATION_METFORMINA_ORIGEM } from "./metforminaOrigem/Video";
 import { VideoVacinaFlow, CapaVacinaFlow, DURATION_VACINA_FLOW } from "./vacinaFlow/Video";
 import { VideoLevotiroxina, CapaLevotiroxina, DURATION_LEVO } from "./levotiroxina/Video";
 import { VideoAlopurinol, CapaAlopurinol, DURATION_ALOP } from "./alopurinol/Video";
@@ -607,6 +608,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="PressaoPararCapa"
       component={CapaPressaoParar}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="MetforminaOrigem"
+      component={VideoMetforminaOrigem}
+      durationInFrames={DURATION_METFORMINA_ORIGEM}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="MetforminaOrigemCapa"
+      component={CapaMetforminaOrigem}
       durationInFrames={1}
       fps={FPS}
       width={1080}

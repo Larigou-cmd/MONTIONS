@@ -69,6 +69,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 60 | Por que não existe insulina em comprimido? (clipes do Google Flow montados no Remotion) | [60_insulina_comprimido.md](textos/60_insulina_comprimido.md) | [capa_insulina_comprimido.png](capas/capa_insulina_comprimido.png) |
 | 61 | Você construiu a vacina: o cartaz de procurado (clipes do Google Flow montados no Remotion) | [61_vacina_procurado.md](textos/61_vacina_procurado.md) | [capa_vacina_procurado.png](capas/capa_vacina_procurado.png) |
 | 62 | A origem dos remédios #3: a metformina e a flor medieval (boneco de palito, clipes do Google Flow) | [62_origem_metformina.md](textos/62_origem_metformina.md) | [capa_origem_metformina.png](capas/capa_origem_metformina.png) |
+| 63 | O café não te dá energia: ele esconde o cansaço (Modelo 1, receptor em 3D) | [63_cafeina_sono.md](textos/63_cafeina_sono.md) | [capa_cafeina.png](capas/capa_cafeina.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

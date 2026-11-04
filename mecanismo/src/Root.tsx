@@ -163,6 +163,8 @@ import {
   DURATION as DURATION_SEMA_MODELOS,
 } from "./semaModelos/Modelos";
 
+import { VideoSemaFichas } from "./semaModelos/Fichas";
+
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -1242,6 +1244,14 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="SemaM8"
       component={SemaM8}
+      durationInFrames={DURATION_SEMA_MODELOS}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SemaFichas"
+      component={VideoSemaFichas}
       durationInFrames={DURATION_SEMA_MODELOS}
       fps={FPS}
       width={1080}

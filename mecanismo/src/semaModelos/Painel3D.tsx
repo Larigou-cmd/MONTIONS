@@ -1358,3 +1358,36 @@ export const VideoSemaPainel3D: React.FC = () => {
     </AbsoluteFill>
   );
 };
+
+// Capa no Modelo 9 (serve em 1080×1920 e em 3:4, 1080×1440): tudo entre y≈120 e 1350,
+// então os 20% de baixo ficam livres no TikTok e nada é cortado no 3:4.
+export const CapaSemaPainel3D: React.FC = () => {
+  const canto = (x: number, y: number, rx: number, ry: number) => (
+    <path d={`M ${x} ${y + 50 * ry} L ${x} ${y} L ${x + 50 * rx} ${y}`} stroke={rgba(N.neon, 0.8)} strokeWidth={5} fill="none" />
+  );
+  return (
+    <AbsoluteFill>
+      <Fundo f={0} />
+      <svg width={W} height={1440} style={{ position: "absolute" }}>
+        {canto(40, 90, 1, 1)}
+        {canto(1040, 90, -1, 1)}
+        {canto(40, 1380, 1, -1)}
+        {canto(1040, 1380, -1, -1)}
+      </svg>
+      <div style={{ position: "absolute", top: 130, width: W, display: "flex", justifyContent: "center" }}>
+        <span style={{ fontFamily: VT, fontSize: 40, color: N.neon, border: `3px solid ${rgba(N.neon, 0.7)}`, padding: "4px 20px", boxShadow: `0 0 20px ${rgba(N.neon, 0.4)}` }}>● NOTÍCIAS DA FARMÁCIA #3</span>
+      </div>
+      <div style={{ position: "absolute", top: 220, width: W, textAlign: "center", fontFamily: SERIF, fontStyle: "italic", fontSize: 130, lineHeight: 1, color: N.txt, textShadow: `0 0 40px ${rgba(N.neon, 0.4)}` }}>Semaglutida</div>
+      <div style={{ position: "absolute", top: 370, width: W, textAlign: "center", fontFamily: SANS, fontWeight: 900, fontSize: 104, lineHeight: 1, color: N.neon, letterSpacing: 2, textShadow: `0 0 36px ${rgba(N.neon, 0.7)}` }}>EM COMPRIMIDO</div>
+      <div style={{ position: "absolute", left: 0, top: 470, width: W, height: 680 }}>
+        <Objeto3D f={60} ini={0} tipo="duelo" h={680} zoom={1.5} />
+      </div>
+      <div style={{ position: "absolute", left: 540, top: 1180, transform: "translate(-50%,-50%) rotate(-6deg)", fontFamily: SANS, fontWeight: 900, fontSize: 64, letterSpacing: 4, color: N.neon, border: `7px solid ${N.neon}`, borderRadius: 12, padding: "6px 28px", whiteSpace: "nowrap", background: "rgba(0,0,0,0.6)", textShadow: `0 0 18px ${N.neon}`, boxShadow: `0 0 30px ${rgba(N.neon, 0.5)}` }}>
+        APROVADA PELA ANVISA
+      </div>
+      <div style={{ position: "absolute", top: 1275, width: W, textAlign: "center", fontFamily: SANS, fontWeight: 300, fontSize: 56, color: "#f2f2f2" }}>
+        caneta ou <Sel>comprimido</Sel>?
+      </div>
+    </AbsoluteFill>
+  );
+};

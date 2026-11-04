@@ -167,7 +167,7 @@ import { VideoSemaFichas } from "./semaModelos/Fichas";
 
 import { VideoSemaFichasEscuro } from "./semaModelos/FichasEscuro";
 
-import { VideoSemaPainel3D } from "./semaModelos/Painel3D";
+import { VideoSemaPainel3D, CapaSemaPainel3D } from "./semaModelos/Painel3D";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -1276,6 +1276,22 @@ export const RemotionRoot: React.FC = () => (
       fps={FPS}
       width={1080}
       height={1920}
+    />
+    <Composition
+      id="SemaPainel3DCapa"
+      component={CapaSemaPainel3D}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SemaPainel3DCapa34"
+      component={CapaSemaPainel3D}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1440}
     />
   </>
 );

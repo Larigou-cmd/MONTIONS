@@ -56,7 +56,7 @@ const Caneta: React.FC<{ s?: number }> = ({ s = 1 }) => (
   </group>
 );
 
-const Cena: React.FC<{ f: number; ini: number; tipo: Tipo3D; marcos: number[] }> = ({ f, ini, tipo, marcos }) => {
+const Cena: React.FC<{ f: number; ini: number; tipo: Tipo3D; marcos: number[]; zoom: number }> = ({ f, ini, tipo, marcos, zoom }) => {
   const { gl, scene, camera } = useThree();
   useLayoutEffect(() => {
     const pm = new THREE.PMREMGenerator(gl);
@@ -66,7 +66,7 @@ const Cena: React.FC<{ f: number; ini: number; tipo: Tipo3D; marcos: number[] }>
   }, [gl, scene]);
   const t = f - ini;
   useLayoutEffect(() => {
-    camera.position.set(Math.sin(t / 140) * 1.4, 0.8 + Math.sin(t / 200) * 0.3, 11 - Math.min(1.5, t / 200));
+    camera.position.set(Math.sin(t / 140) * 1.4, 0.8 + Math.sin(t / 200) * 0.3, (11 - Math.min(1.5, t / 200)) / zoom);
     camera.lookAt(0, 0, 0);
     camera.updateProjectionMatrix();
   }, [camera, t]);
@@ -208,11 +208,11 @@ const Cena: React.FC<{ f: number; ini: number; tipo: Tipo3D; marcos: number[] }>
   );
 };
 
-export const Objeto3D: React.FC<{ f: number; ini: number; tipo: Tipo3D; marcos?: number[]; h?: number }> = ({ f, ini, tipo, marcos = [], h = 900 }) => {
+export const Objeto3D: React.FC<{ f: number; ini: number; tipo: Tipo3D; marcos?: number[]; h?: number; zoom?: number }> = ({ f, ini, tipo, marcos = [], h = 900, zoom = 1 }) => {
   const { width } = useVideoConfig();
   return (
     <ThreeCanvas width={width} height={h} camera={{ fov: 45, near: 0.1, far: 80, position: [0, 0.8, 11] }}>
-      <Cena f={f} ini={ini} tipo={tipo} marcos={marcos} />
+      <Cena f={f} ini={ini} tipo={tipo} marcos={marcos} zoom={zoom} />
     </ThreeCanvas>
   );
 };

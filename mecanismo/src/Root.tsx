@@ -153,6 +153,16 @@ import {
   DURATION as DURATION_SEMA_COMPRIMIDO,
 } from "./semaComprimido/Video";
 
+import {
+  SemaM1,
+  SemaM2,
+  SemaM3,
+  SemaM4,
+  SemaM6,
+  SemaM8,
+  DURATION as DURATION_SEMA_MODELOS,
+} from "./semaModelos/Modelos";
+
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -1185,6 +1195,54 @@ export const RemotionRoot: React.FC = () => (
       id="SemaComprimidoCapa"
       component={CapaSemaComprimido}
       durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SemaM1"
+      component={SemaM1}
+      durationInFrames={DURATION_SEMA_MODELOS}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SemaM2"
+      component={SemaM2}
+      durationInFrames={DURATION_SEMA_MODELOS}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SemaM3"
+      component={SemaM3}
+      durationInFrames={DURATION_SEMA_MODELOS}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SemaM4"
+      component={SemaM4}
+      durationInFrames={DURATION_SEMA_MODELOS}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SemaM6"
+      component={SemaM6}
+      durationInFrames={DURATION_SEMA_MODELOS}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SemaM8"
+      component={SemaM8}
+      durationInFrames={DURATION_SEMA_MODELOS}
       fps={FPS}
       width={1080}
       height={1920}

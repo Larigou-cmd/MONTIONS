@@ -1,7 +1,7 @@
 # Notícias da Farmácia #3 — Anvisa aprova a semaglutida em comprimido para obesidade
 
 Formato: quadro "Notícias da Farmácia", modelo reportagem (repórter no canto, estilo explicadora pixel, igual ao #1 e #2). Duração estimada: ~2min05s.
-Estratégia de comentários: pergunta plantada no começo (curiosidade até o fim) + pergunta de escolha fácil no final ("caneta ou comprimido", responde com 1 palavra ou emoji) + convite para dúvidas que viram vídeos-resposta.
+Estratégia de comentários: pergunta plantada no começo (curiosidade até o fim) + pergunta de escolha fácil no final ("caneta ou comprimido", responde com 1 palavra ou emoji) + convite para contar a experiência (sem tirar dúvidas).
 Dica de gravação (ElevenLabs, Juliana, Eleven v4): números já escritos por extenso. Se ela errar "semaglutida", escreva "sema-glutida".
 
 ## Narração
@@ -37,7 +37,7 @@ Ainda não tem preço definido, e a previsão é que chegue às farmácias no pr
 Então cuidado: se aparecer semaglutida em comprimido à venda na internet antes disso, desconfie. Pode ser falsificada.
 
 11. **Pergunta para os comentários**
-E aí, você prefere a caneta ou o comprimido? Uma injeção por semana, ou um comprimido todo dia, em jejum? Comenta aí: caneta ou comprimido! E se você já usa semaglutida, me conta como está sendo. Ficou com dúvida? Deixa nos comentários, que eu respondo nos próximos vídeos.
+E aí, qual combina mais com a sua rotina: uma injeção por semana, ou um comprimido todo dia, em jejum? Comenta aí: caneta ou comprimido! E se você já usa semaglutida, me conta como está sendo.
 
 12. **Me siga**
 Me siga para mais dicas de farmacologia e curiosidades sobre a área.
@@ -51,7 +51,7 @@ Duas placas grandes lado a lado: 💉 CANETA (1x por semana) × 💊 COMPRIMIDO 
 ## Depois de postar (estratégia de comentários)
 1. **Comentário fixado:** comente você mesma logo depois de postar e fixe: "Caneta 💉 ou comprimido 💊? Eu quero saber! 👇"
 2. **Responda rápido:** fique respondendo nos primeiros 30 a 60 minutos. Conversa com ida e volta pesa mais para o algoritmo do que muitos comentários soltos.
-3. **Responda com vídeo:** pegue as dúvidas mais repetidas e responda com "responder com vídeo" (TikTok) ou um novo Reels. Isso vira série e puxa quem comentou de volta.
+3. **Respostas curtas:** responda com reações simples ("que bom que está dando certo!", "a rotina conta muito, né?"), sem entrar em dúvidas de tratamento.
 4. **Legenda com a mesma pergunta:** termine a legenda com "Caneta ou comprimido? Comenta 👇".
 5. **Evite:** "comenta SIM" ou "comenta qualquer coisa" (as redes tratam como isca e entregam menos), e pedir curtida.
 6. **Cuidado ético:** não indique dose nem remédio nos comentários. Responda com informação geral e "converse com seu médico ou farmacêutico".

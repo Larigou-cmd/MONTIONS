@@ -2,6 +2,10 @@
 
 > Cole este arquivo no começo de uma nova conversa com o Claude para ele continuar de onde parou.
 
+## Onde fica o projeto
+- Desde 03/11/2026 a pasta do projeto é **E:\MONTIONS** (mudou do C:, que estava cheio).
+- Renderizar com TEMP e TMP apontando para `E:\remotion-temp`.
+
 ## Quem sou e o que faço
 - Farmacêutica, falo português do Brasil e não sou programadora: preciso de explicações simples.
 - Faço vídeos verticais educativos de farmacologia para Shorts, Reels e TikTok, além de pins para o Pinterest.

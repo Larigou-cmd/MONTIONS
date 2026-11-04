@@ -1,6 +1,6 @@
 # Notícias da Farmácia #3 — Anvisa aprova a semaglutida em comprimido para obesidade
 
-Formato: quadro "Notícias da Farmácia". Duração estimada: ~2min05s.
+Formato: quadro "Notícias da Farmácia", modelo reportagem (repórter no canto, estilo explicadora pixel, igual ao #1 e #2). Duração estimada: ~2min05s.
 Estratégia de comentários: pergunta plantada no começo (curiosidade até o fim) + pergunta de escolha fácil no final ("caneta ou comprimido", responde com 1 palavra ou emoji) + convite para dúvidas que viram vídeos-resposta.
 Dica de gravação (ElevenLabs, Juliana, Eleven v4): números já escritos por extenso. Se ela errar "semaglutida", escreva "sema-glutida".
 
@@ -37,7 +37,7 @@ Ainda não tem preço definido, e a previsão é que chegue às farmácias no pr
 Então cuidado: se aparecer semaglutida em comprimido à venda na internet antes disso, desconfie. Pode ser falsificada.
 
 11. **Pergunta para os comentários**
-E agora eu quero saber: se o seu médico indicasse, você ficaria com a caneta, uma vez por semana, ou com o comprimido, todo dia? Comenta aí: caneta ou comprimido. E se você já usa semaglutida, conta como está sendo. Ficou com alguma dúvida? Deixa nos comentários, que eu respondo nos próximos vídeos.
+E aí, você prefere a caneta ou o comprimido? Uma injeção por semana, ou um comprimido todo dia, em jejum? Comenta aí: caneta ou comprimido! E se você já usa semaglutida, me conta como está sendo. Ficou com dúvida? Deixa nos comentários, que eu respondo nos próximos vídeos.
 
 12. **Me siga**
 Me siga para mais dicas de farmacologia e curiosidades sobre a área.

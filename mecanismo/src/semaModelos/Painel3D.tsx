@@ -2,6 +2,7 @@ import React from "react";
 import {
   AbsoluteFill,
   Audio,
+  Img,
   Sequence,
   random,
   staticFile,
@@ -511,6 +512,22 @@ const Cenas: React.FC<{ f: number }> = ({ f }) => (
     {/* 11 e 12 */}
     {ativa(f, 11) && (
       <>
+        {/* foto de perfil da usuária (logo do perfil) acima do "Me siga" */}
+        <Img
+          src={staticFile("semaComprimido/logo.jpg")}
+          style={{
+            position: "absolute",
+            left: 540 - 160,
+            top: 210,
+            width: 320,
+            height: 320,
+            borderRadius: 160,
+            border: `5px solid ${N.neon}`,
+            boxShadow: `0 0 40px ${rgba(N.neon, 0.6)}`,
+            opacity: P(f, T.siga - 4, T.siga + 8),
+            transform: `scale(${0.7 + 0.3 * it(f, T.siga - 4, T.siga + 12, 0, 1, SNAP)})`,
+          }}
+        />
         <Titulo f={f} at={T.siga} y={560} size={110}>
           Me siga
         </Titulo>

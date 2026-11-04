@@ -109,7 +109,7 @@ import { VideoPressaoParar, CapaPressaoParar, DURATION_PRESSAO } from "./pressao
 import { VideoInsulinaFlow, CapaInsulinaFlow, DURATION_INSULINA_FLOW } from "./insulinaFlow/Video";
 import { VideoMetforminaOrigem, CapaMetforminaOrigem, DURATION_METFORMINA_ORIGEM } from "./metforminaOrigem/Video";
 import { VideoCafeina, CapaCafeina, DURATION_CAFEINA } from "./cafeina/Video";
-import { VideoCafeinaFlow, DURATION_CAFEINA_FLOW } from "./cafeinaFlow/Video";
+import { VideoCafeinaFlow, CapaCafeinaFlow, DURATION_CAFEINA_FLOW } from "./cafeinaFlow/Video";
 import { VideoVacinaFlow, CapaVacinaFlow, DURATION_VACINA_FLOW } from "./vacinaFlow/Video";
 import { VideoLevotiroxina, CapaLevotiroxina, DURATION_LEVO } from "./levotiroxina/Video";
 import { VideoAlopurinol, CapaAlopurinol, DURATION_ALOP } from "./alopurinol/Video";
@@ -635,6 +635,14 @@ export const RemotionRoot: React.FC = () => (
       id="CafeinaFlow"
       component={VideoCafeinaFlow}
       durationInFrames={DURATION_CAFEINA_FLOW}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="CafeinaFlowCapa"
+      component={CapaCafeinaFlow}
+      durationInFrames={1}
       fps={FPS}
       width={1080}
       height={1920}

@@ -316,3 +316,62 @@ export const VideoCafeinaFlow: React.FC = () => {
     </AbsoluteFill>
   );
 };
+
+// capa: quadro do clipe 1 (a bateria descolada revela a carinha de sono), reduzido e
+// encaixado embaixo; título à mão em lilás no alto; tudo entre y 300 e 1620
+const PAPEL_CAPA = "rgb(243,231,204)";
+const HALO = "0 0 4px " + PAPEL_CAPA + ", 0 0 10px " + PAPEL_CAPA;
+export const CapaCafeinaFlow: React.FC = () => (
+  <AbsoluteFill style={{ background: PAPEL_CAPA }}>
+    <Img
+      src={staticFile("cafeinaFlow/capa_fundo.png")}
+      style={{
+        position: "absolute",
+        width: 640,
+        height: 1138,
+        left: (1080 - 640) / 2,
+        top: 560,
+        // bordas esfumadas para o quadro sumir no papel (e esconder a xícara cortada)
+        WebkitMaskImage:
+          "linear-gradient(to right, transparent 0%, black 14%, black 90%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 90%, transparent 100%)",
+        WebkitMaskComposite: "source-in",
+        maskComposite: "intersect",
+      }}
+    />
+    <div
+      style={{
+        position: "absolute",
+        top: 300,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+        fontFamily: "Caveat, cursive",
+        fontWeight: 700,
+        color: "#7a62a3",
+        fontSize: 58,
+        textShadow: HALO,
+      }}
+    >
+      Por que o café tira o seu sono
+    </div>
+    <div
+      style={{
+        position: "absolute",
+        top: 372,
+        left: 40,
+        right: 40,
+        textAlign: "center",
+        fontFamily: "Caveat, cursive",
+        fontWeight: 700,
+        color: "#4a2f78",
+        fontSize: 108,
+        lineHeight: 1.0,
+        textShadow: HALO,
+      }}
+    >
+      O café NÃO te dá
+      <br />
+      <span style={{ color: "#8a5cc4" }}>ENERGIA</span>
+    </div>
+  </AbsoluteFill>
+);

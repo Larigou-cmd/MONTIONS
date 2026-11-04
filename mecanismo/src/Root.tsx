@@ -147,6 +147,12 @@ import {
   DURATION as DURATION_FALCIFORME,
 } from "./falciforme/Video";
 
+import {
+  VideoSemaComprimido,
+  CapaSemaComprimido,
+  DURATION as DURATION_SEMA_COMPRIMIDO,
+} from "./semaComprimido/Video";
+
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -1166,6 +1172,22 @@ export const RemotionRoot: React.FC = () => (
       fps={FPS}
       width={1080}
       height={1440}
+    />
+    <Composition
+      id="SemaComprimido"
+      component={VideoSemaComprimido}
+      durationInFrames={DURATION_SEMA_COMPRIMIDO}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SemaComprimidoCapa"
+      component={CapaSemaComprimido}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
     />
   </>
 );

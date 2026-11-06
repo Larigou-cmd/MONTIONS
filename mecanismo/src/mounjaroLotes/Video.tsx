@@ -543,3 +543,36 @@ export const VideoMounjaroLotes: React.FC = () => {
     </AbsoluteFill>
   );
 };
+
+// Capa no Modelo 9 (serve em 1080×1920 e em 3:4, 1080×1440): tudo entre y≈90 e 1380,
+// então os 20% de baixo ficam livres no TikTok e nada é cortado no 3:4. Caneta genérica, sem marca.
+export const CapaMounjaroLotes: React.FC = () => {
+  const canto = (x: number, y: number, rx: number, ry: number) => (
+    <path d={`M ${x} ${y + 50 * ry} L ${x} ${y} L ${x + 50 * rx} ${y}`} stroke={rgba(N.verm, 0.85)} strokeWidth={5} fill="none" />
+  );
+  return (
+    <AbsoluteFill>
+      <Fundo f={0} />
+      <svg width={W} height={1440} style={{ position: "absolute" }}>
+        {canto(40, 90, 1, 1)}
+        {canto(1040, 90, -1, 1)}
+        {canto(40, 1380, 1, -1)}
+        {canto(1040, 1380, -1, -1)}
+      </svg>
+      <div style={{ position: "absolute", top: 130, width: W, display: "flex", justifyContent: "center" }}>
+        <span style={{ fontFamily: VT, fontSize: 40, color: N.verm, border: `3px solid ${rgba(N.verm, 0.7)}`, padding: "4px 20px", boxShadow: `0 0 20px ${rgba(N.verm, 0.4)}` }}>● NOTÍCIAS DA FARMÁCIA #4</span>
+      </div>
+      <div style={{ position: "absolute", top: 220, width: W, textAlign: "center", fontFamily: SERIF, fontStyle: "italic", fontSize: 130, lineHeight: 1, color: N.txt, textShadow: `0 0 40px ${rgba(N.verm, 0.4)}` }}>Mounjaro</div>
+      <div style={{ position: "absolute", top: 370, width: W, textAlign: "center", fontFamily: SANS, fontWeight: 900, fontSize: 104, lineHeight: 1, color: N.verm, letterSpacing: 2, textShadow: `0 0 36px ${rgba(N.verm, 0.7)}` }}>LOTES FALSOS</div>
+      <div style={{ position: "absolute", left: 0, top: 480, width: W, height: 660 }}>
+        <Objeto3D f={40} ini={0} tipo="falsa" h={660} zoom={1.1} />
+      </div>
+      <div style={{ position: "absolute", left: 540, top: 1180, transform: "translate(-50%,-50%) rotate(-6deg)", fontFamily: SANS, fontWeight: 900, fontSize: 62, letterSpacing: 4, color: N.verm, border: `7px solid ${N.verm}`, borderRadius: 12, padding: "6px 28px", whiteSpace: "nowrap", background: "rgba(0,0,0,0.6)", textShadow: `0 0 18px ${N.verm}`, boxShadow: `0 0 30px ${rgba(N.verm, 0.5)}` }}>
+        PROIBIDOS PELA ANVISA
+      </div>
+      <div style={{ position: "absolute", top: 1275, width: W, textAlign: "center", fontFamily: SANS, fontWeight: 300, fontSize: 56, color: "#f2f2f2" }}>
+        confira o <Sel>seu lote</Sel>
+      </div>
+    </AbsoluteFill>
+  );
+};

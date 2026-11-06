@@ -21,8 +21,8 @@ import palavras from "../../audio/semaComprimido_palavras.json";
 
 export { DURATION };
 const W = 1080;
-const VT = "'VTThreeTwoThree', monospace";
-const N = {
+export const VT = "'VTThreeTwoThree', monospace";
+export const N = {
   neon: "#22c55e",
   ambar: "#f59e0b",
   verm: "#ef4444",
@@ -36,7 +36,7 @@ const R = (i: number) => PARTES[i];
 const ativa = (f: number, i: number) => f >= R(i)[0] && f < R(i)[1];
 
 // ---------- fundo ----------
-const Fundo: React.FC<{ f: number }> = ({ f }) => (
+export const Fundo: React.FC<{ f: number }> = ({ f }) => (
   <AbsoluteFill
     style={{
       background:
@@ -165,7 +165,7 @@ const Moldura: React.FC<{
     </AbsoluteFill>
   );
 };
-const Chip: React.FC<{
+export const Chip: React.FC<{
   f: number;
   at: number;
   cor: string;
@@ -203,7 +203,7 @@ const Chip: React.FC<{
       </span>
     </div>
   );
-const Carimbo: React.FC<{
+export const Carimbo: React.FC<{
   f: number;
   at: number;
   texto: string;
@@ -240,7 +240,7 @@ const Carimbo: React.FC<{
     </div>
   );
 };
-const Titulo: React.FC<{
+export const Titulo: React.FC<{
   f: number;
   at: number;
   y: number;
@@ -288,7 +288,7 @@ const Cena3D: React.FC<{
     </div>
   </Sequence>
 );
-const Painel: React.FC<{
+export const Painel: React.FC<{
   x: number;
   y: number;
   w: number;
@@ -688,7 +688,7 @@ const Medidor: React.FC<{ v: number }> = ({ v }) => {
 };
 
 // ---------- legenda (palavra-chave em itálico na caixa azul de seleção) ----------
-const Sel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+export const Sel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <span
     style={{
       position: "relative",

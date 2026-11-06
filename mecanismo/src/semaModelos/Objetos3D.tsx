@@ -13,7 +13,7 @@ const rnd = (i: number) => {
   const x = Math.sin(i * 127.1 + 311.7) * 43758.5453;
   return x - Math.floor(x);
 };
-export type Tipo3D = "abertura" | "cartela" | "estomago" | "semana" | "caixa" | "duelo";
+export type Tipo3D = "abertura" | "cartela" | "estomago" | "semana" | "caixa" | "duelo" | "falsa" | "real" | "vazia";
 
 const Comprimido: React.FC<{ s?: number }> = ({ s = 1 }) => (
   <group scale={[s, s, s]}>
@@ -190,6 +190,40 @@ const Cena: React.FC<{ f: number; ini: number; tipo: Tipo3D; marcos: number[]; z
             <mesh position={[0, 0.65, 0.61]}>
               <planeGeometry args={[2.6, 0.2]} />
               <meshStandardMaterial color="#fde68a" />
+            </mesh>
+          </group>
+        )}
+        {tipo === "falsa" && (
+          <>
+            {/* caneta genérica girando com luz vermelha de alerta piscando */}
+            <pointLight position={[3, 2, 4]} intensity={20 + 40 * (0.5 + 0.5 * Math.sin(t / 5))} color="#ef4444" />
+            <group rotation={[0.35, t / 40, 0.55 + Math.sin(t / 50) * 0.1]}>
+              <Caneta s={1.6} />
+            </group>
+          </>
+        )}
+        {tipo === "real" && (
+          <>
+            <pointLight position={[3, 2, 4]} intensity={45} color="#22c55e" />
+            <group rotation={[0.3, t / 45, 0.5]}>
+              <Caneta s={1.6} />
+            </group>
+          </>
+        )}
+        {tipo === "vazia" && (
+          <group rotation={[0.3, t / 45, 0.5]} scale={[1.6, 1.6, 1.6]}>
+            {/* corpo transparente: não dá para saber o que tem dentro */}
+            <mesh>
+              <cylinderGeometry args={[0.28, 0.28, 3.0, 40]} />
+              <meshPhysicalMaterial color="#cbd5e1" roughness={0.05} transparent opacity={0.22} side={THREE.DoubleSide} />
+            </mesh>
+            <mesh position={[0, 1.15, 0]}>
+              <cylinderGeometry args={[0.3, 0.3, 0.9, 40]} />
+              <meshPhysicalMaterial color="#64748b" roughness={0.3} transparent opacity={0.5} />
+            </mesh>
+            <mesh position={[0, -1.65, 0]}>
+              <cylinderGeometry args={[0.16, 0.16, 0.3, 24]} />
+              <meshStandardMaterial color="#64748b" metalness={0.6} roughness={0.3} />
             </mesh>
           </group>
         )}

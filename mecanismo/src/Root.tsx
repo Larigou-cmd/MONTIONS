@@ -169,6 +169,7 @@ import { VideoSemaFichasEscuro } from "./semaModelos/FichasEscuro";
 
 import { VideoSemaPainel3D, CapaSemaPainel3D } from "./semaModelos/Painel3D";
 
+import { VideoMounjaroLotes, DURATION as DUR_MOUNJARO_LOTES } from "./mounjaroLotes/Video";
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -1293,5 +1294,6 @@ export const RemotionRoot: React.FC = () => (
       width={1080}
       height={1440}
     />
+      <Composition id="MounjaroLotes" component={VideoMounjaroLotes} durationInFrames={DUR_MOUNJARO_LOTES} fps={30} width={1080} height={1920} />
   </>
 );

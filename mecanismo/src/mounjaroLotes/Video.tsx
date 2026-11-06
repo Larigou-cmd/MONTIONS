@@ -11,60 +11,61 @@ import palavras from "../../audio/mounjaroLotes_palavras.json";
 // Caneta genérica em 3D, sem logo nem cores da marca. Os lotes aparecem escritos na hora em que são falados.
 const W = 1080;
 const s = (x: number) => Math.round(x * 30);
-// marcos da narração (segundos -> quadros), tirados de audio/mounjaroLotes_palavras.json
+// marcos da narração (segundos -> quadros), da transcrição palavra a palavra do ElevenLabs Scribe
+// (audio/mounjaroLotes_palavras.json). Cada lote tem o tempo de cada letra/número falado.
 const T = {
-  falsif: s(2.86),
-  lista: s(5.54),
-  apreender: s(11.44),
-  cinco: s(12.06),
-  l1: s(13.18),
-  l1a: s(16.43),
-  l1b: s(20.1),
-  l2: s(20.24),
-  l2a: s(22.68),
-  l2b: s(24.8),
-  l3: s(24.9),
-  l3a: s(27.48),
-  l3b: s(30.1),
-  l4a: s(30.31),
-  l4b: s(32.9),
-  l5a: s(33.06),
-  l5b: s(35.6),
-  reconhecidos: s(37.58),
-  rotulo: s(39.63),
-  venda: s(41.52),
-  distrib: s(42.03),
-  uso: s(43.28),
-  proibidos: s(44.15),
-  atencao: s(45.32),
-  so: s(48.87),
-  dose: s(52.61),
-  nenhum: s(53.62),
-  dentro: s(56.03),
-  farmacia: s(59.79),
-  receita: s(60.72),
-  nota: s(60.95),
-  preco: s(62.48),
-  redes: s(64.87),
-  naoUse: s(69.09),
-  fabricante: s(71.06),
-  anvisa: s(72.79),
-  comenta: s(77.26),
-  siga: s(80.87),
-  final: s(85.4),
+  falsif: s(3.04),
+  lista: s(6.08),
+  apreender: s(11.28),
+  cinco: s(11.92),
+  l1: s(13.35),
+  l2: s(22.12),
+  l3: s(26.72),
+  reconhecidos: s(41.68),
+  rotulo: s(43.64),
+  venda: s(45.44),
+  distrib: s(45.92),
+  uso: s(46.96),
+  proibidos: s(47.84),
+  atencao: s(49.09),
+  so: s(52.76),
+  dose: s(56.6),
+  nenhum: s(57.68),
+  dentro: s(60.08),
+  farmacia: s(62.32),
+  receita: s(63.4),
+  nota: s(64.08),
+  preco: s(65.92),
+  redes: s(68.0),
+  naoUse: s(70.96),
+  fabricante: s(72.4),
+  anvisa: s(73.52),
+  comenta: s(78.32),
+  jaViu: s(79.16),
+  nunca: s(80.0),
+  siga: s(81.12),
+  final: s(85.5),
 };
-export const DURATION = s(88.6);
+// início de cada caractere falado e o fim da fala de cada lote
+const LOTES: { cod: string; ts: number[]; fim: number }[] = [
+  { cod: "KUSTR43969410", ts: [16.56, 17.12, 17.6, 17.84, 18.24, 18.72, 19.2, 19.64, 20.04, 20.4, 20.88, 21.2, 21.48].map(s), fim: s(22.08) },
+  { cod: "B55010", ts: [24.0, 24.64, 25.04, 25.6, 25.92, 26.2].map(s), fim: s(26.64) },
+  { cod: "D810042", ts: [28.96, 29.56, 29.92, 30.32, 30.64, 31.04, 31.44].map(s), fim: s(32.16) },
+  { cod: "D838889", ts: [32.28, 32.76, 33.2, 33.76, 34.16, 34.52, 34.88].map(s), fim: s(35.52) },
+  { cod: "2138737", ts: [35.76, 36.44, 36.72, 37.32, 37.8, 38.28, 38.68].map(s), fim: s(39.28) },
+];
+export const DURATION = s(88.7);
 const PARTES: [number, number][] = [
-  [0, s(8.0)],
-  [s(8.0), s(13.0)],
-  [s(13.0), s(35.7)],
-  [s(35.7), s(45.2)],
-  [s(45.2), s(50.5)],
-  [s(50.5), s(57.8)],
-  [s(57.8), s(66.4)],
-  [s(66.4), s(73.3)],
-  [s(73.3), s(80.7)],
-  [s(80.7), T.final],
+  [0, s(8.1)],
+  [s(8.1), s(13.2)],
+  [s(13.2), s(39.35)],
+  [s(39.35), s(49.0)],
+  [s(49.0), s(55.0)],
+  [s(55.0), s(60.7)],
+  [s(60.7), s(69.14)],
+  [s(69.14), s(74.28)],
+  [s(74.28), s(80.92)],
+  [s(80.92), T.final],
   [T.final, DURATION],
 ];
 const R = (i: number) => PARTES[i];
@@ -154,10 +155,11 @@ const Legenda: React.FC<{ f: number }> = ({ f }) => {
 };
 
 // ---------- lote sendo "digitado" na tela enquanto é falado ----------
-const Lote: React.FC<{ f: number; cod: string; a: number; b: number; size?: number }> = ({ f, cod, a, b, size = 84 }) => {
-  if (f < a - 4) return <div style={{ height: size * 1.15 }} />;
-  const n = Math.round(it(f, a, b, 1, cod.length));
-  const falando = f < b + 6;
+const Lote: React.FC<{ f: number; i: number; size?: number }> = ({ f, i, size = 84 }) => {
+  const { cod, ts, fim } = LOTES[i];
+  if (f < ts[0] - 4) return <div style={{ height: size * 1.15 }} />;
+  const n = ts.filter((t) => f >= t).length;
+  const falando = f < fim + 4;
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 18, height: size * 1.15 }}>
       <span style={{ fontFamily: VT, fontSize: size, letterSpacing: 6, color: falando ? N.ambar : N.txt, textShadow: falando ? `0 0 20px ${rgba(N.ambar, 0.6)}` : "none" }}>
@@ -165,7 +167,7 @@ const Lote: React.FC<{ f: number; cod: string; a: number; b: number; size?: numb
         {falando && f % 16 < 9 ? "▌" : ""}
       </span>
       {!falando && (
-        <span style={{ fontFamily: SANS, fontWeight: 900, fontSize: 28, color: N.verm, border: `3px solid ${N.verm}`, borderRadius: 8, padding: "2px 10px", transform: `scale(${it(f, b + 6, b + 14, 1.5, 1, OUT)})` }}>
+        <span style={{ fontFamily: SANS, fontWeight: 900, fontSize: 28, color: N.verm, border: `3px solid ${N.verm}`, borderRadius: 8, padding: "2px 10px", transform: `scale(${it(f, fim + 4, fim + 12, 1.5, 1, OUT)})` }}>
           FALSO
         </span>
       )}
@@ -301,15 +303,15 @@ const Cenas: React.FC<{ f: number }> = ({ f }) => (
           Confira o lote da sua caneta
         </Titulo>
         <Cartao f={f} at={T.l1} fim={T.l2} y={360} h={220} dose="2,5 mg">
-          <Lote f={f} cod="KUSTR43969410" a={T.l1a} b={T.l1b} size={80} />
+          <Lote f={f} i={0} size={80} />
         </Cartao>
         <Cartao f={f} at={T.l2} fim={T.l3} y={610} h={220} dose="5 mg">
-          <Lote f={f} cod="B55010" a={T.l2a} b={T.l2b} />
+          <Lote f={f} i={1} />
         </Cartao>
         <Cartao f={f} at={T.l3} fim={R(2)[1]} y={860} h={420} dose="15 mg">
-          <Lote f={f} cod="D810042" a={T.l3a} b={T.l3b} />
-          <Lote f={f} cod="D838889" a={T.l4a} b={T.l4b} />
-          <Lote f={f} cod="2138737" a={T.l5a} b={T.l5b} />
+          <Lote f={f} i={2} />
+          <Lote f={f} i={3} />
+          <Lote f={f} i={4} />
         </Cartao>
         <div style={{ position: "absolute", top: 1310, width: W, textAlign: "center", fontFamily: VT, fontSize: 32, color: N.cinza, opacity: P(f, T.l3, T.l3 + 10) }}>
           fonte: Anvisa · 06/11/2026
@@ -463,8 +465,8 @@ const Cenas: React.FC<{ f: number }> = ({ f }) => (
         </Titulo>
         {(
           [
-            ["👀 JÁ VI", N.ambar, T.comenta + 20, 120],
-            ["🙅 NUNCA VI", N.azul, T.comenta + 34, 580],
+            ["👀 JÁ VI", N.ambar, T.jaViu, 120],
+            ["🙅 NUNCA VI", N.azul, T.nunca, 580],
           ] as [string, string, number, number][]
         ).map(([t, cor, at, x]) => (
           <Painel key={t} x={x} y={820} w={380} h={170} o={P(f, at - 6, at + 6)}>
@@ -515,11 +517,7 @@ const SFX: [number, string, number][] = [
   ...PARTES.slice(1).map(([de]) => [de, "whoosh", 0.2] as [number, string, number]),
   [T.falsif, "trava", 0.28],
   [T.apreender, "trava", 0.26],
-  [T.l1b + 6, "plim", 0.2],
-  [T.l2b + 6, "plim", 0.2],
-  [T.l3b + 6, "plim", 0.2],
-  [T.l4b + 6, "plim", 0.2],
-  [T.l5b + 6, "plim", 0.2],
+  ...LOTES.map(({ fim }) => [fim + 4, "plim", 0.2] as [number, string, number]),
   [T.proibidos, "trava", 0.28],
   [T.naoUse, "trava", 0.3],
   [T.comenta, "plim", 0.24],

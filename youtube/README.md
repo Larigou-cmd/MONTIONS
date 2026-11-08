@@ -64,11 +64,11 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 55 | Toma tirzepatida? Evite estes 3 (Modelo 8) | [55_tirzepatida_alimentos.md](textos/55_tirzepatida_alimentos.md) | [capa_tirzepatida_alimentos.png](capas/capa_tirzepatida_alimentos.png) |
 | 56 | Começou a tomar levotiroxina? (Modelo 1 verde com 3D) | [56_levotiroxina_comecou.md](textos/56_levotiroxina_comecou.md) | [capa_levotiroxina_comecou.png](capas/capa_levotiroxina_comecou.png) |
 | 57 | Começou a tomar alopurinol? (Modelo 1 verde com 3D) | [57_alopurinol_comecou.md](textos/57_alopurinol_comecou.md) | [capa_alopurinol_comecou.png](capas/capa_alopurinol_comecou.png) |
-| 58 | Como um mofo esquecido salvou a humanidade (TBT, Google Vids + final no Remotion) | [58_penicilina_mofo.md](textos/58_penicilina_mofo.md) | [capa_penicilina_mofo.png](capas/capa_penicilina_mofo.png) |
+| 58 | A origem dos remédios #3: a penicilina, o mofo que salvou a humanidade (TBT, Google Vids + final no Remotion) | [58_penicilina_mofo.md](textos/58_penicilina_mofo.md) | [capa_origem_penicilina.png](capas/capa_origem_penicilina.png) |
 | 59 | Sua pressão melhorou: pode parar o remédio? (Modelo 8) | [59_pressao_parar_remedio.md](textos/59_pressao_parar_remedio.md) | [capa_pressao_parar.png](capas/capa_pressao_parar.png) |
 | 60 | Por que não existe insulina em comprimido? (clipes do Google Flow montados no Remotion) | [60_insulina_comprimido.md](textos/60_insulina_comprimido.md) | [capa_insulina_comprimido.png](capas/capa_insulina_comprimido.png) |
 | 61 | Você construiu a vacina: o cartaz de procurado (clipes do Google Flow montados no Remotion) | [61_vacina_procurado.md](textos/61_vacina_procurado.md) | [capa_vacina_procurado.png](capas/capa_vacina_procurado.png) |
-| 62 | A origem dos remédios #3: a metformina e a flor medieval (boneco de palito, clipes do Google Flow) | [62_origem_metformina.md](textos/62_origem_metformina.md) | [capa_origem_metformina.png](capas/capa_origem_metformina.png) |
+| 62 | A origem dos remédios #4: a metformina e a flor medieval (boneco de palito, clipes do Google Flow) | [62_origem_metformina.md](textos/62_origem_metformina.md) | [capa_origem_metformina.png](capas/capa_origem_metformina.png) |
 | 63 | O café não te dá energia: ele esconde o cansaço (Modelo 1, receptor em 3D) | [63_cafeina_sono.md](textos/63_cafeina_sono.md) | [capa_cafeina.png](capas/capa_cafeina.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)

@@ -1,4 +1,4 @@
-# A origem dos remédios #3: A metformina e a flor medieval (`mecanismo/out/origem_metformina.mp4`, capa `youtube/capas/capa_origem_metformina.png`)
+# A origem dos remédios #4: A metformina e a flor medieval (`mecanismo/out/origem_metformina.mp4`, capa `youtube/capas/capa_origem_metformina.png`)
 
 Boneco de palito: 8 clipes do Google Flow montados no Remotion (`src/metforminaOrigem/`).
 
@@ -15,7 +15,7 @@ A metformina, um dos remédios mais usados contra o diabetes, começou numa flor
 🇫🇷 Em 1957, o francês Jean Sterne publicou os primeiros estudos em pessoas com diabetes e deu o apelido Glucophage, o "comedor de glicose"
 ✅ Os "primos" da mesma família (fenformina e buformina) saíram do mercado por efeitos graves. A metformina ficou, e hoje está na lista de medicamentos essenciais da OMS e é gratuita no Farmácia Popular
 
-Série "A origem dos remédios" #3.
+Série "A origem dos remédios" #4.
 Fontes: Bailey, "Metformin: historical overview", Diabetologia (2017); Bailey e Day, "Metformin: its botanical background", Practical Diabetes International (2004); LGC, "Pharma roots: Metformin"; Le Quotidien du Pharmacien, "D'un antigrippal à un antidiabétique".
 Animações: geradas com IA (Google Flow). Narração gerada com voz sintética.
 ⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações.
@@ -25,7 +25,7 @@ Animações: geradas com IA (Google Flow). Narração gerada com voz sintética.
 ### TikTok
 
 **Legenda:**
-O remédio do diabetes nasceu de uma florzinha lilás 🌸➡️💊 E ainda passou décadas esquecido numa gaveta 😅 #3 da série "A origem dos remédios" 👇
+O remédio do diabetes nasceu de uma florzinha lilás 🌸➡️💊 E ainda passou décadas esquecido numa gaveta 😅 #4 da série "A origem dos remédios" 👇
 ⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
 
 #metformina #diabetes #historiadamedicina #farmacologia #farmacia #curiosidades

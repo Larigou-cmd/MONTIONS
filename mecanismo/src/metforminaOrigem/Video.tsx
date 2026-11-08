@@ -13,7 +13,7 @@ import {
 import fala from "./fala.json";
 import "../fonts";
 
-// "A origem dos remédios #3: a metformina e a flor medieval" em boneco de palito.
+// "A origem dos remédios #4: a metformina e a flor medieval" em boneco de palito.
 // 8 clipes do Google Flow (prompts em origens/metformina/prompts_flow.md) + narração da
 // Juliana (ElevenLabs). Mesma montagem do insulinaFlow: cada clipe é esticado até o
 // trecho da fala; se sobrar tempo, o último quadro congela com zoom lento.
@@ -375,7 +375,7 @@ export const CapaMetforminaOrigem: React.FC = () => (
         textShadow: HALO,
       }}
     >
-      A origem dos remédios #3
+      A origem dos remédios #4
     </div>
     <div
       style={{

@@ -1,4 +1,4 @@
-# Como um mofo esquecido no laboratório salvou a humanidade (`mecanismo/out/penicilina_vids_m.mp4`, capa `youtube/capas/capa_penicilina_mofo.png`)
+# Como um mofo esquecido no laboratório salvou a humanidade (`mecanismo/out/penicilina_vids_m.mp4`, capa `youtube/capas/capa_origem_penicilina.png`; é o #3 da série "A origem dos remédios")
 
 TBT de origens (quinta, 05/11/2026). Vídeo feito pela usuária no Google Vids (desenhos, narração e legendas), com o final trocado no Remotion: saiu o "salvo ou imune?" e entraram o Me siga com o logo, a tela final e uma trilha retrô com ducking (master em −14 LUFS). Vertical, cerca de 1 min 37 s. Código: `mecanismo/src/penicilinaVids/` (Id `PenicilinaVids`, capa `PenicilinaVidsCapa`).
 

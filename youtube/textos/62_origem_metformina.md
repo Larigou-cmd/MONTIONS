@@ -38,7 +38,7 @@ Você sabia que a metformina veio de uma FLOR? 🌸➡️💊 Da Idade Média at
 
 #metformina #diabetes #curiosidades #historia #ciencia #farmacia #saude #kwai
 
-### Instagram (Reels)
+### Instagram e Facebook (Reels)
 
 **Legenda:**
 Um dos remédios mais usados contra o diabetes nasceu de uma flor do campo 🌸
@@ -62,5 +62,5 @@ Fontes: Diabetologia (2017); Practical Diabetes International (2004).
 ### Ao postar: marcar a IA
 - TikTok: "Conteúdo gerado por IA"
 - YouTube: "conteúdo alterado ou sintético: Sim"
-- Instagram: "Rótulo de IA"
+- Instagram e Facebook: "Rótulo de IA"
 - Kwai: a opção de IA, se aparecer

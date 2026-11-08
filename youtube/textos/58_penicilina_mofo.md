@@ -13,6 +13,7 @@ Em 1928, um descuido no laboratório mudou a medicina 👇
 🍈 Produzir em grande quantidade era quase impossível, até que, na Segunda Guerra, um melão mofado de um mercado dos Estados Unidos deu um fungo que fazia muito mais penicilina
 🏅 Em 1945, Fleming dividiu o Nobel com Florey e Chain, que transformaram o mofo em remédio
 
+Série "A origem dos remédios" #3.
 Fontes: Nobel Prize; American Chemical Society.
 ⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações. Vídeo feito com ferramentas de IA (imagens e narração).
 
@@ -21,7 +22,7 @@ Fontes: Nobel Prize; American Chemical Society.
 ### TikTok
 
 **Legenda:**
-Esqueceu um prato sujo antes de viajar? Em 1928, um descuido assim criou o primeiro antibiótico 🦠💊 #TBT da farmácia
+Esqueceu um prato sujo antes de viajar? Em 1928, um descuido assim criou o primeiro antibiótico 🦠💊 #3 da série "A origem dos remédios" 👇
 ⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
 
 #penicilina #antibiotico #historia #farmacia #farmaceutica #curiosidades
@@ -29,7 +30,7 @@ Esqueceu um prato sujo antes de viajar? Em 1928, um descuido assim criou o prime
 ### Kwai
 
 **Legenda:**
-O mofo que salvou milhões de vidas 🦠💊 A história da penicilina 👇
+O mofo que salvou milhões de vidas 🦠💊 A história da penicilina, #3 da série "A origem dos remédios" 👇
 ⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica.
 
 #penicilina #antibiotico #historia #farmacia #kwai
@@ -45,7 +46,7 @@ Em 1928, Alexander Fleming saiu de férias e deixou placas com bactérias aberta
 🍈 O problema era produzir em grande quantidade. Na Segunda Guerra, um melão mofado de um mercado dos Estados Unidos deu um fungo muito mais produtivo.
 🏅 Em 1945, Fleming dividiu o Nobel com Florey e Chain, que transformaram o mofo em remédio de verdade.
 
-Me siga para mais histórias da farmácia 📌
+Série "A origem dos remédios" #3. Me siga para mais histórias da farmácia 📌
 
 ⚠️ Conteúdo educativo. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações.
 

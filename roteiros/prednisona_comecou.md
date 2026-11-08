@@ -1,7 +1,7 @@
 # Começou a tomar prednisona? Por que não pode parar de repente (e a diferença para a prednisolona)
 
 Formato: Reels/Shorts/TikTok vertical (1080×1920), cerca de 1 min 50 s. Modelo 1 com a paleta verde; 3D só na explicação (glândulas adrenais em cima dos rins e o fígado convertendo a prednisona). Série "Começou a tomar...". Agenda: era o vídeo de 06/11. Feito com prompts/guia_roteiro_tiktok.md e o perfil de voz (prompts/voice.md).
-Status: roteiro enviado em 08/11/2026, aguardando o áudio da usuária (OpenArt/ElevenLabs).
+Status: roteiro enviado em 08/11/2026, gancho C escolhido; aguardando o áudio da usuária (OpenArt/ElevenLabs).
 
 ## Opções de gancho
 A. Começou a tomar prednisona? Não para de uma vez.
@@ -9,7 +9,7 @@ B. Prednisona e prednisolona: é a mesma coisa? Quase.
 C. Parou a prednisona de repente e ficou fraco e tonto? Tem explicação.
 
 ## Texto da fala
-Começou a tomar prednisona? Não para de uma vez.
+Parou a prednisona de repente e ficou fraco e tonto? Tem explicação.
 
 E fica até o final, porque eu vou explicar a diferença entre prednisona e prednisolona. Quase todo mundo confunde.
 
@@ -36,7 +36,7 @@ Salva e manda para quem toma corticoide.
 Me siga para mais dicas de farmacologia e curiosidades sobre a área.
 
 ## Cenas (Modelo 1 verde; a definir com o áudio)
-1. Gancho sem 3D: comprimido de prednisona + carimbo vermelho "NÃO PARE DE UMA VEZ".
+1. Gancho sem 3D: "PAROU DE REPENTE?" + comprimido de prednisona + boneco fraco e tonto; carimbo vermelho "TEM EXPLICAÇÃO".
 2. Promessa: "prednisona × prednisolona", com um "≠?" piscando.
 3. 3D: rins com as glândulas adrenais em cima, soltando partículas de cortisol (pressão, açúcar, energia em chips).
 4. 3D: chegam as partículas da prednisona (maiores, mais brilhantes); a adrenal vai apagando ("fábrica desligando").

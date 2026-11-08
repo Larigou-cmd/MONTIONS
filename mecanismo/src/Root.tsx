@@ -84,6 +84,7 @@ import { OrigemCaptopril, DURATION_CAPTOPRIL } from "./origens/Captopril";
 import { CapaCaptopril } from "./origens/CapaCaptopril";
 import { OrigemAspirina, DURATION_ASPIRINA } from "./origens/Aspirina";
 import { CapaAspirina } from "./origens/CapaAspirina";
+import { VideoPrednisona, CapaPrednisona, DURATION_PREDNISONA } from "./prednisona/Video";
 import { CapaPenicilina } from "./origens/CapaPenicilina";
 import { VideoVencido, DURATION_VENCIDO } from "./vencido/Video";
 import { CapaVencido } from "./vencido/Capa";
@@ -1066,6 +1067,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="OrigemPenicilinaCapa"
       component={CapaPenicilina}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Prednisona"
+      component={VideoPrednisona}
+      durationInFrames={DURATION_PREDNISONA}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="PrednisonaCapa"
+      component={CapaPrednisona}
       durationInFrames={1}
       fps={FPS}
       width={1080}

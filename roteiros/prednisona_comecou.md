@@ -1,7 +1,7 @@
 # Começou a tomar prednisona? Por que não pode parar de repente (e a diferença para a prednisolona)
 
 Formato: Reels/Shorts/TikTok vertical (1080×1920), cerca de 1 min 50 s. Modelo 1 com a paleta verde; 3D só na explicação (glândulas adrenais em cima dos rins e o fígado convertendo a prednisona). Série "Começou a tomar...". Agenda: era o vídeo de 06/11. Feito com prompts/guia_roteiro_tiktok.md e o perfil de voz (prompts/voice.md).
-Status: roteiro enviado em 08/11/2026, gancho C escolhido; aguardando o áudio da usuária (OpenArt/ElevenLabs).
+Status: aprovado e entregue em 08/11/2026 (gancho C); textos em youtube/textos/67_prednisona_parar.md.
 
 ## Opções de gancho
 A. Começou a tomar prednisona? Não para de uma vez.

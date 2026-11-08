@@ -172,6 +172,7 @@ import { VideoSemaFichasEscuro } from "./semaModelos/FichasEscuro";
 import { VideoSemaPainel3D, CapaSemaPainel3D } from "./semaModelos/Painel3D";
 
 import { VideoMounjaroLotes, CapaMounjaroLotes, DURATION as DUR_MOUNJARO_LOTES } from "./mounjaroLotes/Video";
+import { VideoTirzepatidaParaguai, CapaTirzepatidaParaguai, DURATION as DUR_TIRZ_PY } from "./tirzepatidaParaguai/Video";
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -1323,5 +1324,7 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="MounjaroLotes" component={VideoMounjaroLotes} durationInFrames={DUR_MOUNJARO_LOTES} fps={30} width={1080} height={1920} />
       <Composition id="MounjaroLotesCapa" component={CapaMounjaroLotes} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="MounjaroLotesCapa34" component={CapaMounjaroLotes} durationInFrames={1} fps={30} width={1080} height={1440} />
+      <Composition id="TirzepatidaParaguai" component={VideoTirzepatidaParaguai} durationInFrames={DUR_TIRZ_PY} fps={30} width={1080} height={1920} />
+      <Composition id="TirzepatidaParaguaiCapa" component={CapaTirzepatidaParaguai} durationInFrames={1} fps={30} width={1080} height={1920} />
   </>
 );

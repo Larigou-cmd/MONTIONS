@@ -84,7 +84,11 @@ import { OrigemCaptopril, DURATION_CAPTOPRIL } from "./origens/Captopril";
 import { CapaCaptopril } from "./origens/CapaCaptopril";
 import { OrigemAspirina, DURATION_ASPIRINA } from "./origens/Aspirina";
 import { CapaAspirina } from "./origens/CapaAspirina";
-import { VideoPrednisona, CapaPrednisona, DURATION_PREDNISONA } from "./prednisona/Video";
+import {
+  VideoPrednisona,
+  CapaPrednisona,
+  DURATION_PREDNISONA,
+} from "./prednisona/Video";
 import { CapaPenicilina } from "./origens/CapaPenicilina";
 import { VideoVencido, DURATION_VENCIDO } from "./vencido/Video";
 import { CapaVencido } from "./vencido/Capa";
@@ -101,21 +105,82 @@ import { CapaAntibiotico } from "./antibiotico/Capa";
 import { VideoFebre, CapaFebre, DURATION_FEBRE } from "./febre/Video";
 import { VideoPartir, CapaPartir, DURATION_PARTIR } from "./partir/Video";
 import { VideoXixi, CapaXixi, DURATION_XIXI } from "./xixi/Video";
-import { VideoVitaminaC, CapaVitaminaC, DURATION_VITAMINAC } from "./vitaminac/Video";
-import { VideoOmeprazol, CapaOmeprazol, DURATION_OMEPRAZOL } from "./omeprazol/Video";
-import { VideoAnticoncepcional, CapaAnticoncepcional, DURATION_ANTICONCEPCIONAL } from "./anticoncepcional/Video";
-import { VideoAnlodipinoNovo, CapaAnlodipinoNovo, DURATION_ANLODIPINO_NOVO } from "./anlodipinoNovo/Video";
-import { VideoTirzepAlimentos, CapaTirzepAlimentos, DURATION_TIRZEP } from "./tirzepAlimentos/Video";
-import { VideoPenicilinaVids, CapaPenicilinaVids, DURATION_PENICILINA_VIDS } from "./penicilinaVids/Video";
-import { VideoPressaoParar, CapaPressaoParar, DURATION_PRESSAO } from "./pressaoParar/Video";
-import { VideoInsulinaFlow, CapaInsulinaFlow, DURATION_INSULINA_FLOW } from "./insulinaFlow/Video";
-import { VideoMetforminaOrigem, CapaMetforminaOrigem, DURATION_METFORMINA_ORIGEM } from "./metforminaOrigem/Video";
+import {
+  VideoVitaminaC,
+  CapaVitaminaC,
+  DURATION_VITAMINAC,
+} from "./vitaminac/Video";
+import {
+  VideoOmeprazol,
+  CapaOmeprazol,
+  DURATION_OMEPRAZOL,
+} from "./omeprazol/Video";
+import {
+  VideoAnticoncepcional,
+  CapaAnticoncepcional,
+  DURATION_ANTICONCEPCIONAL,
+} from "./anticoncepcional/Video";
+import {
+  VideoAnlodipinoNovo,
+  CapaAnlodipinoNovo,
+  DURATION_ANLODIPINO_NOVO,
+} from "./anlodipinoNovo/Video";
+import {
+  VideoTirzepAlimentos,
+  CapaTirzepAlimentos,
+  DURATION_TIRZEP,
+} from "./tirzepAlimentos/Video";
+import {
+  VideoPenicilinaVids,
+  CapaPenicilinaVids,
+  DURATION_PENICILINA_VIDS,
+} from "./penicilinaVids/Video";
+import {
+  VideoPressaoParar,
+  CapaPressaoParar,
+  DURATION_PRESSAO,
+} from "./pressaoParar/Video";
+import {
+  VideoInsulinaFlow,
+  CapaInsulinaFlow,
+  DURATION_INSULINA_FLOW,
+} from "./insulinaFlow/Video";
+import {
+  VideoMetforminaOrigem,
+  CapaMetforminaOrigem,
+  DURATION_METFORMINA_ORIGEM,
+} from "./metforminaOrigem/Video";
 import { VideoCafeina, CapaCafeina, DURATION_CAFEINA } from "./cafeina/Video";
-import { VideoCafeinaFlow, CapaCafeinaFlow, DURATION_CAFEINA_FLOW } from "./cafeinaFlow/Video";
-import { VideoVacinaFlow, CapaVacinaFlow, DURATION_VACINA_FLOW } from "./vacinaFlow/Video";
-import { VideoLevotiroxina, CapaLevotiroxina, DURATION_LEVO } from "./levotiroxina/Video";
-import { VideoAlopurinol, CapaAlopurinol, DURATION_ALOP } from "./alopurinol/Video";
-import { VideoRemAlcool, CapaRemAlcool, DURATION_REMALCOOL } from "./remalcool/Video";
+import {
+  VideoCafeinaFlow,
+  CapaCafeinaFlow,
+  DURATION_CAFEINA_FLOW,
+} from "./cafeinaFlow/Video";
+import {
+  VideoSonoAlmocoFlow,
+  CapaSonoAlmocoFlow,
+  DURATION_SONO_ALMOCO_FLOW,
+} from "./sonoAlmocoFlow/Video";
+import {
+  VideoVacinaFlow,
+  CapaVacinaFlow,
+  DURATION_VACINA_FLOW,
+} from "./vacinaFlow/Video";
+import {
+  VideoLevotiroxina,
+  CapaLevotiroxina,
+  DURATION_LEVO,
+} from "./levotiroxina/Video";
+import {
+  VideoAlopurinol,
+  CapaAlopurinol,
+  DURATION_ALOP,
+} from "./alopurinol/Video";
+import {
+  VideoRemAlcool,
+  CapaRemAlcool,
+  DURATION_REMALCOOL,
+} from "./remalcool/Video";
 import { VideoAntialergico, DURATION_ANTIALERGICO } from "./antialergico/Video";
 import { CapaAntialergico } from "./antialergico/Capa";
 import { VideoAnlodipino, DURATION_ANLODIPINO } from "./anlodipino/Video";
@@ -126,7 +191,24 @@ import { FarmaEstilo } from "./farmaexe/Estilo";
 import { FarmaComercial, DURATION_FARMA } from "./farmaexe/Comercial";
 import { CapaFarma } from "./farmaexe/Capa";
 import { FarmaCarrossel } from "./farmaexe/Carrossel";
-import { CarrosselGlobulo, CarrosselFumaca, CarrosselVencido, CarrosselGenericos, CarrosselAlcool, ALCOOL, CarrosselNasal, NASAL, CarrosselAntialergico, ANTIALERGICO, CarrosselAnlodipino, ANLODIPINO, GLOBULO, FUMACA, VENCIDO, GENERICOS } from "./carrosseis/Carrosseis";
+import {
+  CarrosselGlobulo,
+  CarrosselFumaca,
+  CarrosselVencido,
+  CarrosselGenericos,
+  CarrosselAlcool,
+  ALCOOL,
+  CarrosselNasal,
+  NASAL,
+  CarrosselAntialergico,
+  ANTIALERGICO,
+  CarrosselAnlodipino,
+  ANLODIPINO,
+  GLOBULO,
+  FUMACA,
+  VENCIDO,
+  GENERICOS,
+} from "./carrosseis/Carrosseis";
 import { VideoCaibra, DURATION_CAIBRA } from "./caibra/Video";
 import { VideoCaibraOpenArt } from "./caibra/VideoOpenArt";
 import { CapaCaibra } from "./caibra/Capa";
@@ -171,8 +253,16 @@ import { VideoSemaFichasEscuro } from "./semaModelos/FichasEscuro";
 
 import { VideoSemaPainel3D, CapaSemaPainel3D } from "./semaModelos/Painel3D";
 
-import { VideoMounjaroLotes, CapaMounjaroLotes, DURATION as DUR_MOUNJARO_LOTES } from "./mounjaroLotes/Video";
-import { VideoTirzepatidaParaguai, CapaTirzepatidaParaguai, DURATION as DUR_TIRZ_PY } from "./tirzepatidaParaguai/Video";
+import {
+  VideoMounjaroLotes,
+  CapaMounjaroLotes,
+  DURATION as DUR_MOUNJARO_LOTES,
+} from "./mounjaroLotes/Video";
+import {
+  VideoTirzepatidaParaguai,
+  CapaTirzepatidaParaguai,
+  DURATION as DUR_TIRZ_PY,
+} from "./tirzepatidaParaguai/Video";
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -668,6 +758,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="CafeinaFlowCapa"
       component={CapaCafeinaFlow}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SonoAlmocoFlow"
+      component={VideoSonoAlmocoFlow}
+      durationInFrames={DURATION_SONO_ALMOCO_FLOW}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="SonoAlmocoFlowCapa"
+      component={CapaSonoAlmocoFlow}
       durationInFrames={1}
       fps={FPS}
       width={1080}
@@ -1321,10 +1427,45 @@ export const RemotionRoot: React.FC = () => (
       width={1080}
       height={1440}
     />
-      <Composition id="MounjaroLotes" component={VideoMounjaroLotes} durationInFrames={DUR_MOUNJARO_LOTES} fps={30} width={1080} height={1920} />
-      <Composition id="MounjaroLotesCapa" component={CapaMounjaroLotes} durationInFrames={1} fps={30} width={1080} height={1920} />
-      <Composition id="MounjaroLotesCapa34" component={CapaMounjaroLotes} durationInFrames={1} fps={30} width={1080} height={1440} />
-      <Composition id="TirzepatidaParaguai" component={VideoTirzepatidaParaguai} durationInFrames={DUR_TIRZ_PY} fps={30} width={1080} height={1920} />
-      <Composition id="TirzepatidaParaguaiCapa" component={CapaTirzepatidaParaguai} durationInFrames={1} fps={30} width={1080} height={1920} />
+    <Composition
+      id="MounjaroLotes"
+      component={VideoMounjaroLotes}
+      durationInFrames={DUR_MOUNJARO_LOTES}
+      fps={30}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="MounjaroLotesCapa"
+      component={CapaMounjaroLotes}
+      durationInFrames={1}
+      fps={30}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="MounjaroLotesCapa34"
+      component={CapaMounjaroLotes}
+      durationInFrames={1}
+      fps={30}
+      width={1080}
+      height={1440}
+    />
+    <Composition
+      id="TirzepatidaParaguai"
+      component={VideoTirzepatidaParaguai}
+      durationInFrames={DUR_TIRZ_PY}
+      fps={30}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="TirzepatidaParaguaiCapa"
+      component={CapaTirzepatidaParaguai}
+      durationInFrames={1}
+      fps={30}
+      width={1080}
+      height={1920}
+    />
   </>
 );

@@ -72,6 +72,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 63 | O café não te dá energia: ele esconde o cansaço (Modelo 1, receptor em 3D) | [63_cafeina_sono.md](textos/63_cafeina_sono.md) | [capa_cafeina.png](capas/capa_cafeina.png) |
 | 67 | Parou a prednisona de repente? E a diferença para a prednisolona (Modelo 1 verde com 3D) | [67_prednisona_parar.md](textos/67_prednisona_parar.md) | [capa_prednisona.png](capas/capa_prednisona.png) |
 | 68 | A caneta do Paraguai é Mounjaro? As 4 canetas de tirzepatida (Modelo 9 com fichas de foto) | [68_tirzepatida_paraguai.md](textos/68_tirzepatida_paraguai.md) | [capa_tirzepatida_paraguai.png](capas/capa_tirzepatida_paraguai.png) |
+| 69 | Por que dá sono depois do almoço (boneco de palito, "você dentro da cena") | [69_sono_depois_almoco.md](textos/69_sono_depois_almoco.md) | [capa_sono_almoco.png](capas/capa_sono_almoco.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

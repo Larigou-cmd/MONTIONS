@@ -162,6 +162,11 @@ import {
   DURATION_SONO_ALMOCO_FLOW,
 } from "./sonoAlmocoFlow/Video";
 import {
+  VideoNovembroAzul,
+  CapaNovembroAzul,
+  DURATION_NOVEMBRO_AZUL,
+} from "./novembroAzul/Video";
+import {
   VideoVacinaFlow,
   CapaVacinaFlow,
   DURATION_VACINA_FLOW,
@@ -774,6 +779,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="SonoAlmocoFlowCapa"
       component={CapaSonoAlmocoFlow}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="NovembroAzul"
+      component={VideoNovembroAzul}
+      durationInFrames={DURATION_NOVEMBRO_AZUL}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="NovembroAzulCapa"
+      component={CapaNovembroAzul}
       durationInFrames={1}
       fps={FPS}
       width={1080}

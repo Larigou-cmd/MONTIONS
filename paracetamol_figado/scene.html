@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Paracetamol e fígado</title>
+<style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas><script>
+// Vídeo 73: por que o paracetamol em excesso ataca o fígado. Modelo de fundo escuro, bolinhas com carinha,
+// frase grossa no topo trocando a cada trecho da fala. Tempos tirados de fala.json (30 qps).
+const W = 1080, H = 1920, END = 72.5;
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v)), lerp = (a, b, u) => a + (b - a) * u;
+const ss = (a, b, x) => { const u = cl((x - a) / (b - a)); return u * u * (3 - 2 * u); };
+const back = u => { const c = 1.70158; u = cl(u) - 1; return 1 + (c + 1) * u * u * u + c * u * u; };
+const hash = (a, b) => { const s = Math.sin(a * 127.1 + b * 311.7) * 43758.5453; return s - Math.floor(s); };
+const DARK = '#14101c', INK = '#f1ecdf', BLUE = '#8fd3ff', RED = '#ff5a4d', ORANGE = '#ff8a3d', GREEN = '#5fe08f', PURPLE = '#c9a7ff';
+const HEAD = 'Impact, "Arial Narrow", sans-serif', LAB = '"Bahnschrift", "Arial Narrow", sans-serif';
+
+const PAPER = (() => { const c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d');
+  x.fillStyle = '#17131f'; x.fillRect(0, 0, W, H);
+  for (let i = 0; i < 60; i++) { const px = hash(i, 1) * W, py = hash(i, 2) * H, r = 150 + hash(i, 3) * 350, gr = x.createRadialGradient(px, py, 0, px, py, r);
+    const d = hash(i, 4) > 0.5 ? '70,55,110' : '0,0,0'; gr.addColorStop(0, `rgba(${d},0.10)`); gr.addColorStop(1, `rgba(${d},0)`); x.fillStyle = gr; x.fillRect(px - r, py - r, r * 2, r * 2); }
+  for (let i = 0; i < 26000; i++) { x.fillStyle = hash(i, 5) > 0.5 ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.03)'; x.fillRect(hash(i, 6) * W, hash(i, 7) * H, 1 + hash(i, 8) * 2, 1 + hash(i, 9) * 2); }
+  return c; })();
+const LOGO = new Image();
+
+// ---------- peças ----------
+function liverPath() { g.beginPath(); g.moveTo(150, 800); g.bezierCurveTo(150, 670, 330, 640, 520, 660); g.bezierCurveTo(710, 680, 890, 710, 950, 790);
+  g.bezierCurveTo(985, 835, 930, 885, 860, 912); g.bezierCurveTo(740, 960, 640, 990, 560, 1040); g.bezierCurveTo(470, 1100, 330, 1120, 235, 1070); g.bezierCurveTo(170, 1030, 150, 920, 150, 800); g.closePath(); }
+function pipe(pts, w = 74) { g.lineCap = 'butt'; g.lineJoin = 'round';
+  g.beginPath(); pts.forEach(([x, y], i) => i ? g.lineTo(x, y) : g.moveTo(x, y)); g.strokeStyle = INK; g.lineWidth = w; g.stroke();
+  g.strokeStyle = '#2b2538'; g.lineWidth = w - 14; g.stroke(); g.strokeStyle = 'rgba(255,255,255,0.14)'; g.lineWidth = 8; g.setLineDash([18, 22]); g.stroke(); g.setLineDash([]); }
+function along(pts, u) { const L = []; let tot = 0; for (let i = 1; i < pts.length; i++) { const d = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); L.push(d); tot += d; }
+  let d = cl(u) * tot; for (let i = 0; i < L.length; i++) { if (d <= L[i] || i === L.length - 1) { const k = cl(d / L[i]); return [lerp(pts[i][0], pts[i + 1][0], k), lerp(pts[i][1], pts[i + 1][1], k)]; } d -= L[i]; } }
+// bolinha com carinha: 'pill' (paracetamol), 'ok' (já desmontado), 'shield' (proteção), 'tox' (substância tóxica)
+function ball(x, y, r, kind, a = 1, sc = 1, t = 0, id = 0) { if (a <= 0 || sc <= 0) return; g.save(); g.globalAlpha *= a; g.translate(x, y); g.scale(sc, sc);
+  const col = { pill: '#fbf8ee', ok: '#a9bfd6', shield: '#3fbf73', tox: '#e23a3a' }[kind];
+  g.lineWidth = 4; g.strokeStyle = DARK; g.fillStyle = col; g.beginPath();
+  if (kind === 'tox') { const n = 9, rot = t * 1.2 + id; for (let i = 0; i < n * 2; i++) { const rr = i % 2 ? r * 0.82 : r * 1.28, an = rot + i * Math.PI / n; g.lineTo(Math.cos(an) * rr, Math.sin(an) * rr); } g.closePath(); }
+  else g.arc(0, 0, r, 0, 7);
+  g.fill(); g.stroke();
+  g.fillStyle = 'rgba(255,255,255,0.45)'; g.beginPath(); g.ellipse(-r * 0.32, -r * 0.42, r * 0.28, r * 0.16, -0.6, 0, 7); g.fill();
+  g.fillStyle = DARK; g.beginPath(); g.arc(-r * 0.3, -r * 0.05, r * 0.11, 0, 7); g.arc(r * 0.3, -r * 0.05, r * 0.11, 0, 7); g.fill();
+  g.lineWidth = 3; g.lineCap = 'round'; g.beginPath();
+  if (kind === 'tox') { g.moveTo(-r * 0.5, -r * 0.34); g.lineTo(-r * 0.14, -r * 0.2); g.moveTo(r * 0.5, -r * 0.34); g.lineTo(r * 0.14, -r * 0.2); g.moveTo(-r * 0.25, r * 0.4); g.quadraticCurveTo(0, r * 0.2, r * 0.25, r * 0.4); }
+  else g.arc(0, r * 0.18, r * 0.28, 0.15 * Math.PI, 0.85 * Math.PI);
+  g.stroke(); g.restore(); }
+function tag(txt, x, y, col, size = 34, align = 'left', a = 1, font = LAB) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.font = `${font === LAB ? '700 ' : ''}${size}px ${font}`; g.textAlign = align; g.fillStyle = col; g.fillText(txt, x, y); g.restore(); }
+function fit(txt, size, max) { g.font = `${size}px ${HEAD}`; const w = g.measureText(txt).width; return w > max ? size * max / w : size; }
+
+// ---------- o mundo do fígado ----------
+const IN = [[250, 475], [250, 610], [390, 720], [470, 790]], OUT = [[330, 1060], [330, 1400]];
+const SPOTS = [[760, 800], [640, 860], [820, 830], [560, 780], [700, 760], [480, 900], [870, 790], [600, 940], [420, 800], [740, 880],
+  [330, 760], [520, 1000], [260, 900], [660, 800], [380, 960], [800, 770], [300, 1010], [450, 720], [580, 870], [230, 800], [700, 920]];
+const TUBE = { x: 820, top: 1140, bot: 1480 }, STOCK = 10;
+const slot = i => [TUBE.x + (i % 2 ? 28 : -28), TUBE.bot - 34 - Math.floor(i / 2) * 56];
+const seq = (a, b, step) => { const o = []; for (let t = a; t < b; t += step) o.push(t); return o; };
+// A: gancho (0–5,9 s). B: explicação (5,9–36 s). C: "sem sintoma" (57,4–64 s).
+const EA = { pills: seq(2.8, 5.9, 0.1), oks: seq(3.2, 5.9, 0.22).map(t => [t, 1.6]), tox: seq(3.0, 5.7, 0.25).map((t, i) => ({ t, dep: i < STOCK ? t + 0.15 : Infinity })),
+  dmg: t => ss(5.2, 6.2, t) * 0.35, tPara: 2.8, tVia: 99, tLot: 99, tLegend: 99, tZero: 5.45, glow: [[0.4, 2.8]], figado: [0, 2.8] };
+const EB = { pills: [...seq(6.2, 24, 0.7), ...seq(24.3, 35.9, 0.12)], oks: [...seq(9.0, 25.4, 0.7).map(t => [t, 1.4]), ...seq(25.7, 36, 0.24).map(t => [t, 2.0])],
+  tox: [{ t: 15.6, dep: 22.3 }, { t: 19.5, dep: 23.0 }, ...seq(28.5, 34.5, 0.33).map((t, i) => ({ t, dep: i < 8 ? t + 0.25 : Infinity }))],
+  dmg: t => ss(32.0, 36, t), tPara: 6.0, tVia: 9.6, tUrina: 12.2, tLot: 26.6, tLegend: 15.9, tZero: 31.2, glow: [[17.6, 22.2]], figado: [5.9, 24] };
+const EC = { pills: [], oks: [], tox: [0, 1, 2, 3, 4, 5].map(i => ({ t: 50 + i, dep: Infinity })), dmg: t => lerp(0.3, 0.6, ss(57.4, 64, t)), bare: true, figado: [0, 0] };
+
+function world(t, E) {
+  const dmg = E.dmg(t), shake = dmg * Math.sin(t * 38) * 3;
+  if (!E.bare) { pipe(IN); pipe(OUT); }
+  g.save(); g.translate(shake, 0);
+  const c = [lerp(214, 112, dmg), lerp(108, 70, dmg), lerp(98, 84, dmg)].map(Math.round);
+  g.save(); g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = 30; g.shadowOffsetY = 14; liverPath(); g.fillStyle = `rgb(${c})`; g.fill(); g.restore();
+  g.save(); liverPath(); g.clip();
+  g.fillStyle = 'rgba(255,255,255,0.16)'; g.beginPath(); g.ellipse(380, 740, 230, 60, -0.1, 0, 7); g.fill();
+  g.fillStyle = 'rgba(80,30,25,0.16)'; g.beginPath(); g.ellipse(560, 1090, 420, 90, -0.2, 0, 7); g.fill();
+  g.strokeStyle = 'rgba(80,30,25,0.35)'; g.lineWidth = 5; g.beginPath(); g.moveTo(600, 665); g.quadraticCurveTo(560, 850, 600, 1010); g.stroke();
+  E.tox.forEach((o, i) => { if (o.dep !== Infinity) return; const a = ss(o.t + 0.3, o.t + 1.6, t); if (a <= 0) return; const [x, y] = SPOTS[i], r = 30 + a * 62;
+    const gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, `rgba(20,8,14,${0.85 * a})`); gr.addColorStop(1, 'rgba(20,8,14,0)'); g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2); });
+  g.restore();
+  liverPath(); g.strokeStyle = INK; g.lineWidth = 8; g.stroke();
+  tag('FÍGADO', 300, 850, 'rgba(255,255,255,0.9)', 40, 'center', 0.85 * ss(E.figado[0], E.figado[0] + 0.3, t) * (1 - ss(E.figado[1] - 0.4, E.figado[1], t)));
+  g.restore();
+
+  E.pills.forEach((t0, i) => { const u = (t - t0) / 1.1; if (u < 0 || u > 1) return; const [x, y] = along(IN, u); ball(x + (hash(i, 3) - 0.5) * 22, y, 23, 'pill', 1 - ss(0.8, 1, u)); });
+  E.oks.forEach(([t0, d], i) => { const u = (t - t0) / d; if (u < 0 || u > 1.25) return;
+    if (u <= 1) { const [x, y] = along(OUT, u); ball(x + (hash(i, 5) - 0.5) * 20, y, 21, 'ok', ss(0, 0.12, u)); }
+    else { const k = (u - 1) / 0.25, y = 1400 + k * 110; g.save(); g.globalAlpha *= 1 - k; g.fillStyle = '#5f8fd0'; g.strokeStyle = DARK; g.lineWidth = 3; g.beginPath(); g.moveTo(330, y - 22); g.quadraticCurveTo(350, y + 6, 330, y + 14); g.quadraticCurveTo(310, y + 6, 330, y - 22); g.fill(); g.stroke(); g.restore(); } });
+
+  // tubo do estoque de proteção
+  const guarded = E.tox.filter(o => o.dep !== Infinity);
+  if (!E.bare) {
+    const left = STOCK - guarded.filter(o => t >= o.dep).length;
+    const glow = E.glow.reduce((m, [a, b]) => Math.max(m, ss(a, a + 0.4, t) * (1 - ss(b - 0.4, b, t))), 0);
+    if (glow > 0) { g.save(); g.globalAlpha *= glow * (0.35 + 0.15 * Math.sin(t * 6)); const gr = g.createRadialGradient(TUBE.x, 1320, 40, TUBE.x, 1320, 300); gr.addColorStop(0, 'rgba(95,224,143,0.9)'); gr.addColorStop(1, 'rgba(95,224,143,0)'); g.fillStyle = gr; g.fillRect(TUBE.x - 300, 1020, 600, 600); g.restore(); }
+    g.save(); g.lineWidth = 7; g.strokeStyle = INK; g.fillStyle = 'rgba(255,255,255,0.07)';
+    g.beginPath(); g.moveTo(TUBE.x - 66, TUBE.top); g.lineTo(TUBE.x - 66, TUBE.bot - 40); g.quadraticCurveTo(TUBE.x - 66, TUBE.bot + 14, TUBE.x, TUBE.bot + 14); g.quadraticCurveTo(TUBE.x + 66, TUBE.bot + 14, TUBE.x + 66, TUBE.bot - 40); g.lineTo(TUBE.x + 66, TUBE.top); g.fill(); g.stroke();
+    g.beginPath(); g.moveTo(TUBE.x - 82, TUBE.top); g.lineTo(TUBE.x + 82, TUBE.top); g.stroke();
+    g.lineWidth = 3; for (let i = 0; i < 5; i++) { const y = TUBE.bot - 34 - i * 56 - 28; g.beginPath(); g.moveTo(TUBE.x + 66, y); g.lineTo(TUBE.x + 44, y); g.stroke(); }
+    g.restore();
+    for (let i = 0; i < left; i++) { const [x, y] = slot(i); ball(x, y + Math.sin(t * 3 + i) * 1.5, 25, 'shield'); }
+    const empty = ss(E.tZero, E.tZero + 0.4, t);
+    if (empty > 0) tag('0', TUBE.x, 1350, RED, 86, 'center', empty * (0.75 + 0.25 * Math.sin(t * 9)), HEAD);
+    tag('ESTOQUE DE PROTEÇÃO', TUBE.x, 1555, empty > 0.5 ? RED : GREEN, 34, 'center');
+    tag('(GLUTATIONA)', TUBE.x, 1596, INK, 28, 'center', 0.75);
+  }
+  // substância tóxica
+  E.tox.forEach((o, i) => { if (t < o.t) return; const [x, y] = SPOTS[i], g1 = o.dep !== Infinity, hit = o.dep + 0.6;
+    const out = g1 ? 1 - ss(hit, hit + 0.25, t) : 1;
+    ball(x + Math.sin(t * 5 + i) * 3, y + Math.cos(t * 4 + i) * 3, 27, 'tox', out, back((t - o.t) / 0.3) * (g1 ? lerp(0.4, 1, out) : 1), t, i);
+    if (g1 && t > hit && t < hit + 0.4) { const k = (t - hit) / 0.4; g.save(); g.globalAlpha *= 1 - k; g.strokeStyle = GREEN; g.lineWidth = 6; g.beginPath(); g.arc(x, y, 30 + k * 40, 0, 7); g.stroke(); g.restore(); } });
+  guarded.forEach((o, k) => { const u = (t - o.dep) / 0.6; if (u < 0 || u > 1.4) return; const [sx, sy] = slot(STOCK - 1 - k), [x, y] = SPOTS[E.tox.indexOf(o)], e = ss(0, 1, u);
+    ball(lerp(sx, x, e), lerp(sy, y, e) - Math.sin(e * Math.PI) * 90, 25, 'shield', 1 - ss(1, 1.35, u)); });
+
+  if (!E.bare) {
+    tag('PARACETAMOL', 310, 540, INK, 38, 'left', ss(E.tPara, E.tPara + 0.3, t));
+    tag('VIA SEGURA', 390, 1230, BLUE, 38, 'left', ss(E.tVia, E.tVia + 0.3, t));
+    const full = ss(E.tLot, E.tLot + 0.4, t); if (full > 0) tag('LOTADA', 390, 1278, RED, 38, 'left', full * (0.7 + 0.3 * Math.sin(t * 8)));
+    tag('SAI NA URINA', 390, 1470, INK, 30, 'left', 0.8 * ss(E.tUrina ?? 99, (E.tUrina ?? 99) + 0.3, t));
+    const leg = ss(E.tLegend, E.tLegend + 0.4, t); if (leg > 0) { ball(560, 572, 22, 'tox', leg, 1, t, 0); tag('= SUBSTÂNCIA TÓXICA (NAPQI)', 594, 583, RED, 30, 'left', leg); }
+  }
+}
+
+// ---------- medidor, caixas, ícones ----------
+function gauge(cx, cy, r, v, a = 1, limTxt = 'LIMITE') { if (a <= 0) return; g.save(); g.globalAlpha *= a; const A = u => Math.PI * (1 + u), LIM = 0.7;
+  g.beginPath(); g.arc(cx, cy, r, Math.PI, 2 * Math.PI); g.closePath(); g.fillStyle = '#241e30'; g.fill();
+  g.lineCap = 'butt'; g.lineWidth = 34; g.strokeStyle = '#3fbf73'; g.beginPath(); g.arc(cx, cy, r - 36, A(0), A(LIM)); g.stroke();
+  g.strokeStyle = '#e23a3a'; g.beginPath(); g.arc(cx, cy, r - 36, A(LIM), A(1)); g.stroke();
+  g.strokeStyle = INK; g.lineWidth = 3; for (let i = 0; i <= 20; i++) { const an = A(i / 20), r1 = r - 62, r2 = r - (i % 5 ? 76 : 90); g.beginPath(); g.moveTo(cx + Math.cos(an) * r1, cy + Math.sin(an) * r1); g.lineTo(cx + Math.cos(an) * r2, cy + Math.sin(an) * r2); g.stroke(); }
+  g.lineWidth = 8; g.beginPath(); g.arc(cx, cy, r, Math.PI, 2 * Math.PI); g.closePath(); g.stroke();
+  const la = A(LIM); g.lineWidth = 6; g.strokeStyle = ORANGE; g.beginPath(); g.moveTo(cx + Math.cos(la) * (r - 100), cy + Math.sin(la) * (r - 100)); g.lineTo(cx + Math.cos(la) * (r + 22), cy + Math.sin(la) * (r + 22)); g.stroke();
+  tag(limTxt, cx + Math.cos(la) * (r + 40), cy + Math.sin(la) * (r + 40), ORANGE, limTxt.length < 5 ? 64 : 34, 'left', 1, limTxt.length < 5 ? HEAD : LAB);
+  const na = A(cl(v, 0, 1.02)) + (v > LIM ? Math.sin(performanceT * 40) * 0.02 : 0);
+  g.strokeStyle = INK; g.lineWidth = 12; g.lineCap = 'round'; g.beginPath(); g.moveTo(cx, cy - 6); g.lineTo(cx + Math.cos(na) * (r - 70), cy - 6 + Math.sin(na) * (r - 70)); g.stroke();
+  g.fillStyle = INK; g.beginPath(); g.arc(cx, cy - 6, 22, 0, 7); g.fill(); g.fillStyle = DARK; g.beginPath(); g.arc(cx, cy - 6, 9, 0, 7); g.fill(); g.restore(); }
+let performanceT = 0;
+function medBox(cx, cy, col, label, a, drop) { if (a <= 0) return; const w = 330, h = 430, x = cx - w / 2, y = cy - h / 2 - (1 - back(drop)) * 500;
+  g.save(); g.globalAlpha *= a; g.shadowColor = 'rgba(0,0,0,0.55)'; g.shadowBlur = 26; g.shadowOffsetY = 14;
+  g.fillStyle = col; g.beginPath(); g.roundRect(x, y, w, h, 22); g.fill(); g.shadowColor = 'transparent';
+  g.fillStyle = 'rgba(0,0,0,0.18)'; g.fillRect(x + w - 46, y + 12, 34, h - 24);
+  g.lineWidth = 7; g.strokeStyle = INK; g.beginPath(); g.roundRect(x, y, w, h, 22); g.stroke();
+  g.fillStyle = INK; g.beginPath(); g.roundRect(x + 26, y + 60, w - 90, 120, 12); g.fill();
+  g.font = `76px ${HEAD}`; g.textAlign = 'center'; g.fillStyle = DARK; g.fillText(label, x + 26 + (w - 90) / 2, y + 150);
+  g.fillStyle = 'rgba(255,255,255,0.55)'; [0, 1, 2].forEach(i => g.fillRect(x + 26, y + 220 + i * 34, (w - 90) * [1, 0.8, 0.55][i], 12));
+  g.strokeStyle = INK; g.lineWidth = 16; g.lineCap = 'round'; g.beginPath(); g.moveTo(x + 70, y + 365); g.lineTo(x + 130, y + 365); g.moveTo(x + 100, y + 335); g.lineTo(x + 100, y + 395); g.stroke(); g.restore(); }
+function chip(cx, y, a) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.translate(cx, y); const s = back(a); g.scale(s, s);
+  g.fillStyle = '#241e30'; g.strokeStyle = ORANGE; g.lineWidth = 5; g.beginPath(); g.roundRect(-190, -62, 380, 124, 18); g.fill(); g.stroke();
+  tag('NA COMPOSIÇÃO:', 0, -22, INK, 26, 'center', 0.8); ball(-140, 22, 20, 'pill'); tag('PARACETAMOL', 22, 36, ORANGE, 40, 'center'); g.restore(); }
+function check(x, y, a) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.translate(x, y); const s = back(a); g.scale(s, s);
+  g.fillStyle = '#3fbf73'; g.strokeStyle = DARK; g.lineWidth = 5; g.beginPath(); g.arc(0, 0, 44, 0, 7); g.fill();
+  g.strokeStyle = DARK; g.lineWidth = 11; g.lineCap = 'round'; g.lineJoin = 'round'; g.beginPath(); g.moveTo(-20, 2); g.lineTo(-5, 18); g.lineTo(22, -14); g.stroke(); g.restore(); }
+
+// ---------- frases do topo ----------
+const TITLES = [
+  [0.1, 'O SEU FÍGADO GUARDA', INK, 'UM ESTOQUE DE PROTEÇÃO', GREEN], [2.8, 'PARACETAMOL EM EXCESSO', ORANGE, 'ACABA COM ELE', RED],
+  [5.9, 'NA DOSE CERTA', BLUE, 'O PARACETAMOL É SEGURO', INK], [8.7, 'O FÍGADO DESMONTA', INK, 'QUASE TUDO', BLUE], [12.0, 'E O RESTO', INK, 'SAI NA URINA', BLUE],
+  [13.9, 'UMA PARTE PEQUENA', INK, 'VIRA SUBSTÂNCIA TÓXICA', RED], [17.6, 'AÍ ENTRA A GLUTATIONA', GREEN, 'A PROTEÇÃO DO FÍGADO', INK], [22.2, 'ELA NEUTRALIZA', INK, 'NA HORA', GREEN],
+  [24.0, 'O PROBLEMA', INK, 'É O EXCESSO', RED], [25.7, 'O CAMINHO SEGURO', BLUE, 'FICA SOBRECARREGADO', ORANGE], [28.5, 'SOBRA MAIS', INK, 'SUBSTÂNCIA TÓXICA', RED],
+  [30.7, 'O ESTOQUE DE PROTEÇÃO', INK, 'ACABA', RED], [32.9, 'SEM PROTEÇÃO', PURPLE, 'ELA ATACA O FÍGADO', RED],
+  [36.0, 'E NEM PRECISA SER', INK, 'DE PROPÓSITO', ORANGE], [38.6, 'O PARACETAMOL ESTÁ EM', INK, 'VÁRIOS REMÉDIOS', ORANGE], [42.2, 'QUEM TOMA DOIS', INK, 'SOMA AS DOSES', RED],
+  [46.1, 'POR ISSO', GREEN, '', INK], [52.6, 'PARA ADULTO, O LIMITE GERAL É', INK, '4 GRAMAS EM 24 HORAS', ORANGE],
+  [57.4, 'NO COMEÇO, O EXCESSO', INK, 'PODE NEM DAR SINTOMA', ORANGE], [61.6, 'NA DÚVIDA', INK, 'PROCURE ATENDIMENTO', GREEN],
+  [64.0, 'SALVA PARA CONFERIR', INK, 'NA PRÓXIMA GRIPE', GREEN], [65.9],
+];
+function titles(t) { let k = -1; TITLES.forEach((r, i) => { if (t >= r[0]) k = i; }); if (k < 0 || TITLES[k].length < 2) return;
+  const [a, l1, c1, l2, c2] = TITLES[k], b = TITLES[k + 1][0], al = ss(a, a + 0.12, t) * (1 - ss(b - 0.1, b, t)), s = lerp(0.9, 1, back((t - a) / 0.28)), gap = Math.min(0.5, (b - a) * 0.3);
+  g.save(); g.globalAlpha = al; g.textAlign = 'center'; g.translate(W / 2, 330); g.scale(s, s);
+  g.font = `${fit(l1, 72, 980)}px ${HEAD}`; g.fillStyle = c1; g.fillText(l1, 0, 0);
+  if (l2) { g.globalAlpha = al * ss(a + gap, a + gap + 0.18, t); g.font = `${fit(l2, 84, 980)}px ${HEAD}`; g.fillStyle = c2; g.fillText(l2, 0, 92);
+    if (c2 === RED) { const w = g.measureText(l2).width; g.fillStyle = ORANGE; g.fillRect(-w / 2, 108, w * ss(a + gap + 0.15, a + gap + 0.55, t), 9); } }
+  g.restore(); }
+
+// ---------- cenas fora do fígado ----------
+function boxes(t) {
+  medBox(290, 800, '#3d74c7', 'GRIPE', 1, (t - 36.1) / 0.5); medBox(790, 800, '#d9772e', 'DOR', ss(36.8, 36.9, t), (t - 36.9) / 0.5);
+  chip(290, 1090, ss(40.6, 40.9, t)); chip(790, 1090, ss(41.4, 41.7, t));
+  const ga = ss(42.0, 42.4, t), v = 0.42 * ss(42.9, 43.9, t) + 0.5 * ss(44.3, 45.4, t); performanceT = t;
+  gauge(540, 1560, 250, v, ga);
+  [[290, 42.4], [790, 43.9]].forEach(([bx, t0], b) => [0, 1, 2, 3].forEach(i => { const u = (t - t0 - i * 0.22) / 0.8; if (u < 0 || u > 1) return; const e = ss(0, 1, u);
+    ball(lerp(bx, 540, e), lerp(1110, 1500, e) - Math.sin(e * Math.PI) * 60, 23, 'pill', 1 - ss(0.85, 1, u)); }));
+  tag('DOSE DO DIA', 540, 1612, INK, 34, 'center', ga * 0.85);
+  const over = ss(44.9, 45.2, t); if (over > 0) tag('PASSOU DO LIMITE', 540, 1255, RED, 54, 'center', over * (0.7 + 0.3 * Math.sin(t * 9)), HEAD);
+}
+function list(t) {
+  [['LEIA A COMPOSIÇÃO', 47.1], ['RESPEITE O INTERVALO DA BULA', 48.6], ['NÃO PASSE DA DOSE MÁXIMA DO DIA', 50.1]].forEach(([txt, t0], i) => { const a = ss(t0, t0 + 0.3, t), y = 690 + i * 170;
+    check(130, y, a); if (a > 0) { g.save(); g.globalAlpha = a; g.font = `${fit(txt, 62, 820)}px ${HEAD}`; g.textAlign = 'left'; g.fillStyle = INK; g.fillText(txt, 200 + (1 - a) * 40, y + 22); g.restore(); } });
+  const ga = ss(52.4, 52.9, t); performanceT = 0; gauge(540, 1470, 250, 0.7 * ss(52.9, 54.2, t), ga, '4 g');
+  tag('EM 24 HORAS · ADULTO', 540, 1532, INK, 38, 'center', ga);
+  tag('a bula do seu remédio pode indicar menos', 540, 1592, INK, 30, 'center', 0.7 * ss(54.6, 55.1, t));
+}
+function quiet(t) {
+  world(t, EC);
+  // relógio: as horas passam e nada aparece
+  const cx = 300, cy = 1340, r = 130, a = ss(57.6, 58.0, t); g.save(); g.globalAlpha = a;
+  g.fillStyle = '#241e30'; g.strokeStyle = INK; g.lineWidth = 8; g.beginPath(); g.arc(cx, cy, r, 0, 7); g.fill(); g.stroke();
+  g.lineWidth = 4; for (let i = 0; i < 12; i++) { const an = i * Math.PI / 6; g.beginPath(); g.moveTo(cx + Math.cos(an) * (r - 14), cy + Math.sin(an) * (r - 14)); g.lineTo(cx + Math.cos(an) * (r - 30), cy + Math.sin(an) * (r - 30)); g.stroke(); }
+  const h = -Math.PI / 2 + (t - 57.4) * 1.4; g.lineCap = 'round'; g.lineWidth = 10; g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + Math.cos(h) * 62, cy + Math.sin(h) * 62); g.stroke();
+  g.lineWidth = 6; g.strokeStyle = ORANGE; g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + Math.cos(h * 12) * 96, cy + Math.sin(h * 12) * 96); g.stroke();
+  g.fillStyle = INK; g.beginPath(); g.arc(cx, cy, 10, 0, 7); g.fill(); g.restore();
+  tag('AS HORAS PASSAM', cx, 1535, INK, 34, 'center', a); tag('SEM SINTOMA', cx, 1580, ORANGE, 38, 'center', ss(59.6, 60.0, t));
+  // atendimento
+  const b = ss(61.7, 62.0, t); if (b > 0) { g.save(); g.globalAlpha = b; g.translate(780, 1340); const s = back(b) * (1 + 0.03 * Math.sin(t * 7)); g.scale(s, s);
+    g.fillStyle = '#3fbf73'; g.strokeStyle = INK; g.lineWidth = 8; g.beginPath(); g.roundRect(-130, -130, 260, 260, 40); g.fill(); g.stroke();
+    g.fillStyle = INK; g.fillRect(-32, -92, 64, 184); g.fillRect(-92, -32, 184, 64); g.restore(); tag('ATENDIMENTO', 780, 1535, GREEN, 38, 'center', b); }
+}
+function save(t) { const a = ss(64.1, 64.4, t), s = back((t - 64.1) / 0.4) * (1 + 0.03 * Math.sin(t * 8)); g.save(); g.globalAlpha = a; g.translate(540, 960); g.scale(s, s);
+  g.fillStyle = GREEN; g.strokeStyle = INK; g.lineWidth = 12; g.lineJoin = 'round'; g.beginPath(); g.moveTo(-150, -230); g.lineTo(150, -230); g.lineTo(150, 230); g.lineTo(0, 110); g.lineTo(-150, 230); g.closePath(); g.fill(); g.stroke(); g.restore(); }
+function mesiga(t) { const a = ss(65.9, 66.3, t), s = back((t - 65.9) / 0.45), cx = 540, cy = 800, r = 240;
+  g.save(); g.globalAlpha = a; g.translate(cx, cy); g.scale(s, s);
+  g.save(); g.beginPath(); g.arc(0, 0, r, 0, 7); g.clip(); if (LOGO.width) g.drawImage(LOGO, -r, -r, r * 2, r * 2); g.restore();
+  g.strokeStyle = GREEN; g.lineWidth = 12; g.beginPath(); g.arc(0, 0, r + 6, 0, 7); g.stroke(); g.restore();
+  tag('ME SIGA', 540, 1230, INK, 150, 'center', ss(66.4, 66.7, t), HEAD);
+  tag('PARA MAIS CONTEÚDOS COMO ESTE', 540, 1320, GREEN, 46, 'center', ss(66.9, 67.3, t)); }
+function final(t) { const a = ss(69.6, 70.1, t); ['Consulte um', 'profissional de saúde', 'para orientações.'].forEach((l, i) => tag(l, 540, 880 + i * 96, i === 1 ? GREEN : INK, 76, 'center', a, HEAD)); }
+
+const CUTS = [5.9, 36.0, 46.1, 57.4, 64.0, 65.9, 69.5];
+window.END = END;
+window.draw = function (t) {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.drawImage(PAPER, 0, 0);
+  if (t < 5.9) world(t, EA); else if (t < 36) world(t, EB); else if (t < 46.1) boxes(t); else if (t < 57.4) list(t); else if (t < 64) quiet(t); else if (t < 65.9) save(t); else if (t < 69.5) mesiga(t); else final(t);
+  g.globalAlpha = 1; titles(t);
+  // corte entre cenas: escurece e volta
+  const f = CUTS.reduce((m, c) => Math.max(m, 1 - Math.abs(t - c) / 0.16), 0); if (f > 0) { g.globalAlpha = f; g.drawImage(PAPER, 0, 0); g.globalAlpha = 1; }
+  if (t > END - 0.5) { g.fillStyle = `rgba(0,0,0,${ss(END - 0.5, END, t)})`; g.fillRect(0, 0, W, H); }
+};
+window.capa = function () { const t = 35.6;
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.drawImage(PAPER, 0, 0);
+  g.save(); g.translate(W / 2, 1070); g.scale(0.88, 0.88); g.translate(-W / 2, -960); world(t, EB); g.restore();
+  g.textAlign = 'center'; g.font = `${fit('PARACETAMOL', 150, 960)}px ${HEAD}`; g.fillStyle = INK; g.fillText('PARACETAMOL', W / 2, 410);
+  g.font = `112px ${HEAD}`; g.fillStyle = ORANGE; g.fillText('EM EXCESSO', W / 2, 525);
+  g.fillStyle = RED; g.fillText('ATACA O FÍGADO', W / 2, 632);
+};
+LOGO.onload = LOGO.onerror = () => { draw(0); window.ready = true; }; LOGO.src = 'logo.jpg';
+</script></body></html>

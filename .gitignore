@@ -29,3 +29,10 @@ interacoes_exe/previas/
 interacoes_exe/capa_*.png
 interacoes_exe/sfx/
 mecanismo/public/sfxkit/
+
+# Paracetamol (modelo de fundo escuro): mídia gerada fica só no PC
+paracetamol_figado/*.mp4
+paracetamol_figado/*.mp3
+paracetamol_figado/*.wav
+paracetamol_figado/previas/
+paracetamol_figado/sfx/

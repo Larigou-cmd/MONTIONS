@@ -162,6 +162,11 @@ import {
   DURATION_SONO_ALMOCO_FLOW,
 } from "./sonoAlmocoFlow/Video";
 import {
+  VideoCanetaProteinaFlow,
+  CapaCanetaProteinaFlow,
+  DURATION_CANETA_PROTEINA_FLOW,
+} from "./canetaProteinaFlow/Video";
+import {
   VideoNovembroAzul,
   CapaNovembroAzul,
   DURATION_NOVEMBRO_AZUL,
@@ -779,6 +784,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="SonoAlmocoFlowCapa"
       component={CapaSonoAlmocoFlow}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="CanetaProteinaFlow"
+      component={VideoCanetaProteinaFlow}
+      durationInFrames={DURATION_CANETA_PROTEINA_FLOW}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="CanetaProteinaFlowCapa"
+      component={CapaCanetaProteinaFlow}
       durationInFrames={1}
       fps={FPS}
       width={1080}

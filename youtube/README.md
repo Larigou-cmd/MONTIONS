@@ -74,6 +74,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 68 | A caneta do Paraguai é Mounjaro? As 4 canetas de tirzepatida (Modelo 9 com fichas de foto) | [68_tirzepatida_paraguai.md](textos/68_tirzepatida_paraguai.md) | [capa_tirzepatida_paraguai.png](capas/capa_tirzepatida_paraguai.png) |
 | 69 | Por que dá sono depois do almoço (boneco de palito, "você dentro da cena") | [69_sono_depois_almoco.md](textos/69_sono_depois_almoco.md) | [capa_sono_almoco.png](capas/capa_sono_almoco.png) |
 | 70 | Novembro Azul: os remédios do câncer de próstata (Modelo 1 em azul, com 3D) | [70_novembro_azul_prostata.md](textos/70_novembro_azul_prostata.md) | [capa_novembro_azul.png](capas/capa_novembro_azul.png) |
+| 71 | Tá usando caneta? Por que você precisa de mais proteína (boneco de palito, "você dentro da cena") | [71_caneta_proteina_musculo.md](textos/71_caneta_proteina_musculo.md) | [capa_caneta_proteina.png](capas/capa_caneta_proteina.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

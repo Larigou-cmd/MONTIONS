@@ -8,11 +8,11 @@ Frase final (o que a pessoa leva): na dose certa o fígado dá conta. Em excesso
 - B (quebra de crença): "O paracetamol é seguro. Até o seu fígado ficar sem estoque."
 - C (curiosidade): "O seu fígado guarda um estoque de proteção. E o paracetamol em excesso acaba com ele."
 
-Escolhido: (aguardando).
+Escolhido: **C** (10/11/2026).
 
 ## Texto da fala
 
-(GANCHO ESCOLHIDO)
+O seu fígado guarda um estoque de proteção. E o paracetamol em excesso acaba com ele.
 Na dose certa, o paracetamol é seguro. O fígado desmonta quase tudo por um caminho tranquilo, e o resto sai na urina.
 Só que uma parte pequena vira uma substância tóxica. Aí entra a glutationa, uma proteção que o fígado guarda em estoque. Ela neutraliza na hora.
 O problema é o excesso. O caminho seguro fica sobrecarregado, sobra mais substância tóxica, e o estoque de proteção acaba. Sem proteção, ela ataca as células do fígado.

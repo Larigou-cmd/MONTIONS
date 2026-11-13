@@ -77,6 +77,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 71 | Tá usando caneta? Por que você precisa de mais proteína (boneco de palito, "você dentro da cena") | [71_caneta_proteina_musculo.md](textos/71_caneta_proteina_musculo.md) | [capa_caneta_proteina.png](capas/capa_caneta_proteina.png) |
 | 72 | Por que a pimenta arde, e por que a água não resolve (Modelo 2, PIMENTA.EXE) | [72_pimenta_arde_agua.md](textos/72_pimenta_arde_agua.md) | [capa_pimenta.png](capas/capa_pimenta.png) |
 | 73 | Por que o paracetamol em excesso ataca o fígado (modelo de fundo escuro, bolinhas com carinha) | [73_paracetamol_figado.md](textos/73_paracetamol_figado.md) | [capa_paracetamol.png](capas/capa_paracetamol.png) |
+| 74 | O caminho do paracetamol no corpo, da boca ao xixi (longo horizontal, animação 3D do Flow + edição Modelo 2) | [74_caminho_paracetamol_3d.md](textos/74_caminho_paracetamol_3d.md) | [capa_caminho_paracetamol.png](capas/capa_caminho_paracetamol.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

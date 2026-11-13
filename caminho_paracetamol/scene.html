@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>O caminho do paracetamol (camada de edição)</title>
+<style>
+@font-face{font-family:'Silk';font-weight:400;src:url(fonts/silk400.woff2)}
+@font-face{font-family:'Silk';font-weight:400;src:url(fonts/silk400ext.woff2)}
+@font-face{font-family:'Silk';font-weight:700;src:url(fonts/silk700.woff2)}
+@font-face{font-family:'Silk';font-weight:700;src:url(fonts/silk700ext.woff2)}
+@font-face{font-family:'VT';src:url(fonts/vt.woff2)}
+@font-face{font-family:'VT';src:url(fonts/vtext.woff2)}
+html,body{margin:0;background:transparent}canvas{display:block}
+</style>
+</head>
+<body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+// Camada de edição do vídeo longo "O caminho do paracetamol" no visual do Modelo 2 (terminal em pixel de game).
+// Por cima dos clipes realistas do Flow: painel com a etapa, rota dos órgãos, nome do lugar e carimbos com os números.
+// Nas partes marcadas CODE em timeline.json, desenha a tela inteira (farmacocinética, fígado, meia-vida, pergunta, Me siga, tela final).
+// Tempos em segundos da narração (narracao.mp3), tirados de fala.json.
+const W = 1920, H = 1080;
+window.END = 272.5;
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const G = '#39ff6a', A = '#ffc23d', R = '#ff4d6d', CY = '#3de0ff', BG = '#020c06', WH = '#eafff0';
+const SILK = "'Silk'", VT = "'VT'";
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const k = (t, a, d = 0.35) => cl((t - a) / d);
+const eo = x => 1 - Math.pow(1 - x, 3);
+const lerp = (a, b, u) => a + (b - a) * u;
+function rgba(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; }
+function text(s, x, y, size, { font = VT, color = WH, align = 'left', alpha = 1, glow = 0, bold = false } = {}) {
+  if (alpha <= 0) return; g.save(); g.globalAlpha *= alpha; g.font = `${bold ? 700 : 400} ${size}px ${font}`; g.textAlign = align; g.textBaseline = 'alphabetic';
+  if (glow) { g.shadowColor = color; g.shadowBlur = glow; } g.fillStyle = color; g.fillText(s, x, y); g.restore();
+}
+function typed(s, t, at, x, y, size, opt = {}) {
+  if (t < at) return; const n = Math.min(s.length, Math.floor((t - at) * (opt.cps || 26)) + 1);
+  text(s.slice(0, n) + (n < s.length ? (Math.floor(t * 3) % 2 ? '█' : ' ') : ''), x, y, size, opt);
+}
+function box(x, y, w, h, color, { lit = 0, alpha = 1, fill = 'rgba(2,20,10,0.86)', lw = 4 } = {}) {
+  if (alpha <= 0) return; g.save(); g.globalAlpha *= alpha; g.fillStyle = fill; g.fillRect(x, y, w, h);
+  g.shadowColor = color; g.shadowBlur = 8 + 26 * lit; g.strokeStyle = color; g.lineWidth = lw + 2 * lit; g.strokeRect(x, y, w, h); g.shadowBlur = 0;
+  g.fillStyle = color; [[x, y], [x + w - 10, y], [x, y + h - 10], [x + w - 10, y + h - 10]].forEach(([a, b]) => g.fillRect(a, b, 10, 10)); g.restore();
+}
+function stamp(s, t, at, x, y, color, { rot = -4, size = 44, until = 1e9 } = {}) {
+  if (t < at || t > until + 0.3) return; const u = cl((t - at) / 0.22), out = cl((t - until) / 0.3);
+  const sc = lerp(2.4, 1, eo(u)), shake = u >= 1 ? Math.max(0, 1 - (t - at - 0.22) / 0.25) * 7 * Math.sin((t - at) * 90) : 0;
+  g.save(); g.translate(x + shake, y); g.rotate(rot * Math.PI / 180); g.scale(sc, sc); g.globalAlpha *= cl(u * 1.6) * (1 - out);
+  g.font = `700 ${size}px ${SILK}`; g.textAlign = 'center'; g.textBaseline = 'middle';
+  const w = g.measureText(s).width + 44, h = size + 30; g.fillStyle = 'rgba(0,0,0,0.72)'; g.fillRect(-w / 2, -h / 2, w, h);
+  g.strokeStyle = color; g.lineWidth = 6; g.shadowColor = color; g.shadowBlur = 18; g.strokeRect(-w / 2, -h / 2, w, h); g.fillStyle = color; g.fillText(s, 0, 3); g.restore();
+}
+function scan(alpha = 0.10) { g.save(); g.fillStyle = `rgba(0,0,0,${alpha})`; for (let y = 0; y < H; y += 4) g.fillRect(0, y, W, 2); g.restore(); }
+function terminalBG(t) {
+  const rg = g.createRadialGradient(W / 2, H / 2, 100, W / 2, H / 2, W * 0.7); rg.addColorStop(0, '#062a14'); rg.addColorStop(1, BG); g.fillStyle = rg; g.fillRect(0, 0, W, H);
+  g.strokeStyle = 'rgba(57,255,106,0.06)'; g.lineWidth = 2; for (let x = 0; x < W; x += 60) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, H); g.stroke(); } for (let y = 0; y < H; y += 60) { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); }
+}
+function px(x, y, w, h, c) { g.fillStyle = c; g.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); }
+function pill(x, y, s = 1) { g.save(); g.translate(x, y); g.scale(s, s); g.shadowColor = WH; g.shadowBlur = 14; px(-24, -12, 48, 24, '#f4fbff'); px(-18, -18, 36, 36, '#f4fbff'); g.shadowBlur = 0; px(-2, -16, 4, 32, '#b9c7cf'); g.restore(); }
+
+// ---------- dados da linha do tempo ----------
+const SEGS = [[0, 15.7, 'clip'], [15.7, 31.4, 'farmaco'], [31.4, 131.9, 'clip'], [131.9, 144.8, 'figado'], [144.8, 225.5, 'clip'], [225.5, 242.4, 'meiavida'], [242.4, 257.2, 'clip'], [257.2, 262.6, 'pergunta'], [262.6, 268.6, 'siga'], [268.6, 272.5, 'consulte']];
+const ETAPAS = ['ABSORÇÃO', 'DISTRIBUIÇÃO', 'METABOLISMO', 'EXCREÇÃO'];
+const ETAPA = [[31.4, 0], [110.7, 2], [144.8, 1], [178.4, 2], [201.6, 3], [257.2, -1]];
+const ROTA = ['BOCA', 'ESÔFAGO', 'ESTÔMAGO', 'INTESTINO', 'SANGUE', 'FÍGADO', 'CÉREBRO', 'RINS', 'BEXIGA'];
+const LUGAR = [[31.4, 0], [43.0, 1], [49.6, 2], [82.1, 3], [95.9, 4], [110.7, 5], [144.8, 4], [157.1, 6], [178.4, 5], [201.6, 7], [211.8, 8], [242.4, 8]];
+const NOME = [[31.4, 'boca'], [43.0, 'esofago'], [49.6, 'estomago'], [66.0, 'piloro'], [82.1, 'intestino_delgado'], [95.9, 'capilar'], [110.7, 'figado'], [125.1, 'celulas_do_figado'], [144.8, 'circulacao'], [157.1, 'cerebro'], [178.4, 'figado'], [201.6, 'rins'], [211.8, 'bexiga'], [242.4, 'viagem_completa']];
+const at = (arr, t) => { let r = null; arr.forEach(([a, v]) => { if (t >= a) r = [a, v]; }); return r; };
+
+function hud(t) {
+  if (t < 31.4 || t >= 257.2) return;
+  const fade = k(t, 31.4, 0.5);
+  g.save(); g.globalAlpha = fade;
+  // etapa (4 chips no canto superior esquerdo)
+  const e = at(ETAPA, t);
+  box(36, 32, 640, 104, G, { lit: 0.2 });
+  text('PARACETAMOL.EXE', 62, 74, 30, { font: SILK, color: G, bold: true, glow: 8 });
+  ETAPAS.forEach((s, i) => { const on = e && e[1] === i; const x = 62 + i * 152; text(s, x, 116, 26, { color: on ? A : rgba(WH, 0.35), glow: on ? 10 : 0 }); if (on) px(x, 122, g.measureText ? 140 : 140, 3, A); });
+  // nome do lugar, digitado (canto inferior esquerdo)
+  const n = at(NOME, t); if (n) { box(36, 846, 520, 64, G, { fill: 'rgba(0,0,0,0.6)', lw: 3 }); typed('> ' + n[1] + '.exe', t, n[0] + 0.2, 58, 890, 38, { color: G, glow: 6, cps: 30 }); }
+  // rota dos órgãos (faixa de baixo)
+  const L = at(LUGAR, t), cur = L ? L[1] : 0;
+  g.fillStyle = 'rgba(0,0,0,0.62)'; g.fillRect(0, 944, W, 136);
+  const x0 = 120, x1 = 1800, step = (x1 - x0) / (ROTA.length - 1);
+  px(x0, 990, x1 - x0, 6, rgba(G, 0.25)); px(x0, 990, step * cur, 6, G);
+  ROTA.forEach((s, i) => { const x = x0 + i * step, done = i <= cur; px(x - 11, 982, 22, 22, done ? G : '#1c3a26'); if (i === cur) { g.save(); g.shadowColor = A; g.shadowBlur = 20; px(x - 15, 978, 30, 30, A); g.restore(); }
+    text(s, x, 1050, 26, { align: 'center', color: i === cur ? A : done ? G : rgba(WH, 0.45), font: i === cur ? SILK : VT, bold: i === cur }); });
+  const tr = L ? k(t, L[0], 0.8) : 1, prevX = x0 + Math.max(0, cur - 1) * step, curX = x0 + cur * step;
+  pill(lerp(prevX, curX, eo(tr)), 950, 0.8);
+  g.restore();
+}
+function carimbos(t) {
+  stamp('DA BOCA AO XIXI', t, 12.3, W / 2, 140, A, { size: 60, until: 15.5 });
+  stamp('QUASE NADA É ABSORVIDO AQUI', t, 59.97, W / 2 + 200, 230, R, { until: 65.8 });
+  stamp('COM COMIDA: DEMORA MAIS', t, 73.27, W / 2 + 220, 230, A, { until: 81.9 });
+  stamp('PICO NO SANGUE: 30–60 MIN', t, 106.77, W / 2 + 220, 230, CY, { until: 110.5 });
+  stamp('PRIMEIRA PASSAGEM', t, 118.07, W / 2 + 220, 230, A, { until: 121.9 });
+  stamp('≈ 75% CHEGA INTEIRO', t, 122.07, W / 2 + 220, 230, G, { until: 124.9 });
+  stamp('DOR ↓   FEBRE ↓', t, 163.67, W / 2 + 220, 230, CY, { until: 169.2 });
+  stamp('MECANISMO: AINDA EM ESTUDO', t, 169.37, W / 2 + 220, 230, A, { until: 178.2 });
+  stamp('NAPQI = PARTE TÓXICA', t, 182.0, W / 2 + 220, 230, R, { until: 188.4 });
+  stamp('GLUTATIONA = PROTEÇÃO', t, 188.6, W / 2 + 220, 230, G, { until: 191.6 });
+  stamp('EXCESSO: A PROTEÇÃO ACABA', t, 191.83, W / 2 + 220, 230, R, { until: 197.9 });
+  stamp('▶ VÍDEO SOBRE ISSO NO CANAL', t, 198.07, W / 2 + 220, 230, A, { until: 201.4 });
+  stamp('SÓ 2 A 5% SAI INTEIRO', t, 213.5, W / 2 + 220, 230, A, { until: 225.3 });
+}
+
+// ---------- telas inteiras (Modelo 2) ----------
+function farmaco(t) {
+  terminalBG(t); const t0 = 15.7;
+  typed('> farmacocinetica.exe', t, t0 + 0.2, 160, 170, 54, { color: G, glow: 10 });
+  typed('o que o corpo faz com o remédio', t, t0 + 1.4, 160, 240, 46, { color: WH });
+  const ws = [['ABSORVER', 23.57, G], ['DISTRIBUIR', 24.63, CY], ['TRANSFORMAR', 25.73, A], ['ELIMINAR', 26.73, '#ff8ad8']];
+  ws.forEach(([s, a, c], i) => { const u = k(t, a, 0.3), x = 160 + i * 410; if (u <= 0) { box(x, 420, 370, 300, '#1c3a26', { fill: 'rgba(2,20,10,0.6)' }); text(String(i + 1), x + 185, 600, 90, { font: SILK, color: '#1c3a26', align: 'center', bold: true }); return; }
+    box(x, 420 - 14 * eo(u), 370, 300, c, { lit: 1 - k(t, a + 0.3, 0.6) }); text(String(i + 1), x + 185, 560 - 14 * eo(u), 90, { font: SILK, color: c, align: 'center', bold: true, glow: 16 }); text(s, x + 185, 660 - 14 * eo(u), 38, { font: SILK, color: WH, align: 'center', bold: true }); });
+  typed('cada etapa explica uma regra da bula', t, 27.33, 160, 860, 44, { color: A, glow: 8 });
+  scan();
+}
+function figado(t) {
+  terminalBG(t); const t0 = 131.9;
+  typed('> figado.exe   // como ele "embrulha" o remédio', t, t0 + 0.1, 160, 170, 48, { color: G, glow: 10 });
+  const bars = [['GLICURONÍDEO', 131.9, 0.50, 0.70, G], ['SULFATO', 137.97, 0.25, 0.35, CY], ['VIA TÓXICA', 139.3, 0.05, 0.10, R]];
+  bars.forEach(([s, a, lo, hi, c], i) => { const y = 330 + i * 190, u = eo(k(t, a, 1.0)); if (t < a) return;
+    text(s, 160, y + 20, 46, { font: SILK, color: c, bold: true }); px(640, y - 30, 1100, 64, '#0c2414'); px(640, y - 30, 1100 * hi * u, 64, rgba(c, 0.35)); px(640, y - 30, 1100 * lo * u, 64, c);
+    text(i === 2 ? 'pequena' : `${Math.round(lo * 100)}–${Math.round(hi * 100)}%`, 640 + 1100 * hi * u + 24, y + 16, 46, { color: WH, alpha: k(t, a + 0.8, 0.3) }); });
+  stamp('EMBRULHADO → SAI PELOS RINS', t, 140.47, W / 2, 920, A, { size: 46 });
+  scan();
+}
+function meiavida(t) {
+  terminalBG(t); const t0 = 225.5;
+  typed('> meia_vida.exe', t, t0 + 0.1, 160, 150, 54, { color: G, glow: 10 });
+  typed('quanto paracetamol sobra no sangue', t, t0 + 1.0, 160, 215, 42, { color: WH });
+  const ox = 260, oy = 900, gw = 1400, gh = 560; px(ox, oy, gw, 4, WH); px(ox, oy - gh, 4, gh, WH);
+  [0, 2, 4, 6, 8].forEach((h, i) => text(h + ' h', ox + i * gw / 4, oy + 50, 36, { align: 'center', color: rgba(WH, 0.7) }));
+  const vals = [1, 0.5, 0.25, 0.125, 0.0625]; const shown = cl((t - (t0 + 2.0)) / 5.5) * 4;
+  for (let i = 0; i < 5; i++) { if (i > shown + 0.001) break; const u = eo(cl(shown - i + 1)); const x = ox + i * gw / 4, hgt = gh * 0.92 * vals[i] * (i === 0 ? 1 : u), c = i === 0 ? G : lerp(1, 0, i / 4) > 0.5 ? A : R;
+    px(x - 50, oy - hgt, 100, hgt, rgba(i === 0 ? G : A, 0.85)); text(['100%', '50%', '25%', '12,5%', '6,25%'][i], x, oy - hgt - 18, 40, { align: 'center', color: WH, font: SILK, bold: true }); }
+  stamp('MEIA-VIDA ≈ 2 HORAS', t, 234.07, 1400, 330, A, { size: 52 });
+  stamp('NUNCA DOBRE A DOSE', t, 237.6, 1400, 470, R, { size: 46, rot: 3 });
+  scan();
+}
+function pergunta(t) {
+  terminalBG(t); const t0 = 257.2;
+  typed('> proximo_video.exe', t, t0 + 0.1, 160, 300, 60, { color: G, glow: 10 });
+  typed('qual remédio você quer ver por dentro?', t, t0 + 0.9, 160, 420, 58, { color: WH });
+  if (t > t0 + 2.4) { const b = Math.floor(t * 3) % 2; text('COMENTA AÍ ▼', W / 2, 700, 80, { font: SILK, color: A, align: 'center', bold: true, glow: b ? 22 : 8 }); }
+  scan();
+}
+const LOGO = new Image();
+function siga(t) {
+  terminalBG(t); const t0 = 262.6, u = eo(k(t, t0, 0.5)), r = 230;
+  g.save(); g.translate(W / 2, 420); g.scale(lerp(0.6, 1, u), lerp(0.6, 1, u)); g.globalAlpha = u;
+  g.save(); g.beginPath(); g.arc(0, 0, r, 0, 7); g.clip(); if (LOGO.width) g.drawImage(LOGO, -r, -r, r * 2, r * 2); g.restore();
+  g.strokeStyle = G; g.lineWidth = 10; g.shadowColor = G; g.shadowBlur = 24; g.beginPath(); g.arc(0, 0, r + 6, 0, 7); g.stroke(); g.restore();
+  text('ME SIGA', W / 2, 820, 110, { font: SILK, color: WH, align: 'center', bold: true, alpha: k(t, t0 + 0.4, 0.3), glow: 12 });
+  text('para mais conteúdos como este', W / 2, 900, 52, { color: G, align: 'center', alpha: k(t, t0 + 0.8, 0.3) });
+  scan();
+}
+function consulte(t) {
+  terminalBG(t); const a = k(t, 268.6, 0.5);
+  ['Consulte um', 'profissional de saúde', 'para orientações.'].forEach((s, i) => text(s, W / 2, 440 + i * 110, 84, { font: SILK, color: i === 1 ? G : WH, align: 'center', bold: true, alpha: a, glow: i === 1 ? 14 : 0 }));
+  if (t > window.END - 0.6) { g.fillStyle = `rgba(0,0,0,${cl((t - window.END + 0.6) / 0.6)})`; g.fillRect(0, 0, W, H); }
+  scan();
+}
+
+window.draw = function (t) {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.clearRect(0, 0, W, H);
+  const s = SEGS.find(([a, b]) => t >= a && t < b) || SEGS[SEGS.length - 1];
+  const kind = s[2];
+  if (kind === 'farmaco') farmaco(t); else if (kind === 'figado') figado(t); else if (kind === 'meiavida') meiavida(t);
+  else if (kind === 'pergunta') pergunta(t); else if (kind === 'siga') siga(t); else if (kind === 'consulte') consulte(t);
+  else { hud(t); carimbos(t); if (t < 0.6) { g.fillStyle = `rgba(0,0,0,${1 - t / 0.6})`; g.fillRect(0, 0, W, H); } }
+  // passagem entre clipe e tela em código: flash verde rápido de "troca de tela"
+  SEGS.forEach(([a]) => { const d = Math.abs(t - a); if (a > 0 && d < 0.12) { g.fillStyle = rgba(G, 0.35 * (1 - d / 0.12)); g.fillRect(0, 0, W, H); } });
+};
+Promise.all([document.fonts.load("700 40px 'Silk'"), document.fonts.load("40px 'VT'"), new Promise(r => { LOGO.onload = LOGO.onerror = r; LOGO.src = 'logo.jpg'; })]).then(() => { draw(0); window.ready = true; });
+</script>
+</body>
+</html>

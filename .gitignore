@@ -36,3 +36,14 @@ paracetamol_figado/*.mp3
 paracetamol_figado/*.wav
 paracetamol_figado/previas/
 paracetamol_figado/sfx/
+
+# Caminho do paracetamol (longo 3D): mídia gerada fica só no PC
+caminho_paracetamol/*.mp4
+caminho_paracetamol/*.mp3
+caminho_paracetamol/*.wav
+caminho_paracetamol/previas/
+caminho_paracetamol/sfx/
+caminho_paracetamol/tmp_base/
+caminho_paracetamol/capa_fundo.jpg
+caminho_paracetamol/capa_full.png
+caminho_paracetamol/render.log

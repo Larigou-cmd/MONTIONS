@@ -2,6 +2,8 @@
 
 Modelo novo para o YouTube: vídeo longo horizontal (16:9), com clipes realistas gerados no Google Vids (Omni, 720p, 10 s, paisagem) e a narração gravada por você depois. Tema: farmacocinética (absorção, distribuição, metabolismo e excreção) contada como a viagem de um comprimido.
 
+**Versão escolhida (12/11/2026): Flow.** Clipes em `E:\Downloads\Videos\Videos Flow\caminho_comprimido_flow\` (Omni 1.1 Flash, 720p, 10 s, 16:9, 225 créditos). A versão do Google Vids fica só como reserva. Comparação lado a lado: `E:\Downloads\Videos\previas\comparacao_vids_flow\`.
+
 Clipes: `E:\Downloads\Videos\Videos Flow\caminho_comprimido_vids\` (numerados na ordem do vídeo). Projeto no Google Vids: "O caminho do paracetamol no corpo (animação 3D)", com os 15 clipes em ordem (2 min 30 s). Os primeiros testes verticais ficaram em `vertical_teste\`.
 
 ## Título (escolher 1)

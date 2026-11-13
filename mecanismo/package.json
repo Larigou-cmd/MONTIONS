@@ -7,17 +7,17 @@
   "private": true,
   "dependencies": {
     "@react-three/fiber": "9.8.2",
-    "@remotion/cli": "4.0.535",
-    "@remotion/fonts": "^4.0.535",
-    "@remotion/google-fonts": "^4.0.535",
-    "@remotion/three": "4.0.535",
+    "@remotion/cli": "^4.0.543",
+    "@remotion/fonts": "^4.0.543",
+    "@remotion/google-fonts": "^4.0.543",
+    "@remotion/three": "^4.0.543",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "remotion": "4.0.535",
+    "remotion": "^4.0.543",
     "three": "0.170.0"
   },
   "devDependencies": {
-    "@remotion/eslint-config-flat": "4.0.535",
+    "@remotion/eslint-config-flat": "^4.0.543",
     "@types/react": "19.2.7",
     "@types/three": "0.170.0",
     "@types/web": "0.0.166",

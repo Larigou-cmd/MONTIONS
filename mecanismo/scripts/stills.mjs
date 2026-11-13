@@ -7,7 +7,15 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 // na nuvem (Linux) usa o Chromium já instalado; no Windows/Mac o Remotion baixa o navegador sozinho
-const linuxChrome = "/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell";
+const pw = "/opt/pw-browsers";
+const linuxChrome = fs.existsSync(pw)
+  ? fs
+      .readdirSync(pw)
+      .filter((d) => d.startsWith("chromium_headless_shell-"))
+      .map((d) => [path.join(pw, d, "chrome-linux/headless_shell"), path.join(pw, d, "chrome-headless-shell-linux64/chrome-headless-shell")])
+      .flat()
+      .find((p) => fs.existsSync(p)) ?? ""
+  : "";
 const browserExecutable = fs.existsSync(linuxChrome) ? linuxChrome : undefined;
 const serveUrl = await bundle({ entryPoint: path.join(root, "src/index.ts") });
 const composition = await selectComposition({ serveUrl, id: process.env.COMP || "Video", browserExecutable });

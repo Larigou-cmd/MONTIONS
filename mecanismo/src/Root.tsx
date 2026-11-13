@@ -273,6 +273,7 @@ import {
   CapaTirzepatidaParaguai,
   DURATION as DUR_TIRZ_PY,
 } from "./tirzepatidaParaguai/Video";
+import { VideoCaminhoRemedio, DURATION as DUR_CAMINHO } from "./caminhoRemedio/Video";
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -1509,5 +1510,6 @@ export const RemotionRoot: React.FC = () => (
       width={1080}
       height={1920}
     />
+      <Composition id="CaminhoRemedio" component={VideoCaminhoRemedio} durationInFrames={DUR_CAMINHO} fps={30} width={1080} height={1920} />
   </>
 );

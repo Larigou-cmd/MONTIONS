@@ -140,6 +140,7 @@ import {
   CapaPressaoParar,
   DURATION_PRESSAO,
 } from "./pressaoParar/Video";
+import { VideoRessaca, CapaRessaca, DURATION_RESSACA } from "./ressaca/Video";
 import {
   VideoInsulinaFlow,
   CapaInsulinaFlow,
@@ -730,6 +731,22 @@ export const RemotionRoot: React.FC = () => (
       id="PressaoParar"
       component={VideoPressaoParar}
       durationInFrames={DURATION_PRESSAO}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Ressaca"
+      component={VideoRessaca}
+      durationInFrames={DURATION_RESSACA}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="RessacaCapa"
+      component={CapaRessaca}
+      durationInFrames={1}
       fps={FPS}
       width={1080}
       height={1920}

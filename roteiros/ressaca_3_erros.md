@@ -12,9 +12,9 @@ Escolhido: **C** (13/11/2026).
 
 ## Texto da fala
 
-Versão de domingo de feriado (15/11/2026), gancho C adaptado:
+Versão de domingo (15/11/2026), gancho C adaptado:
 
-Exagerou no feriadão? Três erros que deixam a ressaca pior, e o que ajuda de verdade.
+Exagerou nesse fim de semana? Três erros que deixam a ressaca pior, e o que ajuda de verdade.
 Erro número um: beber de estômago vazio. Com comida no estômago, o álcool entra mais devagar no sangue. Fica a dica para a próxima.
 Erro número dois: achar que ressaca é só falta de água. Ela também vem do acetaldeído, uma substância que o fígado produz ao quebrar o álcool, de uma inflamação no corpo e do sono ruim. E bebida escura, como uísque e vinho tinto, costuma deixar a ressaca pior.
 Erro número três: o remédio errado. O paracetamol passa pelo fígado, que acabou de trabalhar com o álcool. E o anti-inflamatório pode irritar ainda mais o estômago. Na dúvida, pergunte ao farmacêutico.
@@ -28,7 +28,7 @@ Cerca de 165 palavras, uns 70 s de fala + Me siga + tela final.
 
 ## Cenas (Modelo 8, lista neon preta e verde-limão)
 
-1. Gancho: "EXAGEROU NO FERIADÃO?" em neon; dois copos brindando (genéricos) e um relógio pulando para "AMANHÃ". Título: "3 ERROS QUE PIORAM A RESSACA".
+1. Gancho: "EXAGEROU NO FIM DE SEMANA?" em neon; dois copos brindando (genéricos) e um relógio pulando para "AMANHÃ". Título: "3 ERROS QUE PIORAM A RESSACA".
 2. Item 1: prato vazio e um copo ("ESTÔMAGO VAZIO"); depois o prato cheio e uma seta de álcool entrando devagar ("COM COMIDA = MAIS DEVAGAR").
 3. Item 2: gota d'água com um "X" parcial ("NÃO É SÓ ÁGUA"). Três ícones: acetaldeído, inflamação, sono ruim. Duas garrafas genéricas, clara e escura; a escura ganha "+ RESSACA".
 4. Item 3: comprimido genérico com o fígado ("FÍGADO OCUPADO") e o anti-inflamatório com o estômago ("ESTÔMAGO IRRITADO"). Rodapé: "PERGUNTE AO FARMACÊUTICO".

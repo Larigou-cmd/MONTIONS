@@ -47,9 +47,9 @@ if (process.env.MUDO) { fs.renameSync(mudo, path.join(dir, 'previa_sem_audio.mp4
 
 // 2) áudio: narração sem alteração + música baixinha + efeitos nos carimbos
 const sfx = JSON.parse(fs.readFileSync(path.join(dir, 'sfx.json'), 'utf8'));
-const inputs = ['-i', mudo, '-i', path.join(dir, 'fala.mp3'), '-i', path.join(dir, 'musica.wav')];
+const inputs = ['-i', mudo, '-i', path.join(dir, 'fala.mp3'), '-i', path.join(dir, 'musica_leve.wav')];
 sfx.forEach(([, f]) => inputs.push('-i', path.join(dir, 'sfx', f + '.wav')));
-const parts = ['[1:a]apad[nar]', `[2:a]volume=0.07,afade=t=out:st=${(END - 2).toFixed(2)}:d=2[mus]`];
+const parts = ['[1:a]apad[nar]', `[2:a]volume=0.05,afade=t=out:st=${(END - 2).toFixed(2)}:d=2[mus]`];
 sfx.forEach(([t, , v], i) => parts.push(`[${i + 3}:a]volume=${v},adelay=${Math.round(t * 1000)}|${Math.round(t * 1000)}[s${i}]`));
 parts.push(`[nar][mus]${sfx.map((_, i) => `[s${i}]`).join('')}amix=inputs=${sfx.length + 2}:normalize=0:duration=first[a]`);
 await run(['-y', '-loglevel', 'error', ...inputs, '-filter_complex', parts.join(';'), '-map', '0:v', '-map', '[a]',

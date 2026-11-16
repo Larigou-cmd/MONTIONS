@@ -35,8 +35,8 @@ function plate(cx, cy, s, a = 1, glint = -1) { if (a <= 0) return; g.save(); g.g
   g.font = `800 96px ${COND}`; g.textAlign = 'center'; g.fillStyle = INK; g.fillText('FARMA.EXE', 0, 34);
   g.font = `700 28px ${MONO}`; g.fillText('NOTÍCIAS DE SAÚDE', 0, 74); g.restore(); }
 function bug(a) { plate(905, 130, 0.33, a); }
-function eyebrow(txt, y, a) { text(txt, 80, y, 28, GOLD, 'left', a, MONO, 700); }
-function cornerTag(txt, a) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.fillStyle = INK3; g.strokeStyle = GOLD; g.lineWidth = 2; g.fillRect(80, 92, 380, 56); g.strokeRect(80, 92, 380, 56); g.restore(); text(txt, 100, 130, 24, GOLD, 'left', a, MONO, 700, 340); }
+function eyebrow(txt, y, a) { text(txt, 80, y, 34, GOLD, 'left', a, MONO, 700, 900); }
+function cornerTag(txt, a) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.fillStyle = INK3; g.strokeStyle = GOLD; g.lineWidth = 2; g.fillRect(80, 92, 440, 62); g.strokeRect(80, 92, 440, 62); g.restore(); text(txt, 100, 134, 30, GOLD, 'left', a, MONO, 700, 400); }
 function card(x, y, w, h, a = 1) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.fillStyle = INK2; g.fillRect(x, y, w, h); g.fillStyle = ACC; g.fillRect(x, y, w, 8); g.strokeStyle = 'rgba(255,255,255,0.08)'; g.lineWidth = 2; g.strokeRect(x, y, w, h); g.restore(); }
 function stamp(txt, cx, cy, t0, t, col = ACC, size = 70, rot = -0.13) { const a = ss(t0, t0 + 0.05, t); if (a <= 0) return; const u = cl((t - t0) / 0.16), s = lerp(1.9, 1, u);
   g.save(); g.globalAlpha = a; g.translate(cx, cy); g.rotate(rot); g.scale(s, s); g.font = `800 ${size}px ${COND}`; const w = g.measureText(txt).width + 70, h = size + 50;
@@ -54,11 +54,11 @@ function shield(cx, cy, s, a, fill = ACC) { if (a <= 0) return; g.save(); g.glob
   g.fillStyle = fill; g.fill(); g.strokeStyle = PAPER; g.lineWidth = 6; g.stroke(); g.restore(); }
 
 // ---------- tarja (lower third) ----------
-const STRAP = [[1.4, 'ALERTA', 'COVID VOLTA A SUBIR NO BRASIL'], [12.5, 'ALERTA', 'CASOS GRAVES SOBEM EM 5 ESTADOS E NO DF'], [24.0, 'ENTENDA', 'POR QUE TOMAR O REFORÇO'],
-  [35.1, 'ENTENDA', 'O QUE A VACINA FAZ DE MAIS IMPORTANTE'], [45.2, 'CALENDÁRIO', 'QUEM PRECISA DO REFORÇO'], [56.7, 'SERVIÇO', 'VACINA DE GRAÇA NO SUS']];
-const SOURCES = [[1.4, 'FONTE: MINISTÉRIO DA SAÚDE'], [12.5, 'FONTE: FIOCRUZ · INFOGRIPE'], [24.0, 'FONTE: ESTUDOS DE EFETIVIDADE'], [35.1, 'FONTE: MINISTÉRIO DA SAÚDE'], [45.2, 'FONTE: CALENDÁRIO 2026 · FIOCRUZ'], [56.7, 'FONTE: MINISTÉRIO DA SAÚDE']];
-const SX = 50, SY = 1482, SW = 870, SH = 118, TY = 1430;
-function strap(t) { const inA = ss(1.4, 1.7, t), out = ss(63.5, 63.9, t); if (inA <= 0 || out >= 1) return; const dx = lerp(-1100, 0, back(inA)) - out * 1150;
+const STRAP = [[0.9, 'ALERTA', 'COVID VOLTA A SUBIR NO BRASIL'], [12.5, 'ALERTA', 'CASOS GRAVES EM ALTA'], [24.0, 'ENTENDA', 'POR QUE TOMAR O REFORÇO'],
+  [35.1, 'ENTENDA', 'O QUE A VACINA FAZ'], [45.2, 'CALENDÁRIO', 'QUEM PRECISA DO REFORÇO'], [56.7, 'SERVIÇO', 'VACINA DE GRAÇA NO SUS']];
+const SOURCES = [[0.9, 'FONTE: MINISTÉRIO DA SAÚDE'], [12.5, 'FONTE: FIOCRUZ · INFOGRIPE'], [24.0, 'FONTE: ESTUDOS DE EFETIVIDADE'], [35.1, 'FONTE: MINISTÉRIO DA SAÚDE'], [45.2, 'FONTE: CALENDÁRIO 2026 · FIOCRUZ'], [56.7, 'FONTE: MINISTÉRIO DA SAÚDE']];
+const SX = 50, SY = 1482, SW = 760, SH = 118, TY = 1430;
+function strap(t) { const inA = ss(0.9, 1.2, t), out = ss(63.5, 63.9, t); if (inA <= 0 || out >= 1) return; const dx = lerp(-1100, 0, back(inA)) - out * 1150;
   let k = 0; STRAP.forEach((r, i) => { if (t >= r[0]) k = i; }); const [t0, tab, txt] = STRAP[k], prev = k > 0 ? STRAP[k - 1] : null, u = k > 0 ? ss(t0, t0 + 0.32, t) : 1;
   g.save(); g.translate(dx, 0);
   // aba
@@ -66,23 +66,23 @@ function strap(t) { const inA = ss(1.4, 1.7, t), out = ss(63.5, 63.9, t); if (in
   g.fillStyle = tab === 'ALERTA' ? HOT : ACC; g.fillRect(SX, TY, tw, 52); if (flash > 0) { g.globalAlpha = flash; g.fillStyle = '#fff'; g.fillRect(SX, TY, tw, 52); g.globalAlpha = 1; }
   g.fillStyle = INK; g.textAlign = 'left'; g.fillText(tab, SX + 20, TY + 39);
   // faixa de papel + bloco escuro
-  g.fillStyle = PAPER; g.fillRect(SX, SY, SW, SH); g.fillStyle = INK; g.fillRect(SX + SW, SY, 110, SH); g.fillStyle = ACC; g.fillRect(SX + SW + 20, SY + 30, 70, 58);
-  g.fillStyle = INK; g.font = `800 34px ${COND}`; g.textAlign = 'center'; g.fillText('F', SX + SW + 55, SY + 72);
+  g.fillStyle = PAPER; g.fillRect(SX, SY, SW, SH); g.fillStyle = INK; g.fillRect(SX + SW, SY, 90, SH); g.fillStyle = ACC; g.fillRect(SX + SW + 16, SY + 30, 58, 58);
+  g.fillStyle = INK; g.font = `800 34px ${COND}`; g.textAlign = 'center'; g.fillText('F', SX + SW + 45, SY + 72);
   g.save(); g.beginPath(); g.rect(SX, SY, SW, SH); g.clip(); g.textAlign = 'left'; g.fillStyle = INK;
   const put = (s, y) => { g.font = `800 64px ${COND}`; const w = g.measureText(s).width; if (w > SW - 50) g.font = `800 ${64 * (SW - 50) / w}px ${COND}`; g.fillText(s, SX + 24, y); };
   if (prev && u < 1) { put(prev[2], SY + 82 - u * SH); put(txt, SY + 82 + (1 - u) * SH); } else put(txt, SY + 82);
   g.restore(); g.restore();
-  let s = ''; SOURCES.forEach(r => { if (t >= r[0]) s = r[1]; }); text(s, 1030, 1405, 24, GOLD, 'right', 0.8 * inA * (1 - out), MONO, 700); }
+  let s = ''; SOURCES.forEach(r => { if (t >= r[0]) s = r[1]; }); text(s, SX, 1408, 30, GOLD, 'left', 0.85 * inA * (1 - out), MONO, 700, 820); }
 
 // ---------- vinheta + gancho (0–7,3) ----------
-function sting(t) { const sl = [0.04, 0.1]; sl.forEach((t0, i) => { const u = ss(t0, t0 + 0.25, t) * (1 - ss(0.9, 1.1, t)); if (u <= 0) return; g.save(); g.globalAlpha = u; g.fillStyle = i ? GOLD : ACC; g.translate(540, 700); g.rotate(-0.5); g.fillRect(-700 + u * 0, -30 + i * 80, 1400 * u, 26); g.restore(); });
-  const sl2 = cl((t - 0.16) / 0.26), fly = ss(1.0, 1.45, t), s = lerp(lerp(0.2, 1.25, back(sl2)), 0.33, fly), cx = lerp(540, 905, fly), cy = lerp(720, 130, fly);
-  const shake = t > 0.3 && t < 0.6 ? Math.sin(t * 90) * 8 * (0.6 - t) / 0.3 : 0; if (t >= 0.16) plate(cx + shake, cy, s, 1, cl((t - 0.55) / 0.4));
-  if (t > 0.38 && t < 0.8) { const k = (t - 0.38) / 0.42; g.save(); g.globalAlpha = 1 - k; g.strokeStyle = ACC; g.lineWidth = 8; g.beginPath(); g.ellipse(540, 720, 300 + k * 300, 120 + k * 120, 0, 0, 7); g.stroke(); g.restore(); } }
+function sting(t) { const sl = [0.04, 0.1]; sl.forEach((t0, i) => { const u = ss(t0, t0 + 0.25, t) * (1 - ss(0.5, 0.7, t)); if (u <= 0) return; g.save(); g.globalAlpha = u; g.fillStyle = i ? GOLD : ACC; g.translate(540, 700); g.rotate(-0.5); g.fillRect(-700 + u * 0, -30 + i * 80, 1400 * u, 26); g.restore(); });
+  const sl2 = cl((t - 0.05) / 0.2), fly = ss(0.55, 0.9, t), s = lerp(lerp(0.2, 1.25, back(sl2)), 0.33, fly), cx = lerp(540, 905, fly), cy = lerp(720, 130, fly);
+  const shake = t > 0.2 && t < 0.45 ? Math.sin(t * 90) * 8 * (0.45 - t) / 0.25 : 0; if (t >= 0.05) plate(cx + shake, cy, s, 1, cl((t - 0.28) / 0.3));
+  if (t > 0.2 && t < 0.6) { const k = (t - 0.2) / 0.4; g.save(); g.globalAlpha = 1 - k; g.strokeStyle = ACC; g.lineWidth = 8; g.beginPath(); g.ellipse(540, 720, 300 + k * 300, 120 + k * 120, 0, 0, 7); g.stroke(); g.restore(); } }
 function hook(t) {
-  if (t < 1.45) sting(t); else bug(1);
-  eyebrow('16 NOV 2026 · BRASIL', 300, ss(1.5, 1.8, t));
-  text('COVID', 80, 440, 150, PAPER, 'left', ss(1.35, 1.6, t), COND, 800); text('SUBINDO DE NOVO', 80, 540, 84, ACC, 'left', ss(1.45, 1.7, t), COND, 800);
+  if (t < 0.9) sting(t); else bug(1);
+  eyebrow('16 NOV 2026 · BRASIL', 300, ss(0.9, 1.2, t));
+  text('COVID', 80, 440, 150, PAPER, 'left', ss(0.05, 0.25, t), COND, 800); text('SUBINDO DE NOVO', 80, 540, 84, ACC, 'left', ss(0.15, 0.35, t), COND, 800);
   // carteirinha
   const a = ss(1.6, 2.0, t), y = lerp(1300, 640, back(ss(1.6, 2.1, t))); if (a > 0) { g.save(); g.globalAlpha = a; g.translate(540, y + 260); g.rotate(lerp(0.15, -0.03, ss(1.6, 2.1, t)));
     g.fillStyle = PAPER; g.fillRect(-400, -230, 800, 460); g.fillStyle = INK; g.fillRect(-400, -230, 800, 80); text('CARTEIRA DE VACINAÇÃO', -370, -175, 44, PAPER, 'left', 1, COND, 800);
@@ -100,7 +100,7 @@ const val = w => w < 6 ? 0.18 + 0.03 * Math.sin(w * 1.7) : 0.18 + (w - 5) * 0.1;
 function chart(t) { bug(1); cornerTag('ESQUEMA · SEM ESCALA', ss(7.4, 7.7, t)); eyebrow('MINISTÉRIO DA SAÚDE · NOV 2026', 230, ss(7.4, 7.7, t));
   text('CASOS DE COVID', 80, 330, 70, PAPER, 'left', ss(7.4, 7.7, t), COND, 800);
   g.save(); g.globalAlpha = ss(7.4, 7.7, t); g.strokeStyle = 'rgba(255,255,255,0.25)'; g.lineWidth = 3; g.beginPath(); g.moveTo(GX0, GY1 - 20); g.lineTo(GX0, GY0); g.lineTo(GX1 + 20, GY0); g.stroke(); g.restore();
-  text('SEMANAS', GX1, GY0 + 50, 26, GOLD, 'right', ss(7.4, 7.7, t), MONO);
+  text('SEMANAS', GX1, GY0 + 54, 32, GOLD, 'right', ss(7.4, 7.7, t), MONO);
   const steps = cl((t - 7.6) / 0.22, 0, WEEKS - 1), px = w => lerp(GX0 + 20, GX1, w / (WEEKS - 1)), py = w => lerp(GY0, GY1, val(w));
   const tx = px(5.5), dl = ss(9.0, 9.3, t); if (dl > 0) { g.save(); g.globalAlpha = dl; g.setLineDash([16, 12]); g.strokeStyle = GOLD; g.lineWidth = 4; g.beginPath(); g.moveTo(tx, GY0); g.lineTo(tx, GY1 - 40); g.stroke(); g.restore(); text('6 SEMANAS EM ALTA →', tx + 14, GY1 - 50, 34, GOLD, 'left', dl, MONO, 700); }
   g.save(); g.lineWidth = 9; g.lineJoin = 'round'; g.lineCap = 'round'; for (let w = 1; w <= Math.floor(steps) + 1 && w < WEEKS; w++) { const f = cl(steps - (w - 1)); if (f <= 0) break; g.strokeStyle = w > 5 ? ACC : PAPER;
@@ -120,31 +120,31 @@ function map(t) { bug(1); cornerTag('MAPA ESQUEMÁTICO', ss(12.6, 12.9, t)); eye
     if (lt > 0 && lt < 1) { g.globalAlpha = 1 - lt; g.strokeStyle = ACC; g.lineWidth = 6; g.strokeRect(x - lt * 20, y - lt * 20, S - 10 + lt * 40, S - 10 + lt * 40); }
     g.restore(); text(n, x + (S - 10) / 2, y + 66, 38, lt > 0.5 ? INK : 'rgba(244,241,232,0.55)', 'center', a, COND, 800); });
   stamp('AINDA EM NÍVEL BAIXO', 540, 1270, 20.1, t, GOLD, 58, -0.08);
-  const up = ss(22.0, 22.3, t); if (up > 0) { text('TENDÊNCIA', 760, 820, 46, ACC, 'left', up, COND, 800); text('DE ALTA ↑', 760, 875, 54, ACC, 'left', up, COND, 800); } }
+  const up = ss(22.0, 22.3, t); if (up > 0) { text('TENDÊNCIA', 120, 1010, 50, ACC, 'left', up, COND, 800); text('DE ALTA ↑', 120, 1068, 58, ACC, 'left', up, COND, 800); } }
 
 // ---------- proteção cai e o vírus muda (24–35,1) ----------
 function wane(t) { bug(1);
   if (t < 29.0) { cornerTag('ESQUEMA · SEM ESCALA', ss(24.1, 24.4, t)); eyebrow('DEPOIS DA VACINA', 230, ss(24.1, 24.4, t)); text('A PROTEÇÃO CAI', 80, 330, 76, PAPER, 'left', ss(24.1, 24.4, t), COND, 800);
     const a = ss(24.2, 24.5, t); g.save(); g.globalAlpha = a; g.strokeStyle = 'rgba(255,255,255,0.25)'; g.lineWidth = 3; g.beginPath(); g.moveTo(GX0, GY1 - 20); g.lineTo(GX0, GY0); g.lineTo(GX1 + 20, GY0); g.stroke(); g.restore();
-    for (let m = 0; m <= 12; m += 3) text(String(m), lerp(GX0 + 20, GX1, m / 12), GY0 + 50, 30, GOLD, 'center', a, MONO, 700); text('MESES', GX1, GY0 + 95, 26, GOLD, 'right', a, MONO, 700);
+    for (let m = 0; m <= 12; m += 3) text(String(m), lerp(GX0 + 20, GX1, m / 12), GY0 + 50, 30, GOLD, 'center', a, MONO, 700); text('MESES', GX1, GY0 + 100, 32, GOLD, 'right', a, MONO, 700);
     const p = ss(25.7, 28.4, t), N = 60; g.save(); g.lineWidth = 9; g.strokeStyle = ACC; g.lineCap = 'round'; g.beginPath();
     for (let i = 0; i <= N * p; i++) { const u = i / N, x = lerp(GX0 + 20, GX1, u), y = lerp(GY0, GY1, 0.92 * Math.exp(-u * 1.7) + 0.06); i ? g.lineTo(x, y) : g.moveTo(x, y); } g.stroke(); g.restore();
-    shield(GX0 + 120, GY1 + 30, 0.6, a * (1 - 0.6 * p)); text('VACINA', GX0 + 20, GY1 - 60, 30, GOLD, 'left', a, MONO, 700);
+    shield(GX0 + 120, GY1 + 30, 0.6, a * (1 - 0.6 * p)); text('VACINA', GX0 + 20, GY1 - 60, 34, GOLD, 'left', a, MONO, 700);
   } else {
     eyebrow('E O VÍRUS TAMBÉM MUDA', 230, 1); text('O VÍRUS MUDA', 80, 330, 76, PAPER, 'left', 1, COND, 800);
-    const a1 = ss(29.0, 29.3, t), a2 = ss(29.9, 30.2, t); card(70, 450, 450, 560, a1); card(560, 450, 450, 560, a2);
+    const a1 = ss(29.0, 29.3, t), a2 = ss(29.9, 30.2, t); card(70, 450, 450, 650, a1); card(560, 450, 450, 650, a2);
     text('ANTES', 295, 520, 40, GOLD, 'center', a1, MONO, 700); text('HOJE', 785, 520, 40, GOLD, 'center', a2, MONO, 700);
-    virus(295, 720, 90, 0, t, a1); virus(785, 720, 90, 1, t, a2);
-    shield(295, 920, 0.55, a1, GREEN); tick(355, 880, a1);
-    shield(785, 920, 0.55, a2 * 0.45, GOLD); text('ENCAIXA MENOS', 785, 990, 30, HOT, 'center', a2, MONO, 700);
-    stamp('MENOS PROTEGIDO', 540, 1200, 31.4, t, HOT, 64, -0.08); } }
+    virus(295, 740, 100, 0, t, a1); virus(785, 740, 100, 1, t, a2);
+    shield(295, 960, 0.6, a1, GREEN); tick(360, 920, a1);
+    shield(785, 960, 0.6, a2 * 0.45, GOLD); text('ENCAIXA MENOS', 785, 1050, 40, HOT, 'center', a2, COND, 800);
+    stamp('MENOS PROTEGIDO', 540, 1250, 31.4, t, HOT, 70, -0.08); } }
 
 // ---------- o que a vacina faz (35,1–45,2) ----------
 function severe(t) { bug(1); eyebrow('O MAIS IMPORTANTE', 230, ss(35.2, 35.5, t)); text('A VACINA PROTEGE', 80, 330, 76, PAPER, 'left', ss(35.2, 35.5, t), COND, 800);
   text('CONTRA', 80, 410, 60, ACC, 'left', ss(37.0, 37.3, t), COND, 800);
-  [['A FORMA GRAVE', 38.2], ['A INTERNAÇÃO', 39.5], ['A MORTE', 40.6]].forEach(([s, t0], i) => { const a = ss(t0, t0 + 0.25, t), y = 520 + i * 170; card(80, y, 920, 140, a); tick(160, y + 74, a); text(s, 220, y + 96, 70, PAPER, 'left', a, COND, 800); });
-  const r = ss(41.4, 41.7, t); text('QUEM TEM MAIS RISCO', 540, 1110, 60, PAPER, 'center', r, COND, 800); text('DE FICAR GRAVE', 540, 1175, 50, GOLD, 'center', r, COND, 700);
-  stamp('PRECISA DE REFORÇO', 540, 1300, 44.2, t, ACC, 64, -0.08); }
+  [['A FORMA GRAVE', 38.2], ['A INTERNAÇÃO', 39.5], ['A MORTE', 40.6]].forEach(([s, t0], i) => { const a = ss(t0, t0 + 0.25, t), y = 500 + i * 190; card(80, y, 900, 160, a); tick(160, y + 82, a); text(s, 220, y + 108, 80, PAPER, 'left', a, COND, 800); });
+  const r = ss(41.4, 41.7, t); text('QUEM TEM MAIS RISCO', 510, 1150, 66, PAPER, 'center', r, COND, 800); text('DE FICAR GRAVE', 510, 1215, 54, GOLD, 'center', r, COND, 700);
+  stamp('PRECISA DE REFORÇO', 510, 1320, 44.2, t, ACC, 66, -0.08); }
 
 // ---------- quem toma (45,2–56,7) ----------
 function flapTile(x, y, w, h, from, to, t0, t) { const u = cl((t - t0) / 0.3); g.save(); g.fillStyle = INK3; g.fillRect(x, y, w, h); g.fillStyle = 'rgba(0,0,0,0.5)'; g.fillRect(x, y + h / 2 - 2, w, 4);
@@ -152,15 +152,15 @@ function flapTile(x, y, w, h, from, to, t0, t) { const u = cl((t - t0) / 0.3); g
   g.font = `800 ${h * 0.72}px ${COND}`; { const mw = g.measureText(cur).width; if (mw > w - 30) g.font = `800 ${h * 0.72 * (w - 30) / mw}px ${COND}`; } g.textAlign = 'center'; g.fillStyle = cur === '?' ? 'rgba(244,241,232,0.3)' : ACC; g.fillText(cur, 0, h * 0.26); g.restore(); }
 function who(t) { bug(1); eyebrow('CALENDÁRIO NACIONAL DE VACINAÇÃO · 2026', 230, ss(45.3, 45.6, t));
   if (t < 51.3) { const a = ss(45.3, 45.6, t), b = ss(47.6, 47.9, t);
-    card(80, 300, 920, 130, a); text('60 ANOS OU MAIS', 120, 390, 68, PAPER, 'left', a, COND, 800);
-    card(80, 460, 920, 130, b); text('IMUNIDADE BAIXA', 120, 550, 68, PAPER, 'left', b, COND, 800);
-    const c = ss(48.9, 49.2, t); text('UMA DOSE A CADA', 540, 720, 50, GOLD, 'center', c, MONO, 700);
-    if (c > 0) { g.save(); g.globalAlpha = c; flapTile(150, 780, 260, 300, '?', '6', 50.0, t); flapTile(440, 780, 490, 300, '???', 'MESES', 50.4, t); g.restore(); }
+    card(80, 330, 900, 150, a); text('60 ANOS OU MAIS', 120, 432, 80, PAPER, 'left', a, COND, 800);
+    card(80, 510, 900, 150, b); text('IMUNIDADE BAIXA', 120, 612, 80, PAPER, 'left', b, COND, 800);
+    const c = ss(48.9, 49.2, t); text('UMA DOSE A CADA', 520, 790, 56, GOLD, 'center', c, MONO, 700);
+    if (c > 0) { g.save(); g.globalAlpha = c; flapTile(90, 850, 290, 360, '?', '6', 50.0, t); flapTile(400, 850, 560, 360, '???', 'MESES', 50.4, t); g.restore(); }
   } else { const a = ss(51.4, 51.7, t), b = ss(52.4, 52.7, t), c = ss(54.9, 55.2, t);
     text('TAMBÉM NO CALENDÁRIO', 80, 330, 70, PAPER, 'left', ss(51.3, 51.6, t), COND, 800);
-    card(80, 430, 920, 140, a); tick(160, 504, a); text('CRIANÇAS PEQUENAS', 220, 528, 66, PAPER, 'left', a, COND, 800);
-    card(80, 600, 920, 140, b); tick(160, 674, b); text('GESTANTES', 220, 698, 66, PAPER, 'left', b, COND, 800);
-    card(80, 770, 920, 170, c); tick(160, 854, c, GOLD); text('OUTROS GRUPOS', 220, 850, 66, PAPER, 'left', c, COND, 800); text('INDICAÇÃO PRÓPRIA · CONFIRA NA UBS', 222, 905, 32, GOLD, 'left', c, MONO, 700); } }
+    card(80, 440, 900, 170, a); tick(160, 525, a); text('CRIANÇAS PEQUENAS', 220, 555, 76, PAPER, 'left', a, COND, 800);
+    card(80, 640, 900, 170, b); tick(160, 725, b); text('GESTANTES', 220, 755, 76, PAPER, 'left', b, COND, 800);
+    card(80, 840, 900, 220, c); tick(160, 925, c, GOLD); text('OUTROS GRUPOS', 220, 935, 76, PAPER, 'left', c, COND, 800); text('INDICAÇÃO PRÓPRIA · CONFIRA NA UBS', 222, 1000, 38, GOLD, 'left', c, MONO, 700, 740); } }
 
 // ---------- serviço (56,7–63,5) ----------
 function service(t) { bug(1); eyebrow('SUS · UNIDADE BÁSICA DE SAÚDE', 230, ss(56.8, 57.1, t));
@@ -175,9 +175,9 @@ function service(t) { bug(1); eyebrow('SUS · UNIDADE BÁSICA DE SAÚDE', 230, s
 
 // ---------- chamada, me siga, final ----------
 function share(t) { bug(1); const a = ss(63.6, 63.9, t);
-  text('MANDA PARA', 540, 760, 100, PAPER, 'center', a, COND, 800); text('AQUELE AVÔ OU AVÓ', 540, 880, 104, ACC, 'center', ss(64.1, 64.4, t), COND, 800, 960);
-  text('QUE NÃO TOMA REFORÇO FAZ TEMPO', 540, 960, 44, GOLD, 'center', ss(65.4, 65.7, t), MONO, 700, 960);
-  g.save(); g.globalAlpha = ss(64.4, 64.9, t); g.fillStyle = ACC; g.fillRect(540 - 380 * ss(64.4, 65.0, t), 905, 760 * ss(64.4, 65.0, t), 8); g.restore(); }
+  text('MANDA PARA', 520, 800, 110, PAPER, 'center', a, COND, 800); text('AQUELE AVÔ OU AVÓ', 520, 920, 110, ACC, 'center', ss(64.1, 64.4, t), COND, 800, 900);
+  text('QUE NÃO TOMA REFORÇO FAZ TEMPO', 520, 1010, 58, PAPER, 'center', ss(65.4, 65.7, t), COND, 700, 900);
+  g.save(); g.globalAlpha = ss(64.4, 64.9, t); g.fillStyle = ACC; g.fillRect(520 - 380 * ss(64.4, 65.0, t), 945, 760 * ss(64.4, 65.0, t), 8); g.restore(); }
 function mesiga(t) { const a = ss(67.4, 67.8, t), s = back((t - 67.4) / 0.45), r = 230; plate(540, 380, 0.75, ss(67.4, 67.7, t), cl((t - 67.8) / 0.5));
   g.save(); g.globalAlpha = a; g.translate(540, 820); g.scale(s, s); g.save(); g.beginPath(); g.arc(0, 0, r, 0, 7); g.clip(); if (LOGO.width) g.drawImage(LOGO, -r, -r, r * 2, r * 2); g.restore();
   g.strokeStyle = ACC; g.lineWidth = 12; g.beginPath(); g.arc(0, 0, r + 6, 0, 7); g.stroke(); g.restore();

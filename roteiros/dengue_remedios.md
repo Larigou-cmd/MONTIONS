@@ -12,11 +12,11 @@ Frase final (o que a pessoa leva): a dengue derruba as plaquetas. O ácido aceti
 
 Minha aposta: **C**. Abre uma curiosidade real ("desligam como?") e o vídeo inteiro responde.
 
-Escolhido: (aguardando).
+Escolhido: **C** (16/11/2026).
 
 ## Texto da fala
 
-(GANCHO ESCOLHIDO)
+A dengue derruba as suas plaquetas. E alguns remédios desligam as que sobraram.
 Plaquetas são as pecinhas do sangue que tapam qualquer furinho nos vasos. Na dengue, o vírus faz o número delas cair.
 Só que tem remédio que piora isso. O ácido acetilsalicílico trava a cola das plaquetas, e o efeito dura a vida inteira delas, cerca de uma semana. Os anti-inflamatórios, como ibuprofeno, diclofenaco e nimesulida, também atrapalham essa cola.
 Resultado: poucas plaquetas, e as que sobram, sem cola. Aumenta o risco de sangramento.

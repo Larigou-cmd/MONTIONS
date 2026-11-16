@@ -140,7 +140,7 @@ function wane(t) { bug(1);
     stamp('MENOS PROTEGIDO', 540, 1250, 31.4, t, HOT, 70, -0.08); } }
 
 // ---------- o que a vacina faz (35,1–45,2) ----------
-function severe(t) { bug(1); eyebrow('O MAIS IMPORTANTE', 230, ss(35.2, 35.5, t)); text('A VACINA PROTEGE', 80, 330, 76, PAPER, 'left', ss(35.2, 35.5, t), COND, 800);
+function severe(t) { bug(1); { const sa = ss(35.3, 35.7, t) * (1 - ss(37.9, 38.2, t)); shield(510, 820, lerp(1.2, 1.9, back(ss(35.3, 35.8, t))), sa, ACC); } eyebrow('O MAIS IMPORTANTE', 230, ss(35.2, 35.5, t)); text('A VACINA PROTEGE', 80, 330, 76, PAPER, 'left', ss(35.2, 35.5, t), COND, 800);
   text('CONTRA', 80, 410, 60, ACC, 'left', ss(37.0, 37.3, t), COND, 800);
   [['A FORMA GRAVE', 38.2], ['A INTERNAÇÃO', 39.5], ['A MORTE', 40.6]].forEach(([s, t0], i) => { const a = ss(t0, t0 + 0.25, t), y = 500 + i * 190; card(80, y, 900, 160, a); tick(160, y + 82, a); text(s, 220, y + 108, 80, PAPER, 'left', a, COND, 800); });
   const r = ss(41.4, 41.7, t); text('QUEM TEM MAIS RISCO', 510, 1150, 66, PAPER, 'center', r, COND, 800); text('DE FICAR GRAVE', 510, 1215, 54, GOLD, 'center', r, COND, 700);
@@ -165,6 +165,7 @@ function who(t) { bug(1); eyebrow('CALENDÁRIO NACIONAL DE VACINAÇÃO · 2026',
 // ---------- serviço (56,7–63,5) ----------
 function service(t) { bug(1); eyebrow('SUS · UNIDADE BÁSICA DE SAÚDE', 230, ss(56.8, 57.1, t));
   stamp('DE GRAÇA NO SUS', 540, 400, 56.9, t, ACC, 84, -0.07);
+  { const ra = ss(57.4, 57.7, t) * (1 - ss(59.5, 59.8, t)); if (ra > 0) { g.save(); g.globalAlpha = ra; text('VOCÊ PAGA', 510, 640, 56, GOLD, 'center', 1, MONO, 700); flapTile(130, 700, 230, 300, '?', 'R$', 57.6, t); flapTile(380, 700, 520, 300, '???', '0,00', 57.9, t); g.restore(); } }
   const f = cl((t - 59.8) / 0.5), a = ss(59.8, 59.9, t); if (a > 0) { const e = back(f), x = lerp(150, 540, e), y = lerp(1300, 860, e) - Math.sin(f * Math.PI) * 120;
     g.save(); g.globalAlpha = a; g.translate(x, y); g.rotate(lerp(-0.5, -0.04, e)); g.scale(lerp(0.15, 1, e), lerp(0.15, 1, e));
     g.fillStyle = PAPER; g.fillRect(-360, -220, 720, 440); g.fillStyle = INK; g.fillRect(-360, -220, 720, 78); text('CARTEIRA DE VACINAÇÃO', -330, -166, 42, PAPER, 'left', 1, COND, 800);
@@ -197,9 +198,9 @@ window.draw = function (t) {
   const wc = WIPES.find(c => t > c - 0.15 && t < c + 0.15);
   if (wc !== undefined) { const u = (t - (wc - 0.15)) / 0.3, bx = lerp(-110, W + 10, u);
     g.save(); g.beginPath(); g.rect(bx, 0, W, H); g.clip(); scene(wc - 0.001); strap(wc - 0.001); g.restore();
-    g.save(); g.beginPath(); g.rect(0, 0, bx, H); g.clip(); g.drawImage(BG, 0, 0); scene(Math.max(t, wc)); strap(Math.max(t, wc)); g.restore();
+    g.save(); g.beginPath(); g.rect(0, 0, bx, H); g.clip(); g.drawImage(BG, 0, 0); scene(Math.max(t, wc)); strap(Math.max(t, wc + 0.33)); g.restore();
     g.fillStyle = ACC; g.fillRect(bx, 0, 84, H); g.fillStyle = INK; g.fillRect(bx + 84, 0, 5, H); g.fillStyle = GOLD; g.fillRect(bx + 89, 0, 14, H);
-  } else { scene(t); strap(t); }
+  } else { scene(t); const wl = WIPES.find(c => t >= c + 0.15 && t < c + 0.33); strap(wl !== undefined ? wl + 0.33 : t); }
   if (t > END - 0.5) { g.fillStyle = `rgba(0,0,0,${ss(END - 0.5, END, t)})`; g.fillRect(0, 0, W, H); }
 };
 window.capa = function () { g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.drawImage(BG, 0, 0);

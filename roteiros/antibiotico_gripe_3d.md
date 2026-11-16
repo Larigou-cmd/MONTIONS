@@ -158,6 +158,9 @@ Final comum (colar no fim de cada um): `Photorealistic medical 3D animation, wid
 - **14 Resistencia:** A large colony of rod-shaped bacteria is hit by glowing white particles; most of them fade away, while a few bacteria with a slightly different amber glow survive and start multiplying to fill the space.
 - **15 1945:** A 1940s research laboratory with warm vintage light, wooden bench, glass bottles; close-up of a glass petri dish with a fuzzy green-blue mold colony and a clear ring around it where the bacterial colonies have vanished. No people faces in focus.
 - **16 Pneumonia:** Inside the human lung, grape-like clusters of alveoli; clusters of round bacteria settle and multiply inside some alveoli, which become cloudy and inflamed, while the healthy ones remain clear.
+- **12b Vacina (trecho da defesa tem 26 s):** Tiny harmless virus fragments from a vaccine are shown to white immune cells, which wake up, multiply and release many Y-shaped antibodies, calm blue glow, a sense of protection being trained.
+- **14b Colonia resistente (trecho de 17 s):** A single amber-glowing resistant rod-shaped bacterium divides again and again, forming a growing amber colony that slowly fills the frame.
+- **16b Receita (trecho da pneumonia tem 28 s):** In a pharmacy, close-up of hands sliding a paper medical prescription across a counter to a pharmacist's hands, next to a plain white medicine box with no markings, warm light, no faces, no readable text.
 - **17 Fechamento:** A translucent human body standing in a dark space with the airways and lungs glowing softly in blue; the camera slowly pulls back to reveal the full body.
 
 ## Texto para o ElevenLabs v4 (com entonações)

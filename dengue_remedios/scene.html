@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Dengue e remédios</title>
+<style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas><script>
+// Vídeo 76: dengue e remédios (por que evitar ácido acetilsalicílico e anti-inflamatórios). Modelo papel escuro do vídeo 73:
+// fundo escuro, bolinhas com carinha (plaquetas lilases), frase grossa no topo. Tempos tirados de fala.json (30 qps).
+const W = 1080, H = 1920, END = 77;
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v)), lerp = (a, b, u) => a + (b - a) * u;
+const ss = (a, b, x) => { const u = cl((x - a) / (b - a)); return u * u * (3 - 2 * u); };
+const back = u => { const c = 1.70158; u = cl(u) - 1; return 1 + (c + 1) * u * u * u + c * u * u; };
+const hash = (a, b) => { const s = Math.sin(a * 127.1 + b * 311.7) * 43758.5453; return s - Math.floor(s); };
+const DARK = '#14101c', INK = '#f1ecdf', BLUE = '#8fd3ff', RED = '#ff5a4d', ORANGE = '#ff8a3d', GREEN = '#5fe08f', PURPLE = '#c9a7ff', GLUE = '#ffd34d';
+const HEAD = 'Impact, "Arial Narrow", sans-serif', LAB = '"Bahnschrift", "Arial Narrow", sans-serif';
+
+const PAPER = (() => { const c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d');
+  x.fillStyle = '#17131f'; x.fillRect(0, 0, W, H);
+  for (let i = 0; i < 60; i++) { const px = hash(i, 1) * W, py = hash(i, 2) * H, r = 150 + hash(i, 3) * 350, gr = x.createRadialGradient(px, py, 0, px, py, r);
+    const d = hash(i, 4) > 0.5 ? '70,55,110' : '0,0,0'; gr.addColorStop(0, `rgba(${d},0.10)`); gr.addColorStop(1, `rgba(${d},0)`); x.fillStyle = gr; x.fillRect(px - r, py - r, r * 2, r * 2); }
+  for (let i = 0; i < 26000; i++) { x.fillStyle = hash(i, 5) > 0.5 ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.03)'; x.fillRect(hash(i, 6) * W, hash(i, 7) * H, 1 + hash(i, 8) * 2, 1 + hash(i, 9) * 2); }
+  return c; })();
+const LOGO = new Image();
+
+// ---------- peças ----------
+// bolinha com carinha: 'plaq' (plaqueta), 'off' (plaqueta travada), 'pill' (remédio), 'virus' (vírus da dengue)
+function ball(x, y, r, kind, a = 1, sc = 1, t = 0, id = 0, mood = 0) { if (a <= 0 || sc <= 0) return; g.save(); g.globalAlpha *= a; g.translate(x, y); g.scale(sc, sc);
+  const col = { plaq: PURPLE, off: '#8a8296', pill: '#fbf8ee', virus: ORANGE, good: '#bfe8ff' }[kind];
+  g.lineWidth = 4; g.strokeStyle = DARK; g.fillStyle = col; g.beginPath();
+  if (kind === 'virus') { const n = 10, rot = t * 0.8 + id; for (let i = 0; i < n * 2; i++) { const rr = i % 2 ? r * 0.88 : r * 1.2, an = rot + i * Math.PI / n; g.lineTo(Math.cos(an) * rr, Math.sin(an) * rr); } g.closePath(); }
+  else if (kind === 'plaq' || kind === 'off') g.ellipse(0, 0, r * 1.15, r * 0.9, 0, 0, 7);
+  else g.arc(0, 0, r, 0, 7);
+  g.fill(); g.stroke();
+  g.fillStyle = 'rgba(255,255,255,0.45)'; g.beginPath(); g.ellipse(-r * 0.32, -r * 0.42, r * 0.28, r * 0.14, -0.6, 0, 7); g.fill();
+  g.strokeStyle = DARK; g.fillStyle = DARK; g.lineWidth = Math.max(3, r * 0.08); g.lineCap = 'round';
+  if (kind === 'off') { g.beginPath(); g.moveTo(-r * 0.42, -r * 0.05); g.lineTo(-r * 0.18, -r * 0.05); g.moveTo(r * 0.18, -r * 0.05); g.lineTo(r * 0.42, -r * 0.05); g.moveTo(-r * 0.2, r * 0.32); g.lineTo(r * 0.2, r * 0.32); g.stroke(); }
+  else { g.beginPath(); g.arc(-r * 0.3, -r * 0.05, r * 0.11, 0, 7); g.arc(r * 0.3, -r * 0.05, r * 0.11, 0, 7); g.fill(); g.beginPath();
+    if (kind === 'virus' || mood < 0) { g.moveTo(-r * 0.25, r * 0.4); g.quadraticCurveTo(0, r * 0.2, r * 0.25, r * 0.4); }
+    else g.arc(0, r * 0.18, r * 0.28, 0.15 * Math.PI, 0.85 * Math.PI);
+    g.stroke(); }
+  g.restore(); }
+// a "cola" da plaqueta: gotas amarelas em volta
+function glue(x, y, r, a, t) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.fillStyle = GLUE; g.strokeStyle = DARK; g.lineWidth = 3;
+  [[-1.25, 0.2], [1.25, 0.15], [-0.6, 0.95], [0.65, 0.95], [0, -1.05]].forEach(([dx, dy], i) => { const px = x + dx * r, py = y + dy * r + Math.sin(t * 3 + i) * 2, s = r * 0.2;
+    g.beginPath(); g.arc(px, py, s, 0, 7); g.fill(); g.stroke(); }); g.restore(); }
+function lock(x, y, s, a) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.translate(x, y); const k = back(a) * s; g.scale(k, k);
+  g.strokeStyle = INK; g.lineWidth = 9; g.beginPath(); g.arc(0, -22, 20, Math.PI, 0); g.lineTo(20, -6); g.moveTo(-20, -22); g.lineTo(-20, -6); g.stroke();
+  g.fillStyle = RED; g.strokeStyle = INK; g.lineWidth = 5; g.beginPath(); g.roundRect(-30, -8, 60, 46, 8); g.fill(); g.stroke();
+  g.fillStyle = INK; g.beginPath(); g.arc(0, 10, 7, 0, 7); g.fill(); g.fillRect(-3, 12, 6, 14); g.restore(); }
+function rbc(x, y, r, rot) { g.save(); g.translate(x, y); g.rotate(rot); g.fillStyle = '#c23a45'; g.strokeStyle = DARK; g.lineWidth = 3;
+  g.beginPath(); g.ellipse(0, 0, r, r * 0.62, 0, 0, 7); g.fill(); g.stroke(); g.fillStyle = 'rgba(80,10,20,0.45)'; g.beginPath(); g.ellipse(0, 0, r * 0.5, r * 0.28, 0, 0, 7); g.fill(); g.restore(); }
+function tag(txt, x, y, col, size = 34, align = 'left', a = 1, font = LAB) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.font = `${font === LAB ? '700 ' : ''}${size}px ${font}`; g.textAlign = align; g.fillStyle = col; g.fillText(txt, x, y); g.restore(); }
+function fit(txt, size, max) { g.font = `${size}px ${HEAD}`; const w = g.measureText(txt).width; return w > max ? size * max / w : size; }
+function drop(x, y, s, a) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.fillStyle = '#e0414c'; g.strokeStyle = DARK; g.lineWidth = 3; g.beginPath();
+  g.moveTo(x, y - 26 * s); g.quadraticCurveTo(x + 20 * s, y + 4 * s, x, y + 14 * s); g.quadraticCurveTo(x - 20 * s, y + 4 * s, x, y - 26 * s); g.fill(); g.stroke(); g.restore(); }
+
+// ---------- o vaso de sangue ----------
+const VT = 840, VB = 1180, HX = 540; // paredes de cima e de baixo; furinho na parede de cima
+function vessel(t, hole, patch) {
+  g.save(); g.fillStyle = '#3a0f1a'; g.fillRect(0, VT, W, VB - VT);
+  const gr = g.createLinearGradient(0, VT, 0, VB); gr.addColorStop(0, 'rgba(0,0,0,0.35)'); gr.addColorStop(0.5, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(0,0,0,0.35)'); g.fillStyle = gr; g.fillRect(0, VT, W, VB - VT);
+  for (let i = 0; i < 16; i++) { const x = ((hash(i, 1) * 1300 + t * 150) % 1300) - 110, y = VT + 60 + hash(i, 2) * (VB - VT - 120); rbc(x, y, 34, t * 0.6 + i); }
+  g.fillStyle = '#b5485a'; g.fillRect(0, VT - 46, W, 46); g.fillRect(0, VB, W, 46);
+  g.strokeStyle = INK; g.lineWidth = 7; g.beginPath(); g.moveTo(0, VT - 46); g.lineTo(W, VT - 46); g.moveTo(0, VT); g.lineTo(W, VT); g.moveTo(0, VB); g.lineTo(W, VB); g.moveTo(0, VB + 46); g.lineTo(W, VB + 46); g.stroke();
+  if (hole > 0) { const w = 70 * hole; g.fillStyle = '#17131f'; g.fillRect(HX - w, VT - 50, w * 2, 56); g.strokeStyle = INK; g.lineWidth = 6; g.beginPath(); g.moveTo(HX - w, VT - 46); g.lineTo(HX - w, VT); g.moveTo(HX + w, VT - 46); g.lineTo(HX + w, VT); g.stroke(); }
+  if (patch > 0) { g.globalAlpha = patch; g.fillStyle = GLUE; g.strokeStyle = DARK; g.lineWidth = 4; g.beginPath(); g.roundRect(HX - 82, VT - 52, 164, 60, 26); g.fill(); g.stroke(); }
+  g.restore(); }
+// plaquetas soltas no sangue
+const flowP = (i, t) => [((hash(i, 3) * 1300 + t * 110) % 1300) - 110, VT + 70 + hash(i, 4) * (VB - VT - 140)];
+function bar(t, n, of, a) { if (a <= 0) return; g.save(); g.globalAlpha = a; const x = 190, y = 1420, w = 700;
+  tag('PLAQUETAS', 540, 1390, INK, 40, 'center'); g.fillStyle = '#241e30'; g.strokeStyle = INK; g.lineWidth = 6; g.beginPath(); g.roundRect(x, y, w, 64, 14); g.fill(); g.stroke();
+  const k = cl(n / of); g.fillStyle = k > 0.5 ? PURPLE : k > 0.25 ? ORANGE : RED; g.beginPath(); g.roundRect(x + 8, y + 8, (w - 16) * k, 48, 9); g.fill(); g.restore(); }
+
+// A: gancho (0–5,47)
+function sceneA(t) { vessel(t, 0, 0);
+  let alive = 0;
+  for (let i = 0; i < 12; i++) { const [x, y] = flowP(i, t), gone = i < 8 ? 0.6 + i * 0.16 : 99, off = i >= 8 ? 3.6 + (i - 8) * 0.3 : 99;
+    const a = 1 - ss(gone, gone + 0.2, t), s = a < 1 ? 1 + 0.4 * ss(gone, gone + 0.2, t) : 1; if (a > 0) alive++;
+    const pu = (t - (off - 0.35)) / 0.35; if (pu > 0 && pu < 1) ball(lerp(x - 260, x, ss(0, 1, pu)), lerp(y + 240, y, ss(0, 1, pu)), 16, 'pill');
+    ball(x, y, 30, t >= off ? 'off' : 'plaq', a, s); if (t >= off) lock(x + 34, y - 30, 0.55, ss(off, off + 0.25, t));
+    if (i < 8 && t > gone && t < gone + 0.35) { g.save(); g.globalAlpha = 1 - (t - gone) / 0.35; g.strokeStyle = PURPLE; g.lineWidth = 5; g.beginPath(); g.arc(x, y, 30 + (t - gone) * 120, 0, 7); g.stroke(); g.restore(); } }
+  bar(t, alive, 12, ss(0.3, 0.6, t)); }
+// B: plaquetas tapam o furinho (5,47–10,33)
+const SLOT = [[HX - 46, VT - 18], [HX + 46, VT - 18], [HX, VT - 22], [HX - 70, VT + 20], [HX, VT + 22], [HX + 70, VT + 20]];
+function sceneB(t) { const hole = ss(5.9, 6.3, t), patch = ss(8.6, 9.1, t); vessel(t, hole, patch);
+  if (hole > 0 && patch < 1) for (let k = 0; k < 3; k++) { const u = ((t - 6.2) * 0.8 + k / 3) % 1; if (t > 6.2) drop(HX + (k - 1) * 14, VT - 60 - u * 90, 0.7, (1 - u) * (1 - patch)); }
+  for (let i = 0; i < 10; i++) { const [fx, fy] = flowP(i, t), st = i < 6 ? 6.9 + i * 0.22 : 99, u = ss(st, st + 0.7, t);
+    const [sx, sy] = i < 6 ? SLOT[i] : [fx, fy]; ball(lerp(fx, sx, u), lerp(fy, sy, u), 30, 'plaq', 1, 1, t, i);
+    if (i < 6) glue(lerp(fx, sx, u), lerp(fy, sy, u), 30, 0.5 + 0.5 * u, t); else glue(fx, fy, 30, 0.5, t); }
+  tag('FURINHO', HX, VT - 130, RED, 46, 'center', hole * (1 - patch), HEAD);
+  tag('TAPADO!', HX, VT - 130, GREEN, 56, 'center', patch, HEAD);
+  tag('PLAQUETA', 200, 1290, PURPLE, 40, 'center', ss(5.6, 5.9, t)); ball(200, 1360, 30, 'plaq', ss(5.6, 5.9, t)); glue(200, 1360, 30, ss(5.6, 5.9, t), t);
+  tag('COLA', 860, 1290, GLUE, 40, 'center', ss(7.6, 7.9, t)); g.save(); g.globalAlpha = ss(7.6, 7.9, t); g.fillStyle = GLUE; g.strokeStyle = DARK; g.lineWidth = 3; g.beginPath(); g.arc(860, 1355, 22, 0, 7); g.fill(); g.stroke(); g.restore(); }
+// C: na dengue, o número cai (10,33–13,47)
+function sceneC(t) { vessel(t, 0, 0); let alive = 0;
+  for (let i = 0; i < 12; i++) { const [x, y] = flowP(i, t), gone = i < 9 ? 11.0 + i * 0.2 : 99, a = 1 - ss(gone, gone + 0.25, t); if (a > 0) alive++; ball(x, y, 30, 'plaq', a, 1, t, i, i >= 9 ? -1 : 0); }
+  for (let k = 0; k < 4; k++) { const a = ss(10.5 + k * 0.25, 10.8 + k * 0.25, t), x = ((hash(k, 7) * 1300 + t * 90) % 1300) - 110, y = VT + 90 + hash(k, 8) * 200; ball(x, y, 26, 'virus', a, back(a), t, k); }
+  tag('VÍRUS DA DENGUE', 540, 1290, ORANGE, 40, 'center', ss(10.7, 11.0, t)); bar(t, alive, 12, 1); }
+
+// D: os remédios e a cola (13,47–30,6)
+const PL = [300, 930], PR = [780, 930];
+function sceneD(t) {
+  const lA = ss(17.85, 18.2, t), rB = ss(28.9, 29.6, t), cal = ss(19.9, 20.2, t) * (1 - ss(23.8, 24.1, t)), meds = ss(24.0, 24.3, t);
+  // plaqueta da esquerda: ácido acetilsalicílico
+  ball(PL[0], PL[1] + Math.sin(t * 2) * 4, 110, lA > 0.5 ? 'off' : 'plaq', 1, back(ss(13.5, 13.9, t)), t);
+  glue(PL[0], PL[1], 110, ss(14.2, 14.5, t) * (1 - lA), t); lock(PL[0] + 105, PL[1] - 95, 1.3, lA);
+  // plaqueta da direita: anti-inflamatórios
+  ball(PR[0], PR[1] + Math.sin(t * 2 + 1) * 4, 110, 'plaq', 1, back(ss(13.7, 14.1, t)), t, 0, rB > 0.5 ? -1 : 0);
+  glue(PR[0], PR[1], 110, ss(14.2, 14.5, t) * (1 - 0.7 * rB), t);
+  tag('COLA', 540, 1110, GLUE, 44, 'center', ss(14.4, 14.7, t) * (1 - ss(15.9, 16.1, t)), HEAD);
+  // comprimido de ácido acetilsalicílico voando
+  const u = ss(16.1, 17.85, t); if (t > 16.1 && t < 18.3) ball(lerp(120, PL[0] - 40, u), lerp(1500, PL[1] + 90, u) - Math.sin(u * Math.PI) * 120, 44, 'pill', 1 - ss(17.9, 18.3, t));
+  tag('ÁCIDO ACETILSALICÍLICO', PL[0], 1150, INK, 36, 'center', ss(16.1, 16.4, t) * (1 - meds));
+  const tv = ss(17.9, 18.2, t) * (1 - meds); if (tv > 0) tag('TRAVADA', PL[0], 1210, RED, 56, 'center', tv, HEAD);
+  // calendário: o efeito dura a vida da plaqueta
+  if (cal > 0) { g.save(); g.globalAlpha = cal; for (let d = 0; d < 7; d++) { const x = 135 + d * 135, y = 1340, f = ss(20.4 + d * 0.36, 20.6 + d * 0.36, t);
+      g.fillStyle = f > 0.5 ? '#3b2a4f' : '#241e30'; g.strokeStyle = f > 0.5 ? RED : INK; g.lineWidth = 5; g.beginPath(); g.roundRect(x - 55, y - 55, 110, 110, 14); g.fill(); g.stroke();
+      tag(String(d + 1), x, y - 6, INK, 34, 'center', 0.8); if (f > 0) lock(x, y + 22, 0.42, f); }
+    tag('DIAS', 540, 1465, INK, 34, 'center', 0.8); g.restore(); }
+  // anti-inflamatórios
+  [['IBUPROFENO', 200, 25.67], ['DICLOFENACO', 540, 26.57], ['NIMESULIDA', 880, 28.13]].forEach(([n, x, t0], i) => { const a = ss(t0 - 0.1, t0 + 0.2, t) * meds; if (a <= 0) return;
+    const hu = ss(28.9 + i * 0.12, 29.5 + i * 0.12, t), bx = lerp(x, PR[0] + (i - 1) * 60, hu), by = lerp(1360, PR[1] + 110, hu) - Math.sin(hu * Math.PI) * 80;
+    ball(bx, by, 40, 'pill', a * (1 - ss(29.5, 29.8, t)), back(a)); tag(n, x, 1450, INK, 34, 'center', a); });
+  if (rB > 0) tag('COLA FRACA', PR[0], 1150, ORANGE, 52, 'center', rB, HEAD);
+}
+// E: poucas e sem cola (30,6–37,3)
+function sceneE(t) { vessel(t, 1, 0);
+  const P = [[HX - 150, VT + 90, 1], [HX + 140, VT + 120, 1], [HX - 40, VT + 200, 0], [HX + 230, VT + 230, 0]];
+  P.forEach(([x, y, off], i) => { const a = ss(31.6 + i * 0.25, 31.9 + i * 0.25, t), wx = x + Math.sin(t * 2.5 + i) * 20, wy = y + Math.cos(t * 2 + i) * 14;
+    ball(wx, wy, 32, off ? 'off' : 'plaq', a, 1, t, i, off ? 0 : -1); if (off) lock(wx + 34, wy - 30, 0.55, a); else glue(wx, wy, 32, a * 0.3, t); });
+  const k = ss(33.5, 34.0, t) + ss(35.2, 35.6, t);
+  for (let j = 0; j < 6; j++) { const u = ((t - 33.5) * 0.7 + j / 6) % 1; if (t > 33.5 && j < 2 + k * 2) drop(HX + (hash(j, 2) - 0.5) * 60, VT - 70 - u * 260, 1, (1 - u) * cl(k)); }
+  const st = ss(35.2, 35.45, t); if (st > 0) { g.save(); g.globalAlpha = st; g.translate(540, 1420); g.rotate(-0.06); const s = lerp(1.6, 1, back(st)); g.scale(s, s);
+    g.strokeStyle = RED; g.lineWidth = 9; g.beginPath(); g.roundRect(-410, -70, 820, 140, 14); g.stroke(); tag('RISCO DE SANGRAMENTO', 0, 26, RED, 72, 'center', 1, HEAD); g.restore(); } }
+
+// F: o que evitar e o que usar (37,3–50,5)
+function xmark(x, y, a) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.translate(x, y); const s = back(a); g.scale(s, s);
+  g.fillStyle = '#e23a3a'; g.strokeStyle = DARK; g.lineWidth = 5; g.beginPath(); g.arc(0, 0, 44, 0, 7); g.fill();
+  g.strokeStyle = INK; g.lineWidth = 11; g.lineCap = 'round'; g.beginPath(); g.moveTo(-16, -16); g.lineTo(16, 16); g.moveTo(16, -16); g.lineTo(-16, 16); g.stroke(); g.restore(); }
+function check(x, y, a) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.translate(x, y); const s = back(a); g.scale(s, s);
+  g.fillStyle = '#3fbf73'; g.strokeStyle = DARK; g.lineWidth = 5; g.beginPath(); g.arc(0, 0, 44, 0, 7); g.fill();
+  g.strokeStyle = DARK; g.lineWidth = 11; g.lineCap = 'round'; g.lineJoin = 'round'; g.beginPath(); g.moveTo(-20, 2); g.lineTo(-5, 18); g.lineTo(22, -14); g.stroke(); g.restore(); }
+function row(mark, txt, y, t0, t, col = INK, size = 62) { const a = ss(t0, t0 + 0.3, t); mark(130, y, a);
+  if (a > 0) { g.save(); g.globalAlpha = a; g.font = `${fit(txt, size, 820)}px ${HEAD}`; g.textAlign = 'left'; g.fillStyle = col; g.fillText(txt, 200 + (1 - a) * 40, y + 22); g.restore(); } }
+function sceneF(t) {
+  tag('EVITAR', 130, 600, RED, 40, 'left', ss(38.9, 39.2, t));
+  row(xmark, 'ÁCIDO ACETILSALICÍLICO', 690, 39.0, t); row(xmark, 'ANTI-INFLAMATÓRIOS', 830, 40.4, t);
+  tag('PARA DOR E FEBRE', 130, 990, GREEN, 40, 'left', ss(42.4, 42.7, t));
+  row(check, 'PARACETAMOL', 1080, 44.6, t); row(check, 'DIPIRONA', 1220, 45.7, t);
+  tag('na dose da bula · com orientação', 540, 1345, INK, 44, 'center', 0.85 * ss(46.5, 46.9, t));
+  // copo d'água enchendo
+  const a = ss(48.9, 49.2, t); if (a > 0) { g.save(); g.globalAlpha = a; const cx = 540, top = 1420, bot = 1640, f = ss(49.1, 50.4, t);
+    g.save(); g.beginPath(); g.moveTo(cx - 90, top); g.lineTo(cx - 70, bot); g.lineTo(cx + 70, bot); g.lineTo(cx + 90, top); g.closePath(); g.clip();
+    g.fillStyle = 'rgba(143,211,255,0.75)'; const wy = bot - (bot - top - 20) * f; g.fillRect(cx - 100, wy + Math.sin(t * 6) * 3, 200, bot - wy + 10); g.restore();
+    g.strokeStyle = INK; g.lineWidth = 8; g.lineJoin = 'round'; g.beginPath(); g.moveTo(cx - 90, top); g.lineTo(cx - 70, bot); g.lineTo(cx + 70, bot); g.lineTo(cx + 90, top); g.stroke(); g.restore(); } }
+
+// G: atenção quando a febre baixa (50,5–65,7)
+function thermo(cx, top, bot, lvl, a) { if (a <= 0) return; g.save(); g.globalAlpha = a;
+  g.fillStyle = '#241e30'; g.strokeStyle = INK; g.lineWidth = 7; g.beginPath(); g.roundRect(cx - 34, top, 68, bot - top, 34); g.fill(); g.stroke(); g.beginPath(); g.arc(cx, bot + 30, 58, 0, 7); g.fill(); g.stroke();
+  const col = lvl > 0.6 ? RED : ORANGE; g.fillStyle = col; g.beginPath(); g.arc(cx, bot + 30, 44, 0, 7); g.fill(); const h = (bot - top - 30) * lvl; g.fillRect(cx - 18, bot - h, 36, h + 20);
+  g.strokeStyle = INK; g.lineWidth = 3; for (let i = 1; i < 8; i++) { const y = top + i * (bot - top) / 8; g.beginPath(); g.moveTo(cx + 34, y); g.lineTo(cx + 54, y); g.stroke(); } g.restore(); }
+function bang(x, y, a) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.translate(x, y); const s = back(a); g.scale(s, s);
+  g.fillStyle = ORANGE; g.strokeStyle = DARK; g.lineWidth = 5; g.beginPath(); g.moveTo(0, -48); g.lineTo(46, 36); g.lineTo(-46, 36); g.closePath(); g.fill(); g.stroke();
+  g.fillStyle = DARK; g.fillRect(-5, -18, 10, 30); g.beginPath(); g.arc(0, 24, 6, 0, 7); g.fill(); g.restore(); }
+function sceneG(t) {
+  if (t < 59.4) { const a = 1 - ss(59.1, 59.4, t); thermo(250, 640, 1130, lerp(0.85, 0.35, ss(52.0, 54.2, t)), a * ss(50.6, 50.9, t));
+    tag('FEBRE', 400, 760, RED, 52, 'left', a * ss(50.8, 51.1, t) * (1 - ss(52.6, 53.0, t)), HEAD);
+    tag('BAIXANDO', 400, 900, ORANGE, 52, 'left', a * ss(53.3, 53.6, t), HEAD);
+    for (let d = 0; d < 7; d++) { const x = 135 + d * 135, y = 1380, show = ss(54.6, 54.9, t) * a, hi = d >= 2 ? ss(54.97 + (d - 2) * 0.17, 55.15 + (d - 2) * 0.17, t) : 0; if (show <= 0) continue;
+      g.save(); g.globalAlpha = show; g.fillStyle = hi > 0.5 ? '#4a2a1f' : '#241e30'; g.strokeStyle = hi > 0.5 ? ORANGE : INK; g.lineWidth = 5 + hi * 3; g.beginPath(); g.roundRect(x - 55, y - 55, 110, 110, 14); g.fill(); g.stroke(); g.restore();
+      tag(String(d + 1), x, y + 14, hi > 0.5 ? ORANGE : INK, 46, 'center', show, HEAD); }
+    tag('DIA DA DOENÇA', 540, 1505, INK, 34, 'center', 0.8 * ss(54.6, 54.9, t) * a);
+    tag('FASE QUE PEDE MAIS CUIDADO', 540, 1580, ORANGE, 44, 'center', ss(57.2, 57.5, t) * a, HEAD);
+  } else {
+    row(bang, 'DOR FORTE NA BARRIGA', 690, 59.47, t); row(bang, 'VÔMITO QUE NÃO PARA', 850, 61.2, t); row(bang, 'SANGRAMENTO', 1010, 62.5, t);
+    const b = ss(63.7, 64.0, t); if (b > 0) { g.save(); g.globalAlpha = b; g.translate(540, 1330); const s = back(b) * (1 + 0.03 * Math.sin(t * 7)); g.scale(s, s);
+      g.fillStyle = '#3fbf73'; g.strokeStyle = INK; g.lineWidth = 8; g.beginPath(); g.roundRect(-110, -110, 220, 220, 36); g.fill(); g.stroke();
+      g.fillStyle = INK; g.fillRect(-27, -78, 54, 156); g.fillRect(-78, -27, 156, 54); g.restore(); tag('PROCURE ATENDIMENTO', 540, 1530, GREEN, 50, 'center', b, HEAD); } } }
+
+function share(t) { const a = ss(65.8, 66.1, t), s = back((t - 65.8) / 0.4); g.save(); g.globalAlpha = a; g.translate(540 + ss(66.8, 67.8, t) * 30, 960 - ss(66.8, 67.8, t) * 30); g.scale(s, s); g.rotate(-0.3);
+  g.fillStyle = GREEN; g.strokeStyle = INK; g.lineWidth = 10; g.lineJoin = 'round'; g.beginPath(); g.moveTo(-200, 0); g.lineTo(200, -150); g.lineTo(80, 170); g.lineTo(20, 40); g.closePath(); g.fill(); g.stroke();
+  g.beginPath(); g.moveTo(20, 40); g.lineTo(200, -150); g.stroke(); g.restore(); }
+function mesiga(t) { const a = ss(67.95, 68.35, t), s = back((t - 67.95) / 0.45), cx = 540, cy = 800, r = 240;
+  g.save(); g.globalAlpha = a; g.translate(cx, cy); g.scale(s, s);
+  g.save(); g.beginPath(); g.arc(0, 0, r, 0, 7); g.clip(); if (LOGO.width) g.drawImage(LOGO, -r, -r, r * 2, r * 2); g.restore();
+  g.strokeStyle = GREEN; g.lineWidth = 12; g.beginPath(); g.arc(0, 0, r + 6, 0, 7); g.stroke(); g.restore();
+  tag('ME SIGA', 540, 1230, INK, 150, 'center', ss(68.1, 68.4, t), HEAD);
+  tag('PARA MAIS DICAS DE FARMACOLOGIA', 540, 1320, GREEN, 46, 'center', ss(68.9, 69.3, t));
+  tag('E CURIOSIDADES SOBRE A ÁREA', 540, 1385, INK, 40, 'center', ss(70.3, 70.7, t)); }
+function final(t) { const a = ss(72.45, 72.9, t); ['Consulte um', 'profissional de saúde', 'para orientações.'].forEach((l, i) => tag(l, 540, 880 + i * 96, i === 1 ? GREEN : INK, 76, 'center', a, HEAD)); }
+
+// ---------- frases do topo ----------
+const TITLES = [
+  [0.1, 'A DENGUE DERRUBA', INK, 'AS SUAS PLAQUETAS', PURPLE], [2.5, 'E ALGUNS REMÉDIOS DESLIGAM', INK, 'AS QUE SOBRARAM', RED],
+  [5.47, 'PLAQUETAS', PURPLE, 'TAPAM OS FURINHOS', INK], [10.33, 'NA DENGUE', ORANGE, 'O NÚMERO DELAS CAI', RED],
+  [13.47, 'SÓ QUE TEM REMÉDIO', INK, 'QUE PIORA ISSO', RED], [16.07, 'O ÁCIDO ACETILSALICÍLICO', INK, 'TRAVA A COLA', RED],
+  [19.9, 'E O EFEITO DURA', INK, 'CERCA DE 1 SEMANA', ORANGE], [24.03, 'OS ANTI-INFLAMATÓRIOS', INK, 'TAMBÉM ATRAPALHAM', ORANGE],
+  [30.6, 'POUCAS PLAQUETAS', PURPLE, 'E SEM COLA', RED], [35.17, 'AUMENTA O RISCO', INK, 'DE SANGRAMENTO', RED],
+  [37.3, 'NA DENGUE, O MINISTÉRIO', INK, 'DA SAÚDE ORIENTA', GREEN], [42.33, 'PARA DOR E FEBRE', INK, 'O INDICADO É', GREEN], [48.9, 'E BEBA', INK, 'BASTANTE LÍQUIDO', BLUE],
+  [50.57, 'ATENÇÃO', ORANGE, 'QUANDO A FEBRE BAIXA', INK], [54.9, 'GERALMENTE ENTRE', INK, 'O 3º E O 7º DIA', ORANGE],
+  [59.4, 'SINAIS DE ALERTA', RED, '', INK], [63.7, 'PROCURE ATENDIMENTO', INK, 'NA HORA', GREEN],
+  [65.77, 'MANDA PARA QUEM ESTÁ', INK, 'COM DENGUE EM CASA', GREEN], [67.9],
+];
+function titles(t) { let k = -1; TITLES.forEach((r, i) => { if (t >= r[0]) k = i; }); if (k < 0 || TITLES[k].length < 2) return;
+  const [a, l1, c1, l2, c2] = TITLES[k], b = TITLES[k + 1][0], al = ss(a, a + 0.12, t) * (1 - ss(b - 0.1, b, t)), s = lerp(0.9, 1, back((t - a) / 0.28)), gap = Math.min(0.5, (b - a) * 0.3);
+  g.save(); g.globalAlpha = al; g.textAlign = 'center'; g.translate(W / 2, 330); g.scale(s, s);
+  g.font = `${fit(l1, 72, 980)}px ${HEAD}`; g.fillStyle = c1; g.fillText(l1, 0, 0);
+  if (l2) { g.globalAlpha = al * ss(a + gap, a + gap + 0.18, t); g.font = `${fit(l2, 84, 980)}px ${HEAD}`; g.fillStyle = c2; g.fillText(l2, 0, 92);
+    if (c2 === RED) { const w = g.measureText(l2).width; g.fillStyle = ORANGE; g.fillRect(-w / 2, 108, w * ss(a + gap + 0.15, a + gap + 0.55, t), 9); } }
+  g.restore(); }
+
+const CUTS = [5.47, 10.33, 13.47, 30.6, 37.3, 50.5, 65.75, 67.9, 72.4];
+window.END = END;
+window.draw = function (t) {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.drawImage(PAPER, 0, 0);
+  if (t < 5.47) sceneA(t); else if (t < 10.33) sceneB(t); else if (t < 13.47) sceneC(t); else if (t < 30.6) sceneD(t); else if (t < 37.3) sceneE(t);
+  else if (t < 50.5) sceneF(t); else if (t < 65.75) sceneG(t); else if (t < 67.9) share(t); else if (t < 72.4) mesiga(t); else final(t);
+  g.globalAlpha = 1; titles(t);
+  const f = CUTS.reduce((m, c) => Math.max(m, 1 - Math.abs(t - c) / 0.16), 0); if (f > 0) { g.globalAlpha = f; g.drawImage(PAPER, 0, 0); g.globalAlpha = 1; }
+  if (t > END - 0.5) { g.fillStyle = `rgba(0,0,0,${ss(END - 0.5, END, t)})`; g.fillRect(0, 0, W, H); }
+};
+window.capa = function () { const t = 34.5;
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.drawImage(PAPER, 0, 0);
+  g.save(); g.translate(0, 120); sceneE(t); g.restore();
+  g.textAlign = 'center'; g.font = `${fit('DENGUE', 190, 960)}px ${HEAD}`; g.fillStyle = ORANGE; g.fillText('DENGUE', W / 2, 470);
+  g.font = `${fit('REMÉDIOS PARA EVITAR', 100, 960)}px ${HEAD}`; g.fillStyle = INK; g.fillText('REMÉDIOS PARA EVITAR', W / 2, 590);
+  g.font = `${fit('E O QUE PODE TOMAR', 84, 960)}px ${HEAD}`; g.fillStyle = GREEN; g.fillText('E O QUE PODE TOMAR', W / 2, 1600);
+};
+LOGO.onload = LOGO.onerror = () => { draw(0); window.ready = true; }; LOGO.src = 'logo.jpg';
+</script></body></html>

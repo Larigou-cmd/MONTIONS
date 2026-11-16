@@ -22,14 +22,14 @@ Lado esquerdo: a bactéria em bastonete com um alvo verde em cima e a palavra "A
 - B (tamanho): "O vírus da gripe é tão pequeno que uns vinte dele, enfileirados, cabem no comprimento de uma bactéria. E o antibiótico, que foi feito para bactéria, nem enxerga ele. Vou te mostrar isso por dentro do corpo."
 - C (história): "Em 1945, o homem que descobriu a penicilina deu um aviso: usar mal esse remédio ia ensinar as bactérias a resistir. Oitenta anos depois, uma em cada seis infecções por bactéria já resiste aos antibióticos de costume. E muitas vezes começa com um erro: tomar antibiótico para gripe."
 
-Minha aposta: **A**. Promete a viagem por dentro do corpo, que é a cara do modelo 3D. O C é o mais forte de emoção. Se você gostar dele, a parte do Fleming no meio do vídeo vira um "lembra que eu falei no começo?", o que ajuda a segurar quem está assistindo.
+**Escolhido (15/11/2026): A.**
 
 ## Roteiro da fala (cerca de 950 palavras, uns 7 min)
 
 As marcações [00] a [17] são os clipes de cada trecho. Os tempos estimam cerca de 2,3 palavras por segundo. "TELA" é uma tela inteira em código no estilo do Modelo 2, sem clipe.
 
 ### 0:00 Gancho [00]
-(GANCHO ESCOLHIDO)
+Você pega uma gripe, vai na farmácia e pede um antibiótico. Lá dentro do seu corpo, ele procura o inimigo em todo canto... e não encontra nada. Vem comigo que eu vou te mostrar por quê.
 
 ### 0:15 Dois inimigos diferentes [01]
 Bactéria e vírus parecem a mesma coisa, porque os dois causam infecção. Mas, por dentro, eles são mundos completamente diferentes. E é essa diferença que decide se o antibiótico funciona ou não.
@@ -137,7 +137,82 @@ Estilo comum, colado no fim de cada prompt: Photorealistic medical 3D animation,
 | 16 | Pneumonia | Pulmão por dentro, alvéolos com bactérias em cachos depois da gripe |
 | 17 | Fechamento | Corpo humano translúcido, a câmera se afasta com as vias respiratórias acesas |
 
-Os prompts em inglês completos eu escrevo quando você aprovar as cenas.
+### Prompts do Flow (Omni 1.1 Flash, 720p, 10 s, 16:9, x1)
+
+Final comum (colar no fim de cada um): `Photorealistic medical 3D animation, widescreen 16:9 horizontal frame, no text, no letters, no logos, no blood, soft volumetric light, shallow depth of field, slow cinematic camera.`
+
+- **00 Gancho:** An adult with a mild cold sneezes softly into a tissue in a cozy living room; the camera smoothly dives into the nose and travels down the airway lined with pink mucosa and tiny cilia, where small spherical influenza virus particles with surface spikes drift down and land on the surface.
+- **01 Dois inimigos:** Inside a dark microscopic space, a large translucent rod-shaped bacterium floats on the left and a much smaller spherical influenza virus particle with surface spikes floats on the right, both slowly rotating, clear size contrast between them.
+- **02 A bacteria:** Cutaway view of a rod-shaped bacterium: a thick layered cell wall on the outside and many small round ribosomes like grains floating inside the cytoplasm, camera slowly orbiting.
+- **03 Multiplicacao:** A rod-shaped bacterium elongates and splits into two, then the two split into four, smooth time-lapse of binary fission in a soft green-lit microscopic environment.
+- **04 O antibiotico chega:** A plain white and blue capsule, no markings, dissolves into tiny glowing white particles that travel through a blood vessel among red blood cells, then reach a cluster of rod-shaped bacteria.
+- **05 Parede:** Tiny glowing white particles attach to the cell wall of a rod-shaped bacterium; the wall develops cracks, the bacterium swells and bursts open gently, its contents dispersing like mist.
+- **06 Fabrica:** Close-up of a bacterial ribosome producing a ribbon-like protein chain; a tiny glowing white particle locks into the ribosome and the protein chain stops coming out, the ribosome freezes.
+- **07 O virus:** Extreme close-up of a spherical influenza virus particle slowly rotating, covered in mushroom-shaped and spike-shaped surface proteins, a semi-transparent envelope revealing coiled genetic strands inside.
+- **08 A chave:** A spherical influenza virus particle with surface spikes approaches the surface of a respiratory epithelial cell; the spikes lock onto receptors like a key, and the cell membrane wraps around and swallows the virus.
+- **09 A copia:** Inside a human cell, many new spherical influenza virus particles are being assembled near the cell membrane, glowing genetic strands being copied, busy factory-like activity.
+- **10 A saida:** Many new spherical influenza virus particles bud from the outer surface of a respiratory cell and detach, floating away toward neighboring cells.
+- **11 Passa reto:** Tiny glowing white particles drift through a space filled with spherical influenza virus particles with surface spikes, passing right by them without attaching to anything, the viruses unaffected.
+- **12 Defesa:** Y-shaped antibodies attach to the surface spikes of influenza virus particles, then a large white immune cell engulfs the antibody-covered viruses.
+- **13 Intestino:** Inside the intestine, a colorful community of friendly gut bacteria of different shapes lives on the intestinal wall; tiny glowing white particles arrive and many of the bacteria fade and disappear, leaving empty spaces.
+- **14 Resistencia:** A large colony of rod-shaped bacteria is hit by glowing white particles; most of them fade away, while a few bacteria with a slightly different amber glow survive and start multiplying to fill the space.
+- **15 1945:** A 1940s research laboratory with warm vintage light, wooden bench, glass bottles; close-up of a glass petri dish with a fuzzy green-blue mold colony and a clear ring around it where the bacterial colonies have vanished. No people faces in focus.
+- **16 Pneumonia:** Inside the human lung, grape-like clusters of alveoli; clusters of round bacteria settle and multiply inside some alveoli, which become cloudy and inflamed, while the healthy ones remain clear.
+- **17 Fechamento:** A translucent human body standing in a dark space with the airways and lungs glowing softly in blue; the camera slowly pulls back to reveal the full body.
+
+## Texto para o ElevenLabs v4 (com entonações)
+
+Voz "Juliana - Bright and Encouraging", estabilidade Natural. As tags entre colchetes são lidas como direção, não como texto. As reticências marcam pausas. Se ficar longo demais para gerar de uma vez, dividir nas linhas em branco.
+
+```
+[curious] Você pega uma gripe, vai na farmácia e pede um antibiótico. Lá dentro do seu corpo, ele procura o inimigo em todo canto... [dramatically] e não encontra nada. [playfully] Vem comigo que eu vou te mostrar por quê.
+
+[warmly] Bactéria e vírus parecem a mesma coisa, porque os dois causam infecção. Mas, por dentro, eles são mundos completamente diferentes. [serious] E é essa diferença que decide se o antibiótico funciona... ou não.
+
+[warmly] Vamos começar pela bactéria. Ela é uma célula inteira, viva. Tem uma parede firme por fora, que segura tudo no lugar. E tem a própria fábrica de proteínas, o ribossomo.
+
+Ela não precisa de ninguém para se multiplicar. [excited] Uma vira duas, duas viram quatro, quatro viram oito. [serious] É assim que uma infecção por bactéria cresce.
+
+Quando você toma um antibiótico, ele é absorvido e viaja pelo sangue até o lugar da infecção. E lá ele procura uma coisa bem específica... [curious] peças que só a bactéria tem.
+
+Alguns, como a penicilina, atacam a parede. A bactéria tenta construir parede nova e não consegue terminar. A pressão de dentro empurra... empurra... [dramatically] e ela se rompe.
+
+Outros travam a fábrica de proteínas. [excited] E aqui está o detalhe genial: o ribossomo da bactéria tem um formato diferente do nosso. Por isso, o remédio trava a fábrica dela e deixa a sua funcionando.
+
+[serious] Esse é o segredo de todo antibiótico: ele mira em alguma coisa que a bactéria tem... e você não tem.
+
+[curious] Agora, o vírus da gripe. Primeiro, o tamanho: ele é umas vinte vezes menor que uma bactéria. E ele não é uma célula. [playfully] É uma capinha com uma receita genética dentro e um monte de espetinhos por fora.
+
+Esses espetinhos funcionam como uma chave. Eles se encaixam na superfície das células do nariz, da garganta e dos pulmões. A célula abre a porta... e o vírus entra.
+
+[serious] Lá dentro, ele faz uma coisa assustadora: usa a fábrica da sua própria célula para fazer cópias dele. A sua célula vira uma fábrica de vírus.
+
+As cópias novas saem da célula, e cada uma vai invadir outra. É assim que a gripe se espalha pelas vias respiratórias.
+
+[curious] E o antibiótico? Ele chega e procura a parede... o vírus não tem parede. Procura a fábrica de bactéria... o vírus não tem fábrica nenhuma, ele usa a sua. [serious] O antibiótico não tem onde mirar. [playfully] Ele simplesmente passa reto.
+
+[serious] Bactéria: célula viva, com parede, com fábrica própria. Antibiótico funciona. Vírus da gripe: sem parede, sem fábrica. Antibiótico não funciona.
+
+[warmly] Então, quem vence a gripe? O seu sistema de defesa. Os anticorpos grudam nos espetinhos do vírus, e as células de defesa limpam as células infectadas. Isso leva alguns dias, e é por isso que a gripe precisa seguir o curso dela. Em alguns casos, o médico indica um antiviral, que é outra classe de remédio, feita para atrapalhar o vírus. E a vacina treina essa defesa antes de o vírus chegar.
+
+[curious] Mas, se o antibiótico não acerta o vírus, ele acerta quem? [sighs] As bactérias boas que moram no seu intestino. Por isso, muita gente tem diarreia e dor de barriga quando toma antibiótico.
+
+[serious] E tem um efeito ainda pior. No meio de bilhões de bactérias, algumas já são um pouquinho mais resistentes. O antibiótico elimina as outras, e essas sobram, com espaço livre para se multiplicar. Cada uso sem necessidade dá uma vantagem para as resistentes.
+
+[warmly] Quem avisou isso primeiro foi o próprio descobridor da penicilina, Alexander Fleming. Em mil novecentos e quarenta e cinco, ao receber o Prêmio Nobel, ele alertou: [serious] usar a penicilina em dose pequena demais podia ensinar as bactérias a resistir a ela.
+
+Oitenta anos depois, a Organização Mundial da Saúde mostrou que, em dois mil e vinte e três, uma em cada seis infecções por bactéria confirmadas em laboratório no mundo já resistia aos antibióticos de costume.
+
+[curious] Isso quer dizer que quem tem gripe nunca precisa de antibiótico? [warmly] Não. Às vezes, depois da gripe, uma bactéria aproveita a defesa cansada e causa uma pneumonia, por exemplo. Aí sim o antibiótico entra. E quem faz esse diagnóstico é o médico. [playfully] Detalhe: catarro amarelo ou verde, sozinho, não quer dizer que é bactéria. [serious] É por isso que, no Brasil, o antibiótico só sai da farmácia com receita, e a farmácia fica com ela.
+
+[warmly] Resumindo: o antibiótico ataca peças que só a bactéria tem. O vírus da gripe não tem essas peças. Então, tomar antibiótico para gripe não te cura mais rápido... e ainda ajuda as bactérias a aprenderem a vencer o remédio.
+
+[playfully] Me conta nos comentários: você já tomou antibiótico para gripe? E de qual remédio você quer ver a viagem no próximo vídeo?
+
+[warmly] Me siga para mais dicas de farmacologia e curiosidades sobre a área.
+
+[serious] Consulte um profissional de saúde para orientações.
+```
 
 ## Fontes e revisão
 

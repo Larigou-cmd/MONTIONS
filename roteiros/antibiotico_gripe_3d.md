@@ -137,6 +137,8 @@ Estilo comum, colado no fim de cada prompt: Photorealistic medical 3D animation,
 | 16 | Pneumonia | Pulmão por dentro, alvéolos com bactérias em cachos depois da gripe |
 | 17 | Fechamento | Corpo humano translúcido, a câmera se afasta com as vias respiratórias acesas |
 
+**Status (15/11/2026):** narração pronta (`antibiotico_gripe/narracao.mp3`, 4 min 54 s, tempos em `fala.json`). No Flow (mesmo projeto do vídeo 74) já foram enviados 00 gancho, 01 dois inimigos e 02 bactéria. Sobraram 96 créditos; ela preferiu pausar e continuar quando os créditos renovarem, em **23/11/2026 às 22h**. Faltam 18 clipes (03 em diante, incluindo 12b, 14b e 16b), cerca de 270 créditos.
+
 ### Prompts do Flow (Omni 1.1 Flash, 720p, 10 s, 16:9, x1)
 
 Final comum (colar no fim de cada um): `Photorealistic medical 3D animation, widescreen 16:9 horizontal frame, no text, no letters, no logos, no blood, soft volumetric light, shallow depth of field, slow cinematic camera.`

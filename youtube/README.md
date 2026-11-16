@@ -80,6 +80,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 74 | O caminho do paracetamol no corpo, da boca ao xixi (longo horizontal, animação 3D do Flow + edição Modelo 2) | [74_caminho_paracetamol_3d.md](textos/74_caminho_paracetamol_3d.md) | [capa_caminho_paracetamol.png](capas/capa_caminho_paracetamol.png) |
 | 75 | Exagerou no fim de semana? 3 erros que pioram a ressaca (Modelo 8) | [75_ressaca_3_erros.md](textos/75_ressaca_3_erros.md) | [capa_ressaca.png](capas/capa_ressaca.png) |
 | 76 | Dengue: por que alguns remédios para dor são perigosos (modelo de fundo escuro, bolinhas com carinha) | [76_dengue_remedios.md](textos/76_dengue_remedios.md) | [capa_dengue.png](capas/capa_dengue.png) |
+| 77 | Covid voltou a subir: por que a vacina precisa de reforço (estilo telejornal) | [77_covid_vacina_reforco.md](textos/77_covid_vacina_reforco.md) | [capa_covid.png](capas/capa_covid.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

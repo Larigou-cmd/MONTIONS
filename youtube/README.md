@@ -81,6 +81,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 75 | Exagerou no fim de semana? 3 erros que pioram a ressaca (Modelo 8) | [75_ressaca_3_erros.md](textos/75_ressaca_3_erros.md) | [capa_ressaca.png](capas/capa_ressaca.png) |
 | 76 | Dengue: por que alguns remédios para dor são perigosos (modelo de fundo escuro, bolinhas com carinha) | [76_dengue_remedios.md](textos/76_dengue_remedios.md) | [capa_dengue.png](capas/capa_dengue.png) |
 | 77 | Covid voltou a subir: por que a vacina precisa de reforço (estilo telejornal) | [77_covid_vacina_reforco.md](textos/77_covid_vacina_reforco.md) | [capa_covid.png](capas/capa_covid.png) |
+| 78 | FPS 30 ou FPS 70: qual a diferença de verdade? (Modelo 1 verde) | [78_fps_30_ou_70.md](textos/78_fps_30_ou_70.md) | [capa_fps.png](capas/capa_fps.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

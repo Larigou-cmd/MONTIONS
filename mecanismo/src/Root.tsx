@@ -140,6 +140,7 @@ import {
   CapaPressaoParar,
   DURATION_PRESSAO,
 } from "./pressaoParar/Video";
+import { VideoFps, CapaFps, DURATION_FPS } from "./fps/Video";
 import { VideoRessaca, CapaRessaca, DURATION_RESSACA } from "./ressaca/Video";
 import {
   VideoInsulinaFlow,
@@ -275,6 +276,7 @@ import {
   DURATION as DUR_TIRZ_PY,
 } from "./tirzepatidaParaguai/Video";
 import { VideoCaminhoRemedio, DURATION as DUR_CAMINHO } from "./caminhoRemedio/Video";
+import { VideoHqTeste, DURATION as DUR_HQ_TESTE } from "./hqTeste/Video";
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -1527,6 +1529,9 @@ export const RemotionRoot: React.FC = () => (
       width={1080}
       height={1920}
     />
+      <Composition id="Fps" component={VideoFps} durationInFrames={DURATION_FPS} fps={30} width={1080} height={1920} />
+      <Composition id="FpsCapa" component={CapaFps} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="CaminhoRemedio" component={VideoCaminhoRemedio} durationInFrames={DUR_CAMINHO} fps={30} width={1080} height={1920} />
+      <Composition id="HqTeste" component={VideoHqTeste} durationInFrames={DUR_HQ_TESTE} fps={30} width={1080} height={1920} />
   </>
 );

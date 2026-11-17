@@ -142,6 +142,7 @@ import {
 } from "./pressaoParar/Video";
 import { VideoFps, CapaFps, DURATION_FPS } from "./fps/Video";
 import { VideoRessaca, CapaRessaca, DURATION_RESSACA } from "./ressaca/Video";
+import { VideoAdrenalina, CapaAdrenalina, DURATION_ADRENALINA } from "./adrenalina/Video";
 import {
   VideoInsulinaFlow,
   CapaInsulinaFlow,
@@ -276,6 +277,8 @@ import {
   DURATION as DUR_TIRZ_PY,
 } from "./tirzepatidaParaguai/Video";
 import { VideoCaminhoRemedio, DURATION as DUR_CAMINHO } from "./caminhoRemedio/Video";
+import { AvatarHistorico } from "./hqTeste/Avatar";
+import { VideoVampiro007, DURATION as DUR_VAMPIRO007 } from "./vampiro007/Video";
 import { VideoHqTeste, DURATION as DUR_HQ_TESTE } from "./hqTeste/Video";
 export const RemotionRoot: React.FC = () => (
   <>
@@ -733,6 +736,22 @@ export const RemotionRoot: React.FC = () => (
       id="PressaoParar"
       component={VideoPressaoParar}
       durationInFrames={DURATION_PRESSAO}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="AdrenalinaCapa"
+      component={CapaAdrenalina}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Adrenalina"
+      component={VideoAdrenalina}
+      durationInFrames={DURATION_ADRENALINA}
       fps={FPS}
       width={1080}
       height={1920}
@@ -1533,5 +1552,7 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="FpsCapa" component={CapaFps} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="CaminhoRemedio" component={VideoCaminhoRemedio} durationInFrames={DUR_CAMINHO} fps={30} width={1080} height={1920} />
       <Composition id="HqTeste" component={VideoHqTeste} durationInFrames={DUR_HQ_TESTE} fps={30} width={1080} height={1920} />
+      <Composition id="HistoricoAvatar" component={AvatarHistorico} durationInFrames={1} fps={30} width={1080} height={1080} />
+      <Composition id="Vampiro007" component={VideoVampiro007} durationInFrames={DUR_VAMPIRO007} fps={30} width={1080} height={1920} />
   </>
 );

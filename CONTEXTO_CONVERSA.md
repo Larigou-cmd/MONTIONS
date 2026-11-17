@@ -122,3 +122,9 @@
 - Existe um perfil "Juliana" (clone) no VoiceStudio: não usar (voz do ElevenLabs licenciada só lá).
 - Texto da Lei 8.080 pronto para audiolivro, em 16 partes: `concurso_lei8080/audiolivro/*.txt` (~64 min). Amostra: `audiolivro/audio/01_titulo_i_amostra.mp3`.
 - Microfone interno estava mudo (captava -91 dB); provável tecla F4 de mudo do Lenovo.
+
+## Estilo "gibi antigo" (2026-11-16)
+- Vídeo 79, adrenalina: história em quadrinhos antiga (cores chapadas azul/amarelo/vermelho, retícula, balão estourado com onomatopeia, 12 quadros por segundo). Aprovado de primeira.
+- Tudo desenhado em canvas dentro do Remotion: `mecanismo/src/adrenalina/Video.tsx` (Ids `Adrenalina` e `AdrenalinaCapa`). Página: cabeçalho de gibi, quadrinho principal, legenda em caixa amarela, mascote de capacete espiando embaixo.
+- Atenção: um formatador automático reescreve o `.tsx` depois de salvar; para editar, procurar os trechos de novo antes de trocar.
+- A animação de teste que deu origem ao estilo está em `E:\Downloads\Videos\quadrinhos_vruuum.html`.

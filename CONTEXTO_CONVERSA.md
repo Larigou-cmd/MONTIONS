@@ -135,3 +135,9 @@
 - Efeitos sonoros sintetizados do kit da vox-style-video em `public/audio/sfx/synth` (papel, carimbo, marcador, pop).
 - O recorte automático de fundo da skill só funciona no Mac; aqui as fotos ficaram em recorte retangular ou redondo. Instalar o `rembg` foi recusado, então não instalar pacote sem pedir.
 - Linhas de fonte sempre no topo da tela (embaixo os botões do TikTok cobrem).
+
+## Notícias da Farmácia #3 e legendas SEO (2026-11-18)
+- Vídeo 81: canetas de GLP-1 e o aviso da FDA (09/11/2026) sobre risco raro de perda de visão (NOIANA). Modelo Notícias da Farmácia em pixel, agora com **fotos livres do Wikimedia Commons dentro das janelinhas**, com crédito no canto de cada foto. Código: `mecanismo/src/noticiaGlp1/Video.tsx` (Ids `NoticiaGlp1` e `CapaNoticiaGlp1`); créditos em `public/noticiaGlp1/brutas/CREDITOS.md`.
+- A trilha do quadro agora segue a regra nova (0,22 nas pausas, 0,09 sob a voz), e não mais 0,07.
+- O Wikimedia bloqueia downloads seguidos: baixar pelo endereço `thumb.wikimedia.org/.../NNNNpx-arquivo` com alguns segundos entre um e outro.
+- A partir deste vídeo, as legendas das 4 redes são escritas para a busca (SEO), com no máximo 5 hashtags em cada rede.

@@ -26,7 +26,7 @@ Manda para alguém que vive furando o dedo 👇
 Fontes: preços nos sites da Drogasil, Droga Raia, Panvel e Pague Menos (18/11/2026); Portaria SECTICS/MS nº 2, de 31/01/2025; Consulta Pública Conitec nº 63/2026; alerta da Anvisa de 27/08/2026; Sociedade Brasileira de Diabetes, Posicionamento 01/2025. Fotos do produto: site do fabricante (Abbott).
 ⚠️ Conteúdo educativo, sem patrocínio. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações. Narração gerada com IA.
 
-#diabetes #glicose #insulina #saude #farmacologia #shorts
+#diabetes #glicose #insulina #saude #shorts
 
 ### TikTok
 
@@ -68,4 +68,4 @@ Manda para alguém que vive furando o dedo 👇 E me segue para mais dicas de fa
 Fontes: sites das farmácias (18/11/2026), Ministério da Saúde, Conitec, Anvisa e Sociedade Brasileira de Diabetes.
 ⚠️ Conteúdo educativo, sem patrocínio. Não substitui orientação médica ou farmacêutica. Consulte um profissional de saúde para orientações.
 
-#diabetes #glicose #insulina #saude #farmacologia #farmacia
+#diabetes #glicose #insulina #saude #farmacologia

@@ -83,6 +83,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 77 | Covid voltou a subir: por que a vacina precisa de reforço (estilo telejornal) | [77_covid_vacina_reforco.md](textos/77_covid_vacina_reforco.md) | [capa_covid.png](capas/capa_covid.png) |
 | 78 | FPS 30 ou FPS 70: qual a diferença de verdade? (Modelo 1 verde) | [78_fps_30_ou_70.md](textos/78_fps_30_ou_70.md) | [capa_fps.png](capas/capa_fps.png) |
 | 79 | Adrenalina: o botão de turbo do seu corpo (estilo história em quadrinhos antiga) | [79_adrenalina_susto.md](textos/79_adrenalina_susto.md) | [capa_adrenalina.png](capas/capa_adrenalina.png) |
+| 80 | O sensor de glicose no braço: quanto custa e por que pouca gente tem (colagem Vox vertical) | [80_sensor_glicose.md](textos/80_sensor_glicose.md) | [capa_sensor_glicose.png](capas/capa_sensor_glicose.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

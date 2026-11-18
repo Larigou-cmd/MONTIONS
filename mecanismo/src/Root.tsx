@@ -279,6 +279,12 @@ import {
 import { VideoCaminhoRemedio, DURATION as DUR_CAMINHO } from "./caminhoRemedio/Video";
 import { AvatarHistorico } from "./hqTeste/Avatar";
 import { VideoVampiro007, DURATION as DUR_VAMPIRO007 } from "./vampiro007/Video";
+import { VideoDossie007, DURATION as DUR_DOSSIE007 } from "./dossie007/Video";
+import { VideoDossie007Completo, DURATION_COMPLETO as DUR_DOSSIE_COMPLETO, CapaDossie007 } from "./dossie007/Completo";
+import { VoxNvidiaTeste, DURACAO_VOX } from "./voxNvidia/Teste";
+import { VideoVoxNvidia, DURACAO_VOX_COMPLETO } from "./voxNvidia/Completo";
+import { VideoNeymarTigrinha, DURACAO_NEYMAR } from "./voxNeymar/Video";
+import { VideoSensorGlicose, CapaSensorGlicose, DUR_SENSOR, FPS_SENSOR } from "./sensorGlicose/Video";
 import { VideoHqTeste, DURATION as DUR_HQ_TESTE } from "./hqTeste/Video";
 export const RemotionRoot: React.FC = () => (
   <>
@@ -1554,5 +1560,13 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="HqTeste" component={VideoHqTeste} durationInFrames={DUR_HQ_TESTE} fps={30} width={1080} height={1920} />
       <Composition id="HistoricoAvatar" component={AvatarHistorico} durationInFrames={1} fps={30} width={1080} height={1080} />
       <Composition id="Vampiro007" component={VideoVampiro007} durationInFrames={DUR_VAMPIRO007} fps={30} width={1080} height={1920} />
+      <Composition id="Dossie007" component={VideoDossie007} durationInFrames={DUR_DOSSIE007} fps={30} width={1080} height={1920} />
+      <Composition id="Dossie007Completo" component={VideoDossie007Completo} durationInFrames={DUR_DOSSIE_COMPLETO} fps={30} width={1080} height={1920} />
+      <Composition id="Dossie007Capa" component={CapaDossie007} durationInFrames={120} fps={30} width={1080} height={1920} />
+      <Composition id="VoxNvidiaTeste" component={VoxNvidiaTeste} durationInFrames={DURACAO_VOX} fps={30} width={1080} height={1920} />
+      <Composition id="VoxNvidia" component={VideoVoxNvidia} durationInFrames={DURACAO_VOX_COMPLETO} fps={30} width={1080} height={1920} />
+      <Composition id="NeymarTigrinha" component={VideoNeymarTigrinha} durationInFrames={DURACAO_NEYMAR} fps={30} width={1080} height={1920} />
+      <Composition id="SensorGlicose" component={VideoSensorGlicose} durationInFrames={DUR_SENSOR} fps={FPS_SENSOR} width={1080} height={1920} />
+      <Composition id="CapaSensorGlicose" component={CapaSensorGlicose} durationInFrames={1} fps={24} width={1080} height={1920} />
   </>
 );

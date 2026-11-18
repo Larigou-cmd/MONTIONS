@@ -128,3 +128,10 @@
 - Tudo desenhado em canvas dentro do Remotion: `mecanismo/src/adrenalina/Video.tsx` (Ids `Adrenalina` e `AdrenalinaCapa`). Página: cabeçalho de gibi, quadrinho principal, legenda em caixa amarela, mascote de capacete espiando embaixo.
 - Atenção: um formatador automático reescreve o `.tsx` depois de salvar; para editar, procurar os trechos de novo antes de trocar.
 - A animação de teste que deu origem ao estilo está em `E:\Downloads\Videos\quadrinhos_vruuum.html`.
+
+## Estilo "colagem Vox vertical" (2026-11-18)
+- Vídeo 80, sensor de glicose no braço: recortes de papel com retícula e borda rasgada, letras recortadas de revista, uma cor forte por cena, peças animadas "em 2" (12 desenhos/s a 24 fps). Aprovado de primeira.
+- Biblioteca em `mecanismo/src/collage` (copiada de SousekiL/vox-style-video, licença MIT, sem o mapa e só com fontes latinas). Vídeo em `mecanismo/src/sensorGlicose/Video.tsx` (Ids `SensorGlicose` e `CapaSensorGlicose`); fotos recortadas em `public/sensorGlicose/cut`.
+- Efeitos sonoros sintetizados do kit da vox-style-video em `public/audio/sfx/synth` (papel, carimbo, marcador, pop).
+- O recorte automático de fundo da skill só funciona no Mac; aqui as fotos ficaram em recorte retangular ou redondo. Instalar o `rembg` foi recusado, então não instalar pacote sem pedir.
+- Linhas de fonte sempre no topo da tela (embaixo os botões do TikTok cobrem).

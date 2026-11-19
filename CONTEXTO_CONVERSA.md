@@ -136,8 +136,10 @@
 - O recorte automático de fundo da skill só funciona no Mac; aqui as fotos ficaram em recorte retangular ou redondo. Instalar o `rembg` foi recusado, então não instalar pacote sem pedir.
 - Linhas de fonte sempre no topo da tela (embaixo os botões do TikTok cobrem).
 
-## Notícias da Farmácia #3 e legendas SEO (2026-11-18)
-- Vídeo 81: canetas de GLP-1 e o aviso da FDA (09/11/2026) sobre risco raro de perda de visão (NOIANA). Modelo Notícias da Farmácia em pixel, agora com **fotos livres do Wikimedia Commons dentro das janelinhas**, com crédito no canto de cada foto. Código: `mecanismo/src/noticiaGlp1/Video.tsx` (Ids `NoticiaGlp1` e `CapaNoticiaGlp1`); créditos em `public/noticiaGlp1/brutas/CREDITOS.md`.
+## Notícias da Farmácia #5 e legendas SEO (2026-11-18)
+- Vídeo 81: canetas de GLP-1 e o aviso da FDA (09/11/2026) sobre risco raro de perda de visão (NOIANA). É o **Notícias da Farmácia #5** (o #3 é a semaglutida em comprimido, vídeo 65, e o #4 os lotes falsificados de Mounjaro, vídeo 66). Versão final no **estilo telejornal do vídeo 77** (pasta `noticias_05_glp1`, `scene.html` + `node render.mjs`), com fotos livres do Wikimedia Commons e crédito em cada foto (`noticias_05_glp1/fotos/CREDITOS.md`). A primeira versão em pixel (`mecanismo/src/noticiaGlp1`) e uma tentativa em colagem Vox (`mecanismo/src/noticiaGlp1Vox`) não foram usadas.
+- Quando ela disser "o modelo do vídeo X", confirmar qual vídeo antes de refazer: aqui era o da Covid (telejornal), não a colagem Vox.
+- Antes de numerar um Notícias da Farmácia, conferir os textos em `youtube/textos/` (65 e 66 não estavam no índice e o número saiu errado).
 - A trilha do quadro agora segue a regra nova (0,22 nas pausas, 0,09 sob a voz), e não mais 0,07.
 - O Wikimedia bloqueia downloads seguidos: baixar pelo endereço `thumb.wikimedia.org/.../NNNNpx-arquivo` com alguns segundos entre um e outro.
 - A partir deste vídeo, as legendas das 4 redes são escritas para a busca (SEO), com no máximo 5 hashtags em cada rede.

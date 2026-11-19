@@ -70,6 +70,9 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 61 | Você construiu a vacina: o cartaz de procurado (clipes do Google Flow montados no Remotion) | [61_vacina_procurado.md](textos/61_vacina_procurado.md) | [capa_vacina_procurado.png](capas/capa_vacina_procurado.png) |
 | 62 | A origem dos remédios #4: a metformina e a flor medieval (boneco de palito, clipes do Google Flow) | [62_origem_metformina.md](textos/62_origem_metformina.md) | [capa_origem_metformina.png](capas/capa_origem_metformina.png) |
 | 63 | O café não te dá energia: ele esconde o cansaço (Modelo 1, receptor em 3D) | [63_cafeina_sono.md](textos/63_cafeina_sono.md) | [capa_cafeina.png](capas/capa_cafeina.png) |
+| 64 | O café não te dá energia (versão boneco de palito) | [64_cafeina_boneco.md](textos/64_cafeina_boneco.md) | capa_cafeina_boneco.png (só em Downloads) |
+| 65 | Notícias da Farmácia #3: semaglutida em comprimido aprovada pela Anvisa | [65_noticias_03_sema_comprimido.md](textos/65_noticias_03_sema_comprimido.md) | [capa_noticias_03_sema_comprimido.png](capas/capa_noticias_03_sema_comprimido.png) |
+| 66 | Notícias da Farmácia #4: Anvisa proíbe lotes falsificados de Mounjaro | [66_noticias_04_mounjaro_lotes.md](textos/66_noticias_04_mounjaro_lotes.md) | [capa_noticias_04_mounjaro_lotes.png](capas/capa_noticias_04_mounjaro_lotes.png) |
 | 67 | Parou a prednisona de repente? E a diferença para a prednisolona (Modelo 1 verde com 3D) | [67_prednisona_parar.md](textos/67_prednisona_parar.md) | [capa_prednisona.png](capas/capa_prednisona.png) |
 | 68 | A caneta do Paraguai é Mounjaro? As 4 canetas de tirzepatida (Modelo 9 com fichas de foto) | [68_tirzepatida_paraguai.md](textos/68_tirzepatida_paraguai.md) | [capa_tirzepatida_paraguai.png](capas/capa_tirzepatida_paraguai.png) |
 | 69 | Por que dá sono depois do almoço (boneco de palito, "você dentro da cena") | [69_sono_depois_almoco.md](textos/69_sono_depois_almoco.md) | [capa_sono_almoco.png](capas/capa_sono_almoco.png) |
@@ -84,7 +87,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 78 | FPS 30 ou FPS 70: qual a diferença de verdade? (Modelo 1 verde) | [78_fps_30_ou_70.md](textos/78_fps_30_ou_70.md) | [capa_fps.png](capas/capa_fps.png) |
 | 79 | Adrenalina: o botão de turbo do seu corpo (estilo história em quadrinhos antiga) | [79_adrenalina_susto.md](textos/79_adrenalina_susto.md) | [capa_adrenalina.png](capas/capa_adrenalina.png) |
 | 80 | O sensor de glicose no braço: quanto custa e por que pouca gente tem (colagem Vox vertical) | [80_sensor_glicose.md](textos/80_sensor_glicose.md) | [capa_sensor_glicose.png](capas/capa_sensor_glicose.png) |
-| 81 | Notícias da Farmácia #3: canetas de GLP-1 e o risco raro de perda de visão (pixel com fotos livres) | [81_noticias_03_glp1_visao.md](textos/81_noticias_03_glp1_visao.md) | [capa_noticias_03_glp1.png](capas/capa_noticias_03_glp1.png) |
+| 81 | Notícias da Farmácia #5: canetas de GLP-1 e o risco raro de perda de visão (estilo telejornal) | [81_noticias_05_glp1_visao.md](textos/81_noticias_05_glp1_visao.md) | [capa_noticias_05_glp1.png](capas/capa_noticias_05_glp1.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

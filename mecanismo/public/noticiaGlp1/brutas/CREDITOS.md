@@ -1,4 +1,4 @@
-# Fotos do Notícias da Farmácia #3 (Wikimedia Commons, baixadas em 18/11/2026)
+# Fotos do Notícias da Farmácia #5 (Wikimedia Commons, baixadas em 18/11/2026)
 - fda_entrada.jpg — "FDA Entrance (16792957331)", U.S. Food and Drug Administration, domínio público.
 - fundo_olho.jpg — "Fundus photograph of normal left eye", Mikael Häggström, CC0.
 - olho_esquema_pt.png — "Schematic diagram of the human eye pt", Rhcastilhos e Jmarchn, CC BY-SA 3.0 (crédito obrigatório).

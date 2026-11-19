@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Notícias da Farmácia #5 · canetas GLP-1 e a visão</title>
+<style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas><script>
+// Notícias da Farmácia #5: o aviso novo das canetas de GLP-1 sobre a visão (FDA, 09/11/2026).
+// Modelo telejornal do vídeo 77 (covid): vinheta que vira selo, tarja fixa embaixo, uma informação por tela,
+// carimbos e cortina amarela. Fotos livres do Wikimedia Commons (créditos em fotos/CREDITOS.md).
+// Narração: Juliana (ElevenLabs v4), take 1. Tempos em segundos tirados de fala.json (30 qps).
+const W = 1080, H = 1920, END = 90.4;
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v)), lerp = (a, b, u) => a + (b - a) * u;
+const ss = (a, b, x) => { const u = cl((x - a) / (b - a)); return u * u * (3 - 2 * u); };
+const back = u => { const c = 1.70158; u = cl(u) - 1; return 1 + (c + 1) * u * u * u + c * u * u; };
+const INK = '#121417', INK2 = '#1B1E23', INK3 = '#22262C', ACC = '#F2CF1D', ACCL = '#F8DE4A', ACCD = '#D8B30C', GOLD = '#D4B064', PAPER = '#F4F1E8', HOT = '#FE6B3D', OLIVE = '#6E5A1E', GREEN = '#4FD18B';
+const COND = '"Bahnschrift Condensed", "Bahnschrift", "Arial Narrow", sans-serif', MONO = 'Consolas, "Courier New", monospace';
+
+const BG = (() => { const c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d');
+  x.fillStyle = INK; x.fillRect(0, 0, W, H);
+  for (let i = 0; i < 4; i++) { const gr = x.createLinearGradient(0, 0, W, H); gr.addColorStop(0, 'rgba(242,207,29,0)'); gr.addColorStop(0.45 + i * 0.05, `rgba(242,207,29,${0.025 + i * 0.008})`); gr.addColorStop(0.55 + i * 0.05, 'rgba(242,207,29,0)');
+    x.save(); x.translate(W * (0.2 + i * 0.25), 0); x.rotate(0.35); x.fillStyle = gr; x.fillRect(-120, -200, 180, H + 600); x.restore(); }
+  x.strokeStyle = 'rgba(255,255,255,0.035)'; x.lineWidth = 1; for (let i = 0; i <= W; i += 60) { x.beginPath(); x.moveTo(i, 0); x.lineTo(i, H); x.stroke(); } for (let j = 0; j <= H; j += 60) { x.beginPath(); x.moveTo(0, j); x.lineTo(W, j); x.stroke(); }
+  const v = x.createRadialGradient(W / 2, H / 2, 300, W / 2, H / 2, 1200); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.55)'); x.fillStyle = v; x.fillRect(0, 0, W, H);
+  return c; })();
+
+// imagens
+const SRC = { logo: 'logo.jpg', fda: 'fotos/fda_entrada.jpg', fundo: 'fotos/fundo_olho.jpg', fenda: 'fotos/lampada_fenda.jpg',
+  normal: 'fotos/visao_normal.jpg', noiana: 'fotos/visao_noiana_simulada.jpg', mancha: 'fotos/visao_mancha.jpg', glaucoma: 'fotos/visao_glaucoma.jpg' };
+const IMG = {}; let carregadas = 0; const total = Object.keys(SRC).length;
+
+function text(txt, x, y, size, col, align = 'left', a = 1, font = COND, weight = 700, max = 0) { if (a <= 0 || !txt) return; g.save(); g.globalAlpha *= a; g.font = `${weight} ${size}px ${font}`;
+  if (max) { const w = g.measureText(txt).width; if (w > max) g.font = `${weight} ${size * max / w}px ${font}`; } g.textAlign = align; g.fillStyle = col; g.fillText(txt, x, y); g.restore(); }
+function plate(cx, cy, s, a = 1, glint = -1) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.translate(cx, cy); g.scale(s, s);
+  const k = 40; g.beginPath(); g.moveTo(-260 + k, -90); g.lineTo(260 + k, -90); g.lineTo(260 - k, 90); g.lineTo(-260 - k, 90); g.closePath();
+  const gr = g.createLinearGradient(0, -90, 0, 90); gr.addColorStop(0, ACCL); gr.addColorStop(1, ACCD); g.fillStyle = gr; g.fill();
+  g.save(); g.clip(); g.fillStyle = INK; g.fillRect(-320, -90, 46, 180); g.fillStyle = GOLD; g.fillRect(-274, -90, 14, 180);
+  if (glint >= 0 && glint <= 1) { const gx = lerp(-400, 400, glint); const gg = g.createLinearGradient(gx - 60, 0, gx + 60, 0); gg.addColorStop(0, 'rgba(255,255,255,0)'); gg.addColorStop(0.5, 'rgba(255,255,255,0.8)'); gg.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = gg; g.fillRect(-320, -90, 640, 180); }
+  g.restore();
+  g.font = `800 96px ${COND}`; g.textAlign = 'center'; g.fillStyle = INK; g.fillText('FARMA.EXE', 0, 34);
+  g.font = `700 28px ${MONO}`; g.fillText('NOTÍCIAS DA FARMÁCIA', 0, 74); g.restore(); }
+function bug(a) { plate(905, 130, 0.33, a); }
+function eyebrow(txt, y, a) { text(txt, 80, y, 34, GOLD, 'left', a, MONO, 700, 920); }
+function cornerTag(txt, a) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.fillStyle = INK3; g.strokeStyle = GOLD; g.lineWidth = 2; g.fillRect(80, 92, 470, 62); g.strokeRect(80, 92, 470, 62); g.restore(); text(txt, 100, 134, 30, GOLD, 'left', a, MONO, 700, 430); }
+function card(x, y, w, h, a = 1) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.fillStyle = INK2; g.fillRect(x, y, w, h); g.fillStyle = ACC; g.fillRect(x, y, w, 8); g.strokeStyle = 'rgba(255,255,255,0.08)'; g.lineWidth = 2; g.strokeRect(x, y, w, h); g.restore(); }
+function stamp(txt, cx, cy, t0, t, col = ACC, size = 70, rot = -0.13) { const a = ss(t0, t0 + 0.05, t); if (a <= 0) return; const u = cl((t - t0) / 0.16), s = lerp(1.9, 1, u);
+  g.save(); g.globalAlpha = a; g.translate(cx, cy); g.rotate(rot); g.scale(s, s); g.font = `800 ${size}px ${COND}`; const w = g.measureText(txt).width + 70, h = size + 50;
+  if (col === ACC) { g.fillStyle = ACC; g.fillRect(-w / 2, -h / 2, w, h); g.fillStyle = INK; } else { g.fillStyle = INK; g.fillRect(-w / 2, -h / 2, w, h); g.strokeStyle = col; g.lineWidth = 6; g.strokeRect(-w / 2 + 8, -h / 2 + 8, w - 16, h - 16); g.lineWidth = 3; g.strokeRect(-w / 2 + 18, -h / 2 + 18, w - 36, h - 36); g.fillStyle = col; }
+  g.textAlign = 'center'; g.fillText(txt, 0, size * 0.36); g.restore();
+  if (t - t0 < 0.4) { const k = (t - t0) / 0.4; g.save(); g.globalAlpha = 1 - k; g.strokeStyle = col; g.lineWidth = 6; g.beginPath(); g.ellipse(cx, cy, 200 + k * 260, 90 + k * 120, 0, 0, 7); g.stroke(); g.restore(); } }
+function tick(x, y, a, col = GREEN) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.translate(x, y); const s = back(a); g.scale(s, s); g.fillStyle = col; g.beginPath(); g.arc(0, 0, 36, 0, 7); g.fill();
+  g.strokeStyle = INK; g.lineWidth = 9; g.lineCap = 'round'; g.lineJoin = 'round'; g.beginPath(); g.moveTo(-16, 1); g.lineTo(-4, 14); g.lineTo(18, -12); g.stroke(); g.restore(); }
+function cross(x, y, a, col = HOT) { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.translate(x, y); const s = back(a); g.scale(s, s); g.fillStyle = col; g.beginPath(); g.arc(0, 0, 36, 0, 7); g.fill();
+  g.strokeStyle = INK; g.lineWidth = 9; g.lineCap = 'round'; g.beginPath(); g.moveTo(-13, -13); g.lineTo(13, 13); g.moveTo(13, -13); g.lineTo(-13, 13); g.stroke(); g.restore(); }
+function flapTile(x, y, w, h, from, to, t0, t) { const u = cl((t - t0) / 0.3); g.save(); g.fillStyle = INK3; g.fillRect(x, y, w, h); g.fillStyle = 'rgba(0,0,0,0.5)'; g.fillRect(x, y + h / 2 - 2, w, 4);
+  const cur = u < 0.5 ? from : to; g.beginPath(); g.rect(x, y, w, h); g.clip(); g.translate(x + w / 2, y + h / 2); g.scale(1, u < 1 ? Math.abs(Math.cos(u * Math.PI)) * 0.9 + 0.1 : 1);
+  g.font = `800 ${h * 0.72}px ${COND}`; { const mw = g.measureText(cur).width; if (mw > w - 30) g.font = `800 ${h * 0.72 * (w - 30) / mw}px ${COND}`; } g.textAlign = 'center'; g.fillStyle = cur === '?' || cur === '??' ? 'rgba(244,241,232,0.3)' : ACC; g.fillText(cur, 0, h * 0.26); g.restore(); }
+// caneta genérica (sem marca)
+function pen(cx, cy, s, rot, a, cor = '#3B82C4') { if (a <= 0) return; g.save(); g.globalAlpha *= a; g.translate(cx, cy); g.rotate(rot); g.scale(s, s);
+  const rr = (x, y, w, h, r, f, st) => { g.beginPath(); g.roundRect(x, y, w, h, r); g.fillStyle = f; g.fill(); g.strokeStyle = INK; g.lineWidth = 7; g.stroke(); };
+  rr(-250, -36, 360, 72, 30, cor); rr(-110, -20, 120, 40, 6, PAPER); g.fillStyle = INK; for (let i = 0; i < 5; i++) g.fillRect(-98 + i * 22, -14, 4, 12);
+  rr(110, -28, 110, 56, 16, '#DADDE2'); rr(220, -10, 30, 20, 4, '#8C929B'); rr(-230, -20, 60, 40, 10, INK3); g.restore(); }
+// foto dentro de um quadro, com zoom lento e crédito embaixo
+function photo(im, x, y, w, h, a, o = {}) { if (a <= 0 || !im || !im.width) return; g.save(); g.globalAlpha *= a;
+  g.fillStyle = PAPER; g.fillRect(x - 10, y - 10, w + 20, h + 20); g.beginPath(); g.rect(x, y, w, h); g.clip();
+  const z = 1 + (o.zoom || 0), ir = im.width / im.height, br = w / h; let sw, sh; if (ir > br) { sh = im.height / z; sw = sh * br; } else { sw = im.width / z; sh = sw / br; }
+  const px = o.px ?? 0.5, py = o.py ?? 0.5, sx = (im.width - sw) * px, sy = (im.height - sh) * py;
+  if (o.filter) g.filter = o.filter; g.drawImage(im, sx, sy, sw, sh, x, y, w, h); g.filter = 'none';
+  if (o.dark) { g.fillStyle = `rgba(0,0,0,${o.dark})`; g.fillRect(x, y, w, h); }
+  g.restore(); if (o.cred) text(o.cred, x, y + h + 46, 26, GOLD, 'left', a * 0.9, MONO, 700, w); }
+
+// ---------- tarja (lower third) ----------
+const STRAP = [[0.9, 'URGENTE', 'FDA MUDA A BULA DAS CANETAS'], [9.4, 'URGENTE', 'ALERTA EM TODAS AS CANETAS GLP-1'], [23.3, 'ENTENDA', 'O QUE É A NOIANA'],
+  [32.2, 'ENTENDA', 'É RARO, DIZ A FDA'], [46.4, 'BRASIL', 'ANVISA ANALISA 13 NOTIFICAÇÕES'], [54.8, 'ALERTA', 'VISÃO QUE CAI DE REPENTE'], [66.9, 'SERVIÇO', 'OFTALMOLOGISTA NO MESMO DIA'],
+  [71.9, 'SERVIÇO', 'NÃO PARE POR CONTA PRÓPRIA']];
+const SOURCES = [[0.9, 'FONTE: FDA · 09/11/2026'], [23.3, 'FONTE: FDA · SOCIEDADES DE OFTALMOLOGIA'], [32.2, 'FONTE: FDA · 126 ESTUDOS, 134 MIL PESSOAS'], [46.4, 'FONTE: ANVISA · VIGIMED'],
+  [54.8, 'FONTE: FDA · LISTA DE SINTOMAS'], [66.9, 'FONTE: FDA · NANOS/AAO'], [71.9, 'FONTE: FDA · NANOS/AAO, MAIO 2026']];
+const SX = 50, SY = 1482, SW = 760, SH = 118, TY = 1430, S_OUT = 79.9;
+function strap(t) { const inA = ss(0.9, 1.2, t), out = ss(S_OUT, S_OUT + 0.4, t); if (inA <= 0 || out >= 1) return; const dx = lerp(-1100, 0, back(inA)) - out * 1150;
+  let k = 0; STRAP.forEach((r, i) => { if (t >= r[0]) k = i; }); const [t0, tab, txt] = STRAP[k], prev = k > 0 ? STRAP[k - 1] : null, u = k > 0 ? ss(t0, t0 + 0.32, t) : 1;
+  g.save(); g.translate(dx, 0);
+  g.font = `800 34px ${COND}`; const tw = g.measureText(tab).width + 40, flash = prev && prev[1] !== tab ? 1 - ss(t0, t0 + 0.25, t) : 0;
+  g.fillStyle = tab === 'ALERTA' || tab === 'URGENTE' ? HOT : ACC; g.fillRect(SX, TY, tw, 52); if (flash > 0) { g.globalAlpha = flash; g.fillStyle = '#fff'; g.fillRect(SX, TY, tw, 52); g.globalAlpha = 1; }
+  g.fillStyle = INK; g.textAlign = 'left'; g.fillText(tab, SX + 20, TY + 39);
+  g.fillStyle = PAPER; g.fillRect(SX, SY, SW, SH); g.fillStyle = INK; g.fillRect(SX + SW, SY, 90, SH); g.fillStyle = ACC; g.fillRect(SX + SW + 16, SY + 30, 58, 58);
+  g.fillStyle = INK; g.font = `800 34px ${COND}`; g.textAlign = 'center'; g.fillText('F', SX + SW + 45, SY + 72);
+  g.save(); g.beginPath(); g.rect(SX, SY, SW, SH); g.clip(); g.textAlign = 'left'; g.fillStyle = INK;
+  const put = (s, y) => { g.font = `800 64px ${COND}`; const w = g.measureText(s).width; if (w > SW - 50) g.font = `800 ${64 * (SW - 50) / w}px ${COND}`; g.fillText(s, SX + 24, y); };
+  if (prev && u < 1) { put(prev[2], SY + 82 - u * SH); put(txt, SY + 82 + (1 - u) * SH); } else put(txt, SY + 82);
+  g.restore(); g.restore();
+  let s = ''; SOURCES.forEach(r => { if (t >= r[0]) s = r[1]; }); text(s, SX, 1408, 30, GOLD, 'left', 0.85 * inA * (1 - out), MONO, 700, 820); }
+
+// ---------- vinheta + gancho (0–7,6) ----------
+function sting(t) { const sl = [0.04, 0.1]; sl.forEach((t0, i) => { const u = ss(t0, t0 + 0.25, t) * (1 - ss(0.5, 0.7, t)); if (u <= 0) return; g.save(); g.globalAlpha = u; g.fillStyle = i ? GOLD : ACC; g.translate(540, 700); g.rotate(-0.5); g.fillRect(-700, -30 + i * 80, 1400 * u, 26); g.restore(); });
+  const sl2 = cl((t - 0.05) / 0.2), fly = ss(0.55, 0.9, t), s = lerp(lerp(0.2, 1.25, back(sl2)), 0.33, fly), cx = lerp(540, 905, fly), cy = lerp(720, 130, fly);
+  const shake = t > 0.2 && t < 0.45 ? Math.sin(t * 90) * 8 * (0.45 - t) / 0.25 : 0; if (t >= 0.05) plate(cx + shake, cy, s, 1, cl((t - 0.28) / 0.3));
+  if (t > 0.2 && t < 0.6) { const k = (t - 0.2) / 0.4; g.save(); g.globalAlpha = 1 - k; g.strokeStyle = ACC; g.lineWidth = 8; g.beginPath(); g.ellipse(540, 720, 300 + k * 300, 120 + k * 120, 0, 0, 7); g.stroke(); g.restore(); } }
+function hook(t) {
+  if (t < 0.9) sting(t); else bug(1);
+  eyebrow('09 NOV 2026 · ESTADOS UNIDOS', 300, ss(0.9, 1.2, t));
+  text('BULA NOVA', 80, 440, 150, PAPER, 'left', ss(0.05, 0.25, t), COND, 800); text('EM TODAS AS CANETAS', 80, 540, 84, ACC, 'left', ss(0.15, 0.35, t), COND, 800, 920);
+  [[2.2, 700, -0.1, '#3B82C4'], [2.6, 840, 0.06, '#57A773'], [3.0, 980, -0.04, '#9B6BD1']].forEach(([t0, y, r, c]) => { const u = ss(t0, t0 + 0.35, t); pen(lerp(-400, 540, back(u)), y, 1.45, r, u, c); });
+  text('DE GLP-1', 540, 1150, 110, PAPER, 'center', ss(4.4, 4.7, t), COND, 800);
+  stamp('O MOTIVO: O OLHO', 540, 1300, 6.7, t, HOT, 76, -0.08); }
+// vinheta do quadro (7,6–9,4)
+function vinheta(t) { const a = ss(7.6, 7.9, t); plate(540, 640, lerp(0.5, 0.85, back(ss(7.6, 8.0, t))), a, cl((t - 7.9) / 0.5));
+  text('NOTÍCIAS DA FARMÁCIA', 540, 930, 100, PAPER, 'center', ss(7.8, 8.1, t), COND, 800, 960);
+  stamp('#5', 540, 1110, 8.3, t, ACC, 110, -0.06); }
+
+// ---------- FDA (9,4–18,7) ----------
+function fda(t) { bug(1); cornerTag('COMUNICADO DE SEGURANÇA', ss(9.5, 9.8, t)); eyebrow('FDA · A AGÊNCIA DE REMÉDIOS DOS EUA', 230, ss(9.5, 9.8, t));
+  text('ALERTA NA BULA', 80, 330, 84, PAPER, 'left', ss(9.5, 9.8, t), COND, 800);
+  const pa = ss(10.9, 11.3, t); photo(IMG.fda, 80, lerp(470, 400, back(ss(10.9, 11.4, t))), 920, 560, pa, { zoom: 0.05 * ss(10.9, 18.7, t), cred: 'FOTO: FDA, DOMÍNIO PÚBLICO (WIKIMEDIA COMMONS)' });
+  stamp('09/11/2026', 760, 440, 9.9, t, ACC, 54, 0.06);
+  const a = ss(14.4, 14.7, t); text('PARA DIABETES', 80, 1100, 40, GOLD, 'left', a, MONO, 700); text('OU PARA EMAGRECER', 80, 1146, 40, GOLD, 'left', a, MONO, 700);
+  const b = ss(16.7, 17.0, t), c = ss(17.8, 18.1, t); card(80, 1180, 440, 150, b); tick(150, 1255, b); text('DIABETES', 200, 1282, 66, PAPER, 'left', b, COND, 800, 300);
+  card(560, 1180, 440, 150, c); tick(630, 1255, c); text('EMAGRECER', 680, 1282, 66, PAPER, 'left', c, COND, 800, 300); }
+
+// ---------- quais (18,7–23,3) ----------
+function quais(t) { bug(1); eyebrow('VALE PARA TODA A CLASSE', 230, ss(18.8, 19.1, t)); text('QUAIS CANETAS?', 80, 330, 84, PAPER, 'left', ss(18.8, 19.1, t), COND, 800);
+  [['SEMAGLUTIDA', 19.5], ['TIRZEPATIDA', 20.5], ['LIRAGLUTIDA', 21.5]].forEach(([s, t0], i) => { const a = ss(t0, t0 + 0.25, t), y = 430 + i * 190; card(80, y, 920, 160, a); tick(160, y + 82, a); text(s, 220, y + 108, 84, PAPER, 'left', a, COND, 800); });
+  stamp('E AS OUTRAS', 540, 1080, 22.5, t, ACC, 72, -0.07);
+  pen(540, 1260, 1.3, -0.05, ss(18.8, 19.2, t) * 0.9, '#3B82C4'); }
+
+// ---------- NOIANA (23,3–32,2) ----------
+function noiana(t) { bug(1); cornerTag('FOTO REAL · OLHO NORMAL', ss(26.6, 26.9, t)); eyebrow('O QUE É', 230, ss(23.4, 23.7, t));
+  text('NOIANA', 80, 360, 150, ACC, 'left', ss(24.4, 24.6, t), COND, 800);
+  text('UMA ESPÉCIE DE DERRAME NO NERVO DO OLHO', 80, 430, 46, PAPER, 'left', ss(25.6, 25.9, t), COND, 800, 920);
+  const L = 540, X = 270, Y = 480, pa = ss(26.6, 27.0, t);
+  photo(IMG.fundo, X, Y, L, L, pa, { zoom: 0.04 * ss(26.6, 32, t), dark: 0.55 * ss(30.6, 31.4, t), cred: 'FOTO: M. HÄGGSTRÖM, CC0 (WIKIMEDIA COMMONS)' });
+  const k = ss(28.9, 29.2, t); if (k > 0) { const dx = X + 0.17 * L, dy = Y + 0.46 * L; g.save(); g.globalAlpha = k; g.strokeStyle = ACC; g.lineWidth = 9; g.beginPath(); g.arc(dx, dy, 70 * back(k), 0, 7); g.stroke();
+    g.lineWidth = 5; g.beginPath(); g.moveTo(dx - 20, dy + 70); g.lineTo(150, Y + L + 75); g.stroke(); g.restore();
+    text('ENTRADA DO NERVO ÓPTICO', 80, Y + L + 120, 46, ACC, 'left', k, COND, 800); text('FALTA SANGUE AQUI', 80, Y + L + 168, 40, PAPER, 'left', ss(28.3, 28.6, t) * k, MONO, 700); }
+  stamp('A VISÃO CAI DE REPENTE', 540, 1310, 30.6, t, HOT, 60, -0.06); }
+
+// ---------- raro (32,2–46,4) ----------
+function raro(t) { bug(1); cornerTag('DADOS DA FDA', ss(32.3, 32.6, t));
+  stamp('MAS CALMA: É RARO', 540, 300, 33.2, t, ACC, 70, -0.05);
+  if (t < 42.3) { eyebrow('CASOS A CADA 100 MIL PESSOAS POR ANO', 430, ss(37.6, 37.9, t));
+    const base = 1180, hMax = 560, bar = (x, v, t0, col, lab, num) => { const u = ss(t0, t0 + 0.9, t); if (u <= 0) return; const h = hMax * v / 6.4 * u;
+      g.fillStyle = col; g.fillRect(x, base - h, 330, h); text(num, x + 165, base - h - 30, 110, col === INK3 ? PAPER : col, 'center', u, COND, 800); text(lab, x + 165, base + 60, 46, PAPER, 'center', u, COND, 800); };
+    g.save(); g.globalAlpha = ss(36.6, 36.9, t); g.strokeStyle = 'rgba(255,255,255,0.3)'; g.lineWidth = 3; g.beginPath(); g.moveTo(90, base); g.lineTo(990, base); g.stroke(); g.restore();
+    bar(150, 6.4, 36.6, HOT, 'COM A CANETA', '≈ 6'); bar(600, 3.8, 40.6, '#5B6370', 'SEM A CANETA', '≈ 4');
+    text('126 ESTUDOS · 134 MIL PESSOAS', 540, 1320, 36, GOLD, 'center', ss(38.0, 38.3, t), MONO, 700);
+  } else { const a = ss(42.4, 42.7, t); text('A FDA FALA EM', 540, 560, 70, PAPER, 'center', a, COND, 800);
+    text('RISCO', 540, 760, 200, ACC, 'center', ss(43.4, 43.6, t), COND, 800); text('POSSÍVEL', 540, 900, 130, ACC, 'center', ss(43.8, 44.0, t), COND, 800);
+    stamp('SEM CAUSA COMPROVADA', 540, 1140, 44.8, t, HOT, 66, -0.07); } }
+
+// ---------- Brasil (46,4–54,8) ----------
+function brasil(t) { bug(1); eyebrow('ANVISA · BRASIL', 230, ss(46.5, 46.8, t)); text('E AQUI NO BRASIL?', 80, 330, 84, PAPER, 'left', ss(46.5, 46.8, t), COND, 800);
+  const f = ss(47.4, 47.9, t); if (f > 0) { g.save(); g.globalAlpha = f; g.translate(540, lerp(900, 590, back(f))); g.rotate(-0.03);
+    g.fillStyle = PAPER; g.fillRect(-440, -170, 880, 340); g.fillStyle = INK; g.fillRect(-440, -170, 880, 70); text('BULA · SEMAGLUTIDA', -410, -120, 40, PAPER, 'left', 1, COND, 800);
+    text('Reações adversas muito raras:', -410, -40, 40, INK, 'left', 1, 'Georgia, serif', 700);
+    g.fillStyle = 'rgba(242,207,29,0.75)'; g.fillRect(-414, -6, 830, 100); text('neuropatia óptica isquêmica anterior', -410, 34, 38, INK, 'left', 1, 'Georgia, serif', 400, 820); text('não arterítica (NOIANA)', -410, 80, 38, INK, 'left', 1, 'Georgia, serif', 400);
+    text('(trecho resumido para o vídeo)', -410, 140, 24, OLIVE, 'left', 1, MONO, 700); g.restore(); }
+  stamp('DESDE 2025', 760, 470, 50.0, t, HOT, 56, 0.08);
+  const c = ss(51.6, 51.9, t); text('A ANVISA ANALISA', 540, 900, 56, GOLD, 'center', c, MONO, 700);
+  if (c > 0) { g.save(); g.globalAlpha = c; flapTile(90, 950, 330, 300, '??', '13', 52.6, t); g.restore(); text('NOTIFICAÇÕES', 450, 1080, 76, PAPER, 'left', ss(53.1, 53.4, t), COND, 800, 560); text('DE SUSPEITA', 450, 1160, 66, ACC, 'left', ss(53.9, 54.2, t), COND, 800); } }
+
+// ---------- sinal de alerta (54,8–66,9) ----------
+function sinal(t) { bug(1); cornerTag('SIMULAÇÃO ILUSTRATIVA', ss(54.9, 55.2, t)); eyebrow('FIQUE DE OLHO NESTE SINAL', 230, ss(54.9, 55.2, t));
+  text('SINAL DE ALERTA', 80, 330, 84, HOT, 'left', ss(54.9, 55.2, t), COND, 800);
+  const et = t >= 65.5 ? 4 : t >= 63.8 ? 3 : t >= 62.8 ? 2 : t >= 56.9 ? 1 : 0;
+  const im = [IMG.normal, IMG.noiana, IMG.mancha, IMG.glaucoma, IMG.normal][et], t0 = [56.0, 56.9, 62.8, 63.8, 65.5][et];
+  const fl = et > 0 ? 1 - ss(t0, t0 + 0.2, t) : 0;
+  photo(im, 80, 400, 920, 500, ss(56.0, 56.3, t), { py: et === 1 ? 0.78 : 0.35, zoom: 0.03 * ss(t0, t0 + 3, t), filter: et === 4 ? 'hue-rotate(70deg) saturate(0.55) contrast(0.9)' : undefined, cred: 'SIMULAÇÃO: NATIONAL EYE INSTITUTE (NIH), DOMÍNIO PÚBLICO' });
+  if (fl > 0) { g.fillStyle = `rgba(255,255,255,${fl * 0.6})`; g.fillRect(80, 400, 920, 500); }
+  if (t < 62.6) { [['DE REPENTE', 58.1], ['UM OLHO SÓ', 59.2], ['SEM DOR', 60.1], ['AO ACORDAR', 61.6]].forEach(([s, a0], i) => { const a = ss(a0, a0 + 0.25, t), x = 80 + (i % 2) * 470, y = 1010 + Math.floor(i / 2) * 180;
+      card(x, y, 450, 150, a); tick(x + 70, y + 76, a, HOT); text(s, x + 120, y + 100, 58, PAPER, 'left', a, COND, 800, 310); });
+  } else { [['MANCHA ESCURA', 62.8], ['PARTE SUMINDO', 63.8], ['CORES ESTRANHAS', 65.5]].forEach(([s, a0], i) => { const a = ss(a0, a0 + 0.25, t), y = 1000 + i * 125;
+      card(80, y, 920, 110, a); tick(150, y + 56, a, HOT); text(s, 210, y + 80, 62, PAPER, 'left', a, COND, 800); }); } }
+
+// ---------- oftalmo (66,9–71,9) ----------
+function oftalmo(t) { bug(1); eyebrow('SE ACONTECER', 230, ss(67.0, 67.3, t)); text('VÁ AO OFTALMO', 80, 330, 84, PAPER, 'left', ss(67.0, 67.3, t), COND, 800);
+  photo(IMG.fenda, 80, 400, 920, 560, ss(67.0, 67.4, t), { py: 0.3, zoom: 0.04 * ss(67, 72, t), cred: 'FOTO: JEEVAMUTHURAMALINGAM, CC BY-SA 4.0 (WIKIMEDIA COMMONS)' });
+  stamp('NO MESMO DIA', 540, 1150, 68.8, t, HOT, 90, -0.07);
+  text('SEM ESPERAR A PRÓXIMA CONSULTA', 540, 1310, 50, ACC, 'center', ss(70.0, 70.3, t), COND, 800, 920); }
+
+// ---------- não pare (71,9–79,9) ----------
+function naoPare(t) { bug(1); eyebrow('E ATENÇÃO', 230, ss(72.0, 72.3, t));
+  pen(540, 430, 1.4, -0.05, ss(72.0, 72.4, t), '#3B82C4');
+  const x = ss(73.4, 73.7, t); if (x > 0) { g.save(); g.globalAlpha = x; g.strokeStyle = HOT; g.lineWidth = 18; g.lineCap = 'round'; g.beginPath(); g.moveTo(160, 330); g.lineTo(lerp(160, 920, x), lerp(330, 530, x)); g.moveTo(920, 330); g.lineTo(lerp(920, 160, x), lerp(330, 530, x)); g.stroke(); g.restore(); }
+  text('NÃO PARE A CANETA', 540, 660, 96, PAPER, 'center', ss(72.1, 72.4, t), COND, 800, 920); text('POR CONTA PRÓPRIA', 540, 740, 66, HOT, 'center', ss(73.4, 73.7, t), COND, 800);
+  const a = ss(75.4, 75.7, t); card(80, 820, 920, 180, a); tick(160, 910, a); text('CONVERSE COM', 220, 895, 56, PAPER, 'left', a, COND, 800); text('QUEM RECEITOU', 220, 960, 66, ACC, 'left', ss(76.1, 76.4, t), COND, 800);
+  const b = ss(77.0, 77.3, t); card(80, 1030, 920, 180, b); tick(160, 1120, b, GOLD); text('PRINCIPALMENTE SE VOCÊ JÁ TEVE', 220, 1105, 46, PAPER, 'left', b, COND, 800, 740); text('ESSE PROBLEMA EM UM OLHO', 220, 1168, 52, GOLD, 'left', ss(78.4, 78.7, t), COND, 800, 740); }
+
+// ---------- chamada, me siga, final ----------
+function share(t) { bug(1); const a = ss(80.0, 80.3, t);
+  text('MANDA PARA', 540, 820, 120, PAPER, 'center', a, COND, 800); text('QUEM USA CANETA', 540, 950, 116, ACC, 'center', ss(80.6, 80.9, t), COND, 800, 940);
+  g.save(); g.globalAlpha = ss(80.8, 81.3, t); g.fillStyle = ACC; g.fillRect(540 - 400 * ss(80.8, 81.4, t), 985, 800 * ss(80.8, 81.4, t), 8); g.restore(); }
+function mesiga(t) { const a = ss(81.8, 82.2, t), s = back((t - 81.8) / 0.45), r = 230; plate(540, 380, 0.75, ss(81.8, 82.1, t), cl((t - 82.2) / 0.5));
+  g.save(); g.globalAlpha = a; g.translate(540, 820); g.scale(s, s); g.save(); g.beginPath(); g.arc(0, 0, r, 0, 7); g.clip(); if (IMG.logo && IMG.logo.width) g.drawImage(IMG.logo, -r, -r, r * 2, r * 2); g.restore();
+  g.strokeStyle = ACC; g.lineWidth = 12; g.beginPath(); g.arc(0, 0, r + 6, 0, 7); g.stroke(); g.restore();
+  text('ME SIGA', 540, 1225, 150, PAPER, 'center', ss(81.9, 82.2, t), COND, 800);
+  text('PARA MAIS NOTÍCIAS', 540, 1300, 50, ACC, 'center', ss(82.6, 82.9, t), COND, 700);
+  text('E DICAS DE FARMACOLOGIA', 540, 1365, 46, PAPER, 'center', ss(83.4, 83.7, t), COND, 700); }
+function final(t) { const a = ss(84.7, 85.1, t); plate(540, 600, 0.55, a);
+  ['Consulte um', 'profissional de saúde', 'para orientações.'].forEach((l, i) => text(l, 540, 900 + i * 100, 84, i === 1 ? ACC : PAPER, 'center', a, COND, 800)); }
+
+// ---------- montagem ----------
+const WIPES = [7.6, 9.4, 18.7, 23.3, 32.2, 46.4, 54.8, 66.9, 71.9, 79.9, 81.8, 84.6];
+function scene(t) { if (t < 7.6) hook(t); else if (t < 9.4) vinheta(t); else if (t < 18.7) fda(t); else if (t < 23.3) quais(t); else if (t < 32.2) noiana(t); else if (t < 46.4) raro(t);
+  else if (t < 54.8) brasil(t); else if (t < 66.9) sinal(t); else if (t < 71.9) oftalmo(t); else if (t < 79.9) naoPare(t); else if (t < 81.8) share(t); else if (t < 84.6) mesiga(t); else final(t); }
+window.END = END;
+window.draw = function (t) {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.drawImage(BG, 0, 0);
+  const wc = WIPES.find(c => t > c - 0.15 && t < c + 0.15);
+  if (wc !== undefined) { const u = (t - (wc - 0.15)) / 0.3, bx = lerp(-110, W + 10, u);
+    g.save(); g.beginPath(); g.rect(bx, 0, W, H); g.clip(); scene(wc - 0.001); strap(wc - 0.001); g.restore();
+    g.save(); g.beginPath(); g.rect(0, 0, bx, H); g.clip(); g.drawImage(BG, 0, 0); scene(Math.max(t, wc)); strap(Math.max(t, wc + 0.33)); g.restore();
+    g.fillStyle = ACC; g.fillRect(bx, 0, 84, H); g.fillStyle = INK; g.fillRect(bx + 84, 0, 5, H); g.fillStyle = GOLD; g.fillRect(bx + 89, 0, 14, H);
+  } else { scene(t); const wl = WIPES.find(c => t >= c + 0.15 && t < c + 0.33); strap(wl !== undefined ? wl + 0.33 : t); }
+  if (t > END - 0.5) { g.fillStyle = `rgba(0,0,0,${ss(END - 0.5, END, t)})`; g.fillRect(0, 0, W, H); }
+};
+// capa: tudo entre y≈300 e 1620 (recorte 3:4)
+window.capa = function () { g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.drawImage(BG, 0, 0);
+  plate(540, 400, 0.55, 1);
+  text('CANETAS GLP-1', 540, 650, 150, PAPER, 'center', 1, COND, 800, 960); text('E A SUA VISÃO', 540, 760, 104, ACC, 'center', 1, COND, 800, 960);
+  photo(IMG.noiana, 140, 820, 800, 460, 1, { py: 0.78 });
+  stamp('ALERTA DA FDA', 540, 1340, 0, 1, HOT, 70, -0.06);
+  text('O SINAL QUE NÃO DÁ PARA IGNORAR', 540, 1530, 58, GOLD, 'center', 1, COND, 800, 960); };
+Object.entries(SRC).forEach(([k, s]) => { const im = new Image(); IMG[k] = im; im.onload = im.onerror = () => { if (++carregadas === total) document.fonts.load(`800 40px ${COND}`).then(() => { draw(0); window.ready = true; }); }; im.src = s; });
+</script></body></html>

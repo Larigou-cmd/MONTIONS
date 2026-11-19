@@ -1,4 +1,4 @@
-# Notícias da Farmácia #3: o aviso novo das canetas de GLP-1 sobre a visão
+# Notícias da Farmácia #5: o aviso novo das canetas de GLP-1 sobre a visão
 
 Formato: curto vertical 1080×1920, Notícias da Farmácia (explicadora em pixel, repórter no canto), cerca de 1 min 40 s.
 Status: roteiro v1, gancho C escolhido em 18/11/2026. Aguardando a narração. Base do tema: PDF do clube "Além da Farmacologia" enviado por ela (18/11/2026), conferido em fontes abertas.

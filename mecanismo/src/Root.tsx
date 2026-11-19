@@ -286,6 +286,7 @@ import { VideoVoxNvidia, DURACAO_VOX_COMPLETO } from "./voxNvidia/Completo";
 import { VideoNeymarTigrinha, DURACAO_NEYMAR } from "./voxNeymar/Video";
 import { VideoSensorGlicose, CapaSensorGlicose, DUR_SENSOR, FPS_SENSOR } from "./sensorGlicose/Video";
 import { VideoNoticiaGlp1, CapaNoticiaGlp1, DURATION as DUR_NOTICIA_GLP1 } from "./noticiaGlp1/Video";
+import { VideoNoticiaGlp1Vox, CapaNoticiaGlp1Vox, DUR_GLP1_VOX, FPS_GLP1_VOX } from "./noticiaGlp1Vox/Video";
 import { VideoHqTeste, DURATION as DUR_HQ_TESTE } from "./hqTeste/Video";
 export const RemotionRoot: React.FC = () => (
   <>
@@ -1571,5 +1572,7 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="CapaSensorGlicose" component={CapaSensorGlicose} durationInFrames={1} fps={24} width={1080} height={1920} />
       <Composition id="NoticiaGlp1" component={VideoNoticiaGlp1} durationInFrames={DUR_NOTICIA_GLP1} fps={30} width={1080} height={1920} />
       <Composition id="CapaNoticiaGlp1" component={CapaNoticiaGlp1} durationInFrames={1} fps={30} width={1080} height={1920} />
+      <Composition id="NoticiaGlp1Vox" component={VideoNoticiaGlp1Vox} durationInFrames={DUR_GLP1_VOX} fps={FPS_GLP1_VOX} width={1080} height={1920} />
+      <Composition id="CapaNoticiaGlp1Vox" component={CapaNoticiaGlp1Vox} durationInFrames={1} fps={24} width={1080} height={1920} />
   </>
 );

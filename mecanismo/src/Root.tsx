@@ -142,6 +142,7 @@ import {
 } from "./pressaoParar/Video";
 import { VideoFps, CapaFps, DURATION_FPS } from "./fps/Video";
 import { VideoRessaca, CapaRessaca, DURATION_RESSACA } from "./ressaca/Video";
+import { VideoDengueElNino, CapaDengueElNino, DURATION_DENGUE_ELNINO } from "./dengueElNino/Video";
 import { VideoAdrenalina, CapaAdrenalina, DURATION_ADRENALINA } from "./adrenalina/Video";
 import {
   VideoInsulinaFlow,
@@ -284,6 +285,7 @@ import { VideoDossie007Completo, DURATION_COMPLETO as DUR_DOSSIE_COMPLETO, CapaD
 import { VoxNvidiaTeste, DURACAO_VOX } from "./voxNvidia/Teste";
 import { VideoVoxNvidia, DURACAO_VOX_COMPLETO } from "./voxNvidia/Completo";
 import { VideoNeymarTigrinha, DURACAO_NEYMAR } from "./voxNeymar/Video";
+import { VideoDolarAtaque, DURACAO_DOLAR } from "./voxDolar/Video";
 import { VideoSensorGlicose, CapaSensorGlicose, DUR_SENSOR, FPS_SENSOR } from "./sensorGlicose/Video";
 import { VideoNoticiaGlp1, CapaNoticiaGlp1, DURATION as DUR_NOTICIA_GLP1 } from "./noticiaGlp1/Video";
 import { VideoNoticiaGlp1Vox, CapaNoticiaGlp1Vox, DUR_GLP1_VOX, FPS_GLP1_VOX } from "./noticiaGlp1Vox/Video";
@@ -1558,6 +1560,8 @@ export const RemotionRoot: React.FC = () => (
     />
       <Composition id="Fps" component={VideoFps} durationInFrames={DURATION_FPS} fps={30} width={1080} height={1920} />
       <Composition id="FpsCapa" component={CapaFps} durationInFrames={1} fps={30} width={1080} height={1920} />
+      <Composition id="DengueElNino" component={VideoDengueElNino} durationInFrames={DURATION_DENGUE_ELNINO} fps={30} width={1080} height={1920} />
+      <Composition id="DengueElNinoCapa" component={CapaDengueElNino} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="CaminhoRemedio" component={VideoCaminhoRemedio} durationInFrames={DUR_CAMINHO} fps={30} width={1080} height={1920} />
       <Composition id="HqTeste" component={VideoHqTeste} durationInFrames={DUR_HQ_TESTE} fps={30} width={1080} height={1920} />
       <Composition id="HistoricoAvatar" component={AvatarHistorico} durationInFrames={1} fps={30} width={1080} height={1080} />
@@ -1568,6 +1572,7 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="VoxNvidiaTeste" component={VoxNvidiaTeste} durationInFrames={DURACAO_VOX} fps={30} width={1080} height={1920} />
       <Composition id="VoxNvidia" component={VideoVoxNvidia} durationInFrames={DURACAO_VOX_COMPLETO} fps={30} width={1080} height={1920} />
       <Composition id="NeymarTigrinha" component={VideoNeymarTigrinha} durationInFrames={DURACAO_NEYMAR} fps={30} width={1080} height={1920} />
+      <Composition id="DolarAtaque" component={VideoDolarAtaque} durationInFrames={DURACAO_DOLAR} fps={30} width={1080} height={1920} />
       <Composition id="SensorGlicose" component={VideoSensorGlicose} durationInFrames={DUR_SENSOR} fps={FPS_SENSOR} width={1080} height={1920} />
       <Composition id="CapaSensorGlicose" component={CapaSensorGlicose} durationInFrames={1} fps={24} width={1080} height={1920} />
       <Composition id="NoticiaGlp1" component={VideoNoticiaGlp1} durationInFrames={DUR_NOTICIA_GLP1} fps={30} width={1080} height={1920} />

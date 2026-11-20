@@ -88,6 +88,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 79 | Adrenalina: o botão de turbo do seu corpo (estilo história em quadrinhos antiga) | [79_adrenalina_susto.md](textos/79_adrenalina_susto.md) | [capa_adrenalina.png](capas/capa_adrenalina.png) |
 | 80 | O sensor de glicose no braço: quanto custa e por que pouca gente tem (colagem Vox vertical) | [80_sensor_glicose.md](textos/80_sensor_glicose.md) | [capa_sensor_glicose.png](capas/capa_sensor_glicose.png) |
 | 81 | Notícias da Farmácia #5: canetas de GLP-1 e o risco raro de perda de visão (estilo telejornal) | [81_noticias_05_glp1_visao.md](textos/81_noticias_05_glp1_visao.md) | [capa_noticias_05_glp1.png](capas/capa_noticias_05_glp1.png) |
+| 82 | Dengue e El Niño: por que a dengue pode voltar com força no verão (quadro branco, Dia Nacional de Combate à Dengue) | [82_dengue_el_nino.md](textos/82_dengue_el_nino.md) | [capa_dengue_el_nino.png](capas/capa_dengue_el_nino.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

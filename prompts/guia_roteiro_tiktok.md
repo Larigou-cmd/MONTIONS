@@ -1,6 +1,6 @@
 # Guia de roteiro para TikTok e Reels
 
-Resumo próprio, feito a partir de seis livros: Hook Point (Brendan Kane), Manual do Roteiro (Syd Field), Story (Robert McKee), Save the Cat (Blake Snyder), Anatomia da História (John Truby) e O Guia Completo do Storytelling (Terenzzo), e de dois guias de Fernando Alvaric sobre vídeo curto. Os materiais servem só de referência e nunca são citados nos vídeos.
+Resumo próprio, feito a partir de sete livros: Hook Point (Brendan Kane), Manual do Roteiro (Syd Field), Story (Robert McKee), Save the Cat (Blake Snyder), Anatomia da História (John Truby), O Guia Completo do Storytelling (Terenzzo) e Vídeos que Vendem Mais (Camilo Coutinho), e de dois guias de Fernando Alvaric sobre vídeo curto. Os materiais servem só de referência e nunca são citados nos vídeos.
 
 As regras de vídeo dos livros são sobre Facebook, Instagram e YouTube (2020) ou sobre cinema. Os guias de Alvaric falam de Reels e TikTok, mas os tempos são a prática dele, sem dados. Tudo deve ser ajustado com os números reais dos vídeos.
 
@@ -157,6 +157,37 @@ Proposta a validar com a usuária.
 - Cada cor com uma função fixa no vídeo: verde = certo ou solução, amarelo = atenção, vermelho = perigo.
 - Poucas cores por cena. O destaque precisa contrastar com o fundo para chamar o olho primeiro.
 - Conferir no celular: a mesma cor muda conforme o fundo, e nem todo mundo enxerga as cores igual. Nunca passar um aviso só pela cor; manter sempre a palavra.
+
+## Busca, sequência e capa (a partir de Vídeos que Vendem Mais, Camilo Coutinho)
+Livro de 2020, anterior ao Shorts e ao TikTok forte no Brasil, e voltado para venda. Ficou só o que serve a um canal de saúde anônimo. Números do livro são da experiência do autor, sem dados públicos.
+
+**Frases que soam como "acabou"** (derrubam a retenção): "então é isso", "então...", "resumindo", "recapitulando", "finalizando", "enfim", "de novo", "voltando ao começo", "espero que tenha gostado". Não usar antes do fim. Para virar de bloco, preferir "só que", "e tem mais", "agora vem a parte que...".
+
+**Seis perguntas antes de escrever** (o "roteiro-chicote", adaptado):
+1. O que a pessoa vai aprender?
+2. Como ela aplica isso no dia a dia?
+3. Quem precisa disso (quem toma o remédio, quem cuida de alguém)?
+4. **Quando** ela procura isso? Esse momento vira o gancho ("Começou a tomar...", "Teve febre e...").
+5. Por que ouvir o Farma.exe (farmacêutica, fontes oficiais)?
+6. O que ela perde se não souber? Dizer sem assustar além das fontes.
+
+**Três degraus**: série de 3 vídeos sobre o mesmo tema, cada um terminando com uma ponte clara para o próximo ("no próximo, ..."). Vídeo 1 nivela o básico, vídeo 2 entrega o principal, vídeo 3 vai um passo além. Serve para testar um tema novo com mais segurança do que um vídeo só. Montar uma playlist com os três.
+
+**Um pedido só no fim**: salvar, mandar para alguém ou comentar, nunca os três juntos.
+
+**Reaproveitar o longo**: de cada vídeo longo saem vários curtos. Escolher os trechos pelo gráfico de retenção e pelos comentários que citam uma parte específica.
+
+**Pauta antecipada**: acompanhar o tema da semana dos programas de saúde da TV e das campanhas do Ministério, e publicar antes, para ser o primeiro resultado quando as pessoas forem buscar.
+
+**Título**: até 50 a 60 caracteres, com o termo buscado no começo; emoji só no início ou no fim, nunca no meio do termo. Escrever várias opções e escolher. Nada no título que o vídeo não entregue.
+
+**Capa**:
+- texto curto, em torno de 15 caracteres, porque o título já aparece ao lado;
+- os "3 E's": olhos, emoção e curiosidade. Sem rosto real (canal anônimo): usar o avatar, um personagem ou um desenho com olhos (mosquito, comprimido, sol);
+- "meio movimento": a cena congelada um instante antes de acontecer (o comprimido quase caindo no copo, o mosquito quase picando);
+- nada de imagem, produto ou pessoa que não esteja no vídeo.
+
+**Comentários**: responder com pergunta aberta ("Você já tinha passado por isso?"), e não só "obrigada". Parte na primeira meia hora, o resto no dia seguinte. Sem forçar conversa quando não há o que dizer.
 
 ## Como vamos trabalhar
 1. Junto com cada roteiro, envio **3 opções de gancho** para você escolher.

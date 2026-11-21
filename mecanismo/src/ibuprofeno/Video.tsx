@@ -7,6 +7,7 @@ import {
   Img,
   interpolate,
   random,
+  Sequence,
   staticFile,
   useCurrentFrame,
   Easing,
@@ -1074,8 +1075,40 @@ const Final: React.FC<{ f: number }> = ({ f }) => (
   </AbsoluteFill>
 );
 
-export const VideoIbuprofeno: React.FC = () => {
-  const f = useCurrentFrame();
+
+// ---------- som (poucos efeitos, como na referência; reais CC0 do Freesound via Openverse) ----------
+const OV = "sfx_openverse/";
+const SFX: [number, string, number][] = [
+  [6, OV + "pop.mp3", 0.3],
+  [185, OV + "whoosh.mp3", 0.28],
+  [T.dock, OV + "portao.mp3", 0.4],
+  [T.docaParede, OV + "portao.mp3", 0.3],
+  [1094, OV + "whoosh.mp3", 0.28],
+  [1155, OV + "pop.mp3", 0.25],
+  [T.zoomOut, OV + "ding.mp3", 0.35],
+  [T.siga, OV + "whoosh.mp3", 0.28],
+  [T.final - 4, OV + "sting.mp3", 0.55],
+];
+const FALANDO_IBU = (() => {
+  const v = new Float32Array(DURATION_IBUPROFENO + 1);
+  LEGENDAS.forEach(([a, b]) => {
+    for (let fr = Math.max(0, a - 4); fr <= Math.min(DURATION_IBUPROFENO, b + 6); fr++) v[fr] = 1;
+  });
+  const out = new Float32Array(v.length);
+  let acc = 0;
+  for (let fr = 0; fr < v.length; fr++) {
+    acc += (v[fr] - acc) * (v[fr] > acc ? 0.25 : 0.08);
+    out[fr] = acc;
+  }
+  return out;
+})();
+const musicaIbu = (fr: number) =>
+  (0.22 - 0.13 * (FALANDO_IBU[Math.max(0, Math.min(FALANDO_IBU.length - 1, Math.round(fr)))] ?? 0)) *
+  interpolate(fr, [DURATION_IBUPROFENO - 12, DURATION_IBUPROFENO], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+
+export const VideoIbuprofeno: React.FC<{ capa?: boolean }> = ({ capa }) => {
+  const frameAtual = useCurrentFrame();
+  const f = capa ? 640 : frameAtual; // capa: molécula encaixada na COX
   const [mx, my] = lerpPts(f, CAMINHO);
   // a câmera segue a molécula com um leve atraso (sensação de tomada única)
   const [cx1, cy1] = lerpPts(f - 4, CAMINHO);
@@ -1158,12 +1191,35 @@ export const VideoIbuprofeno: React.FC = () => {
         <rect x={0} y={0} width={1080} height={640} fill="url(#topo)" />
         <rect x={0} y={1230} width={1080} height={690} fill="url(#baixo)" />
       </svg>
+      {capa ? <TituloCapa /> : (<>
       <Cabecalho f={f} />
       <Contador f={f} />
       <Legenda f={f} />
+      </>)}
       {f >= T.siga - 2 && <MeSiga f={f} />}
       {f >= T.final - 2 && <Final f={f} />}
-      <Audio src={staticFile("ibuprofeno/fala.mp3")} />
+      {!capa && <Audio src={staticFile("ibuprofeno/fala.mp3")} />}
+      {!capa && <Audio src={staticFile("ibuprofeno/musica.wav")} volume={(fr) => musicaIbu(fr)} />}
+      {!capa && SFX.map(([fr, src, vol], i) => (
+        <Sequence key={i} from={Math.max(0, fr)}>
+          <Audio src={staticFile(src)} volume={vol} />
+        </Sequence>
+      ))}
     </AbsoluteFill>
   );
 };
+
+// ---------- capa (1080×1920; tudo entre y≈300 e 1620, o recorte 3:4 das redes) ----------
+const TituloCapa: React.FC = () => (
+  <>
+    <div style={{ position: "absolute", left: 60, right: 60, top: 330, textAlign: "center", fontFamily: SANS,
+      fontWeight: 900, fontSize: 96, lineHeight: 1.02, color: K.ink, textShadow: "0 6px 30px rgba(0,0,0,.8)" }}>
+      COMO O IBUPROFENO <span style={{ color: K.lime }}>DESLIGA A DOR</span>
+    </div>
+    <div style={{ position: "absolute", left: 60, right: 60, top: 1440, textAlign: "center", fontFamily: SANS,
+      fontWeight: 800, fontSize: 62, lineHeight: 1.1, color: K.ink, textShadow: "0 6px 30px rgba(0,0,0,.8)" }}>
+      e por que ele mexe com o <span style={{ color: K.red }}>estômago</span>
+    </div>
+  </>
+);
+export const CapaIbuprofeno: React.FC = () => <VideoIbuprofeno capa />;

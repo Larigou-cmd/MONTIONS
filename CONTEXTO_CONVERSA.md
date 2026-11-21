@@ -150,3 +150,4 @@
 - A API do Openverse às vezes dá erro 500 na página de um som: pegar o endereço pela busca.
 - A trilha `musica_calma.py` já sai com 4 s de fade no fim: gerar uns 8 s mais longa que o vídeo, senão o final fica mudo (o Earshot acusa).
 - Para refazer só o som: `npx remotion render <Id> audio.wav --codec=wav` (com TEMP/TMP no E:) e juntar com o vídeo já renderizado no ffmpeg.
+- Vídeo 84 (ibuprofeno, estilo "uma molécula só"): poucos efeitos, como na referência (pop, whoosh, clique na COX, ding na virada do título, sting). A capa sai do próprio vídeo (`VideoIbuprofeno capa`, quadro 640), sem cabeçalho nem legenda.

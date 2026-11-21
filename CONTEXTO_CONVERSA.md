@@ -143,3 +143,10 @@
 - A trilha do quadro agora segue a regra nova (0,22 nas pausas, 0,09 sob a voz), e não mais 0,07.
 - O Wikimedia bloqueia downloads seguidos: baixar pelo endereço `thumb.wikimedia.org/.../NNNNpx-arquivo` com alguns segundos entre um e outro.
 - A partir deste vídeo, as legendas das 4 redes são escritas para a busca (SEO), com no máximo 5 hashtags em cada rede.
+
+## Estilo "maquete 3D com caminho aceso" e efeitos do Openverse (2026-11-21)
+- Vídeo 83 (colírio): maquete isométrica em SVG no Remotion (`mecanismo/src/colirio/`), salas em zigue-zague para caber na tela em pé, gota-personagem, caminho neon, uma palavra por vez na legenda (palavras de até 3 letras vão junto com a seguinte).
+- Pedido dela: o som dos vídeos usa **efeitos reais do Openverse** + revisão no **Earshot**. Mostrar a lista (nome, autor, licença) antes de baixar. Preferir CC0. Kit baixado em `mecanismo/public/sfx_openverse/` (gota, pop, ding, whoosh, coração, portão, sting), com os créditos em `.json` ao lado.
+- A API do Openverse às vezes dá erro 500 na página de um som: pegar o endereço pela busca.
+- A trilha `musica_calma.py` já sai com 4 s de fade no fim: gerar uns 8 s mais longa que o vídeo, senão o final fica mudo (o Earshot acusa).
+- Para refazer só o som: `npx remotion render <Id> audio.wav --codec=wav` (com TEMP/TMP no E:) e juntar com o vídeo já renderizado no ffmpeg.

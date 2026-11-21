@@ -144,6 +144,8 @@ import { VideoFps, CapaFps, DURATION_FPS } from "./fps/Video";
 import { VideoRessaca, CapaRessaca, DURATION_RESSACA } from "./ressaca/Video";
 import { VideoDengueElNino, CapaDengueElNino, DURATION_DENGUE_ELNINO } from "./dengueElNino/Video";
 import { VideoAdrenalina, CapaAdrenalina, DURATION_ADRENALINA } from "./adrenalina/Video";
+import { VideoIbuprofeno, DURATION_IBUPROFENO } from "./ibuprofeno/Video";
+import { VideoColirio, DURATION_COLIRIO, CapaColirio } from "./colirio/Video";
 import {
   VideoInsulinaFlow,
   CapaInsulinaFlow,
@@ -754,6 +756,22 @@ export const RemotionRoot: React.FC = () => (
       id="AdrenalinaCapa"
       component={CapaAdrenalina}
       durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Colirio"
+      component={VideoColirio}
+      durationInFrames={DURATION_COLIRIO}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Ibuprofeno"
+      component={VideoIbuprofeno}
+      durationInFrames={DURATION_IBUPROFENO}
       fps={FPS}
       width={1080}
       height={1920}
@@ -1561,6 +1579,7 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="Fps" component={VideoFps} durationInFrames={DURATION_FPS} fps={30} width={1080} height={1920} />
       <Composition id="FpsCapa" component={CapaFps} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="DengueElNino" component={VideoDengueElNino} durationInFrames={DURATION_DENGUE_ELNINO} fps={30} width={1080} height={1920} />
+      <Composition id="ColirioCapa" component={CapaColirio} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="DengueElNinoCapa" component={CapaDengueElNino} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="CaminhoRemedio" component={VideoCaminhoRemedio} durationInFrames={DUR_CAMINHO} fps={30} width={1080} height={1920} />
       <Composition id="HqTeste" component={VideoHqTeste} durationInFrames={DUR_HQ_TESTE} fps={30} width={1080} height={1920} />

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Prévia RDC 1.000 — quadro branco</title>
+<style>
+@font-face { font-family: Caveat; font-weight: 700; src: url(fonts/Caveat-700-latin.woff2); }
+@font-face { font-family: Caveat; font-weight: 700; src: url(fonts/Caveat-700-latin-ext.woff2); unicode-range: U+0100-024F; }
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; }
+body { background: linear-gradient(135deg, #fbfaf6, #eeede8); position: relative; font-family: Caveat; font-weight: 700; color: #23262c; }
+.ghost { position: absolute; border: 6px solid rgba(125,138,160,.07); border-radius: 50%; }
+.sheen { position: absolute; inset: 0; background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.55) 42%, transparent 54%); opacity: .35; }
+.rot { position: absolute; left: 120px; top: 50px; font-size: 44px; color: #6a707a; }
+.art { position: absolute; left: 120px; top: 120px; font-size: 120px; line-height: 1; }
+.lei { position: absolute; left: 130px; top: 290px; width: 1600px; font-size: 64px; line-height: 1.28; }
+.lei p { margin: 0 0 10px; }
+.inc { padding-left: 70px; }
+.rom { display: inline-block; min-width: 90px; color: #c8363a; }
+.u { background: linear-gradient(#c8363a, #c8363a) no-repeat 0 92% / 100% 6px; }
+.circ { position: relative; }
+.circ::after { content: ""; position: absolute; left: -16px; right: -16px; top: -4px; bottom: -6px; border: 6px solid #c8363a; border-radius: 50%; transform: rotate(-2deg); }
+.pen { position: absolute; left: 980px; top: 840px; width: 240px; height: 36px; transform: rotate(-40deg); transform-origin: 0 50%; }
+.pen .b { position: absolute; left: 16px; top: 0; width: 190px; height: 36px; background: #f7f7f5; border: 2px solid #c9c9c4; }
+.pen .band { position: absolute; left: 150px; top: 0; width: 18px; height: 36px; background: #23262c; }
+.pen .cap { position: absolute; left: 204px; top: 2px; width: 40px; height: 32px; background: #23262c; }
+.pen .tip { position: absolute; left: 0; top: 10px; width: 0; height: 0; border-right: 16px solid #23262c; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+.shadow { position: absolute; left: 1010px; top: 880px; width: 230px; height: 32px; background: rgba(0,0,0,.16); filter: blur(8px); transform: rotate(-40deg); transform-origin: 0 50%; }
+</style></head><body>
+<div class="ghost" style="left:1500px;top:80px;width:240px;height:240px"></div>
+<div class="ghost" style="left:60px;top:760px;width:180px;height:180px"></div>
+<div class="ghost" style="left:1620px;top:800px;width:300px;height:300px"></div>
+<div class="rot">RDC nº 1.000/2025 · Anvisa · parte 1</div>
+<div class="art">Art. 2º</div>
+<div class="lei">
+  <p>O disposto nesta Resolução se aplica aos seguintes tipos de receituários quando emitidos em <span class="u">meio eletrônico</span>:</p>
+  <p class="inc"><span class="rom">I</span> Notificações de Receita dos tipos <span class="circ">A, B e B2</span>;</p>
+  <p class="inc"><span class="rom">II</span> Notificação de Receita Especial para retinoides de uso sistêmico;</p>
+  <p class="inc"><span class="rom">III</span> Notificação de Receita de Talid</p>
+</div>
+<div class="shadow"></div>
+<div class="pen"><div class="tip"></div><div class="b"></div><div class="band"></div><div class="cap"></div></div>
+<div class="sheen"></div>
+</body></html>

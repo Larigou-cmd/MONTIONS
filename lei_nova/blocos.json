@@ -1,0 +1,285 @@
+[
+ {
+  "t": "titulo",
+  "s": "Resolução da Diretoria Colegiada - RDC nº 1.000, de 11 de dezembro de 2025"
+ },
+ {
+  "t": "ementa",
+  "s": "Dispõe sobre os requisitos de controle para Notificações de Receita, Receitas de Controle Especial e Receitas sujeitas à retenção emitidas em meio eletrônico."
+ },
+ {
+  "t": "parte",
+  "s": "Parte 1 · Artigos 1 a 20"
+ },
+ {
+  "t": "cap",
+  "s": "Capítulo I · Disposições Gerais"
+ },
+ {
+  "t": "caput",
+  "a": 1,
+  "s": "Art. 1º Esta Resolução estabelece os requisitos de controle aplicáveis às Notificações de Receita, às Receitas de Controle Especial e às Receitas sujeitas à retenção, quando emitidas em meio eletrônico, e dá outras providências."
+ },
+ {
+  "t": "caput",
+  "a": 2,
+  "s": "Art. 2º O disposto nesta Resolução se aplica aos seguintes tipos de receituários quando emitidos em meio eletrônico:"
+ },
+ {
+  "t": "inc",
+  "a": 2,
+  "s": "I - Notificações de Receita dos tipos A, B e B2;"
+ },
+ {
+  "t": "inc",
+  "a": 2,
+  "s": "II - Notificação de Receita Especial para retinoides de uso sistêmico;"
+ },
+ {
+  "t": "inc",
+  "a": 2,
+  "s": "III - Notificação de Receita de Talidomida;"
+ },
+ {
+  "t": "inc",
+  "a": 2,
+  "s": "IV - Receitas de Controle Especial; e"
+ },
+ {
+  "t": "inc",
+  "a": 2,
+  "s": "V - Receitas sujeitas à retenção."
+ },
+ {
+  "t": "par",
+  "a": 2,
+  "s": "Parágrafo único. Não são considerados receituários eletrônicos os documentos originalmente emitidos em meio físico, com assinatura manual ou imagem da assinatura, ainda que digitalizados, bem como aqueles elaborados em meio físico, posteriormente digitalizados e assinados eletronicamente."
+ },
+ {
+  "t": "caput",
+  "a": 3,
+  "s": "Art. 3º Para fins desta Resolução, são adotadas as seguintes definições:"
+ },
+ {
+  "t": "inc",
+  "a": 3,
+  "s": "I - assinatura eletrônica avançada: a que utiliza certificados não emitidos pela Infraestrutura de Chaves Públicas Brasileiras - ICP-Brasil - ou outro meio de comprovação da autoria e da integridade de documentos em forma eletrônica, nos termos da Lei nº 14.063, de 23 de setembro de 2020, ou norma que vier a substituí-la;"
+ },
+ {
+  "t": "inc",
+  "a": 3,
+  "s": "II - assinatura eletrônica qualificada: a que utiliza certificado digital emitido pela Infraestrutura de Chaves Públicas Brasileiras - ICP-Brasil, nos termos da Lei nº 14.063, de 23 de setembro de 2020, ou norma que vier a substituí-la;"
+ },
+ {
+  "t": "inc",
+  "a": 3,
+  "s": "III - medicamento sujeito a controle especial: medicamento que contenha substância, planta ou fungo constantes das listas do Anexo I da Portaria SVS/MS nº 344, de 12 de maio de 1998, e suas atualizações ou norma que vier a substituí-la;"
+ },
+ {
+  "t": "inc",
+  "a": 3,
+  "s": "IV - Notificações de Receita: documentos padronizados destinados à prescrição de medicamentos que contenha substância constante das Listas \"A1\", \"A2\" (entorpecentes), \"A3\", \"B1\", \"B2\" (psicotrópicos), \"C2\" (retinoicas), e do medicamento Talidomida da Lista C3, do Anexo I da Portaria SVS/MS nº 344/1998, de 12 de maio de 1998, e suas atualizações ou norma que vier a substituí-la;"
+ },
+ {
+  "t": "inc",
+  "a": 3,
+  "s": "V - Receitas de Controle Especial: documentos padronizados destinados à prescrição de medicamentos que contenha substância constante das Listas \"C1\" (outras substâncias sujeitas a controle especial), \"C5\" (anabolizantes) e dos adendos das listas \"A1\", \"A2\" (entorpecentes) e \"B1\" (psicotrópicos) do Anexo I da Portaria SVS/MS n˚ 344/1998, de 12 de maio de 1998, e suas atualizações ou norma que vier a substituí-la;"
+ },
+ {
+  "t": "inc",
+  "a": 3,
+  "s": "VI - Receitas sujeitas à retenção: documentos destinados à prescrição de medicamentos à base de substâncias isoladas ou em associação, de uso sob prescrição e retenção da receita, conforme a Resolução da Diretoria Colegiada - RDC nº 471, de 23 de fevereiro de 2021, listadas em Instrução Normativa específica, e suas atualizações ou norma que vier a substituí-la;"
+ },
+ {
+  "t": "inc",
+  "a": 3,
+  "s": "VII - receituários eletrônicos: as Notificações de Receita dos tipos A, B e B2, as Notificações de Receita Especial para retinoides de uso sistêmico, as Notificações de Receita de Talidomida, as Receitas de Controle Especial e as Receitas sujeitas à retenção emitidas exclusivamente em meio eletrônico, elaboradas e assinadas originariamente em formato eletrônico; e"
+ },
+ {
+  "t": "inc",
+  "a": 3,
+  "s": "VIII - SNCR: Sistema Nacional de Controle de Receituários, instituído pela Resolução da Diretoria Colegiada - RDC nº 873, de 27 de maio de 2024, ou norma que vier a substituí-la."
+ },
+ {
+  "t": "cap",
+  "s": "Capítulo II · Da Emissão Eletrônica"
+ },
+ {
+  "t": "caput",
+  "a": 4,
+  "s": "Art. 4º Os receituários eletrônicos de que trata esta Resolução deverão ser gerados exclusivamente em serviços de prescrição eletrônica integrados ao SNCR por meio de interface de programação de aplicações (API)."
+ },
+ {
+  "t": "par",
+  "a": 4,
+  "s": "§ 1º Os requisitos técnicos para integração dos serviços de prescrição eletrônica ao SNCR serão estabelecidos pela Anvisa e divulgados em seu sítio eletrônico."
+ },
+ {
+  "t": "par",
+  "a": 4,
+  "s": "§ 2º É vedada a emissão dos receituários eletrônicos por serviços de prescrição eletrônica que não estejam integrados ao SNCR."
+ },
+ {
+  "t": "caput",
+  "a": 5,
+  "s": "Art. 5º O serviço de prescrição eletrônica deverá:"
+ },
+ {
+  "t": "inc",
+  "a": 5,
+  "s": "I - requisitar ao SNCR a numeração necessária à emissão dos receituários eletrônicos, mediante assinatura eletrônica qualificada;"
+ },
+ {
+  "t": "inc",
+  "a": 5,
+  "s": "II - assegurar a liberação e a vinculação da numeração das Notificações de Receita ao prescritor previamente autorizado;"
+ },
+ {
+  "t": "inc",
+  "a": 5,
+  "s": "III - garantir a disponibilização do receituário eletrônico ao paciente, de forma que este possa apresentá-lo em qualquer estabelecimento dispensador de sua escolha; e"
+ },
+ {
+  "t": "inc",
+  "a": 5,
+  "s": "IV - assegurar a rastreabilidade das informações referentes à emissão dos receituários eletrônicos."
+ },
+ {
+  "t": "caput",
+  "a": 6,
+  "s": "Art. 6º A emissão dos receituários eletrônicos referidos nesta Resolução é de responsabilidade exclusiva do prescritor, sendo vedada sua emissão por instituições ou por terceiros em seu nome."
+ },
+ {
+  "t": "caput",
+  "a": 7,
+  "s": "Art. 7º Cada receituário eletrônico deve conter a numeração individualizada previamente concedida por meio do SNCR e seguir os modelos estabelecidos em documento disponível no portal da Anvisa."
+ },
+ {
+  "t": "caput",
+  "a": 8,
+  "s": "Art. 8º As Notificações de Receita e as Receitas de Controle Especial, quando emitidas em meio eletrônico, deverão ainda:"
+ },
+ {
+  "t": "inc",
+  "a": 8,
+  "s": "I - ser subscritas com assinatura eletrônica qualificada; e"
+ },
+ {
+  "t": "inc",
+  "a": 8,
+  "s": "II - ser solicitadas e emitidas exclusivamente pelos prescritores previstos pela Portaria SVS/MS nº 344, de 12 de maio de 1998, e pela Portaria nº 6, de 29 de janeiro de 1999, ou por normas que vierem a substituí-las."
+ },
+ {
+  "t": "caput",
+  "a": 9,
+  "s": "Art. 9º As Notificações de Receita emitidas em meio eletrônico não precisam estar acompanhadas da receita a que se refere o artigo 35 da Portaria SVS/MS nº 344, de 12 de maio de 1998."
+ },
+ {
+  "t": "caput",
+  "a": 10,
+  "s": "Art. 10. As Receitas de Controle Especial e as Receitas sujeitas à retenção, quando emitidas em meio eletrônico, não estão sujeitas à emissão em duas vias."
+ },
+ {
+  "t": "caput",
+  "a": 11,
+  "s": "Art. 11. As Receitas sujeitas à retenção emitidas em meio eletrônico deverão ser subscritas com assinatura eletrônica avançada ou qualificada."
+ },
+ {
+  "t": "caput",
+  "a": 12,
+  "s": "Art. 12. A data da assinatura eletrônica será considerada como data de emissão dos receituários eletrônicos."
+ },
+ {
+  "t": "cap",
+  "s": "Capítulo III · Do Registro de Utilização"
+ },
+ {
+  "t": "caput",
+  "a": 13,
+  "s": "Art. 13. O estabelecimento dispensador deverá, no momento da dispensação, realizar o registro de utilização no SNCR dos receituários eletrônicos tratados nesta Resolução, atendendo aos seguintes procedimentos:"
+ },
+ {
+  "t": "inc",
+  "a": 13,
+  "s": "I - verificar a autenticidade, a integridade e a validade jurídica da assinatura eletrônica do prescritor por meio de serviço de validação de assinaturas eletrônicas disponibilizado pelo Instituto Nacional de Tecnologia da Informação (ITI);"
+ },
+ {
+  "t": "inc",
+  "a": 13,
+  "s": "II - conferir a validade da numeração dos receituários eletrônicos, assegurando que tenha sido concedida ao profissional prescritor no SNCR; e"
+ },
+ {
+  "t": "inc",
+  "a": 13,
+  "s": "III - registrar a utilização dos receituários eletrônicos, preenchendo integralmente os campos exigidos pelo SNCR."
+ },
+ {
+  "t": "caput",
+  "a": 14,
+  "s": "Art. 14. É de responsabilidade do estabelecimento dispensador a guarda dos registros de utilização dos receituários tratados nesta Resolução, os quais deverão ser armazenados em meio eletrônico pelo prazo determinado pela Portaria SVS/MS nº 344, de 12 de maio de 1998 e pela Resolução da Diretoria Colegiada - RDC nº 11, de 11 de março de 2011, ou por normas que venham a substituí-las, e disponibilizados para fins de fiscalização.."
+ },
+ {
+  "t": "caput",
+  "a": 15,
+  "s": "Art. 15. Os receituários tratados nesta Resolução poderão ser utilizados uma única vez, não podendo ser reutilizados para dispensação posterior após o registro de uso no SNCR."
+ },
+ {
+  "t": "cap",
+  "s": "Capítulo IV · Das Disposições Finais"
+ },
+ {
+  "t": "caput",
+  "a": 16,
+  "s": "Art. 16. A Anvisa disponibilizará o SNCR para a requisição de numeração para a emissão eletrônica dos receituários eletrônicos de que trata esta Resolução, bem como o respectivo registro de utilização, até 30 de setembro de 2026."
+ },
+ {
+  "t": "nota",
+  "a": 16,
+  "s": "(Redação dada pela RDC nº 1.028, de 1º de junho de 2026)"
+ },
+ {
+  "t": "caput",
+  "a": 17,
+  "s": "Art. 17. O descumprimento dos requisitos para utilização do SNCR acarretará a imediata suspensão do acesso do serviço de prescrição eletrônica ao Sistema."
+ },
+ {
+  "t": "caput",
+  "a": 18,
+  "s": "Art. 18. As Receitas de Controle Especial e as Receitas sujeitas à retenção poderão ser emitidas eletronicamente sem a numeração do SNCR até 3 de março de 2027."
+ },
+ {
+  "t": "nota",
+  "a": 18,
+  "s": "(Redação dada pela RDC nº 1.046, de 29 de outubro de 2026)"
+ },
+ {
+  "t": "par",
+  "a": 18,
+  "s": "§ 1º Os receituários emitidos nos termos do caput poderão ser aceitos pelos estabelecimentos dispensadores durante o respectivo prazo de validade, observadas as disposições da Portaria SVS/MS nº 344, de 12 de maio de 1998, da RDC nº 471, de 23 de fevereiro de 2021, ou de normas que vierem a substituí-las."
+ },
+ {
+  "t": "nota",
+  "a": 18,
+  "s": "(Incluído pela RDC nº 1.046, de 29 de outubro de 2026)"
+ },
+ {
+  "t": "par",
+  "a": 18,
+  "s": "§ 2º A partir de 4 de março de 2027, as Receitas de Controle Especial e as Receitas sujeitas à retenção emitidas em meio eletrônico deverão conter, obrigatoriamente, a numeração fornecida pelo SNCR."
+ },
+ {
+  "t": "nota",
+  "a": 18,
+  "s": "(Incluído pela RDC nº 1.046, de 29 de outubro de 2026)"
+ },
+ {
+  "t": "caput",
+  "a": 19,
+  "s": "Art. 19. As Notificações de Receita impressas pela autoridade sanitária competente até a data de vigência desta Resolução poderão ser distribuídas e utilizadas por prazo indeterminado."
+ },
+ {
+  "t": "caput",
+  "a": 20,
+  "s": "Art. 20. O disposto nesta Resolução não elide, no que couber, a obrigatoriedade de cumprimento dos demais requisitos estabelecidos pela Portaria SVS/MS nº 344, de 12 de maio de 1998, pela Portaria nº 6, de 29 de janeiro de 1999, pela Resolução da Diretoria Colegiada - RDC nº 11, de 11 de março de 2011, pela Resolução da Diretoria Colegiada - RDC nº 471, de 23 de fevereiro de 2021, e pela Resolução da Diretoria Colegiada - RDC nº 873, de 27 de maio de 2024, ou normas que vierem a substituí-las."
+ }
+]

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Prévia RDC — terminal</title>
+<link rel="stylesheet" href="base.css">
+<style>
+body { background: radial-gradient(ellipse at 50% 45%, #0b1a10 0%, #030806 75%); color: #7dff9b; font-family: VT323, monospace; position: relative; }
+.scan { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0,0,0,.28) 0 2px, transparent 2px 4px); pointer-events: none; }
+.glow { text-shadow: 0 0 8px rgba(125,255,155,.55); }
+.bar { position: absolute; left: 90px; right: 90px; top: 60px; height: 64px; border: 3px solid #7dff9b; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; font: 22px "Press Start 2P"; }
+.bar b { background: #7dff9b; color: #03140a; padding: 8px 12px; }
+.prompt { position: absolute; left: 110px; top: 170px; font-size: 52px; color: #3fbf5f; }
+.art { position: absolute; left: 110px; top: 230px; font: 54px "Press Start 2P"; }
+.lei { position: absolute; left: 110px; top: 340px; width: 1700px; font-size: 56px; line-height: 1.18; }
+.lei p { margin: 0 0 14px; }
+.inc { padding-left: 40px; }
+.k { color: #fff27a; }
+.inv { background: #7dff9b; color: #03140a; padding: 0 8px; text-shadow: none; }
+.cur { display: inline-block; width: 28px; height: 50px; background: #7dff9b; vertical-align: -8px; }
+.status { position: absolute; left: 90px; right: 90px; bottom: 60px; font: 20px "Press Start 2P"; color: #3fbf5f; display: flex; justify-content: space-between; }
+.prog { position: absolute; left: 90px; right: 90px; bottom: 110px; height: 18px; border: 3px solid #3fbf5f; }
+.prog i { position: absolute; left: 0; top: 0; bottom: 0; width: 7%; background: #3fbf5f; }
+</style></head><body>
+<div class="bar glow"><span>RDC_1000.EXE</span><b>CAP. I · DISPOSIÇÕES GERAIS</b></div>
+<div class="prompt glow">C:\ANVISA\RDC1000&gt; ler --artigo 2</div>
+<div class="art glow">ART. 2º</div>
+<div class="lei glow">
+  <p>O disposto nesta Resolução se aplica aos seguintes tipos de receituários quando emitidos em <span class="inv">meio eletrônico</span>:</p>
+  <p class="inc"><span class="k">[I]</span>   Notificações de Receita dos tipos <span class="inv">A, B e B2</span>;</p>
+  <p class="inc"><span class="k">[II]</span>  Notificação de Receita Especial para retinoides de uso sistêmico;</p>
+  <p class="inc"><span class="k">[III]</span> Notificação de Receita de Talidomida;</p>
+  <p class="inc"><span class="k">[IV]</span>  Receitas de Controle Esp<span class="cur"></span></p>
+</div>
+<div class="prog"><i></i></div>
+<div class="status glow"><span>PARTE 1 · ART. 1 A 20</span><span>LEI SECA</span></div>
+<div class="scan"></div>
+</body></html>

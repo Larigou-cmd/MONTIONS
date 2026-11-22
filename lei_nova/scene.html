@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>RDC 1.000/2025 — lei seca (verde)</title>
+<style>
+@font-face { font-family: Inter; font-weight: 600; src: url(fonts/Inter-600-latin.woff2); }
+@font-face { font-family: Inter; font-weight: 600; src: url(fonts/Inter-600-latin-ext.woff2); unicode-range: U+0100-024F; }
+@font-face { font-family: Inter; font-weight: 800; src: url(fonts/Inter-800-latin.woff2); }
+@font-face { font-family: Inter; font-weight: 800; src: url(fonts/Inter-800-latin-ext.woff2); unicode-range: U+0100-024F; }
+@font-face { font-family: "Instrument Serif"; src: url(fonts/InstrumentSerif-400-normal-latin.woff2); }
+@font-face { font-family: "Instrument Serif"; src: url(fonts/InstrumentSerif-400-normal-latin-ext.woff2); unicode-range: U+0100-024F; }
+@font-face { font-family: "Instrument Serif"; font-style: italic; src: url(fonts/InstrumentSerif-400-italic-latin.woff2); }
+@font-face { font-family: "Instrument Serif"; font-style: italic; src: url(fonts/InstrumentSerif-400-italic-latin-ext.woff2); unicode-range: U+0100-024F; }
+html, body { margin: 0; background: #000; } canvas { display: block; }
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script src="dados.js"></script>
+<script>
+// RDC nº 1.000/2025 (Anvisa), Parte 1: arts. 1 a 20, lei seca no tempo da narração. Visual "verde escuro" (paleta do Modelo 1).
+// Texto oficial consolidado com as RDC nº 1.028/2026 e 1.046/2026 (blocos.json); tempo de cada palavra em palavras.json.
+const W = 1920, H = 1080, FPS = 30;
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const BG1 = '#0a2a22', BG0 = '#04120f', INK = '#f7f3df', MINT = '#8fc4ae', NEON = '#3dff8f', YEL = '#f2e52e';
+const SANS = 'Inter', SERIF = '"Instrument Serif"';
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v)), lerp = (a, b, u) => a + (b - a) * u;
+const sm = u => { u = cl(u); return u * u * (3 - 2 * u); };
+const B = window.BLOCOS, PW = window.PALAVRAS;
+const LAST = PW[PW.length - 1].f / FPS;
+const END = Math.ceil(LAST + 1.4 + 9);
+
+// destaques por bloco (trechos do texto oficial)
+const DEST = {
+  'caput1': ['meio eletrônico'], 'caput2': ['meio eletrônico'], 'inc2I': ['A, B e B2'], 'inc2II': ['retinoides de uso sistêmico'], 'inc2III': ['Talidomida'],
+  'par2Parágrafo': ['Não são considerados receituários eletrônicos', 'ainda que digitalizados'],
+  'inc3I': ['assinatura eletrônica avançada', 'não emitidos'], 'inc3II': ['assinatura eletrônica qualificada', 'ICP-Brasil'], 'inc3III': ['substância, planta ou fungo'],
+  'inc3IV': ['Notificações de Receita:'], 'inc3V': ['Receitas de Controle Especial:'], 'inc3VI': ['Receitas sujeitas à retenção:', 'RDC nº 471'],
+  'inc3VII': ['exclusivamente em meio eletrônico'], 'inc3VIII': ['SNCR:', 'RDC nº 873'],
+  'caput4': ['integrados ao SNCR'], 'par4§': ['É vedada'], 'inc5I': ['assinatura eletrônica qualificada'], 'inc5III': ['qualquer estabelecimento dispensador'], 'inc5IV': ['rastreabilidade'],
+  'caput6': ['responsabilidade exclusiva do prescritor', 'vedada'], 'caput7': ['numeração individualizada'], 'inc8I': ['assinatura eletrônica qualificada'], 'inc8II': ['exclusivamente pelos prescritores'],
+  'caput9': ['não precisam estar acompanhadas'], 'caput10': ['não estão sujeitas à emissão em duas vias'], 'caput11': ['avançada ou qualificada'], 'caput12': ['data da assinatura eletrônica'],
+  'caput13': ['no momento da dispensação'], 'inc13I': ['(ITI)'], 'caput14': ['armazenados em meio eletrônico'], 'caput15': ['uma única vez'],
+  'caput16': ['30 de setembro de 2026'], 'caput17': ['imediata suspensão'], 'caput18': ['até 3 de março de 2027'], 'par18§1': ['durante o respectivo prazo de validade'],
+  'par18§2': ['4 de março de 2027', 'obrigatoriamente'], 'caput19': ['prazo indeterminado'], 'caput20': ['não elide'],
+};
+
+// palavras de cada bloco, com o tempo e se é destaque
+const BW = B.map(() => []);
+PW.forEach(p => BW[p.b].push({ w: p.w, t: p.f / FPS }));
+B.forEach((b, bi) => {
+  const ws = BW[bi]; let pos = 0;
+  ws.forEach(o => { const i = b.s.indexOf(o.w, pos); o.c0 = i; o.c1 = i + o.w.length; pos = o.c1; });
+  b.t0 = ws[0].t;
+  // prefixo que vira etiqueta (não entra no texto)
+  let cut = 0, tag = '';
+  if (b.t === 'caput') { cut = 2; }
+  else if (b.t === 'inc') { cut = 2; tag = ws[0].w; }
+  else if (b.t === 'par') { cut = 2; tag = b.s.startsWith('Parágrafo') ? 'Parágrafo único' : ws[0].w + ' ' + ws[1].w; }
+  b.tag = tag; b.ws = ws.slice(cut);
+  const key = b.t + (b.a || '') + (b.t === 'inc' ? tag : b.t === 'par' ? (tag.startsWith('§') ? '§' + tag.slice(2, 3) : 'Parágrafo') : '');
+  const keyAlt = b.t + (b.a || '') + (b.t === 'par' ? '§' : '');
+  const fr = DEST[key] || DEST[keyAlt] || [];
+  fr.forEach(f => { const i = b.s.indexOf(f); if (i < 0) return; b.ws.forEach(o => { if (o.c0 >= i && o.c1 <= i + f.length + 1) o.hl = true; }); });
+});
+
+// artigos: grupos de blocos
+const ARTS = [];
+B.forEach((b, bi) => { if (b.t === 'caput') ARTS.push({ a: b.a, bl: [bi], t0: b.t0 }); else if (b.a && ARTS.length && ARTS[ARTS.length - 1].a === b.a) ARTS[ARTS.length - 1].bl.push(bi); });
+ARTS.forEach((A, i) => { A.t1 = i + 1 < ARTS.length ? ARTS[i + 1].t0 : LAST + 1.4; });
+const CAPS = B.map((b, i) => ({ ...b, i })).filter(b => b.t === 'cap');
+CAPS.forEach((c, k) => { const nx = ARTS.find(A => A.t0 > c.t0); c.t1 = nx ? nx.t0 : c.t0 + 3; });
+const capAt = t => { let c = CAPS[0]; for (const x of CAPS) if (x.t0 <= t + 0.01) c = x; return c; };
+
+// ---------- diagramação de um artigo ----------
+const X0 = 120, TX = 250, RW = 1680, BODY_TOP = 340, BODY_BOT = 965, CLIP_TOP = 262, FS = 52, LH = 70;
+function layout(A) {
+  const items = []; let y = 0;
+  A.bl.forEach(bi => {
+    const b = B[bi]; const nota = b.t === 'nota';
+    const fs = nota ? 34 : FS, lh = nota ? 48 : LH;
+    g.font = `${nota ? 'italic ' : ''}${fs}px ${SERIF}`;
+    const x0 = b.t === 'caput' ? X0 : b.t === 'nota' ? TX : TX, maxX = X0 + RW;
+    if (b.t !== 'caput' && !nota) y += 14;
+    const tagY = y; let tagW = 0; if (b.tag) { g.save(); g.font = `800 28px ${SANS}`; tagW = Math.max(84, g.measureText(b.tag).width + 36); g.restore(); g.font = `${nota ? 'italic ' : ''}${fs}px ${SERIF}`; }
+    if (tagW > TX - X0 - 16) y += 56;
+    let x = x0; const line0 = y; const sp = g.measureText(' ').width;
+    const pos = b.ws.map(o => { const w = g.measureText(o.w).width; if (x + w > maxX && x > x0) { x = x0; y += lh; } const p = { o, x, y, w }; x += w + sp; return p; });
+    items.push({ b, pos, fs, nota, y0: line0, tagY });
+    y += lh + (nota ? 4 : 0);
+  });
+  return { items, h: y };
+}
+ARTS.forEach(A => { A.L = layout(A); });
+
+function curWordY(A, t) {
+  let y = 0;
+  for (const it of A.L.items) for (const p of it.pos) if (p.o.t <= t) y = p.y;
+  return y;
+}
+function scrollFor(A, t) {
+  const avail = BODY_BOT - BODY_TOP;
+  if (A.L.h <= avail) return 0;
+  let s = 0;
+  for (let k = 0; k < 10; k++) { const tt = t - k * 0.06; const y = curWordY(A, tt); s += cl(y - avail * 0.55, 0, A.L.h - avail + 30); }
+  return s / 10;
+}
+
+// ---------- desenho ----------
+function fundo() {
+  const gr = g.createRadialGradient(560, 320, 60, 560, 320, 1500); gr.addColorStop(0, BG1); gr.addColorStop(1, BG0);
+  g.fillStyle = gr; g.fillRect(0, 0, W, H);
+}
+function text(s, x, y, font, color, alpha = 1, align = 'left', ls = 0) {
+  g.save(); g.globalAlpha = alpha; g.font = font; g.fillStyle = color; g.textAlign = align; g.textBaseline = 'alphabetic';
+  if (ls) { g.letterSpacing = ls + 'px'; } g.fillText(s, x, y); g.restore();
+}
+function pill(label, x, yMid, on, a = 1) {
+  g.save(); g.globalAlpha = a; g.font = `800 28px ${SANS}`; const w = Math.max(84, g.measureText(label).width + 36), h = 46;
+  g.beginPath(); g.roundRect(x, yMid - h / 2, w, h, 23);
+  if (on) { g.fillStyle = NEON; g.fill(); g.fillStyle = BG0; } else { g.strokeStyle = 'rgba(61,255,143,.6)'; g.lineWidth = 2.5; g.stroke(); g.fillStyle = NEON; }
+  g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(label, x + w / 2, yMid + 1); g.restore();
+}
+function topo(chap, artLabel, a = 1) {
+  text('RDC Nº 1.000/2025 · ANVISA · PARTE 1', X0, 92, `600 26px ${SANS}`, MINT, a, 'left', 3);
+  if (artLabel) {
+    g.save(); g.globalAlpha = a; g.font = `800 96px ${SANS}`; g.fillStyle = NEON; g.fillText(artLabel, X0, 222); const w = g.measureText(artLabel).width; g.restore();
+    text(chap.toUpperCase(), X0 + w + 36, 214, `600 30px ${SANS}`, MINT, a, 'left', 2);
+  }
+}
+function barra(t) {
+  const x0 = X0, x1 = W - X0, y = 1018;
+  g.fillStyle = 'rgba(255,255,255,.08)'; g.beginPath(); g.roundRect(x0, y, x1 - x0, 6, 3); g.fill();
+  g.fillStyle = NEON; g.beginPath(); g.roundRect(x0, y, (x1 - x0) * cl(t / LAST), 6, 3); g.fill();
+  CAPS.forEach(c => { const x = x0 + (x1 - x0) * c.t0 / LAST; g.fillStyle = 'rgba(143,196,174,.7)'; g.fillRect(x - 1, y - 6, 2, 18); });
+}
+function artigo(A, t, a) {
+  const sc = scrollFor(A, t);
+  g.save(); g.globalAlpha = a; g.beginPath(); g.rect(0, CLIP_TOP, W, BODY_BOT + 40 - CLIP_TOP); g.clip();
+  const edge = yy => cl((yy - CLIP_TOP - 20) / 60) * cl((BODY_BOT + 30 - yy) / 60);
+  for (const it of A.L.items) {
+    const b = it.b, base = BODY_TOP + 0 - sc;
+    if (b.tag) { const dito = it.pos.length && it.pos[0].o.t <= t; const ty = base + it.tagY - 16; pill(b.tag, X0, ty, dito, edge(ty + 16)); }
+    g.font = `${it.nota ? 'italic ' : ''}${it.fs}px ${SERIF}`; g.textBaseline = 'alphabetic';
+    for (const p of it.pos) {
+      const yy = base + p.y; if (yy < CLIP_TOP - 10 || yy > BODY_BOT + 70) continue; const ed = edge(yy); if (ed <= 0) continue;
+      const k = sm((t - p.o.t + 0.05) / 0.18);
+      g.globalAlpha = a * ed * (0.28 + 0.72 * k);
+      g.fillStyle = it.nota ? MINT : (p.o.hl && k > 0 ? YEL : INK);
+      g.fillText(p.o.w, p.x, yy);
+    }
+  }
+  g.restore();
+}
+function abertura(t) {
+  const ti = B[0], em = B[1], pa = B[2];
+  const a = sm(t / 0.6);
+  text('RESOLUÇÃO DA DIRETORIA COLEGIADA · ANVISA', X0, 250, `600 30px ${SANS}`, MINT, a, 'left', 3);
+  g.save(); g.globalAlpha = a; g.font = `800 150px ${SANS}`; g.fillStyle = NEON; g.fillText('RDC nº 1.000/2025', X0, 420); g.restore();
+  text('de 11 de dezembro de 2025', X0, 505, `52px ${SERIF}`, INK, sm((t - 3) / 0.5));
+  // ementa revelada no tempo da fala
+  g.font = `48px ${SERIF}`; let x = X0, y = 620; const sp = g.measureText(' ').width;
+  em.ws.forEach(o => { const w = g.measureText(o.w).width; if (x + w > X0 + 1600) { x = X0; y += 64; } const k = sm((t - o.t + 0.05) / 0.2); g.globalAlpha = 0.25 + 0.75 * k; g.fillStyle = INK; g.fillText(o.w, x, y); x += w + sp; });
+  g.globalAlpha = 1;
+  const kp = sm((t - pa.t0) / 0.4);
+  if (kp > 0) { g.save(); g.globalAlpha = kp; pill('PARTE 1 · ARTIGOS 1º A 20', X0, 860, true); g.restore(); }
+}
+function capitulo(c, t) {
+  const k = sm((t - c.t0 + 0.1) / 0.4) * (1 - sm((t - c.t1 + 0.35) / 0.35));
+  const [num, nome] = c.s.split(' · ');
+  g.save(); g.globalAlpha = k;
+  text(num.toUpperCase(), W / 2, 470, `800 120px ${SANS}`, NEON, k, 'center');
+  text(nome, W / 2, 570, `72px ${SERIF}`, INK, k, 'center');
+  g.fillStyle = NEON; g.fillRect(W / 2 - 60 * k, 620, 120 * k, 5);
+  g.restore();
+}
+function final(t) {
+  const t0 = LAST + 1.4;
+  const a1 = sm((t - t0) / 0.5) * (1 - sm((t - t0 - 4.2) / 0.4));
+  if (a1 > 0) {
+    text('Bons estudos!', W / 2, 430, `800 130px ${SANS}`, NEON, a1, 'center');
+    text('Fonte: RDC nº 1.000/2025 (DOU, 15/12/2025), com as alterações das RDC nº 1.028/2026 e nº 1.046/2026.', W / 2, 560, `40px ${SERIF}`, INK, a1, 'center');
+    text('Texto consolidado em novembro de 2026. Confira sempre a versão vigente no portal da Anvisa.', W / 2, 620, `34px ${SERIF}`, MINT, a1, 'center');
+  }
+  const a2 = sm((t - t0 - 4.6) / 0.5);
+  if (a2 > 0) {
+    const r = 170, cx = W / 2, cy = 400;
+    g.save(); g.globalAlpha = a2; g.beginPath(); g.arc(cx, cy, r, 0, 7); g.clip(); g.drawImage(LOGO, cx - r, cy - r, r * 2, r * 2); g.restore();
+    g.save(); g.globalAlpha = a2; g.strokeStyle = NEON; g.lineWidth = 6; g.beginPath(); g.arc(cx, cy, r, 0, 7); g.stroke(); g.restore();
+    text('ME SIGA', W / 2, 700, `800 96px ${SANS}`, INK, a2, 'center');
+    text('para mais dicas sobre leis', W / 2, 770, `54px ${SERIF}`, MINT, a2, 'center');
+  }
+}
+
+function draw(t) {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.letterSpacing = '0px';
+  fundo();
+  const firstCap = CAPS[0].t0;
+  if (t < firstCap) { const k = 1 - sm((t - firstCap + 0.4) / 0.4); g.save(); g.globalAlpha = k; abertura(t); g.restore(); barra(t); return; }
+  if (t >= LAST + 1.4) { final(t); return; }
+  const c = capAt(t);
+  if (t < c.t1) { capitulo(c, t); barra(t); return; }
+  let A = ARTS[0]; for (const x of ARTS) if (x.t0 - 0.35 <= t) A = x;
+  const ka = sm((t - (A.t0 - 0.35)) / 0.35) * (1 - sm((t - (A.t1 - 0.4)) / 0.35));
+  topo(c.s.split(' · ')[1], `Art. ${A.a}${A.a < 10 ? 'º' : ''}`, ka);
+  artigo(A, t, ka);
+  barra(t);
+  text(`${A.a} / 20`, W - X0, 1000, `600 24px ${SANS}`, MINT, 0.9, 'right', 2);
+}
+const LOGO = new Image(); LOGO.src = 'logo.jpg';
+window.END = END;
+window.draw = draw;
+window.capa = function () {
+  g.setTransform(1, 0, 0, 1, 0, 0); fundo();
+  text('LEI SECA · ANVISA', X0, 190, `600 34px ${SANS}`, MINT, 1, 'left', 4);
+  g.font = `800 170px ${SANS}`; g.fillStyle = NEON; g.fillText('RDC 1.000', X0, 380);
+  text('Receitas eletrônicas', X0, 520, `96px ${SERIF}`, INK);
+  text('de controlados', X0, 620, `96px ${SERIF}`, INK);
+  pill('ARTS. 1º A 20 · ATUALIZADA 2026', X0, 760, true);
+  ['A', 'B', 'B2'].forEach((s, i) => { const x = 1300 + i * 170, y = 470; g.beginPath(); g.roundRect(x, y - 90, 140, 180, 18); g.strokeStyle = i === 0 ? YEL : NEON; g.lineWidth = 6; g.stroke(); text(s, x + 70, y + 30, `800 80px ${SANS}`, i === 0 ? YEL : NEON, 1, 'center'); });
+  text('notificações de receita', 1300, 640, `44px ${SERIF}`, MINT);
+};
+Promise.all([document.fonts.load(`800 40px ${SANS}`), document.fonts.load(`600 40px ${SANS}`), document.fonts.load(`40px ${SERIF}`), document.fonts.load(`italic 40px ${SERIF}`), new Promise(r => { if (LOGO.complete) r(); else LOGO.onload = LOGO.onerror = r; })]).then(() => {
+  ARTS.forEach(A => { A.L = layout(A); }); draw(0); window.ready = true;
+});
+</script></body></html>

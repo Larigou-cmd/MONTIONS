@@ -1,0 +1,208 @@
+[    0.0] Resolução da diretoria colegiada da Anvisa, RDC número 1.0 de 11 de dezembro de 2025.
+[    7.8] Dispõe sobre os requisitos de controle das notificações de receita, das receitas de controle especial
+[   13.8] e das receitas sujeitas à retenção emitidas em meio eletrônico.
+[   18.8] Parte 1, Artigos 1 a 20.
+[   22.2] Capítulo 1, Disposições Gerais.
+[   25.1] Artigo 1.
+[   26.7] Esta resolução estabelece os requisitos de controle aplicáveis às notificações de receita,
+[   32.6] às receitas de controle especial e às receitas sujeitas à retenção,
+[   37.0] quando emitidas em meio eletrônico e da outras providências.
+[   41.0] Artigo 2.
+[   42.5] O disposto nesta resolução se aplica aos seguintes tipos de receituários quando emitidos em meio eletrônico.
+[   48.6] Artigo 1.
+[   50.4] Notificações de receita dos tipos A, B e B2.
+[   54.8] Artigo 2.
+[   56.4] Notificação de receita especial para retinoides de uso sistêmico.
+[   61.1] Artigo 3.
+[   62.4] Notificação de receita de talidomida.
+[   65.5] Artigo 4.
+[   66.6] Receitas de controle especial.
+[   69.0] Artigo 5.
+[   70.6] Receita sujeitas à retenção.
+[   73.1] Parágrafo único.
+[   73.9] Não são considerados receituários eletrônicos os documentos originalmente emitidos em meio
+[   79.7] físico, com assinatura manual ou imagem da assinatura, ainda que digitalizados,
+[   85.3] bem como aqueles elaborados em meio físico, posteriormente digitalizados e assinados eletrônicamente.
+[   92.1] Artigo 3.
+[   93.4] Para fins desta resolução, são adotadas as seguintes definições.
+[   98.1] Em CISU-1, assinatura eletrônica avançada.
+[  101.3] Aqui utiliza certificados não emitidos pela infraestrutura de chaves públicas brasileiras
+[  107.1] e CP Brasil, ou outro meio de comprovação da autoria e da integridade de documentos em forma
+[  113.4] eletrônica, nos termos da lei número 14.063 de 23 de setembro de 2020 ou norma que viera substituí-la.
+[  122.4] Em CISU-2, assinatura eletrônica qualificada.
+[  125.9] Aqui utiliza certificado digital emitido pela infraestrutura de chaves públicas brasileiras
+[  131.9] e CP Brasil, nos termos da lei número 14.063 de 23 de setembro de 2020 ou norma que viera substituí-la.
+[  141.5] Em CISU-3, medicamento sujeito a controle especial.
+[  145.8] Medicamento que contém a substância, planta ou fungo constantes das listas do anexo 1
+[  151.5] da portaria S-V-S-MS número 344 de 12 de maio de 1998 e suas atualizações ou norma que viera substituí-la.
+[  164.0] Em CISU-4, notificações de receita.
+[  167.5] Documentos padronizados destinados à prescrição de medicamentos que contêm a substância
+[  172.6] constante das listas A1, A2, interpecentes, A3, B1, B2, psicotrópicos, C2, retinoicas
+[  182.6] e do medicamento talidomida da lista C3 do anexo 1 da portaria S-V-S-MS número 344-1998
+[  194.2] de 12 de maio de 1998 e suas atualizações ou norma que viera substituí-la.
+[  201.2] Em CISU-5, receitas de controle especial.
+[  205.3] Documentos padronizados destinados à prescrição de medicamentos que contêm a substância constante
+[  211.0] das listas C1, outras substâncias sujeitas a controle especial, C5, anabolizantes e dos
+[  218.3] adendos das listas A1, A2, interpecentes e B1, psicotrópicos.
+[  223.9] Do anexo 1 da portaria S-V-S-MS número 344-1998 de 12 de maio de 1998 e suas atualizações ou norma
+[  238.1] que viera substituí-la.
+[  239.8] Em CISU-6, receitas sujeitas a retenção.
+[  243.6] Documentos destinados à prescrição de medicamentos à base de substâncias isoladas
+[  248.3] ou em associação de uso sob prescrição e retenção da receita.
+[  252.8] Conforme a resolução da diretoria colegiada RDC número 471 de 23 de fevereiro de 2021,
+[  261.9] listadas em instrução normativa específica e suas atualizações ou norma que viera substituí-la.
+[  268.7] Em CISU-7, receituários eletrônicos, as notificações de receita dos tipos A, B e B2,
+[  276.3] as notificações de receita especial para retinoides de uso sistêmico,
+[  280.4] as notificações de receita de talidomida, as receitas de controle especial
+[  285.3] e as receitas sujeitas a retenção emitidas exclusivamente em meio eletrônico
+[  290.4] elaboradas e assinadas originariamente em formato eletrônico.
+[  294.4] Em CISU-8, SNCR, Sistema Nacional de Controle de Receituários,
+[  301.0] instituído pela resolução da diretoria colegiada RDC número 873 de 27 de maio de 2024
+[  309.4] ou norma que viera substituí-la.
+[  312.6] CAPÍTULO 2, DA EMISSÃO ELETRÔNICA
+[  315.9] Art. 4, os receituários eletrônicos de que trata esta resolução deverão ser gerados
+[  321.7] exclusivamente em serviços de prescrição eletrônica integrados ao SNCR
+[  326.8] por meio de interface de programação de aplicações.
+[  330.1] API, parágrafo primeiro.
+[  332.6] Os requisitos técnicos para a integração dos serviços de prescrição eletrônica
+[  336.9] ao SNCR serão estabelecidos pela ANVISA e divulgados em seu sítio eletrônico.
+[  342.7] Parágrafo segundo.
+[  344.2] É vedada a emissão dos receituários eletrônicos
+[  346.9] por serviços de prescrição eletrônica que não estejam integrados ao SNCR.
+[  352.7] Art. 5, o serviço de prescrição eletrônica deverá, em CISU-1,
+[  358.0] requisitar ao SNCR a numeração necessária à emissão dos receituários eletrônicos,
+[  363.6] redação dada pela resolução da diretoria colegiada ANVISA número 1028
+[  368.8] de 1º de junho de 2026.
+[  372.2] Enciso 2, assegurar a liberação e a vinculação da numeração
+[  376.5] das notificações de receita ao prescritor previamente autorizado.
+[  381.2] Enciso 3, garantir a disponibilização do receituário eletrônico ao paciente,
+[  386.6] de forma que este possa apresentá-lo em qualquer estabelecimento dispensador de sua escolha.
+[  391.7] E, em CISU-4, assegurar a rastreabilidade das informações referentes
+[  397.3] à emissão dos receituários eletrônicos.
+[  400.1] Art. 6, a emissão dos receituários eletrônicos referidos nesta resolução
+[  405.3] é de responsabilidade exclusiva do prescritor,
+[  408.5] sendo vedada sua emissão por instituições ou por terceiros em seu nome.
+[  413.4] Art. 7, cada receituário eletrônico deve conter a numeração individualizada
+[  418.9] previamente concedida por meio do SNCR e seguir os modelos estabelecidos
+[  423.9] em documento disponível no portal da Anvisa.
+[  427.1] Art. 8, as notificações de receita e as receitas de controle especial
+[  432.0] quando emitidas em meio eletrônico deverão ainda.
+[  435.7] Enciso 1, ser subscritas com assinatura eletrônica qualificada.
+[  439.8] E, em CISU-2, ser solicitadas e emitidas exclusivamente pelos prescritores
+[  445.9] previstos pela portaria SvS-MS número 344 de 12 de maio de 1998
+[  453.9] e pela portaria número 6 de 29 de janeiro de 1999
+[  459.8] ou por normas que vierem a substituí-las.
+[  462.6] Art. 9, as notificações de receita emitidas em meio eletrônico
+[  467.0] não precisam estar acompanhadas da receita que se refere o art. 35
+[  471.7] da portaria SvS-MS número 344 de 12 de maio de 1998.
+[  480.1] Art. 10, as receitas de controle especial e as receitas sujeitas
+[  484.7] à retenção quando emitidas em meio eletrônico
+[  487.4] não estão sujeitas à emissão em duas vias.
+[  490.7] Art. 11, as receitas sujeitas à retenção emitidas em meio eletrônico
+[  495.5] deverão ser subscritas com assinatura eletrônica avançada ou qualificada.
+[  500.6] Art. 12, a data da assinatura eletrônica
+[  503.6] será considerada como data de emissão dos receituários eletrônicos.
+[  508.0] Capítulo 3, do registro de utilização.
+[  511.4] Art. 13, o estabelecimento dispensador deverá,
+[  515.1] no momento da dispensação,
+[  516.8] realizar o registro de utilização no SNCR
+[  520.2] dos receituários eletrônicos tratados nesta resolução,
+[  523.4] atendendo aos seguintes procedimentos.
+[  526.3] Art. 14, verificar a autenticidade, a integridade
+[  530.0] e a validade jurídica da assinatura eletrônica do prescritor
+[  533.5] por meio de serviço de validação de assinaturas eletrônicas
+[  536.9] disponibilizado pelo Instituto Nacional de Tecnologia da Informação, ITI.
+[  542.7] Art. 15, conferir a validade da numeração
+[  545.6] dos receituários eletrônicos,
+[  547.5] assegurando que tenha sido concedida
+[  549.5] ao profissional prescritor no SNCR.
+[  551.9] I, inciso 3, registrar a utilização
+[  555.8] dos receituários eletrônicos,
+[  557.7] preenchendo integralmente os campos exigidos pelo SNCR.
+[  562.2] Art. 14, é de responsabilidade
+[  564.7] do estabelecimento dispensador
+[  566.4] a guarda dos registros de utilização
+[  568.9] dos receituários tratados nesta resolução,
+[  572.1] os quais deverão ser armazenados
+[  574.2] em meio eletrônico pelo prazo determinado
+[  576.9] pela portaria SVS-MS,
+[  579.7] número 344, de 12 de maio de 1998
+[  585.2] e pela resolução da diretoria colegiada,
+[  588.1] RDC número 11, de 11 de março de 2011,
+[  592.6] ou por normas que venham a substituí-las
+[  594.9] e disponibilizados para fins de fiscalização.
+[  598.6] Art. 15, os receituários tratados nesta resolução
+[  602.5] poderão ser utilizados uma única vez,
+[  605.5] não podendo ser reutilizados
+[  607.3] para dispensação posterior
+[  608.9] após o registro de uso no SNCR.
+[  612.6] Art. 4, das disposições finais.
+[  616.0] Art. 16, a anvisa disponibilizará o SNCR
+[  620.5] para a requisição de numeração
+[  622.5] para a emissão eletrônica dos receituários eletrônicos
+[  625.4] de que trata esta resolução,
+[  627.5] bem como o respectivo registro de utilização
+[  630.5] até 30 de setembro de 2026.
+[  634.1] Redação dada pela resolução
+[  635.7] da diretoria colegiada anvisa número 1028,
+[  639.5] de 1 de junho de 2026.
+[  642.5] Art. 17, o descumprimento dos requisitos
+[  645.8] para a utilização do SNCR
+[  648.0] acarretará a imediata suspensão do acesso
+[  651.1] do serviço de prescrição eletrônica ao sistema.
+[  654.3] Art. 18, as receitas de controle especial
+[  657.6] e as receitas sujeitas à retenção
+[  660.0] poderão ser emitidas eletrônicamente
+[  662.4] sem a numeração do SNCR
+[  664.6] até 3 de março de 2027.
+[  667.9] Redação dada pela resolução
+[  669.6] da diretoria colegiada anvisa número 1046,
+[  673.5] de 29 de outubro de 2026.
+[  676.7] Parágrafo primeiro.
+[  678.2] Os receituários emitidos nos termos do CAPT
+[  680.9] poderão ser aceitos pelos estabelecimentos dispensadores
+[  684.2] durante o respectivo prazo de validade.
+[  687.3] Observadas as disposições da portaria
+[  689.6] SVS-MS número 344
+[  693.9] de 12 de maio de 1998
+[  697.1] da RDC número 471
+[  700.4] de 23 de fevereiro de 2021
+[  703.0] ou de normas que vierem a substituí-las.
+[  706.2] Incluído pela resolução da diretoria colegiada anvisa
+[  709.8] número 1046, de 29 de outubro de 2026.
+[  715.0] Parágrafo segundo.
+[  716.6] A partir de 4 de março de 2027
+[  719.2] as receitas de controle especial
+[  721.5] e as receitas sujeitas à retenção
+[  723.9] emitidas em meio eletrônico
+[  725.6] deverão conter obrigatoriamente
+[  728.0] a numeração fornecida pelo SNCR.
+[  731.4] Incluído pela resolução
+[  732.8] da diretoria colegiada anvisa número 1046,
+[  736.3] de 29 de outubro de 2026.
+[  739.5] Artigo 19.
+[  741.2] As notificações de receita impressas
+[  743.2] pela autoridade sanitária competente
+[  745.3] até a data de vigência desta resolução
+[  747.7] poderão ser distribuídas e utilizadas
+[  750.2] por prazo indeterminado.
+[  752.2] Artigo 20.
+[  753.5] O disposto nesta resolução, não elide
+[  756.0] no que couber, a obrigatoriedade
+[  758.2] de cumprimento dos demais requisitos
+[  760.2] estabelecidos pela portaria
+[  761.9] svs-ms
+[  764.0] número 344
+[  766.0] de 12 de maio de 1998
+[  769.2] pela portaria número 6
+[  770.9] de 29 de janeiro de 1999
+[  773.9] pela resolução da diretoria
+[  776.2] colegiada RDC número 11
+[  778.8] de 11 de março de 2011
+[  781.0] pela resolução da diretoria
+[  783.0] colegiada RDC número 471
+[  786.6] de 23 de fevereiro de 2021
+[  789.3] e pela resolução da diretoria
+[  791.4] colegiada RDC número 873
+[  795.0] de 27 de maio de 2024
+[  797.8] ou normas que vierem a substituí-las.

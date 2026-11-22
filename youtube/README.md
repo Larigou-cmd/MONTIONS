@@ -91,6 +91,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 82 | Dengue e El Niño: por que a dengue pode voltar com força no verão (quadro branco, Dia Nacional de Combate à Dengue) | [82_dengue_el_nino.md](textos/82_dengue_el_nino.md) | [capa_dengue_el_nino.png](capas/capa_dengue_el_nino.png) |
 | 83 | Pingou colírio e sentiu gosto na boca? O caminho da gota (maquete 3D com caminho aceso) | [83_colirio_gosto_na_boca.md](textos/83_colirio_gosto_na_boca.md) | [capa_colirio_gosto_na_boca.png](capas/capa_colirio_gosto_na_boca.png) |
 | 84 | Uma molécula de ibuprofeno: como ele desliga a dor e por que mexe com o estômago (uma molécula só, tomada única) | [84_ibuprofeno_uma_molecula.md](textos/84_ibuprofeno_uma_molecula.md) | [capa_ibuprofeno_uma_molecula.png](capas/capa_ibuprofeno_uma_molecula.png) |
+| 85 | RDC 1.000/2025 Anvisa: receita eletrônica de controlados, Parte 1, arts. 1º a 20 (longo horizontal, lei seca no estilo verde) | [85_rdc_1000_parte1.md](textos/85_rdc_1000_parte1.md) | [capa_rdc_1000.png](capas/capa_rdc_1000.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

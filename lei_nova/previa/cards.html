@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Prévia RDC — fichas</title>
+<link rel="stylesheet" href="base.css">
+<style>
+body { background: #f4f2ee; color: #111; position: relative; font-family: Inter; }
+.grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,0,0,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.05) 1px, transparent 1px); background-size: 120px 120px; }
+.left { position: absolute; left: 100px; top: 90px; width: 560px; }
+.left .t { font: 600 24px Inter; letter-spacing: .14em; color: #666; }
+.left .big { font: 800 230px/0.9 Inter; color: #e2231a; letter-spacing: -.04em; margin-top: 30px; }
+.left .big small { font-size: 90px; vertical-align: top; }
+.left .cap { font: 800 34px/1.15 Inter; margin-top: 40px; }
+.left .caput { font: 400 34px/1.35 "Source Serif 4", serif; margin-top: 28px; color: #222; }
+.left .caput b { background: #111; color: #fff; padding: 0 6px; font-weight: 400; }
+.cards { position: absolute; left: 760px; top: 90px; width: 1060px; display: flex; flex-direction: column; gap: 22px; }
+.card { display: flex; align-items: center; gap: 34px; background: #fff; border: 3px solid #111; padding: 26px 34px; box-shadow: 10px 10px 0 #111; }
+.card .r { font: 800 48px Inter; min-width: 90px; }
+.card .x { font: 400 38px/1.25 "Source Serif 4", serif; }
+.card.on { background: #e2231a; color: #fff; border-color: #e2231a; box-shadow: 10px 10px 0 #111; }
+.card.ghost { opacity: .25; box-shadow: none; }
+</style></head><body>
+<div class="grid"></div>
+<div class="left">
+  <div class="t">RDC Nº 1.000/2025 · PARTE 1</div>
+  <div class="big">Art.2<small>º</small></div>
+  <div class="cap">Capítulo I<br>Disposições gerais</div>
+  <div class="caput">A Resolução se aplica a estes receituários quando emitidos em <b>meio eletrônico</b>:</div>
+</div>
+<div class="cards">
+  <div class="card on"><span class="r">I</span><span class="x">Notificações de Receita dos tipos A, B e B2</span></div>
+  <div class="card"><span class="r">II</span><span class="x">Notificação de Receita Especial para retinoides de uso sistêmico</span></div>
+  <div class="card"><span class="r">III</span><span class="x">Notificação de Receita de Talidomida</span></div>
+  <div class="card ghost"><span class="r">IV</span><span class="x">Receitas de Controle Especial</span></div>
+  <div class="card ghost"><span class="r">V</span><span class="x">Receitas sujeitas à retenção</span></div>
+</div>
+</body></html>

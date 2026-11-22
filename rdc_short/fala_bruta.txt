@@ -1,0 +1,24 @@
+[    0.0] A receita azul agora pode chegar pelo celular.
+[    3.1] Você sabe conferir?
+[    4.6] A RDC 1000 é a norma da anvisa para a receita eletrônica de controlado e muda o que você
+[   10.1] confere no balcão.
+[   11.4] Notificação A, B e B2, receita de controle especial e até a receita retida como adiante
+[   17.8] biótico podem chegar em meio eletrônico.
+[   20.5] Mas PDF assinado não basta, e é aqui que muita gente erra.
+[   24.9] Cada receita precisa ter uma numeração do SNCR, o Sistema Nacional de Controle de
+[   30.6] Receituários.
+[   31.7] Notificação e controle especial exigem assinatura eletrônica qualificada, aquela
+[   36.5] com certificado ICP Brasil.
+[   38.6] E receita de papel escaneada não é receita eletrônica.
+[   42.3] E o que muda na sua dispensação?
+[   44.2] Você confere a assinatura no validador do ITI.
+[   47.2] Confere se a numeração é daquele prescritor e registra o uso no SNCR.
+[   51.8] Depois disso, a receita não pode ser usada de novo.
+[   55.5] Guarda essa data.
+[   56.7] A partir de 4 de março de 2027, controle especial e receita retida
+[   61.7] eletrônicas só com numeração do SNCR.
+[   65.2] Quer a lei seca completa?
+[   66.6] Artigo por artigo.
+[   68.0] A videoaula está no YouTube do pharma.exe.
+[   71.1] Me siga para mais dicas sobre leis.
+[   73.5] Bons estudos.

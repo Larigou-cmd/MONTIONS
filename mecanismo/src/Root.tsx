@@ -291,6 +291,7 @@ import { VideoDolarAtaque, DURACAO_DOLAR } from "./voxDolar/Video";
 import { VideoSensorGlicose, CapaSensorGlicose, DUR_SENSOR, FPS_SENSOR } from "./sensorGlicose/Video";
 import { VideoNoticiaGlp1, CapaNoticiaGlp1, DURATION as DUR_NOTICIA_GLP1 } from "./noticiaGlp1/Video";
 import { VideoNoticiaGlp1Vox, CapaNoticiaGlp1Vox, DUR_GLP1_VOX, FPS_GLP1_VOX } from "./noticiaGlp1Vox/Video";
+import { VideoRdcShort, CapaRdcShort, DURATION_RDC_SHORT } from "./rdcShort/Video";
 import { VideoHqTeste, DURATION as DUR_HQ_TESTE } from "./hqTeste/Video";
 export const RemotionRoot: React.FC = () => (
   <>
@@ -963,6 +964,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="TirzepAlimentosCapa"
       component={CapaTirzepAlimentos}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="RdcShort"
+      component={VideoRdcShort}
+      durationInFrames={DURATION_RDC_SHORT}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="RdcShortCapa"
+      component={CapaRdcShort}
       durationInFrames={1}
       fps={FPS}
       width={1080}

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>RDC 1.000/2025 — partes 2 e 3 (verde)</title>
+<style>
+@font-face { font-family: Inter; font-weight: 600; src: url(fonts/Inter-600-latin.woff2); }
+@font-face { font-family: Inter; font-weight: 600; src: url(fonts/Inter-600-latin-ext.woff2); unicode-range: U+0100-024F; }
+@font-face { font-family: Inter; font-weight: 800; src: url(fonts/Inter-800-latin.woff2); }
+@font-face { font-family: Inter; font-weight: 800; src: url(fonts/Inter-800-latin-ext.woff2); unicode-range: U+0100-024F; }
+@font-face { font-family: "Instrument Serif"; src: url(fonts/InstrumentSerif-400-normal-latin.woff2); }
+@font-face { font-family: "Instrument Serif"; src: url(fonts/InstrumentSerif-400-normal-latin-ext.woff2); unicode-range: U+0100-024F; }
+@font-face { font-family: "Instrument Serif"; font-style: italic; src: url(fonts/InstrumentSerif-400-italic-latin.woff2); }
+@font-face { font-family: "Instrument Serif"; font-style: italic; src: url(fonts/InstrumentSerif-400-italic-latin-ext.woff2); unicode-range: U+0100-024F; }
+html, body { margin: 0; background: #000; } canvas { display: block; }
+</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script>const P = Number(new URLSearchParams(location.search).get('p') || 2); document.write(`<script src="parte${P}/dados.js"><\/script>`);</script>
+<script>
+// RDC nº 1.000/2025 (Anvisa), Partes 2 e 3 (arts. 21 a 27): mesmo visual "verde" da Parte 1.
+// Cada tela é um artigo da RDC ou o "novo texto" de um artigo da norma que ela altera (parteN/blocos.json, montado por montar_partes.py).
+const W = 1920, H = 1080, FPS = 30;
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const BG1 = '#0a2a22', BG0 = '#04120f', INK = '#f7f3df', MINT = '#8fc4ae', NEON = '#3dff8f', YEL = '#f2e52e';
+const SANS = 'Inter', SERIF = '"Instrument Serif"';
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const sm = u => { u = cl(u); return u * u * (3 - 2 * u); };
+const B = window.BLOCOS, U = window.UNID, PW = window.PALAVRAS;
+const LAST = window.FIM_FALA / FPS;
+const END = Math.ceil(LAST + 1.4 + 9);
+
+// palavras de cada bloco, com o tempo e se é destaque
+const BW = B.map(() => []);
+PW.forEach(p => BW[p.b].push({ w: p.w, t: p.f / FPS }));
+B.forEach((b, bi) => {
+  const ws = BW[bi]; let pos = 0;
+  ws.forEach(o => { const i = b.s.indexOf(o.w, pos); o.c0 = i; o.c1 = i + o.w.length; pos = o.c1; });
+  b.t0 = ws[0].t; b.t1 = ws[ws.length - 1].t; b.ws = ws; b.tag = b.tag || '';
+  (b.hl || []).forEach(f => { const i = b.s.indexOf(f); if (i < 0) return; ws.forEach(o => { if (o.c0 >= i && o.c1 <= i + f.length + 1) o.hl = true; }); });
+});
+
+// telas: um artigo da RDC ou um "novo texto"
+const ARTS = U.map((u, k) => ({ ...u, k, bl: [] }));
+B.forEach((b, bi) => { if (b.u >= 0) ARTS[b.u].bl.push(bi); });
+ARTS.forEach((A, i) => {
+  const first = B[A.bl[0]].t0, prevEnd = i ? B[ARTS[i - 1].bl[ARTS[i - 1].bl.length - 1]].t1 : 0;
+  A.t0 = Math.max(first - 0.9, prevEnd + 0.45);   // a tela entra quando a narração diz "Artigo N" / "Novo texto do artigo N"
+});
+ARTS.forEach((A, i) => { A.t1 = i + 1 < ARTS.length ? ARTS[i + 1].t0 : LAST + 1.4; });
+const OPEN = { titulo: B.find(b => b.t === 'titulo'), parte: B.find(b => b.t === 'parte'), sub: B.find(b => b.t === 'sub'), aviso: B.find(b => b.t === 'aviso') };
+
+// ---------- diagramação ----------
+const X0 = 120, TX = 250, RW = 1680, BODY_TOP = 340, BODY_BOT = 965, CLIP_TOP = 262, FS = 52, LH = 70;
+const estilo = b => b.t === 'mant' ? { fs: 40, lh: 56, it: true } : { fs: FS, lh: LH, it: false };
+function layout(A) {
+  const items = []; let y = 0;
+  A.bl.forEach((bi, j) => {
+    const b = B[bi]; const st = estilo(b);
+    g.font = `${st.it ? 'italic ' : ''}${st.fs}px ${SERIF}`;
+    const x0 = (b.t === 'caput' || b.t === 'secao' || b.t === 'mant') ? X0 : TX, maxX = X0 + RW;
+    if (j > 0) y += 14;
+    const tagY = y; let tagW = 0;
+    if (b.tag) { g.save(); g.font = `800 28px ${SANS}`; tagW = Math.max(84, g.measureText(b.tag).width + 36); g.restore(); g.font = `${st.it ? 'italic ' : ''}${st.fs}px ${SERIF}`; }
+    if (tagW > TX - X0 - 16) y += 56;
+    let x = x0; const sp = g.measureText(' ').width;
+    const pos = b.ws.map(o => { const w = g.measureText(o.w).width; if (x + w > maxX && x > x0) { x = x0; y += st.lh; } const p = { o, x, y, w }; x += w + sp; return p; });
+    items.push({ b, pos, st, tagY });
+    y += st.lh;
+  });
+  return { items, h: y };
+}
+function curWordY(A, t) { let y = 0; for (const it of A.L.items) for (const p of it.pos) if (p.o.t <= t) y = p.y; return y; }
+function scrollFor(A, t) {
+  const avail = BODY_BOT - BODY_TOP;
+  if (A.L.h <= avail) return 0;
+  let s = 0;
+  for (let k = 0; k < 10; k++) { const y = curWordY(A, t - k * 0.06); s += cl(y - avail * 0.55, 0, A.L.h - avail + 30); }
+  return s / 10;
+}
+
+// ---------- desenho ----------
+function fundo() {
+  const gr = g.createRadialGradient(560, 320, 60, 560, 320, 1500); gr.addColorStop(0, BG1); gr.addColorStop(1, BG0);
+  g.fillStyle = gr; g.fillRect(0, 0, W, H);
+}
+function text(s, x, y, font, color, alpha = 1, align = 'left', ls = 0) {
+  g.save(); g.globalAlpha = alpha; g.font = font; g.fillStyle = color; g.textAlign = align; g.textBaseline = 'alphabetic';
+  if (ls) g.letterSpacing = ls + 'px'; g.fillText(s, x, y); const w = g.measureText(s).width; g.restore(); return w;
+}
+function pill(label, x, yMid, on, a = 1, cor = NEON) {
+  g.save(); g.globalAlpha = a; g.font = `800 28px ${SANS}`; const w = Math.max(84, g.measureText(label).width + 36), h = 46;
+  g.beginPath(); g.roundRect(x, yMid - h / 2, w, h, 23);
+  if (on) { g.fillStyle = cor; g.fill(); g.fillStyle = BG0; } else { g.strokeStyle = cor === NEON ? 'rgba(61,255,143,.6)' : cor; g.lineWidth = 2.5; g.stroke(); g.fillStyle = cor; }
+  g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(label, x + w / 2, yMid + 1); g.restore(); return w;
+}
+function topo(A, a = 1) {
+  text(`RDC Nº 1.000/2025 · ANVISA · PARTE ${P}`, X0, 92, `600 26px ${SANS}`, MINT, a, 'left', 3);
+  g.save(); g.globalAlpha = a; g.font = `800 96px ${SANS}`; g.fillStyle = A.kind === 'novo' ? INK : NEON; g.fillText(A.lab, X0, 222); const w = g.measureText(A.lab).width; g.restore();
+  let x = X0 + w + 36;
+  if (A.kind === 'novo') { x += pill('NOVO TEXTO', x, 190, true, a, YEL) + 22; text(A.ctx.toUpperCase(), x, 201, `600 28px ${SANS}`, MINT, a, 'left', 2); }
+  else text(('RDC 1.000 · ' + A.ctx).toUpperCase(), x, 214, `600 30px ${SANS}`, MINT, a, 'left', 2);
+}
+function barra(t) {
+  const x0 = X0, x1 = W - X0, y = 1018;
+  g.fillStyle = 'rgba(255,255,255,.08)'; g.beginPath(); g.roundRect(x0, y, x1 - x0, 6, 3); g.fill();
+  g.fillStyle = NEON; g.beginPath(); g.roundRect(x0, y, (x1 - x0) * cl(t / LAST), 6, 3); g.fill();
+  ARTS.filter(A => A.kind === 'rdc').forEach(A => { const x = x0 + (x1 - x0) * A.t0 / LAST; g.fillStyle = 'rgba(143,196,174,.7)'; g.fillRect(x - 1, y - 6, 2, 18); });
+}
+function artigo(A, t, a) {
+  const sc = scrollFor(A, t);
+  g.save(); g.globalAlpha = a; g.beginPath(); g.rect(0, CLIP_TOP, W, BODY_BOT + 40 - CLIP_TOP); g.clip();
+  const edge = yy => cl((yy - CLIP_TOP - 20) / 60) * cl((BODY_BOT + 30 - yy) / 60);
+  for (const it of A.L.items) {
+    const b = it.b, base = BODY_TOP - sc, mant = b.t === 'mant';
+    if (b.tag) { const dito = it.pos.length && it.pos[0].o.t <= t; const ty = base + it.tagY - 16; pill(b.tag, X0, ty, dito, a * edge(ty + 16)); }
+    g.font = `${it.st.it ? 'italic ' : ''}${it.st.fs}px ${SERIF}`; g.textBaseline = 'alphabetic';
+    for (const p of it.pos) {
+      const yy = base + p.y; if (yy < CLIP_TOP - 10 || yy > BODY_BOT + 70) continue; const ed = edge(yy); if (ed <= 0) continue;
+      const k = sm((t - p.o.t + 0.05) / 0.18);
+      g.globalAlpha = a * ed * (0.28 + 0.72 * k);
+      g.fillStyle = mant ? MINT : (p.o.hl && k > 0 ? YEL : INK);
+      g.fillText(p.o.w, p.x, yy);
+    }
+  }
+  g.restore();
+}
+function revela(ws, t, x0, y0, maxW, font, lh, cor) {
+  g.font = font; let x = x0, y = y0; const sp = g.measureText(' ').width;
+  ws.forEach(o => { const w = g.measureText(o.w).width; if (x + w > x0 + maxW) { x = x0; y += lh; } const k = sm((t - o.t + 0.05) / 0.2); g.globalAlpha = 0.25 + 0.75 * k; g.fillStyle = cor; g.fillText(o.w, x, y); x += w + sp; });
+  g.globalAlpha = 1; return y;
+}
+function abertura(t) {
+  const a = sm(t / 0.6);
+  text('RESOLUÇÃO DA DIRETORIA COLEGIADA · ANVISA', X0, 230, `600 30px ${SANS}`, MINT, a, 'left', 3);
+  g.save(); g.globalAlpha = a; g.font = `800 150px ${SANS}`; g.fillStyle = NEON; g.fillText('RDC nº 1.000/2025', X0, 400); g.restore();
+  text('de 11 de dezembro de 2025', X0, 480, `52px ${SERIF}`, INK, sm((t - 3) / 0.5));
+  const kp = sm((t - OPEN.parte.t0) / 0.4);
+  if (kp > 0) pill(OPEN.parte.s.toUpperCase(), X0, 570, true, kp);
+  const y = revela(OPEN.sub.ws, t, X0, 680, 1640, `56px ${SERIF}`, 70, INK);
+  revela(OPEN.aviso.ws, t, X0, y + 110, 1500, `italic 44px ${SERIF}`, 58, MINT);
+}
+function final(t) {
+  const t0 = LAST + 1.4;
+  const a1 = sm((t - t0) / 0.5) * (1 - sm((t - t0 - 4.2) / 0.4));
+  if (a1 > 0) {
+    text('Bons estudos!', W / 2, 430, `800 130px ${SANS}`, NEON, a1, 'center');
+    text('Fonte: RDC nº 1.000/2025 (DOU nº 238, de 15/12/2025, Seção 1).', W / 2, 560, `40px ${SERIF}`, INK, a1, 'center');
+    text('Confira sempre a versão vigente no portal da Anvisa.', W / 2, 620, `34px ${SERIF}`, MINT, a1, 'center');
+  }
+  const a2 = sm((t - t0 - 4.6) / 0.5);
+  if (a2 > 0) {
+    const r = 170, cx = W / 2, cy = 400;
+    g.save(); g.globalAlpha = a2; g.beginPath(); g.arc(cx, cy, r, 0, 7); g.clip(); g.drawImage(LOGO, cx - r, cy - r, r * 2, r * 2); g.restore();
+    g.save(); g.globalAlpha = a2; g.strokeStyle = NEON; g.lineWidth = 6; g.beginPath(); g.arc(cx, cy, r, 0, 7); g.stroke(); g.restore();
+    text('ME SIGA', W / 2, 700, `800 96px ${SANS}`, INK, a2, 'center');
+    text('para mais dicas sobre leis', W / 2, 770, `54px ${SERIF}`, MINT, a2, 'center');
+  }
+}
+
+function draw(t) {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.letterSpacing = '0px';
+  fundo();
+  const first = ARTS[0].t0;
+  if (t < first) { const k = 1 - sm((t - first + 0.4) / 0.4); g.save(); g.globalAlpha = k; abertura(t); g.restore(); barra(t); return; }
+  if (t >= LAST + 1.4) { final(t); return; }
+  let A = ARTS[0]; for (const x of ARTS) if (x.t0 - 0.35 <= t) A = x;
+  const ka = sm((t - (A.t0 - 0.35)) / 0.35) * (1 - sm((t - (A.t1 - 0.4)) / 0.35));
+  topo(A, ka);
+  artigo(A, t, ka);
+  barra(t);
+  text(`${A.k + 1} / ${ARTS.length}`, W - X0, 1000, `600 24px ${SANS}`, MINT, 0.9, 'right', 2);
+}
+const LOGO = new Image(); LOGO.src = 'logo.jpg';
+window.END = END;
+window.SFX = [...ARTS.filter((A, i) => A.kind === 'rdc' && i > 0).map(A => [+(A.t0 - 0.1).toFixed(2), 'whoosh', 0.18]), [+(LAST + 1.4).toFixed(2), 'sting', 0.4]];
+window.draw = draw;
+window.capa = function () {
+  g.setTransform(1, 0, 0, 1, 0, 0); fundo();
+  text('LEI SECA · ANVISA', X0, 190, `600 34px ${SANS}`, MINT, 1, 'left', 4);
+  g.font = `800 170px ${SANS}`; g.fillStyle = NEON; g.fillText('RDC 1.000', X0, 380);
+  const [l1, l2, pl, cards, leg] = P === 2
+    ? ['Parte 2: o que muda', 'na Portaria 344', 'ART. 21 · TEXTO OFICIAL', ['A', 'B', 'B2'], 'notificações de receita']
+    : ['Parte 3: Portaria 6,', 'RDC 58 e RDC 11', 'ARTS. 22 A 27 · TEXTO OFICIAL', ['A', 'B2', 'C3'], 'notificação A, B2 e talidomida'];
+  text(l1, X0, 520, `96px ${SERIF}`, INK); text(l2, X0, 620, `96px ${SERIF}`, INK);
+  pill(pl, X0, 760, true);
+  cards.forEach((s, i) => { const x = 1300 + i * 170, y = 470; g.beginPath(); g.roundRect(x, y - 90, 140, 180, 18); g.strokeStyle = i === 0 ? YEL : NEON; g.lineWidth = 6; g.stroke(); text(s, x + 70, y + 30, `800 80px ${SANS}`, i === 0 ? YEL : NEON, 1, 'center'); });
+  text(leg, 1300, 640, `44px ${SERIF}`, MINT);
+};
+Promise.all([document.fonts.load(`800 40px ${SANS}`), document.fonts.load(`600 40px ${SANS}`), document.fonts.load(`40px ${SERIF}`), document.fonts.load(`italic 40px ${SERIF}`), new Promise(r => { if (LOGO.complete) r(); else LOGO.onload = LOGO.onerror = r; })]).then(() => {
+  ARTS.forEach(A => { A.L = layout(A); }); draw(0); window.ready = true;
+});
+</script></body></html>

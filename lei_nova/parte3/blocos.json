@@ -1,0 +1,591 @@
+{
+ "blocos": [
+  {
+   "t": "titulo",
+   "u": -1,
+   "s": "Resolução da Diretoria Colegiada da Anvisa - RDC nº 1.000, de 11 de dezembro de 2025"
+  },
+  {
+   "t": "parte",
+   "u": -1,
+   "s": "Parte 3 · Artigos 22 a 27"
+  },
+  {
+   "t": "sub",
+   "u": -1,
+   "s": "Mudanças na Portaria nº 6/1999 e em outras resoluções, revogações e vigência"
+  },
+  {
+   "t": "aviso",
+   "u": -1,
+   "s": "Quando aparecer \"Novo texto do artigo\", é a nova redação de um artigo da norma alterada."
+  },
+  {
+   "t": "caput",
+   "u": 0,
+   "s": "A Portaria SVS/MS nº 06, de 29 de janeiro de 1999, passa a vigorar com as seguintes alterações:",
+   "hl": []
+  },
+  {
+   "t": "secao",
+   "u": 1,
+   "s": "DA DISTRIBUIÇÃO DA NUMERAÇÃO PARA CONFECÇÃO DA NOTIFICAÇÃO DE RECEITA \"A\" PELOS PROFISSIONAIS",
+   "hl": []
+  },
+  {
+   "t": "caput",
+   "u": 2,
+   "s": "A Autoridade Sanitária competente deve distribuir a numeração para confecção da Notificação de Receita \"A\", bem como fornecer informação aos profissionais da documentação que será necessária para retirar a numeração.",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 2,
+   "tag": "§ 1º",
+   "s": "Para preencher a Ficha Cadastral, assinará com pelo menos 3 (três) autógrafos, e receber a primeira numeração, o profissional deve ir pessoalmente a Autoridade Sanitária local, munido de:",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 2,
+   "tag": "b)",
+   "s": "comprovante de endereço residencial ou do consultório, e carimbo com os dados: nome e o Conselho Regional correspondente;",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 2,
+   "tag": "§ 3º",
+   "s": "A documentação de que trata este artigo poderá ser apresentada por meio eletrônico, com assinatura eletrônica válida do profissional e identificação oficial do portador, sendo a entrega da numeração formalizada por comprovante gerado pelo SNCR.",
+   "hl": [
+    "por meio eletrônico",
+    "comprovante gerado pelo SNCR"
+   ]
+  },
+  {
+   "t": "par",
+   "u": 2,
+   "tag": "§ 4º",
+   "s": "O preenchimento da Ficha Cadastral e a solicitação da primeira numeração de Notificação de Receita \"A\" poderão, alternativamente, ser realizados por meio eletrônico, mediante o envio da documentação digitalizada e da ficha devidamente preenchida e assinada eletronicamente com certificado digital ou outro meio de assinatura eletrônica válida, nos termos da Lei nº 14.063, de 23 de setembro de 2020.",
+   "hl": [
+    "por meio eletrônico"
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 3,
+   "s": "Na hipótese de o profissional não poder comparecer pessoalmente à Autoridade Sanitária local, poderá solicitar por escrito, o seu cadastramento e as numerações, através de um portador autorizado.",
+   "hl": [
+    "portador autorizado"
+   ]
+  },
+  {
+   "t": "par",
+   "u": 3,
+   "tag": "§ 1º",
+   "s": "O procedimento para o portador retirar a numeração da Notificação de Receita \"A\" será:",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 3,
+   "tag": "§ 2º",
+   "s": "A documentação de que trata este artigo poderá ser apresentada por meio eletrônico, com assinatura eletrônica válida do profissional e identificação oficial do portador, sendo a entrega da numeração formalizada por comprovante gerado pelo SNCR.",
+   "hl": [
+    "comprovante gerado pelo SNCR"
+   ]
+  },
+  {
+   "t": "secao",
+   "u": 4,
+   "s": "DA DISTRIBUIÇÃO DA NUMERAÇÃO PARA CONFECÇÃO DA NOTIFICAÇÃO DE RECEITA \"A\" PELA INSTITUIÇÃO OU UNIDADE HOSPITALAR",
+   "hl": []
+  },
+  {
+   "t": "caput",
+   "u": 5,
+   "s": "A numeração da Notificação de Receita \"A\", para instituição, hospitais ou clínicas, pode ser retirada pelo diretor clínico ou por pessoa indicada por ele, para prescrição de pacientes em tratamento ou em alta hospitalar.",
+   "hl": [
+    "diretor clínico"
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 6,
+   "s": "O procedimento da Autoridade Sanitária para a entrega das numerações para hospitais ou instituições deve ser o mesmo estabelecido para os profissionais.",
+   "hl": []
+  },
+  {
+   "t": "caput",
+   "u": 7,
+   "s": "O profissional deve retirar a numeração para a confecção da Notificação de Receita \"B\" e da Notificação de Receita Especial (Retinóides e Imunossupressores) junto a Autoridade Sanitária da localidade do consultório ou da instituição, para a prescrição de medicamentos à base de substâncias constantes das listas \"B1\" e \"B2\" (psicotrópicos), \"C2\" (retinóides de uso sistêmico) e da lista \"C3\" (imunossupressores) da Portaria SVS/MS nº 344/98 e de suas atualizações.",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 7,
+   "tag": "§ 2º",
+   "s": "A retirada da numeração poderá ser realizada por meio eletrônico, mediante emissão de comprovante eletrônico pelo Sistema Nacional de Controle de Receituários - SNCR, conforme regulamentação específica.",
+   "hl": [
+    "por meio eletrônico"
+   ]
+  },
+  {
+   "t": "mant",
+   "u": 8,
+   "s": "(caput mantido como está)",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 8,
+   "tag": "Parágrafo único",
+   "s": "A entrega da numeração poderá ser formalizada por meio eletrônico, mediante emissão de comprovante pelo SNCR, dispensando o comparecimento presencial do profissional.",
+   "hl": [
+    "dispensando o comparecimento presencial"
+   ]
+  },
+  {
+   "t": "mant",
+   "u": 9,
+   "s": "(caput mantido como está)",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 9,
+   "tag": "Parágrafo único",
+   "s": "A documentação poderá ser apresentada por meio eletrônico, com assinatura eletrônica válida do profissional e identificação oficial do portador, sendo a entrega formalizada por comprovante gerado pelo SNCR.",
+   "hl": [
+    "comprovante gerado pelo SNCR"
+   ]
+  },
+  {
+   "t": "mant",
+   "u": 10,
+   "s": "(caput mantido como está)",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 10,
+   "tag": "a)",
+   "s": "identificação do eminente: no local correspondente à identificação do emitente deve contar o nome do profissional com sua inscrição no Conselho Regional com a sigla da respectiva Unidade da Federação e telefone; ou nome da instituição, CNPJ, ou, CNES, no caso de estabelecimentos públicos, endereço completo e telefone;",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 10,
+   "tag": "c)",
+   "s": "paciente: nome e CPF do paciente do paciente, ou passaporte, no caso de estrangeiro, e no caso de uso veterinário, nome e CPF do proprietário, ou passaporte no caso de estrangeiro, e identificação do animal;",
+   "hl": []
+  },
+  {
+   "t": "caput",
+   "u": 11,
+   "s": "Campos de preenchimento exclusivos do estabelecimento dispensador:",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 11,
+   "tag": "a)",
+   "s": "identificação do comprador: nome e CPF, ou passaporte, no caso de estrangeiro;",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 11,
+   "tag": "b)",
+   "s": "identificação do estabelecimento dispensador: o responsável pelo atendimento, deve utilizar o carimbo de identificado do estabelecimento contendo o CNPJ, ou, CNES, no caso de estabelecimentos públicos de dispensação, nome e endereço completo, datar e colocar seu nome de forma legível abaixo do carimbo de identificação do estabelecimento;",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 11,
+   "tag": "Parágrafo único",
+   "s": "No caso de receituários emitidos em meio eletrônico, o carimbo de que trata as alíneas \"b\" e \"c\" será substituído pelo documento de registro de uso do receituário gerado pelo Sistema Nacional de Controle de Receituários - SNCR, instituído pela Resolução da Diretoria Colegiada - RDC nº 873, de 27 de maio 2024, devidamente preenchido com os campos exigidos, dispensando anotação manual.",
+   "hl": [
+    "dispensando anotação manual"
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 12,
+   "s": "O profissional médico, médico-veterinário e cirurgião-dentista prescreverá em Receita de Controle Especial em 2 (duas) vias, conforme modelo disponível no sítio eletrônico da Anvisa, sendo a 1ª via retida pela farmácia ou drogaria e a 2ª via do paciente, substâncias constantes das listas \"C1\" (outras substâncias sujeitas ao controle especial) e \"C5\" (anabolizantes), da Portaria SVS/MS nº 344/98 e de suas atualizações, e referentes adendos:",
+   "hl": [
+    "2 (duas) vias",
+    "\"C1\"",
+    "\"C5\""
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 13,
+   "s": "A Receita de Controle Especial, válida em todo território nacional deve conter os dizeres abaixo:",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 13,
+   "tag": "a) 4.",
+   "s": "endereço completo - rua, bairro, número, telefone (opcional) do consultório, clínica, hospital ou outro quando for caso, e CNPJ, ou, CNES, no caso de estabelecimentos públicos;",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 13,
+   "tag": "b) 1.",
+   "s": "paciente - nome completo do paciente e CPF, ou passaporte, no caso de estrangeiro;",
+   "hl": [
+    "CPF"
+   ]
+  },
+  {
+   "t": "inc",
+   "u": 13,
+   "tag": "c)",
+   "s": "identificação do comprador e do estabelecimento dispensador: os dados constantes destes campos podem ser apostos mediante carimbo e devidamente preenchidos pela farmácia ou drogaria.",
+   "hl": []
+  },
+  {
+   "t": "mant",
+   "u": 14,
+   "s": "(caput mantido como está)",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 14,
+   "tag": "§ 5º",
+   "s": "As Notificações de Receita \"A\" eletrônicas poderão ser encaminhadas em meio eletrônico.",
+   "hl": [
+    "encaminhadas em meio eletrônico"
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 15,
+   "s": "A Resolução da Diretoria Colegiada - RDC nº 58, de 05 de setembro de 2007, passa a vigorar com as seguintes alterações:",
+   "hl": []
+  },
+  {
+   "t": "caput",
+   "u": 16,
+   "s": "A prescrição, o aviamento ou a dispensação de medicamentos ou fórmulas medicamentosas que contenham substâncias psicotrópicas anorexígenas ficam sujeitas à Notificação de Receita \"B2\", conforme modelo disponível no sítio eletrônico da Anvisa.",
+   "hl": [
+    "\"B2\""
+   ]
+  },
+  {
+   "t": "par",
+   "u": 16,
+   "tag": "§ 5º",
+   "s": "As Notificações de Receita \"B2\" eletrônicas poderão ser encaminhadas em meio eletrônico.",
+   "hl": [
+    "\"B2\"",
+    "encaminhadas em meio eletrônico"
+   ]
+  },
+  {
+   "t": "par",
+   "u": 16,
+   "tag": "§ 6º",
+   "s": "As Notificações de Receitas \"B2\" emitidas em meio eletrônico deverão atender aos requisitos estabelecidos na Resolução da Diretoria Colegiada - RDC nº 1.000.",
+   "hl": [
+    "\"B2\""
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 17,
+   "s": "A Resolução da Diretoria Colegiada - RDC nº 11, de 11 de março de 2011, passa a vigorar com as seguintes alterações:",
+   "hl": []
+  },
+  {
+   "t": "caput",
+   "u": 18,
+   "s": "A cada prescrição do medicamento à base de Talidomida, o paciente deverá receber do prescritor a Notificação de Receita de Talidomida, conforme modelo disponível no sítio eletrônico da Anvisa, e o Termo de Responsabilidade /Esclarecimento (Anexos V-A ou V-B desta Resolução, conforme o caso).",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 18,
+   "tag": "§ 3º",
+   "s": "O Termo de Responsabilidade/Esclarecimento poderá ser emitido e assinado em meio eletrônico, desde que contenha assinatura eletrônica válida do prescritor e do paciente, nos termos da Lei nº 14.063, de 23 de setembro de 2020, devendo o arquivo eletrônico ser arquivado nos locais correspondentes às vias físicas previstas neste artigo.",
+   "hl": [
+    "emitido e assinado em meio eletrônico"
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 19,
+   "s": "A Notificação de Receita de Talidomida é o documento que, juntamente com os Termos de Responsabilidade/Esclarecimento, autoriza a dispensação do medicamento à base de Talidomida.",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 19,
+   "tag": "§ 4º",
+   "s": "As Notificações de Receita de Talidomida emitidas em meio eletrônico deverão atender integralmente aos requisitos estabelecidos na Resolução da Diretoria Colegiada - RDC nº 1.000.",
+   "hl": [
+    "RDC nº 1.000"
+   ]
+  },
+  {
+   "t": "mant",
+   "u": 20,
+   "s": "(caput mantido como está)",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 20,
+   "tag": "§ 4º",
+   "s": "No caso de Notificação de Receita de Talidomida emitida em meio eletrônico, os dados sobre a dispensação constante dos incisos IX e X serão substituídos pelo documento de registro de uso do receituário gerado pelo Sistema Nacional de Controle de Receituários - SNCR, instituído pela Resolução da Diretoria Colegiada - RDC nº 873, de 27 de maio 2024, devidamente preenchido com os campos exigidos, dispensando anotação manual.",
+   "hl": [
+    "dispensando anotação manual"
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 21,
+   "s": "Cabe à autoridade sanitária distribuir a numeração da Notificação de Receita de Talidomida aos profissionais devidamente cadastrados.",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 21,
+   "tag": "§ 1º",
+   "s": "A Notificação de que trata o \"caput\" deste artigo deverá ser impressa conforme modelo disponível no sítio eletrônico da Anvisa, em 2 (duas) vias e na cor branca.",
+   "hl": [
+    "na cor branca"
+   ]
+  },
+  {
+   "t": "par",
+   "u": 21,
+   "tag": "§ 2º",
+   "s": "A distribuição, reposição e controle da numeração da Notificação de Receita de Talidomida serão realizados pela autoridade sanitária competente por meio do Sistema Nacional de Controle de Receituários - SNCR, conforme os critérios e procedimentos estabelecidos na Resolução da Diretoria Colegiada - RDC nº 873, de 27 de maio de 2024, ou norma que vier a substituí-la.",
+   "hl": [
+    "SNCR"
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 22,
+   "s": "Para solicitar a numeração para confecção da Notificação de Receita de Talidomida, o profissional prescritor deve ir pessoalmente à autoridade sanitária competente para preencher a ficha cadastral, apresentando os seguintes documentos:",
+   "hl": []
+  },
+  {
+   "t": "caput",
+   "u": 23,
+   "s": "Será suspenso o fornecimento da numeração da Notificação de Receita de Talidomida quando for verificado seu uso indevido pelo profissional, devendo o fato ser comunicado ao órgão de classe e às demais autoridades competentes.",
+   "hl": [
+    "uso indevido"
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 24,
+   "s": "Ficam revogados:",
+   "hl": [
+    "Ficam revogados"
+   ]
+  },
+  {
+   "t": "inc",
+   "u": 24,
+   "tag": "I",
+   "s": "a alínea \"a\" do caput do artigo 36; o §2º do artigo 40; os anexos IX, X, XI e XII da Portaria SVS/MS nº 344, de 12 de maio de 1998, publicada no DOU nº 91, de 15 de maio de 1998, Seção 1, pág.3;",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 24,
+   "tag": "II",
+   "s": "o artigo 67; o artigo 68; o §2º do artigo 69; o artigo 76; a alínea \"e\" do caput do artigo 77; o artigo 79; e o item \"2\" da alínea \"b\" do artigo 85 da Portaria SVS/MS nº 06, de 29 de janeiro de 1999, publicada no DOU nº 21, de 1º de fevereiro de 1999, Seção 1, pág.42;",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 24,
+   "tag": "III",
+   "s": "o inciso I do caput do artigo 22; o artigo 25; e o anexo VI da Resolução da Diretoria Colegiada - RDC 11, de 11 de março de 2011, publicada no DOU nº 57, de 24 de março de 1998, Seção 1, pág.79;",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 24,
+   "tag": "IV",
+   "s": "o anexo I da Resolução da Diretoria Colegiada - RDC nº 58, de 5 de setembro de 2007, publicada no DOU de 6 de setembro de 2007, Seção 1; e",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 24,
+   "tag": "V",
+   "s": "o artigo 12 da Resolução da Diretoria Colegiada - RDC nº 873, de 27 de maio 2024, publicada no DOU nº 104, de 3 de junho de 2024, Seção 1, pág.82.",
+   "hl": []
+  },
+  {
+   "t": "caput",
+   "u": 25,
+   "s": "O descumprimento das disposições contidas nesta Resolução constituirá infração sanitária, nos termos da Lei nº 6.437, de 20 de agosto de 1977, sem prejuízo das demais sanções civis, administrativas e penais cabíveis.",
+   "hl": [
+    "infração sanitária"
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 26,
+   "s": "Esta Resolução entra em vigor 60 dias após a data da sua publicação.",
+   "hl": [
+    "60 dias após a data da sua publicação"
+   ]
+  }
+ ],
+ "unid": [
+  {
+   "lab": "Art. 22",
+   "kind": "rdc",
+   "ctx": "altera a Portaria 6/1999",
+   "a": 22
+  },
+  {
+   "lab": "4.1.1.1",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "Art. 69",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "Art. 70",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "4.1.1.2",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "Art. 71",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "Art. 74",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "Art. 75",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "Art. 77",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "Art. 80",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "Art. 81",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "Art. 82",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "Art. 84",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "Art. 85",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "Art. 107",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 6/1999"
+  },
+  {
+   "lab": "Art. 23",
+   "kind": "rdc",
+   "ctx": "altera a RDC 58/2007",
+   "a": 23
+  },
+  {
+   "lab": "Art. 1º",
+   "kind": "novo",
+   "ctx": "RDC nº 58/2007"
+  },
+  {
+   "lab": "Art. 24",
+   "kind": "rdc",
+   "ctx": "altera a RDC 11/2011",
+   "a": 24
+  },
+  {
+   "lab": "Art. 20",
+   "kind": "novo",
+   "ctx": "RDC nº 11/2011"
+  },
+  {
+   "lab": "Art. 21",
+   "kind": "novo",
+   "ctx": "RDC nº 11/2011"
+  },
+  {
+   "lab": "Art. 22",
+   "kind": "novo",
+   "ctx": "RDC nº 11/2011"
+  },
+  {
+   "lab": "Art. 23",
+   "kind": "novo",
+   "ctx": "RDC nº 11/2011"
+  },
+  {
+   "lab": "Art. 24",
+   "kind": "novo",
+   "ctx": "RDC nº 11/2011"
+  },
+  {
+   "lab": "Art. 26",
+   "kind": "novo",
+   "ctx": "RDC nº 11/2011"
+  },
+  {
+   "lab": "Art. 25",
+   "kind": "rdc",
+   "ctx": "revogações",
+   "a": 25
+  },
+  {
+   "lab": "Art. 26",
+   "kind": "rdc",
+   "ctx": "infração sanitária",
+   "a": 26
+  },
+  {
+   "lab": "Art. 27",
+   "kind": "rdc",
+   "ctx": "vigência",
+   "a": 27
+  }
+ ]
+}

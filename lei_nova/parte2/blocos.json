@@ -1,0 +1,314 @@
+{
+ "blocos": [
+  {
+   "t": "titulo",
+   "u": -1,
+   "s": "Resolução da Diretoria Colegiada da Anvisa - RDC nº 1.000, de 11 de dezembro de 2025"
+  },
+  {
+   "t": "parte",
+   "u": -1,
+   "s": "Parte 2 · Artigo 21"
+  },
+  {
+   "t": "sub",
+   "u": -1,
+   "s": "Mudanças na Portaria SVS/MS nº 344/1998"
+  },
+  {
+   "t": "aviso",
+   "u": -1,
+   "s": "Quando aparecer \"Novo texto do artigo\", é a nova redação de um artigo da Portaria 344, e não um artigo desta RDC."
+  },
+  {
+   "t": "caput",
+   "u": 0,
+   "s": "A Portaria SVS/MS nº 344, de 12 de maio de 1998, passa a vigorar com as seguintes alterações:",
+   "hl": []
+  },
+  {
+   "t": "caput",
+   "u": 1,
+   "s": "A entrega remota de medicamentos sujeitos a controle especial realizada por estabelecimento dispensador, inclusive a entrega remota definida por programas governamentais, devem ser realizadas atendendo aos requisitos e procedimentos previstos nos incisos abaixo:",
+   "hl": [
+    "entrega remota"
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 2,
+   "s": "A Notificação de Receita é o documento que, acompanhado de receita, autoriza a dispensação de medicamentos a base de substâncias constantes das listas \"A1\" e \"A2\" (entorpecentes), \"A3\", \"B1\" e \"B2\" (psicotrópicas) e \"C2\" (retinóicas para uso sistêmico), deste Regulamento Técnico e de suas atualizações.",
+   "hl": [
+    "acompanhado de receita"
+   ]
+  },
+  {
+   "t": "par",
+   "u": 2,
+   "tag": "§ 1º",
+   "s": "Caberá à Autoridade Sanitária fornecer ao profissional ou à instituição devidamente cadastrados a numeração para confecção das Notificações de Receita, bem como avaliar e controlar esta numeração.",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 2,
+   "tag": "§ 2º",
+   "s": "A solicitação da numeração das Notificações de Receita se fará mediante requisição (ANEXO VI), devidamente preenchida e assinada pelo profissional.",
+   "hl": []
+  },
+  {
+   "t": "caput",
+   "u": 3,
+   "s": "A Notificação de Receita deverá conter os itens referentes as alíneas a, b e c devidamente impressos e apresentando as seguintes características:",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 3,
+   "tag": "c)",
+   "s": "identificação do emitente: - nome do profissional com sua inscrição no Conselho Regional com a sigla da respectiva Unidade da Federação; ou nome da instituição com o CNPJ, ou, CNES, no caso de estabelecimentos públicos, endereço completo e telefone;",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 3,
+   "tag": "d)",
+   "s": "identificação do usuário: nome e CPF do paciente, ou, passaporte, no caso de estrangeiro; e, no caso de uso veterinário, nome e CPF do proprietário, ou passaporte, no caso de estrangeiro, e identificação do animal;",
+   "hl": [
+    "CPF",
+    "passaporte"
+   ]
+  },
+  {
+   "t": "inc",
+   "u": 3,
+   "tag": "i)",
+   "s": "identificação do comprador; nome e CPF, ou, passaporte, no caso de estrangeiro; endereço completo e telefone;",
+   "hl": [
+    "CPF",
+    "passaporte"
+   ]
+  },
+  {
+   "t": "inc",
+   "u": 3,
+   "tag": "j)",
+   "s": "identificação do estabelecimento dispensador: nome, CNPJ, ou, CNES, no caso de estabelecimentos públicos de dispensação, e endereço completo, nome do responsável pela dispensação e data do atendimento;",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 3,
+   "tag": "l)",
+   "s": "identificação da gráfica: nome, endereço e CNPJ impressos no rodapé de cada folha do talonário; e",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 3,
+   "tag": "§ 1º",
+   "s": "A distribuição e controle da sequência numérica da Notificação de Receita \"A\", da Notificação de Receita \"B\" (psicotrópicos) e da Notificação de Receita Especial (retinóides e talidomida) obedecerão ao disposto na Instrução Normativa deste Regulamento Técnico.",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 3,
+   "tag": "§ 3º",
+   "s": "No caso de receituários emitidos em meio eletrônico, a anotação de que trata a alínea \"m\" será substituída pelo documento de registro de uso do receituário gerado pelo Sistema Nacional de Controle de Receituários - SNCR, instituído pela Resolução da Diretoria Colegiada - RDC nº 873, de 27 de maio 2024, devidamente preenchido com os campos exigidos, dispensando anotação manual.",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 3,
+   "tag": "§ 4º",
+   "s": "O disposto no § 2º não se aplica às Notificações de Receitas eletrônicas, as quais deverão atender integralmente aos requisitos estabelecidos na Resolução da Diretoria Colegiada - RDC nº 1.000.",
+   "hl": []
+  },
+  {
+   "t": "caput",
+   "u": 4,
+   "s": "Será suspenso o fornecimento da sequência numérica da Notificação de Receita \"A\" (listas \"A1\" e \"A2\" entorpecentes e \"A3\" - psicotrópicas), da Notificação de Receita \"B\" (listas \"B1\" e \"B2\" psicotrópicas) e da Notificação de Receita Especial \"C2\" (lista: \"C2\" - retinóicas de uso sistêmico), quando for apurado seu uso indevido pelo profissional ou pela instituição, devendo o fato ser comunicado ao órgão de classe e as demais autoridades competentes.",
+   "hl": [
+    "uso indevido"
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 5,
+   "s": "A Notificação de Receita \"A\", para a prescrição dos medicamentos contendo substâncias das listas \"A1\" \"A2\" (entorpecentes) e \"A3\" (psicotrópicos), de cor amarela, deverá ser impressa em gráficas pelo profissional ou instituição devidamente cadastrados, conforme modelo disponível no sítio eletrônico da Anvisa.",
+   "hl": [
+    "de cor amarela"
+   ]
+  },
+  {
+   "t": "par",
+   "u": 5,
+   "tag": "§ 1º",
+   "s": "Na solicitação da numeração de Notificação de Receita \"A\", o profissional ou o portador poderá dirigir-se pessoalmente à Autoridade Sanitária Competente para o cadastramento ou encaminhar ficha cadastral devidamente preenchida com sua assinatura reconhecida em cartório.",
+   "hl": [
+    "assinatura reconhecida em cartório"
+   ]
+  },
+  {
+   "t": "par",
+   "u": 5,
+   "tag": "§ 3º",
+   "s": "A ficha cadastral mencionada no § 1º também poderá ser encaminhada em formato eletrônico, desde que contenha assinatura eletrônica válida , nos termos da Lei nº 14.063, de 23 de setembro de 2020.",
+   "hl": [
+    "formato eletrônico"
+   ]
+  },
+  {
+   "t": "par",
+   "u": 5,
+   "tag": "§ 4º",
+   "s": "A numeração de Notificação de Receita \"A\" poderá ser disponibilizada ao prescritor por meio eletrônico, mediante emissão de comprovante pelo Sistema Nacional de Controle de Receituários - SNCR, instituído na Resolução da Diretoria Colegiada - RDC 873, de 27 de maio de 2024, que servirá como registro formal da entrega.",
+   "hl": [
+    "por meio eletrônico"
+   ]
+  },
+  {
+   "t": "mant",
+   "u": 6,
+   "s": "(caput mantido como está)",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 6,
+   "tag": "Parágrafo único",
+   "s": "As Notificações de Receita \"A\" eletrônicas poderão ser encaminhadas em meio eletrônico.",
+   "hl": [
+    "encaminhadas em meio eletrônico"
+   ]
+  },
+  {
+   "t": "caput",
+   "u": 7,
+   "s": "A Notificação de Receita \"B\", de cor azul, deverá ser impressa às expensas do profissional ou da instituição, em gráficas, conforme modelo estabelecido no sítio eletrônico da Anvisa, e terá validade, em todo o Território Nacional, pelo período de 30 (trinta) dias, contados da data de sua emissão, para fins de dispensação do medicamento.",
+   "hl": [
+    "de cor azul",
+    "30 (trinta) dias"
+   ]
+  },
+  {
+   "t": "mant",
+   "u": 8,
+   "s": "(caput mantido como está)",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 8,
+   "tag": "§ 3º",
+   "s": "O Termo de Consentimento Pós-Informação poderá ser emitido e assinado em meio eletrônico, desde que contenha assinatura eletrônica válida do prescritor e do paciente, nos termos da Lei nº 14.063, de 23 de setembro de 2020, devendo o arquivo eletrônico ser arquivado nos locais correspondentes às vias físicas previstas neste Regulamento Técnico.",
+   "hl": [
+    "emitido e assinado em meio eletrônico"
+   ]
+  },
+  {
+   "t": "mant",
+   "u": 9,
+   "s": "(caput mantido como está)",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 9,
+   "tag": "a)",
+   "s": "identificação do emitente: impresso em formulário do profissional ou da instituição, contendo nome do profissional com sua inscrição no Conselho Regional com a sigla da respectiva Unidade da Federação; ou nome da instituição, CNPJ, ou, CNES, no caso de estabelecimentos públicos, endereço completo e telefone;",
+   "hl": []
+  },
+  {
+   "t": "inc",
+   "u": 9,
+   "tag": "b)",
+   "s": "identificação do usuário: nome e CPF do paciente, ou passaporte, no caso de estrangeiro, e no caso de uso veterinário, nome e CPF do proprietário, ou passaporte, no caso de estrangeiro, e identificação do animal;",
+   "hl": [
+    "CPF"
+   ]
+  },
+  {
+   "t": "par",
+   "u": 9,
+   "tag": "§ 3º",
+   "s": "O disposto no § 2º não se aplica às Receitas de Controle Especial eletrônicas, as quais deverão atender integralmente aos requisitos estabelecidos na Resolução da Diretoria Colegiada - RDC nº 1.000.",
+   "hl": [
+    "não se aplica"
+   ]
+  },
+  {
+   "t": "mant",
+   "u": 10,
+   "s": "(caput mantido como está)",
+   "hl": []
+  },
+  {
+   "t": "par",
+   "u": 10,
+   "tag": "§ 2º-A",
+   "s": "As Notificações de Receita \"A\" eletrônicas poderão ser encaminhadas em meio eletrônico.",
+   "hl": [
+    "encaminhadas em meio eletrônico"
+   ]
+  }
+ ],
+ "unid": [
+  {
+   "lab": "Art. 21",
+   "kind": "rdc",
+   "ctx": "altera a Portaria 344/1998",
+   "a": 21
+  },
+  {
+   "lab": "Art. 34-B",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 344/1998"
+  },
+  {
+   "lab": "Art. 35",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 344/1998"
+  },
+  {
+   "lab": "Art. 36",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 344/1998"
+  },
+  {
+   "lab": "Art. 37",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 344/1998"
+  },
+  {
+   "lab": "Art. 40",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 344/1998"
+  },
+  {
+   "lab": "Art. 42",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 344/1998"
+  },
+  {
+   "lab": "Art. 45",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 344/1998"
+  },
+  {
+   "lab": "Art. 50",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 344/1998"
+  },
+  {
+   "lab": "Art. 55",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 344/1998"
+  },
+  {
+   "lab": "Art. 72",
+   "kind": "novo",
+   "ctx": "Portaria SVS/MS nº 344/1998"
+  }
+ ]
+}

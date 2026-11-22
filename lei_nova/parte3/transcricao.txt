@@ -1,0 +1,163 @@
+[    0.0] Resolução da diretoria colegiada da Anvisa, RDC número 1.0 de 11 de dezembro de 2025
+[    7.4] Parte 3 Artigos 22 a 27
+[   11.4] Mudanças na portaria 6 de 1999 e em outras resoluções, revogações e vigência
+[   19.1] Quando aparecer novo texto do artigo é a nova redação de um artigo da norma alterada
+[   24.1] Artigo 22 a portaria SVS-MS número 06 de 29 de janeiro de 1999
+[   34.4] passa a vigorar com as seguintes alterações 4.1.1.1 da distribuição da
+[   41.1] numeração para a confecção da notificação de receita a pelos profissionais
+[   46.2] Novo texto do artigo 69 a autoridade sanitária competente deve distribuir a
+[   52.5] primeira numeração para a confecção da notificação de receita a bem como fornecer
+[   57.3] informação aos profissionais da documentação que será necessária para
+[   62.0] retirar a numeração. Parágrafo primeiro para preencher a ficha cadastral assinará
+[   67.3] com pelo menos três autógrafos e receber a primeira numeração o
+[   71.6] profissional deve ir pessoalmente à autoridade sanitária local munido de a
+[   76.6] linha B comprovante de endereço residencial ou do consultório e carimbo com
+[   81.8] os dados nome e o conselho regional correspondente. Parágrafo terceiro a
+[   88.2] documentação de que trata este artigo poderá ser apresentada por meio
+[   92.0] eletrônico com assinatura eletrônica válida do profissional e identificação
+[   96.7] oficial do portador sendo a entrega da numeração formalizada por comprovante
+[  101.0] gerado pelo SNCR. Parágrafo quarto o preenchimento da ficha cadastral e a
+[  107.5] solicitação da primeira numeração de notificação de receita a poderão
+[  112.6] alternativamente ser realizados por meio eletrônico mediante o envio da
+[  117.0] documentação digitalizada e da ficha devidamente preenchida e assinada
+[  122.2] eletrônicamente com certificado digital ou outro meio de assinatura eletrônica
+[  126.5] válida nos termos da lei número 14 mil e 63 de 23 de setembro de 2020.
+[  133.6] Novo texto do artigo 70 na hipótese de o profissional não poder comparecer
+[  138.6] pessoalmente a autoridade sanitária local poderá solicitar por escrito o seu
+[  143.5] cadastramento e as numerações através de um portador autorizado. Parágrafo
+[  148.8] primeiro o procedimento para o portador retirar a numeração da
+[  152.6] notificação de receita a será. Parágrafo segundo a documentação de que trata
+[  158.2] este artigo poderá ser apresentada por meio eletrônico com assinatura eletrônica
+[  163.2] válida do profissional e identificação oficial do portador sendo a entrega da
+[  168.4] numeração formalizada por comprovante gerado pelo SNCR. 4.1.1.2 da
+[  176.5] distribuição da numeração para a confecção da notificação de receita a
+[  181.0] pela instituição ou unidade hospitalar. Novo texto do artigo 71 a numeração da
+[  187.9] notificação de receita a para instituição, hospitais ou clínicas pode ser retirada
+[  193.1] pelo diretor clínico ou por pessoa indicada por ele para prescrição de
+[  197.6] pacientes em tratamento ou em auto-hospitalar. Novo texto do artigo 74 o
+[  203.6] procedimento da autoridade sanitária para entrega das numerações para
+[  207.4] hospitais ou instituições deve ser o mesmo estabelecido para os profissionais.
+[  212.4] Novo texto do artigo 75 o profissional deve retirar a numeração para a
+[  217.7] confecção da notificação de receita a e da notificação de receita especial
+[  222.4] retinoides e imunossupressores junto à autoridade sanitária da localidade do
+[  227.8] consultório ou da instituição para prescrição de medicamentos a base de
+[  232.3] substâncias constantes das listas B1 e B2 psicotrópicos C2 retinoides de uso
+[  239.7] sistêmico e da lista C3 imunossupressores da portaria SVS barra MS número 344
+[  248.8] barra 98 e de suas atualizações. Parágrafo segundo a retirada da
+[  254.5] numeração poderá ser realizada por meio eletrônico mediante emissão de
+[  258.8] comprovante eletrônico pelo Sistema Nacional de Controle de Receituários
+[  262.9] SNCR conforme regulamentação específica artigo 77 mantido como está
+[  270.1] parágrafo único a entrega da numeração poderá ser formalizada por meio
+[  275.6] eletrônico mediante emissão de comprovante pelo SNCR dispensando o
+[  280.4] comparecimento presencial do profissional artigo 80 mantido como está
+[  285.2] parágrafo único a documentação poderá ser apresentada por meio
+[  289.7] eletrônico com assinatura eletrônica válida do profissional e identificação
+[  294.6] oficial do portador sendo a entrega formalizada por comprovante gerado
+[  299.3] pelo SNCR artigo 81 mantido como está a linha A identificação do eminente no
+[  307.3] local correspondente a identificação do emitente deve contar o nome do
+[  311.4] profissional com sua inscrição no Conselho Regional com a sigla da
+[  315.3] respectiva unidade da Federação e Telefone ou nome da instituição CNPJ ou CNES no
+[  323.4] caso de estabelecimentos públicos endereço completo e telefone a linha C
+[  328.8] paciente nome e CPF do paciente do paciente ou passaporte no caso de
+[  334.9] estrangeiro e no caso de uso veterinário nome e CPF do proprietário ou
+[  340.2] passaporte no caso de estrangeiro e identificação do animal a linha D novo
+[  345.6] texto do artigo 82 campos de preenchimento exclusivos do estabelecimento
+[  350.5] dispensador a linha A identificação do comprador nome e CPF ou passaporte no
+[  357.5] caso de estrangeiro a linha B identificação do estabelecimento dispensador o
+[  363.1] responsável pelo atendimento deve utilizar o carimbo de identificado do
+[  367.4] estabelecimento contendo CNPJ ou CNES no caso de estabelecimentos públicos de
+[  373.8] dispensação nome e endereço completo datar e colocar seu nome de forma legível
+[  379.7] abaixo do carimbo de identificação do estabelecimento
+[  382.7] parágrafo único no caso de receituários emitidos em meio eletrônico
+[  387.5] o carimbo de que trata as alímias B e C será substituído pelo documento de
+[  392.6] registro de uso do receituário gerado pelo sistema nacional de controle de
+[  397.1] receituários SNCR instituído pela resolução da diretoria colegiada RDC
+[  403.4] número 873 de 27 de maio de 2024 devidamente preenchido com os campos
+[  410.9] exigidos dispensando a notação manual novo texto do artigo 84 o profissional
+[  417.0] médico médico veterinário e cirurgião dentista prescreverá em receita de
+[  422.0] controle especial em duas vias conforme modelo disponível no sítio
+[  426.3] eletrônico da anvisa sendo a primeira via retida pela farmácia ou drogaria e a
+[  431.5] segunda via do paciente substâncias constantes das listas c1 outra
+[  436.7] substâncias sujeitas ao controle especial e c5 anabolizantes da portaria
+[  442.2] svs barra ms número 344 barra 98 e de suas atualizações e referentes a
+[  451.1] novo texto do artigo 85 a receita de controle especial válida em todo o
+[  456.7] território nacional deve conter os dizeres abaixo um dois três quatro endereço
+[  462.3] completo rua bairro número telefone opcional do consultório clínica
+[  468.5] hospital ou outro quando for caso e cnpj ou cnes no caso de estabelecimentos
+[  475.7] públicos 5 1 paciente nome completo do paciente e cpf ou passaporte no caso de
+[  483.7] estrangeiro 2 3 4 a línia c identificação do comprador e do estabelecimento
+[  490.3] dispensador os dados constantes destes campos podem ser apostos mediante carimbo
+[  495.4] e devidamente preenchidos pela farmácia ou drogaria artigo 107 mantido
+[  501.2] como está parágrafo quinto as notificações de receita a eletrônicas
+[  506.1] poderão ser encaminhadas em meio eletrônico artigo 23 a resolução da
+[  511.8] diretoria colegiada rdc número 58 de 5 de setembro de 2007 passa a vigorar com
+[  519.1] as seguintes alterações novo texto do artigo 1 a prescrição o aviamento ou
+[  525.1] a dispensação de medicamentos ou fórmulas medicamentos que contém
+[  529.3] substâncias psicotrópicas anorexígenas ficam sujeitas à notificação de receita
+[  534.8] b2 conforme modelo disponível no sítio eletrônico da anvisa
+[  539.1] parágrafo quinto as notificações de receita b2 eletrônicas poderão ser
+[  544.5] encaminhadas em meio eletrônico parágrafo sexto as notificações de
+[  549.1] receitas b2 emitidas em meio eletrônico deverão atender aos requisitos
+[  553.8] estabelecidos na resolução da diretoria colegiada rdc número mil artigo 24 a
+[  561.6] resolução da diretoria colegiada rdc número 11 de 11 de março de 2011 passa a
+[  567.7] vigorar com as seguintes alterações novo texto do artigo 20 a cada prescrição
+[  573.1] do medicamento a base de talidomida o paciente deverá receber do
+[  577.6] prescritor a notificação de receita de talidomida conforme modelo disponível no
+[  582.4] sítio eletrônico da anvisa e o termo de responsabilidade barra esclarecimento anexo
+[  588.6] 5 a ou vb desta resolução conforme o caso parágrafo terceiro o termo de
+[  595.2] responsabilidade barra esclarecimento poderá ser emitido e assinado em meio
+[  599.5] eletrônico desde que contém a assinatura eletrônica válida do
+[  603.3] prescritor e do paciente nos termos da lei número 14 mil e 63 de 23 de
+[  609.4] setembro de 2020 devendo o arquivo eletrônico ser arquivado nos locais
+[  614.0] correspondentes às vias físicas previstas neste artigo novo texto do artigo 21 a
+[  620.1] notificação de receita de talidomida é o documento que juntamente com os termos
+[  625.2] de responsabilidade barra esclarecimento autoriza a dispensação do
+[  629.7] medicamento a base de talidomida parágrafo quarto as notificações de
+[  634.7] receita de talidomida emitidas em meio eletrônico deverão atender integralmente
+[  639.7] aos requisitos estabelecidos na resolução da diretoria colediada rdc número
+[  645.0] mil artigo 22 mantido como está
+[  648.2] parágrafo quarto no caso de notificação de receita de talidomida
+[  653.0] emitida em meio eletrônico os dados sobre a dispensação constante dos
+[  657.4] incisos 9 e 10 serão substituídos pelo documento de registro de uso do
+[  662.5] receituário gerado pelo sistema nacional de controle de receituários sncr
+[  668.2] instituído pela resolução da diretoria colediada rdc número 873 de 27 de maio de
+[  676.3] 2024 devidamente preenchido com os campos exigidos dispensando a notação
+[  681.8] manual novo texto do artigo 23 cabe a autoridade sanitária distribuir a
+[  688.1] número ação da notificação de receita de talidomida aos profissionais
+[  692.6] devidamente cadastrados parágrafo primeiro a notificação de que trata o
+[  697.2] capote deste artigo deverá ser impressa conforme modelo disponível no sítio
+[  702.3] eletrônico da anvisa em duas vias e na cor branca parágrafo segundo a
+[  707.3] distribuição reposição e controle da número ação da notificação de
+[  711.7] receita de talidomida serão realizados pela autoridade sanitária competente
+[  716.3] por meio do sistema nacional de controle de receituários sncr conforme os
+[  721.9] critérios e procedimentos estabelecidos na resolução da diretoria
+[  725.5] colediada rdc número 873 de 27 de maio de 2024 ou norma que vier a
+[  733.8] substituí-la novo texto do artigo 24 para solicitar a
+[  738.5] numeração para a confecção da notificação de receita de talidomida
+[  742.3] o profissional prescritor deve ir pessoalmente a autoridade sanitária
+[  746.4] competente para preencher a ficha cadastral apresentando os seguintes
+[  750.7] documentos novo texto do artigo 26 será suspenso o fornecimento da
+[  756.4] numeração da notificação de receita de talidomida quando for
+[  760.0] verificado seu uso indebido pelo profissional devendo o fato ser
+[  764.0] comunicado ao órgão de classe e as demais autoridades competentes
+[  768.7] artigo 25 ficam revogados em siso 1 a alínea a do capote do artigo 36 o
+[  776.4] parágrafo segundo do artigo 40 os anexos 9 10 11 e 12 da portaria svs
+[  783.8] barra ms número 344 de 12 de maio de 1998 publicada no diário
+[  791.6] oficial da união número 91 de 15 de maio de 1998 sessão 1
+[  798.0] página 3 em siso 2 o artigo 67 o artigo 68 o parágrafo segundo do
+[  805.5] artigo 69 o artigo 76 a alínea e do capote do artigo 77 o artigo 79 e o
+[  814.4] item 2 da alínea b do artigo 85 da portaria svs barra ms número 0 6 de
+[  821.9] 29 de janeiro de 1999 publicada no diário oficial da união número 21 de
+[  828.9] 1º de fevereiro de 1999 sessão 1 página 42 em siso 3 o em siso 1 do capote do
+[  837.9] artigo 22 o artigo 25 e o anexo 6 da resolução da diretoria
+[  843.4] colegiada rdc 11 de 11 de março de 2011 publicada no diário
+[  849.1] oficial da união número 57 de 24 de março de 1998 sessão 1 página 79
+[  857.3] em siso 4 o anexo 1 da resolução da diretoria colegiada rdc número 58 de
+[  864.8] 5 de setembro de 2007 publicada no diário oficial da união de 6 de
+[  869.9] setembro de 2007 sessão 1 e em siso 5 o artigo 12 da resolução da diretoria
+[  876.6] colegiada rdc número 873 de 27 de maio de 2024 publicada no diário oficial da
+[  885.1] união número 104 de 3 de junho de 2024 sessão 1 página 82 artigo 26 o
+[  894.2] descumprimento das disposições contidas nesta resolução constituirá
+[  898.5] a infração sanitária nos termos da lei número 6437 de 20 de agosto de 1977
+[  906.8] sem prejuízo das demais sanções civis administrativas e penais cabíveis
+[  911.9] artigo 27 esta resolução entra em vigor 60 dias após a data da sua publicação

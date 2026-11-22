@@ -1,0 +1,101 @@
+[    0.0] Resolução da diretoria colegiada da Anvisa, RDC número 1.000, de 11 de dezembro de 2025,
+[    7.6] parte 2. Artigo 21, mudanças na portaria 344 de 1998. Quando aparecer novo texto do artigo,
+[   18.0] é a nova redação de um artigo da portaria 344 e não um artigo desta RDC.
+[   24.0] Artigo 21, a portaria SVS-MS número 344 de 12 de maio de 1998, passa a vigorar com as
+[   35.8] seguintes alterações. Novo texto do artigo 34B, a entrega remota de medicamento e sujeitos a
+[   43.0] controle especial, realizada por estabelecimento dispensador, inclusive a entrega remota definida
+[   49.0] por programas governamentais, devem ser realizadas atendendo aos requisitos e procedimentos previstos
+[   55.2] nos incisos abaixo. Novo texto do artigo 35. A notificação de receita é o documento que,
+[   62.7] acompanhado de receita, autoriza a dispensação de medicamentos a base de substâncias constantes
+[   68.6] das listas A1 e A2, entorpecentes, A3, B1 e B2, psicotrópicas, e C2, retinoicas para
+[   78.3] uso sistêmico, deste regulamento técnico e de suas atualizações.
+[   83.2] Parágrafo I. Caberá a autoridade sanitária fornecer ao profissional ou à instituição
+[   89.2] devidamente cadastrados a numeração para a confecção das notificações de receita,
+[   94.7] bem como avaliar e controlar esta numeração.
+[   98.1] Parágrafo II. A solicitação da numeração das notificações de receita se fará mediante
+[  104.0] requisição, anexo 6, devidamente preenchida e assinada pelo profissional.
+[  109.7] Novo texto do artigo 36. A notificação de receita deverá conter os itens referentes
+[  115.7] às alíneas A, B e C, devidamente impressos e apresentando as seguintes características.
+[  122.8] Alínea C. Identificação do emitente. Nome do profissional com sua inscrição no
+[  128.4] Conselho Regional com a sigla da Respetiva Unidade da Federação, ou Nome da Instituição com o CNPJ,
+[  136.4] ou CNES, no caso de estabelecimentos públicos, endereço completo e telefone.
+[  143.1] Alínea D. Identificação do usuário. Nome e CPF do paciente, ou Passaporte no caso
+[  150.3] de estrangeiro. E, no caso de uso veterinário, Nome e CPF do proprietário, ou Passaporte
+[  156.9] no caso de estrangeiro e identificação do animal. Alínea I. Identificação do comprador.
+[  163.8] Nome e CPF, ou Passaporte no caso de estrangeiro. Endereço completo e telefone.
+[  170.2] Alínea J. Identificação do estabelecimento dispensador. Nome, CNPJ ou CNES, no caso de
+[  178.9] estabelecimentos públicos de dispensação. E, endereço completo. Nome do responsável pela dispensação
+[  184.5] e data do atendimento. Alínea L. Identificação da gráfica. Nome, endereço e CNPJ impressos
+[  192.9] no roda-pé de cada folha do talonário. E, parágrafo primeiro. A distribuição e controle da
+[  199.3] sequência numérica da notificação de receita A, da notificação de receita B,
+[  204.4] psicotrópicos, e da notificação de receita especial, retinoides e talidomida,
+[  209.6] obedecerão ao disposto na instrução normativa deste regulamento técnico.
+[  214.6] Parágrafo terceiro. No caso de receituários emitidos em meio eletrônico, a anotação de que
+[  220.3] trata a Alínea M será substituída pelo documento de registro de uso do receituário
+[  225.6] gerado pelo Sistema Nacional de Controle de Receituários, SNCR,
+[  230.5] instituído pela Resolução da Diretoria Colegiada, RDC nº 873 de 27 de maio de 2024,
+[  240.1] devidamente preenchido com os campos exigidos dispensando a anotação manual.
+[  245.1] Parágrafo quarto. O disposto no parágrafo segundo não se aplica às notificações de
+[  250.3] receitas eletrônicas, as quais deverão atender integralmente aos requisitos
+[  254.7] estabelecidos na Resolução da Diretoria Colegiada, RDC nº 1000.
+[  259.9] Novo texto do artigo 37. Será suspenso o fornecimento da sequência numérica da
+[  265.7] notificação de receita A, listas A1 e A2 entorpecentes e A3 psicotrópicas, da
+[  272.8] notificação de receita B, listas B1 e B2 psicotrópicas e da notificação de
+[  278.9] receita especial C2, lista C2 retinoicas de uso sistêmico, quando for apurado seu
+[  286.1] uso indebido pelo profissional ou pela instituição, devendo o fato ser
+[  290.5] comunicado ao órgão de classe e as demais autoridades competentes.
+[  295.5] Novo texto do artigo 40. A notificação de receita A para prescrição dos
+[  301.1] medicamentos contendo substâncias das listas A1, A2 entorpecentes e A3
+[  306.9] psicotrópicos, de cor amarela, deverá ser impressa em gráficas pelo profissional
+[  312.3] ou instituição devidamente cadastrados, conforme o modelo disponível no sítio
+[  317.2] eletrônico da Anvisa.
+[  319.1] Parágrafo 1. Na solicitação da numeração de notificação de
+[  323.2] receita A, o profissional ou o portador poderá dirigir-se pessoalmente
+[  328.2] à autoridade sanitária competente para o cadastramento, ou encaminhar ficha
+[  332.4] cadastral devidamente preenchida com sua assinatura reconhecida em cartório.
+[  337.7] Parágrafo 3. A ficha cadastral mencionada no parágrafo 1 também
+[  342.5] poderá ser encaminhada em formato eletrônico, desde que contém a
+[  346.4] assinatura eletrônica válida nos termos da lei número 14.063 de 23 de
+[  352.4] setembro de 2020.
+[  354.5] Parágrafo 4. A numeração de notificação de receita A poderá
+[  359.2] ser disponibilizada ao prescritor por meio eletrônico, mediante
+[  363.0] emissão de comprovante pelo Sistema Nacional de Controle de
+[  366.4] Receituários, SNCR, instituído na resolução da diretoria colediada
+[  371.8] RDC 873 de 27 de maio de 2024, que servirá como registro formal
+[  379.6] da entrega.
+[  381.0] Artigo 42, mantido como está.
+[  384.2] Parágrafo único. As notificações de receita A eletrônicas
+[  388.2] poderão ser encaminhadas em meio eletrônico.
+[  391.6] Novo texto do artigo 45. A notificação de receita B de cor azul
+[  397.3] deverá ser impressa às expensas do profissional ou da instituição
+[  401.3] em gráficas conforme modelo estabelecido no sítio eletrônico
+[  405.3] da Anvisa e terá validade em todo o território nacional pelo
+[  409.4] período de 30 dias contados da data de sua emissão para
+[  413.4] fins de dispensação do medicamento.
+[  415.5] Artigo 50, mantido como está.
+[  419.5] Parágrafo terceiro. O termo de consentimento pós-informação
+[  423.1] poderá ser emitido e assinado em meio eletrônico, desde que
+[  427.3] contém a assinatura eletrônica válida do prescritor e do paciente,
+[  431.6] nos termos da lei número 14.063 de 23 de setembro de 2020,
+[  437.5] devendo o arquivo eletrônico ser arquivado nos locais correspondentes
+[  441.1] às vias físicas previstas neste regulamento técnico.
+[  444.4] Artigo 55, mantido como está.
+[  448.4] Alínea A, identificação do emitente.
+[  451.5] Impresso em formulário do profissional ou da instituição, contendo
+[  455.3] o nome do profissional com sua inscrição no Conselho Regional
+[  458.5] com a sigla da respectiva unidade da Federação.
+[  461.9] Ou nome da instituição CNPJ ou CNES, no caso de
+[  467.3] estabelecimentos públicos, endereço completo e telefone.
+[  471.4] Alínea B, identificação do usuário.
+[  474.1] Nome e CPF do paciente, ou passaporte, no caso de estrangeiro.
+[  479.4] E no caso de uso veterinário, nome e CPF do proprietário,
+[  483.7] ou passaporte, no caso de estrangeiro.
+[  486.3] E identificação do animal.
+[  488.1] Parágrafo 3, o disposto no parágrafo 2 não se aplica
+[  492.4] às receitas de controle especial eletrônicas,
+[  495.3] as quais deverão atender integralmente aos requisitos
+[  498.2] estabelecidos na resolução da diretoria colegiada,
+[  501.3] RDC número 1.
+[  503.5] Artigo 72, mantido como está.
+[  506.9] Parágrafo 2, A, as notificações de receita A eletrônicas
+[  511.5] poderão ser encaminhadas em meio eletrônico.

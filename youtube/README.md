@@ -102,6 +102,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | Ep. | Vídeo | Textos | Capa |
 |---|---|---|---|
 | 1 | Arts. 1º ao 4º (refeito no estilo verde da RDC em 23/11/2026) | [lei8080.md](textos/lei8080.md) | [capa_lei8080_ep01.png](capas/capa_lei8080_ep01.png) |
+| 2 | Arts. 5º, 6º e 6º-A: objetivos e campo de atuação do SUS (estilo verde, voz Juliana) | [lei8080.md](textos/lei8080.md) | [capa_lei8080_ep02.png](capas/capa_lei8080_ep02.png) |
 
 ## Concursos (longos)
 

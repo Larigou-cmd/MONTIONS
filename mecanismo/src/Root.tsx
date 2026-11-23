@@ -1,5 +1,7 @@
 import React from "react";
 import { VideoLei8080 as VideoLei8080Verde, DURATION as DURATION_LEI8080V } from "./lei8080Verde/Video";
+import { CapaLei8080Ep2Verde } from "./lei8080Verde/CapaEp2";
+import { VideoLei8080Ep2, DURATION as DURATION_LEI8080E2 } from "./lei8080Ep2/Video";
 import { CapaLei8080Ep1Verde } from "./lei8080Verde/Capa";
 import { VideoRosuvastatina, CapaRosuvastatina, DURATION_ROSUVA } from "./rosuvastatina/Video";
 import { VideoGravidezPixel, DURATION_GRAVIDEZ_PIXEL } from "./gravidezPixel/Video";
@@ -1427,6 +1429,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="Lei8080Ep1VerdeCapa"
       component={CapaLei8080Ep1Verde}
+      durationInFrames={1}
+      fps={FPS}
+      width={1280}
+      height={720}
+    />
+    <Composition
+      id="Lei8080Ep2"
+      component={VideoLei8080Ep2}
+      durationInFrames={DURATION_LEI8080E2}
+      fps={FPS}
+      width={1920}
+      height={1080}
+    />
+    <Composition
+      id="Lei8080Ep2Capa"
+      component={CapaLei8080Ep2Verde}
       durationInFrames={1}
       fps={FPS}
       width={1280}

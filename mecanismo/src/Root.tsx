@@ -290,6 +290,7 @@ import { VoxNvidiaTeste, DURACAO_VOX } from "./voxNvidia/Teste";
 import { VideoVoxNvidia, DURACAO_VOX_COMPLETO } from "./voxNvidia/Completo";
 import { VideoNeymarTigrinha, DURACAO_NEYMAR } from "./voxNeymar/Video";
 import { VideoDolarAtaque, DURACAO_DOLAR } from "./voxDolar/Video";
+import { VideoVarginha, CapaVarginha, DURACAO_VARGINHA } from "./voxVarginha/Video";
 import { VideoOuroPreto, CapaOuroPreto, DURACAO_OURO_PRETO } from "./voxOuroPreto/Video";
 import { VideoSensorGlicose, CapaSensorGlicose, DUR_SENSOR, FPS_SENSOR } from "./sensorGlicose/Video";
 import { VideoNoticiaGlp1, CapaNoticiaGlp1, DURATION as DUR_NOTICIA_GLP1 } from "./noticiaGlp1/Video";
@@ -1623,6 +1624,8 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="NeymarTigrinha" component={VideoNeymarTigrinha} durationInFrames={DURACAO_NEYMAR} fps={30} width={1080} height={1920} />
       <Composition id="OuroPreto" component={VideoOuroPreto} durationInFrames={DURACAO_OURO_PRETO} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
       <Composition id="CapaOuroPreto" component={CapaOuroPreto} durationInFrames={1} fps={30} width={1080} height={1920} />
+      <Composition id="EtVarginha" component={VideoVarginha} durationInFrames={DURACAO_VARGINHA} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
+      <Composition id="CapaEtVarginha" component={CapaVarginha} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="DolarAtaque" component={VideoDolarAtaque} durationInFrames={DURACAO_DOLAR} fps={30} width={1080} height={1920} />
       <Composition id="SensorGlicose" component={VideoSensorGlicose} durationInFrames={DUR_SENSOR} fps={FPS_SENSOR} width={1080} height={1920} />
       <Composition id="CapaSensorGlicose" component={CapaSensorGlicose} durationInFrames={1} fps={24} width={1080} height={1920} />

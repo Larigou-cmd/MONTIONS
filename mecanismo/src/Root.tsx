@@ -1,4 +1,6 @@
 import React from "react";
+import { VideoRosuvastatina, CapaRosuvastatina, DURATION_ROSUVA } from "./rosuvastatina/Video";
+import { VideoGravidezPixel, DURATION_GRAVIDEZ_PIXEL } from "./gravidezPixel/Video";
 import { Composition } from "remotion";
 import { DURATION, FPS } from "./config";
 import { Video } from "./Video";
@@ -288,10 +290,12 @@ import { VoxNvidiaTeste, DURACAO_VOX } from "./voxNvidia/Teste";
 import { VideoVoxNvidia, DURACAO_VOX_COMPLETO } from "./voxNvidia/Completo";
 import { VideoNeymarTigrinha, DURACAO_NEYMAR } from "./voxNeymar/Video";
 import { VideoDolarAtaque, DURACAO_DOLAR } from "./voxDolar/Video";
+import { VideoOuroPreto, CapaOuroPreto, DURACAO_OURO_PRETO } from "./voxOuroPreto/Video";
 import { VideoSensorGlicose, CapaSensorGlicose, DUR_SENSOR, FPS_SENSOR } from "./sensorGlicose/Video";
 import { VideoNoticiaGlp1, CapaNoticiaGlp1, DURATION as DUR_NOTICIA_GLP1 } from "./noticiaGlp1/Video";
 import { VideoNoticiaGlp1Vox, CapaNoticiaGlp1Vox, DUR_GLP1_VOX, FPS_GLP1_VOX } from "./noticiaGlp1Vox/Video";
 import { VideoRdcShort, CapaRdcShort, DURATION_RDC_SHORT } from "./rdcShort/Video";
+import { VideoBonecoCodigo, DURATION_BONECO_CODIGO } from "./bonecoCodigo/Video";
 import { VideoHqTeste, DURATION as DUR_HQ_TESTE } from "./hqTeste/Video";
 export const RemotionRoot: React.FC = () => (
   <>
@@ -970,6 +974,14 @@ export const RemotionRoot: React.FC = () => (
       height={1920}
     />
     <Composition
+      id="BonecoCodigo"
+      component={VideoBonecoCodigo}
+      durationInFrames={DURATION_BONECO_CODIGO}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
       id="RdcShort"
       component={VideoRdcShort}
       durationInFrames={DURATION_RDC_SHORT}
@@ -1609,6 +1621,8 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="VoxNvidiaTeste" component={VoxNvidiaTeste} durationInFrames={DURACAO_VOX} fps={30} width={1080} height={1920} />
       <Composition id="VoxNvidia" component={VideoVoxNvidia} durationInFrames={DURACAO_VOX_COMPLETO} fps={30} width={1080} height={1920} />
       <Composition id="NeymarTigrinha" component={VideoNeymarTigrinha} durationInFrames={DURACAO_NEYMAR} fps={30} width={1080} height={1920} />
+      <Composition id="OuroPreto" component={VideoOuroPreto} durationInFrames={DURACAO_OURO_PRETO} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
+      <Composition id="CapaOuroPreto" component={CapaOuroPreto} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="DolarAtaque" component={VideoDolarAtaque} durationInFrames={DURACAO_DOLAR} fps={30} width={1080} height={1920} />
       <Composition id="SensorGlicose" component={VideoSensorGlicose} durationInFrames={DUR_SENSOR} fps={FPS_SENSOR} width={1080} height={1920} />
       <Composition id="CapaSensorGlicose" component={CapaSensorGlicose} durationInFrames={1} fps={24} width={1080} height={1920} />
@@ -1616,5 +1630,8 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="CapaNoticiaGlp1" component={CapaNoticiaGlp1} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="NoticiaGlp1Vox" component={VideoNoticiaGlp1Vox} durationInFrames={DUR_GLP1_VOX} fps={FPS_GLP1_VOX} width={1080} height={1920} />
       <Composition id="CapaNoticiaGlp1Vox" component={CapaNoticiaGlp1Vox} durationInFrames={1} fps={24} width={1080} height={1920} />
+      <Composition id="GravidezPixel" component={VideoGravidezPixel} durationInFrames={DURATION_GRAVIDEZ_PIXEL} fps={30} width={1080} height={1920} />
+      <Composition id="Rosuvastatina" component={VideoRosuvastatina} durationInFrames={DURATION_ROSUVA} fps={30} width={1080} height={1920} />
+      <Composition id="RosuvastatinaCapa" component={CapaRosuvastatina} durationInFrames={1} fps={30} width={1080} height={1920} />
   </>
 );

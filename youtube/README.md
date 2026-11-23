@@ -95,6 +95,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 86 | RDC 1.000/2025, Parte 2: art. 21, o que muda na Portaria 344 (longo horizontal, estilo verde, "novo texto" em amarelo) | [86_rdc_1000_parte2.md](textos/86_rdc_1000_parte2.md) | [capa_rdc_1000_parte2.png](capas/capa_rdc_1000_parte2.png) |
 | 87 | RDC 1.000/2025, Parte 3: arts. 22 a 27, Portaria 6, RDC 58, RDC 11, revogações e vigência (longo horizontal, estilo verde) | [87_rdc_1000_parte3.md](textos/87_rdc_1000_parte3.md) | [capa_rdc_1000_parte3.png](capas/capa_rdc_1000_parte3.png) |
 | 88 | Short: a receita azul pelo celular, RDC 1.000/2025 (Modelo 1 verde, chama para a lei seca) | [88_rdc_1000_short.md](textos/88_rdc_1000_short.md) | [capa_rdc_1000_short.png](capas/capa_rdc_1000_short.png) |
+| 89 | Rosuvastatina não é igual à sinvastatina: 3 coisas (Modelo 8, lista neon; ideia da skill Outliers) | [89_rosuvastatina_3_coisas.md](textos/89_rosuvastatina_3_coisas.md) | [capa_rosuvastatina.png](capas/capa_rosuvastatina.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

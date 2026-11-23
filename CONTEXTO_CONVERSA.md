@@ -109,6 +109,8 @@
 - **Tempos das palavras (desde 2026-10-25):** `%LOCALAPPDATA%\montions-whisper\Scripts\python.exe mecanismo/scripts/transcrever.py <narracao.mp3> <roteiro.md> <fala.json>`. O ambiente fica fora da pasta temporária, porque o Windows apagou a versão antiga.
 - Episódio 1 (Arts. 1º ao 4º): FINALIZADO. Próximo: Ep. 2, Arts. 5º e 6º (conferir na internet as Leis 15.390/2026 e 15.471/2026 antes).
 - Ideias aprovadas para depois: linha do tempo das alterações da lei; Shorts verticais de 30 s com cada pegadinha, levando para a aula completa.
+- **Estilo verde (aprovado em 23/11/2026):** o Ep. 01 foi refeito com o visual da RDC 1.000 (fundo verde-escuro, títulos Inter 800 neon, lei seca em Instrument Serif acendendo palavra por palavra pelos tempos de `src/lei8080Verde_palavras.json`, destaques em amarelo, barra com marcas de capítulo, "Me siga" com logo). Código `mecanismo/src/lei8080Verde/` (Id `Lei8080Ep1Verde`). Usar esse estilo nos próximos episódios.
+- **Som da série:** efeitos reais do Openverse (`public/sfx_openverse/`, CC0: whoosh, pop, ding, carimbo, tique, sting) a 60% do volume; trilha "Deep Study of a Calm Mind" (KonstantinPazuzuStudio, CC BY 3.0, crédito obrigatório na descrição) **só nos respiros**: some sob a voz, toca na abertura, nas pausas de questões, em silêncios ≥1,5 s e no final. Ela não gosta de trilha aguda feita em código ("iiiii"). Arquivo e crédito em `trilhas_openverse/`.
 
 ## Lei 8.142 (HyperFrames, 2026-10-31)
 - Primeiro vídeo feito no HyperFrames: `lei8142_video/` (gerar cenas com `node tools/build.mjs`; papel e trilha com `python tools/assets.py`; roteiro em `concurso_lei8142/`). Capa em `lei8142_capa/`.

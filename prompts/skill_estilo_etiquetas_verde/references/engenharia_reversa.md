@@ -52,3 +52,13 @@ Selo no canto superior direito: "#1 · BCG" (nosso `SeloEpisodio`).
 - Pausa de leitura no "Grava aí" (eles cortam rápido porque a fala é rápida; nossa narração pede respiro).
 - Telas obrigatórias do canal no fim: "Me siga para mais dicas de farmacologia e curiosidades sobre a área" com o logo e "Consulte um profissional de saúde para orientações." (leis: "Me siga para mais dicas sobre leis" + "Bons estudos!").
 - Fotos de pessoas (o bebê do vídeo A) não entram: sem rosto real e sem imagem de banco; usar desenho.
+
+## O que o rea-video mediu (desmontagem automática, 24/11/2026)
+
+Relatórios completos: `E:\Downloads\Videos\ferramentas\rea-video-saidas\vacina_angulos` e `\vacina_bcg` (`VIDEO.md`, `report.html`, `storyboard.jpg`). Rodou sem modelo de visão, então a parte "como foi feito" é palpite por estatística de pixel (chamou as figuras anatômicas de "3D" e a foto do bebê de "IA"): vale o que é medido.
+
+- **Câmera sempre parada.** Nada de zoom ou movimento de câmera: o movimento é dos elementos entrando.
+- **Transições:** quase todas um **desfoque rápido de 0,1 a 0,4 s** (algumas um corte seco ou uma cortina de 0,3 s). Nosso `Part` já faz esse desfoque na entrada e na saída.
+- **Duração das telas:** vídeo A com 13 tomadas de 1,8 a 12,5 s (média ~6,5 s); vídeo B com 7 tomadas de 8 a 15 s. Dentro de cada tomada, os elementos entram um a um, a cada ~1 s, e é isso que segura o olho.
+- **Legenda:** 91 linhas no A e 79 no B, ou seja, uma legenda nova a cada ~1 s.
+- **Som:** os arquivos chegaram sem áudio, então não há medida de trilha ou efeitos.

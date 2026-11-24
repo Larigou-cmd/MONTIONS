@@ -1,3 +1,4 @@
+import { EstiloEtiquetasDemo, DURATION_ETIQUETAS_DEMO } from "./estiloEtiquetas/Demo";
 import { VideoInsulinaAplicacao, CapaInsulinaAplicacao, DURATION_INSULINA as DURATION_INS_APLIC } from "./insulinaAplicacao/Video";
 import React from "react";
 import { VideoLei8080 as VideoLei8080Verde, DURATION as DURATION_LEI8080V } from "./lei8080Verde/Video";
@@ -1000,6 +1001,14 @@ export const RemotionRoot: React.FC = () => (
       id="RdcShortCapa"
       component={CapaRdcShort}
       durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="EstiloEtiquetasDemo"
+      component={EstiloEtiquetasDemo}
+      durationInFrames={DURATION_ETIQUETAS_DEMO}
       fps={FPS}
       width={1080}
       height={1920}

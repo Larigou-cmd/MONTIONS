@@ -153,3 +153,8 @@
 - A trilha `musica_calma.py` já sai com 4 s de fade no fim: gerar uns 8 s mais longa que o vídeo, senão o final fica mudo (o Earshot acusa).
 - Para refazer só o som: `npx remotion render <Id> audio.wav --codec=wav` (com TEMP/TMP no E:) e juntar com o vídeo já renderizado no ffmpeg.
 - Vídeo 84 (ibuprofeno, estilo "uma molécula só"): poucos efeitos, como na referência (pop, whoosh, clique na COX, ding na virada do título, sting). A capa sai do próprio vídeo (`VideoIbuprofeno capa`, quadro 640), sem cabeçalho nem legenda.
+
+## Modelo 1 com "etiquetas e corte da pele" (vídeo 90, 2026-11-23)
+- Base: `mecanismo/src/insulinaAplicacao/Video.tsx` (Id `InsulinaAplicacao`). Formato tirado de 2 vídeos de referência que ela mandou (série de vacinas): etiquetas fixas no topo que acendem por parte, corte da pele em camadas reaproveitado no vídeo todo (pele, gordura, músculo; dá prega e caroço), número grande ao lado do título, legenda em pílula com a palavra falada acesa em verde, tabela final "Grava aí".
+- Som: ela pediu para TIRAR a música de fundo neste vídeo (só voz e efeitos). Efeitos reais do Openverse em `public/sfx_openverse/` (novos: `caneta_clique` = clique real de caneta de insulina, `grave_curto` = batida grave; ambos CC0).
+- Cuidado ao inserir pausa na narração: cortar no meio do silêncio medido com silencedetect, não no tempo do whisper (o corte cedo cortou o fim de "aplicação" e ela ouviu uma travada).

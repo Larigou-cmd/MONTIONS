@@ -1,3 +1,4 @@
+import { VideoInsulinaAplicacao, CapaInsulinaAplicacao, DURATION_INSULINA as DURATION_INS_APLIC } from "./insulinaAplicacao/Video";
 import React from "react";
 import { VideoLei8080 as VideoLei8080Verde, DURATION as DURATION_LEI8080V } from "./lei8080Verde/Video";
 import { CapaLei8080Ep2Verde } from "./lei8080Verde/CapaEp2";
@@ -998,6 +999,22 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="RdcShortCapa"
       component={CapaRdcShort}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="InsulinaAplicacao"
+      component={VideoInsulinaAplicacao}
+      durationInFrames={DURATION_INS_APLIC}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="InsulinaAplicacaoCapa"
+      component={CapaInsulinaAplicacao}
       durationInFrames={1}
       fps={FPS}
       width={1080}

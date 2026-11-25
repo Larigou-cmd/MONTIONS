@@ -1,3 +1,4 @@
+import { VideoOndansetronaPrevia, DURATION_ONDANSETRONA_PREVIA } from "./ondansetronaFlow/Video";
 import { TesteFarmaciaPeeps, DURATION_PEEPS } from "./toonflow/TesteFarmaciaPeeps";
 import { TesteFarmaciaRough, DURATION_TOON_ROUGH } from "./toonflow/TesteFarmaciaRough";
 import { TesteFarmaciaToon, DURATION_TOON_TESTE } from "./toonflow/TesteFarmacia";
@@ -1050,6 +1051,14 @@ export const RemotionRoot: React.FC = () => (
       id="TesteFarmaciaPeeps"
       component={TesteFarmaciaPeeps}
       durationInFrames={DURATION_PEEPS}
+      fps={30}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="OndansetronaPrevia"
+      component={VideoOndansetronaPrevia}
+      durationInFrames={DURATION_ONDANSETRONA_PREVIA}
       fps={30}
       width={1080}
       height={1920}

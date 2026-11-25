@@ -13,7 +13,9 @@
     "@remotion/three": "^4.0.543",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-peeps": "^0.1.10",
     "remotion": "^4.0.543",
+    "roughjs": "^4.6.6",
     "three": "0.170.0"
   },
   "devDependencies": {

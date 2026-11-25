@@ -97,6 +97,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 88 | Short: a receita azul pelo celular, RDC 1.000/2025 (Modelo 1 verde, chama para a lei seca) | [88_rdc_1000_short.md](textos/88_rdc_1000_short.md) | [capa_rdc_1000_short.png](capas/capa_rdc_1000_short.png) |
 | 89 | Rosuvastatina não é igual à sinvastatina: 3 coisas (Modelo 8, lista neon; ideia da skill Outliers) | [89_rosuvastatina_3_coisas.md](textos/89_rosuvastatina_3_coisas.md) | [capa_rosuvastatina.png](capas/capa_rosuvastatina.png) |
 | 90 | Insulina: ângulo e local certo de aplicação (Modelo 1 verde, formato de etiquetas e corte da pele inspirado em vídeos de referência; sem música) | [90_insulina_aplicacao.md](textos/90_insulina_aplicacao.md) | [capa_insulina_aplicacao.png](capas/capa_insulina_aplicacao.png) |
+| 91 | A origem dos remédios #5: varfarina, do veneno de rato ao remédio (boneco de palito no Flow; sem música, SFX reais do Openverse) | [91_origem_varfarina.md](textos/91_origem_varfarina.md) | [capa_origem_varfarina.png](capas/capa_origem_varfarina.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

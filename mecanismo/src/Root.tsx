@@ -1,3 +1,4 @@
+import { TesteFarmaciaToon, DURATION_TOON_TESTE } from "./toonflow/TesteFarmacia";
 import { EstiloEtiquetasDemo, DURATION_ETIQUETAS_DEMO } from "./estiloEtiquetas/Demo";
 import { VideoInsulinaAplicacao, CapaInsulinaAplicacao, DURATION_INSULINA as DURATION_INS_APLIC } from "./insulinaAplicacao/Video";
 import React from "react";
@@ -164,6 +165,11 @@ import {
   CapaMetforminaOrigem,
   DURATION_METFORMINA_ORIGEM,
 } from "./metforminaOrigem/Video";
+import {
+  VideoVarfarinaOrigem,
+  CapaVarfarinaOrigem,
+  DURATION_VARFARINA_ORIGEM,
+} from "./varfarinaOrigem/Video";
 import { VideoCafeina, CapaCafeina, DURATION_CAFEINA } from "./cafeina/Video";
 import {
   VideoCafeinaFlow,
@@ -902,6 +908,22 @@ export const RemotionRoot: React.FC = () => (
       height={1920}
     />
     <Composition
+      id="VarfarinaOrigem"
+      component={VideoVarfarinaOrigem}
+      durationInFrames={DURATION_VARFARINA_ORIGEM}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="VarfarinaOrigemCapa"
+      component={CapaVarfarinaOrigem}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
       id="MetforminaOrigem"
       component={VideoMetforminaOrigem}
       durationInFrames={DURATION_METFORMINA_ORIGEM}
@@ -1010,6 +1032,14 @@ export const RemotionRoot: React.FC = () => (
       component={EstiloEtiquetasDemo}
       durationInFrames={DURATION_ETIQUETAS_DEMO}
       fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="TesteFarmaciaToon"
+      component={TesteFarmaciaToon}
+      durationInFrames={DURATION_TOON_TESTE}
+      fps={30}
       width={1080}
       height={1920}
     />

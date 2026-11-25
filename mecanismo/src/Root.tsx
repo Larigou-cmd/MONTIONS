@@ -1,3 +1,5 @@
+import { TesteFarmaciaPeeps, DURATION_PEEPS } from "./toonflow/TesteFarmaciaPeeps";
+import { TesteFarmaciaRough, DURATION_TOON_ROUGH } from "./toonflow/TesteFarmaciaRough";
 import { TesteFarmaciaToon, DURATION_TOON_TESTE } from "./toonflow/TesteFarmacia";
 import { EstiloEtiquetasDemo, DURATION_ETIQUETAS_DEMO } from "./estiloEtiquetas/Demo";
 import { VideoInsulinaAplicacao, CapaInsulinaAplicacao, DURATION_INSULINA as DURATION_INS_APLIC } from "./insulinaAplicacao/Video";
@@ -303,6 +305,7 @@ import { VideoVoxNvidia, DURACAO_VOX_COMPLETO } from "./voxNvidia/Completo";
 import { VideoNeymarTigrinha, DURACAO_NEYMAR } from "./voxNeymar/Video";
 import { VideoDolarAtaque, DURACAO_DOLAR } from "./voxDolar/Video";
 import { VideoNvidiaVolta, CapaNvidiaVolta, DURACAO_NVIDIA_VOLTA } from "./voxNvidiaVolta/Video";
+import { VideoWhatsappSom, CapaWhatsappSom, DURACAO_WHATSAPP_SOM } from "./voxWhatsappSom/Video";
 import { VideoVarginha, CapaVarginha, DURACAO_VARGINHA } from "./voxVarginha/Video";
 import { VideoOuroPreto, CapaOuroPreto, DURACAO_OURO_PRETO } from "./voxOuroPreto/Video";
 import { VideoSensorGlicose, CapaSensorGlicose, DUR_SENSOR, FPS_SENSOR } from "./sensorGlicose/Video";
@@ -1036,6 +1039,22 @@ export const RemotionRoot: React.FC = () => (
       height={1920}
     />
     <Composition
+      id="TesteFarmaciaRough"
+      component={TesteFarmaciaRough}
+      durationInFrames={DURATION_TOON_ROUGH}
+      fps={30}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="TesteFarmaciaPeeps"
+      component={TesteFarmaciaPeeps}
+      durationInFrames={DURATION_PEEPS}
+      fps={30}
+      width={1080}
+      height={1920}
+    />
+    <Composition
       id="TesteFarmaciaToon"
       component={TesteFarmaciaToon}
       durationInFrames={DURATION_TOON_TESTE}
@@ -1721,6 +1740,8 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="CapaEtVarginha" component={CapaVarginha} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="NvidiaVolta" component={VideoNvidiaVolta} durationInFrames={DURACAO_NVIDIA_VOLTA} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
       <Composition id="CapaNvidiaVolta" component={CapaNvidiaVolta} durationInFrames={1} fps={30} width={1080} height={1920} />
+      <Composition id="WhatsappSom" component={VideoWhatsappSom} durationInFrames={DURACAO_WHATSAPP_SOM} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
+      <Composition id="CapaWhatsappSom" component={CapaWhatsappSom} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="DolarAtaque" component={VideoDolarAtaque} durationInFrames={DURACAO_DOLAR} fps={30} width={1080} height={1920} />
       <Composition id="SensorGlicose" component={VideoSensorGlicose} durationInFrames={DUR_SENSOR} fps={FPS_SENSOR} width={1080} height={1920} />
       <Composition id="CapaSensorGlicose" component={CapaSensorGlicose} durationInFrames={1} fps={24} width={1080} height={1920} />

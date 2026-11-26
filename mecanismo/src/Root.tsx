@@ -1,3 +1,4 @@
+import { Modelo10Demo, DURATION_MODELO10_DEMO } from "./modelo10/Demo";
 import { VideoOndansetronaPrevia, DURATION_ONDANSETRONA_PREVIA } from "./ondansetronaFlow/Video";
 import { TesteFarmaciaPeeps, DURATION_PEEPS } from "./toonflow/TesteFarmaciaPeeps";
 import { TesteFarmaciaRough, DURATION_TOON_ROUGH } from "./toonflow/TesteFarmaciaRough";
@@ -1027,6 +1028,14 @@ export const RemotionRoot: React.FC = () => (
       id="RdcShortCapa"
       component={CapaRdcShort}
       durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="Modelo10Demo"
+      component={Modelo10Demo}
+      durationInFrames={DURATION_MODELO10_DEMO}
       fps={FPS}
       width={1080}
       height={1920}

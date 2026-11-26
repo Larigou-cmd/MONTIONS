@@ -1,3 +1,4 @@
+import { VideoCanetaVoltou, DURATION_CANETA_VOLTOU, CapaCanetaVoltou } from "./canetaVoltou/Video";
 import { Modelo10Demo, DURATION_MODELO10_DEMO } from "./modelo10/Demo";
 import { VideoOndansetronaPrevia, DURATION_ONDANSETRONA_PREVIA } from "./ondansetronaFlow/Video";
 import { TesteFarmaciaPeeps, DURATION_PEEPS } from "./toonflow/TesteFarmaciaPeeps";
@@ -1028,6 +1029,22 @@ export const RemotionRoot: React.FC = () => (
       id="RdcShortCapa"
       component={CapaRdcShort}
       durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="CanetaVoltouCapa"
+      component={CapaCanetaVoltou}
+      durationInFrames={1}
+      fps={FPS}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="CanetaVoltou"
+      component={VideoCanetaVoltou}
+      durationInFrames={DURATION_CANETA_VOLTOU}
       fps={FPS}
       width={1080}
       height={1920}

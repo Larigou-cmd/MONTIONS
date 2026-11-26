@@ -98,6 +98,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 89 | Rosuvastatina não é igual à sinvastatina: 3 coisas (Modelo 8, lista neon; ideia da skill Outliers) | [89_rosuvastatina_3_coisas.md](textos/89_rosuvastatina_3_coisas.md) | [capa_rosuvastatina.png](capas/capa_rosuvastatina.png) |
 | 90 | Insulina: ângulo e local certo de aplicação (Modelo 1 verde, formato de etiquetas e corte da pele inspirado em vídeos de referência; sem música) | [90_insulina_aplicacao.md](textos/90_insulina_aplicacao.md) | [capa_insulina_aplicacao.png](capas/capa_insulina_aplicacao.png) |
 | 91 | A origem dos remédios #5: varfarina, do veneno de rato ao remédio (boneco de palito no Flow; sem música, SFX reais do Openverse) | [91_origem_varfarina.md](textos/91_origem_varfarina.md) | [capa_origem_varfarina.png](capas/capa_origem_varfarina.png) |
+| 92 | Parou a caneta e o peso voltou? Por que isso acontece (1º vídeo no Modelo 10 · Corpo aceso; voz dela, sem música, SFX do Openverse) | [92_caneta_voltou.md](textos/92_caneta_voltou.md) | [capa_caneta_voltou.png](capas/capa_caneta_voltou.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

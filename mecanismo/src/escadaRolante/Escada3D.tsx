@@ -811,6 +811,7 @@ const Cena: React.FC<{ f: number }> = ({ f }) => {
 
       {/* esteira inclinada */}
       {esteira ? (
+        <>
         <group position={[0, Hd, 0]} rotation={[0, 0, angEst]}>
           <mesh position={[3.25, 0, 0]} castShadow receiveShadow>
             <boxGeometry args={[6.5, 0.15, W]} />
@@ -833,13 +834,19 @@ const Cena: React.FC<{ f: number }> = ({ f }) => {
                   <Mat c={COR.degrau} />
                 </mesh>
               ))}
-          {[0.6, 3.2, 5.8].map((x) => (
-            <mesh key={x} position={[x, -0.6, 0]} rotation={[0, 0, -angEst]}>
-              <boxGeometry args={[0.12, 1.2 + x * 0.3, 0.12]} />
-              <Mat c="#8d8f94" />
-            </mesh>
-          ))}
         </group>
+          {[1.4, 3.4, 5.6].map((x) => {
+            const ca = Math.cos(angEst);
+            const sa = Math.sin(angEst);
+            const alt = x * sa - 0.075 * ca;
+            return (
+              <mesh key={x} position={[x * ca + 0.075 * sa, Hd + alt / 2, 0]}>
+                <boxGeometry args={[0.12, alt, 0.12]} />
+                <Mat c="#8d8f94" />
+              </mesh>
+            );
+          })}
+        </>
       ) : null}
       {zeEst}
       {fase === "tortos" ? (

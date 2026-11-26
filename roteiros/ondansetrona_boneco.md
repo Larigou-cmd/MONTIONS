@@ -52,7 +52,7 @@ Prompt 8 (receita): Medium shot, slow push in, the same pharmacy counter as the 
 ## Checagem (fontes)
 - Usos aprovados pela Anvisa: náusea e vômito de quimioterapia e radioterapia; prevenção e tratamento de náusea e vômito pós-operatórios (nota técnica do Ministério da Saúde).
 - Mecanismo: antagonista seletivo dos receptores 5-HT3 de serotonina (bula Blau).
-- Reações muito comuns (>1/10): cefaleia e constipação (bula de comprimido; conferir na bula oficial antes do vídeo final).
+- Reações: cefaleia muito comum (>1/10) em todas as bulas de comprimido conferidas; constipação muito comum na maioria e comum (1-10%) em uma delas (conferido em 26/11/2026).
 - Intervalo QT: a bula traz estudo de QT e cuidado maior em idosos e em quem tem risco de arritmia.
 - Gravidez: risco pequeno de fenda oral no 1º trimestre (MHRA, Reino Unido; Medsafe), ~3 casos a mais por 10 mil (NICHD).
 
@@ -62,3 +62,7 @@ Fontes:
 - https://fresenius-kabi.com/br/documents/2.Bula_Profissional_de_sa%C3%BAde_cl.ondansetrona.pdf
 - https://www.gov.uk/drug-safety-update/ondansetron-small-increased-risk-of-oral-clefts-following-use-in-the-first-12-weeks-of-pregnancy
 - https://www.nichd.nih.gov/newsroom/news/122018-anti-nausea
+
+## Entrega (26/11/2026)
+Narração: voz clonada dela "Laris" no ElevenLabs v4 (`ondansetrona/narracao.mp3`, 57,5 s, com o Me siga falado). Também gravadas e não usadas: Juliana e "Larigou".
+Vídeo: `videos reels/Para que serve a ondansetrona.mp4` · capa `capas/Para que serve a ondansetrona.png` · textos `youtube/textos/93_ondansetrona.md`.

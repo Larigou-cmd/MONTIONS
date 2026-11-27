@@ -70,7 +70,7 @@ const Moldura: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </AbsoluteFill>
 );
 
-const MeSiga: React.FC = () => {
+export const MeSiga: React.FC = () => {
   const f = useCurrentFrame();
   const logo = interpolate(f, [0, 10, 16], [0.4, 1.08, 1], clamp);
   const t1 = interpolate(f, [8, 20], [0, 1], clamp);
@@ -91,7 +91,7 @@ const MeSiga: React.FC = () => {
   );
 };
 
-const TelaFinal: React.FC = () => {
+export const TelaFinal: React.FC = () => {
   const f = useCurrentFrame();
   return (
     <Moldura>

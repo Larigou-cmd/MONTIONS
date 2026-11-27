@@ -1,4 +1,4 @@
-import { VideoCodeinaPrevia, VideoCodeina, DURATION_CODEINA_PREVIA } from "./codeinaMolecula/Video";
+import { VideoCodeinaPrevia, VideoCodeina, CapaCodeina, DURATION_CODEINA_PREVIA } from "./codeinaMolecula/Video";
 import { CodeinaEstilo, DURATION_CODEINA_ESTILO } from "./codeinaMolecula/Estilo";
 import { VideoCanetaVoltou, DURATION_CANETA_VOLTOU, CapaCanetaVoltou } from "./canetaVoltou/Video";
 import { Modelo10Demo, DURATION_MODELO10_DEMO } from "./modelo10/Demo";
@@ -1090,6 +1090,7 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="CodeinaEstilo" component={CodeinaEstilo} durationInFrames={DURATION_CODEINA_ESTILO} fps={30} width={1080} height={1920} />
     <Composition id="CodeinaPrevia" component={VideoCodeinaPrevia} durationInFrames={DURATION_CODEINA_PREVIA} fps={30} width={1080} height={1920} />
     <Composition id="Codeina" component={VideoCodeina} durationInFrames={DURATION_CODEINA_PREVIA} fps={30} width={1080} height={1920} />
+    <Composition id="CapaCodeina" component={CapaCodeina} durationInFrames={1} fps={30} width={1080} height={1920} />
     <Composition
       id="Ondansetrona"
       component={VideoOndansetrona}

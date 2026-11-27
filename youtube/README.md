@@ -100,6 +100,7 @@ Lembrete do rótulo de IA: TikTok "Conteúdo gerado por IA" · YouTube "conteúd
 | 91 | A origem dos remédios #5: varfarina, do veneno de rato ao remédio (boneco de palito no Flow; sem música, SFX reais do Openverse) | [91_origem_varfarina.md](textos/91_origem_varfarina.md) | [capa_origem_varfarina.png](capas/capa_origem_varfarina.png) |
 | 92 | Parou a caneta e o peso voltou? Por que isso acontece (1º vídeo no Modelo 10 · Corpo aceso; voz dela, sem música, SFX do Openverse) | [92_caneta_voltou.md](textos/92_caneta_voltou.md) | [capa_caneta_voltou.png](capas/capa_caneta_voltou.png) |
 | 93 | Para que serve a ondansetrona? (boneco de palito no Flow com o traço do PixVerse; voz dela, sem música, SFX do Openverse) | [93_ondansetrona.md](textos/93_ondansetrona.md) | [capa_ondansetrona.png](capas/capa_ondansetrona.png) |
+| 94 | A codeína vira morfina no seu fígado (1º vídeo no modelo molécula neon, fundo verde; voz dela, sem música, SFX do Openverse) | [94_codeina_vira_morfina.md](textos/94_codeina_vira_morfina.md) | [capa_codeina.png](capas/capa_codeina.png) |
 
 ## Lei 8.080 para concursos (YouTube, horizontal)
 

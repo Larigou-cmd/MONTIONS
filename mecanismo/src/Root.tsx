@@ -312,6 +312,7 @@ import { VideoDolarAtaque, DURACAO_DOLAR } from "./voxDolar/Video";
 import { VideoNvidiaVolta, CapaNvidiaVolta, DURACAO_NVIDIA_VOLTA } from "./voxNvidiaVolta/Video";
 import { VideoWhatsappSom, CapaWhatsappSom, DURACAO_WHATSAPP_SOM } from "./voxWhatsappSom/Video";
 import { VideoTrabuco, CapaTrabuco, DURACAO_TRABUCO } from "./trabucoFazenda/Video";
+import { VideoGarra, CapaGarra, DURACAO_GARRA } from "./maquinaGarra/Video";
 import { VideoEscada, CapaEscada, DURACAO_ESCADA } from "./escadaRolante/Video";
 import { VideoVarginha, CapaVarginha, DURACAO_VARGINHA } from "./voxVarginha/Video";
 import { VideoOuroPreto, CapaOuroPreto, DURACAO_OURO_PRETO } from "./voxOuroPreto/Video";
@@ -1795,6 +1796,8 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="CapaWhatsappSom" component={CapaWhatsappSom} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="Trabuco" component={VideoTrabuco} durationInFrames={DURACAO_TRABUCO} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
       <Composition id="CapaTrabuco" component={CapaTrabuco} durationInFrames={1} fps={30} width={1080} height={1920} />
+      <Composition id="Garra" component={VideoGarra} durationInFrames={DURACAO_GARRA} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
+      <Composition id="CapaGarra" component={CapaGarra} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="EscadaRolante" component={VideoEscada} durationInFrames={DURACAO_ESCADA} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
       <Composition id="CapaEscadaRolante" component={CapaEscada} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="DolarAtaque" component={VideoDolarAtaque} durationInFrames={DURACAO_DOLAR} fps={30} width={1080} height={1920} />

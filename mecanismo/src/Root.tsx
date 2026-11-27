@@ -1,3 +1,5 @@
+import { VideoCodeinaPrevia, VideoCodeina, DURATION_CODEINA_PREVIA } from "./codeinaMolecula/Video";
+import { CodeinaEstilo, DURATION_CODEINA_ESTILO } from "./codeinaMolecula/Estilo";
 import { VideoCanetaVoltou, DURATION_CANETA_VOLTOU, CapaCanetaVoltou } from "./canetaVoltou/Video";
 import { Modelo10Demo, DURATION_MODELO10_DEMO } from "./modelo10/Demo";
 import { VideoOndansetronaPrevia, DURATION_ONDANSETRONA_PREVIA, VideoOndansetrona, DURATION_ONDANSETRONA, CapaOndansetrona } from "./ondansetronaFlow/Video";
@@ -309,6 +311,7 @@ import { VideoNeymarTigrinha, DURACAO_NEYMAR } from "./voxNeymar/Video";
 import { VideoDolarAtaque, DURACAO_DOLAR } from "./voxDolar/Video";
 import { VideoNvidiaVolta, CapaNvidiaVolta, DURACAO_NVIDIA_VOLTA } from "./voxNvidiaVolta/Video";
 import { VideoWhatsappSom, CapaWhatsappSom, DURACAO_WHATSAPP_SOM } from "./voxWhatsappSom/Video";
+import { VideoTrabuco, CapaTrabuco, DURACAO_TRABUCO } from "./trabucoFazenda/Video";
 import { VideoEscada, CapaEscada, DURACAO_ESCADA } from "./escadaRolante/Video";
 import { VideoVarginha, CapaVarginha, DURACAO_VARGINHA } from "./voxVarginha/Video";
 import { VideoOuroPreto, CapaOuroPreto, DURACAO_OURO_PRETO } from "./voxOuroPreto/Video";
@@ -1083,6 +1086,9 @@ export const RemotionRoot: React.FC = () => (
       height={1920}
     />
     <Composition id="CapaOndansetrona" component={CapaOndansetrona} durationInFrames={1} fps={30} width={1080} height={1920} />
+    <Composition id="CodeinaEstilo" component={CodeinaEstilo} durationInFrames={DURATION_CODEINA_ESTILO} fps={30} width={1080} height={1920} />
+    <Composition id="CodeinaPrevia" component={VideoCodeinaPrevia} durationInFrames={DURATION_CODEINA_PREVIA} fps={30} width={1080} height={1920} />
+    <Composition id="Codeina" component={VideoCodeina} durationInFrames={DURATION_CODEINA_PREVIA} fps={30} width={1080} height={1920} />
     <Composition
       id="Ondansetrona"
       component={VideoOndansetrona}
@@ -1787,6 +1793,8 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="CapaNvidiaVolta" component={CapaNvidiaVolta} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="WhatsappSom" component={VideoWhatsappSom} durationInFrames={DURACAO_WHATSAPP_SOM} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
       <Composition id="CapaWhatsappSom" component={CapaWhatsappSom} durationInFrames={1} fps={30} width={1080} height={1920} />
+      <Composition id="Trabuco" component={VideoTrabuco} durationInFrames={DURACAO_TRABUCO} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
+      <Composition id="CapaTrabuco" component={CapaTrabuco} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="EscadaRolante" component={VideoEscada} durationInFrames={DURACAO_ESCADA} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
       <Composition id="CapaEscadaRolante" component={CapaEscada} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="DolarAtaque" component={VideoDolarAtaque} durationInFrames={DURACAO_DOLAR} fps={30} width={1080} height={1920} />

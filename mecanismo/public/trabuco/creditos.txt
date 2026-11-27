@@ -1,0 +1,11 @@
+trabuco.jpg: Luiz Carlos Trabuco Cappi.jpg | Bradesco | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Luiz_Carlos_Trabuco_Cappi.jpg
+catapulta.jpg: Trebuchet Castelnaud.jpg | ? | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Trebuchet_Castelnaud.jpg
+bolsa.jpg: Bovespa Traders.jpg | Galeria de Léo Pinheiro - Picasa | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Bovespa_Traders.jpg
+dilma.jpg: Dilma Rousseff, November 2014 (cropped).jpg | Roberto Stuckert Filho/PR | CC BY 3.0 br | https://commons.wikimedia.org/wiki/File:Dilma_Rousseff,_November_2014_(cropped).jpg
+lula.jpg: Foto oficial de Luiz Inácio Lula da Silva (ombros) denoise.jpg | Ricardo Stuckert/PR | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Foto_oficial_de_Luiz_In%C3%A1cio_Lula_da_Silva_(ombros)_denoise.jpg
+planalto.jpg: Palácio do Planalto em 2020.jpg | Senado Federal | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Pal%C3%A1cio_do_Planalto_em_2020.jpg
+alvorada.jpg: Palácio da Alvorada brasilia.jpg | Arne Müseler | CC BY-SA 3.0 de | https://commons.wikimedia.org/wiki/File:Pal%C3%A1cio_da_Alvorada_brasilia.jpg
+fazenda.jpg: Ministério da Fazenda 2017 03 15 1.jpg | Marcelo Camargo/Agência Brasil | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Minist%C3%A9rio_da_Fazenda_2017_03_15_1.jpg
+agencia.jpg: Agência Bradesco em Brumado.jpg | Alessandro Sil | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Ag%C3%AAncia_Bradesco_em_Brumado.jpg
+bc.jpg: Edifício "Sede" do Banco Central do Brasil em Brasília (cropped).jpg | Banco Central do Brasil | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Edif%C3%ADcio_%22Sede%22_do_Banco_Central_do_Brasil_em_Bras%C3%ADlia_(cropped).jpg
+carimbo.jpg: Carimbo, Acervo do Museu Paulista da USP (1).jpg | ? | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Carimbo,_Acervo_do_Museu_Paulista_da_USP_(1).jpg

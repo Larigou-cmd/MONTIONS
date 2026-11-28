@@ -1,3 +1,4 @@
+import { VideoMetforminaB12, DURATION_METFORMINA_B12 } from "./metforminaB12/Video";
 import { VideoCodeinaPrevia, VideoCodeina, CapaCodeina, DURATION_CODEINA_PREVIA } from "./codeinaMolecula/Video";
 import { CodeinaEstilo, DURATION_CODEINA_ESTILO } from "./codeinaMolecula/Estilo";
 import { VideoCanetaVoltou, DURATION_CANETA_VOLTOU, CapaCanetaVoltou } from "./canetaVoltou/Video";
@@ -313,6 +314,7 @@ import { VideoNvidiaVolta, CapaNvidiaVolta, DURACAO_NVIDIA_VOLTA } from "./voxNv
 import { VideoWhatsappSom, CapaWhatsappSom, DURACAO_WHATSAPP_SOM } from "./voxWhatsappSom/Video";
 import { VideoTrabuco, CapaTrabuco, DURACAO_TRABUCO } from "./trabucoFazenda/Video";
 import { VideoGarra, CapaGarra, DURACAO_GARRA } from "./maquinaGarra/Video";
+import { VideoFechadura, CapaFechadura, DURACAO_FECHADURA } from "./fechadura/Video";
 import { VideoEscada, CapaEscada, DURACAO_ESCADA } from "./escadaRolante/Video";
 import { VideoVarginha, CapaVarginha, DURACAO_VARGINHA } from "./voxVarginha/Video";
 import { VideoOuroPreto, CapaOuroPreto, DURACAO_OURO_PRETO } from "./voxOuroPreto/Video";
@@ -1091,6 +1093,7 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="CodeinaPrevia" component={VideoCodeinaPrevia} durationInFrames={DURATION_CODEINA_PREVIA} fps={30} width={1080} height={1920} />
     <Composition id="Codeina" component={VideoCodeina} durationInFrames={DURATION_CODEINA_PREVIA} fps={30} width={1080} height={1920} />
     <Composition id="CapaCodeina" component={CapaCodeina} durationInFrames={1} fps={30} width={1080} height={1920} />
+    <Composition id="MetforminaB12" component={VideoMetforminaB12} durationInFrames={DURATION_METFORMINA_B12} fps={30} width={1080} height={1920} />
     <Composition
       id="Ondansetrona"
       component={VideoOndansetrona}
@@ -1799,6 +1802,8 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="CapaTrabuco" component={CapaTrabuco} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="Garra" component={VideoGarra} durationInFrames={DURACAO_GARRA} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
       <Composition id="CapaGarra" component={CapaGarra} durationInFrames={1} fps={30} width={1080} height={1920} />
+      <Composition id="Fechadura" component={VideoFechadura} durationInFrames={DURACAO_FECHADURA} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
+      <Composition id="CapaFechadura" component={CapaFechadura} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="EscadaRolante" component={VideoEscada} durationInFrames={DURACAO_ESCADA} fps={30} width={1080} height={1920} defaultProps={{ semAudio: false }} />
       <Composition id="CapaEscadaRolante" component={CapaEscada} durationInFrames={1} fps={30} width={1080} height={1920} />
       <Composition id="DolarAtaque" component={VideoDolarAtaque} durationInFrames={DURACAO_DOLAR} fps={30} width={1080} height={1920} />
